@@ -97,7 +97,7 @@ jobs:
           ALIAS: ${{ steps.deployment.outputs.env }}
         run: |
           echo "${ALIAS}"
-          echo  ${{ steps.deployment.outputs.env }}
+          echo ${{ steps.deployment.outputs.env }} 
           set -x
           npm install -g netlify-cli
           # push main branch to production, others to preview --
