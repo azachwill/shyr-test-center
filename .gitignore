@@ -14,7 +14,6 @@ done.mp3
 *.swp
 *.swo
 shiny_sym
-/_build/
 /.quarto/
 rsconnect/
 venv/

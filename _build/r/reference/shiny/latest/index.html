@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Function reference — 1.9.0 – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Add rel="noopener noreferrer" to each target="_blank" -->
+<script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script>
+<!-- End Add rel="noopener noreferrer" to each target="_blank" -->
+
+<link href="../../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="../../../secondary-menu.css">
+<meta property="og:title" content="Function reference — 1.9.0">
+<meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">    
+        <li class="dropdown-header"><img src="../../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<!-- Google Tag Manager (noscript) -->
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<h1>Function reference <small>version 1.9.0</small></h1>
+
+<table class="index"><tbody data-section="UI Layout"><tr><td colspan="2">
+        <h3>UI Layout</h3>
+        <div class="section-desc"><p>Functions for laying out the user interface for your application.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="absolutePanel.html">absolutePanel()</a> <a href="absolutePanel.html">fixedPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Panel with absolute positioning</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bootstrapPage.html">bootstrapPage()</a> <a href="bootstrapPage.html">basicPage()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a Bootstrap page</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="busyIndicatorOptions.html">busyIndicatorOptions()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Customize busy indicator options</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="column.html">column()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a column within a UI definition</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="conditionalPanel.html">conditionalPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Conditional Panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fillPage.html">fillPage()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a page that fills the window</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fillRow.html">fillRow()</a> <a href="fillRow.html">fillCol()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Flex Box-based row/column layouts</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fixedPage.html">fixedPage()</a> <a href="fixedPage.html">fixedRow()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a page with a fixed layout</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fluidPage.html">fluidPage()</a> <a href="fluidPage.html">fluidRow()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a page with fluid layout</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="helpText.html">helpText()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a help text element</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="icon.html">icon()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an icon</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="navbarPage.html">navbarPage()</a> <a href="navbarPage.html">navbarMenu()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a page with a top level navigation bar</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="navlistPanel.html">navlistPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a navigation list panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="sidebarLayout.html">sidebarLayout()</a> <a href="sidebarLayout.html">sidebarPanel()</a> <a href="sidebarLayout.html">mainPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Layout a sidebar and main area</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tabPanel.html">tabPanel()</a> <a href="tabPanel.html">tabPanelBody()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a tab panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tabsetPanel.html">tabsetPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a tabset panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="titlePanel.html">titlePanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a panel containing an application title.</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="inputPanel.html">inputPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Input panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="flowLayout.html">flowLayout()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Flow layout</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="splitLayout.html">splitLayout()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Split layout</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="useBusyIndicators.html">useBusyIndicators()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Enable/disable busy indication</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="verticalLayout.html">verticalLayout()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Lay out UI elements vertically</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="wellPanel.html">wellPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a well panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="withMathJax.html">withMathJax()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Load the MathJax library and typeset math expressions</div>
+      </td>
+    </tr></tbody><tbody data-section="UI Inputs"><tr><td colspan="2">
+        <h3>UI Inputs</h3>
+        <div class="section-desc"><p>Functions for creating user interface elements that prompt the user for input values or interaction.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="actionButton.html">actionButton()</a> <a href="actionButton.html">actionLink()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Action button/link</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="checkboxGroupInput.html">checkboxGroupInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Checkbox Group Input Control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="checkboxInput.html">checkboxInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Checkbox Input Control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="dateInput.html">dateInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create date input</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="dateRangeInput.html">dateRangeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create date range input</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fileInput.html">fileInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">File Upload Control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="numericInput.html">numericInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a numeric input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="radioButtons.html">radioButtons()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create radio buttons</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="selectInput.html">selectInput()</a> <a href="selectInput.html">selectizeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a select list input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="varSelectInput.html">varSelectInput()</a> <a href="varSelectInput.html">varSelectizeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Select variables from a data frame</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="sliderInput.html">sliderInput()</a> <a href="sliderInput.html">animationOptions()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Slider Input Widget</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="submitButton.html">submitButton()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a submit button</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="textInput.html">textInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a text input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="textAreaInput.html">textAreaInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a textarea input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="passwordInput.html">passwordInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a password input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateActionButton.html">updateActionButton()</a> <a href="updateActionButton.html">updateActionLink()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the label or icon of an action button on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateCheckboxGroupInput.html">updateCheckboxGroupInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a checkbox group input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateCheckboxInput.html">updateCheckboxInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a checkbox input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateDateInput.html">updateDateInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a date input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateDateRangeInput.html">updateDateRangeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the start and end values of a date range input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateNumericInput.html">updateNumericInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a number input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateRadioButtons.html">updateRadioButtons()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a radio input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateSelectInput.html">updateSelectInput()</a> <a href="updateSelectInput.html">updateSelectizeInput()</a> <a href="updateSelectInput.html">updateVarSelectInput()</a> <a href="updateSelectInput.html">updateVarSelectizeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a select input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateSliderInput.html">updateSliderInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Update Slider Input Widget</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateTabsetPanel.html">updateTabsetPanel()</a> <a href="updateTabsetPanel.html">updateNavbarPage()</a> <a href="updateTabsetPanel.html">updateNavlistPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the selected tab on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="insertTab.html">insertTab()</a> <a href="insertTab.html">prependTab()</a> <a href="insertTab.html">appendTab()</a> <a href="insertTab.html">removeTab()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Dynamically insert/remove a tabPanel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="showTab.html">showTab()</a> <a href="showTab.html">hideTab()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Dynamically hide/show a tabPanel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateTextInput.html">updateTextInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a text input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateTextAreaInput.html">updateTextAreaInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a textarea input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateQueryString.html">updateQueryString()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Update URL in browser's location bar</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="getQueryString.html">getQueryString()</a> <a href="getQueryString.html">getUrlHash()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Get the query string / hash component from the URL</div>
+      </td>
+    </tr></tbody><tbody data-section="UI Outputs"><tr><td colspan="2">
+        <h3>UI Outputs</h3>
+        <div class="section-desc"><p>Functions for creating user interface elements that, in conjunction with rendering functions, display different kinds of output from your application.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="htmlOutput.html">htmlOutput()</a> <a href="htmlOutput.html">uiOutput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an HTML output element</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="plotOutput.html">imageOutput()</a> <a href="plotOutput.html">plotOutput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an plot or image output element</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="outputOptions.html">outputOptions()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Set options for an output object.</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="textOutput.html">textOutput()</a> <a href="textOutput.html">verbatimTextOutput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a text output element</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="downloadButton.html">downloadButton()</a> <a href="downloadButton.html">downloadLink()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a download button or link</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="Progress.html">Progress</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reporting progress (object-oriented API)</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="withProgress.html">withProgress()</a> <a href="withProgress.html">setProgress()</a> <a href="withProgress.html">incProgress()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reporting progress (functional API)</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="modalDialog.html">modalDialog()</a> <a href="modalDialog.html">modalButton()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a modal dialog UI</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="urlModal.html">urlModal()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Generate a modal dialog that displays a URL</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="showModal.html">showModal()</a> <a href="showModal.html">removeModal()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Show or remove a modal dialog</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="showNotification.html">showNotification()</a> <a href="showNotification.html">removeNotification()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Show or remove a notification</div>
+      </td>
+    </tr></tbody><tbody data-section="Interface builder functions"><tr><td colspan="2">
+        <h3>Interface builder functions</h3>
+        <div class="section-desc"><p>A sub-library for writing HTML using R functions. These functions form the foundation on which the higher level user interface functions are built, and can also be used in your Shiny UI to provide custom HTML, CSS, and JavaScript.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="builder.html">tags</a> <a href="builder.html">p()</a> <a href="builder.html">h1()</a> <a href="builder.html">h2()</a> <a href="builder.html">h3()</a> <a href="builder.html">h4()</a> <a href="builder.html">h5()</a> <a href="builder.html">h6()</a> <a href="builder.html">a()</a> <a href="builder.html">br()</a> <a href="builder.html">div()</a> <a href="builder.html">span()</a> <a href="builder.html">pre()</a> <a href="builder.html">code()</a> <a href="builder.html">img()</a> <a href="builder.html">strong()</a> <a href="builder.html">em()</a> <a href="builder.html">hr()</a> <a href="builder.html">tag()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create HTML tags</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="HTML.html">HTML()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mark Characters as HTML</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="include.html">includeHTML()</a> <a href="include.html">includeText()</a> <a href="include.html">includeMarkdown()</a> <a href="include.html">includeCSS()</a> <a href="include.html">includeScript()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Include Content From a File</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="singleton.html">singleton()</a> <a href="singleton.html">is.singleton()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Include content only once</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tagList.html">tagList()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a list of tags</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tagAppendAttributes.html">tagAppendAttributes()</a> <a href="tagAppendAttributes.html">tagHasAttribute()</a> <a href="tagAppendAttributes.html">tagGetAttribute()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Append tag attributes</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tagAppendChild.html">tagAppendChild()</a> <a href="tagAppendChild.html">tagAppendChildren()</a> <a href="tagAppendChild.html">tagSetChildren()</a> <a href="tagAppendChild.html">tagInsertChildren()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Modify tag contents</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="validateCssUnit.html">validateCssUnit()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Validate proper CSS formatting of a unit</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="withTags.html">withTags()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Evaluate an expression using <code>tags</code></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="htmlTemplate.html">htmlTemplate()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Process an HTML template</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bootstrapLib.html">bootstrapLib()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Bootstrap libraries</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="suppressDependencies.html">suppressDependencies()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Suppress web dependencies</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="insertUI.html">insertUI()</a> <a href="insertUI.html">removeUI()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Insert and remove UI objects</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="markdown.html">markdown()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Insert inline Markdown</div>
+      </td>
+    </tr></tbody><tbody data-section="Rendering functions"><tr><td colspan="2">
+        <h3>Rendering functions</h3>
+        <div class="section-desc"><p>Functions that you use in your application’s server side code, assigning them to outputs that appear in your user interface.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderPlot.html">renderPlot()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Plot Output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderCachedPlot.html">renderCachedPlot()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Plot output with cached images</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderPrint.html">renderPrint()</a> <a href="renderPrint.html">renderText()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Text Output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderDataTable.html">dataTableOutput()</a> <a href="renderDataTable.html">renderDataTable()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Table output with the JavaScript DataTables library</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderImage.html">renderImage()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Image file output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderTable.html">tableOutput()</a> <a href="renderTable.html">renderTable()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Table Output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderUI.html">renderUI()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">UI Output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="downloadHandler.html">downloadHandler()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">File Downloads</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="createRenderFunction.html">createRenderFunction()</a> <a href="createRenderFunction.html">quoToFunction()</a> <a href="createRenderFunction.html">installExprFunction()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Implement custom render functions</div>
+      </td>
+    </tr></tbody><tbody data-section="Reactive programming"><tr><td colspan="2">
+        <h3>Reactive programming</h3>
+        <div class="section-desc"><p>A sub-library that provides reactive programming facilities for R.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactive.html">reactive()</a> <a href="reactive.html">is.reactive()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a reactive expression</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="observe.html">observe()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a reactive observer</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="observeEvent.html">observeEvent()</a> <a href="observeEvent.html">eventReactive()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Event handler</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveVal.html">reactiveVal()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a (single) reactive value</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveValues.html">reactiveValues()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an object for storing reactive values</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bindCache.html">bindCache()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add caching with reactivity to an object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bindEvent.html">bindEvent()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Make an object respond only to specified reactive events</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="ExtendedTask.html">ExtendedTask</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Task or computation that proceeds in the background</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveValuesToList.html">reactiveValuesToList()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Convert a reactivevalues object to a list</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="is.reactivevalues.html">is.reactivevalues()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Checks whether an object is a reactivevalues object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="isolate.html">isolate()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a non-reactive scope for an expression</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="invalidateLater.html">invalidateLater()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Scheduled Invalidation</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="debounce.html">debounce()</a> <a href="debounce.html">throttle()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Slow down a reactive expression with debounce/throttle</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactlog.html">reactlog()</a> <a href="reactlog.html">reactlogShow()</a> <a href="reactlog.html">reactlogReset()</a> <a href="reactlog.html">reactlogAddMark()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive Log Visualizer</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveFileReader.html">reactiveFileReader()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive file reader</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactivePoll.html">reactivePoll()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive polling</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveTimer.html">reactiveTimer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Timer</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="domains.html">getDefaultReactiveDomain()</a> <a href="domains.html">withReactiveDomain()</a> <a href="domains.html">onReactiveDomainEnded()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive domains</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="freezeReactiveValue.html">freezeReactiveVal()</a> <a href="freezeReactiveValue.html">freezeReactiveValue()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Freeze a reactive value</div>
+      </td>
+    </tr></tbody><tbody data-section="Running"><tr><td colspan="2">
+        <h3>Running</h3>
+        <div class="section-desc"><p>Functions that are used to run or stop Shiny applications.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runApp.html">runApp()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run Shiny Application</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runGadget.html">runGadget()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run a gadget</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runExample.html">runExample()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run Shiny Example Applications</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runUrl.html">runUrl()</a> <a href="runUrl.html">runGist()</a> <a href="runUrl.html">runGitHub()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run a Shiny application from a URL</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="stopApp.html">stopApp()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Stop the currently running Shiny app</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="viewer.html">paneViewer()</a> <a href="viewer.html">dialogViewer()</a> <a href="viewer.html">browserViewer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Viewer options</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="isRunning.html">isRunning()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Check whether a Shiny application is running</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="loadSupport.html">loadSupport()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Load an app's supporting R files</div>
+      </td>
+    </tr></tbody><tbody data-section="Bookmarking state"><tr><td colspan="2">
+        <h3>Bookmarking state</h3>
+        <div class="section-desc"><p>Functions that are used for bookmarking and restoring state.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bookmarkButton.html">bookmarkButton()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a button for bookmarking/sharing</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="enableBookmarking.html">enableBookmarking()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Enable bookmarking for a Shiny application</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="setBookmarkExclude.html">setBookmarkExclude()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Exclude inputs from bookmarking</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="showBookmarkUrlModal.html">showBookmarkUrlModal()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Display a modal dialog for bookmarking</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="onBookmark.html">onBookmark()</a> <a href="onBookmark.html">onBookmarked()</a> <a href="onBookmark.html">onRestore()</a> <a href="onBookmark.html">onRestored()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add callbacks for Shiny session bookmarking events</div>
+      </td>
+    </tr></tbody><tbody data-section="Extending Shiny"><tr><td colspan="2">
+        <h3>Extending Shiny</h3>
+        <div class="section-desc"><p>Functions that are intended to be called by third-party packages that extend Shiny.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="createWebDependency.html">createWebDependency()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a web dependency</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="resourcePaths.html">addResourcePath()</a> <a href="resourcePaths.html">resourcePaths()</a> <a href="resourcePaths.html">removeResourcePath()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Resource Publishing</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="registerInputHandler.html">registerInputHandler()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Register an Input Handler</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="removeInputHandler.html">removeInputHandler()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Deregister an Input Handler</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="markRenderFunction.html">markRenderFunction()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mark a function as a render function</div>
+      </td>
+    </tr></tbody><tbody data-section="Utility functions"><tr><td colspan="2">
+        <h3>Utility functions</h3>
+        <div class="section-desc"><p>Miscellaneous utilities that may be useful to advanced users or when extending Shiny.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="devmode.html">devmode()</a> <a href="devmode.html">in_devmode()</a> <a href="devmode.html">with_devmode()</a> <a href="devmode.html">devmode_inform()</a> <a href="devmode.html">register_devmode_option()</a> <a href="devmode.html">get_devmode_option()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Shiny Developer Mode</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyAppTemplate.html">shinyAppTemplate()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Generate a Shiny application from a template</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="req.html">req()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Check for required values</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="isTruthy.html">isTruthy()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Truthy and falsy values</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="validate.html">validate()</a> <a href="validate.html">need()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Validate input values and other conditions</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="session.html">session</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Session object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyOptions.html">getShinyOption()</a> <a href="shinyOptions.html">shinyOptions()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Get or set Shiny options</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="safeError.html">safeError()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Declare an error safe for the user to see</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="onFlush.html">onFlush()</a> <a href="onFlush.html">onFlushed()</a> <a href="onFlush.html">onSessionEnded()</a> <a href="onFlush.html">onUnhandledError()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add callbacks for Shiny session events</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="restoreInput.html">restoreInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Restore an input value</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="applyInputHandlers.html">applyInputHandlers()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Apply input handlers to raw input values</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="parseQueryString.html">parseQueryString()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Parse a GET query string from a URL</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="getCurrentOutputInfo.html">getCurrentOutputInfo()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Get output information</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="plotPNG.html">plotPNG()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Capture a plot as a PNG file.</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="sizeGrowthRatio.html">sizeGrowthRatio()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a sizing function that grows at a given ratio</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="exportTestValues.html">exportTestValues()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Register expressions for export in test mode</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="setSerializer.html">setSerializer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add a function for serializing an input before bookmarking application state</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="snapshotExclude.html">snapshotExclude()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mark an output to be excluded from test snapshots</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="snapshotPreprocessInput.html">snapshotPreprocessInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add a function for preprocessing an input before taking a test snapshot</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="snapshotPreprocessOutput.html">snapshotPreprocessOutput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add a function for preprocessing an output before taking a test snapshot</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="repeatable.html">repeatable()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Make a random number generator repeatable</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="serverInfo.html">serverInfo()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Collect information about the Shiny Server environment</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="onStop.html">onStop()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run code after an application or session ends</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="httpResponse.html">httpResponse()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an HTTP response object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="key_missing.html">key_missing()</a> <a href="key_missing.html">is.key_missing()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">A missing key object</div>
+      </td>
+    </tr></tbody><tbody data-section="Plot interaction"><tr><td colspan="2">
+        <h3>Plot interaction</h3>
+        <div class="section-desc"><p>Functions related to interactive plots</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="brushedPoints.html">brushedPoints()</a> <a href="brushedPoints.html">nearPoints()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Find rows of data selected on an interactive plot.</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="brushOpts.html">brushOpts()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an object representing brushing options</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="clickOpts.html">clickOpts()</a> <a href="clickOpts.html">dblclickOpts()</a> <a href="clickOpts.html">hoverOpts()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Control interactive plot point events</div>
+      </td>
+    </tr></tbody><tbody data-section="Modules"><tr><td colspan="2">
+        <h3>Modules</h3>
+        <div class="section-desc"><p>Functions for modularizing Shiny apps</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="NS.html">NS()</a> <a href="NS.html">ns.sep</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Namespaced IDs for inputs/outputs</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="moduleServer.html">moduleServer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Shiny modules</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="callModule.html">callModule()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Invoke a Shiny module</div>
+      </td>
+    </tr></tbody><tbody data-section="Embedding"><tr><td colspan="2">
+        <h3>Embedding</h3>
+        <div class="section-desc"><p>Functions that are intended for third-party packages that embed Shiny applications.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyApp.html">shinyApp()</a> <a href="shinyApp.html">shinyAppDir()</a> <a href="shinyApp.html">shinyAppFile()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a Shiny app object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="maskReactiveContext.html">maskReactiveContext()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Evaluate an expression without a reactive context</div>
+      </td>
+    </tr></tbody><tbody data-section="Testing"><tr><td colspan="2">
+        <h3>Testing</h3>
+        <div class="section-desc"><p>Functions intended for testing of Shiny components</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runTests.html">runTests()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Runs the tests associated with this Shiny app</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="testServer.html">testServer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive testing for Shiny server functions and modules</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="MockShinySession.html">MockShinySession</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mock Shiny Session</div>
+      </td>
+    </tr></tbody><tbody data-section="Superseded"><tr><td colspan="2">
+        <h3>Superseded</h3>
+        <div class="section-desc"><p>Functions that have been <code>r lifecycle::badge("superseded")</code></p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="markRenderFunction.html">markRenderFunction()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mark a function as a render function</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyUI.html">shinyUI()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a Shiny UI handler</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyServer.html">shinyServer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Define Server Functionality</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="exprToFunction.html">exprToFunction()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Convert an expression to a function</div>
+      </td>
+    </tr></tbody></table>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

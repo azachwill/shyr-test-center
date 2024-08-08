@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Upgrade notes for Shiny 0.14 – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Add rel="noopener noreferrer" to each target="_blank" -->
+<script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script>
+<!-- End Add rel="noopener noreferrer" to each target="_blank" -->
+
+<link href="../../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="../../../secondary-menu.css">
+<meta property="og:title" content="Upgrade notes for Shiny 0.14 – Shiny">
+<meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">    
+        <li class="dropdown-header"><img src="../../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<!-- Google Tag Manager (noscript) -->
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Upgrade notes for Shiny 0.14</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A new Shiny release is upon us! There are many new exciting features, bug fixes, and library updates. We’ll just highlight the most important changes here, but you can browse through the full changelog below for details. This will likely be the last release before shiny 1.0, so get out your party hats!</p>
+<section id="bookmarkable-state" class="level2">
+<h2 data-anchor-id="bookmarkable-state">Bookmarkable state</h2>
+<p>Shiny now supports bookmarkable state: users can save the state of an application and get a URL which will restore the application with that state. There are two types of bookmarking: encoding the state in a URL, and saving the state to the server. With an encoded state, the entire state of the application is contained in the URL’s query string. You can see this in action with this app: <a href="https://gallery.shinyapps.io/113-bookmarking-url/" class="uri">https://gallery.shinyapps.io/113-bookmarking-url/</a>. An example of a bookmark URL for this app is <a href="https://gallery.shinyapps.io/113-bookmarking-url/?_inputs_&amp;n=200" class="uri">https://gallery.shinyapps.io/113-bookmarking-url/?_inputs_&amp;n=200</a>. When the state is saved to the server, the URL might look something like: <a href="https://gallery.shinyapps.io/bookmark-saved/?_state_id_=d80625dc681e913a" class="uri">https://gallery.shinyapps.io/bookmark-saved/?_state_id_=d80625dc681e913a</a> (note that this URL is not for an active app).</p>
+<p><strong><em>Important note</em>:</strong></p>
+<blockquote class="blockquote">
+<p>Saved-to-server bookmarking currently works with Shiny Server Open Source. Support on Shiny Server Pro, RStudio Connect, and shinyapps.io is under development and testing. However, URL-encoded bookmarking works on all hosting platforms.</p>
+</blockquote>
+<p>See <a href="../../../../articles/bookmarking-state.html">this article</a> to get started with bookmarkable state. There is also an <a href="../../../../articles/advanced-bookmarking.html">advanced-level article</a> (for apps that have a complex state), and <a href="../../../../articles/bookmarking-modules.html">a modules article</a> that details how to use bookmarking in conjunction with modules.</p>
+</section>
+<section id="notifications" class="level2">
+<h2 data-anchor-id="notifications">Notifications</h2>
+<p>Shiny can now display notifications on the client browser by using the <code>showNotification()</code> function. Use <a href="https://gallery.shinyapps.io/116-notifications/">this demo app</a> to play around with the notification API. Here’s a screenshot of a very simple notification (shown when the button is clicked):</p>
+<p align="center">
+<img src="../../../../images/notification.png" alt="notification" width="50%">
+</p>
+<p><a href="../../../../articles/notifications.html">Here</a>’s our article about it, and the <a href="../../../../reference/shiny/latest/showNotification.html">reference documentation</a>.</p>
+</section>
+<section id="progress-indicators" class="level2">
+<h2 data-anchor-id="progress-indicators">Progress indicators</h2>
+<p>If your Shiny app contains computations that take a long time to complete, a progress bar can improve the user experience by communicating how far along the computation is, and how much is left. Progress bars were added in Shiny 0.10.2. In Shiny 0.14, they were changed to use the notifications system, which gives them a different look.</p>
+<p><strong><em>Important note</em>:</strong></p>
+<blockquote class="blockquote">
+<p>If you were already using progress bars and had customized them with your own CSS, you can add the <code>style = "old"</code> argument to your <code>withProgress()</code> call (or <code>Progress$new()</code>). This will result in the same appearance as before. You can also call <code>shinyOptions(progress.style = "old")</code> in your app’s server function to make all progress indicators use the old styling.</p>
+</blockquote>
+<p>To see new progress bars in action, see <a href="https://gallery.shinyapps.io/085-progress/">this app</a> in the gallery. You can also learn more about this in <a href="../../../../articles/progress.html">our article</a> and in the reference documentation (either for the easier <a href="../../../../reference/shiny/latest/withProgress.html"><code>withProgress</code> functional API</a> or the more complicated, but more powerful, <a href="../../../../reference/shiny/latest/Progress.html"><code>Progress</code> object-oriented API</a>.</p>
+</section>
+<section id="reconnection" class="level2">
+<h2 data-anchor-id="reconnection">Reconnection</h2>
+<p>Shiny can now automatically reconnect to your Shiny session if you temporarily lose network access.</p>
+</section>
+<section id="modal-windows" class="level2">
+<h2 data-anchor-id="modal-windows">Modal windows</h2>
+<p>Shiny has now built-in support for displaying modal dialogs like the one below (<a href="https://gallery.shinyapps.io/114-modal-dialog/">live app here</a>):</p>
+<p align="center">
+<img src="../../../../images/modal-dialog.png" alt="modal-dialog" width="50%">
+</p>
+<p>To learn more about this, read <a href="../../../../articles/modal-dialogs.html">our article</a> and the <a href="../../../../reference/shiny/latest/modalDialog.html">reference documentation</a>.</p>
+</section>
+<section id="insertui-and-removeui" class="level2">
+<h2 data-anchor-id="insertui-and-removeui"><code>insertUI</code> and <code>removeUI</code></h2>
+<p>Sometimes in a Shiny app, arbitrary HTML UI may need to be created on-the-fly in response to user input. The existing <code>uiOutput</code> and <code>renderUI</code> functions let you continue using reactive logic to call UI functions and make the results appear in a predetermined place in the UI. The <code>insertUI</code> and <code>removeUI</code> functions, which are used in the server code, allow you to use imperative logic to add and remove arbitrary chunks of HTML (all independent from one another), as many times as you want, whenever you want, wherever you want. This option may be more convenient when you want to, for example, add a new model to your app each time the user selects a different option (and leave previous models unchanged, rather than substitute the previous one for the latest one).</p>
+<p>See <a href="https://gallery.shinyapps.io/111-insert-ui/">this simple demo app</a> of how one could use <code>insertUI</code> and <code>removeUI</code> to insert and remove text elements using a queue. Also see <a href="https://gallery.shinyapps.io/insertUI/">this other app</a> that demonstrates how to insert and remove a few common Shiny input objects. Finally, <a href="https://gallery.shinyapps.io/insertUI-modules/">this app</a> shows how to dynamically insert modules using <code>insertUI</code>.</p>
+<p>For more, read <a href="../../../../articles/dynamic-ui.html">our article</a> about dynamic UI generation and the reference documentation about <a href="../../../../reference/shiny/latest/insertUI.html"><code>insertUI</code></a> and <a href="../../../../reference/shiny/latest/removeUI.html"><code>removeUI</code></a>.</p>
+</section>
+<section id="documentation-for-connecting-to-an-external-database" class="level2">
+<h2 data-anchor-id="documentation-for-connecting-to-an-external-database">Documentation for connecting to an external database</h2>
+<p>Many Shiny users have asked about best practices for accessing external databases from their Shiny applications. Although database access has long been possible using various database connector packages in R, it can be challenging to use them robustly in the dynamic environment that Shiny provides. So far, it has been mostly up to application authors to find the appropriate database drivers and to discover how to manage the database connections within an application. In order to demystify this process, we wrote a series of articles (<a href="../../../../articles/overview.html">first one here</a>) that covers the basics of connecting to an external database, as well as some security precautions to keep in mind (e.g.&nbsp;<a href="../../../../articles/sql-injections.html">how to avoid SQL injection attacks</a>).</p>
+<p>There are a few packages that you should look at if you’re using a relational database in a Shiny app: the <code>dplyr</code> and <code>DBI</code> packages (both featured in the article linked to above), and the brand new <code>pool</code> package, which provides a further layer of abstraction to make it easier and safer to use either <code>DBI</code> or <code>dplyr</code>. <code>pool</code> is not yet on CRAN. In particular, <code>pool</code> will take care of managing connections, preventing memory leaks, and ensuring the best performance. See this <a href="../../../../articles/pool-basics.html"><code>pool</code> basics article</a> and the <a href="../../../../articles/pool-advanced.html">more advanced-level article</a> if you’re feeling adventurous! (Both of these articles contain Shiny app examples that use <code>DBI</code> to connect to an external MySQL database.) If you are more comfortable with <code>dplyr</code> than <code>DBI</code>, don’t miss the article about the <a href="../../../../articles/pool-dplyr.html">integration of <code>pool</code> and <code>dplyr</code></a>.</p>
+<p>If you’re new to databases in the Shiny world, we recommend using <code>dplyr</code> and <code>pool</code> if possible. If you need greater control than <code>dplyr</code> offers (for example, if you need to modify data in the database or use transactions), then use <code>DBI</code> and <code>pool</code>. The <code>pool</code> package was introduced to make your life easier, but in no way constrains you, so we don’t envision any situation in which you’d be better off <em>not</em> using it. The only caveat is that <code>pool</code> is not yet on CRAN, so you may prefer to wait for that.</p>
+</section>
+<section id="others" class="level2">
+<h2 data-anchor-id="others">Others</h2>
+<p>There are many more minor features, small improvements, and bug fixes than we can cover here, so we’ll just mention a few of the more noteworthy ones (the full changelog, with links to all the relevant issues and pull requests, is right below this section):</p>
+<ul>
+<li><p><strong>Error Sanitization</strong>: you now have the option to sanitize error messages; in other words, the content of the original error message can be suppressed so that it doesn’t leak any sensitive information. To sanitize errors everywhere in your app, just add <code>options(shiny.sanitize.errors = TRUE)</code> somewhere in your app. Read <a href="../../../../articles/sanitize-errors.html">this article</a> for more, or play with the <a href="https://gallery.shinyapps.io/110-error-sanitization/">demo app</a>.</p></li>
+<li><p><strong>Code Diagnostics</strong>: if there is an error parsing <code>ui.R</code>, <code>server.R</code>, <code>app.R</code>, or <code>global.R</code>, Shiny will search the code for missing commas, extra commas, and unmatched braces, parens, and brackets, and will print out messages pointing out those problems. (<a href="https://github.com/rstudio/shiny/pull/1126">#1126</a>)</p></li>
+<li><p><strong>Reactlog visualization</strong>: by default, the <a href="../../../../reference/shiny/latest/showReactLog.html"><code>showReactLog()</code> function</a> (which brings up the reactive graph) also displays the time that each reactive and observer were active for:</p>
+<p align="center">
+</p><p><img src="../../../../images/reactlog.png" alt="modal-dialog" width="75%"></p>
+<p></p>
+<p>This new feature can be turned off with <code>showReactLog(time = FALSE)</code>. This may be convenient if you have a large graph and don’t want to have this new information cluttering it up. The elapsed time info shows up above each relevant node’s label, and the time is also coded by color: the slowest reactive will be dark red and the fastest will be light red.</p>
+<p>Additionally, to organize the graph, you can now drag any of the nodes to a specific position and leave it there.</p></li>
+<li><p><strong>Nicer-looking tables</strong>: we’ve made tables generated with <code>renderTable()</code> look cleaner and more modern. While this won’t break any older code, the finished look of your table will be quite a bit different, as the following image shows:</p>
+<p align="center">
+</p><p><img src="../../../../images/render-table.png" alt="render-table" width="75%"></p>
+<p></p>
+<p>For more, read our <a href="../../../../articles/render-table.html">short article</a> about this update, experiment with all the new features in this <a href="https://gallery.shinyapps.io/109-render-table/">demo app</a>, or check out the <a href="../../../../reference/shiny/latest/renderTable.html">reference documentation</a>.</p></li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 data-anchor-id="breaking-changes">Breaking changes</h3>
+<ul>
+<li><p>Progress indicators can now either use the new notification API, using <code>style = "notification"</code> (default), or be displayed with the previous styling, using <code>style = "old"</code>. You can also call <code>shinyOptions(progress.style = "old")</code> in the server function to make all progress indicators use the old styling. Note that if you had customized your progress indicators with additional CSS, you’ll need to use the old style if you want your UI to look the same (<a href="https://github.com/rstudio/shiny/pull/1160">#1160</a> and <a href="https://github.com/rstudio/shiny/pull/1329">#1329</a>).</p></li>
+<li><p>Closed <a href="https://github.com/rstudio/shiny/issues/1161">#1161</a>: Deprecated the <code>position</code> argument to <code>tabsetPanel()</code> since Bootstrap 3 stopped supporting this feature.</p></li>
+<li><p>The long-deprecated ability to pass a <code>func</code> argument to many of the <code>render</code> functions has been removed.</p></li>
+</ul>
+</section>
+<section id="new-features" class="level3">
+<h3 data-anchor-id="new-features">New features</h3>
+<ul>
+<li><p>Added the ability to bookmark and restore application state. (main PR: <a href="https://github.com/rstudio/shiny/pull/1209">#1209</a>)</p></li>
+<li><p>Added a new notification API. From R, there are new functions <code>showNotification</code> and <code>hideNotification</code>. From JavaScript, there is a new <code>Shiny.notification</code> object that controls notifications. (<a href="https://github.com/rstudio/shiny/pull/1141">#1141</a>)</p></li>
+<li><p>Progress indicators now use the notification API. (<a href="https://github.com/rstudio/shiny/pull/1160">#1160</a>)</p></li>
+<li><p>Added the ability for the client browser to reconnect to a new session on the server, by setting <code>session$allowReconnect(TRUE)</code>. This requires a version of Shiny Server that supports reconnections. (<a href="https://github.com/rstudio/shiny/pull/1074">#1074</a>)</p></li>
+<li><p>Added modal dialogs. (<a href="https://github.com/rstudio/shiny/pull/1157">#1157</a>)</p></li>
+<li><p>Added insertUI and removeUI functions to be able to add and remove chunks of UI, standalone, and all independent of one another. (<a href="https://github.com/rstudio/shiny/pull/1174">#1174</a> and <a href="https://github.com/rstudio/shiny/pull/1189">#1189</a>)</p></li>
+<li><p>Improved <code>renderTable()</code> function to make the tables look prettier and also provide the user with a lot more parameters to customize their tables with. (<a href="https://github.com/rstudio/shiny/pull/1129">#1129</a>)</p></li>
+<li><p>Added support for the <code>pool</code> package (use Shiny’s timer/scheduler). (<a href="https://github.com/rstudio/shiny/pull/1226">#1226</a>)</p></li>
+</ul>
+</section>
+<section id="minor-new-features-and-improvements" class="level3">
+<h3 data-anchor-id="minor-new-features-and-improvements">Minor new features and improvements</h3>
+<ul>
+<li><p>Added <code>cancelOutput</code> argument to <code>req()</code>. This causes the currently executing reactive to cancel its execution, and leave its previous state alone (as opposed to clearing the output). (<a href="https://github.com/rstudio/shiny/pull/1272">#1272</a>)</p></li>
+<li><p><code>Display: Showcase</code> now displays the .js, .html and .css files in the <code>www</code> directory by default. In order to use showcase mode and not display these, include a new line in your Description file: <code>IncludeWWW: False</code>. (<a href="https://github.com/rstudio/shiny/pull/1185">#1185</a>)</p></li>
+<li><p>Added an error sanitization option: <code>options(shiny.sanitize.errors = TRUE)</code>. By default, this option is <code>FALSE</code>. When <code>TRUE</code>, normal errors will be sanitized, displaying only a generic error message. This changes the look of an app when errors are printed (but the console log remains the same). (<a href="https://github.com/rstudio/shiny/pull/1156">#1156</a>)</p></li>
+<li><p>Added the option of passing arguments to an <code>xxxOutput()</code> function through the corresponding <code>renderXXX()</code> function via an <code>outputArgs</code> parameter to the latter. This is only valid for snippets of Shiny code in an interactive <code>runtime: shiny</code> Rmd document (never for full apps, even if embedded in an Rmd). (<a href="https://github.com/rstudio/shiny/pull/1143">#1443</a>)</p></li>
+<li><p>Added <code>updateActionButton()</code> function, so the user can change an <code>actionButton</code>’s (or <code>actionLink</code>’s) label and/or icon. It also checks that the icon argument (for both creation and updating of a button) is valid and throws a warning otherwise. (<a href="https://github.com/rstudio/shiny/pull/1134">#1134</a>)</p></li>
+<li><p>Added code diagnostics: if there is an error parsing ui.R, server.R, app.R, or global.R, Shiny will search the code for missing commas, extra commas, and unmatched braces, parens, and brackets, and will print out messages pointing out those problems. (<a href="https://github.com/rstudio/shiny/pull/1126">#1126</a>)</p></li>
+<li><p>Added support for horizontal dividers in <code>navbarMenu</code>. (<a href="https://github.com/rstudio/shiny/pull/1147">#1147</a>)</p></li>
+<li><p>Added <code>placeholder</code> option to <code>passwordInput</code>. (<a href="https://github.com/rstudio/shiny/pull/1152">#1152</a>)</p></li>
+<li><p>Added <code>session$resetBrush(brushId)</code> (R) and <code>Shiny.resetBrush(brushId)</code> (JS) to programatically clear brushes from <code>imageOutput</code>/<code>plotOutput</code>. (<a href="https://github.com/rstudio/shiny/pull/1197">#1197</a>)</p></li>
+<li><p>Added textAreaInput. (thanks, <a href="https://github.com/nuno-agostinho"><span class="citation" data-cites="nuno-agostinho">@nuno-agostinho</span></a>! <a href="https://github.com/rstudio/shiny/pull/1300">#1300</a>)</p></li>
+<li><p>Added <code>session$sendBinaryMessage(type, message)</code> method for sending custom binary data to the client. See <code>?session</code>. (thanks, <a href="https://github.com/daef"><span class="citation" data-cites="daef">@daef</span></a>! <a href="https://github.com/rstudio/shiny/pull/1316">#1316</a> and <a href="https://github.com/rstudio/shiny/pull/1320">#1320</a>)</p></li>
+<li><p>Almost all code examples now have a runnable example with <code>shinyApp()</code>, so that users can run the examples and see them in action. (<a href="https://github.com/rstudio/shiny/pull/1158">#1158</a>)</p></li>
+<li><p>When resized, plots are drawn with <code>replayPlot()</code>, instead of re-executing all plotting code. This results in faster plot rendering. (<a href="https://github.com/rstudio/shiny/pull/1112">#1112</a>)</p></li>
+<li><p>Exported the <code>isTruthy()</code> function. (part of PR <a href="https://github.com/rstudio/shiny/pull/1272">#1272</a>)</p></li>
+<li><p>Reactive log now shows elapsed time for reactives and observers. (<a href="https://github.com/rstudio/shiny/pull/1132">#1132</a>)</p></li>
+<li><p>Nodes in the reactlog visualization are now sticky if the user drags them. (<a href="https://github.com/rstudio/shiny/pull/1283">#1283</a>)</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 data-anchor-id="bug-fixes">Bug fixes</h3>
+<ul>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/1350">#1350</a>: Highlighting of reactives didn’t work in showcase mode.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/1331">#1331</a>: <code>renderPlot()</code> now correctly records and replays plots when <code>execOnResize = FALSE</code>.</p></li>
+<li><p><code>updateDateInput()</code> and <code>updateDateRangeInput()</code> can now clear the date input fields. (thanks, <a href="https://github.com/gaborcsardi"><span class="citation" data-cites="gaborcsardi">@gaborcsardi</span></a>! <a href="https://github.com/rstudio/shiny/pull/1299">#1299</a>, <a href="https://github.com/rstudio/shiny/pull/1315">#1315</a> and <a href="https://github.com/rstudio/shiny/pull/1317">#1317</a>)</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/561">#561</a>: DataTables previously might pop up a warning when the data was updated extremely frequently.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/776">#776</a>: In some browsers, plots sometimes flickered when updated.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/543">#543</a> and <a href="https://github.com/rstudio/shiny/issues/855">#855</a>: When <code>navbarPage()</code> had a <code>navbarMenu()</code> as the first item, it did not automatically select an item.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/970">#970</a>: <code>navbarPage()</code> previously did not have an option to set the selected tab.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/1253">#1253</a>: Memory could leak when an observer was destroyed without first being invalidated.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/931">#931</a>: Nested observers could leak memory.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/1144">#1144</a>: <code>updateRadioButton()</code> and <code>updateCheckboxGroupInput()</code> broke controls when used in modules (thanks, <a href="https://github.com/sipemu"><span class="citation" data-cites="sipemu">@sipemu</span></a>!).</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/1093">#1093</a>: <code>updateRadioButtons()</code> and <code>updateCheckboxGroupInput()</code> didn’t work if <code>choices</code> was numeric vector.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/1122">#1122</a>: <code>downloadHandler()</code> popped up empty browser window if the file wasn’t present. It now gives a 404 error code.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/1278">#1278</a>: Reactive system was being flushed too often (usually this just means a more-expensive no-op than necessary).</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/803">#803</a> and <a href="https://github.com/rstudio/shiny/issues/1179">#1179</a>: handling malformed dates in <code>dateInput</code> and <code>updateDateInput()</code>.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/1257">#1257</a>: <code>updateSelectInput()</code> didn’t work correctly in IE 11 and Edge.</p></li>
+<li><p>Fixed <a href="https://github.com/rstudio/shiny/issues/971">#971</a>: <code>runApp()</code> would give confusing error if <code>port</code> was not numeric.</p></li>
+<li><p>Shiny now avoids using ports that Chrome deems unsafe. (<a href="https://github.com/rstudio/shiny/pull/1222">#1222</a>)</p></li>
+<li><p>Added workaround for quartz graphics device resolution bug, where resolution is hard-coded to 72 ppi.</p></li>
+</ul>
+</section>
+<section id="library-updates" class="level3">
+<h3 data-anchor-id="library-updates">Library updates</h3>
+<ul>
+<li><p>Updated to ion.RangeSlider 2.1.2.</p></li>
+<li><p>Updated to Font Awesome 4.6.3.</p></li>
+<li><p>Updated to Bootstrap 3.3.7.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

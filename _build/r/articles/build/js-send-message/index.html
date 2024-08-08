@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Hermann Sontrop">
+<meta name="author" content="Erwin Schuijtvlot">
+<meta name="dcterms.date" content="2017-07-12">
+<meta name="description" content="The ability to send and receive messages greatly improves the capabilities of our widgets, as C3 offers a powerful API with a vast set of options and methods that allow you to modify a chart after it is initialized.">
+
+<title>How to send messages from the browser to the server and back using Shiny – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../r/articles/build/js-introjs/index.html" rel="next">
+<link href="../../../../r/articles/build/js-widget-functionality/index.html" rel="prev">
+<link href="../../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Add rel="noopener noreferrer" to each target="_blank" -->
+<script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script>
+<!-- End Add rel="noopener noreferrer" to each target="_blank" -->
+
+<link href="../../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="../../../secondary-menu.css">
+<link rel="stylesheet" href="../../articles.css">
+<link rel="stylesheet" href="../../../../r/secondary-menu.css">
+<meta property="og:title" content="How to send messages from the browser to the server and back using Shiny – Shiny">
+<meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">    
+        <li class="dropdown-header"><img src="../../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Build</li><li class="breadcrumb-item">Frontend</li><li class="breadcrumb-item"><a href="../../../../r/articles/build/htmlwidgets/index.html">Shiny extensions</a></li><li class="breadcrumb-item"><a href="../../../../r/articles/build/js-send-message/index.html">How to send messages from the browser to the server and back using Shiny</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>ARTICLES</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles#start" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Start</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Build</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Structure</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Standalone apps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/app-formats/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App formats and launching apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/two-file/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-file Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Interactive documents</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rmarkdown/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to R Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rmd-integration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Markdown integration in the RStudio IDE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/output-args/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting Output args via Render functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/interactive-docs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to interactive documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rm-cheatsheet/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The R Markdown cheatsheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/output-args/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting Output args via Render functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/generating-reports/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generating downloadable reports</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dashboards</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/dashboards/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dashboards</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Gadgets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/gadgets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny Gadgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/gadget-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Designing Gadget UI</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Backend</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reactivity</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/reactivity-overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reactivity - An overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/isolation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stop reactions with isolate()</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/execution-scheduling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Execution scheduling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/understanding-reactivity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to understand reactivity in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/client-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Learn about your user with session$clientData</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Database basics - dplyr and DBI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/sql-injections/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SQL injection prevention</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-basics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pool package (basics)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-advanced/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pool package (advanced)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-dplyr/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using dplyr and pool to query a database</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/persistent-data-storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Persistent data storage in Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Frontend</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">User interface</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/layout-guide/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application layout guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/display-modes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Display modes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/tabsets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tabsets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/html-tags/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Customize your UI with HTML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/html-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build your entire UI with HTML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/dynamic-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build a dynamic UI that reacts to user input</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/templates/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTML Templates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/tag-glossary/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny HTML Tags Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/progress/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Progress indicators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/modal-dialogs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modal dialogs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/notifications/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/themes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Themes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/images/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Render images in a Shiny app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/render-table/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Displaying and customizing static tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/datatables/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to use DataTables in a Shiny App</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/action-buttons/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using Action Buttons</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/sliders/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using sliders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/download/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Help users download data from your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/upload/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Help users upload files to your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/selectize/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using selectize input</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Graphics &amp; visualization</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/plot-interaction/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interactive plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/selecting-rows-of-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting rows of data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/plot-interaction-advanced/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interactive plots - advanced</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+ <span class="menu-text">Shiny extensions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/htmlwidgets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">htmlwidgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/shinyjs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript actions packaged for Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-build-widget/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to build a JavaScript based widget</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-widget-functionality/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to add functionality to JavaScript widgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-send-message/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">How to send messages from the browser to the server and back using Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-introjs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to develop an interactive, dynamic help system for your app with introJS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-custom-input/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to create custom input bindings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-dashboard/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Putting everything together to create an interactive dashboard</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Customizing Shiny</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/css/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using custom CSS in your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/building-inputs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build custom input objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/building-outputs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build custom output objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/google-analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add Google Analytics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/packaging-javascript/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packaging JavaScript code for Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/communicating-with-js/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Communicating with Shiny via JavaScript</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-events/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript Events in Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-dashboard/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Putting everything together to create an interactive dashboard</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Improve</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Refactor</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Code quality</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/debugging/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debugging Shiny applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/upgrade-R/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Upgrading to a new version of R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/req/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Handling missing inputs with req(…)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scoping/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scoping rules for Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/reconnecting/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reconnecting to Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/sanitize-errors/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sanitizing error messages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/validation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Write error messages for your UI with validate</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/unicode/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unicode characters in Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/testing-overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny testing overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/shinytest/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">shinytest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/server-function-testing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Server function testing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modularizing Shiny app code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/communicate-bet-modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Communication between modules</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
+ <span class="menu-text">Scale</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false">
+ <span class="menu-text">Measure usage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/usage-metrics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny App Usage Tracking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/google-analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add Google Analytics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false">
+ <span class="menu-text">Performance and scalability</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/caching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using caching in Shiny to maximize performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/plot-caching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plot Caching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/profiling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Profiling your Shiny app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/performance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/nonblocking/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Non-blocking operations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false">
+ <span class="menu-text">Tuning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scaling-and-tuning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scaling and Performance Tuning with shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scaling-and-tuning-ssp-rsc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scaling and Performance Tuning with Shiny Server Pro and Posit Connect</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false">
+ <span class="menu-text">Share</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false">
+ <span class="menu-text">Deployment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/deployment-web/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deploying Shiny apps to the web</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/shinyapps/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started with shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">r/articles/share/shinyapps-auth/index.qmd</span>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/custom-domains/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting up custom domains on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/share-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sharing data across sessions on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/migration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Migrating authentication on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/shiny-server/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Shiny Server</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/libraries/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Allowing different libraries for different apps on Shiny Server, Shiny Server Pro, and Posit Connect</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/permissions/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating user privileges on Posit Connect and Shiny Server Pro</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/admin-deployment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Administrating Shiny Server, Shiny Server Pro, and Posit Connect</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false">
+ <span class="menu-text">Distribution</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/deployment-local/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sharing apps to run locally</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/function/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Save your app as a function</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bookmarking</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/bookmarking-state/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bookmarking state</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/advanced-bookmarking/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced bookmarking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/bookmarking-modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bookmarking and modules</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+<!-- Google Tag Manager (noscript) -->
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Build</li><li class="breadcrumb-item">Frontend</li><li class="breadcrumb-item"><a href="../../../../r/articles/build/htmlwidgets/index.html">Shiny extensions</a></li><li class="breadcrumb-item"><a href="../../../../r/articles/build/js-send-message/index.html">How to send messages from the browser to the server and back using Shiny</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">How to send messages from the browser to the server and back using Shiny</h1>
+</div>
+
+<div>
+  <div class="description">
+    <p>The ability to send and receive messages greatly improves the capabilities of our widgets, as C3 offers a powerful API with a vast set of options and methods that allow you to modify a chart after it is initialized.</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hermann Sontrop </p>
+             <p>Erwin Schuijtvlot </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 12, 2017</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>In the previous tutorial we learned how to create C3 based widgets for</p>
+<ul>
+<li>a pie chart</li>
+<li>a combined line + bar chart, and</li>
+<li>a stacked area chart.</li>
+</ul>
+<p>We mainly focused on constructing these charts from R and sending data in such a way that C3 could animate the transition between the old and new data. This tutorial is all about sending messages from R to JavaScript and back, including how to listen for events.</p>
+<p>The ability to send and receive messages greatly improves the capabilities of our widgets, as C3 offers a powerful API with a vast set of options and methods that allow you to modify a chart after it is initialized. For instance, we can use messages to</p>
+<ul>
+<li>update a legend</li>
+<li>add or remove data, or</li>
+<li>focus the viewing area of a chart to a particular subset of its data.</li>
+</ul>
+<p>Importantly, we want to be able to do all of this from R. In addition, it want to be able to chain operations together via the pipe operator (%&gt;%) in a way similar to ggplot2 (which uses the + operator).</p>
+<section id="messages-events-and-event-listeners" class="level3">
+<h3 data-anchor-id="messages-events-and-event-listeners">Messages, events and event listeners</h3>
+<p>An advantage of JavaScript charts is that they lend themselves well to user interaction. For instance, you can have JavaScript highlight a specific segment of the chart when you hover over the <a href="http://c3js.org/samples/legend_custom.html">legend</a>. Or, you can have JavaScript remove a segment of the chart when you click on a legend element. <a href="http://c3js.org/samples/tooltip_format.html">Tooltips</a> are another example of chart interaction, in which you can show additional information when hovering over particular elements in the chart.</p>
+<p>In JavaScript, things like clicking, hovering, brushing etc. are called <a href="http://www.w3schools.com/js/js_events.asp">events</a>. Often you want JavaScript to do something when an event occurs, i.e.&nbsp;you want to fire a specific function. An <a href="http://www.w3schools.com/js/js_htmldom_eventlistener.asp">event listener</a>, also called an <em>event handler</em>, is a special function that listens for particular events and that fires another function, called a <em>callback</em> function, if JavaScript detects the event. For instance, when you click a button, JavaScript can detect the click event via an event handler, which subsequently can fire another function.</p>
+<p>JavaScript has many events that you can listen to, see <a href="http://www.w3schools.com/js/js_events_examples.asp">here</a> for a more complete overview. Luckily, C3.js has an easy mechanism built in that allows you to call specific functions for click events, mouseover, mouseout and drag events. In this tutorial, you’ll learn how to use these.</p>
+</section>
+</section>
+<section id="sending-and-receiving-messages-from-shiny-to-javascript-and-back" class="level2 page-columns page-full">
+<h2 data-anchor-id="sending-and-receiving-messages-from-shiny-to-javascript-and-back">Sending and receiving messages from Shiny to JavaScript and back</h2>
+<p>So far we have discussed events that happen solely in JavaScript. Sometimes, however, you may want to:</p>
+<ol type="1">
+<li>activate JavaScript functions from R, e.g.&nbsp;to activate a chart method that modifies the chart, or</li>
+<li>let Shiny listen to events that happen in the browser.</li>
+</ol>
+<p>Let’s see how we can do that!</p>
+<p>Shiny offers three pivotal functions for sending and receiving messages. These are:</p>
+<ol type="1">
+<li>the R function <code>sendCustomMessage</code></li>
+<li>the JavaScript function <code>Shiny.addCustomMessageHandler</code></li>
+<li>the JavaScript function <code>Shiny.onInputChange</code>.</li>
+</ol>
+<p>In the last two items, <code>Shiny</code> refers to a JavaScript object that is provided by Shiny and is available in JavaScript during the lifetime of an app. This object has various methods e.g.&nbsp;<code>addCustomMessageHandler</code> and <code>onInputChange</code> that we can use. Before we use these methods in a C3 context, we first show two basic scenarios that use these functions.</p>
+<section id="scenario-1-calling-a-javascript-function-from-shiny" class="level3">
+<h3 data-anchor-id="scenario-1-calling-a-javascript-function-from-shiny">Scenario 1: calling a JavaScript function from Shiny</h3>
+<p>Many modern R packages like <a href="http://rstudio.github.io/leaflet/">leaflet</a>, the <a href="http://rstudio.github.io/DT/">DT</a> package, <a href="http://dataknowledge.github.io/visNetwork">visNetwork</a> and <a href="https://plot.ly/r/">plotly</a>, use JavaScript functions behind the scenes to perform key functionality. However, as they are all R packages, they invoke such functions from R. How can we do the same? Consider the following figure:</p>
+<p><img src="RtoJS.svg" width="100%"></p>
+<p>Suppose in JavaScript our main goal is to call the function <code>DoAwesomeThing1</code> (step 3), which has as an input object <code>message</code> and sends a simple text string to the browser <a href="https://developers.google.com/web/tools/chrome-devtools/console/?hl=en">console</a>.</p>
+<p>If we want to call this function from R, we can create an event handler in JavaScript (step 2), that handles requests from R, which tells JavaScript to call the function and to pass it a message that it got from R. Suppose we call this handler <code>handler1</code>. In JavaScript, we can create a message handler like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Shiny<span class="op">.</span><span class="fu">addCustomMessageHandler</span>(<span class="st">"handler1"</span><span class="op">,</span> doAwesomeThing1)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first argument is the name of our handler, while the second argument is the callback function we want it to execute, i.e.&nbsp;<code>doAwesomeThing1</code>. Whenever this handler gets a message from Shiny, it will pass the message as a function argument and call our JavaScript function <code>doAwesomeThing1</code>. In the example, the function <code>doAwesomeThing1</code> displays the message via <a href="http://www.w3schools.com/js/js_output.asp">console.log</a> to the browser console.</p>
+<p>Finally, in R we can send a message to our handler (which lives in JavaScript) via:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>session<span class="sc">$</span><span class="fu">sendCustomMessage</span>(<span class="st">"handler1"</span>, message)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, <code>message</code> is a simple text string, e.g.&nbsp;<code>message &lt;- "hello!"</code>. To make things more concrete, let’s create an example.</p>
+</section>
+<section id="example-1" class="level3 page-columns page-full">
+<h3 data-anchor-id="example-1">Example 1</h3>
+<p>Suppose we have a Shiny action button; and when we press it, we want R to send a message string, e.g.&nbsp;“hello!”, to JavaScript. Subsequently, we want JavaScript to create an alert that shows the value JavaScript received from R. The following 4 step procedure shows how we can handle this scenario. The procedure contains an R part (steps 1 &amp; 2, light gray) and a JavaScript part (steps 3 &amp; 4, light blue).</p>
+<div class="column-page">
+<a href="https://js-tutorial.shinyapps.io/messageApp1/" target="_blank"> <img src="messages1.svg" style="max-width: 100%;"> </a>
+<div style="text-align: center; margin-bottom: 25px">
+Example calling a JavaScript function from R. Click on the image to see a shiny app implementing this example!
+</div>
+</div>
+<p>At step 1, we define an action button in ui.R and we include a JavaScript file, i.e.&nbsp;message.js, which we store in the <code>www</code> folder of a Shiny app. The file message.js contains two pieces of JavaScript code, displayed in steps 3 and 4.</p>
+<p>In step 2, we create an <code>observeEvent</code> block, which is triggered via the action button. Inside it, we create a message and use <code>session$sendCustomMessage</code> with two arguments. The first argument is the name of the JavaScript message handler we want it to pass our message to. The second argument is the message itself.</p>
+<p>Next, on the JavaScript side (step 3) we add our custom message handler via <code>Shiny.addCustomMessageHandler</code>. We’ll give the handler a name (or more formally, a type) equal to <code>handler1</code> and a callback function, i.e.&nbsp;<code>doAwesomeThing</code>.</p>
+<p>Finally, in step 4, we define the function <code>doAwesomeThing</code>, which has a single argument <code>message1</code>, which is subsequently used to raise an alert with the message.</p>
+<p>The complete code for this example app can be downloaded <a href="https://github.com/FrissAnalytics/shinyJsTutorials/tree/master/tutorials/materials3/messageApp1">here</a>.</p>
+</section>
+<section id="scenario-2-sending-a-message-from-javascript-to-shiny" class="level3">
+<h3 data-anchor-id="scenario-2-sending-a-message-from-javascript-to-shiny">Scenario 2: sending a message from JavaScript to Shiny</h3>
+<p>Instead of sending a message from Shiny to JavaScript, we can also send messages from JavaScript to Shiny. These actions are often coupled to events, e.g.&nbsp;when we want R to do something when we click on an element. Such messages can be sent using the JavaScript method <code>Shiny.onInputChange</code>, which is made available by shiny. Consider the figure below:</p>
+<p><img src="JStoR.svg" width="100%"></p>
+<p>In this example, we have a JavaScript function <code>doAwesomeThing2</code>, which takes an id and some data object (this can be anything), who’s task it is to send this information to Shiny. Within the function, here we first create an object with name message, and subsequently use it to send a message back to Shiny. Here, we tell it to make the message available in the R world under the name <code>jsValue</code>. That is, in R we can now listen for events via <code>input$jsValue</code>. So now if <code>doAwesomeThing2</code> is called, Shiny gets a message. Nice!</p>
+<p>Caveat: Shiny only listens for <em>changes</em> in the value of a message. Hence, if you call <code>doAwesomeThing2</code> twice with the same arguments, the second call will not trigger the observeEvent block because the object you send is unchanged. This can be overcome by adding a random value to your object, which makes the object as a whole appear changed to Shiny. In R, you simply ignore that part of the object. Such a value is sometimes known as a <em>nonce</em>, see <a href="https://github.com/rstudio/leaflet/search?utf8=%E2%9C%93&amp;q=nonce">here</a>.</p>
+<p>For instance in JavaScript via:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> message <span class="op">=</span> {<span class="dt">id</span><span class="op">:</span> <span class="st">"id1"</span><span class="op">,</span> data <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span><span class="dv">2</span>]<span class="op">,</span> <span class="dt">nonce</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>()}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can force reactivity in repeated calls to <code>doAwesomeThing2</code> even if the values of id and data don’t change.</p>
+<p>Let’s see how we can incorporate these ideas into a small toy app!</p>
+</section>
+<section id="example-2" class="level3">
+<h3 data-anchor-id="example-2">Example 2</h3>
+<p>Let’s say that we have an image on a web page, e.g.&nbsp;the RStudio ball, and when we click on it, we want to send a message from JavaScript to R, indicating that we clicked on the image. To see a Shiny toy app implementing this example, click on the blue RSTUDIO ball below!</p>
+<p style="margin:25px">
+<a href="https://js-tutorial.shinyapps.io/messageApp2/" target="_blank"><img src="messageApp2.png" width="100%"></a>
+</p><div style="text-align:center">
+example app showing how to use Shiny.onInputChange
+</div>
+<p></p>
+<p>If you run the app, the code can be seen next to the logo. Under the www tab you’ll find the css file and the JavaScript file associated with this example. In the app, a counter below the logo shows how often you have clicked on the RStudio ball.</p>
+<p>The complete code for this example app can be downloaded <a href="https://github.com/FrissAnalytics/shinyJsTutorials/tree/master/tutorials/materials3/messageApp2">here</a>.</p>
+<p>The example itself is slightly more complex than what we previously encountered and involves a number of techniques. However, a complete understanding will help you handle various things that can come up when you create more complex Shiny apps. Assuming you opened the app, here are a few things to notice:</p>
+<ol type="1">
+<li><p>the ui.r file contains a link to a <a href="http://www.w3schools.com/html/html_css.asp">css</a> file used to style the logo, to align the text under the image, and to change the mouse pointer on hover.</p></li>
+<li><p>we included a JavaScript file <code>message.js</code> that initializes a counter <code>n</code> and sets up an event handler, in this case a <a href="http://api.jquery.com/on/">click handler</a>. The click handler increases the value of the counter each time we click the image and passes the value of <code>n</code> to Shiny via <code>Shiny.onInputChange</code> via a variable called <code>count</code>.</p></li>
+<li><p>the click handler is created via <a href="http://jquery.com/">jQuery</a> (which comes standard with Shiny apps) and uses the $ sign (which is short for jQuery). jQuery is a JavaScript utility library packed with many useful functions. This library is known as the ‘code less do more’ library. If you’re serious about Shiny, this library is well worth checking out! See <a href="http://www.w3schools.com/jquery/">here</a> for an easy tutorial. Many jQuery functions work by using a <a href="http://www.w3schools.com/cssref/css_selectors.asp">css selector</a> to create a selection and then to call a function on that selection. Of note, under the hood, jQuery plays an important role in many parts of the Shiny implementation by RSTUDIO.</p></li>
+</ol>
+<p>For C3, you don’t have to create your own event listeners. However, it is very valuable if you understand how to create and use your own event listeners.</p>
+<ol start="4" type="1">
+<li><p>in server.r, we can capture the value sent by JavaScript via <code>input$count</code>. Note here we used <a href="http://shiny.rstudio.com/reference/shiny/latest/req.html">req</a> to indicate that the value in <code>input$count</code> must be <a href="http://shiny.rstudio.com/articles/req.html#truthy-and-falsy-values">truthy</a>.</p></li>
+<li><p>in message.js, we wrapped our code in <a href="https://learn.jquery.com/using-jquery-core/document-ready/"><code>$(document).ready(function() { ... }</code></a>. This jQuery function will tell the browser to only run the code inside, once the page, i.e.&nbsp;the <a href="http://www.w3schools.com/js/js_htmldom.asp">Document Object Model</a> (DOM), is ready for JavaScript code to execute. Note that when we activate this code too soon, i.e.&nbsp;before the image is loaded, we cannot yet attach an event handler to it. In other words, here we want to be sure that the image exists before attaching an event handler to it.</p></li>
+</ol>
+</section>
+<section id="data-transformation-from-r-to-javascript-and-back" class="level3">
+<h3 data-anchor-id="data-transformation-from-r-to-javascript-and-back">Data transformation from R to JavaScript and back</h3>
+<p>As noted in the <a href="http://shiny.rstudio.com/tutorial/js-lesson2/">previous</a> tutorial, all objects that are sent from R to JavaScript, or from JavaScript to R, are tacitly passed and processed by Shiny via <a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html">jsonlite</a>, using the functions <code>toJSON</code> and <code>fromJSON</code>. These functions transform R objects into JavaScript objects and vice versa. Especially in the beginning, this may lead to unexpected results, as the transformations are tacit and the returned objects may look different after processing than you might expect. With the hazard of sounding like a broken record: it’s very well worth your time to investigate how objects are transformed!</p>
+<p style="margin:25px">
+<a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html" target="_blank"><img src="jsonlite.svg" width="100%"></a>
+</p><div style="text-align:center">
+All objects that are send from R to JavaScript, or from JavaScript to R, are tacitly passed and processed by shiny via jsonlite.
+</div>
+<p></p>
+</section>
+</section>
+<section id="sending-messages-from-c3-to-shiny" class="level2">
+<h2 data-anchor-id="sending-messages-from-c3-to-shiny">Sending messages from C3 to Shiny</h2>
+<p>In Example 2, we set up our own click handler using jQuery. If that was confusing, your worries are over!</p>
+<p>Luckily, C3 makes it very easy to bind functions to events without using jQuery. We can listen for:</p>
+<p><code>onclick</code>, <code>onmouseover</code>, <code>onmouseout</code>, <code>ondragstart</code>, and <code>ondragend</code></p>
+<p>events, for instance. You can find more information on these events <a href="http://c3js.org/reference.html#data-onclick">here</a>.</p>
+<p>Consider the C3 pie in the following jsFiddle which contains data for series data1 and data2. Just click on a slice and see what happens!</p>
+<iframe width="100%" height="425" src="https://jsfiddle.net/3u47j1n2/8/embedded/result,js,html" allowfullscreen="allowfullscreen" frameborder="0">
+</iframe>
+<p>Here we use C3 to pass some information on the slice we click on. Using the concepts from the sections above, we can send this information back to shiny as well.</p>
+<p>Consider the JavaScript panel of the fiddle above. Here we used the C3 <code>onclick</code> method to display some of C3’s underlying data. Similar to <a href="https://d3js.org/">D3</a>, C3 stores this information in a variable called <a href="https://d3js.org/#properties">d</a>. For instance, we can extract the slice data name via <code>d.id</code>. In this fiddle, the bottom line shows the complete content stored in the <code>d</code> variable by C3. In order to display the content inside a div element, here we use jQuery’s <a href="http://api.jquery.com/html/">html</a> method, in concert with JavaScript’s native <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a> method. The latter method allows you to convert a JavaScript object to JSON, which you then can print.</p>
+<p>Back to our example, relaying the information stored in <code>d.id</code> back to Shiny is quite easy with the help of our new found friend <code>Shiny.onInputChange</code>. In a Shiny context, the relevant code snippet to pass the information to Shiny would look something like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// c3 main method to construct a new chart</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> c3<span class="op">.</span><span class="fu">generate</span>({</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bindto</span><span class="op">:</span> el<span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">data</span><span class="op">:</span> {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// insert toy data</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">json</span> <span class="op">:</span> {<span class="st">"data1"</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span><span class="st">"data2"</span><span class="op">:</span> <span class="dv">120</span>}<span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span> <span class="op">:</span> <span class="st">'pie'</span><span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">onclick</span><span class="op">:</span> <span class="kw">function</span>(d<span class="op">,</span> element) {</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="co">// id of pie to shiny to input$chartId_click</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="kw">var</span> inputId <span class="op">=</span> el<span class="op">.</span><span class="at">id</span> <span class="op">+</span> <span class="st">"_click"</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      <span class="co">// pie slice label</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">var</span> value <span class="op">=</span> d<span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>      <span class="co">// send message to shiny</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      Shiny<span class="op">.</span><span class="fu">onInputChange</span>(inputID<span class="op">,</span>value)<span class="op">;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that in this case, we are also interested in the id of the container element that holds the pie chart, which we can get via <code>el.id</code>. We are interested in this because we will want to know which specific pie we clicked on should we have multiple pie charts in the Shiny app. Here we use this id, combined with the string <code>_click</code> and use this <em>compound</em> id to send the value back to Shiny.</p>
+<p>Suppose the pie container has an id equal to <code>pie1</code>, then in a Shiny context, we can observe the underlying data of a pie slice click in R via <code>input$pie1_click</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">observeEvent</span>(input<span class="sc">$</span>pie1_click,{</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">you clicked on a pie with pie slice data:"</span>, input<span class="sc">$</span>pie1_click)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sending-messages-to-an-already-existing-chart" class="level2">
+<h2 data-anchor-id="sending-messages-to-an-already-existing-chart">Sending messages to an already existing chart</h2>
+<p>Sometimes we need to manipulate an already existing chart in order to control a specific aspect of that chart. Importantly, you would like to do that without redrawing the whole visualization from scratch. Fortunately, C3 provides a variety of <a href="http://c3js.org/reference.html#api-focus">methods</a> to update a chart after it’s rendered.</p>
+<p>To get an impression of what C3 can do, click the start button on the fiddle below and take a guided tour!</p>
+<iframe width="100%" height="400" src="https://jsfiddle.net/1so4zony/13/embedded/result,js,html" allowfullscreen="allowfullscreen" frameborder="0">
+</iframe>
+<p>As you can see, C3 can do quite a lot. Please take a look at the JavaScript panel of the fiddle above. In it, you’ll encounter a <code>demos</code> array. This shows a lot of methods that allow you to update a chart. In the sections below, we’ll see how we can use these methods from R.</p>
+</section>
+<section id="creating-chainable-functions-using-the-pipe-operator" class="level2">
+<h2 data-anchor-id="creating-chainable-functions-using-the-pipe-operator">Creating chainable functions using the pipe operator</h2>
+<p>In the sections above, we learned how to send custom messages to JavaScript from R using <code>sendCustomMessage</code>. Even though it’s great to have this ability, executing statements this way can become a bit cumbersome, especially if we want to send multiple messages. Wouldn’t it be neat if we could chain statements like these? In particular, we would like to write code statements like:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getChart</span>(<span class="st">'id'</span>) <span class="sc">%&gt;%</span>  <span class="fu">doAwesomeThing1</span>() <span class="sc">%&gt;%</span>  <span class="fu">doAwesomeThing2</span>() <span class="sc">%&gt;%</span> <span class="fu">doAwesomeThing3</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the pseudo code above, we first get access to the chart object using an id and subsequently apply operation 1 on it. Then on the result of this we apply operation 2 and on the result of that we apply operation 3. The symbol %&gt;% represents the <strong>pipe</strong> operator from the <a href="https://cran.r-project.org/web/packages/magrittr/index.html">magrittr</a> package.</p>
+<p>The pipe operator is a <a href="https://en.wikipedia.org/wiki/Binary_operation">binary operator</a> which places the argument on the left hand side as the first argument of the function on the right hand side, i.e.&nbsp;it turns an operation like <code>x %&gt;% f(y)</code> into <code>f(x, y)</code>. How can we use this to create chainable statements?</p>
+<p>Actually, the trick is quite simple:</p>
+<blockquote class="blockquote">
+<p>Always make sure that the return type of a chainable function is identical to its first argument.</p>
+</blockquote>
+<p>Note: here we’re not really interested in the return type of each function, which is identical to something we have up front, i.e.&nbsp;its first argument, but in the side effects of each function, i.e.&nbsp;the messages they send via <code>sendCustomMessage</code>. Confused? Don’t be, it will all be clear in a minute!</p>
+<section id="creating-a-proxy-object" class="level3">
+<h3 data-anchor-id="creating-a-proxy-object">Creating a proxy object</h3>
+<p>In most practical cases, in order to send a custom message we need an <code>id</code>, so we can get to a specific chart instance, and a <code>session</code> object, which allows us to call the method <code>sendCustomMessage</code>. Here’s a simple implementation:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> c3ChartProxy <span class="ot">&lt;-</span> <span class="cf">function</span>(id, <span class="at">session =</span> shiny<span class="sc">::</span><span class="fu">getDefaultReactiveDomain</span>()){</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  proxy        <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="at">id =</span> shinyId, <span class="at">session =</span> session )</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">class</span>(proxy) <span class="ot">&lt;-</span> <span class="st">"c3ChartProxy"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(proxy)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Factually, all that this function does is to create a list that holds an id and a session object. For satefy, we also assign a class that can be used in other functions to check if we receive the object we expect. Here, we give it class <code>c3ChartProxy</code>, but this could be anything you like.</p>
+<p>In the code in the sections below, each chainable function receives this list as its first argument (via the pipe operator), but also uses this list as its return value.</p>
+<p>From the sections above we learned that we can call any JavaScript method an object has from R. So if we have access to the object, i.e.&nbsp;the chart, from R, we can send messages to JavaScript that update the chart, via the chart’s own methods. This begs the question, if we have an id, how do we get access to a chart?</p>
+</section>
+<section id="accessing-a-widget-instance-via-an-id" class="level3">
+<h3 data-anchor-id="accessing-a-widget-instance-via-an-id">Accessing a widget instance via an id</h3>
+<p>From the second tutorial, we know that in JavaScript we can define a widget via the function <code>HTMLWidgets.widget</code>, and that it has a factory method, which looks something like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>HTMLWidgets<span class="op">.</span><span class="fu">widget</span>({</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">name</span><span class="op">:</span> <span class="op">...,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">type</span><span class="op">:</span> <span class="st">'output'</span><span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">factory</span><span class="op">:</span> <span class="kw">function</span>(el<span class="op">,</span> width<span class="op">,</span> height) {</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// create an empty chart</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> chart <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">renderValue</span><span class="op">:</span> <span class="kw">function</span>(x) {</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">// if the chart does not exist, create it via c3.generate</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(chart <span class="op">===</span> <span class="kw">null</span>){</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>             <span class="co">// create a C3 chart</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>             chart <span class="op">=</span> c3<span class="op">.</span><span class="fu">generate</span>({</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                     <span class="op">...</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>            })<span class="op">;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            <span class="op">...</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here <code>chart</code> contains the actual C3 chart. If we have that, we can further manipulate the chart via any of C3’s methods. Assuming we have access to our widget instance, how do we expose the chart that we create to the outside? Wait, mmm … ah ha, we simply create a method just for it!</p>
+<p>Luckily, this is extremely simple, i.e.&nbsp;we only need to add a function like this:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>getChart<span class="op">:</span> <span class="kw">function</span>(){</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> chart<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If we combine the previous two snippets we end up with:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>HTMLWidgets<span class="op">.</span><span class="fu">widget</span>({</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">name</span><span class="op">:</span> <span class="op">...,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">type</span><span class="op">:</span> <span class="st">'output'</span><span class="op">,</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">factory</span><span class="op">:</span> <span class="kw">function</span>(el<span class="op">,</span> width<span class="op">,</span> height) {</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// create an empty chart</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> chart <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">renderValue</span><span class="op">:</span> <span class="kw">function</span>(x) {</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">// if the chart does not exist, create it via c3.generate</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(chart <span class="op">===</span> <span class="kw">null</span>){</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>             <span class="co">// create a C3 chart</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>             chart <span class="op">=</span> c3<span class="op">.</span><span class="fu">generate</span>({</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                      <span class="op">...</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>            })<span class="op">;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>            <span class="op">...</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>      <span class="co">// a method to expose our chart to the outside</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>      <span class="dt">getChart</span><span class="op">:</span> <span class="kw">function</span>(){</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> chart<span class="op">;</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, we create a little JavaScript helper function that given an HTMLWidgets instance, calls this method, i.e.&nbsp;<code>getChart</code>. Our helper function looks like this:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getC3Chart</span>(id){</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Get the HTMLWidgets object</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> htmlWidgetsObj <span class="op">=</span> HTMLWidgets<span class="op">.</span><span class="fu">find</span>(<span class="st">"#"</span> <span class="op">+</span> id)<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Use the getChart method we created to get the underlying C3 chart</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> c3Obj <span class="op">=</span> htmlWidgetsObj<span class="op">.</span><span class="fu">getChart</span>()<span class="op">;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(c3Obj)<span class="op">;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note here we use the <code>find()</code> method of our <code>HTMLWidgets</code> object, that allows us to find the widget instance that sits inside the element for a given css selector. As we can see, here we use the id to create a <a href="schools.com/cssreF/sel_id.asp">css selector</a>.</p>
+<p>Once we have the htmlWidgets instance, i.e.&nbsp;<code>htmlWidgetsObj</code>, we call our newly created <code>getChart()</code> method on it, which subsequently provides us access to our chart, i.e.&nbsp;<code>c3Obj</code>. Sweet! We can now use <strong>any</strong> valid method defined in the C3 API to manipulate our chart!</p>
+</section>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 data-anchor-id="putting-it-all-together">Putting it all together</h2>
+<p>The sections above covered a lot of ground. Don’t worry if this is a bit overwhelming. Here we present a toy Shiny app, that combines all the steps in the sections above, which lets you manipulate existing C3 charts in various ways. Just click on the image below to launch the app!</p>
+<br> <a href="https://js-tutorial.shinyapps.io/proxy_app/" target="_blank"> <img src="proxy_app.png" width="100%"> </a>
+<div style="text-align: center; margin: 25px">
+Toy Shiny app demonstrating how we can manipulate a chart via a proxy object. Click on the image to see this app in action!
+</div>
+<p>Initially, the app shows a series of stacked bar charts, which displays three time series over a time period of 30 days, i.e.&nbsp;data1, data2 and data3.</p>
+<p>Using a set of action buttons, we can zoom to the first 15 days, the last 15 days, reset the zoom domain, or update and reset the bar colors. However, we can also transform the series into a set of line charts, area charts, or spline charts. We can also update the type of chart for each dataset independently, by using the bottom left controls and pressing the blue action button. Finally, we can use the bottom right selector to stack or unstack various series in the chart.</p>
+<section id="about-the-app" class="level4">
+<h4 data-anchor-id="about-the-app">About the app</h4>
+<p>The app implements various R and JavaScript functions that allow you to manipulate the chart. However, these are all based on the concept of using a proxy object, which is combined with an R function that sends a custom message to a JavaScript message handler, which then finds the chart object via our helper function <code>getC3Chart</code>, which subsequently calls a C3 method on our chart.</p>
+<p>The demonstration app has 5 functions that allow you to modify an existing C3 chart, i.e.&nbsp;<code>zoomChart</code>, <code>setColors</code>, <code>setGroups</code>, <code>setTypes</code> and <code>transformTo</code>, which are accompanied by the JavaScript custom message handlers of the same name. It also uses an updated C3 package (from the previous tutorial), which in addition implements a slightly more robust version of <code>c3ChartProxy</code> and now also has a new <code>C3StackedChart</code> widget, with associated <code>C3StackedChartOutput</code> (in ui.r) and <code>renderC3StackedChart</code> (in server.R), Shiny helper functions.</p>
+<p>The complete code for this example app can be downloaded <a href="https://github.com/FrissAnalytics/shinyJsTutorials/tree/master/tutorials/materials3/proxyApp">here</a>. In addition, you need to install an updated version of the C3 package, which you can download <a href="https://github.com/FrissAnalytics/shinyJsTutorials/tree/master/tutorials/materials3/C3">here</a>. Furthermore, this demo uses shinyBS, which you can download <a href="https://ebailey78.github.io/shinyBS/install.html">here</a>.</p>
+<p>In the next section, we discuss the implementation of the <code>zoomChart</code> function, as used in the demo app.</p>
+<p>We leave it as an exercise to inspect the app source code to find out how the other functions are implemented. This process, however, is very similar to the steps described below. Furthermore, here we assume we already have an implementation that allows you to create and render a stacked chart widget. The code for this widget can be found <a href="https://github.com/FrissAnalytics/shinyJsTutorials/tree/master/tutorials/materials3/C3/inst/htmlwidgets">here</a>.</p>
+</section>
+<section id="building-a-zoom-function" class="level3">
+<h3 data-anchor-id="building-a-zoom-function">Building a zoom function</h3>
+<p>Assumming we have a <code>C3StackedChart</code> widget function and a suitable render function <code>renderC3StackedAreaChart</code> (see <a href="https://github.com/FrissAnalytics/shinyJsTutorials/tree/master/tutorials/materials3/C3/inst/htmlwidgets/C3StackedChart.js">here</a>. In server.r, our code looks somewhat like this:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>chart1 <span class="ot">&lt;-</span> <span class="fu">renderC3StackedAreaChart</span>({</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">C3StackedChart</span>(<span class="at">dataset  =</span> dataset,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">types    =</span> <span class="fu">list</span>(<span class="at">data1 =</span> <span class="st">"bar"</span>, <span class="at">data2 =</span> <span class="st">"bar"</span>, <span class="at">data3 =</span> <span class="st">"bar"</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colors   =</span> <span class="fu">list</span>(<span class="at">data1 =</span> <span class="st">"purple"</span>, <span class="at">data2 =</span> <span class="st">"blue"</span>, <span class="at">data3 =</span> <span class="st">"gray"</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">groups   =</span> <span class="fu">c</span>(<span class="st">"data1"</span>,<span class="st">"data2"</span>,<span class="st">"data3"</span>))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As we can see, our <code>C3StackedChart</code> takes four arguments.</p>
+<p>Here <code>dataset</code> is a dataframe (assumed created in an earlier step), with 30 rows (days) and 4 columns: one time column and one numeric column for each of the 3 series, in which each cell gives a total count per day for that series.</p>
+<p>Next, <code>types</code> is a list that tells C3 to display each series as a set of bars; <code>colors</code> is a list that defines the color for each series, while <code>groups</code> tells C3 that we want to stack the data for series data1, data2 and data3 (instead of displaying each series next to each other). Note the id of the widget in this case is <code>chart1</code>.</p>
+<p>Next, suppose we have an action button with id <code>update1</code> and when we press it, we want C3 to zoom our chart to a specific region. In server.r of our demonstration app, we have:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># update 1</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">observeEvent</span>(input<span class="sc">$</span>update1, {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c3ChartProxy</span>(<span class="st">"chart1"</span>) <span class="sc">%&gt;%</span> <span class="fu">zoomChart</span>(<span class="st">"2016-10-01"</span>, <span class="st">"2016-10-15"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This observe block uses our <code>c3ChartProxy</code> and calls <code>zoomChart</code>, which passes a start date and an end date for our zoom domain.</p>
+<p>In R, we defined <code>C3ChartZoom</code> as:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>zoomChart <span class="ot">&lt;-</span> <span class="cf">function</span>(chartProxy, minX, maxX){</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># prepair a message using the function arguments</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  message <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">id =</span> chartProxy<span class="sc">$</span>id, <span class="at">minX =</span> minX, <span class="at">maxX =</span> maxX)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># send a custom message to JavaScript</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  chartProxy<span class="sc">$</span>session<span class="sc">$</span><span class="fu">sendCustomMessage</span>(<span class="st">"zoomChart"</span>, message)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the proxy i.e. the list that holds the chart id and session object</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># so we can plug it into the next function (if any), via the pipe operator</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(chartProxy)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that <code>chartProxy</code> provides access to both the <code>session</code> object (which we can send via custom messages), as well as the widget id, which allows us to get to the correct chart.</p>
+<p>Next, in JavaScript we create a custom message handler, that given an id, gets the correct chart and subsequently calls a C3 method on that chart, passing any required data it got from R.</p>
+<p>Here’s what our ZoomC3Chart custom message handler looks like:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Shiny<span class="op">.</span><span class="fu">addCustomMessageHandler</span>(<span class="st">'zoomChart'</span><span class="op">,</span> <span class="kw">function</span>(message){</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// get the correct HTMLWidget instance</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> chart <span class="op">=</span> <span class="fu">getC3Chart</span>(message<span class="op">.</span><span class="at">id</span>)<span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// parse the dates received from R to the correct format, using a tiny bit of JavaScript</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> minDate <span class="op">=</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">parse</span>(message<span class="op">.</span><span class="at">minX</span>)<span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> maxDate <span class="op">=</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">parse</span>(message<span class="op">.</span><span class="at">maxX</span>)<span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// call the C3 zoom method, which according to the C3 reference needs an array</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    chart<span class="op">.</span><span class="fu">zoom</span>([minDate<span class="op">,</span>maxDate])<span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that here, via message, we get the widgets id. We can get our actual chart object back via our helper function <code>getC3Chart</code>. When we have this, we simply call a built in C3 method, here <a href="http://c3js.org/reference.html#api-zoom">zoom</a>, and provide it with the data it needs, i.e.&nbsp;two JavaScript data objects.</p>
+</section>
+</section>
+<section id="closing-remarks" class="level2">
+<h2 data-anchor-id="closing-remarks">Closing remarks</h2>
+<p>Congrats! You made it to the end! This tutorial, by far, is the most technical tutorial of all the Shiny JavaScript tutorials in this series. Don’t worry if you didn’t get everything the first time, experimenting with R and JavaScript takes a bit of time.</p>
+<p>Luckily, on CRAN and GITHUB there are many HTMLWidgets available. By looking at the source code of other widget implementers, you can learn a lot about how things work! For those who want to use JavaScript to extend shiny, we suggest you also look into <a href="https://github.com/daattali/shinyjs">shinyJS</a>, which offers a lot of handy JavaScript routines out of the box. To pay attribution, many of the concepts on sending custom messages were inspired by <a href="https://ryouready.wordpress.com/2013/11/20/sending-data-from-client-to-server-and-back-using-shiny/">this</a> excellent blog post and by looking into the source code of both RSTUDIO’s <a href="https://github.com/rstudio/leaflet">leaflet</a> and the awesome <a href="https://github.com/datastorm-open/visNetwork">visNetwork</a> package.</p>
+</section>
+<section id="next-tutorial" class="level2">
+<h2 data-anchor-id="next-tutorial">Next tutorial</h2>
+<p>In the next tutorial, we will look into an entirely different aspect of Shiny apps: how to create a dynamic interactive help system! In that tutorial, we will show you how you can create a step-by-step guide for a website via <a href="http://introjs.com/">intro.js</a>, which allows you to draw cool HTML based boxes around elements of your choice, combined with an annotation layer and a navigation system. Each aspect is explained in depth in a step by step manner. As a bonus, we present a completely tricked out shiny example app, that allows you to use intro.js to switch tab panels in a multi page shiny app, use voice recognition to activate and control intro.js and that uses voice synthesis to speak out the text inside each box, all from within a Shiny app! Sweet!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../r/articles/build/js-widget-functionality/index.html" class="pagination-link" aria-label="How to add functionality to JavaScript widgets">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How to add functionality to JavaScript widgets</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../r/articles/build/js-introjs/index.html" class="pagination-link" aria-label="How to develop an interactive, dynamic help system for your app with introJS">
+        <span class="nav-page-text">How to develop an interactive, dynamic help system for your app with introJS</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

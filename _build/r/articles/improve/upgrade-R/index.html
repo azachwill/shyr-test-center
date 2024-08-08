@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Winston Chang">
+<meta name="dcterms.date" content="2017-05-16">
+<meta name="description" content="When you upgrade to a new version of R on your computer, it’s possible that everything will continue to work without any trouble, but it’s also possible that you’ll run into problems. The purpose of this article is to explain these problems, and how to fix them.">
+
+<title>Upgrading to a new version of R – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../r/articles/improve/req/index.html" rel="next">
+<link href="../../../../r/articles/improve/debugging/index.html" rel="prev">
+<link href="../../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Add rel="noopener noreferrer" to each target="_blank" -->
+<script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script>
+<!-- End Add rel="noopener noreferrer" to each target="_blank" -->
+
+<link href="../../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="../../../secondary-menu.css">
+<link rel="stylesheet" href="../../articles.css">
+<link rel="stylesheet" href="../../../../r/secondary-menu.css">
+<meta property="og:title" content="Upgrading to a new version of R – Shiny">
+<meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">    
+        <li class="dropdown-header"><img src="../../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Improve</li><li class="breadcrumb-item">Refactor</li><li class="breadcrumb-item"><a href="../../../../r/articles/improve/debugging/index.html">Code quality</a></li><li class="breadcrumb-item"><a href="../../../../r/articles/improve/upgrade-R/index.html">Upgrading to a new version of R</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>ARTICLES</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles#start" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Start</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Build</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Structure</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Standalone apps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/app-formats/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App formats and launching apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/two-file/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-file Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Interactive documents</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rmarkdown/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to R Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rmd-integration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Markdown integration in the RStudio IDE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/output-args/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting Output args via Render functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/interactive-docs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to interactive documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rm-cheatsheet/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The R Markdown cheatsheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/output-args/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting Output args via Render functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/generating-reports/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generating downloadable reports</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dashboards</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/dashboards/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dashboards</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Gadgets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/gadgets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny Gadgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/gadget-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Designing Gadget UI</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Backend</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reactivity</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/reactivity-overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reactivity - An overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/isolation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stop reactions with isolate()</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/execution-scheduling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Execution scheduling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/understanding-reactivity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to understand reactivity in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/client-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Learn about your user with session$clientData</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Database basics - dplyr and DBI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/sql-injections/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SQL injection prevention</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-basics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pool package (basics)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-advanced/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pool package (advanced)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-dplyr/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using dplyr and pool to query a database</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/persistent-data-storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Persistent data storage in Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Frontend</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">User interface</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/layout-guide/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application layout guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/display-modes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Display modes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/tabsets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tabsets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/html-tags/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Customize your UI with HTML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/html-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build your entire UI with HTML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/dynamic-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build a dynamic UI that reacts to user input</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/templates/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTML Templates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/tag-glossary/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny HTML Tags Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/progress/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Progress indicators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/modal-dialogs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modal dialogs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/notifications/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/themes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Themes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/images/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Render images in a Shiny app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/render-table/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Displaying and customizing static tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/datatables/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to use DataTables in a Shiny App</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/action-buttons/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using Action Buttons</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/sliders/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using sliders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/download/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Help users download data from your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/upload/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Help users upload files to your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/selectize/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using selectize input</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Graphics &amp; visualization</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/plot-interaction/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interactive plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/selecting-rows-of-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting rows of data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/plot-interaction-advanced/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interactive plots - advanced</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Shiny extensions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/htmlwidgets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">htmlwidgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/shinyjs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript actions packaged for Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-build-widget/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to build a JavaScript based widget</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-widget-functionality/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to add functionality to JavaScript widgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-send-message/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to send messages from the browser to the server and back using Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-introjs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to develop an interactive, dynamic help system for your app with introJS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-custom-input/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to create custom input bindings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-dashboard/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Putting everything together to create an interactive dashboard</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Customizing Shiny</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/css/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using custom CSS in your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/building-inputs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build custom input objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/building-outputs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build custom output objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/google-analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add Google Analytics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/packaging-javascript/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packaging JavaScript code for Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/communicating-with-js/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Communicating with Shiny via JavaScript</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-events/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript Events in Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-dashboard/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Putting everything together to create an interactive dashboard</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Improve</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
+ <span class="menu-text">Refactor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Code quality</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/debugging/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debugging Shiny applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/upgrade-R/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Upgrading to a new version of R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/req/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Handling missing inputs with req(…)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scoping/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scoping rules for Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/reconnecting/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reconnecting to Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/sanitize-errors/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sanitizing error messages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/validation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Write error messages for your UI with validate</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/unicode/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unicode characters in Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/testing-overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny testing overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/shinytest/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">shinytest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/server-function-testing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Server function testing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modularizing Shiny app code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/communicate-bet-modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Communication between modules</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
+ <span class="menu-text">Scale</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false">
+ <span class="menu-text">Measure usage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/usage-metrics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny App Usage Tracking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/google-analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add Google Analytics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false">
+ <span class="menu-text">Performance and scalability</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/caching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using caching in Shiny to maximize performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/plot-caching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plot Caching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/profiling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Profiling your Shiny app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/performance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/nonblocking/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Non-blocking operations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false">
+ <span class="menu-text">Tuning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scaling-and-tuning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scaling and Performance Tuning with shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scaling-and-tuning-ssp-rsc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scaling and Performance Tuning with Shiny Server Pro and Posit Connect</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false">
+ <span class="menu-text">Share</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false">
+ <span class="menu-text">Deployment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/deployment-web/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deploying Shiny apps to the web</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/shinyapps/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started with shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">r/articles/share/shinyapps-auth/index.qmd</span>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/custom-domains/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting up custom domains on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/share-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sharing data across sessions on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/migration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Migrating authentication on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/shiny-server/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Shiny Server</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/libraries/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Allowing different libraries for different apps on Shiny Server, Shiny Server Pro, and Posit Connect</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/permissions/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating user privileges on Posit Connect and Shiny Server Pro</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/admin-deployment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Administrating Shiny Server, Shiny Server Pro, and Posit Connect</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false">
+ <span class="menu-text">Distribution</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/deployment-local/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sharing apps to run locally</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/function/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Save your app as a function</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bookmarking</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/bookmarking-state/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bookmarking state</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/advanced-bookmarking/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced bookmarking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/bookmarking-modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bookmarking and modules</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<!-- Google Tag Manager (noscript) -->
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Improve</li><li class="breadcrumb-item">Refactor</li><li class="breadcrumb-item"><a href="../../../../r/articles/improve/debugging/index.html">Code quality</a></li><li class="breadcrumb-item"><a href="../../../../r/articles/improve/upgrade-R/index.html">Upgrading to a new version of R</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Upgrading to a new version of R</h1>
+</div>
+
+<div>
+  <div class="description">
+    When you upgrade to a new version of R on your computer, it’s possible that everything will continue to work without any trouble, but it’s also possible that you’ll run into problems. The purpose of this article is to explain these problems, and how to fix them.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Winston Chang </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 16, 2017</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>When you upgrade to a new version of R on your computer, it’s possible that everything will continue to work without any trouble, but it’s also possible that you’ll run into problems. In some cases, the new version of R won’t find your existing R packages. In other cases, R will find the existing packages, but they might not work correctly. The article of this document is to explain these problems, and how to fix them.</p>
+<p>On most single-user systems (Mac, Windows, and Linux), when you upgrade to a new minor version of R (like 3.3.0 to 3.4.0), R will not find the packages, you will need to reinstall your R packages. This is an inconvenience, but the problem is obvious and it is easy to fix. If you are using a system like this, you can just reinstall your packages after upgrading R. You probably don’t need to read the rest of this document unless you want to learn much more about package libraries.</p>
+<p>On servers running Linux, it is possible that after an R version upgrade, your R packages will load without trouble, but they might not work correctly, or they might even crash R when used. Because the cause of these problems will not be obvious, upgrading R on a server should be done with care.</p>
+<p><strong>In a production environment, we strongly suggest testing new versions of R and packages on a staging server before deploying to a production server.</strong></p>
+<p>R version numbers have the form <code>major.minor.subminor</code>. The current version as of the writing of this document, 3.4.0, has a major version 3, minor version 4, and subminor version 0. New minor versions are released about once per year. In general, there are no issues with subminor version upgrades, like going from 3.3.2 to 3.3.3, but there can be compatibility problems when there is a major or minor version upgrade.</p>
+<section id="user-libraries-and-version-incompatibilities" class="level2">
+<h2 data-anchor-id="user-libraries-and-version-incompatibilities">User libraries and version incompatibilities</h2>
+<p>There are two possible sources of problems with R version upgrades, both of which are related to package libraries. (A library is a directory where packages are stored.)</p>
+<p>One problem is that, after upgrading to a new version of R, packages are no longer found because there is a new library. When this happens, the problem is obvious: when R code calls <code>library()</code>, it throws an error and reports that the package is missing.</p>
+<p>The other problem that happens is more subtle. Sometimes packages installed with a previous version of R will not work correctly with the new version of R. Sometimes they can crash the R process. And even when there is a crash, it will not be obvious that this it is because the package was installed with an old version of R.</p>
+<p>In both cases, the solution is to reinstall packages with the new version of R.</p>
+<section id="detecting-which-version-of-r-a-package-was-built-with" class="level3">
+<h3 data-anchor-id="detecting-which-version-of-r-a-package-was-built-with">Detecting which version of R a package was built with</h3>
+<p>The following code will show which packages are installed, their version numbers, and which version of R they were built with. The user is running R 3.4.0 and most of the installed packages were built with R 3.4.0, but others were built with R 3.2.0.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">installed.packages</span>(), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pkgs[, <span class="fu">c</span>(<span class="st">"Package"</span>, <span class="st">"Version"</span>, <span class="st">"Built"</span>)]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       Package Version Built</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        base   3.4.0 3.4.0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        boot  1.3-19 3.4.0</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       class  7.3-14 3.4.0</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     cluster   2.0.6 3.4.0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       Cairo   1.5-6 3.2.0</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this particular case, the Cairo package was able to be loaded with <code>library(Cairo)</code>, but when functions from the package were called, it caused a segfault, crashing the R process. This is because it was built with an older version of R.</p>
+<p>This issue most frequently happens on Linux, when root has installed some packages, though it can happen in other cases as well, if a customized configuration is used.</p>
+</section>
+<section id="reinstalling-packages-with-the-new-version-of-r" class="level3">
+<h3 data-anchor-id="reinstalling-packages-with-the-new-version-of-r">Reinstalling packages with the new version of R</h3>
+<p>After upgrading R, if you have any packages that were built with an older version of R, you should reinstall those packages to avoid compatibility issues. There are two methods described below: one upgrades all packages to the latest available version of that package, and the other reinstalls packages with the currently-installed version. For example, if you have Shiny version 1.0.1 installed, and the latest available version is 1.0.3, the first method will install Shiny 1.0.3, while the second method will reinstall 1.0.1 (built with the current version of R).</p>
+<p>The following code should be run <strong>as root</strong> after upgrading R on Linux. It can also be run as a regular user, but in that case it will store the packages in the user’s personal library, and won’t help other users. If this code is run as root after an R version upgrade, then users should not need to run this code (unless they have their own copies of the same packages in their personal library).</p>
+<p>The first way is to use the base R function <code>update.packages()</code>, with <code>checkBuilt=TRUE</code>. Normally, the <code>update.package()</code> function will only reinstall packages for which a newer version available, but the <code>checkBuilt=TRUE</code> option tells it to also reinstall packages if they were built with an older version of R, even if the version of the package will remain the same.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">checkBuilt =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In many cases, it is useful to update all packages to the latest available version, but it’s possible that some changes in the packages could cause your code to behave differently.</p>
+<p>The <a href="https://github.com/MangoTheCat/pkgsnap">pkgsnap</a> package provides a way to reinstall packages without changing their version. pkgsnap is not yet on CRAN, but you can currently install it from GitHub.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the pkgsnap package from GitHub</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://install-github.me/MangoTheCat/pkgsnap"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">snap</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">restore</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">file.remove</span>(<span class="st">"packages.csv"</span>) <span class="co"># Remove the package list created by save()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="technical-details" class="level2">
+<h2 data-anchor-id="technical-details">Technical details</h2>
+<p>The information above should be enough to help diagnose and solve the problem, but if you’d like a more comprehensive understanding of the problem, read on. Each platform (Mac, Windows, and various flavors of Linux) has a different default configuration, and therefore has different default behavior. This document will also explain the default settings for each platform, and what that means for dealing with R upgrade issues.</p>
+<section id="user-and-site-libraries" class="level3">
+<h3 data-anchor-id="user-and-site-libraries">User and site libraries</h3>
+<p>In all R installations, there is a <strong>site</strong> library: packages installed there are available to all users. (In some installations, there is more than one site library.) Some R installations are also configured to have a <strong>user</strong> library: packages installed in a user library are available only to that user.</p>
+<p>When a regular user starts R, it will recognize both the user library (if configured for it) and the site library. If present, the user library is where packages will be installed to. If there is no user library, then packages will be installed to the site library, assuming the user has the correct permissions to do so.</p>
+<p>When a system’s superuser (root) starts R, it uses only the site library (or libraries), and that is where packages will be installed to. This is not how packages are usually installed, but it is sometimes done this way on servers.</p>
+<p>To find the libraries for your user, you can run <code>.libPaths()</code> from the R prompt. For example, this is what shows on Ubuntu Linux:</p>
+<pre class="console"><code>&gt; .libPaths()
+[1] "/home/username/R/x86_64-pc-linux-gnu-library/3.4"
+[2] "/usr/local/lib/R/site-library"              
+[3] "/usr/lib/R/site-library"                    
+[4] "/usr/lib/R/library"                         </code></pre>
+<p>Users can configure their library path by setting the <code>R_LIBS_USER</code> variable in a file called <code>.Renviron</code> in their home directory. At a system level, the library path(s) can be set with an <code>Renviron.site</code> file. See the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html">R startup documentation</a> page for more information.</p>
+</section>
+<section id="versioned-and-unversioned-libraries" class="level3">
+<h3 data-anchor-id="versioned-and-unversioned-libraries">Versioned and unversioned libraries</h3>
+<p>In some installations (typically on Linux), R is configured to keep the same site library across R version upgrades. The problem here is that packages that built and installed with one version of R may be incompatible with a newer version of R, at least when the major or minor version changes. (Note that <strong>Subminor</strong> version upgrades of R generally do not introduce incompatibilities.)</p>
+<p>In other installations (typically on Mac and Windows), R is configured to use a new library when R has a major or minor version upgrade. The advantage of this is that you won’t experience package incompatibilities. The drawback is that you <strong>must</strong> reinstall your packages after upgrading R.</p>
+</section>
+<section id="customized-library-paths" class="level3">
+<h3 data-anchor-id="customized-library-paths">Customized library paths</h3>
+<p>The user and site library paths can be customized. At the user level, this is done with a file named <code>~/.Renviron</code>, and at the system level, this is usually done with a file named <code>/etc/R/Renviron.site</code>. See the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html">R startup documentation</a> for more information.</p>
+</section>
+</section>
+<section id="platform-specific-notes" class="level2">
+<h2 data-anchor-id="platform-specific-notes">Platform-specific notes</h2>
+<p>The default library configuration differs across platforms, and so the behavior after an R version upgrade also differs across platforms.</p>
+<section id="windows" class="level3">
+<h3 data-anchor-id="windows">Windows</h3>
+<p>On Windows, the default user library has the major.minor version in the path. The default site library has the major.minor.subminor version.</p>
+<pre class="console"><code>&gt; .libPaths()
+[1] "C:/Users/username/Documents/R/win-library/3.4"
+[2] "C:/Program Files/R/R-3.4.0/library"         </code></pre>
+<p>With this configuration, user-installed packages get installed in the user library. (The site library will just contain “base” R packages that are installed along with R itself.) Only R version upgrades that involve a <strong>minor</strong> version change will result in the user library changing. When this happens, you will need to reinstall all your packages.</p>
+<p>On Windows, upgrading R is something that is usually done by the user of the machine, so it shouldn’t be much of a surprise when R cannot find old installed packages.</p>
+<p>Summary:</p>
+<ul>
+<li>Upgrade is usually done explicitly by user.</li>
+<li>User library is versioned to minor.</li>
+<li>Site library is versioned to subminor.</li>
+<li>Unlike on Mac and Linux, when R is run as an administrator on Windows, it will still install packages to the user’s personal library by default, but it can also install to the site library if specified.</li>
+</ul>
+</section>
+<section id="macos" class="level3">
+<h3 data-anchor-id="macos">macOS</h3>
+<p>On macOS, the default configuration does not have a user library. The site library has the major.minor version in the path.</p>
+<pre class="console"><code>&gt; .libPaths()
+[1] "/Library/Frameworks/R.framework/Versions/3.4/Resources/library"</code></pre>
+<p>With this configuration, user-installed packages get installed into the site library. (Users on macOS usually have permission to write to the site library.) R version upgrades that involve a <strong>minor</strong> version change will require the user to reinstall all packages.</p>
+<p>On a Mac, upgrading R is usually done by the user of the machine, so it shouldn’t be a surprise when the new version of R cannot find old installed packages.</p>
+<p>Summary:</p>
+<ul>
+<li>Upgrade is usually done explicitly by user.</li>
+<li>Does not have user library, so packages install to site library.</li>
+<li>Site library is versioned to subminor.</li>
+</ul>
+</section>
+<section id="linux" class="level3">
+<h3 data-anchor-id="linux">Linux</h3>
+<p>On Linux, the default user library has the major.minor version in the path. The site library is not versioned. There can be multiple site libraries, though this should not cause any differences in most use cases.</p>
+<p>Debian / Ubuntu:</p>
+<pre class="console"><code>&gt; .libPaths()
+[1] "/home/username/R/x86_64-pc-linux-gnu-library/3.4"
+[2] "/usr/local/lib/R/site-library"              
+[3] "/usr/lib/R/site-library"                    
+[4] "/usr/lib/R/library"                         </code></pre>
+<p>Red Hat / Centos:</p>
+<pre class="console"><code>&gt; .libPaths()
+[1] "/home/username/R/x86_64-redhat-linux-gnu-library/3.3"
+[2] "/usr/lib64/R/library"                              
+[3] "/usr/share/R/library"                              </code></pre>
+<p>SUSE / openSUSE:</p>
+<pre class="console"><code>&gt; .libPaths()
+[1] "/home/username/R/x86_64-suse-linux-gnu-library/3.3"
+[2] "/usr/lib64/R/library"                            </code></pre>
+<p>The process of upgrading R on Linux is different from upgrading it Mac and Windows. On Mac and Windows, the user usually needs to go download the new version of R and install it, so it is obvious when R is upgraded. On Linux, R is usually upgraded in the process of a system software update, such as when you run <code>apt-get upgrade</code> on Debian or Ubuntu. Additionally, Linux systems often have different people administering them and using them. For these two reasons, the installed version of R can change without the user being aware of it.</p>
+<p>User-installed packages go into the user library. The site library by default will contain only “base” packages included with R itself. After R gets a minor version upgrade, the user will find that their user-installed packages are no longer available, and will need to reinstall all of them. This may come as a surprise to users, but the solution is straightforward.</p>
+<p>When Linux is being used on a server, there is another, more difficult scenario: the system administrator may install some packages as root, so that they’re available for all users. When R is upgraded, those packages will continue to be available even after a major or minor version upgrade, but they potentially could be incompatible with the new version of R. If this happens, users will experience problems like the ones described previously.</p>
+<p>In these cases, a user or system administrator should check which version of R each package was built with, and reinstall those packages that were built with an old version of R, as described above. One risk of doing this is that this will not only reinstall those R packages, but also upgrade the versions of those packages, which could cause problems if the newer version of the package has different behavior.</p>
+<p>Because of these potential problems, administrators of Linux servers should be exercise caution when upgrading R. On most Linux distributions, it is possible to freeze system packages (like R) to a specific version, and only upgrade after testing.</p>
+<p>Summary:</p>
+<ul>
+<li>Upgrade is usually something that happens with <code>apt-get upgrade</code> or <code>yum update</code>, and user might not be aware when it occurs.</li>
+<li>User library is versioned to minor.</li>
+<li>Site library is not versioned.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../r/articles/improve/debugging/index.html" class="pagination-link" aria-label="Debugging Shiny applications">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Debugging Shiny applications</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../r/articles/improve/req/index.html" class="pagination-link" aria-label="Handling missing inputs with req(...)">
+        <span class="nav-page-text">Handling missing inputs with req(…)</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

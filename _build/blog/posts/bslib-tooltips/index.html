@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Carson Sievert">
+<meta name="author" content="Garrick Aden-Buie">
+<meta name="dcterms.date" content="2023-08-16">
+<meta name="description" content="An overview of recent Shiny for R updates, including tooltips, popovers, a new theme, and more.">
+<title>Shiny for R updates: tooltips, popovers, a new theme, and more – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #ffffff;
+      }
+</style>
+<!-- Google Tag Manager --><script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script><!-- End Google Tag Manager --><!-- Add rel="noopener noreferrer" to each target="_blank" --><script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script><!-- End Add rel="noopener noreferrer" to each target="_blank" --><link href="../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+<script src="../../../site_libs/bslib-bslibShiny-js-0.5.1/bslibShiny.min.js"></script><script src="../../../site_libs/bslib-tag-require-0.5.1/tag-require.js"></script><link rel="stylesheet" href="../../../_partials/blog/blog-article.css">
+<meta property="og:title" content="Shiny for R updates: tooltips, popovers, a new theme, and more – Shiny">
+<meta property="og:description" content="An overview of recent Shiny for R updates, including tooltips, popovers, a new theme, and more.">
+<meta property="og:image" content="https://shiny.posit.co/blog/posts/bslib-tooltips/feature.png">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:height" content="1586">
+<meta property="og:image:width" content="2818">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="An overview of recent Shiny for R updates, including tooltips, popovers, a new theme, and more.">
+<meta name="twitter:image" content="https://shiny.posit.co/blog/posts/bslib-tooltips/feature.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="1586">
+<meta name="twitter:image-width" content="2818">
+</head>
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo"></a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">
+<li class="dropdown-header"><img src="../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Shiny for R updates: tooltips, popovers, a new theme, and more</h1>
+                  <div>
+        <div class="description">
+          <p>An overview of recent Shiny for R updates, including tooltips, popovers, a new theme, and more.</p>
+        </div>
+      </div>
+                </div>
+  </div>
+
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Authors</div>
+      <div class="quarto-title-meta-contents">
+               <p>Carson Sievert </p>
+               <p>Garrick Aden-Buie </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 16, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<style type="text/css">
+  #quarto-content>* {
+  padding-top: 0px;
+  }
+</style>
+<div class="column-body-outset blog-image-container pb-5">
+      <img src="feature.png" style="width: 100%; height: auto;">
+</div>
+    
+
+
+<style>
+.quarto-video > div {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.cell-output-display {
+  padding-left: 1rem;
+}
+</style>
+<p>The Shiny team is delighted to share that we’ve just released updates for 12 different R packages that contribute to the Shiny experience. These updates include many improvements and bug fixes that aren’t explicitly covered here, but the <a href="#release-notes">release notes section</a> of this post provides links to the full list of changes for each package. That said, there are a few new features in <code>bslib</code> that we’re particularly excited to highlight for you!</p>
+<section id="bslib" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="bslib">bslib</h2>
+<p>In <a href="https://shiny.posit.co/blog/posts/bslib-dashboards/">the last release of <code>bslib</code> (0.5.0)</a>, we made significant strides towards <code>bslib</code> being our recommended way to <a href="https://rstudio.github.io/bslib/articles/dashboards/index.html">build modern Shiny dashboards</a>. In this release, we’ve added more features to help you make even better dashboards.</p>
+<section id="tooltips-and-popovers" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="tooltips-and-popovers">Tooltips and popovers</h3>
+<p>One essential quality of any great website is that it provides the user with the right amount of information at the right time. In technically-oriented apps, you might want to provide a definition for a term, a description of a model parameter, or an input that updates a specific plot, but you don’t want these details to overwhelm the user when they’re not needed.</p>
+<p>In this release, we’ve added <code><a href="https://rstudio.github.io/bslib/reference/tooltip.html">bslib::tooltip()</a></code> and <code><a href="https://rstudio.github.io/bslib/reference/popover.html">bslib::popover()</a></code> to help you do just that. By putting this additional information in a tooltip or these additional controls in a popover, you can provide the detail your users need on demand, right where they need it.</p>
+<p>Here’s a quick demo. In this example, we have a <a href="https://rstudio.github.io/bslib/articles/cards/index.html">card</a> containing a plot that compares the body mass of our favorite <a href="https://allisonhorst.github.io/palmerpenguins/">penguins</a> across species. We’ve leveraged <code>bslib</code>’s new tooltip and popover features in a few ways:</p>
+<ol type="1">
+<li><p>An info icon next to the card title includes a <a href="https://rstudio.github.io/bslib/reference/tooltip.html">tooltip</a> that describes how the penguin body mass is measured.</p></li>
+<li><p>A gear icon in the upper left corner of the card includes a <a href="https://rstudio.github.io/bslib/reference/popover.html">popover</a> with a few controls for customizing the plot.</p></li>
+<li><p>In the footer, a “Learn more” link opens a <a href="https://rstudio.github.io/bslib/reference/popover.html">popover</a> with the full citation for the data used in the plot.</p></li>
+</ol>
+<div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
+<div class="column-body-outset">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="Using bslib's tooltip and popover functionality to provide more detail on demand"><source src="tooltips-popovers.mp4"></video></div>
+</div>
+<div class="text-center">
+<p>
+<a class="btn btn-outline-primary" href="https://posit.cloud/content/6298796" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="01-tooltips-popovers.R"> <i class="bi bi-cloud-fill me-1" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> Try on Posit Cloud </a> <a class="btn btn-outline-secondary ms-1 px-3" href="https://gist.github.com/cpsievert/7a93ff167aebf474873493d566ab9e07#file-01-tooltips-popovers-r" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code"> <i class="bi bi-file-code-fill" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> <span class="visually-hidden">Source</span></a>
+</p>
+
+<p class="mb-0">
+<i class="bi bi-book-fill"></i>
+Learn more in the new
+<a href="https://rstudio.github.io/bslib/articles/tooltips-popovers/index.html">Tooltips &amp; Popovers article</a>.
+</p>
+</div>
+</div>
+</section><section id="towards-a-new-shiny-theme" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="towards-a-new-shiny-theme">Towards a new Shiny theme</h3>
+<p>This release of <code>bslib</code> introduces a new theme that we intend on making the default experience for <code>bslib</code>-powered apps. Since this theme is still a work-in-progress, you must currently must be opt-in to use it by providing <code>bs_theme(preset = "shiny")</code> to the <code>theme</code> argument of the relevant page function, for example:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page_sidebar.html">page_sidebar</a></span><span class="op">(</span></span>
+<span>  theme <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/bs_theme.html">bs_theme</a></span><span class="op">(</span>preset <span class="op">=</span> <span class="st">"shiny"</span><span class="op">)</span>,</span>
+<span>  <span class="co"># ...</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The screen recording below gives you a preview of the new Shiny preset theme. One exciting difference between the Shiny preset and other <a href="https://bootswatch.com/">Bootswatch themes</a>, is that we’ve taken this opportunity to re-think the appearance of Shiny-specific widgets, like <code><a href="https://rdrr.io/pkg/shiny/man/sliderInput.html">sliderInput()</a></code> and <code><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput()</a></code>.</p>
+<p>Want to see this theme in action? Just install the updated <code>bslib</code> package and run <code><a href="https://rstudio.github.io/bslib/reference/bs_theme_preview.html">bslib::bs_theme_preview()</a></code> in your R console!</p>
+<div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
+<div class="column-body-outset">
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="Changing from the current default theme to the new theme"><source src="shiny-theme.mp4"></video></div>
+</div>
+<div class="text-center">
+<p>
+<a class="btn btn-outline-primary" href="https://posit.cloud/content/6298796" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="02-new-theme.R">  <i class="bi bi-cloud-fill me-1" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> Try on Posit Cloud </a> <a class="btn btn-outline-secondary ms-1 px-3" href="https://gist.github.com/cpsievert/7a93ff167aebf474873493d566ab9e07#file-02-new-theme-r" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code"> <i class="bi bi-file-code-fill" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> <span class="visually-hidden">Source</span></a>
+</p>
+
+<p class="mb-0">
+<i class="bi bi-book-fill"></i>
+Learn more about
+<a href="https://rstudio.github.io/bslib/articles/theming/index.html">real-time theming with bslib</a>.
+</p>
+</div>
+</div>
+</section><section id="improved-quarto-integration" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="improved-quarto-integration">Improved Quarto integration</h3>
+<p>Since <code>bslib</code> components are designed to both work with Shiny and to render statically they can be added to <a href="https://rstudio.github.io/bslib/articles/any-project/index.html">any Bootstrap-compatible page</a>.</p>
+<p>In practice, however, due to nuances in how Quarto provides Boostrap, some <code>bslib</code> components weren’t quite working as expected in Quarto documents. But this release fixes that issue!</p>
+<p>To demonstrate, here’s an example of a fullscreen-capable <a href="https://rstudio.github.io/bslib/articles/cards/index.html"><code>bslib::card()</code></a> in a Quarto document.</p>
+<div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
+<div class="column-body-outset">
+<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="Putting a fullscreen-capable bslib card in a Quarto document"><source src="quarto-bslib.mp4"></video></div>
+</div>
+<div class="text-center">
+<p>
+<a class="btn btn-outline-primary" href="https://posit.cloud/content/6298796" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="03-quarto-bslib.qmd"> <i class="bi bi-cloud-fill me-1" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> Try on Posit Cloud </a> <a class="btn btn-outline-secondary ms-1 px-3" href="https://gist.github.com/cpsievert/7a93ff167aebf474873493d566ab9e07#file-03-quarto-bslib-qmd" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code"> <i class="bi bi-file-code-fill" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> <span class="visually-hidden">Source</span></a>
+</p>
+
+<p class="mb-0">
+<i class="bi bi-lightbulb-fill"></i>
+You can also
+<a href="https://rstudio.github.io/bslib/articles/any-project/index.html#r-markdown">use bslib components in R Markdown</a>.
+</p>
+</div>
+</div>
+</section><section id="new-input_switch" class="level3"><h3 class="anchored" data-anchor-id="new-input_switch">New <code>input_switch()</code>
+</h3>
+<p>Turning a feature on or off is a common action in many Shiny apps. With Shiny’s default UI, this is typically done with a <a href="https://shiny.rstudio.com/reference/shiny/latest/checkboxInput.html"><code>checkboxInput()</code></a>. But checkboxes don’t always give an obvious visual cue of turning an option on or off.</p>
+<p>In this release, we’ve added a new <code><a href="https://rstudio.github.io/bslib/reference/input_switch.html">input_switch()</a></code> with a modern appearance. Here’s a quick live preview of how it looks and feels:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/input_switch.html">input_switch</a></span><span class="op">(</span><span class="st">"switch"</span>, <span class="st">"Turn Up Awesomeness"</span>, <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="form-group shiny-input-container" data-require-bs-version="5" data-require-bs-caller="input_switch()">
+<div class="form-check form-switch">
+<input id="switch" class="form-check-input" type="checkbox" role="switch"><label class="form-check-label" for="switch">
+<span>Turn Up Awesomeness</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The new <code>bslib</code> is <span id="extra" class="d-none"><strong>extra, extra</strong></span> awesome!</p>
+</div>
+</div>
+</div>
+<script>
+document.getElementById("switch").addEventListener("click", (ev) => {
+  const extra = document.getElementById("extra");
+  extra.classList.toggle("d-none", !ev.target.checked);
+});
+</script></section></section><section id="looking-forward" class="level2"><h2 class="anchored" data-anchor-id="looking-forward">Looking forward</h2>
+<p>We’re excited to continue improving Shiny for R, and in the near-term we plan to focus on making <code>bslib</code> a more complete UI framework with great looking defaults. Here are a few things currently towards the top of our roadmap:</p>
+<ul>
+<li>Make the new Shiny preset theme the default for <code>bslib</code>-powered apps.
+<ul>
+<li>We have refreshed style updates in the works for <code><a href="https://rstudio.github.io/bslib/reference/card.html">card()</a></code>s, <code><a href="https://rstudio.github.io/bslib/reference/sidebar.html">sidebar()</a></code>, and much more.</li>
+<li>And we’d love to get your feedback on the new theme!</li>
+</ul>
+</li>
+<li>More UI components, such as <a href="https://getbootstrap.com/docs/5.3/components/offcanvas/">offcanvas</a>, <a href="https://getbootstrap.com/docs/5.3/components/button-group/">button groups</a>, etc.</li>
+<li>More incorporation of <code>bslib</code> as part of the <a href="https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html">Getting Started experience</a> on <a href="https://shiny.posit.co/">shiny.posit.co</a>.</li>
+<li>More <code>bslib</code>-focused example galleries, starter templates, and articles.</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Join us at posit::conf(2023)!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We’re also excited to see you at <a href="https://posit.co/conference/">posit::conf(2023)</a> this September! Currently, there are <a href="https://reg.conf.posit.co/flow/posit/positconf23/attendee-portal/page/sessioncatalog?mkt_tok=NzA5LU5YTi03MDYAAAGMOwicGCTQ0Fdw5xeRt2ICgRdWcmS5wjLMqYn9lIzlZxV_RurIIbKDnx8O9POcnDuz7Fu5IGLG_FegVO8iDE08HrjnqmwQs5JKRs9qk2sS7Ac&amp;search=shiny">35 sessions</a> on the schedule that mention Shiny, including a handful of UI-focused <a href="https://reg.conf.posit.co/flow/posit/positconf23/attendee-portal/page/sessioncatalog?mkt_tok=NzA5LU5YTi03MDYAAAGMOwicGCTQ0Fdw5xeRt2ICgRdWcmS5wjLMqYn9lIzlZxV_RurIIbKDnx8O9POcnDuz7Fu5IGLG_FegVO8iDE08HrjnqmwQs5JKRs9qk2sS7Ac&amp;search=shiny&amp;search.sessiontype=1675316728702001wr6r">workshops</a> and <a href="https://reg.conf.posit.co/flow/posit/positconf23/attendee-portal/page/sessioncatalog?mkt_tok=NzA5LU5YTi03MDYAAAGMOwicGCTQ0Fdw5xeRt2ICgRdWcmS5wjLMqYn9lIzlZxV_RurIIbKDnx8O9POcnDuz7Fu5IGLG_FegVO8iDE08HrjnqmwQs5JKRs9qk2sS7Ac&amp;search=bslib&amp;search.sessiontype=1684338401751002OADN&amp;search.sessiontopics=1684779688709001hs5K">talks</a>.</p>
+</div>
+</div>
+</section><section id="release-notes" class="level2"><h2 class="anchored" data-anchor-id="release-notes">Release notes</h2>
+<p>There are a lot of changes and updates in the Shiny universe that we haven’t covered in this post. Dive into the release notes linked below to learn more about changes in each package.</p>
+<p><strong>Thank you, everyone!</strong> 💙 We’d like to thank everyone who contributed to all of the packages released in this cycle. Your contributions are what make Shiny great!</p>
+<section id="bslib-v0.5.1" class="level3"><h3 class="anchored" data-anchor-id="bslib-v0.5.1">bslib <a href="https://rstudio.github.io/bslib/news/index.html#bslib-051">v0.5.1</a>
+</h3>
+<p><a href="https://github.com/ariebh">@ariebh</a>, <a href="https://github.com/asadow">@asadow</a>, <a href="https://github.com/chrisbrownlie">@chrisbrownlie</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/ctrlxctrlc">@ctrlxctrlc</a>, <a href="https://github.com/daattali">@daattali</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/ideusoes">@ideusoes</a>, <a href="https://github.com/Liripo">@Liripo</a>, <a href="https://github.com/michael-dewar">@michael-dewar</a>, <a href="https://github.com/nteetor">@nteetor</a>, <a href="https://github.com/PaulC91">@PaulC91</a>, <a href="https://github.com/philiph99">@philiph99</a>, <a href="https://github.com/riskcede">@riskcede</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/Teebusch">@Teebusch</a>, <a href="https://github.com/tillea">@tillea</a>, and <a href="https://github.com/wch">@wch</a>.</p>
+</section><section id="shiny-v1.7.5" class="level3"><h3 class="anchored" data-anchor-id="shiny-v1.7.5">shiny <a href="https://shiny.posit.co/r/reference/shiny/1.7.5/upgrade.html">v1.7.5</a>
+</h3>
+<p><a href="https://github.com/AlexWaterboyBezzina">@AlexWaterboyBezzina</a>, <a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/aronatkins">@aronatkins</a>, <a href="https://github.com/asadow">@asadow</a>, <a href="https://github.com/BajczA475">@BajczA475</a>, <a href="https://github.com/barracuda156">@barracuda156</a>, <a href="https://github.com/brooksambrose">@brooksambrose</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/daattali">@daattali</a>, <a href="https://github.com/dipterix">@dipterix</a>, <a href="https://github.com/dkori">@dkori</a>, <a href="https://github.com/drag05">@drag05</a>, <a href="https://github.com/dvg-p4">@dvg-p4</a>, <a href="https://github.com/emillykkejensen">@emillykkejensen</a>, <a href="https://github.com/EricKrantz">@EricKrantz</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/galachad">@galachad</a>, <a href="https://github.com/Gathuh">@Gathuh</a>, <a href="https://github.com/GShotwell">@GShotwell</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/hcsun1">@hcsun1</a>, <a href="https://github.com/ifoxfoot">@ifoxfoot</a>, <a href="https://github.com/ismirsehregal">@ismirsehregal</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/jessekps">@jessekps</a>, <a href="https://github.com/johnkarlen">@johnkarlen</a>, <a href="https://github.com/juwitt">@juwitt</a>, <a href="https://github.com/kathi-resan">@kathi-resan</a>, <a href="https://github.com/kennedymwavu">@kennedymwavu</a>, <a href="https://github.com/kevinushey">@kevinushey</a>, <a href="https://github.com/king-of-poppk">@king-of-poppk</a>, <a href="https://github.com/KRRLP-PL">@KRRLP-PL</a>, <a href="https://github.com/Liripo">@Liripo</a>, <a href="https://github.com/magarick">@magarick</a>, <a href="https://github.com/MalteSteinCytel">@MalteSteinCytel</a>, <a href="https://github.com/matt4815162342">@matt4815162342</a>, <a href="https://github.com/maxheld83">@maxheld83</a>, <a href="https://github.com/Mkranj">@Mkranj</a>, <a href="https://github.com/nolanjj">@nolanjj</a>, <a href="https://github.com/norahAlbarrak">@norahAlbarrak</a>, <a href="https://github.com/pawelru">@pawelru</a>, <a href="https://github.com/pbosetti">@pbosetti</a>, <a href="https://github.com/RaviSekha">@RaviSekha</a>, <a href="https://github.com/RosalynLP">@RosalynLP</a>, <a href="https://github.com/sanjmeh">@sanjmeh</a>, <a href="https://github.com/SarenT">@SarenT</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/shahronak47">@shahronak47</a>, <a href="https://github.com/stefanedwards">@stefanedwards</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/stuvet">@stuvet</a>, <a href="https://github.com/timbrock">@timbrock</a>, <a href="https://github.com/tomjemmett">@tomjemmett</a>, <a href="https://github.com/vivigirardin">@vivigirardin</a>, <a href="https://github.com/vnijs">@vnijs</a>, <a href="https://github.com/wch">@wch</a>, and <a href="https://github.com/Zhenglei-BCS">@Zhenglei-BCS</a>.</p>
+</section><section id="htmltools-v0.5.6" class="level3"><h3 class="anchored" data-anchor-id="htmltools-v0.5.6">htmltools <a href="https://rstudio.github.io/htmltools/news/index.html#htmltools-056">v0.5.6</a>
+</h3>
+<p><a href="https://github.com/ccamara">@ccamara</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/daattali">@daattali</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/PaulC91">@PaulC91</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/ShixiangWang">@ShixiangWang</a>, and <a href="https://github.com/warnes">@warnes</a>.</p>
+</section><section id="flexdashboard-v0.6.2" class="level3"><h3 class="anchored" data-anchor-id="flexdashboard-v0.6.2">flexdashboard <a href="https://rstudio.github.io/flexdashboard/news/index.html#flexdashboard-062">v0.6.2</a>
+</h3>
+<p><a href="https://github.com/actuarial-lonewolf">@actuarial-lonewolf</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/danielludolf">@danielludolf</a>, <a href="https://github.com/DataStrategist">@DataStrategist</a>, <a href="https://github.com/erm-eanway">@erm-eanway</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, and <a href="https://github.com/nplatonov">@nplatonov</a>.</p>
+</section><section id="leaflet-v2.1.3" class="level3"><h3 class="anchored" data-anchor-id="leaflet-v2.1.3">leaflet <a href="https://github.com/rstudio/leaflet/blob/main/NEWS#leaflet-213">v2.1.3</a>
+</h3>
+<p><a href="https://github.com/antoine4ucsd">@antoine4ucsd</a>, <a href="https://github.com/daattali">@daattali</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/Jakka">@Jakka</a>, <a href="https://github.com/jaseeverett">@jaseeverett</a>, <a href="https://github.com/johnbaums">@johnbaums</a>, <a href="https://github.com/JosephStewart">@JosephStewart</a>, <a href="https://github.com/Landon-Getting">@Landon-Getting</a>, <a href="https://github.com/lime-n">@lime-n</a>, <a href="https://github.com/Rafnuss">@Rafnuss</a>, <a href="https://github.com/ramyareddy161">@ramyareddy161</a>, <a href="https://github.com/rhijmans">@rhijmans</a>, <a href="https://github.com/rl-utility-man">@rl-utility-man</a>, and <a href="https://github.com/warnes">@warnes</a>.</p>
+</section><section id="leaflet.providers-v1.13.0" class="level3"><h3 class="anchored" data-anchor-id="leaflet.providers-v1.13.0">leaflet.providers <a href="https://rstudio.github.io/leaflet.providers/news/index.html#leafletproviders-1130">v1.13.0</a>
+</h3>
+<p><a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/jennybc">@jennybc</a>, <a href="https://github.com/joker234">@joker234</a>, <a href="https://github.com/kent37">@kent37</a>, <a href="https://github.com/mgzjys">@mgzjys</a>, and <a href="https://github.com/schloerke">@schloerke</a>.</p>
+</section><section id="shinytest2-v0.3.0" class="level3"><h3 class="anchored" data-anchor-id="shinytest2-v0.3.0">shinytest2 <a href="https://rstudio.github.io/shinytest2/news/index.html#shinytest2-030">v0.3.0</a>
+</h3>
+<p><a href="https://github.com/andrewbaxter439">@andrewbaxter439</a>, <a href="https://github.com/arepsz">@arepsz</a>, <a href="https://github.com/AskPascal">@AskPascal</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/epruesse">@epruesse</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/gladkia">@gladkia</a>, <a href="https://github.com/hugo-pH">@hugo-pH</a>, <a href="https://github.com/matt-sd-watson">@matt-sd-watson</a>, <a href="https://github.com/maxheld83">@maxheld83</a>, <a href="https://github.com/parmsam-pfizer">@parmsam-pfizer</a>, <a href="https://github.com/PaulinCharliquart">@PaulinCharliquart</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/stla">@stla</a>, and <a href="https://github.com/sybrohee">@sybrohee</a>.</p>
+</section><section id="chromote-v0.1.2" class="level3"><h3 class="anchored" data-anchor-id="chromote-v0.1.2">chromote <a href="https://rstudio.github.io/chromote/news/index.html#chromote-012">v0.1.2</a>
+</h3>
+<p><a href="https://github.com/ashbythorpe">@ashbythorpe</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/Ljupch0">@Ljupch0</a>, <a href="https://github.com/moladokun">@moladokun</a>, <a href="https://github.com/mrcaseb">@mrcaseb</a>, <a href="https://github.com/nick-youngblut">@nick-youngblut</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/Waschoi">@Waschoi</a>, <a href="https://github.com/wch">@wch</a>, and <a href="https://github.com/yogat3ch">@yogat3ch</a>.</p>
+</section><section id="webshot2-v0.1.1" class="level3"><h3 class="anchored" data-anchor-id="webshot2-v0.1.1">webshot2 <a href="https://rstudio.github.io/webshot2/news/index.html#webshot2-011">v0.1.1</a>
+</h3>
+<p><a href="https://github.com/aengels-git">@aengels-git</a>, <a href="https://github.com/brunomioto">@brunomioto</a>, <a href="https://github.com/cderv">@cderv</a>, <a href="https://github.com/charleswidnall">@charleswidnall</a>, <a href="https://github.com/egehankinik">@egehankinik</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/iMissile">@iMissile</a>, <a href="https://github.com/kangjf1943">@kangjf1943</a>, <a href="https://github.com/lijinbio">@lijinbio</a>, <a href="https://github.com/Liripo">@Liripo</a>, <a href="https://github.com/Minh-AnhHuynh">@Minh-AnhHuynh</a>, <a href="https://github.com/PatrickRWright">@PatrickRWright</a>, <a href="https://github.com/RKonstantinR">@RKonstantinR</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/trafficonese">@trafficonese</a>, and <a href="https://github.com/tvqt">@tvqt</a>.</p>
+</section><section id="promises-v1.2.1" class="level3"><h3 class="anchored" data-anchor-id="promises-v1.2.1">promises <a href="https://rstudio.github.io/promises/news/index.html#promises-121">v1.2.1</a>
+</h3>
+<p><a href="https://github.com/bakaburg1">@bakaburg1</a>, <a href="https://github.com/bguillod">@bguillod</a>, <a href="https://github.com/can-taslicukur">@can-taslicukur</a>, <a href="https://github.com/CarlijnB">@CarlijnB</a>, <a href="https://github.com/chris31415926535">@chris31415926535</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/CrossD">@CrossD</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/gdeoli">@gdeoli</a>, <a href="https://github.com/HenrikBengtsson">@HenrikBengtsson</a>, <a href="https://github.com/hf778">@hf778</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/jennybc">@jennybc</a>, <a href="https://github.com/king-of-poppk">@king-of-poppk</a>, <a href="https://github.com/lz100">@lz100</a>, <a href="https://github.com/maxheld83">@maxheld83</a>, <a href="https://github.com/mrkaye97">@mrkaye97</a>, <a href="https://github.com/pawelru">@pawelru</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/tzakharko">@tzakharko</a>, and <a href="https://github.com/vspinu">@vspinu</a>.</p>
+</section><section id="thematic-v0.1.3" class="level3"><h3 class="anchored" data-anchor-id="thematic-v0.1.3">thematic <a href="https://rstudio.github.io/thematic/news/index.html#thematic-013">v0.1.3</a>
+</h3>
+<p><a href="https://github.com/biomystery">@biomystery</a>, <a href="https://github.com/boram1024">@boram1024</a>, <a href="https://github.com/cboettig">@cboettig</a>, <a href="https://github.com/cbrnr">@cbrnr</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/dmenne">@dmenne</a>, <a href="https://github.com/Fluke95">@Fluke95</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/gtritchie">@gtritchie</a>, <a href="https://github.com/jennybc">@jennybc</a>, <a href="https://github.com/kbzsl">@kbzsl</a>, <a href="https://github.com/mvwestendorp">@mvwestendorp</a>, <a href="https://github.com/PaulC91">@PaulC91</a>, <a href="https://github.com/r2evans">@r2evans</a>, <a href="https://github.com/rishabhshah-92">@rishabhshah-92</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/stephan-koenig">@stephan-koenig</a>, <a href="https://github.com/uhkeller">@uhkeller</a>, and <a href="https://github.com/yixuan">@yixuan</a>.</p>
+</section><section id="bsicons-v0.1.1" class="level3"><h3 class="anchored" data-anchor-id="bsicons-v0.1.1">bsicons <a href="https://rstudio.github.io/bsicons/news/index.html#bsicons-011">v0.1.1</a>
+</h3>
+<p><a href="https://github.com/cpsievert">@cpsievert</a>, and <a href="https://github.com/sanjmeh">@sanjmeh</a>.</p>
+<script>
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer><script>videojs(video_shortcode_videojs_video1);</script><script>videojs(video_shortcode_videojs_video2);</script><script>videojs(video_shortcode_videojs_video3);</script>
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

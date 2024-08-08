@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Winston Chang">
+<meta name="dcterms.date" content="2021-01-22">
+<meta name="description" content="Speed up and scale up your Shiny app with caching.">
+
+<title>Using caching in Shiny to maximize performance – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../r/articles/improve/plot-caching/index.html" rel="next">
+<link href="../../../../r/articles/improve/google-analytics/index.html" rel="prev">
+<link href="../../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Add rel="noopener noreferrer" to each target="_blank" -->
+<script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script>
+<!-- End Add rel="noopener noreferrer" to each target="_blank" -->
+
+<link href="../../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="../../../secondary-menu.css">
+<link rel="stylesheet" href="../../articles.css">
+<link rel="stylesheet" href="../../../../r/secondary-menu.css">
+<meta property="og:title" content="Using caching in Shiny to maximize performance – Shiny">
+<meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
+<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">    
+        <li class="dropdown-header"><img src="../../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Improve</li><li class="breadcrumb-item">Scale</li><li class="breadcrumb-item"><a href="../../../../r/articles/improve/caching/index.html">Performance and scalability</a></li><li class="breadcrumb-item"><a href="../../../../r/articles/improve/caching/index.html">Using caching in Shiny to maximize performance</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>ARTICLES</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles#start" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Start</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Build</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Structure</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Standalone apps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/app-formats/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App formats and launching apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/two-file/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-file Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Interactive documents</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rmarkdown/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to R Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rmd-integration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Markdown integration in the RStudio IDE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/output-args/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting Output args via Render functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/interactive-docs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to interactive documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/rm-cheatsheet/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The R Markdown cheatsheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/output-args/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting Output args via Render functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/generating-reports/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generating downloadable reports</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dashboards</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/dashboards/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dashboards</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Gadgets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/gadgets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny Gadgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/gadget-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Designing Gadget UI</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Backend</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reactivity</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/reactivity-overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reactivity - An overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/isolation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stop reactions with isolate()</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/execution-scheduling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Execution scheduling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/understanding-reactivity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to understand reactivity in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/client-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Learn about your user with session$clientData</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Database basics - dplyr and DBI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/sql-injections/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SQL injection prevention</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-basics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pool package (basics)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-advanced/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pool package (advanced)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/pool-dplyr/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using dplyr and pool to query a database</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/persistent-data-storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Persistent data storage in Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Frontend</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">User interface</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/layout-guide/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application layout guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/display-modes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Display modes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/tabsets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tabsets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/html-tags/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Customize your UI with HTML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/html-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build your entire UI with HTML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/dynamic-ui/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build a dynamic UI that reacts to user input</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/templates/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTML Templates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/tag-glossary/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny HTML Tags Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/progress/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Progress indicators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/modal-dialogs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modal dialogs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/notifications/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/themes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Themes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/images/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Render images in a Shiny app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/render-table/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Displaying and customizing static tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/datatables/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to use DataTables in a Shiny App</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/action-buttons/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using Action Buttons</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/sliders/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using sliders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/download/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Help users download data from your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/upload/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Help users upload files to your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/selectize/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using selectize input</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Graphics &amp; visualization</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/plot-interaction/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interactive plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/selecting-rows-of-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting rows of data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/plot-interaction-advanced/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interactive plots - advanced</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Shiny extensions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/htmlwidgets/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">htmlwidgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/shinyjs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript actions packaged for Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-build-widget/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to build a JavaScript based widget</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-widget-functionality/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to add functionality to JavaScript widgets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-send-message/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to send messages from the browser to the server and back using Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-introjs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to develop an interactive, dynamic help system for your app with introJS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-custom-input/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to create custom input bindings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-dashboard/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Putting everything together to create an interactive dashboard</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Customizing Shiny</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/css/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using custom CSS in your app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/building-inputs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build custom input objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/building-outputs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Build custom output objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/google-analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add Google Analytics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/packaging-javascript/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packaging JavaScript code for Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/communicating-with-js/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Communicating with Shiny via JavaScript</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-events/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript Events in Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/build/js-dashboard/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Putting everything together to create an interactive dashboard</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Improve</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Refactor</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Code quality</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/debugging/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debugging Shiny applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/upgrade-R/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Upgrading to a new version of R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/req/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Handling missing inputs with req(…)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scoping/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scoping rules for Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/reconnecting/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reconnecting to Shiny apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/sanitize-errors/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sanitizing error messages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/validation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Write error messages for your UI with validate</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/unicode/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unicode characters in Shiny apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/testing-overview/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny testing overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/shinytest/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">shinytest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/server-function-testing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Server function testing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modularizing Shiny app code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/communicate-bet-modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Communication between modules</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="true">
+ <span class="menu-text">Scale</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false">
+ <span class="menu-text">Measure usage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/usage-metrics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny App Usage Tracking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/google-analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Add Google Analytics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="true">
+ <span class="menu-text">Performance and scalability</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/caching/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Using caching in Shiny to maximize performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/plot-caching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plot Caching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/profiling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Profiling your Shiny app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/performance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/nonblocking/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Non-blocking operations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false">
+ <span class="menu-text">Tuning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scaling-and-tuning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scaling and Performance Tuning with shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/improve/scaling-and-tuning-ssp-rsc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scaling and Performance Tuning with Shiny Server Pro and Posit Connect</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false">
+ <span class="menu-text">Share</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false">
+ <span class="menu-text">Deployment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/deployment-web/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deploying Shiny apps to the web</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/shinyapps/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started with shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">r/articles/share/shinyapps-auth/index.qmd</span>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/custom-domains/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setting up custom domains on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/share-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sharing data across sessions on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/migration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Migrating authentication on shinyapps.io</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/shiny-server/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Shiny Server</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/libraries/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Allowing different libraries for different apps on Shiny Server, Shiny Server Pro, and Posit Connect</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/permissions/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating user privileges on Posit Connect and Shiny Server Pro</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/admin-deployment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Administrating Shiny Server, Shiny Server Pro, and Posit Connect</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false">
+ <span class="menu-text">Distribution</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/deployment-local/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sharing apps to run locally</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/function/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Save your app as a function</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bookmarking</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-27" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-27" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/bookmarking-state/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bookmarking state</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/advanced-bookmarking/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced bookmarking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../r/articles/share/bookmarking-modules/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bookmarking and modules</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<!-- Google Tag Manager (noscript) -->
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Improve</li><li class="breadcrumb-item">Scale</li><li class="breadcrumb-item"><a href="../../../../r/articles/improve/caching/index.html">Performance and scalability</a></li><li class="breadcrumb-item"><a href="../../../../r/articles/improve/caching/index.html">Using caching in Shiny to maximize performance</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Using caching in Shiny to maximize performance</h1>
+</div>
+
+<div>
+  <div class="description">
+    Speed up and scale up your Shiny app with caching.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Winston Chang </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 22, 2021</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Suppose you want to scale your application so that it can serve more traffic. One way to do this, of course, is to increase the amount of computing power available by getting more servers. Another way to do this is to reduce the amount of computing power needed by your application.</p>
+<p>With careful use of caching, you can dramatically improve the performance of your Shiny applications. This is especially true of applications where many users see the same information, such as data dashboards.</p>
+<p><strong>What is caching?</strong></p>
+<p>In Shiny 1.6.0, <code>reactive</code>s and <code>render</code> functions can cache their values, using the <a href="../../../../r/reference/shiny/latest/bindCache.html"><code>bindCache()</code></a> function. In other words, the application will do the computation with a given set of inputs once, and then after that, if those inputs are seen again, it can simply retrieve the value saved in the cache, instead of having to compute it again.</p>
+<p><strong>When does caching help?</strong></p>
+<p>Because caching saves computed values for use later, it is most effective when the same computation is done multiple times. If, for example, you have a data dashboard where many users see the same data and the same plots of the data, then with caching, the data processing and plotting can happen once, and after that, the results simply have to be retrieved from the cache.</p>
+<p>This document covers the following:</p>
+<ul>
+<li><a href="#using-bindcache">Using <code>bindCache()</code></a>: <a href="../../../../r/reference/shiny/latest/bindCache.html"><code>bindCache()</code></a> can be used with <code>reactive()</code> and <code>render</code> functions, like <code>renderPlot()</code> and <code>renderText()</code>.</li>
+<li><a href="#using-memoise">Using <code>memoise()</code></a>: <code>memoise()</code> can be used with “normal” R functions.</li>
+<li><a href="#cache-scoping">Cache scoping</a></li>
+<li><a href="#best-practices-for-deployed-applications">Best practices for deployed applications</a></li>
+<li><a href="#faq">Frequently Asked Questions</a></li>
+</ul>
+<section id="using-bindcache" class="level2">
+<h2 data-anchor-id="using-bindcache">Using <code>bindCache()</code></h2>
+<p>Using <a href="../../../../r/reference/shiny/latest/bindCache.html"><code>bindCache()</code></a> is simple: just pass your <code>reactive()</code> or <code>render</code> function to <code>bindCache()</code>. For example, if this is your reactive expression:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>city_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fetchData</span>(input<span class="sc">$</span>city)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can replace it with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>city_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fetchData</span>(input<span class="sc">$</span>city)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(input<span class="sc">$</span>city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notice that we used <code>%&gt;%</code>, which is the pipe operator from the magrittr package. You don’t have to use the pipe operator, but it does make the code a bit easier to read.</p>
+<p>We called <code>bindCache(input$city)</code> — the <code>input$city</code> part is used as the <em>cache key</em>. Suppose the value of <code>input$city</code> is <code>"Boston"</code>. The first time that someone uses <code>city_data()</code> when <code>"Boston"</code> is the city, the user-written code inside of the <code>reactive()</code> will run; it will call <code>fetchData("Boston")</code> and store that in the cache, using <code>"Boston"</code> as the cache key.</p>
+<p>If <code>city_data()</code> is called in the future without a change to <code>input$city</code>, it doesn’t have to run the code again; it simply returns the saved value. This works the same as regular a <code>reactive()</code>: they always store their most recent value.</p>
+<p>Where the cached <code>reactive()</code> differs from a regular <code>reactive()</code> is with previous values. Suppose the value of <code>input$city</code> changes to <code>"New York"</code>, and then back to <code>"Boston"</code>. A normal <code>reactive()</code> would then have to re-run the code and go fetch the data for Boston. However, a cached reactive would be able to just get Boston data from the cache.</p>
+<details>
+<summary>
+Click to see code for an example application
+</summary>
+<p>This is an example application that demonstrates how caching can speed up a computation. It simply multiplies <code>input$x</code> and <code>input$y</code>, with an artificial two-second delay. You can try out this application by copying and pasting into your R session:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ui =</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sliderInput</span>(<span class="st">"x"</span>, <span class="st">"x"</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">5</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sliderInput</span>(<span class="st">"y"</span>, <span class="st">"y"</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">5</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">div</span>(<span class="st">"x * y: "</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">verbatimTextOutput</span>(<span class="st">"txt"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">server =</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    r <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># The value expression is an _expensive_ computation</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">message</span>(<span class="st">"Doing expensive computation..."</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      input<span class="sc">$</span>x <span class="sc">*</span> input<span class="sc">$</span>y</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    }) <span class="sc">%&gt;%</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">bindCache</span>(input<span class="sc">$</span>x, input<span class="sc">$</span>y)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>txt <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="fu">r</span>())</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<section id="bindcache-with-render-functions" class="level3">
+<h3 data-anchor-id="bindcache-with-render-functions"><code>bindCache()</code> with <code>render</code> functions</h3>
+<p>We’ve seen <code>bindCache()</code> used with reactive expressions, but it can also be used with <code>render</code> functions, like <code>renderPlot()</code>, <code>renderText()</code>, <code>renderUI()</code>, as well as render functions from other packages, like <code>plotly::renderPlotly()</code>.</p>
+<p>Here’s an example with <code>renderTable()</code>. Suppose that <code>fetchData()</code> returns a data frame:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>table <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fetchData</span>(input<span class="sc">$</span>city)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(input<span class="sc">$</span>city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Like our earlier example, <code>input$city</code> is used as the cache key. The first time it has particular value, like <code>"Boston"</code>, the code inside the <code>renderTable()</code> will run. Later on, if <code>input$city</code> has the same value, it won’t have to run the code again; it can simply fetch the value from the cache.</p>
+<p>Some <code>render</code> functions may require small modifications to work with caching. Others will not work with caching; one possible reason for this is that the <code>render</code> function modifies some internal state of the session, and so caching it would prevent necessary code from running.</p>
+<p>Note that some render functions may need modifications in order to work with <code>bindCache()</code> — if you are a developer of such a function, see <a href="#updating-render-functions">Updating render functions</a> below.</p>
+</section>
+<section id="understanding-cache-keys" class="level3">
+<h3 data-anchor-id="understanding-cache-keys">Understanding cache keys</h3>
+<p>For caching to work well for your application, it’s important to understand how cache keys are computed and used.</p>
+<p>As a general rule of thumb, the cache key expression should capture all reactive objects used in the reactive/render code. In this example, the <code>renderText()</code> uses three reactive objects: <code>input$x</code>, <code>input$y</code>, and <code>r()</code>. Additionally, all of them are passed to the <code>bindCache()</code> to use as cache key:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">reactive</span>({ input<span class="sc">$</span>z <span class="sc">*</span> <span class="dv">2</span> })</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>txt <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">"The value is"</span>, input<span class="sc">$</span>x <span class="sc">*</span> input<span class="sc">$</span>y <span class="sc">*</span> <span class="fu">r</span>())</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(input<span class="sc">$</span>x, input<span class="sc">$</span>y, <span class="fu">r</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you don’t use all of them in the cache key, you can end up with a <em>cache collision</em>. For example, suppose that we only used <code>input$x</code> for the cache key, like this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>txt <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">"The value is"</span>, input<span class="sc">$</span>x <span class="sc">*</span> input<span class="sc">$</span>y <span class="sc">*</span> <span class="fu">r</span>())</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(input<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this case, changes to <code>input$y</code> and <code>r()</code> would not cause the cache key to be recomputed, and incorrect values could be fetched from the cache.</p>
+<p>After the cache key expression(s) are executed, they are combined into a list and then that list is <em>hashed</em> to produce a string, which is used as the actual cache key. This means that if a large object (for example, a data set) is used in the cache key, it can take a nontrivial amount of time to hash it. If this is an issue for you, see <a href="#faq-large-cache-key">this question</a>.</p>
+<p>A second thing that <code>bindCache()</code> cache key expression(s) are used for is to set up <em>reactive dependencies</em> for the resulting object. Reactive dependencies are based on cache key expression(s), and <em>not</em> the original code in the <code>reactive()</code> or <code>render</code> function. (In technical terms, that code is run inside of <code>isolate()</code>.)</p>
+<p>The reason that the cache key expressions are used for reactive dependencies is because we don’t want upstream reactive invalidations to cause the user-code to re-execute; that could be an expensive operation. Instead, we want those invalidations to cause the cache key expressions to re-execute; this should be a fast operation. If the resulting key is not in the cache, only then do we want to re-execute the (expensive) user code.</p>
+<p>Behind the scenes, <code>bindCache()</code> adds in a few more things as part of the cache key. The code that the user passes to <code>reactive()</code> is also added to cache key before it’s hashed. This is to avoid collisions among objects. In addition, information about the type of object is hashed, so that two different <code>reactive</code>/<code>render</code> functions that have the same user-provided expression will not collide. This may sound confusing, but this example should make it clear. The following will not have collisions among them, even though the <code>bindCache()</code> calls all have the same user-specified portion of the cache key and (in one pairing) the same code passed to <code>reactive()</code> and <code>renderText()</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No collisions</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>r2          <span class="ot">&lt;-</span> <span class="fu">reactive</span>(  { input<span class="sc">$</span>x <span class="sc">*</span> <span class="dv">2</span> }) <span class="sc">%&gt;%</span> <span class="fu">bindCache</span>(input<span class="sc">$</span>x)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>r4          <span class="ot">&lt;-</span> <span class="fu">reactive</span>(  { input<span class="sc">$</span>x <span class="sc">*</span> <span class="dv">4</span> }) <span class="sc">%&gt;%</span> <span class="fu">bindCache</span>(input<span class="sc">$</span>x)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>txt4 <span class="ot">&lt;-</span> <span class="fu">renderText</span>({ input<span class="sc">$</span>x <span class="sc">*</span> <span class="dv">4</span> }) <span class="sc">%&gt;%</span> <span class="fu">bindCache</span>(input<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="bindcache-and-renderplot" class="level3">
+<h3 data-anchor-id="bindcache-and-renderplot"><code>bindCache()</code> and <code>renderPlot()</code></h3>
+<p>Plots can be cached with <code>bindCache()</code>. For example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">fetchData</span>(input<span class="sc">$</span>city)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(data)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(input<span class="sc">$</span>city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In versions of Shiny prior to 1.6.0, the same could be done with <code>renderCachedPlot()</code> (and that code will still work with newer versions of Shiny):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderCachedPlot</span>({</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">fetchData</span>(input<span class="sc">$</span>city)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(data)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cacheKeyExpr =</span> input<span class="sc">$</span>city</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Click to see an example application
+</summary>
+<p>This is an example application that demonstrates how caching can speed up a plot. For a given slider value, it makes a plot with an artificial two-second delay. You can try out this application by copying and pasting into your R session:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidPage</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarLayout</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sidebarPanel</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sliderInput</span>(<span class="st">"n"</span>, <span class="st">"Number of points"</span>, <span class="dv">4</span>, <span class="dv">32</span>, <span class="at">value =</span> <span class="dv">8</span>, <span class="at">step =</span> <span class="dv">4</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mainPanel</span>(<span class="fu">plotOutput</span>(<span class="st">"plot"</span>))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)  <span class="co"># Add an artificial delay</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        rownums <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(input<span class="sc">$</span>n)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(cars<span class="sc">$</span>speed[rownums], cars<span class="sc">$</span>dist[rownums],</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlim =</span> <span class="fu">range</span>(cars<span class="sc">$</span>speed), <span class="at">ylim =</span> <span class="fu">range</span>(cars<span class="sc">$</span>dist))</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>      }) <span class="sc">%&gt;%</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">bindCache</span>(input<span class="sc">$</span>n)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<section id="plot-sizing" class="level4">
+<h4 data-anchor-id="plot-sizing">Plot sizing</h4>
+<p>Sizing for cached plots works a bit differently from regular plots: with regular plots, the plot is rendered to exactly fit the div on the web page; with cached plots, the plot is rendered to a close-fitting size, and the web browser scales it to fit the div.</p>
+<p>With an uncached <code>renderPlot()</code>, the plot is rendered at exactly the dimensions of the div containing the image in the browser. If the div is 500 pixels wide and 400 pixels tall, then it will create a plot that is exactly 500×400 pixels. If you resize the window, and the div then becomes 550x400 pixels (typically the width is variable, but the height is fixed), then Shiny will render another plot that is 550x400, which can take some time.</p>
+<p>With <code>renderPlot() %&gt;% bindCache()</code>, the plot is not rendered to be an exact fit. There are a number of possible sizes, and Shiny will render the plot to be the closest size that is larger than the div on the web page, and cache it. For example, possible widths include 400, 480, 576, 691, and so on, both smaller and larger; each width is 20% larger than the previous one. Heights work the same way.</p>
+<p>If the width of the div is 450 pixels, then Shiny will render a plot that is 480 pixels wide and scale it down to fit the 450 pixel wide div. If the div is then resized to 500 pixels, then Shiny will render a plot that is 576 pixels wide.</p>
+<p>The reason that cached plots work this way is so that it doesn’t have to cache a plot of every possible size; doing that would greatly reduce the usefuless of caching, since each browser would likely have a slightly different width, and so there would be very few cache hits.</p>
+<p>This behavior is controlled by the <code>sizePolicy</code> parameter – it is a function that takes two numbers (the actual dimensions of the div) and returns two numbers (the dimensions of the plot that will be rendered). If you want to use a different strategy, you can pass in a different function. See <a href="../../../../r/reference/shiny/latest/bindCache.html#caching-with-renderplot-">here</a> for more information.</p>
+</section>
+</section>
+<section id="using-bindcache-with-bindevent" class="level3">
+<h3 data-anchor-id="using-bindcache-with-bindevent">Using <code>bindCache()</code> with <code>bindEvent()</code></h3>
+<p>The <code>bindEvent()</code> function makes it easy to make reactive code run only when specified reactive values are invalidated. You may be familiar with the existing <code>eventReactive()</code> and <code>observeEvent()</code> functions. <code>bindEvent()</code> can be used with <code>reactive()</code> and <code>observe()</code> to do the same thing (and in fact, the older functions are now implemented using <code>bindEvent()</code>):</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># These are equivalent:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eventReactive</span>(input<span class="sc">$</span>button, { ... })</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">reactive</span>({ ... }) <span class="sc">%&gt;%</span> <span class="fu">bindEvent</span>(input<span class="sc">$</span>button)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># These are equivalent:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">observeEvent</span>(input<span class="sc">$</span>button, { ... })</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">observe</span>({ ... }) <span class="sc">%&gt;%</span> <span class="fu">bindEvent</span>(input<span class="sc">$</span>button)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>bindEvent()</code> can also be used with <code>render</code> functions. For example, if you have a plot that you want to redraw only when a button is clicked, you could do this:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(cars[<span class="fu">seq_len</span>(input<span class="sc">$</span>nrows), ])</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindEvent</span>(input<span class="sc">$</span>button)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>bindCache()</code> and <code>bindEvent()</code> can be used together:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(cars[<span class="fu">seq_len</span>(input<span class="sc">$</span>nrows), ])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(input<span class="sc">$</span>nrows) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindEvent</span>(input<span class="sc">$</span>button)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This would cache the plot based on the value of <code>input$nrows</code>, and also make it so the plot redraws only when <code>input$button</code> is clicked. Keep in mind that the <code>bind</code> events are “decorators”, and that each one wraps up the object from the previous step; when the code is executed, you can think of them running in the reverse order of which they are applied (when using the pipe operator). So the <code>bindEvent(input$button)</code> acts as a gatekeeper for the <code>bindCache(input$nrows)</code>: the <code>input$button</code> event must happen before the caching code looks at <code>input$nrows</code>. And then if the key isn’t already in the cache, it tells the code in <code>renderPlot()</code> to run.</p>
+<details>
+<summary>
+Click to see an example application
+</summary>
+<p>This is an example application that demonstrates using <code>bindCache()</code> with <code>bindEvent()</code>. You can try out this application by copying and pasting into your R session:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidPage</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarLayout</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sidebarPanel</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sliderInput</span>(<span class="st">"n"</span>, <span class="st">"Number of points"</span>, <span class="dv">4</span>, <span class="dv">32</span>, <span class="at">value =</span> <span class="dv">8</span>, <span class="at">step =</span> <span class="dv">4</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">actionButton</span>(<span class="st">"go"</span>, <span class="st">"Draw plot"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mainPanel</span>(<span class="fu">plotOutput</span>(<span class="st">"plot"</span>))</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)  <span class="co"># Add an artificial delay</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        rownums <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(input<span class="sc">$</span>n)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(cars<span class="sc">$</span>speed[rownums], cars<span class="sc">$</span>dist[rownums],</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlim =</span> <span class="fu">range</span>(cars<span class="sc">$</span>speed), <span class="at">ylim =</span> <span class="fu">range</span>(cars<span class="sc">$</span>dist))</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>      }) <span class="sc">%&gt;%</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">bindCache</span>(input<span class="sc">$</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">bindEvent</span>(input<span class="sc">$</span>go)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+</section>
+<section id="using-memoise" class="level2">
+<h2 data-anchor-id="using-memoise">Using <code>memoise()</code></h2>
+<p>The <a href="http://memoise.r-lib.org/">memoise</a> package provides the <code>memoise()</code> function, which takes a function as input, and returns a version of that function with that caches the result.</p>
+<p>Memoized functions are similar to a <code>reactive()</code> used with <code>bindCache()</code>, although there are a few differences:</p>
+<ul>
+<li><code>memoise()</code> doesn’t know anything about reactivity, whereas <code>bindCache()</code> is designed to be used with reactive objects, and it handles reactive dependencies.</li>
+<li><code>memoise()</code> automatically infers the expressions to use in the cache key (it uses the arguments to the original function), whereas <code>bindCache()</code> requires you to tell it what to use for the cache key.</li>
+<li><code>memoise()</code> doesn’t automatically use an application or session-level cache; the package is separate from Shiny, so it doesn’t know about those things. (See the <a href="#cache-scoping">Cache scoping</a> section for more.)</li>
+</ul>
+<p>Using <code>memoise()</code> is easy. Suppose you have a function named <code>myfun</code>. Creating a memoized version of the function is as simple as passing it to <code>memoise()</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>myfun <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Do something slow</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>myfun_m <span class="ot">&lt;-</span> <span class="fu">memoise</span>(myfun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then you can call <code>myfun_m()</code> just as you would call <code>myfun()</code>, and it will return the same values, but with caching.</p>
+<p>Note that, in order to work reliably, the function should be a <em>pure function</em>: the returned value should depend only on the input values to the function (and shouldn’t be influenced by any global variables), and the function shouldn’t alter any global state. If the function is not a pure function (for example, if the return value depends on a global variable) then it is possible for the memoized version to behave differently from the non-memoized version.</p>
+<p>By default, <code>memoise()</code> creates a new <code>cache_mem()</code> for each memoized function, as the memoise package completely independent of Shiny. However, for a Shiny application, it usually makes sense to tell it to use the app or session-level cache.</p>
+<p>Here’s how to memoize with an application-level cache:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In app.R, server.R, or global.R</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>myfun <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Memoize, using application-level cache</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>myfun_m <span class="ot">&lt;-</span> <span class="fu">memoise</span>(slow_fn, <span class="at">cache =</span> <span class="fu">getShinyOption</span>(<span class="st">"cache"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To memoize with a session-level cache:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Call memoise() in server function, and tell it to use session$cache</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  myfun_m <span class="ot">&lt;-</span> <span class="fu">memoise</span>(slow_fn, <span class="at">cache =</span> session<span class="sc">$</span>cache)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cache-scoping" class="level2">
+<h2 data-anchor-id="cache-scoping">Cache scoping</h2>
+<p>By default, when <code>bindCache()</code> is used, it is scoped to the running application. That means that it shares a cache with all user sessions connected to the application (within the R process). This is done with the <code>cache</code> parameter’s default value, <code>"app"</code> (as in <code>bindCache(..., cache = "app")</code>).</p>
+<p>With an app-level cache scope, one user can benefit from the work done for another user’s session. In most cases, this is the best way to get performance improvements from caching. However, in some cases, this could leak information between sessions. For example, if the cache key does not fully encompass the inputs used by the value, then data could leak between the sessions. Or if a user sees that a cached reactive returns its value very quickly, they may be able to infer that someone else has already used it with the same values.</p>
+<p>Instead of an application-level cache, you can scope the cache to the session, with <code>cache="session"</code>. This removes the risk of information leaking between sessions, but then one session cannot benefit from computations performed in another session. For example, you could use one of the following:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the application-level cache that is shared with other users' sessions</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bindCache</span>(..., <span class="at">cache =</span> <span class="st">"app"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the session-level cache that is unique to this user's session</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bindCache</span>(..., <span class="at">cache =</span> <span class="st">"session"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another way to scope a cache is by passing a caching object directly to <code>bindCache()</code>. This can be useful if, for example, you want to use a a different type of cache with specific objects. We’ll learn more about this in <a href="#finer-control-over-caching">Finer control over caching</a>.</p>
+<p>By default, a session-level cache’s lifetime ends when the user session ends, and the application-scoped cache’s lifetime ends when the application stops running.</p>
+<p>The default application-level cache is a <code>cache_mem()</code> with a <code>max_size</code> 200 MB, and the default session-level cache is also a <code>cache_mem()</code> with a <code>max_size</code> of 200 MB.</p>
+<p>To use different settings for an application-scoped cache, you can call <code>shinyOptions()</code> at the top of your app.R, server.R, or global.R. For example, this will create a cache with 500 MB of space instead of the default 200 MB:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the application-level cache</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> cachem<span class="sc">::</span><span class="fu">cache_mem</span>(<span class="at">max_size =</span> <span class="fl">500e6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To use different settings for a session-scoped cache, you can set <code>self$cache</code> at the top of your server function. To use the session-scoped cache, when you call <code>bindCache()</code>, use <code>cache="session"</code>. For example, this will create a 100 MB cache for the session:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Set the session-level cache</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  session<span class="sc">$</span>cache <span class="ot">&lt;-</span> cachem<span class="sc">::</span><span class="fu">cache_mem</span>(<span class="at">max_size =</span> <span class="fl">100e6</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">reactive</span>(...) <span class="sc">%&gt;%</span> <span class="fu">bindCache</span>(input<span class="sc">$</span>x, <span class="at">cache =</span> <span class="st">"session"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you want to use a cache that is shared across multiple R processes, you can use a <code>cachem::cache_disk()</code>. You can create a application-level shared cache by putting this at the top of your app.R, server.R, or global.R:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> cachem<span class="sc">::</span><span class="fu">cache_disk</span>(<span class="fu">file.path</span>(<span class="fu">dirname</span>(<span class="fu">tempdir</span>()), <span class="st">"myapp-cache"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will create a subdirectory in your system temp directory named <code>myapp-cache</code> (replace <code>myapp-cache</code> with a unique name of your choosing). On most platforms, this directory will be removed when your system reboots. This cache will persist across multiple starts and stops of the R process, as long as you do not reboot.</p>
+<p>To have the cache persist even across reboots, you can create the cache in a location outside of the temp directory. For example, it could be a subdirectory of the application:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> cachem<span class="sc">::</span><span class="fu">cache_disk</span>(<span class="st">"./myapp-cache"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this case, resetting the cache will have to be done manually, by deleting the directory.</p>
+<p>Using a <code>cache_disk()</code> can allow multiple concurrent R processes serving the same Shiny application to share a cache, which can result in even greater performance benefits. Bear in mind that the various platforms have different behavior for sharing disk space; see <a href="#best-practices-for-deployed-applications">Best practices for deployed applications</a> to learn more.</p>
+<section id="finer-control-over-caching" class="level3">
+<h3 data-anchor-id="finer-control-over-caching">Finer control over caching</h3>
+<p>The <code>"app"</code> and <code>"session"</code> options for cache scoping offer a simple way to control cache scoping, but in some cases you may want to have finer control over the caching.</p>
+<p>In addition to the application- and session-level caches, you can create separate cache objects and use them with specific calls to <code>bindCache()</code>. This could be useful if there are particular items that require different cache settings. For example, you might want a specific data set to be cached for only one hour, but other objects to be cached as usual.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A cache with 5 minute max age, created outside of the server function, so it</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># is shared across sessions.</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>cache_5min <span class="ot">&lt;-</span> cachem<span class="sc">::</span><span class="fu">cache_mem</span>(<span class="at">max_age =</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">60</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This specific object will be cached with the cache_5min</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>( ... ) <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bindCache</span>(input<span class="sc">$</span>x, <span class="at">cache =</span> cache_5min)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="best-practices-for-deployed-applications" class="level2">
+<h2 data-anchor-id="best-practices-for-deployed-applications">Best practices for deployed applications</h2>
+<p>In most cases, the default memory cache provides enough of a performance boost so that no other changes need to be made to an application. With a memory cache, the cache can be shared among all Shiny user sessions within a single R process.</p>
+<p>If your application has a large number of users and runs on multiple R processes, you can use a disk cache. Below are best practices for using a shared cache on various hosting platforms. If you have specialized needs, it might make sense to use a <a href="#can-i-write-my-own-caching-backend">custom cache</a> backed by <a href="#can-i-use-redis-for-the-cache">Redis</a> or other database.</p>
+<section id="posit-connect" class="level3">
+<h3 data-anchor-id="posit-connect">Posit Connect</h3>
+<p><a href="https://www.rstudio.com/products/connect/">Posit Connect</a> includes support for running multiple R process for an application. For applications deployed to Posit Connect, the best practice is to use a disk cache located in the application directory. To do so, add a line like this to your application:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># At the top of app.R, server.R, or global.R</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> cachem<span class="sc">::</span><span class="fu">cache_disk</span>(<span class="st">"./app_cache/cache/"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note: the reason for using the path <code>app_cache/cache/</code> is because (1) the rsconnect package (which is used to deploy the app) knows to not deploy the <code>app_cache/</code> subdirectory and (2) inside of that directory, various packages create subdirectories. The <a href="https://rstudio.github.io/sass/">sass</a> package, for example, uses a directory called <code>app_cache/sass/</code>. The subdirectory <code>app_cache/cache/</code> avoids colliding with other directories.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As of 2021-01-28, the CRAN version of rsconnect does not know to ignore <code>app_cache/</code>. This requires the development version of rsconnect, which can be installed with:**</p>
+</div>
+</div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rstudio/rsconnect"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you are using the CRAN version of rsconnect, and you have run the application on the computer which you are deploying from, it will have a local cache directory which should not be deployed. Make sure to deselect the cache directory when you deploy the application. In the RStudio IDE, you can do this:</p>
+<div class="text-center my-5">
+<p><img src="plot-cache-deploy-ignore.png" class="img-fluid" alt="Screen shot for Publish to Server" width="400"></p>
+</div>
+<p>The cache will be shared across multiple R processes running the same application. If you are using a multi-host cluster, the cache will also be shared across hosts, since the application directory resides on networked storage.</p>
+<p>When the application is redeployed, the newly-deployed version will start with an empty cache, which ensures that new versions of the application do not inherit a stale cache.</p>
+</section>
+<section id="shiny-server-and-shiny-server-pro" class="level3">
+<h3 data-anchor-id="shiny-server-and-shiny-server-pro">Shiny Server and Shiny Server Pro</h3>
+<p><a href="https://www.rstudio.com/products/shiny/shiny-server/">Shiny Server Open Source</a> and <a href="https://www.rstudio.com/products/shiny-server-pro/">Shiny Server Pro</a> are typically run on a single server, though they can also be used on multiple servers, with a web proxy in front of them directing traffic to the individual servers.</p>
+<p>With Shiny Server Open Source, on a server each application is served by at most a single R process, so a disk cache will not provide a performance benefit over a memory cache, because it cannot be shared. However, a disk cache can be useful if you want the cache to persist even after an R process shuts down.</p>
+<p>With Shiny Server Pro, multiple processes on a single server can serve the same application, and so a shared disk cache can provide performance benefits. To create a persistent disk cache that can be shared across processes, use a subdirectory of the application for the cache directory. To do that, add a line like this to your application:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># At the top of app.R, server.R, or global.R</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> cachem<span class="sc">::</span><span class="fu">cache_disk</span>(<span class="st">"./app_cache/cache/"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note: the reason for using the path <code>app_cache/cache/</code> is because (1) the rsconnect package (which is used to deploy the app) knows to not deploy the <code>app_cache/</code> subdirectory and (2) inside of that directory, various packages create subdirectories. The <a href="https://rstudio.github.io/sass/">sass</a> package, for example, uses a directory called <code>app_cache/sass/</code>. The subdirectory <code>app_cache/cache/</code> avoids colliding with other directories.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As of 2021-01-28, the CRAN version of rsconnect does not know to ignore <code>app_cache/</code>. This requires the development version of rsconnect, which can be installed with:**</p>
+</div>
+</div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rstudio/rsconnect"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When you update your application, R packages, or R itself, you should remove or clear the cache directory, since the cached objects may no longer be correct for the updated code.</p>
+<p>If you are using multiple servers, you can use a shared disk cache on networked storage, although there may be a performance penalty with this.</p>
+</section>
+<section id="shinyapps.io" class="level3">
+<h3 data-anchor-id="shinyapps.io">shinyapps.io</h3>
+<p>Anywhere you deploy a Shiny application, multiple user sessions can share one R process. For applications deployed on <a href="https://www.rstudio.com/products/shinyapps/">Shinyapps.io</a>, multiple R processes can run on one instance, and multiple instances can run simultaneously.</p>
+<p>R processes within an instance share a filesystem, so it is possible to share a disk cache within an instance. Filesystems are not shared across instances, so a disk cache cannot be shared across instances.</p>
+<p>On shinyapps.io, the application directory is reset after an instance is shut down, and there is currently no storage that persists after an application shuts down. An application typically shuts down after there are no more user sessions connected to the R processes in that instance (although it is possible to configure an application to have different behavior).</p>
+</section>
+</section>
+<section id="faq" class="level2">
+<h2 data-anchor-id="faq">FAQ</h2>
+<section id="faq-large-cache-key" class="level3">
+<h3 data-anchor-id="faq-large-cache-key">I want to use a large object as the cache key, but hashing it is slow. How do I deal with this?</h3>
+<p>If the object that you want to use as the cache key is large, hashing it may take a non-trivial amount of time.</p>
+<p>Suppose you have a cached plot that uses a reactive expression named <code>bigData</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ ... }) <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(<span class="fu">bigData</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Every time <code>bigData</code> is invalidated, the cache key expression will be re-executed and the result will be hashed.</p>
+<p>Before trying to optimize performance in these cases, first make sure that it’s a real problem. You can find out how much time it takes to hash the object by running <code>system.time(rlang::hash(x))</code> on the object. For example, here is the time it takes to hash a data frame with 2 columns and 500,000 rows:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">500000</span>), <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">500000</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(rlang<span class="sc">::</span><span class="fu">hash</span>(d))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   user  system elapsed</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.001   0.000   0.001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The total time is about 1 millisecond, which is fast enough that you don’t need to worry about it.</p>
+<p>Antoher example: the <code>diamonds</code> data set from ggplot2 contains 10 columns and about 54,000 rows:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(rlang<span class="sc">::</span><span class="fu">hash</span>(ggplot2<span class="sc">::</span>diamonds))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   user  system elapsed</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.001   0.000   0.002</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This takes about 2 milliseconds. If your data hashes this quickly, then you don’t have to worry about it; if it’s slow, keep reading.</p>
+<p>There are a few ways to improve performance by reducing the amount of data that needs to be hashed. One way is to extract only the necessary piece of information from the data set and hash that. For example, if <code>bigData()</code> returns log data that has timestamps, then simply using the most recent timestamp in the data set may be sufficient for caching purposes.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ ... }) <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>({</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract and return the latest time</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">bigData</span>()</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">max</span>(df<span class="sc">$</span>time)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The example above only needs to hash a single timestamp extracted from <code>bigData()</code>, which may greatly reduce hashing time. Keep in mind that it still takes a <em>reactive dependency</em> on <code>bigData()</code>, because it is executed in the cache key expressions.</p>
+<p>Another possible way to deal with it is to not use <code>bigData()</code> in the cache key expression. If the value of <code>bigData()</code> depends on some other reactive input, then you could use that input as the cache key – as long as you are sure that the value of <code>bigData()</code> is uniquely determined by that reactive input. Here’s an example where <code>bigData</code> depends on <code>input$city</code>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>bigData <span class="ot">&lt;-</span> <span class="fu">reactive</span>({ <span class="fu">fetchData</span>(input<span class="sc">$</span>city) })</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ ... }) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(<span class="fu">bigData</span>())    <span class="co"># Might be slow because of hashing bigData()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Instead of using <code>bigData()</code> in the cache key, we can just use <code>input$city</code>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ ... }) <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bindCache</span>(input<span class="sc">$</span>city)   <span class="co"># Fast, because input$city is small</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Again, this will work only if the value of <code>bigData()</code> is uniquely determined by the value <code>input$city</code>. If there are other things that could cause <code>bigData()</code> to change, then the cache could provide incorrect results due to cache collisions.</p>
+</section>
+<section id="can-i-customize-the-behavior-of-cachemcache_mem-and-cachemcache_disk" class="level3">
+<h3 data-anchor-id="can-i-customize-the-behavior-of-cachemcache_mem-and-cachemcache_disk">Can I customize the behavior of <code>cachem::cache_mem</code> and <code>cachem::cache_disk</code>?</h3>
+<p><code>cache_mem</code> and <code>cache_disk</code> from the <em>cachem</em> package provide many options to customize behavior. The default for both is to set a maximum size for the cache and to use a LRU (least-recently used) eviction policy. However, it is also possible to expire objects after a certain amount of time, by setting the <code>max_age</code>.</p>
+<p>For example, if you want to use an app-level memory cache with unlimited size, but where the objects expire after five minutes, you would do the following at the top of your app.R/server.R:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> cachem<span class="sc">::</span><span class="fu">cache_mem</span>(<span class="at">max_size =</span> <span class="cn">Inf</span>, <span class="at">max_age =</span> <span class="dv">300</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See the <a href="https://cachem.r-lib.org/">cachem documentation</a> for more information about how to customize caching behavior.</p>
+</section>
+<section id="can-i-cache-objects-with-reference-semantics" class="level3">
+<h3 data-anchor-id="can-i-cache-objects-with-reference-semantics">Can I cache objects with reference semantics?</h3>
+<p>Some R objects, such as environments, R6 objects, and external pointers, have <em>reference semantics</em>. This means that altering the object in one place will cause anyone else with a reference to it to also see the altered version.</p>
+<p>With caches that serialize objects (essentially, anything besides <code>cache_mem</code>), these objects may not behave as expected when restored. With a <code>cache_disk</code>, you can have it warn when reference objects are serialized. For example, here’s how to set your app-level cache to a <code>cache_disk</code> that warns:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> cachem<span class="sc">::</span><span class="fu">cache_disk</span>(<span class="at">warn_ref_objects =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, when serializing a reference object, it will emit a warning like this:</p>
+<pre><code>Warning message:
+In d$set(key, value) :
+  A reference object was cached in a serialized format. The restored object may not work as expected.</code></pre>
+<p>When a <code>cache_disk</code> stores an R object, it serializes the object and then saves the serialized data to disk. However, <em>reference objects</em> such as environments and external pointers cannot be guaranteed to restore exactly the same as when they are stored, especially if they are restored in another R session.</p>
+<p>The warning will be shown when caching an environment, as below:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> cachem<span class="sc">::</span><span class="fu">cache_disk</span>(<span class="at">warn_ref_objects =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">new.env</span>()</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>dc<span class="sc">$</span><span class="fu">set</span>(<span class="st">"x"</span>, e)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning message:</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; In dc$set("x", e) :</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   A reference object was cached in a serialized format. The restored object may not work as expected.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>But other objects also can contain environments. Functions, for instance, consist of formals (the function parameters), body, and environment, and so serializing a function will result in the same warning.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() <span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>dc<span class="sc">$</span><span class="fu">set</span>(<span class="st">"x"</span>, f)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning message:</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; In dc$set("x", f) :</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   A reference object was cached in a serialized format. The restored object may not work as expected.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A reactive expression from Shiny is a special function, and it will result in the warning as well:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">reactive</span>(<span class="dv">1</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>dc<span class="sc">$</span><span class="fu">set</span>(<span class="st">"x"</span>, r)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning message:</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; In dc$set("x", r) :</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   A reference object was cached in a serialized format. The restored object may not work as expected.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the context of a <code>bindCache()</code>, this warning can help you detect accidental usage of a reactive expression in the cache key, when you actually intended to use the <em>result</em> of a reactive expression in the cache key.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># r is some reactive expression</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">reactive</span>(...)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad: Using reactive expression in cacheKeyExpr. This will raise a warning.</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">renderPlot</span>(...) <span class="sc">%&gt;%</span> <span class="fu">bindCache</span>(r)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Good: Using the value of reactive expression in cacheKeyExpr.</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="fu">renderCachedPlot</span>(...) <span class="sc">%&gt;%</span> <span class="fu">bindCache</span>(<span class="fu">r</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="can-i-write-my-own-caching-backend" class="level3">
+<h3 data-anchor-id="can-i-write-my-own-caching-backend">Can I write my own caching backend?</h3>
+<p>It is possible to use a caching backend other than cachem’s <code>cache_mem</code> and <code>cache_disk</code>. To do this, you simply need to supply a caching object – that is, an object that has <code>$get()</code> and <code>$set()</code> methods on it. In this section, we’ll see how to create a cache object that can be used by Shiny.</p>
+<p>Here is a function that creates an extremely simple caching object:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>simple_cache <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">emptyenv</span>())</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">get =</span> <span class="cf">function</span>(key) {</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">exists</span>(key, <span class="at">envir =</span> e, <span class="at">inherits =</span> <span class="cn">FALSE</span>)) {</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(e[[key]])</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(<span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="st">"key_missing"</span>))</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">set =</span> <span class="cf">function</span>(key, value) {</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>      e[[key]] <span class="ot">&lt;-</span> value</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To use it:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">simple_cache</span>()</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>sc<span class="sc">$</span><span class="fu">set</span>(<span class="st">"abc"</span>, <span class="dv">123</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>sc<span class="sc">$</span><span class="fu">get</span>(<span class="st">"abc"</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 123</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calling $get() on a missing key returns a key_missing object</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>sc<span class="sc">$</span><span class="fu">get</span>(<span class="st">"xyz"</span>)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;Key Missing&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The object returned by <code>simple_cache()</code> does all the things that a Shiny application needs from a cache. The requirements are very simple:</p>
+<ul>
+<li>There is a <code>$set(key, value)</code> method which takes a string key, and any R object as a value.</li>
+<li>There is a <code>$get(key)</code> method which returns a cached value, and if the value is not present, returns an empty list with class <code>"key_missing"</code>. (This is the same as what <code>cachem::key_missing()</code> returns.)</li>
+</ul>
+<p>Our example is a simple memory cache – unlike cachem’s <code>cache_mem()</code>, it doesn’t do any pruning, and so it will just keep on growing arbitrarily large. But it does the job for this example.</p>
+<p>If you put the following at the top of app.R, server.R, or global.R, it will use one of these simple cache objects as the default application-level cache.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> <span class="fu">simple_cache</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Similarly, you can put it in the server function to serve as the session-level cache:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyOptions</span>(<span class="at">cache =</span> <span class="fu">simple_cache</span>())</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, you can also create the cache object and pass it directly to <code>bindCache()</code>. As described in the previous section, the cache would be shared among all Shiny sessions connected to this R process, but other plots in the app would use the default app-level cache.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this is defined outside of the server function.</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>my_cache <span class="ot">&lt;-</span> <span class="fu">simple_cache</span>()</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ ... }) <span class="sc">%&gt;%</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bindCache</span>(<span class="at">cache =</span> my_cache)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="can-i-use-redis-for-the-cache" class="level3">
+<h3 data-anchor-id="can-i-use-redis-for-the-cache">Can I use Redis for the cache?</h3>
+<p>In the previous section, we saw how to create a simple cache. Here we’ll create a cache that uses a local Redis store as the backend. In this case, we’ll use an R6 class for the caching objects, instead of a list.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(redux)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R6)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>RedisCache <span class="ot">&lt;-</span> <span class="fu">R6Class</span>(<span class="st">"RedisCache"</span>,</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">public =</span> <span class="fu">list</span>(</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">initialize =</span> <span class="cf">function</span>(..., <span class="at">namespace =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>      private<span class="sc">$</span>r <span class="ot">&lt;-</span> redux<span class="sc">::</span><span class="fu">hiredis</span>(...)</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Configure redis as a cache with a 20 MB capacity</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>      private<span class="sc">$</span>r<span class="sc">$</span><span class="fu">CONFIG_SET</span>(<span class="st">"maxmemory"</span>, <span class="st">"20mb"</span>)</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>      private<span class="sc">$</span>r<span class="sc">$</span><span class="fu">CONFIG_SET</span>(<span class="st">"maxmemory-policy"</span>, <span class="st">"allkeys-lru"</span>)</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>      private<span class="sc">$</span>namespace <span class="ot">&lt;-</span> namespace</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">get =</span> <span class="cf">function</span>(key) {</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>      key <span class="ot">&lt;-</span> <span class="fu">paste0</span>(private<span class="sc">$</span>namespace, <span class="st">"-"</span>, key)</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>      s_value <span class="ot">&lt;-</span> private<span class="sc">$</span>r<span class="sc">$</span><span class="fu">GET</span>(key)</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">is.null</span>(s_value)) {</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(<span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="st">"key_missing"</span>))</span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">unserialize</span>(s_value)</span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">set =</span> <span class="cf">function</span>(key, value) {</span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>      key <span class="ot">&lt;-</span> <span class="fu">paste0</span>(private<span class="sc">$</span>namespace, <span class="st">"-"</span>, key)</span>
+<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a>      s_value <span class="ot">&lt;-</span> <span class="fu">serialize</span>(value, <span class="cn">NULL</span>)</span>
+<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a>      private<span class="sc">$</span>r<span class="sc">$</span><span class="fu">SET</span>(key, s_value)</span>
+<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">private =</span> <span class="fu">list</span>(</span>
+<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">r =</span> <span class="cn">NULL</span>,</span>
+<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">namespace =</span> <span class="cn">NULL</span></span>
+<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Redis provides a key-value store, and our <code>RedisCache</code> objects can have a namespace – which is simply implemented as a prefix to the keys. So of the namespace is <code>"myapp"</code> and you store an object with the key <code>"abc"</code>, then it will be stored in Redis with the namespaced key <code>"myapp-abc"</code>. This allows you to share the same Redis store among multiple different Shiny applications, each with its own namespace.</p>
+<p>Before we create a cache, we need to start up a local Redis server. On a Mac, you can do this by running the following from the command line:</p>
+<pre class="console"><code># Install redis via Homebrew
+brew install redis
+
+redis-server /usr/local/etc/redis.conf</code></pre>
+<p>Now that Redis is running, we can create a <code>RedisCache</code> object and test it out:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>rc <span class="ot">&lt;-</span> RedisCache<span class="sc">$</span><span class="fu">new</span>(<span class="at">namespace =</span> <span class="st">"test"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>rc<span class="sc">$</span><span class="fu">set</span>(<span class="st">"abc"</span>, <span class="dv">123</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>rc<span class="sc">$</span><span class="fu">get</span>(<span class="st">"abc"</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 123</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting a key that's not present</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>rc<span class="sc">$</span><span class="fu">get</span>(<span class="st">"xyz"</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;Key Missing&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This example is the same as the earlier ones, except that it uses a Redis cache as the default application-level cache. (Note once again that if you run <code>shinyOptions(cache=...)</code> from the console instead of in an app.R/server.R, it will set the default cache for the rest of the R session instead of for the duration of the application.)</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="do">## app.R ##</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyOptions</span>(<span class="at">cache =</span> RedisCache<span class="sc">$</span><span class="fu">new</span>(<span class="at">namespace =</span> <span class="st">"myapp"</span>))</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidPage</span>(</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarLayout</span>(</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sidebarPanel</span>(</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sliderInput</span>(<span class="st">"n"</span>, <span class="st">"Number of points"</span>, <span class="dv">4</span>, <span class="dv">32</span>, <span class="at">value =</span> <span class="dv">8</span>, <span class="at">step =</span> <span class="dv">4</span>)</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mainPanel</span>(<span class="fu">plotOutput</span>(<span class="st">"plot"</span>))</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)  <span class="co"># Add an artificial delay</span></span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>        seqn <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(input<span class="sc">$</span>n)</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(mtcars<span class="sc">$</span>wt[seqn], mtcars<span class="sc">$</span>mpg[seqn],</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">xlim =</span> <span class="fu">range</span>(mtcars<span class="sc">$</span>wt), <span class="at">ylim =</span> <span class="fu">range</span>(mtcars<span class="sc">$</span>mpg))</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>      }) <span class="sc">%&gt;%</span></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">bindCache</span>(input<span class="sc">$</span>n)</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Another alternative: set the cache just for this plot.</span></span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>      <span class="co"># bindCache(cache = RedisCache$new(namespace = "myapp-plot"))</span></span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>    <span class="er">)</span></span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The Redis cache can be shared among multiple R processes running the same app, as long as they point to the same Redis cache and use the same namespace (in this case, <code>"myapp"</code>).</p>
+<p>An alternative is to use the Redis cache just for a specific plot. In the code above, the <code>renderCachedPlot()</code> call has a commented-out <code>cache</code> argument. If you uncomment the <code>cache</code> argument (instead of calling <code>shinyOptions()</code> above) then that plot will use the Redis cache, with the namespace <code>"myapp-plot"</code>. Multiple instances of this application, or multiple different applications could share the Redis store using the same namespace.</p>
+<p>In the <code>RedisCache</code> class defined above, the Redis store was configured to behave as a cache with a 20 MB capacity and a LRU (least-recently-used) expiration policy, by the following lines:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>private<span class="sc">$</span>r<span class="sc">$</span><span class="fu">CONFIG_SET</span>(<span class="st">"maxmemory"</span>, <span class="st">"20mb"</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>private<span class="sc">$</span>r<span class="sc">$</span><span class="fu">CONFIG_SET</span>(<span class="st">"maxmemory-policy"</span>, <span class="st">"allkeys-lru"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If the Redis store is shared among applications, it may not be a good idea to configure Redis from R, because one application may set certain settings, and then another application may change them. In these cases, it is advisable to configure the Redis store using the <a href="https://redis.io/topics/config">Redis configuration file</a>. In production, you should also use a more secure configuration, including a password for Redis.</p>
+</section>
+<section id="can-i-use-storr-for-the-caching-backend" class="level3">
+<h3 data-anchor-id="can-i-use-storr-for-the-caching-backend">Can I use storr for the caching backend?</h3>
+<p>The <a href="http://richfitz.github.io/storr/index.html">storr package</a> provides a consistent key-value interface for several different kinds of backends, including SQLite, Postgres, R environments, RDS files, and more.</p>
+<p>It’s possible to wrap a storr object so that it behaves in a way that is compatible with what Shiny’s caching objects expect. The main difference is that, when cachem’s <code>cache_mem</code> or <code>cache_disk</code> try to retrieve a key that is not present, they return a <code>key_missing</code> object, while storr throws a <code>KeyError</code>.</p>
+<p>In the code below, the <code>keyMissingCacheDecorator</code> takes a storr object, and wraps it so that when the <code>get()</code> method encounters a missing key, it returns a <code>key_missing</code> object instead of throwing a <code>KeyError</code>.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>keyMissingCacheDecorator <span class="ot">&lt;-</span> <span class="cf">function</span>(cacheObj) {</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">get =</span> <span class="cf">function</span>(key) {</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>      is_missing <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tryCatch</span>(</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>        { val <span class="ot">&lt;-</span> cacheObj<span class="sc">$</span><span class="fu">get</span>(key) },</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">KeyError =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>          is_missing <span class="ot">&lt;&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (is_missing) {</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(<span class="fu">structure</span>(<span class="fu">list</span>(), <span class="at">class =</span> <span class="st">"key_missing"</span>))</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>      val</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">set =</span> cacheObj<span class="sc">$</span>set</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To test it out, we can use a storr cache that is backed by an R environment – this is similar to a <code>cachem::cache_mem()</code>, but without pruning.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(storr)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the storr cache</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">storr_environment</span>()</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrap it in the decorator</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>se_cache <span class="ot">&lt;-</span> <span class="fu">keyMissingCacheDecorator</span>(se)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it out</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>se_cache<span class="sc">$</span><span class="fu">set</span>(<span class="st">'x'</span>,<span class="dv">123</span>)</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>se_cache<span class="sc">$</span><span class="fu">get</span>(<span class="st">'x'</span>)</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 123</span></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>se_cache<span class="sc">$</span><span class="fu">get</span>(<span class="st">'abc'</span>)</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;Key Missing&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>keyMissingCacheDecorator</code> can be used with any storr cache, not just the environment-backed cache used in the example above.</p>
+</section>
+<section id="caching-render-functions" class="level3">
+<h3 data-anchor-id="caching-render-functions">How do I make my render function to work with caching?</h3>
+<p>If you are a package developer and have created a <code>render</code> function, it is possible that it will just work with <code>bindCache()</code>, but it See the documentation for <a href="../../../../r/reference/shiny/latest/bindCache.html#developing-render-functions-for-caching"><code>bindCache()</code></a> for more information about this.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../r/articles/improve/google-analytics/index.html" class="pagination-link" aria-label="Add Google Analytics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Add Google Analytics</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../r/articles/improve/plot-caching/index.html" class="pagination-link" aria-label="Plot Caching">
+        <span class="nav-page-text">Plot Caching</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

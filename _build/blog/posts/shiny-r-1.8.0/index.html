@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Carson Sievert">
+<meta name="author" content="Garrick Aden-Buie">
+<meta name="dcterms.date" content="2023-11-30">
+<meta name="description" content="An overview of recent Shiny for R updates, a new default look, dark mode, shinylive updates, and more.">
+<title>Shiny for R updates: new default look, dark mode, shinylive updates, and more – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<meta name="shinylive:serviceworker_dir" content="../../..">
+<script src="../../../site_libs/quarto-contrib/shinylive-0.5.0/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="../../../site_libs/quarto-contrib/shinylive-0.5.0/shinylive/run-python-blocks.js" type="module"></script>
+<link href="../../../site_libs/quarto-contrib/shinylive-0.5.0/shinylive/shinylive.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #ffffff;
+      }
+</style>
+<!-- Google Tag Manager --><script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script><!-- End Google Tag Manager --><!-- Add rel="noopener noreferrer" to each target="_blank" --><script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script><!-- End Add rel="noopener noreferrer" to each target="_blank" --><link href="../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../../_partials/blog/blog-article.css">
+<meta property="og:title" content="Shiny for R updates: new default look, dark mode, shinylive updates, and more – Shiny">
+<meta property="og:description" content="An overview of recent Shiny for R updates, a new default look, dark mode, shinylive updates, and more.">
+<meta property="og:image" content="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/feature.jpg">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="An overview of recent Shiny for R updates, a new default look, dark mode, shinylive updates, and more.">
+<meta name="twitter:image" content="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/feature.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo"></a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">
+<li class="dropdown-header"><img src="../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Shiny for R updates: new default look, dark mode, shinylive updates, and more</h1>
+                  <div>
+        <div class="description">
+          <p>An overview of recent Shiny for R updates, a new default look, dark mode, shinylive updates, and more.</p>
+        </div>
+      </div>
+                </div>
+  </div>
+
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Authors</div>
+      <div class="quarto-title-meta-contents">
+               <p>Carson Sievert </p>
+               <p>Garrick Aden-Buie </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 30, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<style type="text/css">
+  #quarto-content>* {
+  padding-top: 0px;
+  }
+</style>
+<div class="column-body-outset blog-image-container pb-5">
+      <img src="feature.jpg" style="width: 100%; height: auto;">
+</div>
+    
+
+
+<style>
+img { border-radius: 8px; }
+.nav-centered > .nav {
+  justify-content: center;
+  border: none;
+}
+.nav-centered > .tab-content {
+  border: none;
+}
+.link-shinylive {
+  position: absolute;
+  bottom: 0;
+  right: 0.5em;
+  background-color: unset;
+  font-family: var(--bs-font-sans-serif);
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Add shinylive links to code blocks
+  document.querySelectorAll("[data-shinylive]").forEach(function(el) {
+    const pre = el.querySelector("pre");
+    const link = document.createElement("a");
+    link.classList.add("link-shinylive");
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.href = el.dataset.shinylive;
+    link.innerHTML = `<i class="bi bi-lightning-fill"></i> Run on shinylive`;
+    pre.appendChild(link);
+  });
+});
+</script><p>The Shiny team is pleased to announce another round of updates for 13 different R packages, including <a href="https://shiny.rstudio.com/">shiny</a> and <a href="https://rstudio.github.io/bslib/">bslib</a>. There are too many improvements to cover in a single post, but we’d like to highlight some of the more notable additions. For a detailed list of changes, be sure to check out the <a href="#release-notes">release notes</a> section of this post.</p>
+<p><a href="https://rstudio.github.io/bslib/">bslib</a> brings modern Bootstrap versions and new user layouts and inputs to <a href="https://shiny.rstudio.com/">Shiny</a>, the web framework for data scientists. Install the latest versions of shiny and bslib from CRAN with:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"shiny"</span>, <span class="st">"bslib"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this post, we’ll cover three main topics: the <a href="#new-shiny-look">new shiny look</a>, <a href="#shinylive-updates">what’s new in shinylive</a> and a long-awaited <a href="#selectize-js">update to selectize.js in shiny</a>.</p>
+<section id="new-shiny-look" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="new-shiny-look">A shiny new look</h2>
+<p>In our <a href="../../../blog/posts/bslib-tooltips/#towards-a-new-shiny-theme">last post</a>, we previewed a new look for <code>bslib</code>-powered UIs, which is designed with dashboards in mind. This release of <code>bslib</code> adds more polish to this new “preset” theme and makes it the default for <code>bslib</code> powered UIs.</p>
+<p>To use the new layouts, simply create an app using any <code>page_*()</code> function in bslib for the UI. Here’s a very simple template you can use to get started. Notice that we’ve used <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> to make this example interactive – the entire app is running in your browser, no server required! You can even edit the app right here in this post and see the changes live when you press the <i class="bi bi-play-fill"></i> play button. We’ll talk more about shinylive <a href="#shinylive-updates">later in this post</a>.</p>
+<div class="column-page mb-3">
+<pre class="shinylive-r" data-engine="r"><code><a href="https://shiny.posit.co/">#| standalone: true
+#| components: [editor, viewer]
+#| viewerHeight: 400
+#| layout: vertical
+library(shiny)
+library(bslib)
+
+ui &lt;- page_sidebar(
+  title = "My dashboard",
+  sidebar = sidebar(
+    title = "Settings",
+    sliderInput("n", "Observations", 1, 100, 50, ticks = FALSE),
+    sliderInput("bins", "Bins", 1, 10, 5, step = 1, ticks = FALSE),
+  ),
+  plotOutput("plot")
+)
+
+server &lt;- function(input, output, session) {
+  output$plot &lt;- renderPlot({
+    hist(rnorm(input$n), breaks = input$bins, col = "#007bc2")
+  })
+}
+
+shinyApp(ui, server)</a></code></pre>
+</div>
+<p>We’re calling this new look the shiny “preset” theme, because it’s a great place to start building your own theme. Remember, you can always customize the preset by passing additional arguments to <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html">bs_theme()</a></code>. You can even switch back to the default <code>preset = "bootstrap"</code> look by using the following <code>theme</code> value in your <code>page_*()</code> function<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># use default Bootstrap styles</span></span>
+<span><span class="va">theme</span> <span class="op">=</span> <span class="fu">bs_theme</span><span class="op">(</span>preset <span class="op">=</span> <span class="st">"bootstrap"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The new shiny preset is designed with dashboards in mind. Here’s a more complete example using a full dashboard app (<a href="https://github.com/rstudio/bslib/tree/main/inst/examples/flights">source</a>, <a href="https://bslib.shinyapps.io/flights">demo</a>) for exploring <a href="https://github.com/cpsievert/chiflights22">flight data from Chicago</a>. Toggle between the new and old look to see what’s changed with this release.</p>
+<div class="column-screen py-3 my-3 page-columns page-full">
+  <div class="column-page">
+  <ul class="nav nav-pills justify-content-center" role="tablist">
+<li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#flights-old" type="button" role="tab" aria-controls="flights-old" aria-selected="false">Old</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#flights-new" type="button" role="tab" aria-controls="flights-new" aria-selected="true">New</button>
+    </li>
+  </ul>
+<div class="tab-content p-3 border-0">
+    <div class="tab-pane fade show active" id="flights-new" role="tabpanel">
+      <img src="flights-new.png" class="img-fluid shadow" alt="Flights dashboard with the new styles, featuring a white navbar and white sidebar framing the dashboard area. Cards are also entirely white on a light gray background, with subtle depth created by drop shadows under the cards. Blue accents are found throughout the dashboard in plots and icons.">
+</div>
+    <div class="tab-pane" id="flights-old" role="tabpanel">
+      <img src="flights-old.png" class="img-fluid shadow" alt="Flights dashboard with the old styles, features solid blue navbar and solid blue value boxes. The sidebar and card headers and footers all have a light gray background.">
+</div>
+  </div>
+  </div>
+</div>
+<p>The rest of this section will explore a few highlights of the new default look, including:</p>
+<ul>
+<li>New <a href="#page-styling">page-level styling</a>
+</li>
+<li><a href="#dark-mode">Dark mode support</a></li>
+<li>Improved <a href="#value-box-styling"><code>value_box()</code> styling</a>
+</li>
+<li>
+<a href="#refreshed-shiny-ui">Refreshed Shiny UI</a> (inputs, modals, notifications, and more)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quarto and PyShiny dashboards
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dashboards are coming to Quarto!</p>
+<p>The new <a href="https://quarto.org/docs/dashboards/">Quarto dashboard</a> format, as well as newer <a href="https://shiny.posit.co/py/">PyShiny</a> components, are built on the same foundation as <code>bslib</code>. Thus, the concepts you’ll learn while building dashboards with <code>bslib</code> should also largely apply there as well.</p>
+</div>
+</div>
+<section id="page-styling" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="page-styling">Page-level styling</h3>
+<p>As we noted above, the new shiny preset is design with dashboards in mind, but it will make any shiny app look great. The new default look is designed to be light and minimal, with a white navbar and white sidebar framing the dashboard area. Cards are also entirely white, with subtle depth created by drop shadows under the cards. Value boxes provide colorful accents, as will the plots you add to showcase your data.</p>
+<p>Here’s an example taken straight from the <a href="https://rstudio.github.io/bslib/articles/dashboards/index.html">getting started guide</a> for <a href="https://rstudio.github.io/bslib/">bslib</a> dashboards.</p>
+<div class="column-screen py-3 my-3 page-columns page-full">
+  <div class="column-page">
+  <ul class="nav nav-pills justify-content-center" role="tablist">
+<li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#simple-old" type="button" role="tab" aria-controls="simple-old" aria-selected="false">Old</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#simple-new" type="button" role="tab" aria-controls="simple-new" aria-selected="true">New</button>
+    </li>
+  </ul>
+<div class="tab-content p-3 border-0">
+    <div class="tab-pane fade show active" id="simple-new" role="tabpanel">
+      <img src="simple-new.png" class="img-fluid shadow" alt="New page_sidebar() styling featuring a light, minimal look with a white title bar, white sidebar and white cards and value boxes. The cards and value boxes have subtle shadows on a light gray background. Value boxes icons are blue with a subtle gradient">
+</div>
+    <div class="tab-pane" id="simple-old" role="tabpanel">
+      <img src="simple-old.png" class="img-fluid shadow" alt="Old page_sidebar() styling with a dark title bar. Sidebars and card headers and footers have a light gray background. Cards and value boxes do not have shadows and value box icons are solid dark gray.">
+</div>
+  </div>
+  </div>
+</div>
+<p>To achieve the full dashboard effect, though, you have opt into the light gray background by adding <code>class = "bslib-page-dashboard"</code> to your <code><a href="https://rstudio.github.io/bslib/reference/page_sidebar.html">page_sidebar()</a></code> or the <code><a href="https://rstudio.github.io/bslib/reference/nav-items.html">nav_panel()</a></code> items in your <code><a href="https://rstudio.github.io/bslib/reference/page_navbar.html">page_navbar()</a></code>. This class enables a few additional features, namely adding a soft gray background to the main content area under cards and value boxes that help them stand out. You can also add the <code>class</code> directly to <code><a href="https://rstudio.github.io/bslib/reference/page_fillable.html">page_fillable()</a></code> or <code><a href="https://rstudio.github.io/bslib/reference/page.html">page()</a></code> to get the same effect in apps with custom layouts.</p>
+<div class="column-page py-3 my-3 grid align-items-start">
+  <ul class="g-col-md-3 g-col-12 nav nav-pills flex-md-column justify-content-center" role="tablist">
+<li class="nav-item" role="presentation">
+      <button class="nav-link active font-monospace" data-bs-toggle="tab" data-bs-target="#class-sidebar" type="button" role="tab" aria-controls="class-sidebar" aria-selected="true">page_sidebar()</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link font-monospace" data-bs-toggle="tab" data-bs-target="#class-navbar" type="button" role="tab" aria-controls="class-navbar" aria-selected="false">page_navbar()</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link font-monospace" data-bs-toggle="tab" data-bs-target="#class-fillable" type="button" role="tab" aria-controls="class-fillable" aria-selected="false">page_fillable()</button>
+    </li>
+  </ul>
+<div class="g-col-md-9 g-col-12 tab-content p-3 border-0">
+    <div class="tab-pane fade show active" id="class-sidebar" role="tabpanel">
+      <div class="sourceCode R"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page_sidebar.html">page_sidebar</a></span><span class="op">(</span></span>
+<span>  title <span class="op">=</span> <span class="st">"My Dashboard"</span>,</span>
+<span>  class <span class="op">=</span> <span class="st">"bslib-page-dashboard"</span>,</span>
+<span>  sidebar <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/sidebar.html">sidebar</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Settings"</span>,</span>
+<span>    <span class="co"># ... sidebar inputs ...</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="co"># ... dashboard content ...</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+    </div>
+    <div class="tab-pane" id="class-navbar" role="tabpanel">
+      <div class="sourceCode R"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page_navbar.html">page_navbar</a></span><span class="op">(</span></span>
+<span>  title <span class="op">=</span> <span class="st">"My Dashboard"</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html">nav_panel</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Page 1"</span>,</span>
+<span>    class <span class="op">=</span> <span class="st">"bslib-page-dashboard"</span>,</span>
+<span>    <span class="co"># ... dashboard content ...</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html">nav_panel</a></span><span class="op">(</span><span class="st">"About"</span>, <span class="st">"Regular content"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+    </div>
+    <div class="tab-pane" id="class-fillable" role="tabpanel">
+      <div class="sourceCode R"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page_fillable.html">page_fillable</a></span><span class="op">(</span></span>
+<span>  title <span class="op">=</span> <span class="st">"My Dashboard"</span>,</span>
+<span>  class <span class="op">=</span> <span class="st">"bslib-page-dashboard"</span>,</span>
+<span>  <span class="co"># ... custom layout and dashboard content ...</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+    </div>
+  </div>
+</div>
+<aside id="footnotes" class="footnotes footnotes-end-of-section" role="doc-footnote"><hr>
+<ol>
+<li id="fn1"><p><code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html">bs_theme()</a></code> still supports <a href="https://bootswatch.com/">Bootswatch</a> presets too, like <code>preset = "flatly"</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></aside></section><section id="dark-mode" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="dark-mode">Built-in dark mode support ☀️ 🌙</h3>
+<p>This release of bslib brings built-in dark mode support to any Shiny app that uses <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html">bs_theme()</a></code>, thanks to Bootstrap 5.3’s new <a href="https://getbootstrap.com/docs/5.3/customize/color-modes/">client-side color mode feature</a>! To enable dark mode in your app, add <code><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html">input_dark_mode()</a></code> somewhere in your UI. In the example below, we’ve <a href="https://github.com/rstudio/bslib/blob/f574b9f0/inst/examples/flights/app.R#L231-L233">put in the navbar</a>.</p>
+<div class="column-screen py-3 my-3 page-columns page-full">
+  <div class="column-page">
+  <ul class="nav nav-pills justify-content-center" role="tablist">
+<li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#flights-light" type="button" role="tab" aria-controls="flights-light" aria-selected="false">Light</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#flights-dark" type="button" role="tab" aria-controls="flights-dark" aria-selected="true">Dark</button>
+    </li>
+  </ul>
+<div class="tab-content p-3 border-0">
+    <div class="tab-pane fade show active" id="flights-dark" role="tabpanel">
+      <img src="flights-dark.png" class="img-fluid shadow" alt="Flights dashboard in dark mode. All white areas are now a deep dark gray. The blue accents remain.">
+</div>
+    <div class="tab-pane" id="flights-light" role="tabpanel">
+      <img src="flights-light.png" class="img-fluid shadow" alt="Flights dashboard in light mode as previously described.">
+</div>
+  </div>
+  </div>
+</div>
+<p>For the best results, make sure you have the latest version of <a href="https://shiny.rstudio.com/">shiny</a>. Dark mode works with nearly any Bootstrap theme created with <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html">bs_theme()</a></code>, including the new shiny preset, but it tends to work best when the theme is designed around light mode first. For matching plots and widgets to the current color mode, you can use <a href="https://rstudio.github.io/thematic/">thematic</a> to automatically style plots or <code><a href="https://rdrr.io/pkg/shiny/man/getCurrentOutputInfo.html">shiny::getCurrentOutputInfo()</a></code> to manually set the colors of your R outputs.</p>
+<p>By default, the color mode is picked from the user’s system settings – i.e.&nbsp;choosing dark mode if their system is also in dark mode – but you can choose the initial color mode via the <code>mode</code> argument. If you give <code><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html">input_dark_mode()</a></code> an <code>id</code>, it reports the current color mode as either <code>"light"</code> or <code>"dark"</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4" data-shinylive="https://shinylive.io/r/editor/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IdJiw71OY4RBEBXWgAIAPAFolqKAHM4AfWgA3ei3YilFpaVqlqcJQF4lQsABEoPekRYATF7nNLIz1OLQI4RnYBXCUAYk15HiUjJRs4GE4rIitue0ZabW5SQItgrQg4ajMwAAUdewBGf2c3D24vXyViMgpisGiS5KhDPTSYMwhLKdSIVHlSPR8WAGs9GCIfOHZaH0cWpcZV9c3m4-snFzpCvtkp2VkRTgjDCNUNADN5CAJrEm3Z+YxIjzOakGJPRgvRgCJQgQZEKTPOAAUReZH+oIAJAcjhs4DE4ZNphZaO8lBj5tiVms8Y4LmAcS4YYTicSeEQAO4AOSI1netAIUF+EGqAHVKsR4FkcvYcUpODs4ABCJmDKYAX0G6tkmrkECkem01ARUGoelIuXgUUevH4AEF0OxFOCkdCwOqALpAA"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page_navbar.html">page_navbar</a></span><span class="op">(</span></span>
+<span>  title <span class="op">=</span> <span class="st">"Dashboard"</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html">nav_spacer</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># push nav items to the right</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html">nav_panel</a></span><span class="op">(</span><span class="st">"Page 1"</span>, <span class="st">"Dashboard content"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html">nav_item</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html">input_dark_mode</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"dark_mode"</span>, mode <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">server</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">dark_mode</span>, <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">dark_mode</span> <span class="op">==</span> <span class="st">"dark"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/showNotification.html">showNotification</a></span><span class="op">(</span><span class="st">"Welcome to the dark side!"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="value-box-styling" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="value-box-styling">Value box styling</h3>
+<p>The new default look includes improved styling for <code><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box()</a></code> outputs, which are commonly used in dashboards. We’re also excited to announce a new <a href="https://bslib.shinyapps.io/build-a-box">Build-a-Box app</a> to help build and explore value boxes themes and options in a live Shiny app.</p>
+<p>Use the tabs below to learn more about several new features and themes supported by <code><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box()</a></code>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills nav-centered page-columns page-full">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Text</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Icons</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Gradient</a></li>
+</ul>
+<div class="tab-content nav-pills nav-centered page-columns page-full">
+<div id="tabset-1-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="column-page-inset overflow-auto mb-3">
+  <div class="d-flex align-items-center" style="height: 200px; min-width: 800px">
+    <img src="value-box-text.png" alt="Three value boxes, with made up statistics in purple, green and blue text. The value boxes feature unadorned plots that fill the bottom half of the box, each a sparkline in the same color as the card." class="img-fluid">
+</div>
+</div>
+<section id="showcase-bottom-with-text-color-theme" class="level5"><h5 class="anchored" data-anchor-id="showcase-bottom-with-text-color-theme">Showcase Bottom with Text-Color Theme</h5>
+<p>The new <code>showcase_layout = "bottom"</code> option is perfect for sparkline-style plots that fill the value box width and expand into full screen plots when the user clicks the <em>expand</em> button (enabled by <code>full_screen = TRUE</code>). See the <a href="https://rstudio.github.io/bslib/articles/value-boxes/index.html#expandable-sparklines">Expandable sparklines</a> section of the <a href="https://rstudio.github.io/bslib/articles/value-boxes/index.html">value box article</a> for an example of how to create these plots with <a href="https://plotly.com/r/">plotly</a> and bslib.</p>
+<p>This example also highlights the <code>text-{color}</code> value box themes that set the color of the text to a <a href="https://getbootstrap.com/docs/5.3/customize/color/#all-colors">Bootstrap color</a>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_columns.html">layout_columns</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Engagement rate"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"3.8%"</span>,</span>
+<span>    theme <span class="op">=</span> <span class="st">"text-indigo"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html">plotOutput</a></span><span class="op">(</span><span class="st">"plot_engagement"</span><span class="op">)</span>,</span>
+<span>    showcase_layout <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>    full_screen <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Project Funding"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"$2,805"</span>,</span>
+<span>    theme <span class="op">=</span> <span class="st">"text-success"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html">plotOutput</a></span><span class="op">(</span><span class="st">"plot_funding"</span><span class="op">)</span>,</span>
+<span>    showcase_layout <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>    full_screen <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Employee satisfaction"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"92.3%"</span>,</span>
+<span>    theme <span class="op">=</span> <span class="st">"text-blue"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html">plotOutput</a></span><span class="op">(</span><span class="st">"plot_satisfaction"</span><span class="op">)</span>,</span>
+<span>    showcase_layout <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>    full_screen <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+<div id="tabset-1-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="column-page-inset overflow-auto mb-3">
+  <div class="d-flex align-items-center" style="height: 200px; min-width: 800px">
+    <img src="value-box-icons.png" alt="Three value boxes with made up statistics, each with an icon to the left of the box. The cards are not tall and fit neatly into small row. The icons are blue with a subtle gradient toward the bottom right corner, blending from blue into purple." class="img-fluid">
+</div>
+</div>
+<section id="showcase-left-center-with-gradient-icons" class="level5"><h5 class="anchored" data-anchor-id="showcase-left-center-with-gradient-icons">Showcase Left Center with Gradient Icons</h5>
+<p>This example uses the default value box styles in the new shiny preset. Icons receive a subtle gradient and are placed to the left of the value box content thanks to the default <code>showcase_layout = "left center"</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_columns.html">layout_columns</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"API Response Time"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"150ms"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu">bsicons</span><span class="fu">::</span><span class="fu">bs_icon</span><span class="op">(</span><span class="st">"arrow-left-square-fill"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Revenue growth"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"+15.2%"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu">bsicons</span><span class="fu">::</span><span class="fu">bs_icon</span><span class="op">(</span><span class="st">"arrow-up-circle-fill"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Market share"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"42%"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa_i.html">fa_i</a></span><span class="op">(</span><span class="st">"magnifying-glass-dollar"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+<div id="tabset-1-3" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="column-page-inset overflow-auto mb-3">
+  <div class="d-flex align-items-center" style="height: 200px; min-width: 800px">
+    <img src="value-box-gradient.png" alt="Three value boxes of made up statistics, with vibrant gradient backgrounds: purple-cyan, orange-indigo, and teal-purple. Each card has an icon in the upper right corner and the title and value in the lower left corner." class="img-fluid">
+</div>
+</div>
+<section id="showcase-top-right-with-gradient-backgrounds" class="level5"><h5 class="anchored" data-anchor-id="showcase-top-right-with-gradient-backgrounds">Showcase Top Right with Gradient Backgrounds</h5>
+<p>This example uses <code>theme = "bg-gradient-{from}-{to}"</code> for value boxes with vibrant gradient backgrounds. You can use any of the <a href="https://getbootstrap.com/docs/5.3/customize/color/#all-colors">Bootstrap color names</a> for the <code>from</code> or <code>to</code> colors. <code>showcase_layout = "top right"</code> places the icon in the top right corner of the value box.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_columns.html">layout_columns</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Average wait"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"4 minutes"</span>,</span>
+<span>    theme <span class="op">=</span> <span class="st">"bg-gradient-purple-cyan"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu">bsicons</span><span class="fu">::</span><span class="fu">bs_icon</span><span class="op">(</span><span class="st">"stopwatch"</span><span class="op">)</span>,</span>
+<span>    showcase_layout <span class="op">=</span> <span class="st">"top right"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Customer churn"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"5%"</span>,</span>
+<span>    theme <span class="op">=</span> <span class="st">"bg-gradient-orange-indigo"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa_i.html">fa_i</a></span><span class="op">(</span><span class="st">"tent-arrow-turn-left"</span><span class="op">)</span>,</span>
+<span>    showcase_layout <span class="op">=</span> <span class="st">"top right"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/value_box.html">value_box</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Daily Active Users"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"8,507"</span>,</span>
+<span>    theme <span class="op">=</span> <span class="st">"bg-gradient-teal-purple"</span>,</span>
+<span>    showcase <span class="op">=</span> <span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa_i.html">fa_i</a></span><span class="op">(</span><span class="st">"arrow-up-right-dots"</span><span class="op">)</span>,</span>
+<span>    showcase_layout <span class="op">=</span> <span class="st">"top right"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Make nav-pills work in Quarto without directly writing the markup
+  document.querySelectorAll(".nav-centered.nav-pills").forEach(function(el) {
+    el.classList.remove('nav-pills');
+    el.firstElementChild.classList.add('nav-pills');
+    el.firstElementChild.classList.remove('nav-tabs');
+  })
+})
+</script></section><section id="refreshed-shiny-ui" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="refreshed-shiny-ui">Refreshed Shiny UI</h3>
+<p>The new default look includes a refreshed Shiny UI, which includes new styling for inputs, modals, notifications, and more.</p>
+<div class="column-page py-3 my-3 grid">
+  <ul class="g-col-md-3 g-col-12 nav nav-pills flex-md-column justify-content-center" role="tablist">
+<li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#preset-inputs" type="button" role="tab" aria-controls="preset-inputs" aria-selected="true">Inputs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#preset-notifications" type="button" role="tab" aria-controls="preset-notifications" aria-selected="false">Notifications</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#preset-progress-bar" type="button" role="tab" aria-controls="preset-progress-bar" aria-selected="false">Progress Bars</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#preset-modals" type="button" role="tab" aria-controls="preset-modals" aria-selected="false">Modals</button>
+    </li>
+  </ul>
+<div class="g-col-md-9 g-col-12 tab-content p-3 border-0">
+    <div class="tab-pane fade show active" id="preset-inputs" role="tabpanel">
+      <img src="shiny-preset-inputs.gif" class="img-fluid" alt="New inputs styles, in particular a minimal slider input.">
+</div>
+    <div class="tab-pane fade" id="preset-notifications" role="tabpanel">
+      <img src="shiny-preset-notifications.gif" class="img-fluid" alt="New notification styles for default, message, warning and error notifications. Notifications have shadows and have a large amount of padding around the edges compared with Shiny's default design.">
+</div>
+    <div class="tab-pane fade" id="preset-progress-bar" role="tabpanel">
+      <img src="shiny-preset-progress-bar.gif" class="img-fluid" alt="New progress bar notification styles, which are similar to notifications.">
+</div>
+    <div class="tab-pane fade" id="preset-modals" role="tabpanel">
+      <img src="shiny-preset-modal.png" class="img-fluid" alt="An example modal with the new shiny preset style. The modal is minimal with additional padding and the backdrop has a soft blur effect.">
+</div>
+  </div>
+</div>
+</section></section><section id="shinylive-updates" class="level2"><h2 class="anchored" data-anchor-id="shinylive-updates">Shinylive updates</h2>
+<p>Thanks to the exceptional work by George Stagg on <a href="https://docs.r-wasm.org/webr/latest/">webR</a> in collaboration with the Shiny team, <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> can now run Shiny applications entirely in a web browser, without the need for a separate server running R!</p>
+<p>While sharing a traditional Shiny app requires you to deploy the app to a server, such as <a href="https://shinyapps.io">shinyapps.io</a>, shinylive allows you to share your app by simply sharing a URL or by embedding the shinylive app in a Quarto webpage. The app runs entirely in the browser, directly on the user’s device.</p>
+<p>We’re please to announce several venues for writing and sharing Shiny apps via shinylive:</p>
+<ol type="1">
+<li><p><strong><a href="https://shinylive.io/r">shinylive.io/r</a> contains a gallery of example Shiny apps</strong> that you can run in your browser. You can also use <a href="https://shinylive.io/r/editor">shinylive.io/r/editor</a> as an online playground to write and share your own apps.</p></li>
+<li><p><strong>The <a href="https://posit-dev.github.io/r-shinylive">shinylive R package</a> is now on CRAN!</strong> This package helps you turn an existing Shiny app into a ready-to-share shinylive app.</p></li>
+<li><p><strong>The <a href="https://quarto-ext.github.io/shinylive/">shinylive Quarto extension</a> now supports both R and Python Shiny apps</strong> – even on the same page! With the <code>shinylive-r</code> and <code>shinylive-python</code> code cells, you can embed Shiny apps directly in Quarto web documents. This is perfect for blog posts, like this one! See <a href="#new-shiny-look">the example</a> near the start of this post.</p></li>
+</ol>
+<p><a href="https://docs.r-wasm.org/webr/latest/">webR</a> and <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> are under active development, so expect ongoing updates and improvements. Currently, shinylive apps download packages from webR’s CRAN-like repository at run time, which adds a delay to the initial startup time. In the future, we hope to make this faster and to allow package installation from more sources. We’re also really excited that <a href="https://ropensci.org/blog/2023/11/17/runiverse-wasm/">R-universe now builds WASM binaries</a> for R packages!</p>
+</section><section id="selectize-js" class="level2"><h2 class="anchored" data-anchor-id="selectize-js">Selectize.js update</h2>
+<p>Shiny’s <code><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput()</a></code> and <code><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectizeInput()</a></code> functions create dropdown menus that allow users to select one or more items from a list. These inputs are powered by the <a href="https://selectize.github.io/selectize.js/">selectize.js</a> library, and shiny 1.8.0 upgrades selectize.js from version 0.12.4 to 0.15.2.</p>
+<p>This upgrade resolved <a href="https://github.com/rstudio/shiny/issues?q=is:issue+is:closed+selectize+sort:updated-desc+">a number of outstanding bugs and issues</a> with <code><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectizeInput()</a></code> (as well as introducing some new ones that we had to squash before release). Most users won’t notice a difference in the select inputs – now they’ll just work <em>better</em> – but if you do notice a change in behavior, please let use know by <a href="https://github.com/rstudio/shiny/issues">filing an issue</a>.</p>
+<p>Power users will find even more selectize.js <a href="https://selectize.dev/docs/usage">options</a> now available, including more <a href="https://selectize.dev/docs/demos/plugins">plugins</a>. We highly recommend trying both the <a href="https://selectize.dev/docs/plugins/clear-button"><code>clear_button</code></a> and <a href="https://selectize.dev/docs/plugins/remove-button"><code>remove_button</code></a> plugins to give users a clear visual cue for removing options:</p>
+<div class="text-center">
+<p><img src="selectize.gif" class="img-fluid" alt="A demo with two select inputs. The first allows a single value and uses the clear_button plugin. An X on the select input allows the user to clear the selection. The second input allows multiple values and uses the remove_button plugin. Each selected value has an X that allows the user to remove the value."></p>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb8" data-shinylive="https://shinylive.io/r/editor/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IdJiw71OY4RBEBXWgAIAPAFolqKAHM4AfQBmtAB5wAJuxFLrSznGpwCpWgC84ASQip5pSxBsBSkJgnHzaDsG4QWAAymEOtvaOpJG2pFDkGNDwuFaB1kSoziScSgC8SnScvqjU8tp8pRXBBA4sevQ+pCTBsgECuf42dg5Orh5ePn751sEw8tTOtXCpwQCyC0sJI8mp1RlwWbBwgzNK84u0y+VKACpYAKoAoqczhcUQTZW01ey19Y0bsFGHAYEQAG76TqkbpyMB9GyyWQiOyMSGMVQaAzyCBjEjsPjeUhRIg+IlROycUIkARKEB5WYQAC+IhRvH4AEF0OxFBS4Gj+QIwEyALpAA"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page.html">page_fixed</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectizeInput</a></span><span class="op">(</span></span>
+<span>        <span class="st">"single"</span>, <span class="st">"Single select"</span>, <span class="va">state.name</span>,</span>
+<span>        options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>plugins <span class="op">=</span> <span class="st">"clear_button"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectizeInput</a></span><span class="op">(</span></span>
+<span>        <span class="st">"multiple"</span>, <span class="st">"Multiple select"</span>, <span class="va">state.name</span>,</span>
+<span>        multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>        options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>plugins <span class="op">=</span> <span class="st">"remove_button"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><div class="column-screen bg-light mt-4 page-columns page-full">
+<section id="release-notes" class="level2 column-body"><h2 class="anchored" data-anchor-id="release-notes">Release notes</h2>
+<p>This post doesn’t cover all of the changes and updates that happened in the Shiny universe in this release cycle. To learn more about specific changes in each package, dive into the release notes linked below!</p>
+<p><strong>Big shout out to everyone involved!</strong> 💙 We’d want to extend a huge thank you to everyone who contributed pull requests, bug reports and feature requests. Your contributions make Shiny brilliant!</p>
+<section id="bslib-v0.6.0" class="level4"><h4 class="anchored" data-anchor-id="bslib-v0.6.0">bslib <a href="https://rstudio.github.io/bslib/news/index.html#bslib-060">v0.6.0</a>
+</h4>
+<p><a href="https://github.com/antoine4ucsd">@antoine4ucsd</a>, <a href="https://github.com/awcm0n">@awcm0n</a>, <a href="https://github.com/barnesparker">@barnesparker</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/ctrlxctrlc">@ctrlxctrlc</a>, <a href="https://github.com/daattali">@daattali</a>, <a href="https://github.com/DavZim">@DavZim</a>, <a href="https://github.com/durraniu">@durraniu</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/gsmolinski">@gsmolinski</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/jmbarbone">@jmbarbone</a>, <a href="https://github.com/JohnCoene">@JohnCoene</a>, <a href="https://github.com/kelly-sovacool">@kelly-sovacool</a>, <a href="https://github.com/lmullany">@lmullany</a>, <a href="https://github.com/m-austen">@m-austen</a>, <a href="https://github.com/MayaGans">@MayaGans</a>, <a href="https://github.com/mhanf">@mhanf</a>, <a href="https://github.com/ncullen93">@ncullen93</a>, <a href="https://github.com/ngoodkindGSI">@ngoodkindGSI</a>, <a href="https://github.com/oude-gao">@oude-gao</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/scrapeable">@scrapeable</a>, <a href="https://github.com/tuge98">@tuge98</a>, and <a href="https://github.com/wch">@wch</a>.</p>
+</section><section id="bsicons-v0.1.2" class="level4"><h4 class="anchored" data-anchor-id="bsicons-v0.1.2">bsicons <a href="https://rstudio.github.io/bsicons/news/index.html#bsicons-012">v0.1.2</a>
+</h4>
+<p><a href="https://github.com/cpsievert">@cpsievert</a>.</p>
+</section><section id="crosstalk-v1.2.1" class="level4"><h4 class="anchored" data-anchor-id="crosstalk-v1.2.1">crosstalk <a href="https://cran.r-project.org/web/packages/crosstalk/news/news.html">v1.2.1</a>
+</h4>
+<p><a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/ctedja">@ctedja</a>, <a href="https://github.com/daattali">@daattali</a>, <a href="https://github.com/danielludolf">@danielludolf</a>, <a href="https://github.com/DataStrategist">@DataStrategist</a>, <a href="https://github.com/dmresearch15">@dmresearch15</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/helgasoft">@helgasoft</a>, <a href="https://github.com/hlydecker">@hlydecker</a>, <a href="https://github.com/JacobBraslaw22">@JacobBraslaw22</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/jonathanmburns">@jonathanmburns</a>, <a href="https://github.com/jonspring">@jonspring</a>, <a href="https://github.com/LDSamson">@LDSamson</a>, <a href="https://github.com/MichaelChirico">@MichaelChirico</a>, <a href="https://github.com/mmfc">@mmfc</a>, <a href="https://github.com/novotny1akub">@novotny1akub</a>, <a href="https://github.com/oobd">@oobd</a>, <a href="https://github.com/pfh">@pfh</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/tbrittoborges">@tbrittoborges</a>, <a href="https://github.com/ThierryO">@ThierryO</a>, <a href="https://github.com/tomsing1">@tomsing1</a>, <a href="https://github.com/ulyngs">@ulyngs</a>, <a href="https://github.com/warnes">@warnes</a>, <a href="https://github.com/yb2125">@yb2125</a>, and <a href="https://github.com/yogat3ch">@yogat3ch</a>.</p>
+</section><section id="histoslider-v0.1.1" class="level4"><h4 class="anchored" data-anchor-id="histoslider-v0.1.1">histoslider <a href="https://cran.r-project.org/web/packages/histoslider/news/news.html">v0.1.1</a>
+</h4>
+<p><a href="https://github.com/cpsievert">@cpsievert</a>.</p>
+</section><section id="htmltools-v0.5.7" class="level4"><h4 class="anchored" data-anchor-id="htmltools-v0.5.7">htmltools <a href="https://rstudio.github.io/htmltools/news/index.html#htmltools-057">v0.5.7</a>
+</h4>
+<p><a href="https://github.com/bjcarothers">@bjcarothers</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/HenningLorenzen-ext-bayer">@HenningLorenzen-ext-bayer</a>, <a href="https://github.com/mgirlich">@mgirlich</a>, and <a href="https://github.com/stla">@stla</a>.</p>
+</section><section id="htmlwidgets-v1.6.3" class="level4"><h4 class="anchored" data-anchor-id="htmlwidgets-v1.6.3">htmlwidgets <a href="https://cran.r-project.org/web/packages/htmlwidgets/news/news.html">v1.6.3</a>
+</h4>
+<p><a href="https://github.com/barracuda156">@barracuda156</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/DavisVaughan">@DavisVaughan</a>, <a href="https://github.com/dmurdoch">@dmurdoch</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/pietrodito">@pietrodito</a>, and <a href="https://github.com/yihui">@yihui</a>.</p>
+</section><section id="httpuv-v1.6.12" class="level4"><h4 class="anchored" data-anchor-id="httpuv-v1.6.12">httpuv <a href="https://cran.r-project.org/web/packages/httpuv/news/news.html">v1.6.12</a>
+</h4>
+<p><a href="https://github.com/Camilo-Mora">@Camilo-Mora</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/jeroen">@jeroen</a>, <a href="https://github.com/nealrichardson">@nealrichardson</a>, and <a href="https://github.com/wfulp">@wfulp</a>.</p>
+</section><section id="leaflet.providers-v2.0.0" class="level4"><h4 class="anchored" data-anchor-id="leaflet.providers-v2.0.0">leaflet.providers <a href="https://cran.r-project.org/web/packages/leaflet.providers/news/news.html">v2.0.0</a>
+</h4>
+<p><a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/schloerke">@schloerke</a>, and <a href="https://github.com/SimonGoring">@SimonGoring</a>.</p>
+</section><section id="leaflet-v2.2.1" class="level4"><h4 class="anchored" data-anchor-id="leaflet-v2.2.1">leaflet <a href="https://cran.r-project.org/web/packages/leaflet/news/news.html">v2.2.1</a>
+</h4>
+<p><a href="https://github.com/barracuda156">@barracuda156</a>, <a href="https://github.com/Bryan1qr">@Bryan1qr</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/gtalavera">@gtalavera</a>, <a href="https://github.com/jmelichar">@jmelichar</a>, <a href="https://github.com/mjdzr">@mjdzr</a>, and <a href="https://github.com/PietrH">@PietrH</a>.</p>
+</section><section id="learnr-v0.11.4" class="level4"><h4 class="anchored" data-anchor-id="learnr-v0.11.4">learnr <a href="https://rstudio.github.io/learnr/news/index.html#learnr-0115">v0.11.4</a>
+</h4>
+<p><a href="https://github.com/davidkane9">@davidkane9</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/jimjam-slam">@jimjam-slam</a>, <a href="https://github.com/katieravenwood">@katieravenwood</a>, and <a href="https://github.com/NaturallyAsh">@NaturallyAsh</a>.</p>
+</section><section id="plotly-v4.10.3" class="level4"><h4 class="anchored" data-anchor-id="plotly-v4.10.3">plotly <a href="https://cran.r-project.org/web/packages/plotly/news/news.html">v4.10.3</a>
+</h4>
+<p><a href="https://github.com/AdroMine">@AdroMine</a>, <a href="https://github.com/AlexisDerumigny">@AlexisDerumigny</a>, <a href="https://github.com/Apompetti-Cori">@Apompetti-Cori</a>, <a href="https://github.com/cashfields">@cashfields</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/CristianRiccio">@CristianRiccio</a>, <a href="https://github.com/davidhodge931">@davidhodge931</a>, <a href="https://github.com/DrMattG">@DrMattG</a>, <a href="https://github.com/geejaytee">@geejaytee</a>, <a href="https://github.com/jacole3">@jacole3</a>, <a href="https://github.com/jrbarber37">@jrbarber37</a>, <a href="https://github.com/lennartraman">@lennartraman</a>, <a href="https://github.com/LouisLeNezet">@LouisLeNezet</a>, <a href="https://github.com/MichalLauer">@MichalLauer</a>, <a href="https://github.com/mjdzr">@mjdzr</a>, <a href="https://github.com/mumbarkar">@mumbarkar</a>, <a href="https://github.com/Obsidian-user">@Obsidian-user</a>, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/OverLordGoldDragon">@OverLordGoldDragon</a>, <a href="https://github.com/rsbivand">@rsbivand</a>, <a href="https://github.com/stephanmg">@stephanmg</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/TheAnalyticalEdge">@TheAnalyticalEdge</a>, <a href="https://github.com/ThierryO">@ThierryO</a>, <a href="https://github.com/tomasnobrega">@tomasnobrega</a>, <a href="https://github.com/tvedebrink">@tvedebrink</a>, <a href="https://github.com/uriahf">@uriahf</a>, <a href="https://github.com/whitejf">@whitejf</a>, <a href="https://github.com/wholmes105">@wholmes105</a>, <a href="https://github.com/wmay">@wmay</a>, <a href="https://github.com/yogat3ch">@yogat3ch</a>, and <a href="https://github.com/zeehio">@zeehio</a>.</p>
+</section><section id="shiny-v1.8.0" class="level4"><h4 class="anchored" data-anchor-id="shiny-v1.8.0">shiny <a href="https://shiny.posit.co/r/reference/shiny/1.8.0/upgrade.html">v1.8.0</a>
+</h4>
+<p><a href="https://github.com/avsdev-cw">@avsdev-cw</a>, <a href="https://github.com/bathyscapher">@bathyscapher</a>, <a href="https://github.com/chlebowa">@chlebowa</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/deining">@deining</a>, <a href="https://github.com/flachboard">@flachboard</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/karangattu">@karangattu</a>, <a href="https://github.com/nstrayer">@nstrayer</a>, <a href="https://github.com/wbakerrobinson">@wbakerrobinson</a>, and <a href="https://github.com/wch">@wch</a>.</p>
+</section><section id="shinyvalidate-v0.1.3" class="level4"><h4 class="anchored" data-anchor-id="shinyvalidate-v0.1.3">shinyvalidate <a href="https://rstudio.github.io/shinyvalidate/news/index.html#shinyvalidate-013">v0.1.3</a>
+</h4>
+<p><a href="https://github.com/BajczA475">@BajczA475</a>, <a href="https://github.com/bhogan-mitre">@bhogan-mitre</a>, <a href="https://github.com/chlebowa">@chlebowa</a>, <a href="https://github.com/cleber-n-borges">@cleber-n-borges</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/dependabot%5Bbot%5D">@dependabot[bot]</a>, <a href="https://github.com/DivadNojnarg">@DivadNojnarg</a>, <a href="https://github.com/doncqueurs">@doncqueurs</a>, <a href="https://github.com/Sebastian-T-T">@Sebastian-T-T</a>, <a href="https://github.com/stefanoborini">@stefanoborini</a>, <a href="https://github.com/stephenwilliams22">@stephenwilliams22</a>, <a href="https://github.com/Teebusch">@Teebusch</a>, and <a href="https://github.com/Wezz0234">@Wezz0234</a>.</p>
+</section><section id="thematic-0.1.4" class="level4"><h4 class="anchored" data-anchor-id="thematic-0.1.4">thematic <a href="https://rstudio.github.io/thematic/news/index.html#thematic-014">0.1.4</a>
+</h4>
+<p><a href="https://github.com/AlbertRapp">@AlbertRapp</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, and <a href="https://github.com/jfulponi">@jfulponi</a>.</p>
+</section></section>
+</div>
+
+
+
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

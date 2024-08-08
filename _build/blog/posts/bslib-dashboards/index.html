@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Carson Sievert">
+<meta name="dcterms.date" content="2023-06-07">
+<meta name="description" content="The {bslib} R package nows makes it very easy to make delightful and customizable dashboard in Shiny for R. This post walks through a Shiny app which quickly illustrates what’s possible with these components.">
+<title>Towards easy, delightful, and customizable dashboards in Shiny for R with {bslib} – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #ffffff;
+      }
+</style>
+<!-- Google Tag Manager --><script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script><!-- End Google Tag Manager --><!-- Add rel="noopener noreferrer" to each target="_blank" --><script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script><!-- End Add rel="noopener noreferrer" to each target="_blank" --><link href="../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../../_partials/blog/blog-article.css">
+<meta property="og:title" content="Towards easy, delightful, and customizable dashboards in Shiny for R with {bslib} – Shiny">
+<meta property="og:description" content="The {bslib} R package nows makes it very easy to make delightful and customizable dashboard in Shiny for R. This post walks through a Shiny app which quickly illustrates what’s possible with these components.">
+<meta property="og:image" content="https://shiny.posit.co/blog/posts/bslib-dashboards/feature.png">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:height" content="1300">
+<meta property="og:image:width" content="2480">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="The {bslib} R package nows makes it very easy to make delightful and customizable dashboard in Shiny for R. This post walks through a Shiny app which quickly illustrates what’s possible with these components.">
+<meta name="twitter:image" content="https://shiny.posit.co/blog/posts/bslib-dashboards/feature.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="1300">
+<meta name="twitter:image-width" content="2480">
+</head>
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo"></a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">
+<li class="dropdown-header"><img src="../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Towards easy, delightful, and customizable dashboards in Shiny for R with {bslib}</h1>
+                  <div>
+        <div class="description">
+          <p>The {bslib} R package nows makes it very easy to make delightful and customizable dashboard in Shiny for R. This post walks through a Shiny app which quickly illustrates what’s possible with these components.</p>
+        </div>
+      </div>
+                </div>
+  </div>
+
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Carson Sievert </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 7, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<style type="text/css">
+  #quarto-content>* {
+  padding-top: 0px;
+  }
+</style>
+<div class="column-body-outset blog-image-container pb-5">
+      <img src="feature.png" style="width: 100%; height: auto;">
+</div>
+    
+
+
+<style>
+.quarto-video > div {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+</style>
+<p>I’m excited to share that the latest release of the <a href="https://rstudio.github.io/bslib"><code>{bslib}</code> R package</a> makes a significant step towards being our recommended way to create Shiny dashboards. Grab it now from CRAN with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bslib"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This release includes a major overhaul of our documentation, including new and updated articles and better organization of content. The <a href="https://rstudio.github.io/bslib/">bslib site</a> nows groups these articles by whether you’re just get started, or want to dive deeper into theming, UI components, or layouts. If you’re primarily interested in making dashboards, make sure to visit the <a href="https://rstudio.github.io/bslib/articles/dashboards.html">Getting Started with dashboards</a> article.</p>
+<p>In this blog post, I’ll discuss some of the new features that contribute to the dashboarding experience, as well as why we’ve chosen <a href="https://rstudio.github.io/bslib/">bslib</a> as the home for this work. You can run the examples in this post yourself (without having to install anything!) in <a href="https://posit.cloud/content/6073069">this Posit Cloud project</a>.</p>
+<section id="hello-dashboards" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="hello-dashboards">Hello dashboards</h3>
+<p><a href="https://rstudio.github.io/bslib/">bslib</a>’s <a href="https://shiny.posit.co/blog/posts/announcing-new-r-shiny-ui-components/">last release</a> first introduced some important dashboard components (e.g., cards, value boxes, etc), but this release adds other essential pieces such as sidebar layouts, filling layouts, new column-wise layouts, accordions, and more. <a href="https://rstudio.github.io/bslib/">bslib</a>’s new <a href="https://rstudio.github.io/bslib/articles/dashboards.html">Getting Started with dashboards</a> article introduces all these pieces by first starting with a basic app and working towards some non-trivial dashboards, like the one below:</p>
+<div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
+<div class="column-body-outset">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="A Shiny dashboard for exploring the palmerpenguins dataset built using bslib"><source src="dashboard.mp4"></video></div>
+<div class="text-center">
+<p><a class="btn btn-outline-primary" href="https://posit.cloud/content/6073069" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="01-hello-dashboards.R"> <i class="bi bi-cloud-fill me-1" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> Try on Posit Cloud </a> <a class="btn btn-outline-secondary ms-1 px-3" href="https://gist.github.com/gadenbuie/74ba1d0a4d597aba20caf1b6bf41922f#file-01-hello-dashboards-r" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code"> <i class="bi bi-file-code-fill" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> <span class="visually-hidden">Source</span> </a></p>
+</div>
+</div>
+</div>
+</section><section id="why-bslib-themable-dashboards" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="why-bslib-themable-dashboards">Why bslib? Themable dashboards</h3>
+<p>Since we <a href="https://posit.co/resources/videos/styling-shiny-apps-with-sass-and-bootstrap-4/">announced it at rstudio::conf(2020)</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, bslib has made it easy to theme virtually any Shiny app, R Markdown document, or R project that utilizes Bootstrap. One notable and unfortunate exception has been <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>, arguably the most popular UI extension for Shiny apps.</p>
+<p>While projects like <a href="https://rinterface.github.io/bs4Dash/index.html">bs4Dash</a> and <a href="https://github.com/dreamRs/fresh">fresh</a> have helped provide way to upgrade <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>’s Bootstrap/AdminLTE dependency and theme dashboards, AdminLTE has kept shinydashboard from keeping up with modern versions of Bootstrap (now on version 5).</p>
+<p>Rather than rewriting <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>, we’re choosing to expand the footprint of bslib. It now provides themable and modern Bootstrap components that are perfect for dashboard apps, meaning that you can expect <a href="https://rstudio.github.io/bslib/articles/theming.html#real-time">real time themes</a>, <a href="https://rstudio.github.io/bslib/articles/theming.html#bootswatch">Bootswatch themes</a>, and <a href="https://rstudio.github.io/bslib/articles/theming.html#main-colors">custom themes</a> to “just work” like they do for most other Shiny apps and R Markdown docs powered by <a href="https://rstudio.github.io/bslib/">bslib</a>.</p>
+<div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
+<div class="column-body-outset">
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="Real-time theming a Shiny dashboard with bslib"><source src="dashboard-real-time.mp4"></video></div>
+<div class="text-center">
+<p><a class="btn btn-outline-primary" href="https://posit.cloud/content/6073069" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="02-themable-dashboards.R"> <i class="bi bi-cloud-fill me-1" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> Try on Posit Cloud </a> <a class="btn btn-outline-secondary ms-1 px-3" href="https://gist.github.com/gadenbuie/74ba1d0a4d597aba20caf1b6bf41922f#file-02-themable-dashboards-r" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code"> <i class="bi bi-file-code-fill" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> <span class="visually-hidden">Source</span> </a></p>
+</div>
+</div>
+</div>
+</section><section id="layout-tooling" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="layout-tooling">Layout tooling</h3>
+<p>This release includes two big improvements to layouts. First, <a href="https://rstudio.github.io/bslib/">bslib</a> has been re-worked to fully embrace <a href="https://rstudio.github.io/bslib/articles/dashboards.html#scrolling-vs-filling">filling layouts</a> by default. This means that things like <code>page_sidebar()</code>, <code>page_navbar()</code>, and <code>page_fillable()</code> all encourage their children to fill the window (by default), and components like <code>card()</code> also encourage their contents to fill when made <a href="https://rstudio.github.io/bslib/articles/cards.html#filling-outputs">full-screen</a>. Keep in mind, filling layouts aren’t always the best choice for every situation, but you can always <a href="https://rstudio.github.io/bslib/articles/dashboards.html#scrolling-vs-filling">specify fixed sizes, restrict resizing limits, or opt-out of filling layout</a>.</p>
+<p>Second, we’ve added <code>layout_columns()</code>, a new approach to <a href="https://rstudio.github.io/bslib/articles/dashboards.html#multi-column">column-wise layout</a>. Compared to <code><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">shiny::fluidRow()</a></code>/<code><a href="https://rdrr.io/pkg/shiny/man/column.html">shiny::column()</a></code>, this newer interface to Bootstrap’s 12-column grid layout system is much more expressive and is compatible with filling layouts. For example, in just one function call, you can express a 12-column layout with multiple rows (and control the row heights), define negative space, and even responsively change the layout depending on screen size with a new <code>breakpoints()</code> helper function.</p>
+<div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
+<div class="column-body-outset">
+<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="A Shiny dashboard with a responsive, filling, layout"><source src="layout-columns.mp4"></video></div>
+<div class="text-center">
+<p><a class="btn btn-outline-primary" href="https://posit.cloud/content/6073069" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="03-layout-tooling.R"> <i class="bi bi-cloud-fill me-1" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> Try on Posit Cloud </a> <a class="btn btn-outline-secondary ms-1 px-3" href="https://gist.github.com/gadenbuie/74ba1d0a4d597aba20caf1b6bf41922f#file-03-layout-tooling-r" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code"> <i class="bi bi-file-code-fill" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> <span class="visually-hidden">Source</span> </a></p>
+</div>
+</div>
+</div>
+</section><section id="card-level-sidebars" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="card-level-sidebars">Card-level sidebars</h3>
+<p>In addition to page-level sidebars (via <code>page_sidebar()</code> and <code>page_navbar()</code>), <a href="https://rstudio.github.io/bslib/">bslib</a> also provides <a href="https://rstudio.github.io/bslib/articles/dashboards.html#cards-with-sidebars">card-level sidebars</a>. This provides a convenient way to create keep visual proximity between the sidebar (input) controls and outputs that they effect, and as a result, helps users to better navigate more complex apps. This can be done through the <code>layout_sidebar()</code> function, which can either render standalone or inside of a <code>card()</code> (making it easy to add full-screen expansion, a header, footer, etc).</p>
+<div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
+<div class="column-body-outset">
+<div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="A couple examples of putting a sidebar inside a card"><source src="layout-sidebar.mp4"></video></div>
+<div class="text-center">
+<p><a class="btn btn-outline-primary" href="https://posit.cloud/content/6073069" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="04-card-level-sidebars.R"> <i class="bi bi-cloud-fill me-1" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> Try on Posit Cloud </a> <a class="btn btn-outline-secondary ms-1 px-3" href="https://gist.github.com/gadenbuie/74ba1d0a4d597aba20caf1b6bf41922f#file-04-card-level-sidebars-r" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code"> <i class="bi bi-file-code-fill" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> <span class="visually-hidden">Source</span> </a></p>
+</div>
+</div>
+</div>
+</section><section id="accordions" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="accordions">Accordions</h3>
+<p>This release also includes a new <a href="https://rstudio.github.io/bslib/reference/accordion.html">accordion</a> component, which is a great way to save space by hiding content behind a collapsible header. Accordions can be useful in a variety of apps, but in the context of dashboards, they’re quite useful for grouping numerous related inputs together.</p>
+<div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
+<div class="column-body-outset">
+<div class="quarto-video"><video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="Using an accordion inside a sidebar to group multiple input controls together"><source src="accordion-sidebar.mp4"></video></div>
+<div class="text-center">
+<p><a class="btn btn-outline-primary" href="https://posit.cloud/content/6073069" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="05-accordions.R"> <i class="bi bi-cloud-fill me-1" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> Try on Posit Cloud </a> <a class="btn btn-outline-secondary ms-1 px-3" href="https://gist.github.com/gadenbuie/74ba1d0a4d597aba20caf1b6bf41922f#file-05-accordions-r" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code"> <i class="bi bi-file-code-fill" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"></i> <span class="visually-hidden">Source</span> </a></p>
+</div>
+</div>
+</div>
+</section><section id="closing-thoughts" class="level3"><h3 class="anchored" data-anchor-id="closing-thoughts">Closing thoughts</h3>
+<p>With this release, we now view <a href="https://rstudio.github.io/bslib/">bslib</a> as a viable alternative to <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>, and plan on making more improvements geared towards making dashboard creation an even more delightful experience. Compared to <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>, <a href="https://rstudio.github.io/bslib/">bslib</a> offers:</p>
+<ul>
+<li><p><strong>A fresh take on components</strong> which build on the latest <a href="https://getbootstrap.com/">Bootstrap</a>, add new features (e.g., full screen expansion, sidebars, etc), and are more customizable.</p></li>
+<li><p><strong>More theming options</strong> including <a href="https://rstudio.github.io/bslib/articles/theming.html#real-time">real-time theming</a>, <a href="https://rstudio.github.io/bslib/articles/theming.html#bootswatch">bootswatch themes</a>, <a href="https://rstudio.github.io/bslib/articles/theming.html#main-colors">main colors / fonts</a>, and <a href="https://rstudio.github.io/bslib/articles/theming.html#theming-variables">more</a>.</p></li>
+<li><p><strong>Better layout tools</strong>, like filling and column-wise layouts. You may have noticed that it wasn’t easy to get a row of cards generated by <code>shinydashboard::box()</code> to have a common height, but <code>layout_columns()</code> and <code>layout_column_wrap()</code> do this automatically.</p></li>
+<li><p><strong>Portability</strong>: <a href="https://rstudio.github.io/bslib/">bslib</a> is <a href="https://rstudio.github.io/bslib/articles/any-project.html">compatible with most Bootstrap projects</a>, and can be used to create dashboards, websites, R Markdown documents, and more.</p></li>
+</ul>
+<p>That said, <a href="https://rstudio.github.io/bslib/">bslib</a> is still a work in progress, and we’re still working on making it a “complete” dashboarding solution. If you find yourself missing certain aspects of <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>, or generally have ideas things we should add, please let us know by <a href="https://github.com/rstudio/bslib/issues/new?assignees=&amp;labels=&amp;projects=&amp;template=feature_request.md">filing an issue</a> and/or <a href="https://github.com/rstudio/bslib/discussions/618">contributing to this discussion</a>.</p>
+<script>
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+
+</section><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<ol>
+<li id="fn1"><p>Joe Cheng’s presentation demoed new theming features in the <code>{bootstraplib}</code> package, which evolved into the package known as <a href="https://rstudio.github.io/bslib/">bslib</a> and was released to CRAN in 2021.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer><script>videojs(video_shortcode_videojs_video1);</script><script>videojs(video_shortcode_videojs_video2);</script><script>videojs(video_shortcode_videojs_video3);</script><script>videojs(video_shortcode_videojs_video4);</script><script>videojs(video_shortcode_videojs_video5);</script>
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Carson Sievert">
+<meta name="dcterms.date" content="2024-03-27">
+<meta name="description" content="An overview of recent Shiny for R updates, including extended tasks, JavaScript errors, and many bslib improvements.">
+<title>Shiny for R updates: Extended tasks, JavaScript errors, and many bslib improvements – Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #ffffff;
+      }
+</style>
+<!-- Google Tag Manager --><script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+</script><!-- End Google Tag Manager --><!-- Add rel="noopener noreferrer" to each target="_blank" --><script type="text/javascript">
+  window.addEventListener("load",() =>
+    [...document.querySelectorAll("a[target=_blank]")]
+      .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
+  );
+</script><!-- End Add rel="noopener noreferrer" to each target="_blank" --><link href="../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../../_partials/blog/blog-article.css">
+<meta property="og:title" content="Shiny for R updates: Extended tasks, JavaScript errors, and many bslib improvements – Shiny">
+<meta property="og:description" content="An overview of recent Shiny for R updates, including extended tasks, JavaScript errors, and many bslib improvements.">
+<meta property="og:image" content="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/feature.png">
+<meta property="og:site_name" content="Shiny">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:height" content="1012">
+<meta property="og:image:width" content="1818">
+<meta name="twitter:title" content="Shiny">
+<meta name="twitter:description" content="An overview of recent Shiny for R updates, including extended tasks, JavaScript errors, and many bslib improvements.">
+<meta name="twitter:image" content="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/feature.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="1012">
+<meta name="twitter:image-width" content="1818">
+</head>
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../images/shiny-solo.png" alt="Shiny logo." class="navbar-logo"></a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../getstarted.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-for-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny for R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-for-r">
+<li class="dropdown-header"><img src="../../../images/r-light.png" class="navbar-sub-logo img-fluid" alt="The R language logo"></li>
+        <li>
+    <a class="dropdown-item" href="../../../r/getstarted/">
+ <span class="dropdown-text">Get Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/articles/index.html">
+ <span class="dropdown-text">Articles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/gallery/index.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/reference/shiny">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/help.html">
+ <span class="dropdown-text">Help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/deploy.html">
+ <span class="dropdown-text">Deploy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../r/contribute.html">
+ <span class="dropdown-text">Contribute</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/rstudio/shiny" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+<span class="menu-text">Shiny for Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Shiny for R updates: Extended tasks, JavaScript errors, and many bslib improvements</h1>
+                  <div>
+        <div class="description">
+          <p>An overview of recent Shiny for R updates, including extended tasks, JavaScript errors, and many bslib improvements.</p>
+        </div>
+      </div>
+                </div>
+  </div>
+
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Carson Sievert </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 27, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<style type="text/css">
+  #quarto-content>* {
+  padding-top: 0px;
+  }
+</style>
+<div class="column-body-outset blog-image-container pb-5">
+      <img src="feature.png" style="width: 100%; height: auto;">
+</div>
+    
+
+
+<style>
+img { border-radius: 8px; }
+</style>
+<p>The Shiny team is delighted to announce another round of updates for 9 different R packages. In this post, we’ll introduce three notable things: <a href="#nonblocking">non-blocking operations</a>, a <a href="#js-errors">JavaScript error dialog</a> and many <a href="#bslib">bslib improvements</a>. For a detailed list of changes, be sure to check out the <a href="#release-notes">release notes</a> section of this post.</p>
+<p>Although 9 packages received updates, the focus of this post is on <a href="https://shiny.posit.co/">shiny</a> and <a href="https://rstudio.github.io/bslib/">bslib</a>, which you can install with the following command:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"shiny"</span>, <span class="st">"bslib"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="nonblocking" class="level2"><h2 class="anchored" data-anchor-id="nonblocking">Non-blocking operations</h2>
+<p>The biggest new feature in this release is the ability to run <strong>truly non-blocking operations</strong> in Shiny via <code>ExtendedTask</code>.</p>
+<section id="the-promise-of-async-programming" class="level3"><h3 class="anchored" data-anchor-id="the-promise-of-async-programming">The promise of async programming</h3>
+<p>For years, we’ve promoted asynchronous programming with the <a href="https://rstudio.github.io/promises/">promises</a> package as a way to improve the performance of large Shiny apps. <a href="https://rstudio.github.io/promises/">promises</a> can be used to prevent operations in one user session from blocking operations in another user’s session, helping scale your app to multiple concurrent users supported by a single R process.</p>
+<p>However, <a href="https://rstudio.github.io/promises/">promises</a> alone won’t prevent an operation in one session from blocking other operations in that same session.</p>
+</section><section id="introducing-extendedtask" class="level3"><h3 class="anchored" data-anchor-id="introducing-extendedtask">Introducing ExtendedTask</h3>
+<p>We’re introducing <code>ExtendedTask</code> as a new way to manage long-running operations that won’t block within or across sessions, meaning that a user can launch an <code>ExtendedTask</code> and still interact with the app while it’s running.</p>
+<p>Additionally, we’ve found that <code>ExtendedTask</code> provides an elegant way to manage async operations. Within the task, you’ll use <a href="https://rstudio.github.io/promises/">promises</a> to create the async operation, but in the rest of your app you can use <code>ExtendedTask</code> methods to start the task or react to results when they arrive.</p>
+<p>As a result, <code>ExtendedTask</code> is now our recommended starting point for non-blocking tasks in Shiny. We’d love to show you a full example right now, but for the sake of space in this blog post we’ll urge you to visit the <a href="https://shiny.posit.co/r/articles/improve/nonblocking">Non-blocking operations article</a>, also on this blog, for a complete introduction.</p>
+</section><section id="a-new-task-button" class="level3"><h3 class="anchored" data-anchor-id="a-new-task-button">A new task button</h3>
+<p>As a companion to <code>ExtendedTask</code>, we’ve created <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">bslib::input_task_button()</a></code>, a special button that displays visual feedback when a task is in progress. As it turns out, <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">input_task_button()</a></code> provides a nice experience for any long-running task, not just <code>ExtendedTask</code>. Think of it like an <code><a href="https://rdrr.io/pkg/shiny/man/actionButton.html">actionButton()</a></code> that, when clicked, shows a busy indicator (and prevents further clicks) up until the next time the server is idle. Here’s an example of it in action in a basic Shiny app:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page.html">page_fixed</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">input_task_button</a></span><span class="op">(</span><span class="st">"launch_task"</span>, <span class="st">"Launch task"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html">textOutput</a></span><span class="op">(</span><span class="st">"result"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html">renderText</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/req.html">req</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">launch_task</span><span class="op">)</span>     <span class="co"># require a button press to launch</span></span>
+<span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>               <span class="co"># simulate expensive operation</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Number of clicks:"</span>, <span class="va">input</span><span class="op">$</span><span class="va">launch_task</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="task-button.gif" class="shadow img-fluid figure-img"></p>
+<figcaption>The task button showing a busy indication while the result is still processing</figcaption></figure>
+</div>
+<p><br class="mb-4"></p>
+</section></section><section id="js-errors" class="level2"><h2 class="anchored" data-anchor-id="js-errors">JS error dialog</h2>
+<p>Another exciting new feature is Shiny’s JavaScript error dialog, which makes critical client-side errors more discoverable. To use the error dialog, turn on Shiny’s developer features by calling <code><a href="https://rdrr.io/pkg/shiny/man/devmode.html">shiny::devmode()</a></code> before running your app locally<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>In addition to the dialog, we’ve also started throwing more errors in situations where behavior is undefined, such as when two inputs (or outputs) have the same ID. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page.html">page_fixed</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textInput.html">textInput</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textInput.html">textInput</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, \<span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="error-dialog.png" class="img-fluid figure-img"></p>
+<figcaption>The error dialog displaying the duplicate IDs error</figcaption></figure>
+</div>
+<aside id="footnotes" class="footnotes footnotes-end-of-section" role="doc-footnote"><hr>
+<ol>
+<li id="fn1">
+<p>Read more about <a href="https://shiny.posit.co/r/reference/shiny/latest/devmode.html">shiny devmode in our docs</a>. If you’d like to turn on dev mode for all of your local interactive session, you can add the following snippet your <code>.Rprofile</code> either in your home directory or your project directory (use <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code> to open either):</p>
+<pre><code>if (interactive() &amp;&amp; requireNamespace("shiny", quietly = TRUE)) {
+  shiny::devmode()
+}</code></pre>
+<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a>
+</li>
+</ol></aside></section><section id="bslib" class="level2"><h2 class="anchored" data-anchor-id="bslib">bslib improvements</h2>
+<p>In addition to the new <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">input_task_button()</a></code>, <code>bslib</code> received many <a href="https://rstudio.github.io/bslib/news/index.html#bslib-070">improvements and fixes in this release</a>. Most of these improvements are focused on <code><a href="https://rstudio.github.io/bslib/reference/sidebar.html">sidebar()</a></code>s, <code>cards()</code>s, <code><a href="https://rstudio.github.io/bslib/reference/layout_columns.html">layout_columns()</a></code>s, and the default <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html">bs_theme()</a></code>.</p>
+<p>To highlight a new feature, <code><a href="https://rstudio.github.io/bslib/reference/card.html">card()</a></code> now reports its <code>full_screen</code> state to the server, which can be useful for various things like providing more context in a full-screen view. Just give the card an <code>id</code> and read <code>input${id}_full_screen</code> in the server, replacing <code>{id}</code> with the actual <code>id</code> value of your card.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="full-screen.gif" class="shadow img-fluid figure-img"></p>
+<figcaption>An expandable card that shows some additional text when it goes full screen.</figcaption></figure>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page.html">page_fixed</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/card.html">card</a></span><span class="op">(</span></span>
+<span>    full_screen <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    id <span class="op">=</span> <span class="st">"my_card"</span>,</span>
+<span>    <span class="fu"><a href="https://rstudio.github.io/bslib/reference/card_body.html">card_header</a></span><span class="op">(</span><span class="st">"My plot"</span><span class="op">)</span>,</span>
+<span>    <span class="co"># fill ensures the plot fills when full_screen</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html">uiOutput</a></span><span class="op">(</span><span class="st">"visual"</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">visual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderUI.html">renderUI</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html">plotOutput</a></span><span class="op">(</span><span class="st">"plot"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Logic.html">isTRUE</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">my_card_full_screen</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="co"># In full screen mode, show the plot plus some additional text</span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_columns.html">layout_columns</a></span><span class="op">(</span></span>
+<span>        <span class="va">plot</span>,</span>
+<span>        <span class="fu">lorem</span><span class="fu">::</span><span class="fu">ipsum</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>        col_widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>      <span class="co"># otherwise, just show the plot</span></span>
+<span>      <span class="va">plot</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu">ggplot</span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">theme_minimal</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="release-notes" class="level2"><h2 class="anchored" data-anchor-id="release-notes">Release notes</h2>
+<p>This post doesn’t cover all of the changes and updates that happened in the Shiny universe in this release cycle. To learn more about specific changes in each package, dive into the release notes linked below!</p>
+<p><strong>Big shout out to everyone involved!</strong> 💙 We’d want to extend a huge thank you to everyone who contributed pull requests, bug reports and feature requests. Your contributions make Shiny brilliant!</p>
+<section id="bslib-v0.7.0" class="level4"><h4 class="anchored" data-anchor-id="bslib-v0.7.0">bslib <a href="https://rstudio.github.io/bslib/news/index.html#bslib-070">v0.7.0</a>
+</h4>
+<p><a href="https://github.com/benubah">@benubah</a>, <a href="https://github.com/CIOData">@CIOData</a>, <a href="https://github.com/clementlefevre">@clementlefevre</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/Damonsoul">@Damonsoul</a>, <a href="https://github.com/davemcg">@davemcg</a>, <a href="https://github.com/davos-i">@davos-i</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/howardbaek">@howardbaek</a>, <a href="https://github.com/ideusoes">@ideusoes</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/kalimu">@kalimu</a>, <a href="https://github.com/lukebandy">@lukebandy</a>, <a href="https://github.com/malcolmbarrett">@malcolmbarrett</a>, <a href="https://github.com/Milko-B">@Milko-B</a>, <a href="https://github.com/ocstringham">@ocstringham</a>, <a href="https://github.com/rickhelmus">@rickhelmus</a>, <a href="https://github.com/royfrancis">@royfrancis</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/tai-mi">@tai-mi</a>, <a href="https://github.com/tanho63">@tanho63</a>, <a href="https://github.com/toxintoxin">@toxintoxin</a>, <a href="https://github.com/TymekDev">@TymekDev</a>, <a href="https://github.com/udurraniAtPresage">@udurraniAtPresage</a>, <a href="https://github.com/WickM">@WickM</a>, <a href="https://github.com/wish1832">@wish1832</a>, and <a href="https://github.com/zross">@zross</a>.</p>
+</section><section id="htmltools-v0.5.8" class="level4"><h4 class="anchored" data-anchor-id="htmltools-v0.5.8">htmltools <a href="https://rstudio.github.io/htmltools/news/index.html#htmltools-058">v0.5.8</a>
+</h4>
+<p><a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/Emanuel-1986">@Emanuel-1986</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/romainfrancois">@romainfrancois</a>, and <a href="https://github.com/russHyde">@russHyde</a>.</p>
+</section><section id="httpuv-v1.6.12" class="level4"><h4 class="anchored" data-anchor-id="httpuv-v1.6.12">httpuv <a href="https://cran.r-project.org/web/packages/httpuv/news/news.html">v1.6.12</a>
+</h4>
+<p><a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, and <a href="https://github.com/nunotexbsd">@nunotexbsd</a>.</p>
+</section><section id="leaflet-v2.2.2" class="level4"><h4 class="anchored" data-anchor-id="leaflet-v2.2.2">leaflet <a href="https://cran.r-project.org/web/packages/leaflet/news/news.html">v2.2.2</a>
+</h4>
+<p><a href="https://github.com/ainefairbrother">@ainefairbrother</a>, <a href="https://github.com/amegbor">@amegbor</a>, <a href="https://github.com/asitemade4u">@asitemade4u</a>, <a href="https://github.com/bmaitner">@bmaitner</a>, <a href="https://github.com/cderv">@cderv</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/jebyrnes">@jebyrnes</a>, <a href="https://github.com/mkoohafkan">@mkoohafkan</a>, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/olyerickson">@olyerickson</a>, <a href="https://github.com/SpeckledJim2">@SpeckledJim2</a>, and <a href="https://github.com/yoelii">@yoelii</a>.</p>
+</section><section id="plotly-v4.10.4" class="level4"><h4 class="anchored" data-anchor-id="plotly-v4.10.4">plotly <a href="https://cran.r-project.org/web/packages/plotly/news/news.html">v4.10.4</a>
+</h4>
+<p><a href="https://github.com/AdroMine">@AdroMine</a>, <a href="https://github.com/AlexisDerumigny">@AlexisDerumigny</a>, <a href="https://github.com/aloboa">@aloboa</a>, <a href="https://github.com/aniskara">@aniskara</a>, <a href="https://github.com/Balaika">@Balaika</a>, <a href="https://github.com/baranovskypd">@baranovskypd</a>, <a href="https://github.com/brennanfalcy">@brennanfalcy</a>, <a href="https://github.com/Brishan200">@Brishan200</a>, <a href="https://github.com/byandell">@byandell</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/dgrignol">@dgrignol</a>, <a href="https://github.com/dvg-p4">@dvg-p4</a>, <a href="https://github.com/FunctionalUrology">@FunctionalUrology</a>, <a href="https://github.com/jeffandcyrus">@jeffandcyrus</a>, <a href="https://github.com/Jensxy">@Jensxy</a>, <a href="https://github.com/JinTonique">@JinTonique</a>, <a href="https://github.com/KarlKaise">@KarlKaise</a>, <a href="https://github.com/KatChampion">@KatChampion</a>, <a href="https://github.com/lukelockley">@lukelockley</a>, <a href="https://github.com/meldarionqeusse">@meldarionqeusse</a>, <a href="https://github.com/morrisseyj">@morrisseyj</a>, <a href="https://github.com/mot12341234">@mot12341234</a>, <a href="https://github.com/msgoussi">@msgoussi</a>, <a href="https://github.com/nlooije">@nlooije</a>, <a href="https://github.com/noamross">@noamross</a>, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/OverLordGoldDragon">@OverLordGoldDragon</a>, <a href="https://github.com/peter-atkinson">@peter-atkinson</a>, <a href="https://github.com/salim-b">@salim-b</a>, <a href="https://github.com/syeddans">@syeddans</a>, <a href="https://github.com/TheAnalyticalEdge">@TheAnalyticalEdge</a>, <a href="https://github.com/tomasnobrega">@tomasnobrega</a>, and <a href="https://github.com/TopBottomTau">@TopBottomTau</a>.</p>
+</section><section id="plumber-v1.2.2" class="level4"><h4 class="anchored" data-anchor-id="plumber-v1.2.2">plumber <a href="https://www.rplumber.io/news/index.html">v1.2.2</a>
+</h4>
+<p><a href="https://github.com/alexverse">@alexverse</a>, <a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/apriandito">@apriandito</a>, <a href="https://github.com/ArcadeAntics">@ArcadeAntics</a>, <a href="https://github.com/aronatkins">@aronatkins</a>, <a href="https://github.com/BioTimHaley">@BioTimHaley</a>, <a href="https://github.com/ColinFay">@ColinFay</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/edavidaja">@edavidaja</a>, <a href="https://github.com/enriquecaballero">@enriquecaballero</a>, <a href="https://github.com/ex0ticOne">@ex0ticOne</a>, <a href="https://github.com/feodosiikraft">@feodosiikraft</a>, <a href="https://github.com/fmalk">@fmalk</a>, <a href="https://github.com/GraphZal">@GraphZal</a>, <a href="https://github.com/hedsnz">@hedsnz</a>, <a href="https://github.com/howardbaek">@howardbaek</a>, <a href="https://github.com/ihamod">@ihamod</a>, <a href="https://github.com/jangorecki">@jangorecki</a>, <a href="https://github.com/jasonheffner">@jasonheffner</a>, <a href="https://github.com/jonthegeek">@jonthegeek</a>, <a href="https://github.com/jpdugo">@jpdugo</a>, <a href="https://github.com/jwebbsoma">@jwebbsoma</a>, <a href="https://github.com/king-of-poppk">@king-of-poppk</a>, <a href="https://github.com/m-muecke">@m-muecke</a>, <a href="https://github.com/meztez">@meztez</a>, <a href="https://github.com/MJSchut">@MJSchut</a>, <a href="https://github.com/mmuurr">@mmuurr</a>, <a href="https://github.com/pietervosnl">@pietervosnl</a>, <a href="https://github.com/pinduzera">@pinduzera</a>, <a href="https://github.com/r2evans">@r2evans</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/sdgd165">@sdgd165</a>, <a href="https://github.com/slodge">@slodge</a>, <a href="https://github.com/slodge-work">@slodge-work</a>, <a href="https://github.com/statasaurus">@statasaurus</a>, <a href="https://github.com/timeddilation">@timeddilation</a>, <a href="https://github.com/tylerlittlefield">@tylerlittlefield</a>, and <a href="https://github.com/wikithink">@wikithink</a>.</p>
+</section><section id="sass-v0.4.9" class="level4"><h4 class="anchored" data-anchor-id="sass-v0.4.9">sass <a href="https://rstudio.github.io/sass/news/index.html">v0.4.9</a>
+</h4>
+<p><a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/jeroen">@jeroen</a>, and <a href="https://github.com/yulric">@yulric</a>.</p>
+</section><section id="shiny-v1.8.1" class="level4"><h4 class="anchored" data-anchor-id="shiny-v1.8.1">shiny <a href="https://shiny.posit.co/r/reference/shiny/1.8.1/upgrade.html">v1.8.1</a>
+</h4>
+<p><a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/Arthfael">@Arthfael</a>, <a href="https://github.com/avoidaway">@avoidaway</a>, <a href="https://github.com/bioinformzhang">@bioinformzhang</a>, <a href="https://github.com/chendaniely">@chendaniely</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/Daishoulu">@Daishoulu</a>, <a href="https://github.com/davidmacro">@davidmacro</a>, <a href="https://github.com/etbrand">@etbrand</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/gunawebs">@gunawebs</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/HugoGit39">@HugoGit39</a>, <a href="https://github.com/ismirsehregal">@ismirsehregal</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/JohnCoene">@JohnCoene</a>, <a href="https://github.com/jsendak">@jsendak</a>, <a href="https://github.com/laresbernardo">@laresbernardo</a>, <a href="https://github.com/MartinBaumga">@MartinBaumga</a>, <a href="https://github.com/nstrayer">@nstrayer</a>, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/Roleren">@Roleren</a>, <a href="https://github.com/RSchwinn">@RSchwinn</a>, <a href="https://github.com/saleforecast1">@saleforecast1</a>, <a href="https://github.com/sharitian">@sharitian</a>, <a href="https://github.com/skaltman">@skaltman</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/trafficonese">@trafficonese</a>, <a href="https://github.com/TymekDev">@TymekDev</a>, <a href="https://github.com/ugurdar">@ugurdar</a>, and <a href="https://github.com/wch">@wch</a>.</p>
+</section><section id="thematic-v0.1.5" class="level4"><h4 class="anchored" data-anchor-id="thematic-v0.1.5">thematic <a href="https://rstudio.github.io/thematic/news/index.html#thematic-015">v0.1.5</a>
+</h4>
+<p><a href="https://github.com/cpsievert">@cpsievert</a>, and <a href="https://github.com/teunbrand">@teunbrand</a>.</p>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/posit_pbc">
+      <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe">
+      <i class="bi bi-youtube" role="img" aria-label="Shiny YouTube Playlist">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../../../blog/index.xml">
+      <i class="bi bi-rss-fill" role="img" aria-label="Shiny Blog">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
