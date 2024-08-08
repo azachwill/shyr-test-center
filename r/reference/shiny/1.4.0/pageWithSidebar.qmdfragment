@@ -1,0 +1,45 @@
+---
+title: "Create a page with a sidebar — pageWithSidebar"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>pageWithSidebar</span>(<span class='no'>headerPanel</span>, <span class='no'>sidebarPanel</span>, <span class='no'>mainPanel</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>headerPanel</p></th>
+    <td><p>The <a href='headerPanel.html'>headerPanel</a> with the application title</p></td>
+  </tr>
+  <tr>
+    <th><p>sidebarPanel</p></th>
+    <td><p>The <a href='sidebarLayout.html'>sidebarPanel</a> containing input controls</p></td>
+  </tr>
+  <tr>
+    <th><p>mainPanel</p></th>
+    <td><p>The <a href='sidebarLayout.html'>mainPanel</a> containing outputs</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p><strong>DEPRECATED</strong>: use <code><a href='fluidPage.html'>fluidPage()</a></code> and <code><a href='sidebarLayout.html'>sidebarLayout()</a></code> instead.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function</p>
+  
+  </div>
+
+</div>
+
+
+```

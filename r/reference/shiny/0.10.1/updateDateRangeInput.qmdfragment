@@ -1,0 +1,104 @@
+---
+title: "updateDateRangeInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>updateDateRangeInput(session, inputId, label&nbsp;=&nbsp;NULL, start&nbsp;=&nbsp;NULL, end&nbsp;=&nbsp;NULL, min&nbsp;=&nbsp;NULL, max&nbsp;=&nbsp;NULL)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</td>
+  </tr>
+  <tr>
+    <th>inputId</th>
+    <td>The id of the input object.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>The label to set for the input object.</td>
+  </tr>
+  <tr>
+    <th>start</th>
+    <td>The start date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format.</td>
+  </tr>
+  <tr>
+    <th>end</th>
+    <td>The end date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format.</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>The minimum allowed date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format.</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>The maximum allowed date. Either a Date object, or a string in
+  <code>yyyy-mm-dd</code> format.</td>
+  </tr>
+</table>
+
+<div data-section="Change the start and end values of a date range input on the client">
+  <h3 data-swiftype-index="false">Change the start and end values of a date range input on the client</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Change the start and end values of a date range input on the client</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+
+  <p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href='numericInput.html'>numericInput</a>()</code> and
+<code>updateNumericInput()</code> take a similar set of arguments.</p>
+
+  <p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# shinyServer(function(input, output, session) {
+# 
+#   observe({
+#     # We&#39;ll use the input$controller variable multiple times, so save it as x
+#     # for convenience.
+#     x &lt;- input$controller
+# 
+#     updateDateRangeInput(session, &quot;inDateRange&quot;,
+#       label = paste(&quot;Date range label&quot;, x),
+#       start = paste(&quot;2013-01-&quot;, x, sep=&quot;&quot;))
+#       end = paste(&quot;2013-12-&quot;, x, sep=&quot;&quot;))
+#   })
+# })
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+</div></pre>
+<!-- <ul>
+  <li>updateDateRangeInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='dateRangeInput.html'>dateRangeInput</a></code>
+
+</div>
+```

@@ -1,0 +1,21 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This is a shiny app I have developed which showcases how to make Shiny apps look nice using HTMLTemplates. The app itself explores my uber data.
+title:        "ubeRideR"
+author:    Vivek Katial
+authorurl:     https://vivekkatial.netlify.com
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - htmltemplates
+ - leaflet
+ - maps
+appurl:      https://vivekkatial.shinyapps.io/uber_shiny
+sourceurl:   https://github.com/vivekkatial/uber_shiny
+rscloudurl:  https://rstudio.cloud/project/258358
+---
+
+This is a shiny app I have developed which showcases how to make Shiny apps look nice using HTMLTemplates. The app itself explores my uber data.
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

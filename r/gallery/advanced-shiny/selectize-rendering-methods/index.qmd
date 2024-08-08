@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Selectize rendering methods
+date: 2014-07-29
+tags: 
+ - selectize
+appurl: https://gallery.shinyapps.io/021-selectize-plot
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/021-selectize-plot
+---

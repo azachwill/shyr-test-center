@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+title: "Didactic modeling process: Linear regression"
+description: "Users can try to perform a linear regression model based on the ordinary least squares method, step by step."
+author: "Oscar Daniel Rivera Baena"
+authorurl: "https://radiant-rstats.github.io/docs/"
+date: 2019-05-31
+no-app-padding: true
+tags:
+ - teaching
+ - regression
+ - modeling
+ - regression
+appurl:      "https://danielrivera1.shinyapps.io/Regression2/"
+sourceurl:   "https://github.com/radiant-rstats"
+rscloudurl:  "https://rstudio.cloud/project/249309"
+---
+
+This application constitutes a didactic modeling process. The user can try to perform a linear regression model based on the ordinary least squares method, step by step (learning environment). The application addresses an actual safety problem in the rural areas of Antioquia - Colombia.
+

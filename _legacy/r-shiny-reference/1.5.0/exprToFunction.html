@@ -1,0 +1,82 @@
+---
+layout: reference
+title: "Convert an expression to a function — exprToFunction"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Convert an expression to a function</h1>
+  
+
+  <pre class="code"><span class='fu'>exprToFunction</span>(<span class='no'>expr</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(), <span class='kw'>quoted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>A quoted or unquoted expression, or a function.</p></td>
+  </tr>
+  <tr>
+    <th><p>env</p></th>
+    <td><p>The desired environment for the function. Defaults to the
+calling environment two steps back.</p></td>
+  </tr>
+  <tr>
+    <th><p>quoted</p></th>
+    <td><p>Is the expression quoted?</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>This is to be called from another function, because it will attempt to get
+an unquoted expression from two calls back.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>If expr is a quoted expression, then this just converts it to a function.
+If expr is a function, then this simply returns expr (and prints a
+deprecation message).
+If expr was a non-quoted expression from two calls back, then this will
+quote the original expression and convert it to a function.</p>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'># Example of a new renderer, similar to renderText</span>
+<span class='co'># This is something that toolkit authors will do</span>
+<span class='no'>renderTriple</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>expr</span>, <span class='no'>env</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(), <span class='no'>quoted</span><span class='kw'>=</span><span class='fl'>FALSE</span>) {
+  <span class='co'># Convert expr to a function</span>
+  <span class='no'>func</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>shiny</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/exprToFunction.html'>exprToFunction</a></span>(<span class='no'>expr</span>, <span class='no'>env</span>, <span class='no'>quoted</span>)
+
+  <span class='kw'>function</span>() {
+    <span class='no'>value</span> <span class='kw'>&lt;-</span> <span class='fu'>func</span>()
+    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>value</span>, <span class='fl'>3</span>), <span class='kw'>collapse</span><span class='kw'>=</span><span class='st'>", "</span>)
+  }
+}
+
+
+<span class='co'># Example of using the renderer.</span>
+<span class='co'># This is something that app authors will do.</span>
+<span class='no'>values</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactiveValues.html'>reactiveValues</a></span>(<span class='kw'>A</span><span class='kw'>=</span><span class='st'>"text"</span>)
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Create an output object</span>
+<span class='no'>output</span>$<span class='no'>tripleA</span> <span class='kw'>&lt;-</span> <span class='fu'>renderTriple</span>({
+  <span class='no'>values</span>$<span class='no'>A</span>
+})
+}
+
+<span class='co'># At the R console, you can experiment with the renderer using isolate()</span>
+<span class='no'>tripleA</span> <span class='kw'>&lt;-</span> <span class='fu'>renderTriple</span>({
+  <span class='no'>values</span>$<span class='no'>A</span>
+})
+
+<span class='fu'><a href='isolate.html'>isolate</a></span>(<span class='fu'>tripleA</span>())
+<span class='co'># "text, text, text"</span></pre>
+</div>
+
+

@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: "ShinyWYSIWYG: visually design, by drag and drop, your Shiny apps. Easily create your app events."
+title:        "ShinyWYSIWYG: a Shiny What You See Is What You Get editor"
+author:    Juan Cruz Rodriguez
+authorurl:     https://jcrodriguez.rbind.io/
+date:         2019-05-31
+tags:       
+ - wysiwyg
+ - design
+ - editor
+ - teaching
+appurl:      https://jcrodriguez.shinyapps.io/shinyWYSIWYG/
+sourceurl:   https://github.com/jcrodriguez1989/shinyWYSIWYG
+rscloudurl:  https://rstudio.cloud/project/179139
+---
+
+ShinyWYSIWYG: visually design, by drag and drop, your Shiny apps. Easily create your app events. Then, ShinyWYSIWYG will automatically deliver the corresponding code so that the app is ready to run!
+  

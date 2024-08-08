@@ -1,0 +1,105 @@
+---
+layout: reference
+title: "fixedPage"
+categories: reference
+---
+<h1>Create a page with a fixed layout</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='fixedPage.html'>fixedPage</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">title</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">responsive</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">theme</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='fixedPage.html'>fixedRow</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Elements to include within the container</td>
+  </tr>
+  <tr>
+    <th>title</th>
+    <td>The browser window title (defaults to the host URL of the page)</td>
+  </tr>
+  <tr>
+    <th>responsive</th>
+    <td>This option is deprecated; it is no longer optional with
+Bootstrap 3.</td>
+  </tr>
+  <tr>
+    <th>theme</th>
+    <td>Alternative Bootstrap stylesheet (normally a css file within the
+www directory). For example, to use the theme located at
+<code>www/bootstrap.css</code> you would use <code>theme = &quot;bootstrap.css&quot;</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Functions for creating fixed page layouts. A fixed page layout consists of
+rows which in turn include columns. Rows exist for the purpose of making sure
+their elements appear on the same line (if the browser has adequate width).
+Columns exist for the purpose of defining how much horizontal space within a
+12-unit wide grid it&#39;s elements should occupy. Fixed pages limit their width
+to 940 pixels on a typical display, and 724px or 1170px on smaller and larger
+displays respectively.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>To create a fixed page use the <code>fixedPage</code> function and include
+  instances of <code>fixedRow</code> and <code><a href='column.html'>column</a></code> within it. Note that
+  unlike <code><a href='fluidPage.html'>fluidPage</a></code>, fixed pages cannot make use of higher-level
+  layout functions like <code>sidebarLayout</code>, rather, all layout must be done
+  with <code>fixedRow</code> and <code>column</code>.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+
+  <p>See the <a href = 'https://shiny.posit.co/articles/layout-guide.html'>
+  Shiny Application Layout Guide</a> for additional details on laying out fixed
+  pages.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fixedPage.html'>fixedPage</a></span><span class="keyword">(</span>
+  <span class="argument">title</span> <span class="argument">=</span> <span class="string">"Hello, Shiny!"</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='fixedPage.html'>fixedRow</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+      <span class="string">"4"</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">3</span><span class="keyword">,</span> <span class="argument">offset</span> <span class="argument">=</span> <span class="number">2</span><span class="keyword">,</span>
+      <span class="string">"3 offset 2"</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>fixedPage</li><li>fixedRow</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='column.html'>column</a></code></p>
+</div>

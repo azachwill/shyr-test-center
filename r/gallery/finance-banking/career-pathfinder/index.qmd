@@ -1,0 +1,23 @@
+---
+image:        thumbnail.png
+imagealt:     ""
+title:        "Career PathFinder"
+description:  Explore historical career choices at LA County and build your own path towards your goals.
+author:       George
+authorurl:    https://community.rstudio.com/u/georgemirandajr
+date:         2019-05-31
+no-app-padding: true
+tags:         
+ - human resources
+ - career
+ - government
+ - visNetwork
+ - DT
+appurl:       https://geom.shinyapps.io/careerpathfinder-beta/
+sourceurl:    https://github.com/georgemirandajr/career-pathfinder
+rscloudurl:   https://rstudio.cloud/project/251957
+---
+
+Explore historical career choices at LA County and build your own path towards your goals.
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

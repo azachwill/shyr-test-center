@@ -1,0 +1,12 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Word cloud
+date: 2014-07-29 
+tags:
+ - wordcloud
+ - text mining
+ - actionbutton
+appurl: https://gallery.shinyapps.io/082-word-cloud
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/082-word-cloud
+---

@@ -1,0 +1,42 @@
+---
+title: "Mark a render function with attributes that will be used by the output — markOutputAttrs"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>markOutputAttrs</span>(<span class='no'>renderFunc</span>, <span class='kw'>snapshotExclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>snapshotPreprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>renderFunc</p></th>
+    <td><p>A function that is suitable for assigning to a Shiny output
+slot.</p></td>
+  </tr>
+  <tr>
+    <th><p>snapshotExclude</p></th>
+    <td><p>If TRUE, exclude the output from test snapshots.</p></td>
+  </tr>
+  <tr>
+    <th><p>snapshotPreprocess</p></th>
+    <td><p>A function for preprocessing the value before
+taking a test snapshot.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Mark a render function with attributes that will be used by the output</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+</div>
+
+
+```

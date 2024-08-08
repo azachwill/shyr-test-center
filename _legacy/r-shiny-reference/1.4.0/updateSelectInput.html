@@ -1,0 +1,135 @@
+---
+layout: reference
+title: "Change the value of a select input on the client — updateSelectInput"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Change the value of a select input on the client</h1>
+  
+
+  <pre class="code"><span class='fu'>updateSelectInput</span>(<span class='no'>session</span>, <span class='no'>inputId</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>choices</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>updateSelectizeInput</span>(<span class='no'>session</span>, <span class='no'>inputId</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>choices</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>server</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>updateVarSelectInput</span>(<span class='no'>session</span>, <span class='no'>inputId</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>updateVarSelectizeInput</span>(<span class='no'>session</span>, <span class='no'>inputId</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>server</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>inputId</p></th>
+    <td><p>The id of the input object.</p></td>
+  </tr>
+  <tr>
+    <th><p>label</p></th>
+    <td><p>The label to set for the input object.</p></td>
+  </tr>
+  <tr>
+    <th><p>choices</p></th>
+    <td><p>List of values to select from. If elements of the list are
+named, then that name --- rather than the value --- is displayed to the
+user. It's also possible to group related inputs by providing a named list
+whose elements are (either named or unnamed) lists, vectors, or factors. In
+this case, the outermost names will be used as the group labels (leveraging
+the <code>&lt;optgroup&gt;</code> HTML tag) for the elements in the respective sublist. See
+the example section for a small demo of this feature.</p></td>
+  </tr>
+  <tr>
+    <th><p>selected</p></th>
+    <td><p>The initially selected value (or multiple values if <code>multiple = TRUE</code>). If not specified then defaults to the first value for
+single-select lists and no values for multiple select lists.</p></td>
+  </tr>
+  <tr>
+    <th><p>options</p></th>
+    <td><p>A list of options. See the documentation of <span class="pkg">selectize.js</span>
+for possible options (character option values inside <code><a href='https://rdrr.io/r/base/AsIs.html'>base::I()</a></code> will
+be treated as literal JavaScript code; see <code><a href='renderDataTable.html'>renderDataTable()</a></code>
+for details).</p></td>
+  </tr>
+  <tr>
+    <th><p>server</p></th>
+    <td><p>whether to store <code>choices</code> on the server side, and load
+the select options dynamically on searching, instead of writing all
+<code>choices</code> into the page at once (i.e., only use the client-side
+version of <span class="pkg">selectize.js</span>)</p></td>
+  </tr>
+  <tr>
+    <th><p>data</p></th>
+    <td><p>A data frame. Used to retrieve the column names as choices for a <code><a href='selectInput.html'>selectInput()</a></code></p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Change the value of a select input on the client</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+<p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href='numericInput.html'>numericInput</a>()</code> and
+<code><a href='updateNumericInput.html'>updateNumericInput()</a></code> take a similar set of arguments.</p>
+<p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+<p>For <code><a href='radioButtons.html'>radioButtons</a>()</code>, <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a>()</code> and
+<code><a href='selectInput.html'>selectInput</a>()</code>, the set of choices can be cleared by using
+<code>choices=character(0)</code>. Similarly, for these inputs, the selected item
+can be cleared by using <code>selected=character(0)</code>.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='selectInput.html'>selectInput()</a></code> <code><a href='varSelectInput.html'>varSelectInput()</a></code></p></div>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'><a href='builder.html'>p</a></span>(<span class='st'>"The checkbox group controls the select input"</span>),
+  <span class='fu'><a href='checkboxGroupInput.html'>checkboxGroupInput</a></span>(<span class='st'>"inCheckboxGroup"</span>, <span class='st'>"Input checkbox"</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Item A"</span>, <span class='st'>"Item B"</span>, <span class='st'>"Item C"</span>)),
+  <span class='fu'><a href='selectInput.html'>selectInput</a></span>(<span class='st'>"inSelect"</span>, <span class='st'>"Select input"</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Item A"</span>, <span class='st'>"Item B"</span>, <span class='st'>"Item C"</span>))
+)
+
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'><a href='observe.html'>observe</a></span>({
+    <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>input</span>$<span class='no'>inCheckboxGroup</span>
+
+    <span class='co'># Can use character(0) to remove all choices</span>
+    <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>x</span>))
+      <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>)
+
+    <span class='co'># Can also set the label and select items</span>
+    <span class='fu'>updateSelectInput</span>(<span class='no'>session</span>, <span class='st'>"inSelect"</span>,
+      <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Select input label"</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>x</span>)),
+      <span class='kw'>choices</span> <span class='kw'>=</span> <span class='no'>x</span>,
+      <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span>(<span class='no'>x</span>, <span class='fl'>1</span>)
+    )
+  })
+}
+
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+

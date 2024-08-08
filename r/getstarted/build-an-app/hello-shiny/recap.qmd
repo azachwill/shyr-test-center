@@ -1,0 +1,56 @@
+---
+title: "Recap"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+---
+
+#### Let's quickly recap what we have learned in this tutorial.
+
+Every Shiny app has a webpage that the user visits, and behind this webpage there is a computer that serves this webpage by running R.
+
+![](../images/recap-1.png){style="width:80%;" .lightbox .shadow fig-alt="Image of 'R' in the background with a view of a Shiny app of a 'Google Trend Index'. The app has Trend Indexes and Date Range on the left and a line plot of Date by Trend on the right. The plot has lines that peak and trough with similar patters for each year."}
+
+###
+
+When running your app locally, the computer serving your app is your computer.
+
+![](../images/recap-2.png){style="width:80%;" .lightbox .shadow fig-alt="Image of R on a laptop with arrows going back and forth with an image of a Shiny app on 'Google Trend Index'."}
+
+###
+
+When your app is deployed, the computer serving your app is a web server.
+
+![](../images/recap-3.png){style="width:80%;" .lightbox .shadow fig-alt="Image of R on a web server on the left and arrows going back and forth, and with a picture of a cloud, to an image of a Shiny app on 'Google Trend Index'."}
+
+###
+
+Each app is comprised of two components, a UI and a server.
+
+![](../images/recap-4.png){style="width:80%;" .lightbox .shadow fig-alt="Figure of a server and R file saying 'Server instructions' on the left with arrows going back and forth, and with a picture of a cloud, to an image of a Shiny app on 'Google Trend Index' and images of JS, HTML and CSS labeled 'User interface' on the right."}
+
+-   The UI is ultimately built with HTML, CSS, and JavaScript. However, you as the Shiny developer do not need to know these languages. Shiny lets R users write user interfaces using a simple, familiar-looking API. However there are no limits to customization for advanced users who are familiar with these languages.
+
+-   The server function contains the instructions to map user inputs to outputs.
+
+I often think of the UI as containing syntax specific to Shiny, and the server as containing R code you might already be familiar with -- with some Shiny functions added to achieve reactivity.
+
+### Tip: Change display
+
+In this tutorial you will be developing your apps in Posit Cloud projects, but once you're done with the tutorial you might consider developing your apps in the RStudio IDE, which has some some handy-dandy functionality for running and viewing your apps.
+
+RStudio will automatically recognize R scripts that contain `ui` and `server` components and that end with a call to the `shinyApp()` function and will make available the Run App button. You can choose to run your app in a new window, or in the viewer pane of your RStudio window.
+
+![](../images/recap-5.png){.lightbox .shadow fig-alt="Image of the RStudio IDE with the drop down under Run App with 'Run in Viewer Pane' selected and highlighted."}
+
+### Tip: Close an app
+
+When you are done with an app, you can terminate the session by clicking the red stop button in your viewer pane.
+
+![](../images/recap-6.png){.lightbox .shadow fig-alt="Image of the RStudio IDE with the 'Stop' buttons in the Console and the Viewer highlighted."}
+
+###
+
+That's all for this module! In the next module we discuss inputs, outputs, and rendering functions in further detail.

@@ -1,0 +1,364 @@
+---
+layout: post
+title: Shiny HTML Tags Glossary
+edited: 2017-08-08
+author: Garrett Grolemund
+description: Shiny provides a list of functions named tags. Each function in the list creates an HTML tag that you can use to layout your Shiny App. But what if you are unfamiliar with HTML tags? The glossary in this article explains what the most popular tags in tags do.
+---
+
+In [Customize your Shiny UI with HTML](/articles/html-tags.html) you saw that Shiny provides a list of functions named `tags`. Each function in the list creates an HTML tag that you can use to layout your Shiny App. But what if you are unfamiliar with HTML tags? The glossary below explains what the most popular tags in `tags` do.
+
+## tags
+
+The `shiny::tags` object contains R functions that recreate 110 HTML tags.
+
+{% highlight r %}
+names(tags)
+##   [1] "a"           "abbr"        "address"     "area"        "article"
+##   [6] "aside"       "audio"       "b"           "base"        "bdi"
+##  [11] "bdo"         "blockquote"  "body"        "br"          "button"
+##  [16] "canvas"      "caption"     "cite"        "code"        "col"
+##  [21] "colgroup"    "command"     "data"        "datalist"    "dd"
+##  [26] "del"         "details"     "dfn"         "div"         "dl"
+##  [31] "dt"          "em"          "embed"       "eventsource" "fieldset"
+##  [36] "figcaption"  "figure"      "footer"      "form"        "h1"
+##  [41] "h2"          "h3"          "h4"          "h5"          "h6"
+##  [46] "head"        "header"      "hgroup"      "hr"          "html"
+##  [51] "i"           "iframe"      "img"         "input"       "ins"
+##  [56] "kbd"         "keygen"      "label"       "legend"      "li"
+##  [61] "link"        "mark"        "map"         "menu"        "meta"
+##  [66] "meter"       "nav"         "noscript"    "object"      "ol"
+##  [71] "optgroup"    "option"      "output"      "p"           "param"
+##  [76] "pre"         "progress"    "q"           "ruby"        "rp"
+##  [81] "rt"          "s"           "samp"        "script"      "section"
+##  [86] "select"      "small"       "source"      "span"        "strong"
+##  [91] "style"       "sub"         "summary"     "sup"         "table"
+##  [96] "tbody"       "td"          "textarea"    "tfoot"       "th"
+## [101] "thead"       "time"        "title"       "tr"          "track"
+## [106] "u"           "ul"          "var"         "video"       "wbr"
+{% endhighlight %}
+
+You can use any of these functions by subsetting the `tags` list. For example to create an `h1` header in HTML, run:
+
+{% highlight r %}
+tags$h1("My header")
+## <h1>My header</h1> 
+{% endhighlight %}
+
+Some tags functions come with a helper function that makes accessing them easier. For example, the `shiny::h1` function is a wrapper for `tags$h1`. 
+
+However, you can access many of the functions in tags only through `tags` because they share a name with a common R function.
+
+The glossary below explains what the most popular tag functions do. The tag functions that do not appear here are less popular, but still useful. You can look them up at an HTML documentation site such as [w3schools](http://www.w3schools.com/tags/).
+
+#### Note about non-standard attribute names
+Like in all R code, if you need to use a non-standard argument or variable name, you will also need to use backticks around it. This can come up for attribute names, since a few of these will include dashes. For example, the following code will not work:
+
+{% highlight r %}
+tags$div(data-value = "test")      # bad
+## Error: unexpected '=' in "tags$div(data-value ="
+{% endhighlight %}
+
+Here's the correct version:
+{% highlight r %}
+tags$div(`data-value` = "test")    # good
+## <div data-value="test"></div>
+{% endhighlight %}
+
+### a
+
+Creates a link to a web page. You can access the "a" tag with the helper function `a`.
+
+Common Attributes  | Description  
+-------------- | ---------------- 
+href            | the address of the web page to link to
+
+{% highlight r %}
+tags$a(href="www.rstudio.com", "Click here!")
+## <a href="www.rstudio.com">Click here!</a> 
+{% endhighlight %}
+
+
+### audio
+Adds an audio element (e.g., a sound to your app).
+
+Common Attributes  | Description  
+-------------- | ---------------- 
+autoplay    | A valueless attribute. If present, audio starts playing automatically when loaded
+controls           | A valueless attribute. If present, play controls are displayed
+src           | The location of the audio file to play
+type          | The type of file to play
+
+{% highlight r %}
+tags$audio(src = "sound.mp3", type = "audio/mp3", autoplay = NA, controls = NA)
+## <audio src="sound.mp3" type="audio/mp3" autoplay controls></audio>
+{% endhighlight %}
+
+### b
+Creates bold text.
+
+{% highlight r %}
+tags$b("This text is bold.")
+## <b>This text is bold.</b>
+{% endhighlight %}
+
+### blockquote
+Creates a block of quoted text. Usually it is displayed in a special way.
+
+Common Attributes  | Description  
+-------------- | ---------------- 
+cite            | the source of the quote
+
+{% highlight r %}
+tags$blockquote("Tidy data sets are all the same. Each messy data set is messy in its own way.", cite = "Hadley Wickham")
+## <blockquote cite="Hadley Wickham">Tidy data sets are all the same. Each messy data set is messy in its own way.</blockquote>
+{% endhighlight %}
+
+### br
+Creates a line break. You can use the helper function `br`.
+
+{% highlight r %}
+tags$div(
+  "Some text followed by a break", 
+  tags$br(),
+  "Some text following a break"
+)
+## <div>
+##   Some text followed by a break
+##   <br/>
+##   Some text following a break
+## </div>
+{% endhighlight %}
+
+### code
+Creates text formatted as computer code. You can use the helper function `code`.
+
+{% highlight r %}
+tags$code("This text will be displayed as computer code.")
+## <code>This text will be displayed as computer code.</code> 
+{% endhighlight %}
+
+### div
+Creates a section (e.g., "division") of an HTML document. divs provide a useful hook for CSS styling. You can use the helper function `div`.
+
+Common Attributes  | Description  
+-------------- | ---------------- 
+class            | The class of the div, a useful way to style the div with CSS
+id                 | The ID of the div, a useful way to style the div with CSS
+style            | CSS styling to apply to the div
+
+{% highlight r %}
+tags$code("This text will be displayed as computer code.")
+## <code>This text will be displayed as computer code.</code> 
+{% endhighlight %}
+
+### em
+Creates emphasized (e.g., italicized) text. You can use the helper function `em`.
+
+{% highlight r %}
+tags$em("This text is emphasized.")
+## <em>This text is emphasized.</em>
+{% endhighlight %}
+
+### embed
+Embed a plug-in or third party application.
+
+Common Attributes  | Description  
+-------------- | ---------------- 
+src            | The source of the file to embed
+type                | The MIME type of the embedded content
+height           | The height of the embedded content
+width           | The width of the embedded content
+
+{% highlight r %}
+tags$embed(src = "animation.swf")
+## <embed src="animation.swf"/> 
+{% endhighlight %}
+
+### h1, h2, h3, h4, h5, h6
+Adds hierarchical headings. `h1` creates a first level heading and `h2` through `h6` create a hierarchy of decreasing subheadings. You can use the helper functions `h1`, `h2`, `h3`, `h4`, `h5`, `h6`.
+
+{% highlight r %}
+tags$div(
+    tags$h1("Heading"), 
+    tags$h2("Subheading"), 
+    tags$h3("Subsubheading"), 
+    tags$h4("Subsubsubheading"), 
+    tags$h5("Subsubsubsubheading"), 
+    tags$h6("Subsubsubsubsubheading") 
+)
+## <div>
+##   <h1>Heading</h1>
+##   <h2>Subheading</h2>
+##   <h3>Subsubheading</h3>
+##   <h4>Subsubsubheading</h4>
+##   <h5>Subsubsubsubheading</h5>
+##   <h6>Subsubsubsubsubheading</h6>
+## </div> 
+{% endhighlight %}
+
+### hr
+Adds a horizontal line (e.g., horizontal rule). You can use the helper function `hr`.
+
+{% highlight r %}
+tags$hr()
+## <hr/> 
+{% endhighlight %}
+
+### i
+Creates italicized text.
+
+{% highlight r %}
+tags$i("This text is italicized.")
+## <i>This text is italicized.</i>
+{% endhighlight %}
+
+### iframe
+Creates an inline frame to embed an HTML document in.
+
+Common Attributes  | Description  
+-------------------|----------------- 
+src                | The URL of the HTML document to embed
+srcdoc             | A raw HTML document to embed
+scrolling          | Should iframe display scrollbars (`yes`, `no`, `auto`)
+seamless           | A valueless attribute. Should the iframe seem like part of the web page?
+height             | The height of the iframe
+width              | The width of the iframe
+name               | The name of the iframe
+
+{% highlight r %}
+tags$iframe(src = "www.rstudio.com", seamless=NA)
+## <iframe src="www.rstudio.com" seamless></iframe>
+{% endhighlight %}
+
+### img
+Creates an image. You can use the helper function `img`.
+
+Common Attributes | Description  
+------------------|----------------- 
+src               | The source of the image to embed
+height            | The height of the image
+width             | The width of the image
+
+{% highlight r %}
+tags$img(src = "www.rstudio.com", width = "100px", height = "100px")
+## <img src="www.rstudio.com" width="100px" height="100px"/>
+{% endhighlight %}
+
+### link
+Creates a link to a separate document. Normally used with CSS style sheets.
+
+### ol and li
+Create an ordered list (i.e., a numbered list).
+
+{% highlight r %}
+tags$ol(
+    tags$li("First list item"), 
+    tags$li("Second list item"), 
+    tags$li("Third list item")
+)
+## <ol>
+##   <li>First list item</li>
+##   <li>Second list item</li>
+##   <li>Third list item</li>
+## </ol> 
+{% endhighlight %}
+
+### p
+Create a paragraph (a block of text that begins on its own line). You can access the p tag with the helper function `p` too.
+
+{% highlight r %}
+tags$div(
+    tags$p("First paragraph"), 
+    tags$p("Second paragraph"), 
+    tags$p("Third paragraph")
+)
+## <div>
+##   <p>First paragraph</p>
+##   <p>Second paragraph</p>
+##   <p>Third paragraph</p>
+## </div> 
+{% endhighlight %}
+
+### pre
+Create pre-formatted text, text that looks like computer code. You can use the helper function `pre`.
+
+{% highlight r %}
+tags$pre("This text is preformatted.")
+## <pre>This text is preformatted.</pre>
+{% endhighlight %}
+
+### script
+Add a client-side script such as javascript. You must wrap the actual script in `HTML` to prevent it from being passed as text.
+
+{% highlight r %}
+tags$script(HTML("if (window.innerHeight < 400) alert('Screen too small');"))
+{% endhighlight %}
+
+### span
+Create a group of inline elements. Normally used to style a string of text. You can use the helper function `span`.
+
+{% highlight r %}
+tags$div(
+    HTML(paste("This text is ", tags$span(style="color:red", "red"), sep = ""))
+)
+## <div>This text is <span style="color:red">red</span></div>
+{% endhighlight %}
+
+### strong
+Create bold text. You can use the helper function `strong`.
+
+{% highlight r %}
+tags$strong("This text is strongly emphasized.")
+## <strong>This text is strongly emphasized.</strong>
+{% endhighlight %}
+
+### style
+Create style specifications. A way to add CSS styles directly to your Shiny App.
+
+### sub, sup
+Create subscript or super script.
+
+{% highlight r %}
+tags$div(
+    HTML(paste("E = mc", tags$sup(2), sep = "")), 
+    HTML(paste("H", tags$sub(2), "0", sep = ""))
+)
+## <div>
+##   E = mc<sup>2</sup>
+##   H<sub>2</sub>0
+## </div>
+{% endhighlight %}
+
+### ul and li
+Create an unordered list (i.e., a list of bullet points).
+
+{% highlight r %}
+tags$ul(
+    tags$li("First list item"), 
+    tags$li("Second list item"), 
+    tags$li("Third list item")
+)
+## <ul>
+##   <li>First list item</li>
+##   <li>Second list item</li>
+##   <li>Third list item</li>
+## </ul> 
+{% endhighlight %}
+
+### video
+Add a video.
+
+Common Attributes  | Description  
+-------------------|---------------- 
+autoplay           | A valueless attribute. If present, video starts playing automatically when loaded
+controls           | A valueless attribute. If present, Shiny will display play controls.
+src                | The location of the video file to play
+height             | The height of the video
+width              | The width of the video
+
+
+{% highlight r %}
+tags$video(src = "video.mp4", type = "video/mp4", autoplay = NA, controls = NA)
+## <video src="video.mp4" type="video/mp4" autoplay controls></video>
+{% endhighlight %}

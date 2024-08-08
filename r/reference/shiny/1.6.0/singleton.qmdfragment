@@ -1,0 +1,41 @@
+---
+title: "Include content only once — singleton"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>singleton</span>(<span class='no'>x</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>is.singleton</span>(<span class='no'>x</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>x</p></th>
+    <td><p>A <code><a href='tag.html'>tag</a></code>, text, <code><a href='HTML.html'>HTML</a></code>, or list.</p></td>
+  </tr>
+  <tr>
+    <th><p>value</p></th>
+    <td><p>Whether the object should be a singleton.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Use <code>singleton</code> to wrap contents (tag, text, HTML, or lists) that should
+be included in the generated document only once, yet may appear in the
+document-generating code more than once. Only the first appearance of the
+content (in document order) will be used.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+</div>
+
+
+```

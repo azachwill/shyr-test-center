@@ -1,0 +1,60 @@
+---
+title: Upgrade notes for Shiny 1.7.0
+---
+
+## Full changelog
+
+### Breaking changes
+
+- The `format` and `locale` arguments to [`sliderInput()`](./sliderInput.html) have been removed. They have been deprecated since 0.10.2.2 (released on 2014-12-08).
+
+- Closed [#3403](https://github.com/rstudio/shiny/issues/3403): [`insertTab()`](./insertTab.html)'s `position` parameter now defaults to `"after"` instead of `"before"`. This has the benefit of allowing us to fix a bug in positioning when `target = NULL`, but has the drawback of changing the default behavior when `target` is not `NULL`. ([#3404](https://github.com/rstudio/shiny/issues/3404))
+
+### New features and improvements
+
+- Bootstrap 5 support. ([#3410](https://github.com/rstudio/shiny/issues/3410) and [rstudio/bslib#304](https://github.com/rstudio/bslib/issues/304))
+
+  - As explained [here](https://rstudio.github.io/bslib/index.html#basic-usage), to opt-in to Bootstrap 5, provide `bslib::bs_theme(version = 5)` to a page layout function with a `theme` argument (e.g., [`fluidPage()`](./fluidPage.html), [`navbarPage()`](./navbarPage.html), etc).
+
+- Closed [#3322](https://github.com/rstudio/shiny/issues/3322), [#3313](https://github.com/rstudio/shiny/issues/3313), [#1823](https://github.com/rstudio/shiny/issues/1823), [#3321](https://github.com/rstudio/shiny/issues/3321), [#3320](https://github.com/rstudio/shiny/issues/3320), [#1928](https://github.com/rstudio/shiny/issues/1928), and [#2310](https://github.com/rstudio/shiny/issues/2310): Various improvements to [`navbarPage()`](./navbarPage.html), [`tabsetPanel()`](./tabsetPanel.html), [`tabPanel()`](./tabPanel.html), [`navbarMenu()`](./navbarPage.html), etc. Also, these functions are now powered by the [bslib](https://rstudio.github.io/bslib/) package's new `nav()` API (consider using [bslib](https://rstudio.github.io/bslib/)'s API to create better looking and more fully featured navs). ([#3388](https://github.com/rstudio/shiny/issues/3388))
+
+- All uses of `list(...)` have been replaced with `rlang::list2(...)`. This means that you can use trailing `,` without error and use rlang's `!!!` operator to "splice" a list of argument values into `...`. We think this'll be particularly useful for passing a list of [`tabPanel()`](./tabPanel.html) to their consumers (i.e., [`tabsetPanel()`](./tabsetPanel.html), [`navbarPage()`](./navbarPage.html), etc). For example, `tabs <- list(tabPanel("A", "a"), tabPanel("B", "b")); navbarPage(!!!tabs)`. ([#3315](https://github.com/rstudio/shiny/issues/3315) and [#3328](https://github.com/rstudio/shiny/issues/3328))
+
+- [`installExprFunction()`](./createRenderFunction.html) and [`exprToFunction()`](./exprToFunction.html) are now able to handle quosures when `quoted = TRUE`. So `render`-functions which call these functions (such as with `htmlwidgets`) can now understand quosures. Users can also use [`rlang::inject()`](https://rlang.r-lib.org/reference/inject.html) to unquote a quosure for evaluation. This also means that `render` function no longer need `env` and `quoted` parameters; that information can be embedded into a quosure which is then passed to the `render` function. Better documentation was added for how to create `render` functions. ([#3472](https://github.com/rstudio/shiny/issues/3472))
+
+- `icon(lib="fontawesome")` is now powered by the [fontawesome](https://github.com/rstudio/fontawesome) package, which will make it easier to use the latest FA icons in the future (by updating the [fontawesome](https://github.com/rstudio/fontawesome) package). ([#3302](https://github.com/rstudio/shiny/issues/3302))
+
+- Closed [#3397](https://github.com/rstudio/shiny/issues/3397): [`renderPlot()`](./renderPlot.html) new uses [`ggplot2::get_alt_text()`](https://ggplot2.tidyverse.org/reference/get_alt_text.html) to inform an `alt` text default (for [ggplot2](https://ggplot2.tidyverse.org) plots). ([#3398](https://github.com/rstudio/shiny/issues/3398))
+
+- [`modalDialog()`](./modalDialog.html) gains support for `size = "xl"`. ([#3410](https://github.com/rstudio/shiny/issues/3410))
+
+- Addressed [#2521](https://github.com/rstudio/shiny/issues/2521): Updated the list of TCP ports that will be rejected by default in runapp.R, adding 5060, 5061 and 6566. Added documentation describing the port range (3000:8000) and which ports are rejected. ([#3456](https://github.com/rstudio/shiny/issues/3456))
+
+### Other improvements
+
+- Shiny's core JavaScript code was converted to TypeScript. For the latest development information, please see the [README.md in `./srcts`](https://github.com/rstudio/shiny/tree/master/srcts). ([#3296](https://github.com/rstudio/shiny/issues/3296))
+
+- Switched from [`digest::digest()`](https://rdrr.io/pkg/digest/man/digest.html) to [`rlang::hash()`](https://rlang.r-lib.org/reference/hash.html) for hashing. ([#3264](https://github.com/rstudio/shiny/issues/3264))
+
+- Switched from internal `Stack` class to [`fastmap::faststack()`](https://r-lib.github.io/fastmap/reference/faststack.html), and used [`fastmap::fastqueue()`](https://r-lib.github.io/fastmap/reference/fastqueue.html). ([#3176](https://github.com/rstudio/shiny/issues/3176))
+
+- Some long-deprecated functions and function parameters were removed. ([#3137](https://github.com/rstudio/shiny/issues/3137))
+
+### Bug fixes
+
+- Closed [#3345](https://github.com/rstudio/shiny/issues/3345): Shiny now correctly renders [`htmltools::htmlDependency()`](https://rstudio.github.io/htmltools/reference/htmlDependency.html)(s) with a [`list()`](https://rdrr.io/r/base/list.html) of `script` attributes when used in a dynamic UI context. This fairly new `htmlDependency()` feature was added in [htmltools](https://github.com/rstudio/htmltools) v0.5.1. ([#3395](https://github.com/rstudio/shiny/issues/3395))
+
+- Fixed [\#2666](https://github.com/rstudio/shiny/issues/2666) and [\#2670](https://github.com/rstudio/shiny/issues/2670): [`nearPoints()`](./brushedPoints.html) and [`brushedPoints()`](./brushedPoints.html) weren't properly account for missing values ([#2666](https://github.com/rstudio/shiny/issues/2666) was introduced in v1.4.0). ([\#2668](https://github.com/rstudio/shiny/pull/2668))
+
+- Closed [#3374](https://github.com/rstudio/shiny/issues/3374): [`quoToFunction()`](./createRenderFunction.html) now works correctly with nested quosures; and as a result, quasi-quotation with rendering function (e.g., [`renderPrint()`](./renderPrint.html), [`renderPlot()`](./renderPlot.html), etc) now works as expected with nested quosures. ([#3373](https://github.com/rstudio/shiny/issues/3373))
+
+- Exported [`register_devmode_option()`](./devmode.html). This method was described in the documentation for [`devmode()`](./devmode.html) but was never exported. See `?devmode()` for more details on how to register Shiny Developer options using [`register_devmode_option()`](./devmode.html). ([#3364](https://github.com/rstudio/shiny/issues/3364))
+
+- Closed [#3484](https://github.com/rstudio/shiny/issues/3484): In the RStudio IDE on Mac 11.5, selected checkboxes and radio buttons were not visible. ([#3485](https://github.com/rstudio/shiny/issues/3485))
+
+### Library updates
+
+- Closed [#3286](https://github.com/rstudio/shiny/issues/3286): Updated to Font-Awesome 5.15.2. ([#3288](https://github.com/rstudio/shiny/issues/3288))
+
+- Updated to jQuery 3.6.0. ([#3311](https://github.com/rstudio/shiny/issues/3311))
+

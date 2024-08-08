@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: null
+title: Client data and query string
+date: 2014-07-29 
+tags: 
+ - clientdata
+ - query-string
+appurl: https://gallery.shinyapps.io/032-client-data-and-query-string
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/032-client-data-and-query-string
+---

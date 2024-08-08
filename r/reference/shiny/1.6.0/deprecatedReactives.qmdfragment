@@ -1,0 +1,57 @@
+---
+title: "Deprecated reactive functions — deprecatedReactives"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>reactivePlot</span>(<span class='no'>func</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"auto"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"auto"</span>, <span class='no'>...</span>)
+
+<span class='fu'>reactiveTable</span>(<span class='no'>func</span>, <span class='no'>...</span>)
+
+<span class='fu'>reactivePrint</span>(<span class='no'>func</span>)
+
+<span class='fu'>reactiveUI</span>(<span class='no'>func</span>)
+
+<span class='fu'>reactiveText</span>(<span class='no'>func</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>func</p></th>
+    <td><p>A function.</p></td>
+  </tr>
+  <tr>
+    <th><p>width</p></th>
+    <td><p>Width.</p></td>
+  </tr>
+  <tr>
+    <th><p>height</p></th>
+    <td><p>Height.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Other arguments to pass on.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p><a href='https://www.tidyverse.org/lifecycle/#superseded'><img src='figures/lifecycle-superseded.svg' alt='Superseded lifecycle'></a></p>
+<p><code>reactivePlot</code> has been replaced by <code><a href='renderPlot.html'>renderPlot()</a></code>.</p>
+<p><code>reactiveTable</code> has been replaced by <code><a href='renderTable.html'>renderTable()</a></code>.</p>
+<p><code>reactivePrint</code> has been replaced by <code><a href='renderPrint.html'>renderPrint()</a></code>.</p>
+<p><code>reactiveUI</code> has been replaced by <code><a href='renderUI.html'>renderUI()</a></code>.</p>
+<p><code>reactiveText</code> has been replaced by <code><a href='renderPrint.html'>renderText()</a></code>.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+</div>
+
+
+```

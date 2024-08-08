@@ -1,0 +1,93 @@
+---
+title: "removeUI"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='removeUI.html'>removeUI</a></span><span class="keyword">(</span><span class="symbol">selector</span><span class="keyword">,</span> <span class="argument">multiple</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">immediate</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>selector</th>
+    <td>A string that is accepted by jQuery&#39;s selector (i.e. the
+string <code>s</code> to be placed in a <code>$(s)</code> jQuery call). This selector
+will determine the element(s) to be removed. If you want to remove a
+Shiny input or output, note that many of these are wrapped in <code>div</code>s,
+so you may need to use a somewhat complex selector -- see the Examples below.
+(Alternatively, you could also wrap the inputs/outputs that you want to be
+able to remove easily in a <code>div</code> with an id.)</td>
+  </tr>
+  <tr>
+    <th>multiple</th>
+    <td>In case your selector matches more than one element,
+<code>multiple</code> determines whether Shiny should remove all the matched
+elements or just the first matched element (default).</td>
+  </tr>
+  <tr>
+    <th>immediate</th>
+    <td>Whether the element(s) should be immediately removed from
+the app when you call <code>removeUI</code>, or whether Shiny should wait until
+all outputs have been updated and all observers have been run (default).</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>The shiny session within which to call <code>removeUI</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Remove a UI object from the app.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This function allows you to remove any part of your UI. Once <code>removeUI</code>
+is executed on some element, it is gone forever.</p>
+
+  <p>While it may be a particularly useful pattern to pair this with
+<code><a href='insertUI.html'>insertUI</a></code> (to remove some UI you had previously inserted),
+there is no restriction on what you can use <code>removeUI</code> on. Any
+element that can be selected through a jQuery selector can be removed
+through this function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+<span class="comment"># Define UI</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"rmv"</span><span class="keyword">,</span> <span class="string">"Remove UI"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"This is no longer useful"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="comment"># Server logic</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">rmv</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='removeUI.html'>removeUI</a></span><span class="keyword">(</span>
+      <span class="argument">selector</span> <span class="argument">=</span> <span class="string">"div:has(&gt; #txt)"</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="comment"># Complete app with UI and server components</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>removeUI</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='insertUI.html'>insertUI</a></code></p>
+</div>
+```

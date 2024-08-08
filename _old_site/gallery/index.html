@@ -1,0 +1,190 @@
+---
+layout: default
+title: Gallery
+categories: gallery
+child_scope: /gallery/
+featured_tags:
+  - getting-started
+  - datatables
+  - application-layout
+  - reactivity
+---
+
+<style type="text/css">
+.gallery-tag, #all-tags-button {
+  margin-bottom: 3px;
+}
+#featured-tags {
+  margin-bottom: 16px;
+}
+#all-tags {
+  display: block;
+}
+</style>
+<script>
+$(document).on("click", "#all-tags-button", function(e) {
+  $("#featured-tags").fadeOut(function() {
+    $("#all-tags").fadeIn(function() {
+      location.hash = "#alltags";
+    });
+  });
+});
+$(function() {
+  if (location.hash == "#alltags") {
+    $("#featured-tags").hide();
+    $("#all-tags").show();
+  }
+});
+window.onhashchange = function() {
+  if (location.hash == "#alltags") {
+    if ($("#featured-tags").is(":visible")) {
+      $("#featured-tags").hide();
+      $("#all-tags").show();
+    }
+  } else {
+    if ($("#all-tags").is(":visible")) {
+      $("#featured-tags").show();
+      $("#all-tags").hide();
+    }
+  }
+};
+</script>
+<style type="text/css">
+.article-group .gallery-app-item {
+  display: block;
+  float: left;
+  width: 25%;
+  padding-right: 6px;
+}
+</style>
+
+<h1>Gallery</h1>
+
+<div id="galleryContent">
+  <div class="bandGallery leftText">
+    <div class="bandContent">
+      <div class="blurb">
+        Welcome to the Shiny Gallery! Below you can find a myriad of Shiny apps to be inspired by and to learn from. We have organized the apps in two main categories: 
+        <ul>
+          <li><a href="#user-showcase"><strong>Shiny User Showcase</strong></a> comprised of contributions from the Shiny app developer community.</li>
+          <li><a href="#demos"><strong>Shiny Demos</strong></a> that are designed to highlight specific features of shiny, the package.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2><a name="user-showcase">Shiny User Showcase</a></h2>
+
+<div id="galleryContentSub">
+  <div class="bandGallery leftText">
+    <div class="bandContent">
+      <div class="blurb">
+        The Shiny User Showcase is comprised of contributions from the Shiny app developer community. The apps are categorized into application areas and presented with a brief description, tags, and for many, the source code. Note that many of these apps are winners and honorable mentions of our <a href="https://blog.rstudio.com/2019/04/05/first-shiny-contest-winners/">annual Shiny contest</a>!
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  {% for group in site.data.showcase %}
+    {% include showcase-group.html group=group %}
+    {% cycle '', '<div class="clearfix"></div>' %}
+  {% endfor %}
+</div>
+
+<!--
+<div class="showcase-home" role="list">
+    <section class="feature-block">
+      <h2 class="feature-block-title">
+        <a class="showcase-home-title-link" href="{/category/{{page.showcase_feature | downcase | url_encode }}">
+          {{page.showcase_feature}}
+        </a>
+      </h2>
+      <ul class="feature-block-items-list">
+      {% for post in site.categories[page.showcase_feature] limit:4 %} 
+        <li class="feature-block-item feature-card-{{forloop.index}}">
+          {% include category_card.html 
+          card_thumbnail="https://www.fillmurray.com/330/200"
+          card_thumb_alt="this is a placeholder image that should be replaced. Bill Murray, as an older man, dressed as a Ghostbuster."
+          card_app_page=post.url
+          card_app_title=post.title
+          card_author_url=post.user_url
+          card_author=post.user_name
+          %}
+        </li>
+      {% endfor %}
+      </ul>
+      <p class="feature-block-desc">
+        {{page.showcase_feature_text}} 
+        <a href="/category/{{page.showcase_feature | downcase | url_encode }}">See all&hellip;</a>
+      <p>
+    </section>
+    <section class="mini-feature-block">
+      <h2 class="mini-feature-block-title">
+        <a class="showcase-home-title-link" href="/category/{{page.showcase_minifeature | downcase | url_encode }}">
+          {{page.showcase_minifeature}} 
+        </a>
+      </h2>
+      <h3>
+        {{page.showcase_minifeature_text}} 
+        <span class="showcase-home-seeall">
+          <a href="/category/{{page.showcase_minifeature | downcase | url_encode }}">See all&hellip;</a>
+        </span>
+      </h3>
+      <ul class="mini-feature-block-list">
+        {% for post in site.categories[page.showcase_minifeature] limit:5 %}
+        <li class="mini-feature-block-item">
+          {% include category_card.html 
+                  card_thumbnail="https://www.fillmurray.com/330/200"
+                  card_thumb_alt="this is a placeholder image that should be replaced. Bill Murray, as an older man, dressed as a Ghostbuster."
+                  card_app_page=post.url
+                  card_app_title=post.title
+                  %}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    {% if site.categories.size > 0 %}
+      {% for category in site.categories %}
+        {% assign category_name = category[0] %}
+        {% if category_name != page.showcase_feature and category_name != page.showcase_minifeature %}
+          <div class="category-card" role="listitem">
+            <h2>
+              <a class="showcase-home-title-link" href="/category/{{category_name | downcase | url_encode }}">
+                {{category_name}}
+              </a>
+            </h2>
+            {% for post in site.categories[category_name] limit:1 %}
+              <a href="/category/{{category_name | downcase | url_encode }}">
+                <img src="https://www.fillmurray.com/330/200" />
+              </a>
+            {% endfor %}
+            </div>
+        {% endif %}
+      {% endfor %}
+  {% endif %} 
+</div>
+-->
+
+<br><br>
+
+<h2><a name="demos">Shiny Demos</a></h2>
+
+<div id="galleryContentSub">
+  <div class="bandGallery leftText">
+    <div class="bandContent">
+      <div class="blurb">
+        Shiny Demos are a series of apps created by the Shiny developers and are designed to highlight specific features of the shiny package. Each app is presented along with its source code to help you implement these features in your apps. Many of these apps are linked from relevant articles as well.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  {% for group in site.data.gallery %}
+    {% include gallery-group.html group=group %}
+    {% cycle '', '<div class="clearfix"></div>' %}
+  {% endfor %}
+</div>

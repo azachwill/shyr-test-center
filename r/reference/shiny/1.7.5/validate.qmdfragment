@@ -1,0 +1,100 @@
+---
+title: "Validate input values and other conditions — validate"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.5</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.5/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p><code>validate()</code> provides convenient mechanism for validating that an output
+has all the inputs necessary for successful rendering. It takes any number
+of (unnamed) arguments, each representing a condition to test. If any
+of condition fails (i.e. is not <a href="isTruthy.html">"truthy"</a>), a special type of
+error is signaled to stop execution. If this error is not handled by
+application-specific code, it is displayed to the user by Shiny.</p>
+<p>If you use <code>validate()</code> in a <code><a href="reactive.html">reactive()</a></code> validation failures will
+automatically propagate to outputs that use the reactive.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">validate</span>(..., <span class="at">errorClass =</span> <span class="fu">character</span>(<span class="dv">0</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">need</span>(expr, <span class="at">message =</span> <span class="fu">paste</span>(label, <span class="st">"must be provided"</span>), label)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>A list of tests. Each test should equal <code>NULL</code> for success,
+<code>FALSE</code> for silent failure, or a string for failure with an error
+message.</p></dd>
+
+
+<dt>errorClass</dt>
+<dd><p>A CSS class to apply. The actual CSS string will have
+<code>shiny-output-error-</code> prepended to this value.</p></dd>
+
+
+<dt>expr</dt>
+<dd><p>An expression to test. The condition will pass if the expression
+meets the conditions spelled out in Details.</p></dd>
+
+
+<dt>message</dt>
+<dd><p>A message to convey to the user if the validation condition is
+not met. If no message is provided, one will be created using <code>label</code>.
+To fail with no message, use <code>FALSE</code> for the message.</p></dd>
+
+
+<dt>label</dt>
+<dd><p>A human-readable name for the field that may be missing. This
+parameter is not needed if <code>message</code> is provided, but must be provided
+otherwise.</p></dd>
+
+</dl></div>
+  <div data-section="need-">
+    <h3 id="need-"><code>need()</code></h3>
+    
+
+<p>An easy way to provide arguments to <code>validate()</code> is to use <code>need()</code>, which
+takes an expression and a string. If the expression is not
+<a href="isTruthy.html">"truthy"</a> then the string will be used as the error message.</p>
+<p>If "truthiness" is flexible for your use case, you'll need to explicitly
+generate a logical values. For example, if you want allow <code>NA</code> but not
+<code>NULL</code>, you can <code>!is.null(input$foo)</code>.</p>
+<p>If you need validation logic that differs significantly from <code>need()</code>, you
+can create your own validation test functions. A passing test should return
+<code>NULL</code>. A failing test should return either a string providing the error
+to display to the user, or if the failure should happen silently, <code>FALSE</code>.</p>
+<p>Alternatively you can use <code>validate()</code> within an <code>if</code> statement, which is
+particularly useful for more complex conditions:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (input<span class="sc">$</span>x <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> input<span class="sc">$</span>choice <span class="sc">==</span> <span class="st">"positive"</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="fu">validate</span>(<span class="st">"If choice is positive then x must be greater than 0"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>}</span></code></pre><p></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">device.ask.default =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">checkboxGroupInput</span>(<span class="st">'in1'</span>, <span class="st">'Check some letters'</span>, <span class="at">choices =</span> <span class="fu">head</span>(LETTERS)),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="fu">selectizeInput</span>(<span class="st">'in2'</span>, <span class="st">'Select a state'</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">""</span>, state.name)),</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">'plot'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="fu">validate</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>      <span class="fu">need</span>(input<span class="sc">$</span>in1, <span class="st">'Check at least one letter!'</span>),</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>      <span class="fu">need</span>(input<span class="sc">$</span>in2 <span class="sc">!=</span> <span class="st">''</span>, <span class="st">'Please choose a state.'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    )</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">main =</span> <span class="fu">paste</span>(<span class="fu">c</span>(input<span class="sc">$</span>in1, input<span class="sc">$</span>in2), <span class="at">collapse =</span> <span class="st">', '</span>))</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  })</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>}</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

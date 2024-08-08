@@ -1,0 +1,127 @@
+---
+title: "Create a textarea input control — textAreaInput"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>textAreaInput</span>(
+  <span class='no'>inputId</span>,
+  <span class='no'>label</span>,
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>placeholder</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>resize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>inputId</p></th>
+    <td><p>The <code>input</code> slot that will be used to access the value.</p></td>
+  </tr>
+  <tr>
+    <th><p>label</p></th>
+    <td><p>Display label for the control, or <code>NULL</code> for no label.</p></td>
+  </tr>
+  <tr>
+    <th><p>value</p></th>
+    <td><p>Initial value.</p></td>
+  </tr>
+  <tr>
+    <th><p>width</p></th>
+    <td><p>The width of the input, e.g. <code>'400px'</code>, or <code>'100%'</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>height</p></th>
+    <td><p>The height of the input, e.g. <code>'400px'</code>, or <code>'100%'</code>; see
+<code><a href='validateCssUnit.html'>validateCssUnit()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>cols</p></th>
+    <td><p>Value of the visible character columns of the input, e.g. <code>80</code>.
+This argument will only take effect if there is not a CSS <code>width</code> rule
+defined for this element; such a rule could come from the <code>width</code> argument
+of this function or from a containing page layout such as
+<code><a href='fluidPage.html'>fluidPage()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>rows</p></th>
+    <td><p>The value of the visible character rows of the input, e.g. <code>6</code>.
+If the <code>height</code> argument is specified, <code>height</code> will take precedence in the
+browser's rendering.</p></td>
+  </tr>
+  <tr>
+    <th><p>placeholder</p></th>
+    <td><p>A character string giving the user a hint as to what can
+be entered into the control. Internet Explorer 8 and 9 do not support this
+option.</p></td>
+  </tr>
+  <tr>
+    <th><p>resize</p></th>
+    <td><p>Which directions the textarea box can be resized. Can be one of
+<code>"both"</code>, <code>"none"</code>, <code>"vertical"</code>, and <code>"horizontal"</code>. The default, <code>NULL</code>,
+will use the client browser's default setting for resizing textareas.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Create a textarea input control for entry of unstructured text values.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A textarea input control that can be added to a UI definition.</p>
+  <h3 class="hasAnchor" id="server-value"><a class="anchor" href="#server-value"></a>Server value</h3>
+
+  
+
+<p>A character string of the text input. The default value is <code>""</code>
+unless <code>value</code> is provided.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='updateTextAreaInput.html'>updateTextAreaInput()</a></code></p>
+<p>Other input elements: 
+<code><a href='actionButton.html'>actionButton</a>()</code>,
+<code><a href='checkboxGroupInput.html'>checkboxGroupInput</a>()</code>,
+<code><a href='checkboxInput.html'>checkboxInput</a>()</code>,
+<code><a href='dateInput.html'>dateInput</a>()</code>,
+<code><a href='dateRangeInput.html'>dateRangeInput</a>()</code>,
+<code><a href='fileInput.html'>fileInput</a>()</code>,
+<code><a href='numericInput.html'>numericInput</a>()</code>,
+<code><a href='passwordInput.html'>passwordInput</a>()</code>,
+<code><a href='radioButtons.html'>radioButtons</a>()</code>,
+<code><a href='selectInput.html'>selectInput</a>()</code>,
+<code><a href='sliderInput.html'>sliderInput</a>()</code>,
+<code><a href='submitButton.html'>submitButton</a>()</code>,
+<code><a href='textInput.html'>textInput</a>()</code>,
+<code><a href='varSelectInput.html'>varSelectInput</a>()</code></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'>textAreaInput</span>(<span class='st'>"caption"</span>, <span class='st'>"Caption"</span>, <span class='st'>"Data Summary"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"1000px"</span>),
+  <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"value"</span>)
+)
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+  <span class='no'>output</span>$<span class='no'>value</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderText</a></span>({ <span class='no'>input</span>$<span class='no'>caption</span> })
+}
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+}</pre>
+</div>
+
+
+```

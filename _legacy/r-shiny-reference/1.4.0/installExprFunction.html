@@ -1,0 +1,76 @@
+---
+layout: reference
+title: "Install an expression as a function — installExprFunction"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Install an expression as a function</h1>
+  
+
+  <pre class="code"><span class='fu'>installExprFunction</span>(<span class='no'>expr</span>, <span class='no'>name</span>, <span class='kw'>eval.env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(<span class='fl'>2</span>),
+  <span class='kw'>quoted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>assign.env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(<span class='fl'>1</span>),
+  <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(-<span class='fl'>1</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]), <span class='kw'>wrappedWithLabel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>..stacktraceon</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>A quoted or unquoted expression</p></td>
+  </tr>
+  <tr>
+    <th><p>name</p></th>
+    <td><p>The name the function should be given</p></td>
+  </tr>
+  <tr>
+    <th><p>eval.env</p></th>
+    <td><p>The desired environment for the function. Defaults to the
+calling environment two steps back.</p></td>
+  </tr>
+  <tr>
+    <th><p>quoted</p></th>
+    <td><p>Is the expression quoted?</p></td>
+  </tr>
+  <tr>
+    <th><p>assign.env</p></th>
+    <td><p>The environment in which the function should be assigned.</p></td>
+  </tr>
+  <tr>
+    <th><p>label</p></th>
+    <td><p>A label for the object to be shown in the debugger. Defaults to
+the name of the calling function.</p></td>
+  </tr>
+  <tr>
+    <th><p>wrappedWithLabel, ..stacktraceon</p></th>
+    <td><p>Advanced use only. For stack manipulation purposes; see
+<code><a href='stacktrace.html'>stacktrace()</a></code>.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Installs an expression in the given environment as a function, and registers
+debug hooks so that breakpoints may be set in the function.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>This function can replace <code>exprToFunction</code> as follows: we may use
+<code>func &lt;- exprToFunction(expr)</code> if we do not want the debug hooks, or
+<code>installExprFunction(expr, "func")</code> if we do. Both approaches create a
+function named <code>func</code> in the current environment.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p>Wraps <code><a href='exprToFunction.html'>exprToFunction()</a></code>; see that method's documentation
+for more documentation and examples.</p></div>
+  
+  </div>
+
+</div>
+
+

@@ -1,0 +1,22 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: Wonder what one week of metro traffic would look like? Wanna see the heaviest/lightest traffic times for your NYC metro stops? Check out this app below.
+title:        "Animated NYC metro traffic"
+author:    Tiger Tang
+authorurl:     https://twitter.com/tigerloveslobs1
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - leaflet
+ - async
+ - caching
+ - promises
+appurl:      https://gallery.shinyapps.io/nyc-metro-vis/
+sourceurl:   https://github.com/rstudio/shiny-gallery/tree/master/nyc-metro-vis
+rscloudurl:  https://rstudio.cloud/project/259682
+---
+
+Wonder what one week of metro traffic would look like? Wanna see the heaviest/lightest traffic times for your NYC metro stops? Check out this app below.
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

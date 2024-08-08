@@ -1,0 +1,158 @@
+---
+title: "Task or computation that proceeds in the background — ExtendedTask"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.9.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.9.0/R/extended-task.R" class="external-link"><code>R/extended-task.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>In normal Shiny reactive code, whenever an observer, calc, or
+output is busy computing, it blocks the current session from receiving any
+inputs or attempting to proceed with any other computation related to that
+session.</p>
+<p>The <code>ExtendedTask</code> class allows you to have an expensive operation that is
+started by a reactive effect, and whose (eventual) results can be accessed
+by a regular observer, calc, or output; but during the course of the
+operation, the current session is completely unblocked, allowing the user
+to continue using the rest of the app while the operation proceeds in the
+background.</p>
+<p>Note that each <code>ExtendedTask</code> object does not represent a <em>single
+invocation</em> of its long-running function. Rather, it's an object that is
+used to invoke the function with different arguments, keeps track of
+whether an invocation is in progress, and provides ways to get at the
+current status or results of the operation. A single <code>ExtendedTask</code> object
+does not permit overlapping invocations: if the <code>invoke()</code> method is called
+before the previous <code>invoke()</code> is completed, the new invocation will not
+begin until the previous invocation has completed.</p></div>
+
+
+  <div data-section="extendedtask-versus-asynchronous-reactives">
+    <h3 id="extendedtask-versus-asynchronous-reactives"><code>ExtendedTask</code> versus asynchronous reactives</h3>
+    
+
+
+<p>Shiny has long supported <a href="https://rstudio.github.io/promises/articles/promises_06_shiny.html" class="external-link">using {promises}</a>
+to write asynchronous observers, calcs, or outputs. You may be wondering
+what the differences are between those techniques and this class.</p>
+<p>Asynchronous observers, calcs, and outputs are not--and have never
+been--designed to let a user start a long-running operation, while keeping
+that very same (browser) session responsive to other interactions. Instead,
+they unblock other sessions, so you can take a long-running operation that
+would normally bring the entire R process to a halt and limit the blocking
+to just the session that started the operation. (For more details, see the
+section on <a href="https://rstudio.github.io/promises/articles/promises_06_shiny.html#the-flush-cycle" class="external-link">"The Flush Cycle"</a>.)</p>
+<p><code>ExtendedTask</code>, on the other hand, invokes an asynchronous function (that
+is, a function that quickly returns a promise) and allows even that very
+session to immediately unblock and carry on with other user interactions.</p>
+  </div>
+  <div data-section="methods">
+    <h3 id="methods">Methods</h3>
+    
+<div class="section">
+<h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
+
+<ul><li><p><a href="#method-ExtendedTask-new"><code>ExtendedTask$new()</code></a></p></li>
+<li><p><a href="#method-ExtendedTask-invoke"><code>ExtendedTask$invoke()</code></a></p></li>
+<li><p><a href="#method-ExtendedTask-status"><code>ExtendedTask$status()</code></a></p></li>
+<li><p><a href="#method-ExtendedTask-result"><code>ExtendedTask$result()</code></a></p></li>
+</ul></div><p></p><hr><a id="method-ExtendedTask-new"></a><div class="section">
+<h3 id="method-new-">Method <code><a href="https://rdrr.io/r/methods/new.html" class="external-link">new()</a></code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+<p>Creates a new <code>ExtendedTask</code> object. <code>ExtendedTask</code> should generally be
+created either at the top of a server function, or at the top of a module
+server function.</p><div class="section">
+<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ExtendedTask.html">ExtendedTask</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">func</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>func</code></dt>
+<dd><p>The long-running operation to execute. This should be an
+asynchronous function, meaning, it should use the
+<a href="https://rstudio.github.io/promises/" class="external-link">{promises}</a> package, most
+likely in conjuction with the
+<a href="https://rstudio.github.io/promises/articles/promises_04_futures.html" class="external-link">{future}</a>
+package. (In short, the return value of <code>func</code> should be a
+<code><a href="https://future.futureverse.org/reference/future.html" class="external-link">Future</a></code> object, or a <code>promise</code>, or something else
+that <code><a href="https://rstudio.github.io/promises/reference/is.promise.html" class="external-link">promises::as.promise()</a></code> understands.)</p>
+<p>It's also important that this logic does not read from any
+reactive inputs/sources, as inputs may change after the function is
+invoked; instead, if the function needs to access reactive inputs, it
+should take parameters and the caller of the <code>invoke()</code> method should
+read reactive inputs and pass them as arguments.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-ExtendedTask-invoke"></a><div class="section">
+<h3 id="method-invoke-">Method <code>invoke()</code><a class="anchor" aria-label="anchor" href="#method-invoke-"></a></h3>
+<p>Starts executing the long-running operation. If this <code>ExtendedTask</code> is
+already running (meaning, a previous call to <code>invoke()</code> is not yet
+complete) then enqueues this invocation until after the current
+invocation, and any already-enqueued invocation, completes.</p><div class="section">
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ExtendedTask</span><span class="op">$</span><span class="fu">invoke</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>...</code></dt>
+<dd><p>Parameters to use for this invocation of the underlying
+function. If reactive inputs are needed by the underlying function,
+they should be read by the caller of <code>invoke</code> and passed in as
+arguments.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-ExtendedTask-status"></a><div class="section">
+<h3 id="method-status-">Method <code>status()</code><a class="anchor" aria-label="anchor" href="#method-status-"></a></h3>
+<p>This is a reactive read that invalidates the caller when the task's
+status changes.</p>
+<p>Returns one of the following values:</p><ul><li><p><code>"initial"</code>: This <code>ExtendedTask</code> has not yet been invoked</p></li>
+<li><p><code>"running"</code>: An invocation is currently running</p></li>
+<li><p><code>"success"</code>: An invocation completed successfully, and a value can be
+retrieved via the <code>result()</code> method</p></li>
+<li><p><code>"error"</code>: An invocation completed with an error, which will be
+re-thrown if you call the <code>result()</code> method</p></li>
+</ul><div class="section">
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ExtendedTask</span><span class="op">$</span><span class="fu">status</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-ExtendedTask-result"></a><div class="section">
+<h3 id="method-result-">Method <code>result()</code><a class="anchor" aria-label="anchor" href="#method-result-"></a></h3>
+<p>Attempts to read the results of the most recent invocation. This is a
+reactive read that invalidates as the task's status changes.</p>
+<p>The actual behavior differs greatly depending on the current status of
+the task:</p><ul><li><p><code>"initial"</code>: Throws a silent error (like <code><a href="req.html">req(FALSE)</a></code>). If
+this happens during output rendering, the output will be blanked out.</p></li>
+<li><p><code>"running"</code>: Throws a special silent error that, if it happens during
+output rendering, makes the output appear "in progress" until further
+notice.</p></li>
+<li><p><code>"success"</code>: Returns the return value of the most recent invocation.</p></li>
+<li><p><code>"error"</code>: Throws whatever error was thrown by the most recent
+invocation.</p></li>
+</ul><p>This method is intended to be called fairly naively by any output or
+reactive expression that cares about the output--you just have to be
+aware that if the result isn't ready for whatever reason, processing will
+stop in much the same way as <code>req(FALSE)</code> does, but when the result is
+ready you'll get invalidated, and when you run again the result should be
+there.</p>
+<p>Note that the <code>result()</code> method is generally not meant to be used with
+<code><a href="observeEvent.html">observeEvent()</a></code>, <code><a href="observeEvent.html">eventReactive()</a></code>, <code><a href="bindEvent.html">bindEvent()</a></code>, or <code><a href="isolate.html">isolate()</a></code> as the
+invalidation will be ignored.</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ExtendedTask</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div>
+
+  </div>
+
+</div>
+```

@@ -1,0 +1,226 @@
+---
+layout: reference
+title: "Implement custom render functions — createRenderFunction"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Implement custom render functions</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/shinywrappers.R" class="external-link"><code>R/shinywrappers.R</code></a>, <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/utils-lang.R" class="external-link"><code>R/utils-lang.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Developer-facing utilities for implementing a custom <code>renderXXX()</code> function.
+Before using these utilities directly, consider using the <a href="http://www.htmlwidgets.org/develop_intro.html" class="external-link"><code>htmlwidgets</code> package</a> to implement custom
+outputs (i.e., custom <code>renderXXX()</code>/<code>xxxOutput()</code> functions). That said,
+these utilities can be used more directly if a full-blown htmlwidget isn't
+needed and/or the user-supplied reactive expression needs to be wrapped in
+additional call(s).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">createRenderFunction</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  func,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="cf">function</span>(value, session, name, ...) value,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">outputFunc =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outputArgs =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cacheHint =</span> <span class="st">"auto"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cacheWriteHook =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">cacheReadHook =</span> <span class="cn">NULL</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">quoToFunction</span>(q, <span class="at">label =</span> <span class="fu">sys.call</span>(<span class="sc">-</span><span class="dv">1</span>)[[<span class="dv">1</span>]], <span class="at">..stacktraceon =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">installExprFunction</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  expr,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  name,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">eval.env =</span> <span class="fu">parent.frame</span>(<span class="dv">2</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">quoted =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">assign.env =</span> <span class="fu">parent.frame</span>(<span class="dv">1</span>),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">sys.call</span>(<span class="sc">-</span><span class="dv">1</span>)[[<span class="dv">1</span>]],</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrappedWithLabel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">..stacktraceon =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>func</dt>
+<dd><p>A function without parameters, that returns user data. If the
+returned value is a promise, then the render function will proceed in async
+mode.</p></dd>
+
+
+<dt>transform</dt>
+<dd><p>A function that takes four arguments: <code>value</code>,
+<code>session</code>, <code>name</code>, and <code>...</code> (for future-proofing). This
+function will be invoked each time a value is returned from <code>func</code>,
+and is responsible for changing the value into a JSON-ready value to be
+JSON-encoded and sent to the browser.</p></dd>
+
+
+<dt>outputFunc</dt>
+<dd><p>The UI function that is used (or most commonly used) with
+this render function. This can be used in R Markdown documents to create
+complete output widgets out of just the render function.</p></dd>
+
+
+<dt>outputArgs</dt>
+<dd><p>A list of arguments to pass to the <code>uiFunc</code>. Render
+functions should include <code>outputArgs = list()</code> in their own parameter list,
+and pass through the value to <code>markRenderFunction</code>, to allow app authors to
+customize outputs. (Currently, this is only supported for dynamically
+generated UIs, such as those created by Shiny code snippets embedded in R
+Markdown documents).</p></dd>
+
+
+<dt>cacheHint</dt>
+<dd><p>One of <code>"auto"</code>, <code>FALSE</code>, or some other information to
+identify this instance for caching using <code><a href="bindCache.html">bindCache()</a></code>. If <code>"auto"</code>, it
+will try to automatically infer caching information. If <code>FALSE</code>, do not
+allow caching for the object. Some render functions (such as <a href="renderPlot.html">renderPlot</a>)
+contain internal state that makes them unsuitable for caching.</p></dd>
+
+
+<dt>cacheWriteHook</dt>
+<dd><p>Used if the render function is passed to <code><a href="bindCache.html">bindCache()</a></code>.
+This is an optional callback function to invoke before saving the value
+from the render function to the cache. This function must accept one
+argument, the value returned from <code>renderFunc</code>, and should return the value
+to store in the cache.</p></dd>
+
+
+<dt>cacheReadHook</dt>
+<dd><p>Used if the render function is passed to <code><a href="bindCache.html">bindCache()</a></code>.
+This is an optional callback function to invoke after reading a value from
+the cache (if there is a cache hit). The function will be passed one
+argument, the value retrieved from the cache. This can be useful when some
+side effect needs to occur for a render function to behave correctly. For
+example, some render functions call <code><a href="createWebDependency.html">createWebDependency()</a></code> so that Shiny
+is able to serve JS and CSS resources.</p></dd>
+
+
+<dt>q</dt>
+<dd><p>Quosure of the expression <code>x</code>. When capturing expressions to create
+your quosure, it is recommended to use <code>enquo0()</code> to not unquote the
+object too early. See <code>enquo0()</code> for more details.</p></dd>
+
+
+<dt>label</dt>
+<dd><p>A label for the object to be shown in the debugger. Defaults to
+the name of the calling function.</p></dd>
+
+
+<dt>expr</dt>
+<dd><p>A quoted or unquoted expression, or a quosure.</p></dd>
+
+
+<dt>name</dt>
+<dd><p>The name the function should be given</p></dd>
+
+
+<dt>eval.env</dt>
+<dd><p>The desired environment for the function. Defaults to the
+calling environment two steps back.</p></dd>
+
+
+<dt>quoted</dt>
+<dd><p>Is the expression quoted?</p></dd>
+
+
+<dt>assign.env</dt>
+<dd><p>The environment in which the function should be assigned.</p></dd>
+
+
+<dt>wrappedWithLabel, ..stacktraceon</dt>
+<dd><p>Advanced use only. For stack manipulation purposes; see
+<code><a href="stacktrace.html">stacktrace()</a></code>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>An annotated render function, ready to be assigned to an
+<code>output</code> slot.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>To implement a custom <code>renderXXX()</code> function, essentially 2 things are needed:</p><ol><li><p>Capture the user's reactive expression as a function.</p><ul><li><p>New <code>renderXXX()</code> functions can use <code>quoToFunction()</code> for this, but
+already existing <code>renderXXX()</code> functions that contain <code>env</code> and <code>quoted</code>
+parameters may want to continue using <code>installExprFunction()</code> for better
+legacy support (see examples).</p></li>
+</ul></li>
+<li><p>Flag the resulting function (from 1) as a Shiny rendering function and
+also provide a UI container for displaying the result of the rendering
+function.</p><ul><li><p><code>createRenderFunction()</code> is currently recommended (instead of
+<code><a href="markRenderFunction.html">markRenderFunction()</a></code>) for this step (see examples).</p></li>
+</ul></li>
+</ol></div>
+  <div data-section="functions">
+    <h3 id="functions">Functions</h3>
+    
+<ul><li><p><code>quoToFunction()</code>: convert a quosure to a function.</p></li>
+<li><p><code>installExprFunction()</code>: converts a user's reactive <code>expr</code> into a
+function that's assigned to a <code>name</code> in the <code>assign.env</code>.</p></li>
+</ul></div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A custom render function that repeats the supplied value 3 times</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>renderTriple <span class="ot">&lt;-</span> <span class="cf">function</span>(expr) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wrap user-supplied reactive expression into a function</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  func <span class="ot">&lt;-</span> <span class="fu">quoToFunction</span>(rlang<span class="sc">::</span><span class="fu">enquo0</span>(expr))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">createRenderFunction</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    func,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">transform =</span> <span class="cf">function</span>(value, session, name, ...) {</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(<span class="fu">rep</span>(value, <span class="dv">3</span>), <span class="at">collapse=</span><span class="st">", "</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">outputFunc =</span> textOutput</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># For better legacy support, consider using installExprFunction() over quoToFunction()</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>renderTripleLegacy <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, <span class="at">env =</span> <span class="fu">parent.frame</span>(), <span class="at">quoted =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  func <span class="ot">&lt;-</span> <span class="fu">installExprFunction</span>(expr, <span class="st">"func"</span>, env, quoted)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">createRenderFunction</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    func,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">transform =</span> <span class="cf">function</span>(value, session, name, ...) {</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(<span class="fu">rep</span>(value, <span class="dv">3</span>), <span class="at">collapse=</span><span class="st">", "</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">outputFunc =</span> textOutput</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Test render function from the console</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">reactiveConsole</span>(<span class="cn">TRUE</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">reactiveVal</span>(<span class="st">"basic"</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">renderTriple</span>({ <span class="fu">v</span>() })</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">r</span>()</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "basic, basic, basic"</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># User can supply quoted code via rlang::quo(). Note that evaluation of the</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># expression happens when r2() is invoked, not when r2 is created.</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">quo</span>({ <span class="fu">v</span>() })</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">inject</span>(<span class="fu">renderTriple</span>(<span class="sc">!!</span>q))</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">v</span>(<span class="st">"rlang"</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">r2</span>()</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "rlang, rlang, rlang"</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Supplying quoted code without rlang::quo() requires installExprFunction()</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> <span class="fu">quote</span>({ <span class="fu">v</span>() })</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>r3 <span class="ot">&lt;-</span> <span class="fu">renderTripleLegacy</span>(expr, <span class="at">quoted =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">v</span>(<span class="st">"legacy"</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">r3</span>()</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "legacy, legacy, legacy"</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co"># The legacy approach also supports with quosures (env is ignored in this case)</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">quo</span>({ <span class="fu">v</span>() })</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>r4 <span class="ot">&lt;-</span> <span class="fu">renderTripleLegacy</span>(q, <span class="at">quoted =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">v</span>(<span class="st">"legacy-rlang"</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">r4</span>()</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "legacy-rlang, legacy-rlang, legacy-rlang"</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn off reactivity in the console</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">reactiveConsole</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+---
+layout: reference
+title: "Modify tag contents — tagAppendChild"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Modify tag contents</h1>
+  
+
+  <pre class="code"><span class='fu'>tagAppendChild</span>(<span class='no'>tag</span>, <span class='no'>child</span>, <span class='kw'>.cssSelector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>tagAppendChildren</span>(<span class='no'>tag</span>, <span class='no'>...</span>, <span class='kw'>.cssSelector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>tagSetChildren</span>(<span class='no'>tag</span>, <span class='no'>...</span>, <span class='kw'>.cssSelector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>tagInsertChildren</span>(<span class='no'>tag</span>, <span class='no'>after</span>, <span class='no'>...</span>, <span class='kw'>.cssSelector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>tag</p></th>
+    <td><p>a <a href='builder.html'>tag</a> object.</p></td>
+  </tr>
+  <tr>
+    <th><p>child</p></th>
+    <td><p>A child element to append to a parent tag.</p></td>
+  </tr>
+  <tr>
+    <th><p>.cssSelector</p></th>
+    <td><p>A character string containing a <a href='https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors'>CSS selector</a>
+for targeting particular (inner) tags of interest. At the moment, only a
+combination of
+<a href='https://www.w3.org/TR/CSS22/selector.html#type-selectors'>type</a> (e.g,
+<code>div</code>), <a href='https://www.w3.org/TR/CSS22/selector.html#class-html'>class</a>
+(e.g., <code>.my-class</code>),
+<a href='https://www.w3.org/TR/CSS22/selector.html#id-selectors'>id</a> (e.g.,
+<code>#myID</code>), and
+<a href='https://www.w3.org/TR/CSS22/selector.html#universal-selector'>universal</a>
+(<code>*</code>) selectors within a given <a href='https://www.w3.org/TR/CSS22/selector.html#selector-syntax'>simple selector</a> is
+supported. Note, if <code>.cssSelector</code> is used, the returned tags will have
+their <code>$children</code> fields flattened to a single <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> via <code>tagQuery()</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>a collection of <code>child</code> elements.</p></td>
+  </tr>
+  <tr>
+    <th><p>list</p></th>
+    <td><p>Deprecated. Use <code>!!!</code> instead to splice into <code>...</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>after</p></th>
+    <td><p>an integer value (i.e., subscript) referring to the child position to append after.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Modify the contents (aka children) of a <a href='builder.html'>tag</a> object.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='tagAppendAttributes.html'>tagAppendAttributes()</a></code>, <code>tagQuery()</code></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='no'>html</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='builder.html'>div</a></span>(<span class='fu'><a href='builder.html'>a</a></span>(), <span class='fu'><a href='builder.html'>h1</a></span>())
+<span class='fu'>tagAppendChild</span>(<span class='no'>html</span>, <span class='fu'><a href='builder.html'>span</a></span>())
+<span class='fu'>tagAppendChild</span>(<span class='no'>html</span>, <span class='kw'>.cssSelector</span> <span class='kw'>=</span> <span class='st'>"a"</span>, <span class='fu'><a href='builder.html'>span</a></span>())
+
+<span class='fu'>tagAppendChildren</span>(<span class='no'>html</span>, <span class='fu'><a href='builder.html'>span</a></span>(), <span class='fu'><a href='builder.html'>p</a></span>())
+<span class='fu'>tagAppendChildren</span>(<span class='no'>html</span>, <span class='kw'>.cssSelector</span> <span class='kw'>=</span> <span class='st'>"a"</span>, <span class='fu'><a href='builder.html'>span</a></span>(), <span class='fu'><a href='builder.html'>p</a></span>())
+
+<span class='fu'>tagSetChildren</span>(<span class='no'>html</span>, <span class='fu'><a href='builder.html'>span</a></span>(), <span class='fu'><a href='builder.html'>p</a></span>())
+
+<span class='fu'>tagInsertChildren</span>(<span class='no'>html</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='fu'><a href='builder.html'>span</a></span>(), <span class='fu'><a href='builder.html'>p</a></span>())</pre>
+</div>
+
+

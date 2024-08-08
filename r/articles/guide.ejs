@@ -1,0 +1,28 @@
+::: {.link-cards}
+
+::: {.grid}
+
+
+<% for (const item of items) { %>
+::: {.g-col-lg-4 .g-col-md-6 .g-col-12}
+::: {.card}
+::: {.card-body}
+::: {.card-title}
+##### <%- item.title %>{.mt-4} 
+<% if (item.subtitle) { %>
+::: {.card-subtitle .text-muted}
+###### <%- item.subtitle %>
+:::
+<% } %>
+:::
+<% for (const link of item.links) { %>
+- [<%- link.text %>](<%- link.href %>)
+<% } %>
+:::
+:::
+:::
+<% } %>
+
+
+:::
+:::

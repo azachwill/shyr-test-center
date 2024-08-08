@@ -1,0 +1,381 @@
+---
+title: "Server function"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+always_allow_html: true
+---
+
+Now that you've had some practice with the UI, it's time to move on to the server function.
+
+Again, before we get into the details, let's remind ourselves of the anatomy of a Shiny app. The basic task of the server function is to define the relationship between inputs and outputs.
+
+### Here again is the app that we are working with in this module
+
+Earlier we saw how to build the UI of this app, and we also noted that each input was tagged with an `inputId` that can be used to refer to them in the server.
+
+![](../images/app-selectinput-scatterplot.png){.lightbox .shadow fig-alt="Shiny app with Y-axis of audience_score and X-axis of critics_score from the movies.RData dataset. Those variables are in a box on the left. On the right is a scatterplot of the data. Points cover the whole plot, but have a general linear upward trend with a slope of 1. This will be our Shiny app that we'll be using and modifying in this lesson."}
+
+### This is the server function code for this app
+
+Once again there is a lot going on here to parse at once, so in the following sections we take a closer look at the function.
+
+![](../images/server.png){.lightbox .shadow fig-alt="Code block of Shiny app highlighting the '#Define server function required to create the scatterplot'."}
+
+### At the outermost layer
+
+![](../images/server-outermost.png){.lightbox .shadow fig-alt="Arrow pointing to the line of code in the Shiny app that says 'server <- function(input, output, session) {' and says Contains instructions needed to build app."}
+
+We define our server function which takes two arguments: an `input` and an `output`. Both of these are named lists.
+
+The server function accesses inputs selected by the user to perform computations and specifies how outputs laid out in the UI should be updated.
+
+The server function can take on one more argument, `session`, which is an environment that can be used to access information and functionality relating to the session. However this concept is beyond the scope of this tutorial, so for now we'll stick to server functions that only have input and output arguments.
+
+### `output`
+
+Our simple app had only one output -- a plot. So our server function contains the logic necessary to build this plot.
+
+![](../images/output-1.png){.lightbox .shadow fig-alt="Arrow pointing to line of code in the Shiny app that says 'output$scatterplot <- renderPlot({'."}
+
+The `renderPlot()` function specifies how the plot output should be updated. Let's take a look at what is happening in the `renderPlot()` function first.
+
+### `renderPlot()`
+
+![](../images/renderplot.png){.lightbox .shadow fig-alt="Arrow pointing to line of code in the Shiny app that says 'ggplot(data = movies, aes_string(x = input$x, y = input$y)) + geom_point()' and says Good ol' ggplot2 code with inputs from UI."}
+
+This is good ol' ggplot2 code! So even if you're new to shiny, if you've previously used ggplot2 for plotting in R, this syntax should look familiar to you.
+
+One aspect of the syntax that might be new, however, is how the x and y variables are defined. They come from the input list that is built in the UI.
+
+### Inputs
+
+Here is the relevant UI and server code.
+
+![](../images/inputs-x-y.png){.lightbox .shadow fig-alt="Arrows pointing from the section of code in the 'ui' section with the y and x variables to the section in the 'server' section where it defines the inputs as x=input$x and y=input$y."}
+
+Input x and y come from the `selectInput()` widgets, and map to the `x` and `y` arguments of the plot aesthetics.
+
+### Rules of server functions
+
+There are three rules of building server functions:
+
+1.  Always save objects to display to the named output list, i.e. something of the form `output$xx`, where `xx` is the plot you want to display.
+
+2.  Always build objects to display with one of the `render*()` functions, like we built our plot with `renderPlot()`.
+
+3.  Use input values from the named input list, with `input$xx`.
+
+### Output types
+
+Just like various inputs, Shiny also provides a wide selection of output types each of which works with a render function.
+
+::: py-3
+![](../images/cheatsheet-outputs.png){.lightbox .shadow style="width:90%;" fig-alt="Outputs section of the Shiny cheatsheet"}
+:::
+
+For example, in our app we used the `renderPlot()` function to build our reactive plot (we'll get to what I mean by reactive in a second) and laid out the plot with the `plotOutput()` function.
+
+![](../images/render-output-pairs.png){.lightbox .shadow fig-alt="Arrows pointing from the 'plotOutput' and 'scatterplot' sections of the code in the 'ui' section to the 'output$scatterplot <- renderPlot({' line in the 'server' section."}
+
+Shiny knows to match these two together as they use the same `outputID`, scatterplot.
+
+In the following exercises you'll get a chance to work with other render/output function pairs to add more elements to your app.
+
+## Practice: Matching inputs and outputs
+
+Here is a simple Shiny app. Try entering some text and observe how the text is displayed back to you after a short pause.
+
+------------------------------------------------------------------------
+
+### Example Shiny App
+
+::: {.column-screen-inset-right .border .mb-5 style="max-width:1100px;"}
+
+<iframe style="width:99%;height:200px;" src="https://gallery.shinyapps.io/503-server-function/" title="Shiny Text Example">
+
+</iframe>
+:::
+
+------------------------------------------------------------------------
+
+The code for this app is given below, with a few pieces missing (indicated with `___`). Each of the blanks are numbered, e.g. (`[1]`, `[2]`, etc.)
+
+``` r
+library(shiny)
+
+ui <- page_fluid(
+
+  textInput(
+    inputId = "custom_text",
+    label = "_[1]_"
+  ),
+
+  strong("Text is shown below:"),
+
+  _[2]_(outputId = "_[3]_")
+
+)
+
+server <- function(input, output, session){
+
+  output$user_text <- renderText({ input$_[4]_ })
+
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+::: callout-note
+## How do we match inputs and outputs?
+
+Which of the following is false?
+
+-   `[1]` should be `"Input some text here:"`
+-   `[2]` should be `textOutput`
+-   `[3]` should be `"custom_text"`
+-   `[4]` should be `"custom_text"`
+
+::: {.callout-note .bg-gray collapse="true" appearance="minimal"}
+## Click to View the Answer
+
+`[3]` should be `"custom_text"` is false.
+:::
+:::
+
+### Reactivity
+
+Let's also briefly discuss reactivity.
+
+![](../images/reactivity.png){.lightbox .shadow fig-alt="Arrows showing the flow of information from input to output in a Shiny app. 'input$x' creates your own reactive values. That goes to the Update button that goes to 'expression()'. 'expression()' goes to 'output$y' which renders the reactive output."}
+
+It's easy to build interactive applications with Shiny, but to get the most out of it, you'll need to understand the reactive programming scheme used by Shiny.
+
+In a nutshell Shiny automatically updates outputs, such as plots, when inputs that go into them change.
+
+### Putting all the pieces together
+
+Before we wrap up this section, I should also mention the last component of each Shiny app, which is a call to the aptly named `shinyApp()` function, which puts the UI and the server pieces together to create a Shiny app object.
+
+![](../images/shinyAppfunction.png){.lightbox .shadow fig-alt="Code block that says '#Create the Shiny app object  shinyApp(ui = ui, server = server)'."}
+
+Time to put this all into practice!
+
+## Practice: Rules of server functions
+
+::: callout-note
+## Reviewing server functions
+
+Which of the following is not true about server functions?
+
+-   Server functions should include a call to \#`runApp()`
+-   Objects to be displayed should be saved to \#`output$`
+-   Reactive objects should be built with `render*()` functions
+-   Input values should be referred to with `input$`
+
+::: {.callout-note .bg-gray collapse="true" appearance="minimal"}
+## Click to View the Answer
+
+Server functions should include a call to \#`runApp()`
+
+The `runApp()` function can be used in the Console to run a Shiny application, as an alternative to the Run App button in the RStudio IDE.
+:::
+:::
+
+
+## Practice: Fix it up
+Below is the code for the Shiny app we built earlier, however currently the code is broken.     Specifically there are errors in the definition of the server function as well as in the `mainPanel` of the UI.
+
+### Your turn
+1.  Review the app and identify errors in the code. (*Hint: Refer back to the rules of server functions.*)
+2.  Do the render functions match the output functions? If not, make the appropriate change and try running the app. Are there any remaining errors?
+3.  Are the inputs referred to using the correct syntax? If not, make the appropriate change and try running the app. Are there any remaining errors?
+4.  Are the outputs referred to using the correct names? If not, make the appropriate change and try running the app. Are there any remaining errors?
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Navigate to the project called **1-3 Fix it up** after clicking the button below*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Workspace](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+::: {.callout-note collapse="true"}
+## Work locally in your RStudio IDE
+
+-   Download the data if you haven't already
+
+```{{r}}
+# Get the data
+
+file <- "https://github.com/rstudio-education/shiny-course/raw/main/movies.RData"
+destfile <- "movies.RData"
+
+download.file(file, destfile)
+```
+
+-   Copy the code below into an R script
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  sidebar = sidebar(
+    # Select variable for y-axis
+    selectInput(
+      inputId = "y",
+      label = "Y-axis:",
+      choices = c(
+        "IMDB rating" = "imdb_rating",
+        "IMDB number of votes" = "imdb_num_votes",
+        "Critics score" = "critics_score",
+        "Audience score" = "audience_score",
+        "Runtime" = "runtime"
+      ),
+      selected = "audience_score"
+    ),
+
+    # Select variable for x-axis
+    selectInput(
+      inputId = "x",
+      label = "X-axis:",
+      choices = c(
+        "IMDB rating" = "imdb_rating",
+        "IMDB number of votes" = "imdb_num_votes",
+        "Critics score" = "critics_score",
+        "Audience score" = "audience_score",
+        "Runtime" = "runtime"
+      ),
+      selected = "critics_score"
+    ),
+
+    # Select variable for color
+    selectInput(
+      inputId = "z",
+      label = "Color by:",
+      choices = c(
+        "Title type" = "title_type",
+        "Genre" = "genre",
+        "MPAA rating" = "mpaa_rating",
+        "Critics rating" = "critics_rating",
+        "Audience rating" = "audience_rating"
+      ),
+      selected = "mpaa_rating"
+    )
+  ),
+
+  # Output: Show scatterplot
+  card(plotOutput(outputId = "scatterPlot"))
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  output$scatterplot <- renderTable({
+
+    ggplot(data = movies, aes_string(x = x, y = y, color = z)) +
+      geom_point()
+
+  })
+
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  sidebar = sidebar(
+    # Select variable for y-axis
+    selectInput(
+      inputId = "y",
+      label = "Y-axis:",
+      choices = c(
+        "IMDB rating" = "imdb_rating",
+        "IMDB number of votes" = "imdb_num_votes",
+        "Critics score" = "critics_score",
+        "Audience score" = "audience_score",
+        "Runtime" = "runtime"
+      ),
+      selected = "audience_score"
+    ),
+
+    # Select variable for x-axis
+    selectInput(
+      inputId = "x",
+      label = "X-axis:",
+      choices = c(
+        "IMDB rating" = "imdb_rating",
+        "IMDB number of votes" = "imdb_num_votes",
+        "Critics score" = "critics_score",
+        "Audience score" = "audience_score",
+        "Runtime" = "runtime"
+      ),
+      selected = "critics_score"
+    ),
+
+    # Select variable for color
+    selectInput(
+      inputId = "z",
+      label = "Color by:",
+      choices = c(
+        "Title type" = "title_type",
+        "Genre" = "genre",
+        "MPAA rating" = "mpaa_rating",
+        "Critics rating" = "critics_rating",
+        "Audience rating" = "audience_rating"
+      ),
+      selected = "mpaa_rating"
+    )
+  ),
+
+  # Output: Show scatterplot
+  card(
+    plotOutput(outputId = "scatterplot")
+  )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y, color = input$z)) +
+      geom_point()
+  })
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::

@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: Biodiversity in National Parks is an app that let you visualize Kaggle's biodiversity dataset. 
+title:        "Visualizing Biodiversity in National Parks data"
+author:    Alessio Benedetti
+authorurl:     https://alessiobenedetti.com/
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - leaflet
+ - shinydashboard
+ - visualization
+appurl:      https://abenedetti.shinyapps.io/bioNPS/
+sourceurl:   https://github.com/abenedetti/bioNPS/
+rscloudurl:  https://rstudio.cloud/project/246130
+---
+
+Biodiversity in National Parks is an app that let you visualize Kaggle's biodiversity dataset. By using the National Park Service database of animal and plant species, the application offers a graphical representation of the data with maps and charts.
+  

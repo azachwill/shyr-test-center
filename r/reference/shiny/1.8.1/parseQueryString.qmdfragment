@@ -1,0 +1,55 @@
+---
+title: "Parse a GET query string from a URL — parseQueryString"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.1</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.1/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Returns a named list of key-value pairs.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">parseQueryString</span>(str, <span class="at">nested =</span> <span class="cn">FALSE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>str</dt>
+<dd><p>The query string. It can have a leading <code>"?"</code> or not.</p></dd>
+
+
+<dt>nested</dt>
+<dd><p>Whether to parse the query string of as a nested list when it
+contains pairs of square brackets <code>[]</code>. For example, the query
+<samp>a[i1][j1]=x&amp;b[i1][j1]=y&amp;b[i2][j1]=z</samp> will be parsed as <code>list(a =
+list(i1 = list(j1 = 'x')), b = list(i1 = list(j1 = 'y'), i2 = list(j1 =
+'z')))</code> when <code>nested = TRUE</code>, and <code>list(`a[i1][j1]` = 'x',
+`b[i1][j1]` = 'y', `b[i2][j1]` = 'z')</code> when <code>nested = FALSE</code>.</p></dd>
+
+</dl></div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">parseQueryString</span>(<span class="st">"?foo=1&amp;bar=b%20a%20r"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Example of usage within a Shiny app</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  output<span class="sc">$</span>queryText <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    query <span class="ot">&lt;-</span> <span class="fu">parseQueryString</span>(session<span class="sc">$</span>clientData<span class="sc">$</span>url_search)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    <span class="co"># Ways of accessing the values</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">as.numeric</span>(query<span class="sc">$</span>foo) <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>      <span class="co"># Do something</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    }</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    <span class="cf">if</span> (query[[<span class="st">"bar"</span>]] <span class="sc">==</span> <span class="st">"targetstring"</span>) {</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>      <span class="co"># Do something else</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    }</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    <span class="co"># Return a string with key-value pairs</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="fu">names</span>(query), query, <span class="at">sep =</span> <span class="st">"="</span>, <span class="at">collapse=</span><span class="st">", "</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  })</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>}</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

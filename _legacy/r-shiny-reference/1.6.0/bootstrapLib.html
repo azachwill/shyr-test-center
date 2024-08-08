@@ -1,0 +1,45 @@
+---
+layout: reference
+title: "Bootstrap libraries — bootstrapLib"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Bootstrap libraries</h1>
+  
+
+  <pre class="code"><span class='fu'>bootstrapLib</span>(<span class='kw'>theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>theme</p></th>
+    <td><p>One of the following:</p><ul>
+<li><p><code>NULL</code> (the default), which implies a "stock" build of Bootstrap 3.</p></li>
+<li><p>A <code><a href='https://rstudio.github.io/bslib//reference/bs_theme.html'>bslib::bs_theme()</a></code> object. This can be used to replace a stock
+build of Bootstrap 3 with a customized version of Bootstrap 3 or higher.</p></li>
+<li><p>A character string pointing to an alternative Bootstrap stylesheet
+(normally a css file within the www directory, e.g. <code>www/bootstrap.css</code>).</p></li>
+</ul></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>This function defines a set of web dependencies necessary for using Bootstrap
+components in a web page.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>It isn't necessary to call this function if you use <code><a href='bootstrapPage.html'>bootstrapPage()</a></code> or
+others which use <code>bootstrapPage</code>, such <code><a href='fluidPage.html'>fluidPage()</a></code>, <code><a href='navbarPage.html'>navbarPage()</a></code>,
+<code><a href='fillPage.html'>fillPage()</a></code>, etc, because they already include the Bootstrap web dependencies.</p>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,112 @@
+---
+layout: reference
+title: "runUrl"
+categories: reference
+---
+<h1>Run a Shiny application from a URL</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='runUrl.html'>runUrl</a></span><span class="keyword">(</span><span class="symbol">url</span><span class="keyword">,</span> <span class="argument">filetype</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">subdir</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">destdir</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='runUrl.html'>runGist</a></span><span class="keyword">(</span><span class="symbol">gist</span><span class="keyword">,</span> <span class="argument">destdir</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='runUrl.html'>runGitHub</a></span><span class="keyword">(</span><span class="symbol">repo</span><span class="keyword">,</span> <span class="argument">username</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"github.user"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">ref</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"master"</span><span class="keyword">,</span>
+  <span class="argument">subdir</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">destdir</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>url</th>
+    <td>URL of the application.</td>
+  </tr>
+  <tr>
+    <th>filetype</th>
+    <td>The file type (<code>&quot;.zip&quot;</code>, <code>&quot;.tar&quot;</code>, or
+<code>&quot;.tar.gz&quot;</code>. Defaults to the file extension taken from the url.</td>
+  </tr>
+  <tr>
+    <th>subdir</th>
+    <td>A subdirectory in the repository that contains the app. By
+default, this function will run an app from the top level of the repo, but
+you can use a path such as `<code>&quot;inst/shinyapp&quot;</code>.</td>
+  </tr>
+  <tr>
+    <th>destdir</th>
+    <td>Directory to store the downloaded application files. If <code>NULL</code>
+(the default), the application files will be stored in a temporary directory
+and removed when the app exits</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Other arguments to be passed to <code><a href='runApp.html'>runApp</a>()</code>, such as
+<code>port</code> and <code>launch.browser</code>.</td>
+  </tr>
+  <tr>
+    <th>gist</th>
+    <td>The identifier of the gist. For example, if the gist is
+https://gist.github.com/jcheng5/3239667, then <code>3239667</code>,
+<code>&#39;3239667&#39;</code>, and <code>&#39;https://gist.github.com/jcheng5/3239667&#39;</code> are
+all valid values.</td>
+  </tr>
+  <tr>
+    <th>repo</th>
+    <td>Name of the repository.</td>
+  </tr>
+  <tr>
+    <th>username</th>
+    <td>GitHub username. If <code>repo</code> is of the form
+<code>&quot;username/repo&quot;</code>, <code>username</code> will be taken from <code>repo</code>.</td>
+  </tr>
+  <tr>
+    <th>ref</th>
+    <td>Desired git reference. Could be a commit, tag, or branch name.
+Defaults to <code>&quot;master&quot;</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p><code>runUrl()</code> downloads and launches a Shiny application that is hosted at
+a downloadable URL. The Shiny application must be saved in a .zip, .tar, or
+.tar.gz file. The Shiny application files must be contained in the root
+directory or a subdirectory in the archive. For example, the files might be
+<code>myapp/server.r</code> and <code>myapp/ui.r</code>. The functions <code>runGitHub()</code>
+and <code>runGist()</code> are based on <code>runUrl()</code>, using URL&#39;s from GitHub
+(<a href = 'https://github.com'>https://github.com</a>) and GitHub gists (<a href = 'https://gist.github.com'>https://gist.github.com</a>),
+respectively.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+  <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='runUrl.html'>runUrl</a></span><span class="keyword">(</span><span class="string">'https://github.com/rstudio/shiny_example/archive/master.tar.gz'</span><span class="keyword">)</span>
+
+  <span class="comment"># Can run an app from a subdirectory in the archive</span>
+  <span class="functioncall"><a href='runUrl.html'>runUrl</a></span><span class="keyword">(</span><span class="string">"https://github.com/rstudio/shiny_example/archive/master.zip"</span><span class="keyword">,</span>
+    <span class="argument">subdir</span> <span class="argument">=</span> <span class="string">"inst/shinyapp/"</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='runUrl.html'>runGist</a></span><span class="keyword">(</span><span class="number">3239667</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='runUrl.html'>runGist</a></span><span class="keyword">(</span><span class="string">"https://gist.github.com/jcheng5/3239667"</span><span class="keyword">)</span>
+
+  <span class="comment"># Old URL format without username</span>
+  <span class="functioncall"><a href='runUrl.html'>runGist</a></span><span class="keyword">(</span><span class="string">"https://gist.github.com/3239667"</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='runUrl.html'>runGitHub</a></span><span class="keyword">(</span><span class="string">"shiny_example"</span><span class="keyword">,</span> <span class="string">"rstudio"</span><span class="keyword">)</span>
+  <span class="comment"># or runGitHub("rstudio/shiny_example")</span>
+
+  <span class="comment"># Can run an app from a subdirectory in the repo</span>
+  <span class="functioncall"><a href='runUrl.html'>runGitHub</a></span><span class="keyword">(</span><span class="string">"shiny_example"</span><span class="keyword">,</span> <span class="string">"rstudio"</span><span class="keyword">,</span> <span class="argument">subdir</span> <span class="argument">=</span> <span class="string">"inst/shinyapp/"</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>runGist</li><li>runGitHub</li><li>runUrl</li>
+</ul>
+<ul>
+  
+</ul> -->
+

@@ -1,0 +1,30 @@
+---
+title: "getCurrentOutputInfo"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='getCurrentOutputInfo.html'>getCurrentOutputInfo</a></span><span class="keyword">(</span><span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The current Shiny session.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Get information about the output that is currently being executed.</p>
+
+</div>
+<!-- <ul>
+  <li>getCurrentOutputInfo</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

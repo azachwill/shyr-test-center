@@ -1,0 +1,321 @@
+project:
+  type: website
+  preview:
+    port: 1313
+  resources:
+    # Explicitly call out the images folder to include background images in _build.
+    - "*.gif"
+    - "*.png"
+    - "*.jpg"
+    - "*.svg"
+    - "*.mp4"
+    - /r/api
+    - _redirects
+  output-dir: _build
+  render:
+    - "*.qmd"
+  post-render:
+    - scripts/generate_api_docs_from_template.R
+
+website:
+  title: "Shiny"
+  site-url: https://shiny.posit.co/
+  page-navigation: true
+  favicon: "favicon.png"
+  page-footer:
+    left: 'Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="/images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a>'
+    right:
+      - icon: twitter
+        href: https://twitter.com/posit_pbc
+        aria-label: Posit Twitter
+      - icon: youtube
+        href: https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe
+        aria-label: Shiny YouTube Playlist
+      - icon: rss-fill
+        href: blog/index.xml
+        aria-label: Shiny Blog
+  open-graph:
+    site-name: Shiny
+    locale: en_US
+    image: https://shiny.posit.co/images/shiny-thumb.png
+    description: Shiny is a package that makes it easy to create interactive web apps using R and Python.
+  twitter-card:
+    title: Shiny
+    image: https://shiny.posit.co/images/shiny-thumb.png
+    description: Shiny is a package that makes it easy to create interactive web apps using R and Python.
+    card-style: summary_large_image
+  navbar:
+    background: "#ffffff"
+    foreground: dark
+    logo: images/shiny-solo.png
+    logo-alt: "Shiny logo."
+    title: false
+    right:
+      - text: Home
+        href: index.qmd
+      - text: Get Started
+        href: getstarted.qmd
+      - text: Shiny for R
+        menu:
+          - text: "![The R language logo](/images/r-light.png){.navbar-sub-logo}"
+          - text: Get Started
+            href: /r/getstarted/
+          - text: Articles
+            href: r/articles/index.qmd
+          - text: Gallery
+            href: r/gallery/index.qmd
+          - text: Reference
+            href: r/reference/shiny
+          - text: Help
+            href: r/help.qmd
+          - text: Deploy
+            href: r/deploy.qmd
+          - text: Contribute
+            href: r/contribute.qmd
+          - icon: "github"
+            href: "https://github.com/rstudio/shiny"
+            target: _blank
+      - text: Shiny for Python
+        href: https://shiny.posit.co/py/
+        target: _blank
+      - text: Blog
+        href: blog/index.qmd
+
+  sidebar:
+    - id: articles
+      collapse-level: 1
+      contents:
+        - text: __ARTICLES__
+          href: /r/articles/
+        - text: Start
+          href: /r/articles#start
+        - section: "Build"
+          contents:
+            - section: "Structure"
+              contents:
+                - section: "Standalone apps"
+                  contents:
+                    - r/articles/build/app-formats/index.qmd
+                    - r/articles/build/two-file/index.qmd
+                - section: "Interactive documents"
+                  contents:
+                    - r/articles/build/rmarkdown/index.qmd
+                    - r/articles/build/rmd-integration/index.qmd
+                    - r/articles/build/output-args/index.qmd
+                    - r/articles/build/interactive-docs/index.qmd
+                    - r/articles/build/rm-cheatsheet/index.qmd
+                    - r/articles/build/output-args/index.qmd
+                    - r/articles/build/generating-reports/index.qmd
+                - section: "Dashboards"
+                  contents:
+                    - r/articles/build/dashboards/index.qmd
+                - section: "Gadgets"
+                  contents:
+                    - r/articles/build/gadgets/index.qmd
+                    - r/articles/build/gadget-ui/index.qmd
+            - section: "Backend"
+              contents:
+                - section: "Reactivity"
+                  contents:
+                    - r/articles/build/reactivity-overview/index.qmd
+                    - r/articles/build/isolation/index.qmd
+                    - r/articles/build/execution-scheduling/index.qmd
+                    - r/articles/build/understanding-reactivity/index.qmd
+                    - r/articles/build/client-data/index.qmd
+                - section: "Data"
+                  contents:
+                    - r/articles/build/overview/index.qmd
+                    - r/articles/build/sql-injections/index.qmd
+                    - r/articles/build/pool-basics/index.qmd
+                    - r/articles/build/pool-advanced/index.qmd
+                    - r/articles/build/pool-dplyr/index.qmd
+                    - r/articles/build/persistent-data-storage/index.qmd
+            - section: "Frontend"
+              contents:
+                - section: "User interface"
+                  contents:
+                    - r/articles/build/layout-guide/index.qmd
+                    - r/articles/build/display-modes/index.qmd
+                    - r/articles/build/tabsets/index.qmd
+                    - r/articles/build/html-tags/index.qmd
+                    - r/articles/build/html-ui/index.qmd
+                    - r/articles/build/dynamic-ui/index.qmd
+                    - r/articles/build/templates/index.qmd
+                    - r/articles/build/tag-glossary/index.qmd
+                    - r/articles/build/progress/index.qmd
+                    - r/articles/build/modal-dialogs/index.qmd
+                    - r/articles/build/notifications/index.qmd
+                    - r/articles/build/themes/index.qmd
+                    - r/articles/build/images/index.qmd
+                    - r/articles/build/render-table/index.qmd
+                    - r/articles/build/datatables/index.qmd
+                    - r/articles/build/action-buttons/index.qmd
+                    - r/articles/build/sliders/index.qmd
+                    - r/articles/build/download/index.qmd
+                    - r/articles/build/upload/index.qmd
+                    - r/articles/build/selectize/index.qmd
+                - section: "Graphics & visualization"
+                  contents:
+                    - r/articles/build/plot-interaction/index.qmd
+                    - r/articles/build/selecting-rows-of-data/index.qmd
+                    - r/articles/build/plot-interaction-advanced/index.qmd
+                - section: "Shiny extensions"
+                  contents:
+                    - r/articles/build/htmlwidgets/index.qmd
+                    - r/articles/build/shinyjs/index.qmd
+                    - r/articles/build/js-build-widget/index.qmd
+                    - r/articles/build/js-widget-functionality/index.qmd
+                    - r/articles/build/js-send-message/index.qmd
+                    - r/articles/build/js-introjs/index.qmd
+                    - r/articles/build/js-custom-input/index.qmd
+                    - r/articles/build/js-dashboard/index.qmd
+                - section: "Customizing Shiny"
+                  contents:
+                    - r/articles/build/css/index.qmd
+                    - r/articles/build/building-inputs/index.qmd
+                    - r/articles/build/building-outputs/index.qmd
+                    - r/articles/build/google-analytics/index.qmd
+                    - r/articles/build/packaging-javascript/index.qmd
+                    - r/articles/build/communicating-with-js/index.qmd
+                    - r/articles/build/js-events/index.qmd
+                    - r/articles/build/js-dashboard/index.qmd
+        - section: "Improve"
+          contents:
+            - section: "Refactor"
+              contents:
+                - section: "Code quality"
+                  contents:
+                    - r/articles/improve/debugging/index.qmd
+                    - r/articles/improve/upgrade-R/index.qmd
+                    - r/articles/improve/req/index.qmd
+                    - r/articles/improve/scoping/index.qmd
+                    - r/articles/improve/reconnecting/index.qmd
+                    - r/articles/improve/sanitize-errors/index.qmd
+                    - r/articles/improve/validation/index.qmd
+                    - r/articles/improve/unicode/index.qmd
+                - section: "Testing"
+                  contents:
+                    - r/articles/improve/testing-overview/index.qmd
+                    - r/articles/improve/shinytest/index.qmd
+                    - r/articles/improve/server-function-testing/index.qmd
+                - section: "Modules"
+                  contents:
+                    - r/articles/improve/modules/index.qmd
+                    - r/articles/improve/communicate-bet-modules/index.qmd
+            - section: "Scale"
+              contents:
+                - section: "Measure usage"
+                  contents:
+                    - r/articles/improve/usage-metrics/index.qmd
+                    - r/articles/improve/google-analytics/index.qmd
+                - section: "Performance and scalability"
+                  contents:
+                    - r/articles/improve/caching/index.qmd
+                    - r/articles/improve/plot-caching/index.qmd
+                    - r/articles/improve/profiling/index.qmd
+                    - r/articles/improve/performance/index.qmd
+                    - r/articles/improve/nonblocking/index.qmd
+                - section: "Tuning"
+                  contents:
+                    - r/articles/improve/scaling-and-tuning/index.qmd
+                    - r/articles/improve/scaling-and-tuning-ssp-rsc/index.qmd
+        - section: "Share"
+          contents:
+            - section: "Deployment"
+              contents:
+                - r/articles/share/deployment-web/index.qmd
+                - r/articles/share/shinyapps/index.qmd
+                - r/articles/share/shinyapps-auth/index.qmd
+                - r/articles/share/custom-domains/index.qmd
+                - r/articles/share/share-data/index.qmd
+                - r/articles/share/migration/index.qmd
+                - r/articles/share/shiny-server/index.qmd
+                - r/articles/share/libraries/index.qmd
+                - r/articles/share/permissions/index.qmd
+                - r/articles/share/admin-deployment/index.qmd
+            - section: "Distribution"
+              contents:
+                - r/articles/share/deployment-local/index.qmd
+                - r/articles/share/function/index.qmd
+            - section: "Bookmarking"
+              contents:
+                - r/articles/share/bookmarking-state/index.qmd
+                - r/articles/share/advanced-bookmarking/index.qmd
+                - r/articles/share/bookmarking-modules/index.qmd
+
+    - id: getstarted-r
+      collapse-level: 1
+      contents:
+        - text: "![](/images/blank-pixel.png){.sidebar-title}__Get Started__"
+          href: /r/getstarted/
+        - section: "![](/images/1-square-fill.svg){.sidebar-icon} Shiny Basics"
+          contents:
+            - r/getstarted/shiny-basics/lesson1/index.qmd
+            - r/getstarted/shiny-basics/lesson2/index.qmd
+            - r/getstarted/shiny-basics/lesson3/index.qmd
+            - r/getstarted/shiny-basics/lesson4/index.qmd
+            - r/getstarted/shiny-basics/lesson5/index.qmd
+            - r/getstarted/shiny-basics/lesson6/index.qmd
+            - r/getstarted/shiny-basics/lesson7/index.qmd
+        - section: "![](/images/2-square-fill.svg){.sidebar-icon} Build an App"
+          contents:
+            - section: "Hello Shiny!"
+              contents:
+              - r/getstarted/build-an-app/hello-shiny/getting-started.qmd
+              - r/getstarted/build-an-app/hello-shiny/user-interface.qmd
+              - r/getstarted/build-an-app/hello-shiny/server-function.qmd
+              - r/getstarted/build-an-app/hello-shiny/recap.qmd
+            - section: "Reactive Flow"
+              contents:
+                - r/getstarted/build-an-app/reactive-flow/reactive-flow.qmd
+                - r/getstarted/build-an-app/reactive-flow/ui-inputs.qmd
+                - r/getstarted/build-an-app/reactive-flow/render-functions.qmd
+                - r/getstarted/build-an-app/reactive-flow/ui-outputs.qmd
+            - section: "Reactivity Essentials"
+              contents:
+                - r/getstarted/build-an-app/reactivity-essentials/reactive-elements.qmd
+                - r/getstarted/build-an-app/reactivity-essentials/using-reactives.qmd
+                - r/getstarted/build-an-app/reactivity-essentials/reactives-observers.qmd
+                - r/getstarted/build-an-app/reactivity-essentials/stop-trigger-delay.qmd
+                - r/getstarted/build-an-app/reactivity-essentials/recap.qmd
+            - section: "Customizing UI"
+              contents:
+                - r/getstarted/build-an-app/customizing-ui/interface.qmd
+                - r/getstarted/build-an-app/customizing-ui/layout.qmd
+                - r/getstarted/build-an-app/customizing-ui/tabs.qmd
+                - r/getstarted/build-an-app/customizing-ui/theming.qmd
+                - r/getstarted/build-an-app/customizing-ui/congratulations.qmd
+        - text: "![](/images/3-square-fill.svg){.sidebar-icon} Next Steps"
+          href: r/getstarted/next-steps/index.qmd
+
+
+    - id: gallery-r
+      collapse-level: 1
+      contents:
+        - section: "Feature Demos"
+          contents:
+            - section: "Start Simple"
+              contents:
+                - https://shiny
+        - section: "![](/images/2-square-fill.svg){.sidebar-icon} Build an App"
+          contents:
+
+
+
+format:
+  html:
+    smooth-scroll: true
+    code-copy: true
+    sidebar: false
+    theme: theme.scss
+    link-external-newwindow: true
+    link-external-filter: ^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)
+    anchor-sections: false
+    enable-grid-classes: true
+    include-in-header: "_partials/head.html"
+    include-before-body: "_partials/google-analytics/gtm-body.html"
+    grid:
+      sidebar-width: 300px
+      body-width: 700px
+      margin-width: 300px
+      gutter-width: 2rem

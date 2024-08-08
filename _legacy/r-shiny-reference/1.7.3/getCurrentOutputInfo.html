@@ -1,0 +1,81 @@
+---
+layout: reference
+title: "Get output information — getCurrentOutputInfo"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Get output information</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.3/R/shiny.R" class="external-link"><code>R/shiny.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Returns information about the currently executing output, including its <code>name</code> (i.e., <code>outputId</code>);
+and in some cases, relevant sizing and styling information.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getCurrentOutputInfo</span>(<span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>())</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>session</dt>
+<dd><p>The current Shiny session.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p><code>NULL</code> if called outside of an output context; otherwise,
+a list which includes:</p><ul><li><p>The <code>name</code> of the output (reported for any output).</p></li>
+<li><p>If the output is a <code><a href="plotOutput.html">plotOutput()</a></code> or <code><a href="plotOutput.html">imageOutput()</a></code>, then:</p><ul><li><p><code>height</code>: a reactive expression which returns the height in pixels.</p></li>
+<li><p><code>width</code>: a reactive expression which returns the width in pixels.</p></li>
+</ul></li>
+<li><p>If the output is a <code><a href="plotOutput.html">plotOutput()</a></code>, <code><a href="plotOutput.html">imageOutput()</a></code>, or contains a <code>shiny-report-theme</code> class, then:</p><ul><li><p><code>bg</code>: a reactive expression which returns the background color.</p></li>
+<li><p><code>fg</code>: a reactive expression which returns the foreground color.</p></li>
+<li><p><code>accent</code>: a reactive expression which returns the hyperlink color.</p></li>
+<li><p><code>font</code>: a reactive expression which returns a list of font information, including:</p><ul><li><p><code>families</code>: a character vector containing the CSS <code>font-family</code> property.</p></li>
+<li><p><code>size</code>: a character string containing the CSS <code>font-size</code> property</p></li>
+</ul></li>
+</ul></li>
+</ul></div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fluidPage</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      tags<span class="sc">$</span><span class="fu">style</span>(<span class="fu">HTML</span>(<span class="st">"body {background-color: black; color: white; }"</span>)),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      tags<span class="sc">$</span><span class="fu">style</span>(<span class="fu">HTML</span>(<span class="st">"body a {color: purple}"</span>)),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      tags<span class="sc">$</span><span class="fu">style</span>(<span class="fu">HTML</span>(<span class="st">"#info {background-color: teal; color: orange; }"</span>)),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"p"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Computed CSS styles for the output named info:"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tagAppendAttributes</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">textOutput</span>(<span class="st">"info"</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">class =</span> <span class="st">"shiny-report-theme"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>p <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        info <span class="ot">&lt;-</span> <span class="fu">getCurrentOutputInfo</span>()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">par</span>(<span class="at">bg =</span> info<span class="sc">$</span><span class="fu">bg</span>(), <span class="at">fg =</span> info<span class="sc">$</span><span class="fu">fg</span>(), <span class="at">col.axis =</span> info<span class="sc">$</span><span class="fu">fg</span>(), <span class="at">col.main =</span> info<span class="sc">$</span><span class="fu">fg</span>())</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">col =</span> info<span class="sc">$</span><span class="fu">accent</span>(), <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">title</span>(<span class="st">"A simple R plot that uses its CSS styling"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>info <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        info <span class="ot">&lt;-</span> <span class="fu">getCurrentOutputInfo</span>()</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        jsonlite<span class="sc">::</span><span class="fu">toJSON</span>(</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>          <span class="fu">list</span>(</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">bg =</span> info<span class="sc">$</span><span class="fu">bg</span>(),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">fg =</span> info<span class="sc">$</span><span class="fu">fg</span>(),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">accent =</span> info<span class="sc">$</span><span class="fu">accent</span>(),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">font =</span> info<span class="sc">$</span><span class="fu">font</span>()</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>          ),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">auto_unbox =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+  </div>
+</div>

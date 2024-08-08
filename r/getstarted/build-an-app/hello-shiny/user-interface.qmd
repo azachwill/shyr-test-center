@@ -1,0 +1,444 @@
+---
+title: "User interface (UI)"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+always_allow_html: true
+---
+
+In this section we'll build the user interface of a simple app.
+
+However, before we get into the weeds of building a user interface, let's revisit the anatomy of a Shiny app.
+
+![](../images/app-selectinput-scatterplot.png){.lightbox .shadow style="width:80%;" fig-alt="Shiny app with Y-axis of audience_score and X-axis of critics_score from the movies.RData dataset. Those variables are in a box on the left. On the right is a scatterplot of the data. Points cover the whole plot, but have a general linear upward trend with a slope of 1. This will be our Shiny app that we'll be using and modifying in this lesson."}
+
+-   The user interface, that we'll refer to as the "UI" going forward, defines and lays out the inputs of your app where users can make their selections. It also lays out the outputs.
+
+-   The server function, on the other hand, calculates outputs and performs any other calculations needed for the outputs.
+
+### Example
+
+![](../images/ui-to-scatterplot.png){.lightbox .shadow style="width:80%;" fig-alt="Highlighting areas of the Shiny app. Shows the Y-axis box pointing to the y-axis on the plot and the X-axis box pointing to the x-axis on the plot. Code 'ggplot(data = movies, aes_string(x = input$x, y = input$y)) + geom_point()' points to the points on the scatterplot."}
+
+For example, if your app features a plot the code for building that plot lives in the server function. But the setup for the user defined inputs for the plot, as well as information on where physically on the app the plot should appear, are defined in the UI.
+
+Here is the app we'll work with in this section and the code that builds the UI of that app.
+
+Since this is too much code to parse, we'll explore individual components of the UI one by one.
+
+![](../images/app-selectinput-scatterplot.png){.lightbox .shadow fig-alt="Our same Shiny app. Shiny app with Y-axis of audience_score and X-axis of critics_score. Those variables are in a box on the left. On the right is a scatterplot of the data. Points cover the whole plot, but have a general linear upward trend with a slope of 1."}
+
+![](../images/ui-selectinput-scatterplot.png){.lightbox .shadow fig-alt="Code block highlighting the ui section of the Shiny app code."}
+
+### Sidebar layout
+
+At the outermost layer of our UI definition we begin with the `page_sidebar()` function.
+
+![](../images/page_sidebar.png){.lightbox .shadow fig-alt="Arrow pointing to the section in the code that says 'ui <- page_sidebar(' that says Create sidebar page layout."}
+
+The `page_sidebar()` function creates a screen-filling page with a sidebar. Calling `page_sidebar()` is equivalent to calling `layout_sidebar()` inside `page_fillable()`. 
+
+![](../images/layout-app.png){.lightbox .shadow fig-alt="Showing the different sections of the Shiny app. The left portion with the variables is the sidebar and the right section with the plot is the main panel."}
+
+As always, for more information on arguments to any of these function, you can view the R function help by typing `?<function_name>` (e.g., `?page_sidebar`) in your R console or visiting the function reference page on the package website [here](https://rstudio.github.io/bslib/reference/index.html).
+
+To learn more about various layouts, I recommend reviewing the [Application Layout Guide article](https://shiny.posit.co/articles/layout-guide.html) at [shiny.posit.co](shiny.posit.co). 
+
+### Input controls
+
+Next we define our sidebar panel containing input controls. Define a sidebar with the `sidebar()` function.
+
+![](../images/input-controls.png){.lightbox .shadow fig-alt="Arrow pointing to the line of code in the Shiny app that says 'sidebar{' and says Create a sidebar panel containing Input controls."}
+
+###
+
+This panel contains two dropdown menus created with the `selectInput()` function.
+
+![](../images/input-dropdowns.png){.lightbox .shadow fig-alt="Arrows pointing to the sections of code in the Shiny app that say 'selection{inputId = 'y', label = 'Y-axis:',' and 'selection{inputId = 'x', label = 'X-axis:',' and shows those sections in the app from the sidebar panel."}
+
+###
+
+Let's take a look at one of the `selectInput` widgets a little more closely.
+
+![](../images/input-closeup.png){.lightbox .shadow fig-alt="Box around section of the code in the Shiny app on '#Selecting variable for y-axis'."}
+
+1.  The first argument is the `inputId`, which is the input value that the app will internally use to access the value selected by the user.
+
+2.  The second argument is the `label`, which is the display label that the user sees.
+
+3.  The third argument is the list of `choices` the user will choose from. In this app, these are variable names from the movies dataset.
+
+4.  And lastly we specify a default selection from that list with `selected`.
+
+### Main Panel
+
+The final component of our UI is the main content area. Add elements to the main content area by passing additional UI elements to `page_sidebar()`. 
+
+![](../images/main-panel.png){.lightbox .shadow fig-alt="Arrow pointing to line of code in the Shiny app that says 'plotOutput(outputId = 'scatterplot')' and says Create a main panel containing output elements that get created in the server function."}
+
+Currently the main content area contains only one component, a card containint a plot output. We'll talk about how this plot is built later in the tutorial.
+
+Next, let's practice building an app UI!
+
+
+## Practice: Extend the UI
+
+We'll start with a simplified version of the app you saw in the previous exercise. In this app a `selectInput()` widget is used to allow the user to select which variables should be plotted on the `x` and `y` axes of the scatterplot.
+
+The `selectInput()` function has the following arguments:
+
+-   an `inputId` that is used to refer to the input parameter when building the scatterplot,
+-   a list of `choices` to pick from (which must match variable names in the data frame),
+-   and a `selected` choice for when the app first launches.
+
+
+### Your turn
+
+Modify the Shiny app code in `app.R` / shown below:
+
+In the `ui`:
+
+1. Add a new `selectInput` widget to color the points by a choice of the following variables: `"title_type"`, `"genre"`, `"mpaa_rating"`, `"critics_rating"`, `"audience_rating"`.
+2. Make the default selection `"mpaa_rating"`.
+3. Use `"z"` as the `inputId`.
+4. `label` can be whatever you like.
+
+In the `server`:
+
+1. Set the color argument in `ggplot()` aesthetic mappings to `input$z`.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete this exercise by opening up the RStudio Project titled **1-2a Extend the UI** within your RStudio Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Workspace](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+::: {.callout-note collapse="true"}
+## Work locally in your RStudio IDE
+
+Continue editing the file you started in the Getting Started section
+
+OR
+
+
+* Download the data if you haven't already
+```{{r}}
+# Get the data
+
+file <- "https://github.com/rstudio-education/shiny-course/raw/main/movies.RData"
+destfile <- "movies.RData"
+
+download.file(file, destfile)
+```
+* Copy the code below into an R script
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    
+    # Inputs: Select variables to plot
+    sidebar = sidebar(
+      
+      # Select variable for y-axis
+      selectInput(inputId = "y",
+                  label = "Y-axis:",
+                  choices = c("imdb_rating", "imdb_num_votes", "critics_score", "audience_score", "runtime"),
+                  selected = "audience_score"),
+
+      # Select variable for x-axis
+      selectInput(inputId = "x",
+                  label = "X-axis:",
+                  choices = c("imdb_rating", "imdb_num_votes", "critics_score", "audience_score", "runtime"),
+                  selected = "critics_score"),
+
+      # Select variable for color
+      selectInput(inputId = "___",
+                  label = "____",
+                  choices = c(___),
+                  selected = "___"),
+      ),
+    
+    # Output: Show scatterplot
+    card(
+      plotOutput(outputId = "scatterplot")
+    )  
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y,
+                                     color = ___)) +
+      geom_point()
+  })
+
+  }
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  
+    
+    # Inputs: Select variables to plot
+    sidebar = sidebar(
+      
+      # Select variable for y-axis
+      selectInput(inputId = "y",
+                  label = "Y-axis:",
+                  choices = c("imdb_rating", "imdb_num_votes", "critics_score", "audience_score", "runtime"),
+                  selected = "audience_score"),
+
+      # Select variable for x-axis
+      selectInput(inputId = "x",
+                  label = "X-axis:",
+                  choices = c("imdb_rating", "imdb_num_votes", "critics_score", "audience_score", "runtime"),
+                  selected = "critics_score"),
+
+      # Select variable for color
+      selectInput(inputId = "z",
+                  label = "Color by:",
+                  choices = c("title_type", "genre", "mpaa_rating", "critics_rating", "audience_rating"),
+                  selected = "mpaa_rating")
+
+    ),
+
+    # Output: Show scatterplot
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y,
+                                     color = input$z)) +
+      geom_point()
+  })
+  
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+
+
+
+## Practice: Extend the UI further
+
+The potential variables the user can select for the `x` and `y` axes and `color` currently appear in the UI of the app the same way that they are spelled in the data frame header. However we might want to label them in a way that is more human readable. We can achieve this using named vectors for the `choices` argument, in the format of `"Human readable label" = "variable_name"`.
+
+### Your turn
+
+1. Fill in the blanks in the code below with human readable labels for `x` and `y` inputs.
+
+2. Re-create the `selectInput` widget for color, `z`, with options `"title_type"`, `"genre"`, `"mpaa_rating"`, `"critics_rating"`, and `"audience_rating"`, default selection `"mpaa_rating"` just like in the previous exercise, but this time use human readable labels as well.
+
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete this exercise by opening up the RStudio Project titled **1-2b Extend the UI further** within your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Workspace](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+::: {.callout-note collapse="true"}
+## Work locally in your RStudio IDE
+
+* Continue editing the code you've created with the code below
+:::
+
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  
+    
+    # Inputs: Select variables to plot
+    sidebar = sidebar(
+      
+      # Select variable for y-axis
+      selectInput(inputId = "y",
+                  label = "Y-axis:",
+                  choices = c(___ = "imdb_rating",
+                              ___ = "imdb_num_votes",
+                              ___ = "critics_score",
+                              ___ = "audience_score",
+                              ___ = "runtime"),
+                  selected = "audience_score"),
+
+      # Select variable for x-axis
+      selectInput(inputId = "x",
+                  label = "X-axis:",
+                  choices = c(___ = "imdb_rating",
+                              ___ = "imdb_num_votes",
+                              ___ = "critics_score",
+                              ___ = "audience_score",
+                              ___ = "runtime"),
+                  selected = "critics_score"),
+
+      # Select variable for color
+      selectInput(inputId = "z",
+                  label = "Color:",
+                  choices = ___,
+                  selected = ___)
+    ),
+
+    # Output: Show scatterplot
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y,
+                                     color = input$z)) +
+      geom_point()
+  })
+
+  }
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  
+    
+    # Inputs: Select variables to plot
+    sidebar = sidebar(
+      
+      # Select variable for y-axis
+      selectInput(inputId = "y",
+                  label = "Y-axis:",
+                  choices = c("IMDB rating"          = "imdb_rating",
+                              "IMDB number of votes" = "imdb_num_votes",
+                              "Critics score"        = "critics_score",
+                              "Audience score"       = "audience_score",
+                              "Runtime"              = "runtime"),
+                  selected = "audience_score"),
+
+      # Select variable for x-axis
+      selectInput(inputId = "x",
+                  label = "X-axis:",
+                  choices = c(
+                    "IMDB rating"          = "imdb_rating",
+                    "IMDB number of votes" = "imdb_num_votes",
+                    "Critics score"        = "critics_score",
+                    "Audience score"       = "audience_score",
+                    "Runtime"              = "runtime"),
+                  selected = "critics_score"),
+
+      # Select variable for color
+      # Select variable for color
+      selectInput(inputId = "z",
+                  label = "Color by:",
+                  choices = c(
+                    "Title type" = "title_type",
+                    "Genre" = "genre",
+                    "MPAA rating" = "mpaa_rating",
+                    "Critics rating" = "critics_rating",
+                    "Audience rating" = "audience_rating"),
+                  selected = "mpaa_rating")
+
+    ),
+
+    # Output: Show scatterplot
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y,
+                                     color = input$z)) +
+      geom_point()
+  })
+
+  }
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::

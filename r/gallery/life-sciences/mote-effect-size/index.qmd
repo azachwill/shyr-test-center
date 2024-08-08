@@ -1,0 +1,22 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: "Check out MOTE: Measure of the Effect - a Shiny App to calculate many effect sizes and their confidence intervals."
+title:        "MOTE: An Effect Size Calculator"
+author:    Erin Buchanan
+authorurl:     https://www.aggieerin.com/
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - effec
+ - size
+ - confidenc
+ - interval
+ - statistics
+appurl:      https://doomlab.shinyapps.io/mote/
+sourceurl:   https://github.com/doomlab/shiny-server/tree/master/MOTE
+rscloudurl:  https://rstudio.cloud/project/255262
+---
+
+Check out MOTE: Measure of the Effect - a Shiny App to calculate many effect sizes and their confidence intervals. Tutorials for integrating with statistical programs such as JASP, SPSS, and R are integrated into the app!
+  

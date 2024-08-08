@@ -1,0 +1,242 @@
+---
+title: "Enable bookmarking for a Shiny application — enableBookmarking"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>enableBookmarking</span>(<span class='kw'>store</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"url"</span>, <span class='st'>"server"</span>, <span class='st'>"disable"</span>))</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>store</p></th>
+    <td><p>Either <code>"url"</code>, which encodes all of the relevant values in
+a URL, <code>"server"</code>, which saves to disk on the server, or
+<code>"disable"</code>, which disables any previously-enabled bookmarking.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>There are two types of bookmarking: saving an application's state to disk on
+the server, and encoding the application's state in a URL. For state that has
+been saved to disk, the state can be restored with the corresponding state
+ID. For URL-encoded state, the state of the application is encoded in the
+URL, and no server-side storage is needed.</p>
+<p>URL-encoded bookmarking is appropriate for applications where there not many
+input values that need to be recorded. Some browsers have a length limit for
+URLs of about 2000 characters, and if there are many inputs, the length of
+the URL can exceed that limit.</p>
+<p>Saved-on-server bookmarking is appropriate when there are many inputs, or
+when the bookmarked state requires storing files.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>For restoring state to work properly, the UI must be a function that takes
+one argument, <code>request</code>. In most Shiny applications, the UI is not a
+function; it might have the form <code><a href='fluidPage.html'>fluidPage(....)</a></code>. Converting it to a
+function is as simple as wrapping it in a function, as in
+<code>function(request) { fluidPage(....) }</code>.</p>
+<p>By default, all input values will be bookmarked, except for the values of
+passwordInputs. fileInputs will be saved if the state is saved on a server,
+but not if the state is encoded in a URL.</p>
+<p>When bookmarking state, arbitrary values can be stored, by passing a function
+as the <code>onBookmark</code> argument. That function will be passed a
+<code>ShinySaveState</code> object. The <code>values</code> field of the object is a list
+which can be manipulated to save extra information. Additionally, if the
+state is being saved on the server, and the <code>dir</code> field of that object
+can be used to save extra information to files in that directory.</p>
+<p>For saved-to-server state, this is how the state directory is chosen:</p><ul>
+<li><p>If running in a hosting environment such as Shiny Server or
+Connect, the hosting environment will choose the directory.</p></li>
+<li><p>If running an app in a directory with <code><a href='runApp.html'>runApp()</a></code>, the
+saved states will be saved in a subdirectory of the app called
+shiny_bookmarks.</p></li>
+<li><p>If running a Shiny app object that is generated from code (not run
+from a directory), the saved states will be saved in a subdirectory of
+the current working directory called shiny_bookmarks.</p></li>
+</ul>
+
+<p>When used with <code><a href='shinyApp.html'>shinyApp()</a></code>, this function must be called before
+<code><a href='shinyApp.html'>shinyApp()</a></code>, or in the <code><a href='shinyApp.html'>shinyApp()</a></code>'s <code>onStart</code> function. An
+alternative to calling the <code>enableBookmarking()</code> function is to use the
+<code>enableBookmarking</code> <em>argument</em> for <code><a href='shinyApp.html'>shinyApp()</a></code>. See examples
+below.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='onBookmark.html'>onBookmark()</a></code>, <code><a href='onBookmark.html'>onBookmarked()</a></code>,
+<code><a href='onBookmark.html'>onRestore()</a></code>, and <code><a href='onBookmark.html'>onRestored()</a></code> for registering
+callback functions that are invoked when the state is bookmarked or
+restored.</p>
+<p>Also see <code><a href='updateQueryString.html'>updateQueryString()</a></code>.</p></div>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run these examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='co'># Basic example with state encoded in URL</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>request</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"txt"</span>, <span class='st'>"Text"</span>),
+    <span class='fu'><a href='checkboxInput.html'>checkboxInput</a></span>(<span class='st'>"chk"</span>, <span class='st'>"Checkbox"</span>),
+    <span class='fu'><a href='bookmarkButton.html'>bookmarkButton</a></span>()
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) { }
+<span class='fu'>enableBookmarking</span>(<span class='st'>"url"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+
+<span class='co'># An alternative to calling enableBookmarking(): use shinyApp's</span>
+<span class='co'># enableBookmarking argument</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>enableBookmarking</span> <span class='kw'>=</span> <span class='st'>"url"</span>)
+
+
+<span class='co'># Same basic example with state saved to disk</span>
+<span class='fu'>enableBookmarking</span>(<span class='st'>"server"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+
+<span class='co'># Save/restore arbitrary values</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>req</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"txt"</span>, <span class='st'>"Text"</span>),
+    <span class='fu'><a href='checkboxInput.html'>checkboxInput</a></span>(<span class='st'>"chk"</span>, <span class='st'>"Checkbox"</span>),
+    <span class='fu'><a href='bookmarkButton.html'>bookmarkButton</a></span>(),
+    <span class='fu'><a href='builder.html'>br</a></span>(),
+    <span class='fu'><a href='textOutput.html'>textOutput</a></span>(<span class='st'>"lastSaved"</span>)
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='no'>vals</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactiveValues.html'>reactiveValues</a></span>(<span class='kw'>savedTime</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+  <span class='no'>output</span>$<span class='no'>lastSaved</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderText.html'>renderText</a></span>({
+    <span class='kw'>if</span> (!<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>vals</span>$<span class='no'>savedTime</span>))
+      <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Last saved at"</span>, <span class='no'>vals</span>$<span class='no'>savedTime</span>)
+    <span class='kw'>else</span>
+      <span class='st'>""</span>
+  })
+
+  <span class='fu'><a href='onBookmark.html'>onBookmark</a></span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='no'>vals</span>$<span class='no'>savedTime</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
+    <span class='co'># state is a mutable reference object, and we can add arbitrary values</span>
+    <span class='co'># to it.</span>
+    <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>time</span> <span class='kw'>&lt;-</span> <span class='no'>vals</span>$<span class='no'>savedTime</span>
+  })
+  <span class='fu'><a href='onBookmark.html'>onRestore</a></span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='no'>vals</span>$<span class='no'>savedTime</span> <span class='kw'>&lt;-</span> <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>time</span>
+  })
+}
+<span class='fu'>enableBookmarking</span>(<span class='kw'>store</span> <span class='kw'>=</span> <span class='st'>"url"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+
+<span class='co'># Usable with dynamic UI (set the slider, then change the text input,</span>
+<span class='co'># click the bookmark button)</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>request</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='sliderInput.html'>sliderInput</a></span>(<span class='st'>"slider"</span>, <span class='st'>"Slider"</span>, <span class='fl'>1</span>, <span class='fl'>100</span>, <span class='fl'>50</span>),
+    <span class='fu'><a href='htmlOutput.html'>uiOutput</a></span>(<span class='st'>"ui"</span>),
+    <span class='fu'><a href='bookmarkButton.html'>bookmarkButton</a></span>()
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='no'>output</span>$<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderUI.html'>renderUI</a></span>({
+    <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"txt"</span>, <span class='st'>"Text"</span>, <span class='no'>input</span>$<span class='no'>slider</span>)
+  })
+}
+<span class='fu'>enableBookmarking</span>(<span class='st'>"url"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+
+<span class='co'># Exclude specific inputs (The only input that will be saved in this</span>
+<span class='co'># example is chk)</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>request</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='passwordInput.html'>passwordInput</a></span>(<span class='st'>"pw"</span>, <span class='st'>"Password"</span>), <span class='co'># Passwords are never saved</span>
+    <span class='fu'><a href='sliderInput.html'>sliderInput</a></span>(<span class='st'>"slider"</span>, <span class='st'>"Slider"</span>, <span class='fl'>1</span>, <span class='fl'>100</span>, <span class='fl'>50</span>), <span class='co'># Manually excluded below</span>
+    <span class='fu'><a href='checkboxInput.html'>checkboxInput</a></span>(<span class='st'>"chk"</span>, <span class='st'>"Checkbox"</span>),
+    <span class='fu'><a href='bookmarkButton.html'>bookmarkButton</a></span>()
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'><a href='setBookmarkExclude.html'>setBookmarkExclude</a></span>(<span class='st'>"slider"</span>)
+}
+<span class='fu'>enableBookmarking</span>(<span class='st'>"url"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+
+<span class='co'># Update the browser's location bar every time an input changes. This should</span>
+<span class='co'># not be used with enableBookmarking("server"), because that would create a</span>
+<span class='co'># new saved state on disk every time the user changes an input.</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>req</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"txt"</span>, <span class='st'>"Text"</span>),
+    <span class='fu'><a href='checkboxInput.html'>checkboxInput</a></span>(<span class='st'>"chk"</span>, <span class='st'>"Checkbox"</span>)
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'><a href='observe.html'>observe</a></span>({
+    <span class='co'># Trigger this observer every time an input changes</span>
+    <span class='fu'><a href='reactiveValuesToList.html'>reactiveValuesToList</a></span>(<span class='no'>input</span>)
+    <span class='no'>session</span>$<span class='fu'>doBookmark</span>()
+  })
+  <span class='fu'><a href='onBookmark.html'>onBookmarked</a></span>(<span class='kw'>function</span>(<span class='no'>url</span>) {
+    <span class='fu'><a href='updateQueryString.html'>updateQueryString</a></span>(<span class='no'>url</span>)
+  })
+}
+<span class='fu'>enableBookmarking</span>(<span class='st'>"url"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+
+<span class='co'># Save/restore uploaded files</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>request</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='sidebarLayout.html'>sidebarLayout</a></span>(
+      <span class='fu'><a href='sidebarLayout.html'>sidebarPanel</a></span>(
+        <span class='fu'><a href='fileInput.html'>fileInput</a></span>(<span class='st'>"file1"</span>, <span class='st'>"Choose CSV File"</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+          <span class='kw'>accept</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+            <span class='st'>"text/csv"</span>,
+            <span class='st'>"text/comma-separated-values,text/plain"</span>,
+            <span class='st'>".csv"</span>
+          )
+        ),
+        <span class='no'>tags</span>$<span class='fu'><a href='builder.html'>hr</a></span>(),
+        <span class='fu'><a href='checkboxInput.html'>checkboxInput</a></span>(<span class='st'>"header"</span>, <span class='st'>"Header"</span>, <span class='fl'>TRUE</span>),
+        <span class='fu'><a href='bookmarkButton.html'>bookmarkButton</a></span>()
+      ),
+      <span class='fu'><a href='sidebarLayout.html'>mainPanel</a></span>(
+        <span class='fu'><a href='tableOutput.html'>tableOutput</a></span>(<span class='st'>"contents"</span>)
+      )
+    )
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+  <span class='no'>output</span>$<span class='no'>contents</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderTable.html'>renderTable</a></span>({
+    <span class='no'>inFile</span> <span class='kw'>&lt;-</span> <span class='no'>input</span>$<span class='no'>file1</span>
+    <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>inFile</span>))
+      <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='kw'>NULL</span>)
+
+    <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>inFile</span>) <span class='kw'>==</span> <span class='fl'>1</span>) {
+      <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(<span class='no'>inFile</span>$<span class='no'>datapath</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>input</span>$<span class='no'>header</span>)
+    } <span class='kw'>else</span> {
+      <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"multiple files"</span>)
+    }
+  })
+}
+<span class='fu'>enableBookmarking</span>(<span class='st'>"server"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+}</pre>
+</div>
+
+
+```

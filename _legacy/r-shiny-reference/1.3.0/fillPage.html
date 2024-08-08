@@ -1,0 +1,133 @@
+---
+layout: reference
+title: "fillPage"
+categories: reference
+---
+<h1>Create a page that fills the window</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='fillPage.html'>fillPage</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">padding</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0</span><span class="keyword">,</span> <span class="argument">title</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">bootstrap</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span>
+  <span class="argument">theme</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Elements to include within the page.</td>
+  </tr>
+  <tr>
+    <th>padding</th>
+    <td>Padding to use for the body. This can be a numeric vector
+(which will be interpreted as pixels) or a character vector with valid CSS
+lengths. The length can be between one and four. If one, then that value
+will be used for all four sides. If two, then the first value will be used
+for the top and bottom, while the second value will be used for left and
+right. If three, then the first will be used for top, the second will be
+left and right, and the third will be bottom. If four, then the values will
+be interpreted as top, right, bottom, and left respectively.</td>
+  </tr>
+  <tr>
+    <th>title</th>
+    <td>The title to use for the browser window/tab (it will not be
+shown in the document).</td>
+  </tr>
+  <tr>
+    <th>bootstrap</th>
+    <td>If <code>TRUE</code>, load the Bootstrap CSS library.</td>
+  </tr>
+  <tr>
+    <th>theme</th>
+    <td>URL to alternative Bootstrap stylesheet.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p><code>fillPage</code> creates a page whose height and width always fill the
+available area of the browser window.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The <code><a href='fluidPage.html'>fluidPage</a></code> and <code><a href='fixedPage.html'>fixedPage</a></code> functions are used
+for creating web pages that are laid out from the top down, leaving
+whitespace at the bottom if the page content&#39;s height is smaller than the
+browser window, and scrolling if the content is larger than the window.</p>
+
+  <p><code>fillPage</code> is designed to latch the document body&#39;s size to the size of
+the window. This makes it possible to fill it with content that also scales
+to the size of the window.</p>
+
+  <p>For example, <code>fluidPage(plotOutput(&quot;plot&quot;, height = &quot;100%&quot;))</code> will not
+work as expected; the plot element&#39;s effective height will be <code>0</code>,
+because the plot&#39;s containing elements (<code>&lt;div&gt;</code> and <code>&lt;body&gt;</code>) have
+<em>automatic</em> height; that is, they determine their own height based on
+the height of their contained elements. However,
+<code>fillPage(plotOutput(&quot;plot&quot;, height = &quot;100%&quot;))</code> will work because
+<code>fillPage</code> fixes the <code>&lt;body&gt;</code> height at 100% of the window height.</p>
+
+  <p>Note that <code>fillPage(plotOutput(&quot;plot&quot;))</code> will not cause the plot to fill
+the page. Like most Shiny output widgets, <code>plotOutput</code>&#39;s default height
+is a fixed number of pixels. You must explicitly set <code>height = &quot;100%&quot;</code>
+if you want a plot (or htmlwidget, say) to fill its container.</p>
+
+  <p>One must be careful what layouts/panels/elements come between the
+<code>fillPage</code> and the plots/widgets. Any container that has an automatic
+height will cause children with <code>height = &quot;100%&quot;</code> to misbehave. Stick
+to functions that are designed for fill layouts, such as the ones in this
+package.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='fillPage.html'>fillPage</a></span><span class="keyword">(</span>
+  <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/crayon/topics/style'>style</a></span><span class="keyword">(</span><span class="argument">type</span> <span class="argument">=</span> <span class="string">"text/css"</span><span class="keyword">,</span>
+    <span class="string">".half-fill { width: 50%; height: 100%; }"</span><span class="keyword">,</span>
+    <span class="string">"#one { float: left; background-color: #ddddff; }"</span><span class="keyword">,</span>
+    <span class="string">"#two { float: right; background-color: #ccffcc; }"</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='builder.html'>div</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"one"</span><span class="keyword">,</span> <span class="argument">class</span> <span class="argument">=</span> <span class="string">"half-fill"</span><span class="keyword">,</span>
+    <span class="string">"Left half"</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='builder.html'>div</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"two"</span><span class="keyword">,</span> <span class="argument">class</span> <span class="argument">=</span> <span class="string">"half-fill"</span><span class="keyword">,</span>
+    <span class="string">"Right half"</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">padding</span> <span class="argument">=</span> <span class="number">10</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;style type=&quot;text/css&quot;&gt;
+  .half-fill { width: 50%; height: 100%; }
+  #one { float: left; background-color: #ddddff; }
+  #two { float: right; background-color: #ccffcc; }
+&lt;/style&gt;
+&lt;div id=&quot;one&quot; class=&quot;half-fill&quot;&gt;Left half&lt;/div&gt;
+&lt;div id=&quot;two&quot; class=&quot;half-fill&quot;&gt;Right half&lt;/div&gt;
+</div>
+<div class='input'>
+<span class="functioncall"><a href='fillPage.html'>fillPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='fillRow.html'>fillRow</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='builder.html'>div</a></span><span class="keyword">(</span><span class="argument">style</span> <span class="argument">=</span> <span class="string">"background-color: red; width: 100%; height: 100%;"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='builder.html'>div</a></span><span class="keyword">(</span><span class="argument">style</span> <span class="argument">=</span> <span class="string">"background-color: blue; width: 100%; height: 100%;"</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;flexfill-container flexfill-container-row&quot; style=&quot;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;width:100%;height:100%;&quot;&gt;
+  &lt;div class=&quot;flexfill-item&quot; style=&quot;position:relative;-webkit-flex:1;-ms-flex:1;flex:1;width:100%;height:100%;&quot;&gt;
+    &lt;div class=&quot;flexfill-item-inner&quot; style=&quot;position:absolute;top:0;left:0;right:0;bottom:0;&quot;&gt;
+      &lt;div style=&quot;background-color: red; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;flexfill-item&quot; style=&quot;position:relative;-webkit-flex:1;-ms-flex:1;flex:1;width:100%;height:100%;&quot;&gt;
+    &lt;div class=&quot;flexfill-item-inner&quot; style=&quot;position:absolute;top:0;left:0;right:0;bottom:0;&quot;&gt;
+      &lt;div style=&quot;background-color: blue; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>fillPage</li>
+</ul>
+<ul>
+  
+</ul> -->
+

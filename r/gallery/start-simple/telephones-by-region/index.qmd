@@ -1,0 +1,12 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Telephones by region
+date: 2014-07-29 
+tags:
+ - sidebarlayout
+ - helptext
+ - selectinput
+appurl: https://gallery.shinyapps.io/064-telephones-by-region
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/064-telephones-by-region
+---

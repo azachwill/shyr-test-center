@@ -1,0 +1,41 @@
+---
+layout: reference
+title: "Deregister an Input Handler — removeInputHandler"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Deregister an Input Handler</h1>
+  
+
+  <pre class="code"><span class='fu'>removeInputHandler</span>(<span class='no'>type</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>type</p></th>
+    <td><p>The type for which handlers should be removed.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Removes an Input Handler. Rather than using the previously specified handler
+for data of this type, the default jsonlite serialization will be used.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>The handler previously associated with this <code>type</code>, if one
+existed. Otherwise, <code>NULL</code>.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='registerInputHandler.html'>registerInputHandler()</a></code></p></div>
+  </div>
+
+</div>
+
+

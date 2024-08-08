@@ -1,0 +1,91 @@
+---
+title: "column"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="symbol">width</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>width</th>
+    <td>The grid width of the column (must be between 1 and 12)</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Elements to include within the column</td>
+  </tr>
+  <tr>
+    <th>offset</th>
+    <td>The number of columns to offset this column from the end of the
+previous column.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A column that can be included within a
+  <code><a href='fluidPage.html'>fluidRow</a></code> or <code><a href='fixedPage.html'>fixedRow</a></code>.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a column for use within a  <code><a href='fluidPage.html'>fluidRow</a></code> or
+<code><a href='fixedPage.html'>fixedRow</a></code></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='fluidPage.html'>fluidRow</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="number">4</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"obs"</span><span class="keyword">,</span> <span class="string">"Number of observations:"</span><span class="keyword">,</span>
+                <span class="argument">min</span> <span class="argument">=</span> <span class="number">1</span><span class="keyword">,</span> <span class="argument">max</span> <span class="argument">=</span> <span class="number">1000</span><span class="keyword">,</span> <span class="argument">value</span> <span class="argument">=</span> <span class="number">500</span><span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="number">8</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"distPlot"</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-sm-4&quot;&gt;
+    &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;obs&quot;&gt;Number of observations:&lt;/label&gt;
+      &lt;input class=&quot;js-range-slider&quot; id=&quot;obs&quot; data-min=&quot;1&quot; data-max=&quot;1000&quot; data-from=&quot;500&quot; data-step=&quot;1&quot; data-grid=&quot;true&quot; data-grid-num=&quot;9.99&quot; data-grid-snap=&quot;false&quot; data-prettify-separator=&quot;,&quot; data-keyboard=&quot;true&quot; data-keyboard-step=&quot;0.1001001001001&quot; data-drag-interval=&quot;true&quot; data-data-type=&quot;number&quot;/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;col-sm-8&quot;&gt;
+    &lt;div id=&quot;distPlot&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div>
+<div class='input'>
+<span class="functioncall"><a href='fluidPage.html'>fluidRow</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+    <span class="string">"4"</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">3</span><span class="keyword">,</span> <span class="argument">offset</span> <span class="argument">=</span> <span class="number">2</span><span class="keyword">,</span>
+    <span class="string">"3 offset 2"</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-sm-4&quot;&gt;4&lt;/div&gt;
+  &lt;div class=&quot;col-sm-3 col-sm-offset-2&quot;&gt;3 offset 2&lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>column</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='fluidPage.html'>fluidRow</a></code>, <code><a href='fixedPage.html'>fixedRow</a></code>.</p>
+</div>
+```

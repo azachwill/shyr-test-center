@@ -1,0 +1,61 @@
+---
+title: "Define Server Functionality — shinyServer"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.1</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.1/R/server.R" class="external-link"><code>R/server.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p><a href="https://lifecycle.r-lib.org/articles/stages.html#superseded" class="external-link"><img src="figures/lifecycle-superseded.svg" alt="[Superseded]"></a></p>
+<p>Defines the server-side logic of the Shiny application. This generally
+involves creating functions that map user inputs to various kinds of output.
+In older versions of Shiny, it was necessary to call <code>shinyServer()</code> in
+the <code>server.R</code> file, but this is no longer required as of Shiny 0.10.
+Now the <code>server.R</code> file may simply return the appropriate server
+function (as the last expression in the code), without calling
+<code>shinyServer()</code>.</p>
+<p>Call <code>shinyServer</code> from your application's <code>server.R</code>
+file, passing in a "server function" that provides the server-side logic of
+your application.</p>
+<p>The server function will be called when each client (web browser) first loads
+the Shiny application's page. It must take an <code>input</code> and an
+<code>output</code> parameter. Any return value will be ignored. It also takes an
+optional <code>session</code> parameter, which is used when greater control is
+needed.</p>
+<p>See the <a href="https://rstudio.github.io/shiny/tutorial/" class="external-link">tutorial</a> for more
+on how to write a server function.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">shinyServer</span>(func)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>func</dt>
+<dd><p>The server function for this application. See the details section
+for more information.</p></dd>
+
+</dl></div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># A very simple Shiny app that takes a message from the user</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># and outputs an uppercase version of it.</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">shinyServer</span>(<span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  output<span class="sc">$</span>uppercase <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="fu">toupper</span>(input<span class="sc">$</span>message)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  })</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>})</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># It is also possible for a server.R file to simply return the function,</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># without calling shinyServer().</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co"># For example, the server.R file could contain just the following:</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  output<span class="sc">$</span>uppercase <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="fu">toupper</span>(input<span class="sc">$</span>message)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  })</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

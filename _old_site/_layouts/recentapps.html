@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<h1>Recent apps</h1>
+
+<ul class="pagination">
+  {% if page.previous_page %}
+  <li><a href="{{ page.previous_page_path }}"><i class="fas fa-chevron-left"></i></a></li>
+  {% else %}
+  <li class="disabled"><a href="#" onclick="return false;"><i class="fas fa-chevron-left"></i></a></li>
+  {% endif %}
+
+  {% for i in (1..page.total_pages) %}
+  <li{% if page.page == forloop.index %} class="active"{% endif %}><a href="{{ site.baseurl }}/gallery/recent/page{{ forloop.index }}/">{% if page.page == forloop.index %}Page {%endif%}{{ forloop.index }}</a></li>
+  {% endfor %}
+
+  {% if page.next_page %}
+  <li><a href="{{ page.next_page_path }}"><i class="fas fa-chevron-right"></i></a></li>
+  {% else %}
+  <li class="disabled"><a href="#" onclick="return false;"><i class="fas fa-chevron-right"></i></a></li>
+  {% endif %}
+</ul>
+
+<div class="gallery-app-list thumbnails row">
+  {% for app_item in page.posts %}
+    {% include app_item.html cols=3 %}
+    {% cycle "recent": '', '', '', '<div class="clearfix"></div>' %}
+  {% endfor %}
+</div>

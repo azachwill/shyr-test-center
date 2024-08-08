@@ -1,0 +1,109 @@
+---
+title: "reactiveVal"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='reactiveVal.html'>reactiveVal</a></span><span class="keyword">(</span><span class="argument">value</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>value</th>
+    <td>An optional initial value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>An optional label, for debugging purposes (see
+<code><a href='showReactLog.html'>showReactLog</a></code>). If missing, a label will be automatically
+created.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A function. Call the function with no arguments to (reactively) read
+  the value; call the function with a single argument to set the value.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>The <code>reactiveVal</code> function is used to construct a &quot;reactive value&quot;
+object. This is an object used for reading and writing a value, like a
+variable, but with special capabilities for reactive programming. When you
+read the value out of a reactiveVal object, the calling reactive expression
+takes a dependency, and when you change the value, it notifies any reactives
+that previously depended on that value.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p><code>reactiveVal</code> is very similar to <code><a href='reactiveValues.html'>reactiveValues</a></code>, except
+that the former is for a single reactive value (like a variable), whereas the
+latter lets you conveniently use multiple reactive values by name (like a
+named list of variables). For a one-off reactive value, it&#39;s more natural to
+use <code>reactiveVal</code>. See the Examples section for an illustration.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'>
+<span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># </span>
+<span class="comment"># # Create the object by calling reactiveVal</span>
+<span class="comment"># r &lt;- reactiveVal()</span>
+<span class="comment"># </span>
+<span class="comment"># # Set the value by calling with an argument</span>
+<span class="comment"># r(10)</span>
+<span class="comment"># </span>
+<span class="comment"># # Read the value by calling without arguments</span>
+<span class="comment"># r()</span>
+<span class="comment">## ---------------------------------------------</span>
+
+<span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"minus"</span><span class="keyword">,</span> <span class="string">"-1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"plus"</span><span class="keyword">,</span> <span class="string">"+1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='builder.html'>br</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='textOutput.html'>textOutput</a></span><span class="keyword">(</span><span class="string">"value"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="comment"># The comments below show the equivalent logic using reactiveValues()</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">value</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveVal.html'>reactiveVal</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">)</span>       <span class="comment"># rv &lt;- reactiveValues(value = 0)</span>
+
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">minus</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="symbol">newValue</span> <span class="assignement">&lt;-</span> <span class="functioncall">value</span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">-</span> <span class="number">1</span>     <span class="comment"># newValue &lt;- rv$value - 1</span>
+    <span class="functioncall">value</span><span class="keyword">(</span><span class="symbol">newValue</span><span class="keyword">)</span>             <span class="comment"># rv$value &lt;- newValue</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">plus</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="symbol">newValue</span> <span class="assignement">&lt;-</span> <span class="functioncall">value</span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">+</span> <span class="number">1</span>     <span class="comment"># newValue &lt;- rv$value + 1</span>
+    <span class="functioncall">value</span><span class="keyword">(</span><span class="symbol">newValue</span><span class="keyword">)</span>             <span class="comment"># rv$value &lt;- newValue</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">value</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall">value</span><span class="keyword">(</span><span class="keyword">)</span>                     <span class="comment"># rv$value</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>reactiveVal</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

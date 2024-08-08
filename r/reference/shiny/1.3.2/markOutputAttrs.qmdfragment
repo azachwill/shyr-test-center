@@ -1,0 +1,41 @@
+---
+title: "markOutputAttrs"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='markOutputAttrs.html'>markOutputAttrs</a></span><span class="keyword">(</span><span class="symbol">renderFunc</span><span class="keyword">,</span> <span class="argument">snapshotExclude</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">snapshotPreprocess</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>renderFunc</th>
+    <td>A function that is suitable for assigning to a Shiny output
+slot.</td>
+  </tr>
+  <tr>
+    <th>snapshotExclude</th>
+    <td>If TRUE, exclude the output from test snapshots.</td>
+  </tr>
+  <tr>
+    <th>snapshotPreprocess</th>
+    <td>A function for preprocessing the value before
+taking a test snapshot.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Mark a render function with attributes that will be used by the output</p>
+
+</div>
+<!-- <ul>
+  <li>markOutputAttrs</li>
+</ul>
+<ul>
+  <li>internal</li>
+</ul> -->
+
+```

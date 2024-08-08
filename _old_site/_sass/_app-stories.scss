@@ -1,0 +1,106 @@
+/**************************************************************************************************
+ * App Stories
+ * These are the shared styles for the app stories page
+**************************************************************************************************/
+/**************************************************************************************************
+ * Main app-stories landing page
+**************************************************************************************************/
+.app-stories-intro {
+  font-weight: 400;
+  display: inline-block;
+  text-align: left;
+  min-height: 160px;
+  font-size: 22px;
+  line-height: 36px;
+  margin-bottom: 4.5rem;
+}
+
+.app-story-post-holder {
+  display: flex;
+  flex-wrap: wrap; /* The posts will wrap around on small screens */
+  padding-top: 1rem;
+}
+
+.app-story-section-links {
+  padding-top: 1rem;
+}
+
+/**************************************************************************************************
+ * Card styling for a given story post
+**************************************************************************************************/
+.app-story-post {
+  max-width: 33%;
+  min-width: 160px; /* Controls when layout starts wrapping */
+  padding: 1rem;
+  margin: 0.7rem; /* Space out the cards a tiny bit */
+  box-shadow: 0px 0px 5px #00000038;
+  border-radius: 8px;
+  cursor: pointer; /* Make it obvious the whole card is clickable */
+}
+
+.app-story-thumbnail {
+  outline: 1px solid #ddd;
+  padding-bottom: 80%; /* This forces the aspect ratio of 250:200px */
+  height: 0;
+  position: relative;
+  background-size: contain; /* Make sure whole thumbnail is included */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.app-story-post-title {
+  font-size: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.app-story-post-blurb {
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+/**************************************************************************************************
+ * Sidebar within post view
+**************************************************************************************************/
+/* Get rid of default list markers so we can replace with custom ones. 
+  We still use lists here for free indentation and accessability reasons */
+#post-breadcrumb ul {
+  list-style: none;
+}
+
+.story-title {
+  font-size: 1.8rem;
+}
+
+.currently-viewed-post {
+  font-weight: 800;
+  position: relative;
+  box-shadow: 0px 0px 5px #00000038;
+  border-radius: 8px;
+  padding: 5px;
+  margin-left: -5px;
+  border-radius: 8px;
+}
+
+// Linked functions/code should provide some hint of their interactivity...
+a > code {
+  color: #007bc2;
+}
+
+.compare_images {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.compare_images > div {
+  width: 48%;
+  min-width: 400px;
+}
+
+.compare_images p {
+  text-align: center;
+  font-style: italic;
+  max-width: 100%;
+}

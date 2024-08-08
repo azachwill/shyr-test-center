@@ -1,0 +1,52 @@
+---
+title: "markRenderFunction"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>markRenderFunction(uiFunc, renderFunc)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>uiFunc</th>
+    <td>A function that renders Shiny UI. Must take a single argument:
+an output ID.</td>
+  </tr>
+  <tr>
+    <th>renderFunc</th>
+    <td>A function that is suitable for assigning to a Shiny output
+slot.</td>
+  </tr>
+</table>
+
+<div data-section="Mark a function as a render function">
+  <h3 data-swiftype-index="false">Mark a function as a render function</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>The <code>renderFunc</code> function, with annotations.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Should be called by implementers of <code>renderXXX</code> functions in order to
+mark their return values as Shiny render functions, and to provide a hint to
+Shiny regarding what UI function is most commonly used with this type of
+render function. This can be used in R Markdown documents to create complete
+output widgets out of just the render function.</p>
+
+</div>
+<!-- <ul>
+  <li>markRenderFunction</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

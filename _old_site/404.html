@@ -1,0 +1,102 @@
+---
+layout: newframe-bare
+title: Shiny
+categories: overview
+---
+
+<script src="lib/bxslider/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/bxslider/jquery.bxslider.css"/>
+
+<script>
+
+$(document).ready(function() {
+
+  $('#menuToggler').on('click', function(event) {
+    if ($('#menuItems').hasClass('showMenu')) {
+      $('#menuItems').removeClass("showMenu");
+    }
+    else {
+      $('#menuItems').addClass("showMenu");
+    }
+  });
+
+  $(window).on('scroll', function(event) {
+    var scrollPos = $(event.target).scrollTop();
+    if (scrollPos > 20) {
+      $('#appShinySite').addClass("shrinkHeader");
+    }
+    else {
+      $('#appShinySite').removeClass("shrinkHeader");
+    }
+  });
+
+  $(".bxslider").bxSlider();
+
+});
+
+</script>
+
+<div id="appShinySite" class="shrinkHeader alwaysShrinkHeader">
+  <div id="main">
+    <!-- rstudio header -->
+    <div id="rStudioHeader">
+      <div class="band">
+        <div class="innards bandContent">
+          <div>
+            <a class="productName" href="{{ site.baseurl }}/"><img src="/images/shiny-solo.svg" height="35" width="80.56"></a>
+          </div>
+          <div id="menu">
+            <div id="menuToggler"></div>
+            <div id="menuItems" class="">
+              <a class="menuItem" href="tutorial/">Get Started</a>
+              <a class="menuItem" href="gallery/">Gallery</a>
+              <a class="menuItem" href="articles/">Articles</a>
+              <a class="menuItem" href="app-stories/">App Stories</a>
+              <a class="menuItem" href="reference/shiny/">Reference</a>
+              <a class="menuItem" href="deploy/">Deploy</a>
+              <a class="menuItem" href="help/">Help</a>
+              <a class="menuItem" href="blog/">Blog</a>
+              <a class="menuItem" href="contribute/">Contribute</a>
+              <a class="menuItem gitHub" href="https://github.com/rstudio/shiny"></a>
+              <a class="menuItem gitHubText" href="https://github.com/rstudio/shiny">Source on GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div id="homeContent" class="pushFooter">
+
+      <div class="band standard third leftText"> <!-- band -->
+        <div class="bandContent"> <!-- bandContent -->
+          <div class="blurb">
+            <div class="tagline"></div>
+              <div>
+                <h1 style="color:gray;font-size:400%;">404</h1>
+                Oops, this page could not be found! <br><br><br>
+                <a class="bigButton blue" href="/">Shiny Home</a>
+                <a class="bigButton ghost" href="javascript:history.back()">Back</a>
+              </div>
+            </div>
+        </div> <!-- bandContent -->
+      </div>  <!-- band -->
+
+</div>
+
+    <!-- rstudio footer -->
+    <div id="rStudioFooter" class="band">
+      <div class="bandContent">
+        <div id="copyright">
+          <div>Proudly supported by <a href="https://www.posit.co/"><img src="/images/posit-logo-white-tm.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></div>
+        </div>
+        <div id="logos">
+          <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+          <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+          <a href="https://www.linkedin.com/company/rstudio-pbc/" class="footerLogo linkedIn"></a>
+          <a href="https://www.facebook.com/rstudiopbc/" class="footerLogo facebook"></a>
+        </div>
+      </div>
+    </div>
+
+  </div>  <!-- main -->
+</div>  <!-- app -->

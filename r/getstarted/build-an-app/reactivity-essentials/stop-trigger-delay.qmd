@@ -1,0 +1,675 @@
+---
+title: "Stop-trigger-delay"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+always_allow_html: true
+---
+
+In this section we present how to stop, trigger, and delay Shiny actions.
+
+### Isolating reactions
+
+Suppose your app has an input widget where users can enter text for the title of the plot. However you only want the title to update if any of the other inputs that go into the plot change. You can achieve this by isolating the plot title such that...
+
+-   When `input$x` or `input$y` changes, the plot, along with the title, will update.
+-   But when only the title input (`input$plot_title`) changes, the plot will **not** update.
+
+![](../images/isolate.png){.lightbox fig-alt="Section of the code with 'output$scatterplot <- renderPlot'. 'input$x' is highlighted with a description of Plot title will update when any of the other inputs in this chunk change. 'isolate({input$plot_title})' is highlighed with the description Plot title will not update when input$plot_title changes."}
+
+### Triggering reactions
+
+For triggering reactions, we use `observeEvent()`. So why might one want to explicitly trigger a reaction?
+
+Sometimes you might want to wait for a specific action to be taken from the user, like clicking an action button, before calculating an expression or taking an action. A reactive value or expression that is used to trigger other calculations in this way is called an **event**.
+
+![](../images/observeEvent.png){.lightbox style="width:90%;" fig-alt="Code line 'observeEvent(eventExpr, handlerExpr, ...)'. 'eventExpr' is described as 'simple reactive value - input$click, call to reactive expression - df(), or complex expression inside {}'. 'handlerExpr' is described as 'expression to call whenever eventExpr is invalidated'."}
+
+-   These events can be the first argument in the `observeEvent()` function. This argument can be a simple reactive value like an input, a call to a reactive expression, or a complex expression provided wrapped in curly braces.
+
+-   The second argument is the expression to call whenever the first argument is invalidated.
+
+So what you see here is similar to saying "if event expression happens, call handler expression".
+
+###
+
+Suppose your app allows for taking a random sample of the data based on a sample size numeric input. Suppose also that you want to add functionality for the users to download the random sample they generated *if* they press an action button (`actionButton()`) requesting to do so.
+
+![](../images/actionButton.png){.lightbox fig-alt="Code block of the ui and the server."}
+
+-   In the UI, we create an action button.
+-   And in the server, we condition the `observeEvent()` on the `inputId` of that action button. This way R knows to call the expression given in the second argument of `observeEvent()` when the user presses the action button.
+
+### Delaying reactions
+
+And finally we can delay reactions with `eventReactive()`, which takes similar arguments as `observeEvent()`.
+
+![](../images/eventReactive.png){.lightbox fig-alt="Code line 'eventReactive(eventExpr, handlerExpr, ...)'. 'eventExpr' is described as 'simple reactive value - input$click, call to reactive expression - df(), or complex expression inside {}'. 'handlerExpr' is described as 'expression to call whenever eventExpr is invalidated'."}
+
+###
+
+Suppose your goal is to change how users take random samples in your app -- you only want them to get a new sample when an action button that says "get new sample" is pressed, not when other things like a numeric input defining the size of the sample changes.
+
+![](../images/eventReactive-ignoreNULL.png){.lightbox fig-alt="Code block of the ui and server section of the Shiny app. 'ignoreNULL = FALSE' is highlighted with the description 'Initially perform the action/calculation and just let the user re-initiate it (like a Recalculate button)'."}
+
+-   In the `eventReactive()` function, the first argument is the input associated with the action button, and the second argument is the sampling code.
+-   Then, we add one more argument -- `ignoreNull`. This argument tells R what to do (or what not to do) when the event expression evaluates to `Null`. For example, what should the app do when the app is first launched and the user has not even interacted with the app yet? If this is set to `FALSE`, the app will initially perform the action or calculation and then the user can re-initiate it.
+
+### `observeEvent()` vs `eventReactive()`
+
+`observeEvent()` and `eventReactive()` look and feel very similar -- same syntax, same arguments, but they're actually not the same at all!
+
+-   `observeEvent()` is used to perform an action in response to an event
+-   `eventReactive()` is used to create a calculated value that only updates in response to an event
+
+### `observeEvent()`/`eventReactive()` vs. `observe()`/`reactive()`
+
+This pair of functions also seem similar, at a first glance, to the observe/reactive pair, however the main difference between them is that
+
+-   `observe()` and `reactive()` functions automatically trigger on whatever they access
+-   `observeEvent()` and `eventReactive()` functions need to be explicitly told what triggers them
+
+### `isolate()` vs event handling functions
+
+And where does isolate fit in all this?
+
+-   `isolate()` is used to stop a reaction
+-   `observeEvent()` is used to perform an action in response to an event
+-   `eventReactive()` is used to create a calculated value that only updates in response to an event
+
+## Practice - Stop with `isolate()`
+
+In the following app, the user, in addition to controlling which variables are plotted, can adjust the size and transparency of points and define the plot title.
+
+### Your turn
+
+1.  Run the code and test out the functionality of the plot title input. Is the plot title updated immediately after you're done typing the title?
+
+2.  Modify the app so that the plot title *only* gets updated when one of the other inputs is changed.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by navigating to the Posit Cloud Project titled **3-4a Stop with isolate()** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(tools)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    sidebar = sidebar(
+      selectInput(
+        inputId = "y",
+        label = "Y-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "audience_score"
+      ),
+
+      selectInput(
+        inputId = "x",
+        label = "X-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "critics_score"
+      ),
+
+      selectInput(
+        inputId = "z",
+        label = "Color by:",
+        choices = c(
+          "Title Type" = "title_type",
+          "Genre" = "genre",
+          "MPAA Rating" = "mpaa_rating",
+          "Critics Rating" = "critics_rating",
+          "Audience Rating" = "audience_rating"
+        ),
+        selected = "mpaa_rating"
+      ),
+
+      sliderInput(
+        inputId = "alpha",
+        label = "Alpha:",
+        min = 0, max = 1,
+        value = 0.5
+      ),
+
+      sliderInput(
+        inputId = "size",
+        label = "Size:",
+        min = 0, max = 5,
+        value = 2
+      ),
+
+      textInput(
+        inputId = "plot_title",
+        label = "Plot title",
+        placeholder = "Enter text to be used as plot title"
+      )
+    ),
+
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y, color = input$z)) +
+      geom_point(alpha = input$alpha, size = input$size) +
+      labs(title = toTitleCase(input$plot_title))
+  })
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(tools)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    sidebar = sidebar(
+      selectInput(
+        inputId = "y",
+        label = "Y-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "audience_score"
+      ),
+
+      selectInput(
+        inputId = "x",
+        label = "X-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "critics_score"
+      ),
+
+      selectInput(
+        inputId = "z",
+        label = "Color by:",
+        choices = c(
+          "Title Type" = "title_type",
+          "Genre" = "genre",
+          "MPAA Rating" = "mpaa_rating",
+          "Critics Rating" = "critics_rating",
+          "Audience Rating" = "audience_rating"
+        ),
+        selected = "mpaa_rating"
+      ),
+
+      sliderInput(
+        inputId = "alpha",
+        label = "Alpha:",
+        min = 0, max = 1,
+        value = 0.5
+      ),
+
+      sliderInput(
+        inputId = "size",
+        label = "Size:",
+        min = 0, max = 5,
+        value = 2
+      ),
+
+      textInput(
+        inputId = "plot_title",
+        label = "Plot title",
+        placeholder = "Enter text to be used as plot title"
+      )
+    ),
+
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y, color = input$z)) +
+      geom_point(alpha = input$alpha, size = input$size) +
+      labs(title = isolate({
+        toTitleCase(input$plot_title)
+      }))
+  })
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+## Practice - Delay with `eventReactive()`
+
+The following app has the same starter code as the previous exercise.
+
+### Your turn
+
+1.  Modify the app such that the title is updated only when a button titled "Update plot title" is clicked.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by navigating to the Posit Cloud Project titled **3-4b Delay with eventReactive()** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(tools)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    sidebar = sidebar(
+      selectInput(
+        inputId = "y",
+        label = "Y-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "audience_score"
+      ),
+
+      selectInput(
+        inputId = "x",
+        label = "X-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "critics_score"
+      ),
+
+      selectInput(
+        inputId = "z",
+        label = "Color by:",
+        choices = c(
+          "Title Type" = "title_type",
+          "Genre" = "genre",
+          "MPAA Rating" = "mpaa_rating",
+          "Critics Rating" = "critics_rating",
+          "Audience Rating" = "audience_rating"
+        ),
+        selected = "mpaa_rating"
+      ),
+
+      sliderInput(
+        inputId = "alpha",
+        label = "Alpha:",
+        min = 0, max = 1,
+        value = 0.5
+      ),
+
+      sliderInput(
+        inputId = "size",
+        label = "Size:",
+        min = 0, max = 5,
+        value = 2
+      ),
+
+      textInput(
+        inputId = "plot_title",
+        label = "Plot title",
+        placeholder = "Enter text to be used as plot title"
+      )
+    ),
+
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y, color = input$z)) +
+      geom_point(alpha = input$alpha, size = input$size) +
+      labs(title = toTitleCase(input$plot_title))
+  })
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(tools)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    sidebar = sidebar(
+      selectInput(
+        inputId = "y",
+        label = "Y-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "audience_score"
+      ),
+
+      selectInput(
+        inputId = "x",
+        label = "X-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "critics_score"
+      ),
+
+      selectInput(
+        inputId = "z",
+        label = "Color by:",
+        choices = c(
+          "Title Type" = "title_type",
+          "Genre" = "genre",
+          "MPAA Rating" = "mpaa_rating",
+          "Critics Rating" = "critics_rating",
+          "Audience Rating" = "audience_rating"
+        ),
+        selected = "mpaa_rating"
+      ),
+
+      sliderInput(
+        inputId = "alpha",
+        label = "Alpha:",
+        min = 0, max = 1,
+        value = 0.5
+      ),
+
+      sliderInput(
+        inputId = "size",
+        label = "Size:",
+        min = 0, max = 5,
+        value = 2
+      ),
+
+      textInput(
+        inputId = "plot_title",
+        label = "Plot title",
+        placeholder = "Enter text to be used as plot title"
+      ),
+
+      actionButton(
+        inputId = "update_plot_title",
+        label = "Update plot title"
+      )
+    ),
+
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  new_plot_title <- eventReactive(
+    eventExpr = input$update_plot_title,
+    valueExpr = {
+      toTitleCase(input$plot_title)
+    }
+  )
+
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y, color = input$z)) +
+      geom_point(alpha = input$alpha, size = input$size) +
+      labs(title = new_plot_title())
+  })
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+## Practice - Trigger with `observeEvent()`
+
+In this app we want two things to happen when an action button is clicked:
+
+1.  A message printed to the console stating how many records are shown and
+2.  A table output of those records.
+
+### Your turn
+
+1.  Fill in the necessary function and input ID for printing a message to the console when the action button is clicked.
+
+2.  Set up a table output that will print only when action button is clicked, but not when other inputs that go into the creation of that output changes.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by navigating to the Posit Cloud Project titled **3-4c Trigger with observeEvent()** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    sidebar = sidebar(
+      numericInput(
+        inputId = "n_rows",
+        label = "How many rows do you want to see?",
+        value = 10
+      ),
+
+      actionButton(
+        inputId = "button",
+        label = "Show"
+      )
+    ),
+
+    card(
+      tableOutput(outputId = "datatable")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  # Print a message to the console every time button is pressed;
+  ___(input$___, {
+    cat("Showing", input$n_rows, "rows\n")
+  })
+
+  # Take a reactive dependency on input$button, but not on any other inputs
+  df <- ___(input$___, {
+    head(movies, input$n_rows)
+  })
+  output$___ <- ___({
+    df()
+  })
+
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    sidebar = sidebar(
+      numericInput(
+        inputId = "n_rows",
+        label = "How many rows do you want to see?",
+        value = 10
+      ),
+
+      actionButton(
+        inputId = "button",
+        label = "Show"
+      )
+    ),
+
+    card(
+      tableOutput(outputId = "datatable")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  # Pring a message to the console every time button is pressed;
+  observeEvent(input$button, {
+    cat("Showing", input$n_rows, "rows\n")
+  })
+
+  # Take a reactive dependency on input$button,
+  # but not on any of the stuff inside the function
+  df <- eventReactive(input$button, {
+    head(movies, input$n_rows)
+  })
+  output$datatable <- renderTable({
+    df()
+  })
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+## Practice - Difference between `eventReactive()` and `observeEvent()`
+
+::: callout-note
+## Noticing the differences
+
+Which of the following is false?
+
+-   `observeEvent()` is used to perform an action in response to an event
+-   `isolate()` is used to trigger a reaction
+-   `eventReactive()` is used to create a calculated value that only updates in response to an event
+-   Recalculating a value does not generally count as performing an action
+
+::: {.callout-note .bg-gray collapse="true" appearance="minimal"}
+## Click to View the Answer
+
+The correct answer is "`isolate()` is used to trigger a reaction"
+:::
+:::
+

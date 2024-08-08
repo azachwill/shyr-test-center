@@ -1,0 +1,64 @@
+---
+title: "Create memory cache (deprecated) — memoryCache"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/deprecated.R" class="external-link"><code>R/deprecated.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Create memory cache (deprecated)</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">memoryCache</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="at">max_size =</span> <span class="dv">200</span> <span class="sc">*</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">max_age =</span> <span class="cn">Inf</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">max_n =</span> <span class="cn">Inf</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">evict =</span> <span class="fu">c</span>(<span class="st">"lru"</span>, <span class="st">"fifo"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">missing =</span> <span class="fu">key_missing</span>(),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">exec_missing =</span> <span class="fu">deprecated</span>(),</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="at">logfile =</span> <span class="cn">NULL</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>max_size</dt>
+<dd><p>Maximum size of the cache, in bytes. If the cache exceeds
+this size, cached objects will be removed according to the value of the
+<code>evict</code>. Use <code>Inf</code> for no size limit. The default is 1 gigabyte.</p></dd>
+
+
+<dt>max_age</dt>
+<dd><p>Maximum age of files in cache before they are evicted, in
+seconds. Use <code>Inf</code> for no age limit.</p></dd>
+
+
+<dt>max_n</dt>
+<dd><p>Maximum number of objects in the cache. If the number of objects
+exceeds this value, then cached objects will be removed according to the
+value of <code>evict</code>. Use <code>Inf</code> for no limit of number of items.</p></dd>
+
+
+<dt>evict</dt>
+<dd><p>The eviction policy to use to decide which objects are removed
+when a cache pruning occurs. Currently, <code>"lru"</code> and <code>"fifo"</code> are supported.</p></dd>
+
+
+<dt>missing</dt>
+<dd><p>A value to return when <code>get(key)</code> is called but the key is not
+present in the cache. The default is a <code><a href="https://r-lib.github.io/fastmap/reference/key_missing.html" class="external-link">key_missing()</a></code> object. It is
+actually an expression that is evaluated each time there is a cache miss.
+See section Missing keys for more information.</p></dd>
+
+
+<dt>exec_missing</dt>
+<dd><p>Deprecated.</p></dd>
+
+
+<dt>logfile</dt>
+<dd><p>An optional filename or connection object to where logging
+information will be written. To log to the console, use <code><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stderr()</a></code> or
+<code><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stdout()</a></code>.</p></dd>
+
+</dl></div>
+
+</div>
+```

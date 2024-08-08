@@ -1,0 +1,26 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This app is a collection of visualizations based on the Lego data available at Rebrickable 2. 
+title:        "Living in the Lego World"
+author:    Abby Kaplan
+authorurl:     https://github.com/kaplanas
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - tidyverse
+ - ggraph
+ - igraph
+ - highcharter
+ - visNetwork
+ - DataTables
+ - fuzzyjoin
+ - wordnet
+ - treemap
+appurl:      https://kaplanas.shinyapps.io/living_in_the_lego_world/
+sourceurl:   https://github.com/kaplanas/Shiny-Lego
+rscloudurl:  https://rstudio.cloud/project/245880
+---
+
+This app is a collection of visualizations based on the Lego data available at Rebrickable 2. They address the question: What is it like to live in the Lego world? That is, what kinds of people do you meet? How are they feeling? What plants and animals do you find around you? Think of each theme as an island on the Lego planet. Each visualization can be faceted by theme, so you can compare fashion, flora and fauna, etc. across themes. The human focus of this app distinguishes it from the various other Lego visualizations that already exist (including one built in Shiny; see About in the app for a fuller list).
+  

@@ -1,0 +1,67 @@
+---
+title: "verticalLayout"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='verticalLayout.html'>verticalLayout</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">fluid</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Elements to include within the container</td>
+  </tr>
+  <tr>
+    <th>fluid</th>
+    <td><code>TRUE</code> to use fluid layout; <code>FALSE</code> to use fixed
+layout.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a container that includes one or more rows of content (each element
+passed to the container will appear on it&#39;s own line in the UI)</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='shinyUI.html'>shinyUI</a></span><span class="keyword">(</span><span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='verticalLayout.html'>verticalLayout</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='builder.html'>a</a></span><span class="keyword">(</span><span class="argument">href</span><span class="argument">=</span><span class="string">"http://example.com/link1"</span><span class="keyword">,</span> <span class="string">"Link One"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='builder.html'>a</a></span><span class="keyword">(</span><span class="argument">href</span><span class="argument">=</span><span class="string">"http://example.com/link2"</span><span class="keyword">,</span> <span class="string">"Link Two"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='builder.html'>a</a></span><span class="keyword">(</span><span class="argument">href</span><span class="argument">=</span><span class="string">"http://example.com/link3"</span><span class="keyword">,</span> <span class="string">"Link Three"</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-sm-12&quot;&gt;
+      &lt;a href=&quot;http://example.com/link1&quot;&gt;Link One&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-sm-12&quot;&gt;
+      &lt;a href=&quot;http://example.com/link2&quot;&gt;Link Two&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-sm-12&quot;&gt;
+      &lt;a href=&quot;http://example.com/link3&quot;&gt;Link Three&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>verticalLayout</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='fluidPage.html'>fluidPage</a></code>, <code><a href='flowLayout.html'>flowLayout</a></code></p>
+</div>
+```

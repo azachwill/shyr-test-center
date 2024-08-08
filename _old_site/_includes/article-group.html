@@ -1,0 +1,12 @@
+<div class="articleGroup">
+  <h3 id="{{ include.group.title | identifier }}">{{ include.group.title }}</h3>
+  <div class="article-group-desc">{{ include.group.description }}</div>
+  <ul class="list-unstyled article-list">
+    {% for postname in include.group.children %}
+      {% assign post = postname | find_post %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

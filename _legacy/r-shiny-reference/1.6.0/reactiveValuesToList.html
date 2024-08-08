@@ -1,0 +1,51 @@
+---
+layout: reference
+title: "Convert a reactivevalues object to a list — reactiveValuesToList"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Convert a reactivevalues object to a list</h1>
+  
+
+  <pre class="code"><span class='fu'>reactiveValuesToList</span>(<span class='no'>x</span>, <span class='kw'>all.names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>x</p></th>
+    <td><p>A <code>reactivevalues</code> object.</p></td>
+  </tr>
+  <tr>
+    <th><p>all.names</p></th>
+    <td><p>If <code>TRUE</code>, include objects with a leading dot. If <code>FALSE</code>
+(the default) don't include those objects.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>This function does something similar to what you might want or expect
+<code><a href='https://rdrr.io/r/base/list.html'>base::as.list()</a></code> to do. The difference is that the calling context will take
+dependencies on every object in the <code>reactivevalue</code>s object. To avoid taking
+dependencies on all the objects, you can wrap the call with <code><a href='isolate.html'>isolate()</a></code>.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='no'>values</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactiveValues.html'>reactiveValues</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>reactiveValuesToList</span>(<span class='no'>values</span>)
+}
+
+<span class='co'># To get the objects without taking dependencies on them, use isolate().</span>
+<span class='co'># isolate() can also be used when calling from outside a reactive context (e.g.</span>
+<span class='co'># at the console)</span>
+<span class='fu'><a href='isolate.html'>isolate</a></span>(<span class='fu'>reactiveValuesToList</span>(<span class='no'>values</span>))</pre>
+</div>
+
+

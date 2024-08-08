@@ -1,0 +1,258 @@
+---
+layout: post
+title: App formats and launching apps
+edited: 2017-06-28
+author: Winston Chang
+description: You may have noticed that there are several different ways that Shiny apps are defined and launched. This article provides an overview of the different ways of defining and launching Shiny applications.
+---
+
+You may have noticed that there are several different ways that Shiny apps are defined and launched. Sometimes you'll see the `shinyServer()` in the `server.R` file, sometimes not, and the same goes for `shinyUI()` in `ui.R`. Sometimes there isn't even a `server.R` file at all.
+
+This article provides an overview of the different ways of defining and launching Shiny applications.
+
+*****
+
+## `server.R` and `ui.R`
+
+Most early Shiny examples will include a `server.R` and `ui.R` file like the following:
+
+{% highlight r %}
+## server.R ##
+function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs), col = 'darkgray', border = 'white')
+  })
+}
+{% endhighlight %}
+
+
+{% highlight r %}
+## ui.R ##
+fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
+    ),
+    mainPanel(plotOutput("distPlot"))
+  )
+)
+{% endhighlight %}
+
+For applications defined this way, the `server.R` file must return the server function, and the `ui.R` file must return the UI object (in this case, the UI object is created by `fluidPage()`). In other words, if the files contained other code (like utility functions) you must make sure that the last expression in the file is the server function or UI object.
+
+For more information, see the article about [two-file apps](two-file.html).
+
+
+*****
+
+### `shinyServer()` and `shinyUI()`
+
+Prior to Shiny 0.10, the `server.R` and `ui.R` files required calls to `shinyServer()` and `shinyUI()` respectively. Older Shiny application examples might look like the following. These are the same as in the previous example, except that the code is wrapped in `shinyServer()` and `shinyUI()`:
+
+
+{% highlight r %}
+## server.R ##
+shinyServer(function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs), col = 'darkgray', border = 'white')
+  })
+})
+{% endhighlight %}
+
+
+{% highlight r %}
+## ui.R ##
+shinyUI(fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
+    ),
+    mainPanel(plotOutput("distPlot"))
+  )
+))
+{% endhighlight %}
+
+As of Shiny 0.10, calling these functions is no longer needed.
+
+*****
+
+## `app.R`
+
+As of Shiny 0.10.2, applications can be created with a single file, `app.R`, which contains both the UI and server code. This file must return an object created by the `shinyApp()` function.
+
+{% highlight r %}
+## app.R ##
+server <- function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs), col = 'darkgray', border = 'white')
+  })
+}
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
+    ),
+    mainPanel(plotOutput("distPlot"))
+  )
+)
+
+shinyApp(ui = ui, server = server)
+{% endhighlight %}
+
+This method is more appropriate for smaller applications; for larger applications, you may find that having separate `ui.R` and `server.R` files makes your code easier to manage.
+
+*****
+
+
+<div style="border: 1px solid #EBB; border-radius: 3px; background-color: #FCFCFC; padding: 1em;" markdown="1">
+
+## The `R/` directory
+
+<div style="color: #A00;" markdown="1">
+> This section describes features still in development and not available in the version of Shiny that is on CRAN. If you want to try these features, you'll need to install Shiny from GitHub using: `remotes::install_github("rstudio/shiny")`
+</div>
+
+As of Shiny version 1.3.2.9001, any `.R` files found in an `R/` directory adjacent to your app will be automatically loaded when your app starts. Just like R packages, only the files at the top level of `R/` are considered; nested directories are ignored. Files in this directory are sourced in alphabetical order and any variables, functions, or modules they create are available to be used in your `app.R`, `ui.R`, or `server.R` files.
+
+### Disable automatic loading of `R/`
+
+In order to disable automatically loading the `.R` files in the `R/` directory, there are two options:
+
+1. Place a file named `_disable_autoload.R` in the `R/` directory, or
+2. Set `options(shiny.autoload.r = FALSE)`. Note that this option will apply to the duration of the R session which could impact subsequent applications that run in this session. To undo this setting, run `options(shiny.autoload.r = NULL)`.
+
+### Example using the `R/` directory
+
+Below is an example of moving the module descibed in the [modules article](modules.html) to a supplemental R file.
+
+{% highlight r %}
+## R/counter.R ##
+counterButton <- function(id, label = "Counter") {
+  ns <- NS(id)
+  tagList(
+    actionButton(ns("button"), label = label),
+    verbatimTextOutput(ns("out"))
+  )
+}
+
+counter <- function(input, output, session) {
+  count <- reactiveVal(0)
+  observeEvent(input$button, {
+    count(count() + 1)
+  })
+  output$out <- renderText({
+    count()
+  })
+  count
+}
+{% endhighlight %}
+
+
+{% highlight r %}
+## server.R ##
+function(input, output, session) {
+  callModule(counter, "counter1")
+}
+{% endhighlight %}
+
+
+{% highlight r %}
+## ui.R ##
+fluidPage(
+  counterButton("counter1", "Counter #1")
+)
+{% endhighlight %}
+
+Notice above that the supplemental R file is nested inside of the `R/` directory and that no `source()` calls are needed; the file was loaded automatically and was available to both the `ui` and `server`.
+
+</div>
+
+*****
+
+## `session` and `clientData`
+
+In the server code for some examples, you might see code like this:
+
+{% highlight r %}
+function(input, output) { .... }
+{% endhighlight %}
+
+In other examples, you might `session` as a third argument to the server function:
+
+{% highlight r %}
+function(input, output, session) { .... }
+{% endhighlight %}
+
+The `session` argument is optional. It's only needed if you want to use advanced features of Shiny -- some functions in Shiny take the `session` variable as an argument.
+
+You may also see some older examples that take `clientData` as an argument to the server function. `clientData` provides information about the connection and the visibility of various components on the web page (see the [client data article](client-data.html) for more).
+
+However, it is no longer necessary to use `clientData` as an argument, because if you have `session`, you can access the same information client data with `session$clientData`. For the sake of consistency, we recommend using `session$clientData`:
+
+{% highlight r %}
+# These two server functions do the same thing
+
+# Using the clientData argument directly (older examples)
+function(input, output, clientData) {
+  output$txt <- renderPrint({
+    clientData
+  })
+}
+
+# Using the session argument
+function(input, output, session) {
+  output$txt <- renderPrint({
+    session$clientData
+  })
+}
+{% endhighlight %}
+
+
+*****
+
+## Ways of calling `runApp()`
+
+There are several different things that may be passed to `runApp()` to launch an application.
+
+*****
+
+### App directory
+
+If your application resides in a directory `myapp/`, you could launch it with:
+
+{% highlight r %}
+runApp("myapp")
+{% endhighlight %}
+
+*****
+
+### Shiny app object
+
+If you've created a Shiny app object at the console by calling `shinyApp()`, you can pass that app object to `runApp()`:
+
+{% highlight r %}
+# Create app object (assume ui and server are defined above)
+app <- shinyApp(ui, server)
+
+runApp(app)
+{% endhighlight %}
+
+
+Additionally, if you simply type `app` at the console and press Enter, R will launch the app. This is because when you run code at the console, R will call `print()` on the return value, and for a Shiny app object, the `print()` method calls `runApp()` on the object. So you could do the following to launch the app:
+
+{% highlight r %}
+app <- shinyApp(ui, server)
+app
+{% endhighlight %}
+
+*****
+
+### `list(ui, server)`
+
+Another way to launch an app is by giving `runApp()` a list with the ui and server components. This is an older style that predates the Shiny app object method above.
+
+{% highlight r %}
+# (Assume ui and server are defined above)
+runApp(list(ui, server))
+{% endhighlight %}

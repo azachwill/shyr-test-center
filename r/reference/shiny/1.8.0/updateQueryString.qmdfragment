@@ -1,0 +1,113 @@
+---
+title: "Update URL in browser's location bar — updateQueryString"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.0/R/bookmark-state.R" class="external-link"><code>R/bookmark-state.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This function updates the client browser's query string in the location bar.
+It typically is called from an observer. Note that this will not work in
+Internet Explorer 9 and below.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">updateQueryString</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  queryString,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"replace"</span>, <span class="st">"push"</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>queryString</dt>
+<dd><p>The new query string to show in the location bar.</p></dd>
+
+
+<dt>mode</dt>
+<dd><p>When the query string is updated, should the the current history
+entry be replaced (default), or should a new history entry be pushed onto
+the history stack? The former should only be used in a live bookmarking
+context. The latter is useful if you want to navigate between states using
+the browser's back and forward buttons. See Examples.</p></dd>
+
+
+<dt>session</dt>
+<dd><p>A Shiny session object.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>For <code>mode = "push"</code>, only three updates are currently allowed:</p><ol><li><p>the query string (format: <code>?param1=val1&amp;param2=val2</code>)</p></li>
+<li><p>the hash (format: <code>#hash</code>)</p></li>
+<li><p>both the query string and the hash
+(format: <code>?param1=val1&amp;param2=val2#hash</code>)</p></li>
+</ol><p>In other words, if <code>mode = "push"</code>, the <code>queryString</code> must start
+with either <code>?</code> or with <code>#</code>.</p>
+<p>A technical curiosity: under the hood, this function is calling the HTML5
+history API (which is where the names for the <code>mode</code> argument come from).
+When <code>mode = "replace"</code>, the function called is
+<code>window.history.replaceState(null, null, queryString)</code>.
+When <code>mode = "push"</code>, the function called is
+<code>window.history.pushState(null, null, queryString)</code>.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="enableBookmarking.html">enableBookmarking()</a></code>, <code><a href="getQueryString.html">getQueryString()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run these examples in interactive sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="do">## App 1: Doing "live" bookmarking</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="do">## Update the browser's location bar every time an input changes.</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="do">## This should not be used with enableBookmarking("server"),</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="do">## because that would create a new saved state on disk every time</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="do">## the user changes an input.</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="fu">enableBookmarking</span>(<span class="st">"url"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="at">ui =</span> <span class="cf">function</span>(req) {</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>      <span class="fu">fluidPage</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>        <span class="fu">textInput</span>(<span class="st">"txt"</span>, <span class="st">"Text"</span>),</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>        <span class="fu">checkboxInput</span>(<span class="st">"chk"</span>, <span class="st">"Checkbox"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>      )</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    },</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>      <span class="fu">observe</span>({</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>        <span class="co"># Trigger this observer every time an input changes</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        <span class="fu">reactiveValuesToList</span>(input)</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>        session<span class="sc">$</span><span class="fu">doBookmark</span>()</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>      })</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>      <span class="fu">onBookmarked</span>(<span class="cf">function</span>(url) {</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>        <span class="fu">updateQueryString</span>(url)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>      })</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    }</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  )</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>  <span class="do">## App 2: Printing the value of the query string</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>  <span class="do">## (Use the back and forward buttons to see how the browser</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>  <span class="do">## keeps a record of each state)</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>      <span class="fu">textInput</span>(<span class="st">"txt"</span>, <span class="st">"Enter new query string"</span>),</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>      <span class="fu">helpText</span>(<span class="st">"Format: ?param1=val1&amp;param2=val2"</span>),</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>      <span class="fu">actionButton</span>(<span class="st">"go"</span>, <span class="st">"Update"</span>),</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>      <span class="fu">hr</span>(),</span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>      <span class="fu">verbatimTextOutput</span>(<span class="st">"query"</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>    ),</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>      <span class="fu">observeEvent</span>(input<span class="sc">$</span>go, {</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>        <span class="fu">updateQueryString</span>(input<span class="sc">$</span>txt, <span class="at">mode =</span> <span class="st">"push"</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a>      })</span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a>      output<span class="sc">$</span>query <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a>        query <span class="ot">&lt;-</span> <span class="fu">getQueryString</span>()</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>        queryText <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">names</span>(query), query,</span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>                       <span class="at">sep =</span> <span class="st">"="</span>, <span class="at">collapse=</span><span class="st">", "</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>        <span class="fu">paste</span>(<span class="st">"Your query string is:</span><span class="sc">\n</span><span class="st">"</span>, queryText)</span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a>      })</span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a>    }</span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a>  )</span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

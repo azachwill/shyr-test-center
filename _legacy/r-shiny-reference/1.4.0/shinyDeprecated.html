@@ -1,0 +1,48 @@
+---
+layout: reference
+title: "Print message for deprecated functions in Shiny — shinyDeprecated"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Print message for deprecated functions in Shiny</h1>
+  
+
+  <pre class="code"><span class='fu'>shinyDeprecated</span>(<span class='kw'>new</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>old</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.call</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>sys.parent</a></span>()))[<span class='fl'>1L</span>], <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>new</p></th>
+    <td><p>Name of replacement function.</p></td>
+  </tr>
+  <tr>
+    <th><p>msg</p></th>
+    <td><p>Message to print. If used, this will override the default message.</p></td>
+  </tr>
+  <tr>
+    <th><p>old</p></th>
+    <td><p>Name of deprecated function.</p></td>
+  </tr>
+  <tr>
+    <th><p>version</p></th>
+    <td><p>The last version of Shiny before the item was deprecated.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>To disable these messages, use <code><a href='https://rdrr.io/r/base/options.html'>options(shiny.deprecation.messages=FALSE)</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+
+  </div>
+
+</div>
+
+

@@ -1,0 +1,106 @@
+---
+title: "reactiveFileReader"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='reactiveFileReader.html'>reactiveFileReader</a></span><span class="keyword">(</span><span class="symbol">intervalMillis</span><span class="keyword">,</span> <span class="symbol">session</span><span class="keyword">,</span> <span class="symbol">filePath</span><span class="keyword">,</span> <span class="symbol">readFunc</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>intervalMillis</th>
+    <td>Approximate number of milliseconds to wait between
+checks of the file&#39;s last modified time. This can be a numeric value, or a
+function that returns a numeric value.</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>The user session to associate this file reader with, or
+<code>NULL</code> if none. If non-null, the reader will automatically stop when
+the session ends.</td>
+  </tr>
+  <tr>
+    <th>filePath</th>
+    <td>The file path to poll against and to pass to <code>readFunc</code>.
+This can either be a single-element character vector, or a function that
+returns one.</td>
+  </tr>
+  <tr>
+    <th>readFunc</th>
+    <td>The function to use to read the file; must expect the first
+argument to be the file path to read. The return value of this function is
+used as the value of the reactive file reader.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Any additional arguments to pass to <code>readFunc</code> whenever it is
+  invoked.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A reactive expression that returns the contents of the file, and
+  automatically invalidates when the file changes on disk (as determined by
+  last modified time).
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Given a file path and read function, returns a reactive data source for the
+contents of the file.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p><code>reactiveFileReader</code> works by periodically checking the file&#39;s last
+modified time; if it has changed, then the file is re-read and any reactive
+dependents are invalidated.</p>
+
+  <p>The <code>intervalMillis</code>, <code>filePath</code>, and <code>readFunc</code> functions
+will each be executed in a reactive context; therefore, they may read
+reactive values and reactive expressions.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># # Per-session reactive file reader</span>
+<span class="comment"># shinyServer(function(input, output, session)) {</span>
+<span class="comment">#   fileData &lt;- reactiveFileReader(1000, session, 'data.csv', read.csv)</span>
+<span class="comment"># </span>
+<span class="comment">#   output$data &lt;- renderTable({</span>
+<span class="comment">#     fileData()</span>
+<span class="comment">#   })</span>
+<span class="comment"># }</span>
+<span class="comment"># </span>
+<span class="comment"># # Cross-session reactive file reader. In this example, all sessions share</span>
+<span class="comment"># # the same reader, so read.csv only gets executed once no matter how many</span>
+<span class="comment"># # user sessions are connected.</span>
+<span class="comment"># fileData &lt;- reactiveFileReader(1000, session, 'data.csv', read.csv)</span>
+<span class="comment"># shinyServer(function(input, output, session)) {</span>
+<span class="comment">#   output$data &lt;- renderTable({</span>
+<span class="comment">#     fileData()</span>
+<span class="comment">#   })</span>
+<span class="comment"># }</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>reactiveFileReader</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='reactivePoll.html'>reactivePoll</a></code></p>
+</div>
+```

@@ -1,0 +1,93 @@
+---
+layout: reference
+title: "column"
+categories: reference
+---
+<h1>Create a column within a UI definition</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="symbol">width</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>width</th>
+    <td>The grid width of the column (must be between 1 and 12)</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Elements to include within the column</td>
+  </tr>
+  <tr>
+    <th>offset</th>
+    <td>The number of columns to offset this column from the end of the
+previous column.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A column that can be included within a
+  <code><a href='fluidPage.html'>fluidRow</a></code> or <code><a href='fixedPage.html'>fixedRow</a></code>.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a column for use within a  <code><a href='fluidPage.html'>fluidRow</a></code> or
+<code><a href='fixedPage.html'>fixedRow</a></code></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidRow</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="number">4</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"obs"</span><span class="keyword">,</span> <span class="string">"Number of observations:"</span><span class="keyword">,</span>
+                  <span class="argument">min</span> <span class="argument">=</span> <span class="number">1</span><span class="keyword">,</span> <span class="argument">max</span> <span class="argument">=</span> <span class="number">1000</span><span class="keyword">,</span> <span class="argument">value</span> <span class="argument">=</span> <span class="number">500</span><span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="number">8</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"distPlot"</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">distPlot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">obs</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidRow</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+      <span class="string">"4"</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">3</span><span class="keyword">,</span> <span class="argument">offset</span> <span class="argument">=</span> <span class="number">2</span><span class="keyword">,</span>
+      <span class="string">"3 offset 2"</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>column</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='fluidPage.html'>fluidRow</a></code>, <code><a href='fixedPage.html'>fixedRow</a></code>.</p>
+</div>

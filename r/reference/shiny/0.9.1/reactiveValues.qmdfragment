@@ -1,0 +1,79 @@
+---
+title: "reactiveValues"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>reactiveValues(...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Objects that will be added to the
+  reactivevalues object. All of these objects must be
+  named.</td>
+  </tr>
+</table>
+
+<div data-section="Create an object for storing reactive values">
+  <h3 data-swiftype-index="false">Create an object for storing reactive values</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>This function returns an object for storing reactive values. It is similar
+to a list, but with special capabilities for reactive programming. When you
+read a value from it, the calling reactive expression takes a reactive
+dependency on that value, and when you write to it, it notifies any reactive
+functions that depend on that value.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Create the object with no values
+values &lt;- reactiveValues()
+
+# Assign values to &#39;a&#39; and &#39;b&#39;
+values$a &lt;- 3
+values[[&#39;b&#39;]] &lt;- 4
+
+## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # From within a reactive context, you can access values with:
+# values$a
+# values[[&#39;a&#39;]]
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+# If not in a reactive context (e.g., at the console), you can use isolate()
+# to retrieve the value:
+isolate(values$a)
+</div>
+<div class='output'>[1] 3
+</div>
+<div class='input'>isolate(values[[&#39;a&#39;]])
+</div>
+<div class='output'>[1] 3
+</div>
+<div class='input'>
+# Set values upon creation
+values &lt;- reactiveValues(a = 1, b = 2)
+isolate(values$a)
+</div>
+<div class='output'>[1] 1
+</div></pre>
+<!-- <ul>
+  <li>reactiveValues</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='isolate.html'>isolate</a></code> and <code><a href='is.reactivevalues.html'>is.reactivevalues</a></code>.
+
+</div>
+```

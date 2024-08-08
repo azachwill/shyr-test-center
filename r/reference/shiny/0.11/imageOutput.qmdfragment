@@ -1,0 +1,64 @@
+---
+title: "imageOutput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='imageOutput.html'>imageOutput</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"100%"</span><span class="keyword">,</span> <span class="argument">height</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"400px"</span><span class="keyword">,</span> <span class="argument">inline</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the image from</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>Image width. Must be a valid CSS unit (like <code>&quot;100%&quot;</code>,
+<code>&quot;400px&quot;</code>, <code>&quot;auto&quot;</code>) or a number, which will be coerced to a
+string and have <code>&quot;px&quot;</code> appended.</td>
+  </tr>
+  <tr>
+    <th>height</th>
+    <td>Image height</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>use an inline (<code>span()</code>) or block container (<code>div()</code>)
+for the output</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+An image output element that can be included in a panel
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Render a <a href='renderImage.html'>renderImage</a> within an application page.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># Show an image</span>
+<span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='imageOutput.html'>imageOutput</a></span><span class="keyword">(</span><span class="string">"dataImage"</span><span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;col-sm-8&quot;&gt;
+  &lt;div id=&quot;dataImage&quot; class=&quot;shiny-image-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>imageOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

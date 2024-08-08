@@ -1,0 +1,162 @@
+---
+title: "Reporting progress (functional API) — withProgress"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.1</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.1/R/progress.R" class="external-link"><code>R/progress.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Reports progress to the user during long-running operations.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">withProgress</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  expr,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">min =</span> <span class="dv">0</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">max =</span> <span class="dv">1</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">value =</span> min <span class="sc">+</span> (max <span class="sc">-</span> min) <span class="sc">*</span> <span class="fl">0.1</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">detail =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="at">style =</span> <span class="fu">getShinyOption</span>(<span class="st">"progress.style"</span>, <span class="at">default =</span> <span class="st">"notification"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">env =</span> <span class="fu">parent.frame</span>(),</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">quoted =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="fu">setProgress</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  <span class="at">value =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="at">detail =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>()</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>)</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="fu">incProgress</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  <span class="at">amount =</span> <span class="fl">0.1</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>  <span class="at">detail =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>()</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>expr</dt>
+<dd><p>The work to be done. This expression should contain calls to
+<code>setProgress()</code> or <code>incProgress()</code>.</p></dd>
+
+
+<dt>min</dt>
+<dd><p>The value that represents the starting point of the progress bar.
+Must be less tham <code>max</code>. Default is 0.</p></dd>
+
+
+<dt>max</dt>
+<dd><p>The value that represents the end of the progress bar. Must be
+greater than <code>min</code>. Default is 1.</p></dd>
+
+
+<dt>value</dt>
+<dd><p>Single-element numeric vector; the value at which to set the
+progress bar, relative to <code>min</code> and <code>max</code>.</p></dd>
+
+
+<dt>message</dt>
+<dd><p>A single-element character vector; the message to be displayed
+to the user, or <code>NULL</code> to hide the current message (if any).</p></dd>
+
+
+<dt>detail</dt>
+<dd><p>A single-element character vector; the detail message to be
+displayed to the user, or <code>NULL</code> to hide the current detail message
+(if any). The detail message will be shown with a de-emphasized appearance
+relative to <code>message</code>.</p></dd>
+
+
+<dt>style</dt>
+<dd><p>Progress display style. If <code>"notification"</code> (the default),
+the progress indicator will show using Shiny's notification API. If
+<code>"old"</code>, use the same HTML and CSS used in Shiny 0.13.2 and below
+(this is for backward-compatibility).</p></dd>
+
+
+<dt>session</dt>
+<dd><p>The Shiny session object, as provided by <code>shinyServer</code> to
+the server function. The default is to automatically find the session by
+using the current reactive domain.</p></dd>
+
+
+<dt>env</dt>
+<dd><p>The environment in which <code>expr</code> should be evaluated.</p></dd>
+
+
+<dt>quoted</dt>
+<dd><p>Whether <code>expr</code> is a quoted expression (this is not
+common).</p></dd>
+
+
+<dt>amount</dt>
+<dd><p>For <code>incProgress</code>, the amount to increment the status bar.
+Default is 0.1.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>The result of <code>expr</code>.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>This package exposes two distinct programming APIs for working with progress.
+Using <code>withProgress</code> with <code>incProgress</code> or <code>setProgress</code>
+provide a simple function-based interface, while the <code><a href="Progress.html">Progress()</a></code>
+reference class provides an object-oriented API.</p>
+<p>Use <code>withProgress</code> to wrap the scope of your work; doing so will cause a
+new progress panel to be created, and it will be displayed the first time
+<code>incProgress</code> or <code>setProgress</code> are called. When <code>withProgress</code>
+exits, the corresponding progress panel will be removed.</p>
+<p>The <code>incProgress</code> function increments the status bar by a specified
+amount, whereas the <code>setProgress</code> function sets it to a specific value,
+and can also set the text displayed.</p>
+<p>Generally, <code>withProgress</code>/<code>incProgress</code>/<code>setProgress</code> should
+be sufficient; the exception is if the work to be done is asynchronous (this
+is not common) or otherwise cannot be encapsulated by a single scope. In that
+case, you can use the <code>Progress</code> reference class.</p>
+<p>As of version 0.14, the progress indicators use Shiny's new notification API.
+If you want to use the old styling (for example, you may have used customized
+CSS), you can use <code>style="old"</code> each time you call
+<code>withProgress()</code>. If you don't want to set the style each time
+<code>withProgress</code> is called, you can instead call
+<code><a href="shinyOptions.html">shinyOptions(progress.style="old")</a></code> just once, inside the server
+function.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="Progress.html">Progress()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">device.ask.default =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="fu">withProgress</span>(<span class="at">message =</span> <span class="st">'Calculation in progress'</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>                 <span class="at">detail =</span> <span class="st">'This may take a while...'</span>, <span class="at">value =</span> <span class="dv">0</span>, {</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>) {</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>        <span class="fu">incProgress</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">15</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="fl">0.25</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>      }</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    })</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    <span class="fu">plot</span>(cars)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>  })</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>}</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

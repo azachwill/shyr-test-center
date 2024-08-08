@@ -1,0 +1,32 @@
+---
+layout: post
+title: htmlwidgets
+edited: 2019-10-15
+description: htmlwidgets is framework for embedding JavaScript visualizations into R.
+---
+
+[htmlwidgets](http://www.htmlwidgets.org/) is framework for embedding JavaScript visualizations into R. 
+
+Ready to use examples include:
+
+- [leaflet](http://rstudio.github.io/leaflet/) - Geo-spatial mapping ([article](http://blog.rstudio.org/2015/06/24/leaflet-interactive-web-maps-with-r/)
+- [dygraphs](http://rstudio.github.io/dygraphs/) - Time series charting ([article](http://blog.rstudio.org/2015/04/14/interactive-time-series-with-dygraphs/))
+- [MetricsGraphics](http://hrbrmstr.github.io/metricsgraphics/) - Scatterplots and line charts with D3
+- [networkD3](http://christophergandrud.github.io/networkD3/) - Graph data visualization with D3
+- [DataTables](http://rstudio.github.io/DT/) - Tabular data display ([article](http://blog.rstudio.org/2015/06/24/dt-an-r-interface-to-the-datatables-library/))
+- [threejs](https://github.com/bwlewis/rthreejs) - 3D scatterplots and globes
+- [rCharts](http://rcharts.io/) - Multiple JavaScript charting libraries
+- [d3heatmap](https://github.com/rstudio/d3heatmap) - Heatmaps ([article](http://blog.rstudio.org/2015/06/24/d3heatmap/))
+- [diagrammeR](http://rich-iannone.github.io/DiagrammeR/) - Graph and flowchart diagrams ([article](http://blog.rstudio.org/2015/05/01/rstudio-v0-99-preview-graphviz-and-diagrammer/))
+
+## Learn more
+
+For more on this topic, see the following resources:
+
+[<i class="fas fa-play-circle fa-lg" aria-hidden="true"></i> Interfacing DataTables](https://resources.rstudio.com/shiny-developer-conference/shinydevcon-datatables-yihuixie-1080p)
+
+[<i class="fas fa-play-circle fa-lg" aria-hidden="true"></i> Interactive network visualization with threejs and R](https://resources.rstudio.com/wistia-rstudio-conf-2017/interactive-network-visualization-with-threejs-and-r-bryan-lewis)
+
+[<i class="fas fa-play-circle fa-lg" aria-hidden="true"></i> Mapping in R with Leaflet](https://resources.rstudio.com/wistia-rstudio-conf-2017/mapping-in-r-with-leaflet-bhaska-karambelkar)
+
+[<i class="fas fa-play-circle fa-lg" aria-hidden="true"></i> Linking HTML Widgets with Crosstalk](https://resources.rstudio.com/wistia-rstudio-conf-2017/linking-html-widgets-with-crosstalk-joe-cheng)

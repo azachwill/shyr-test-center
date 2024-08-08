@@ -1,0 +1,98 @@
+---
+title: "splitLayout"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='splitLayout.html'>splitLayout</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">cellWidths</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">cellArgs</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Unnamed arguments will become child elements of the layout. Named
+arguments will become HTML attributes on the outermost tag.</td>
+  </tr>
+  <tr>
+    <th>cellWidths</th>
+    <td>Character or numeric vector indicating the widths of the
+individual cells. Recycling will be used if needed. Character values will
+be interpreted as CSS lengths (see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>), numeric
+values as pixels.</td>
+  </tr>
+  <tr>
+    <th>cellArgs</th>
+    <td>Any additional attributes that should be used for each cell
+  of the layout.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Lays out elements horizontally, dividing the available horizontal space into
+equal parts (by default).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># Equal sizing</span>
+<span class="functioncall"><a href='splitLayout.html'>splitLayout</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot2"</span><span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;shiny-split-layout&quot;&gt;
+  &lt;div style=&quot;width: 50.000%;&quot;&gt;
+    &lt;div id=&quot;plot1&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;width: 50.000%;&quot;&gt;
+    &lt;div id=&quot;plot2&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div>
+<div class='input'>
+<span class="comment"># Custom widths</span>
+<span class="functioncall"><a href='splitLayout.html'>splitLayout</a></span><span class="keyword">(</span><span class="argument">cellWidths</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"25%"</span><span class="keyword">,</span> <span class="string">"75%"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot2"</span><span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;shiny-split-layout&quot;&gt;
+  &lt;div style=&quot;width: 25%;&quot;&gt;
+    &lt;div id=&quot;plot1&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;width: 75%;&quot;&gt;
+    &lt;div id=&quot;plot2&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div>
+<div class='input'>
+<span class="comment"># All cells at 300 pixels wide, with cell padding</span>
+<span class="comment"># and a border around everything</span>
+<span class="functioncall"><a href='splitLayout.html'>splitLayout</a></span><span class="keyword">(</span>
+  <span class="argument">style</span> <span class="argument">=</span> <span class="string">"border: 1px solid silver;"</span><span class="keyword">,</span>
+  <span class="argument">cellWidths</span> <span class="argument">=</span> <span class="number">300</span><span class="keyword">,</span>
+  <span class="argument">cellArgs</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">style</span> <span class="argument">=</span> <span class="string">"padding: 6px"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot2"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot3"</span><span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;shiny-split-layout&quot; style=&quot;border: 1px solid silver;&quot;&gt;
+  &lt;div style=&quot;width: 300px; padding: 6px&quot;&gt;
+    &lt;div id=&quot;plot1&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;width: 300px; padding: 6px&quot;&gt;
+    &lt;div id=&quot;plot2&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;width: 300px; padding: 6px&quot;&gt;
+    &lt;div id=&quot;plot3&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>splitLayout</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

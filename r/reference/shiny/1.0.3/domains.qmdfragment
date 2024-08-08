@@ -1,0 +1,76 @@
+---
+title: "domains"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='domains.html'>withReactiveDomain</a></span><span class="keyword">(</span><span class="symbol">domain</span><span class="keyword">,</span> <span class="symbol">expr</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='domains.html'>onReactiveDomainEnded</a></span><span class="keyword">(</span><span class="symbol">domain</span><span class="keyword">,</span> <span class="symbol">callback</span><span class="keyword">,</span> <span class="argument">failIfNull</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>domain</th>
+    <td>A valid domain object (for example, a Shiny session), or
+<code>NULL</code></td>
+  </tr>
+  <tr>
+    <th>expr</th>
+    <td>An expression to evaluate under <code>domain</code></td>
+  </tr>
+  <tr>
+    <th>callback</th>
+    <td>A callback function to be invoked</td>
+  </tr>
+  <tr>
+    <th>failIfNull</th>
+    <td>If <code>TRUE</code> then an error is given if the <code>domain</code>
+is <code>NULL</code></td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Reactive domains are a mechanism for establishing ownership over reactive
+primitives (like reactive expressions and observers), even if the set of
+reactive primitives is dynamically created. This is useful for lifetime
+management (i.e. destroying observers when the Shiny session that created
+them ends) and error handling.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>At any given time, there can be either a single &quot;default&quot; reactive domain
+object, or none (i.e. the reactive domain object is <code>NULL</code>). You can
+access the current default reactive domain by calling
+<code>getDefaultReactiveDomain</code>.</p>
+
+  <p>Unless you specify otherwise, newly created observers and reactive
+expressions will be assigned to the current default domain (if any). You can
+override this assignment by providing an explicit <code>domain</code> argument to
+<code><a href='reactive.html'>reactive</a></code> or <code><a href='observe.html'>observe</a></code>.</p>
+
+  <p>For advanced usage, it&#39;s possible to override the default domain using
+<code>withReactiveDomain</code>. The <code>domain</code> argument will be made the
+default domain while <code>expr</code> is evaluated.</p>
+
+  <p>Implementers of new reactive primitives can use <code>onReactiveDomainEnded</code>
+as a convenience function for registering callbacks. If the reactive domain
+is <code>NULL</code> and <code>failIfNull</code> is <code>FALSE</code>, then the callback will
+never be invoked.</p>
+
+</div>
+<!-- <ul>
+  <li>domains</li><li>getDefaultReactiveDomain</li><li>withReactiveDomain</li><li>onReactiveDomainEnded</li><li>domains</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

@@ -1,0 +1,55 @@
+---
+layout: reference
+title: "flowLayout"
+categories: reference
+---
+<h1>Flow layout</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='flowLayout.html'>flowLayout</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">cellArgs</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Unnamed arguments will become child elements of the layout. Named
+arguments will become HTML attributes on the outermost tag.</td>
+  </tr>
+  <tr>
+    <th>cellArgs</th>
+    <td>Any additional attributes that should be used for each cell
+of the layout.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Lays out elements in a left-to-right, top-to-bottom arrangement. The elements
+on a given row will be top-aligned with each other. This layout will not work
+well with elements that have a percentage-based width (e.g.
+<code><a href='plotOutput.html'>plotOutput</a></code> at its default setting of <code>width = &quot;100%&quot;</code>).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='flowLayout.html'>flowLayout</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='numericInput.html'>numericInput</a></span><span class="keyword">(</span><span class="string">"rows"</span><span class="keyword">,</span> <span class="string">"How many rows?"</span><span class="keyword">,</span> <span class="number">5</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='selectInput.html'>selectInput</a></span><span class="keyword">(</span><span class="string">"letter"</span><span class="keyword">,</span> <span class="string">"Which letter?"</span><span class="keyword">,</span> <span class="symbol">LETTERS</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"value"</span><span class="keyword">,</span> <span class="string">"What value?"</span><span class="keyword">,</span> <span class="number">0</span><span class="keyword">,</span> <span class="number">100</span><span class="keyword">,</span> <span class="number">50</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>flowLayout</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='verticalLayout.html'>verticalLayout</a></code></p>
+</div>

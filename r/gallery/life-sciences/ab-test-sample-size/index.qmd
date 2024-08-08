@@ -1,0 +1,19 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: An A/B test sample size calculator that enables the test planner to input different values as part of the planning process and then visualize the impact on the test duration and the likelihood of a Type I or Type II error as a means of providing business users who do not have a strong statistical background a degree of intuition regarding the different levers they can pull in their test design.
+title:        "A/B Testing Sample Size Calculator"
+author:    Tim Wilsonname
+authorurl:     https://community.rstudio.com/u/timwilson7
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - ggplot2
+ - calculator
+appurl:      https://www.searchdiscovery.com/sample-size-calculator/
+sourceurl:   https://github.com/gilliganondata/sample-size-calculator-1/
+rscloudurl:  https://rstudio.cloud/project/231301
+---
+
+An A/B test sample size calculator that enables the test planner to input different values as part of the planning process and then visualize the impact on the test duration and the likelihood of a Type I or Type II error as a means of providing business users who do not have a strong statistical background a degree of intuition regarding the different levers they can pull in their test design.
+  

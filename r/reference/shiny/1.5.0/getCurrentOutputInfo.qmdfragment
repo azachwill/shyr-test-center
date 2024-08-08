@@ -1,0 +1,90 @@
+---
+title: "Get output information — getCurrentOutputInfo"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>getCurrentOutputInfo</span>(<span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The current Shiny session.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Returns information about the currently executing output, including its <code>name</code> (i.e., <code>outputId</code>);
+and in some cases, relevant sizing and styling information.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p><code>NULL</code> if called outside of an output context; otherwise,
+a list which includes:</p><ul>
+<li><p>The <code>name</code> of the output (reported for any output).</p></li>
+<li><p>If the output is a <code><a href='plotOutput.html'>plotOutput()</a></code> or <code><a href='plotOutput.html'>imageOutput()</a></code>, then:</p><ul>
+<li><p><code>height</code>: a reactive expression which returns the height in pixels.</p></li>
+<li><p><code>width</code>: a reactive expression which returns the width in pixels.</p></li>
+</ul></li>
+<li><p>If the output is a <code><a href='plotOutput.html'>plotOutput()</a></code>, <code><a href='plotOutput.html'>imageOutput()</a></code>, or contains a <code>shiny-report-theme</code> class, then:</p><ul>
+<li><p><code>bg</code>: a reactive expression which returns the background color.</p></li>
+<li><p><code>fg</code>: a reactive expression which returns the foreground color.</p></li>
+<li><p><code>accent</code>: a reactive expression which returns the hyperlink color.</p></li>
+<li><p><code>font</code>: a reactive expression which returns a list of font information, including:</p><ul>
+<li><p><code>families</code>: a character vector containing the CSS <code>font-family</code> property.</p></li>
+<li><p><code>size</code>: a character string containing the CSS <code>font-size</code> property</p></li>
+</ul></li>
+</ul></li>
+</ul>
+
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples">
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+    <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+      <span class='no'>tags</span>$<span class='fu'>style</span>(<span class='fu'><a href='HTML.html'>HTML</a></span>(<span class='st'>"body {background-color: black; color: white; }"</span>)),
+      <span class='no'>tags</span>$<span class='fu'>style</span>(<span class='fu'><a href='HTML.html'>HTML</a></span>(<span class='st'>"body a {color: purple}"</span>)),
+      <span class='no'>tags</span>$<span class='fu'>style</span>(<span class='fu'><a href='HTML.html'>HTML</a></span>(<span class='st'>"#info {background-color: teal; color: orange; }"</span>)),
+      <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"p"</span>),
+      <span class='st'>"Computed CSS styles for the output named info:"</span>,
+      <span class='fu'><a href='tag.html'>tagAppendAttributes</a></span>(
+        <span class='fu'><a href='textOutput.html'>textOutput</a></span>(<span class='st'>"info"</span>),
+        <span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"shiny-report-theme"</span>
+      )
+    ),
+    <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+      <span class='no'>output</span>$<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>({
+        <span class='no'>info</span> <span class='kw'>&lt;-</span> <span class='fu'>getCurrentOutputInfo</span>()
+        <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>bg</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>bg</span>(), <span class='kw'>fg</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>fg</span>(), <span class='kw'>col.axis</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>fg</span>(), <span class='kw'>col.main</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>fg</span>())
+        <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>accent</span>(), <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>19</span>)
+        <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"A simple R plot that uses its CSS styling"</span>)
+      })
+      <span class='no'>output</span>$<span class='no'>info</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderText.html'>renderText</a></span>({
+        <span class='no'>info</span> <span class='kw'>&lt;-</span> <span class='fu'>getCurrentOutputInfo</span>()
+        <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>toJSON</a></span>(
+          <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+            <span class='kw'>bg</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>bg</span>(),
+            <span class='kw'>fg</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>fg</span>(),
+            <span class='kw'>accent</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>accent</span>(),
+            <span class='kw'>font</span> <span class='kw'>=</span> <span class='no'>info</span>$<span class='fu'>font</span>()
+          ),
+          <span class='kw'>auto_unbox</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+        )
+      })
+    }
+  )
+}</pre>
+</div>
+
+
+```

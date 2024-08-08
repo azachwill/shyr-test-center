@@ -1,0 +1,238 @@
+---
+title: "onBookmark"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='onBookmark.html'>onBookmark</a></span><span class="keyword">(</span><span class="symbol">fun</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='onBookmark.html'>onBookmarked</a></span><span class="keyword">(</span><span class="symbol">fun</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='onBookmark.html'>onRestore</a></span><span class="keyword">(</span><span class="symbol">fun</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='onBookmark.html'>onRestored</a></span><span class="keyword">(</span><span class="symbol">fun</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>fun</th>
+    <td>A callback function which takes one argument.</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>A shiny session object.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>These functions are for registering callbacks on Shiny session events. They
+should be called within an application&#39;s server function.</p>
+
+  <p><ul>
+<li> <code>onBookmark</code> registers a function that will be called just
+    before Shiny bookmarks state.
+  </li>
+<li> <code>onBookmarked</code> registers a function that will be called just
+    after Shiny bookmarks state.
+  </li>
+<li> <code>onRestore</code> registers a function that will be called when a
+    session is restored, after the server function executes, but before all
+    other reactives, observers and render functions are run.
+  </li>
+<li> <code>onRestored</code> registers a function that will be called after a
+    session is restored. This is similar to <code>onRestore</code>, but it will be
+    called after all reactives, observers, and render functions run, and
+    after results are sent to the client browser. <code>onRestored</code>
+    callbacks can be useful for sending update messages to the client
+    browser.
+</li>
+</ul></p>
+
+  <p></p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>All of these functions return a function which can be called with no
+arguments to cancel the registration.</p>
+
+  <p>The callback function that is passed to these functions should take one
+argument, typically named &quot;state&quot; (for <code>onBookmark</code>, <code>onRestore</code>,
+and <code>onRestored</code>) or &quot;url&quot; (for <code>onBookmarked</code>).</p>
+
+  <p>For <code>onBookmark</code>, the state object has three relevant fields. The
+<code>values</code> field is an environment which can be used to save arbitrary
+values (see examples). If the state is being saved to disk (as opposed to
+being encoded in a URL), the <code>dir</code> field contains the name of a
+directory which can be used to store extra files. Finally, the state object
+has an <code>input</code> field, which is simply the application&#39;s <code>input</code>
+object. It can be read, but not modified.</p>
+
+  <p>For <code>onRestore</code> and <code>onRestored</code>, the state object is a list. This
+list contains <code>input</code>, which is a named list of input values to restore,
+<code>values</code>, which is an environment containing arbitrary values that were
+saved in <code>onBookmark</code>, and <code>dir</code>, the name of the directory that
+the state is being restored from, and which could have been used to save
+extra files.</p>
+
+  <p>For <code>onBookmarked</code>, the callback function receives a string with the
+bookmark URL. This callback function should be used to display UI in the
+client browser with the bookmark URL. If no callback function is registered,
+then Shiny will by default display a modal dialog with the bookmark URL.</p>
+
+</div>
+
+<div data-section="Modules">
+  <h3 data-swiftype-index="false">Modules</h3>
+
+  <p></p>
+
+  <p>These callbacks may also be used in Shiny modules. When used this way, the
+  inputs and values will automatically be namespaced for the module, and the
+  callback functions registered for the module will only be able to see the
+  module&#39;s inputs and values.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run these examples in interactive sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="comment"># Basic use of onBookmark and onRestore: This app saves the time in its</span>
+<span class="comment"># arbitrary values, and restores that time when the app is restored.</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">req</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Input text"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='onBookmark.html'>onBookmark</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">savedTime</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>as.character</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.time</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="string">"Last saved at"</span><span class="keyword">,</span> <span class="symbol">savedTime</span><span class="keyword">,</span> <span class="string">"\n"</span><span class="keyword">)</span>
+    <span class="comment"># state is a mutable reference object, and we can add arbitrary values to</span>
+    <span class="comment"># it.</span>
+    <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">time</span> <span class="assignement">&lt;-</span> <span class="symbol">savedTime</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+
+  <span class="functioncall"><a href='onBookmark.html'>onRestore</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="string">"Restoring from state bookmarked at"</span><span class="keyword">,</span> <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">time</span><span class="keyword">,</span> <span class="string">"\n"</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"url"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">req</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Input text"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">lastUpdateTime</span> <span class="assignement">&lt;-</span> NULL
+
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">txt</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='updateTextInput.html'>updateTextInput</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="string">"txt"</span><span class="keyword">,</span>
+      <span class="argument">label</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span><span class="keyword">(</span><span class="string">"Input text (Changed "</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>as.character</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.time</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span> <span class="string">")"</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+
+  <span class="functioncall"><a href='onBookmark.html'>onBookmark</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="comment"># Save content to a file</span>
+    <span class="symbol">messageFile</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span><span class="keyword">(</span><span class="symbol">state</span><span class="keyword">$</span><span class="symbol">dir</span><span class="keyword">,</span> <span class="string">"message.txt"</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>as.character</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.time</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">file</span> <span class="argument">=</span> <span class="symbol">messageFile</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+
+  <span class="functioncall"><a href='onBookmark.html'>onRestored</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="comment"># Read the file</span>
+    <span class="symbol">messageFile</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span><span class="keyword">(</span><span class="symbol">state</span><span class="keyword">$</span><span class="symbol">dir</span><span class="keyword">,</span> <span class="string">"message.txt"</span><span class="keyword">)</span>
+    <span class="symbol">timeText</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/readChar'>readChar</a></span><span class="keyword">(</span><span class="symbol">messageFile</span><span class="keyword">,</span> <span class="number">1000</span><span class="keyword">)</span>
+
+    <span class="comment"># updateTextInput must be called in onRestored, as opposed to onRestore,</span>
+    <span class="comment"># because onRestored happens after the client browser is ready.</span>
+    <span class="functioncall"><a href='updateTextInput.html'>updateTextInput</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="string">"txt"</span><span class="keyword">,</span>
+      <span class="argument">label</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span><span class="keyword">(</span><span class="string">"Input text (Changed "</span><span class="keyword">,</span> <span class="symbol">timeText</span><span class="keyword">,</span> <span class="string">")"</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="comment"># "server" bookmarking is needed for writing to disk.</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+<span class="comment"># This app has a module, and both the module and the main app code have</span>
+<span class="comment"># onBookmark and onRestore functions which write and read state$values$hash. The</span>
+<span class="comment"># module's version of state$values$hash does not conflict with the app's version</span>
+<span class="comment"># of state$values$hash.</span>
+<span class="comment">#</span>
+<span class="comment"># A basic module that captializes text.</span>
+<span class="symbol">capitalizerUI</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">id</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">ns</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='NS.html'>NS</a></span><span class="keyword">(</span><span class="symbol">id</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='wellPanel.html'>wellPanel</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='builder.html'>h4</a></span><span class="keyword">(</span><span class="string">"Text captializer module"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/splines/topics/ns'>ns</a></span><span class="keyword">(</span><span class="string">"text"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="string">"Enter text:"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/splines/topics/ns'>ns</a></span><span class="keyword">(</span><span class="string">"out"</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">capitalizerServer</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">out</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/chartr'>toupper</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">text</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='onBookmark.html'>onBookmark</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">hash</span> <span class="assignement">&lt;-</span> <span class="package">digest</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/digest/topics/digest'>digest</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">text</span><span class="keyword">,</span> <span class="string">"md5"</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='onBookmark.html'>onRestore</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/identical'>identical</a></span><span class="keyword">(</span><span class="package">digest</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/digest/topics/digest'>digest</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">text</span><span class="keyword">,</span> <span class="string">"md5"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">hash</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/message'>message</a></span><span class="keyword">(</span><span class="string">"Module's input text matches hash "</span><span class="keyword">,</span> <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">hash</span><span class="keyword">)</span>
+    <span class="keyword">}</span> <span class="keyword">else</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/message'>message</a></span><span class="keyword">(</span><span class="string">"Module's input text does not match hash "</span><span class="keyword">,</span> <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">hash</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="comment"># Main app code</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">request</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='sidebarLayout.html'>sidebarLayout</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+        <span class="functioncall">capitalizerUI</span><span class="keyword">(</span><span class="string">"tc"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"text"</span><span class="keyword">,</span> <span class="string">"Enter text (not in module):"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='callModule.html'>callModule</a></span><span class="keyword">(</span><span class="symbol">capitalizerServer</span><span class="keyword">,</span> <span class="string">"tc"</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='onBookmark.html'>onBookmark</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">hash</span> <span class="assignement">&lt;-</span> <span class="package">digest</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/digest/topics/digest'>digest</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">text</span><span class="keyword">,</span> <span class="string">"md5"</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='onBookmark.html'>onRestore</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/identical'>identical</a></span><span class="keyword">(</span><span class="package">digest</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/digest/topics/digest'>digest</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">text</span><span class="keyword">,</span> <span class="string">"md5"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">hash</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/message'>message</a></span><span class="keyword">(</span><span class="string">"App's input text matches hash "</span><span class="keyword">,</span> <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">hash</span><span class="keyword">)</span>
+    <span class="keyword">}</span> <span class="keyword">else</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/message'>message</a></span><span class="keyword">(</span><span class="string">"App's input text does not match hash "</span><span class="keyword">,</span> <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">hash</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="argument">store</span> <span class="argument">=</span> <span class="string">"url"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>onBookmark</li><li>onBookmarked</li><li>onRestore</li><li>onRestored</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p>enableBookmarking for general information on bookmarking.</p>
+</div>
+```

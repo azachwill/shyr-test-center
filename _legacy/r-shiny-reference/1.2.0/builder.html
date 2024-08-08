@@ -1,0 +1,110 @@
+---
+layout: reference
+title: "builder"
+categories: reference
+---
+<h1>HTML Builder Functions</h1>
+
+<pre class="code"><code class="r"><span class="symbol">tags</span>
+
+<span class="functioncall"><a href='builder.html'>p</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>h1</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>h2</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>h3</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>h4</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>h5</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>h6</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>a</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>br</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>div</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>span</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>pre</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>code</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>img</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>strong</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>em</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='builder.html'>hr</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Attributes and children of the element. Named arguments become
+attributes, and positional arguments become children. Valid children are
+tags, single-character character vectors (which become text nodes), and raw
+HTML (see <code><a href='HTML.html'>HTML</a></code>). You can also pass lists that contain tags,
+text nodes, and HTML.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Simple functions for constructing HTML documents.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The <code>tags</code> environment contains convenience functions for all valid
+HTML5 tags. To generate tags that are not part of the HTML5 specification,
+you can use the <code><a href='tag.html'>tag</a>()</code> function.</p>
+
+  <p>Dedicated functions are available for the most common HTML tags that do not
+conflict with common R functions.</p>
+
+  <p>The result from these functions is a tag object, which can be converted using
+<code><a href='http://www.rdocumentation.org/packages/base/topics/character'>as.character</a>()</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="symbol">doc</span> <span class="assignement">&lt;-</span> <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/gt/topics/html'>html</a></span><span class="keyword">(</span>
+  <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/head'>head</a></span><span class="keyword">(</span>
+    <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/title'>title</a></span><span class="keyword">(</span><span class="string">'My first page'</span><span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/body'>body</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='builder.html'>h1</a></span><span class="keyword">(</span><span class="string">'My first heading'</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='builder.html'>p</a></span><span class="keyword">(</span><span class="string">'My first paragraph, with some '</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='builder.html'>strong</a></span><span class="keyword">(</span><span class="string">'bold'</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="string">' text.'</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='builder.html'>div</a></span><span class="keyword">(</span><span class="argument">id</span><span class="argument">=</span><span class="string">'myDiv'</span><span class="keyword">,</span> <span class="argument">class</span><span class="argument">=</span><span class="string">'simpleDiv'</span><span class="keyword">,</span>
+        <span class="string">'Here is a div with some attributes.'</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>as.character</a></span><span class="keyword">(</span><span class="symbol">doc</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My first heading&lt;/h1&gt;
+    &lt;p&gt;
+      My first paragraph, with some 
+      &lt;strong&gt;bold&lt;/strong&gt;
+       text.
+    &lt;/p&gt;
+    &lt;div id=&quot;myDiv&quot; class=&quot;simpleDiv&quot;&gt;Here is a div with some attributes.&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</div></code></pre>
+<!-- <ul>
+  <li>a</li><li>br</li><li>builder</li><li>code</li><li>div</li><li>em</li><li>h1</li><li>h2</li><li>h3</li><li>h4</li><li>h5</li><li>h6</li><li>hr</li><li>img</li><li>p</li><li>pre</li><li>span</li><li>strong</li><li>tags</li>
+</ul>
+<ul>
+  
+</ul> -->
+

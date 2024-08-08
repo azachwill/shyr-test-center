@@ -1,0 +1,676 @@
+---
+title: "Interface Builder Functions"
+description: "Understanding how to build a user interface"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+always_allow_html: true
+---
+
+### Customizing UI
+
+Understanding how to build a user interface
+
+
+###
+
+Earlier in the course we mentioned that the UI is ultimately built with HTML. We actually use R functions to make the UI, but they get translated to HTML.
+
+In this module we build on this idea to develop more complex app interfaces. More specifically, we discuss **tags**.
+
+### tags
+
+Shiny comes with a list of functions saved under tags that allow us to access HTML tags and use them to add static (as opposed to reactive) content to our apps.
+
+The `tags` object in shiny is a list of 100+ simple functions for constructing HTML documents. Each of the elements in this list is a function that maps to an HTML tag.
+
+```r
+names(tags)
+```
+
+:::{.column-page-right}
+```console
+##   [1] "a"                   "abbr"                "address"
+##   [4] "animate"             "animateMotion"       "animateTransform"
+##   [7] "area"                "article"             "aside"
+##  [10] "audio"               "b"                   "base"
+##  [13] "bdi"                 "bdo"                 "blockquote"
+##  [16] "body"                "br"                  "button"
+##  [19] "canvas"              "caption"             "circle"
+##  [22] "cite"                "clipPath"            "code"
+##  [25] "col"                 "colgroup"            "color-profile"
+##  [28] "command"             "data"                "datalist"
+##  [31] "dd"                  "defs"                "del"
+##  [34] "desc"                "details"             "dfn"
+##  [37] "dialog"              "discard"             "div"
+##  [40] "dl"                  "dt"                  "ellipse"
+##  [43] "em"                  "embed"               "eventsource"
+##  [46] "feBlend"             "feColorMatrix"       "feComponentTransfer"
+##  [49] "feComposite"         "feConvolveMatrix"    "feDiffuseLighting"
+##  [52] "feDisplacementMap"   "feDistantLight"      "feDropShadow"
+##  [55] "feFlood"             "feFuncA"             "feFuncB"
+##  [58] "feFuncG"             "feFuncR"             "feGaussianBlur"
+##  [61] "feImage"             "feMerge"             "feMergeNode"
+##  [64] "feMorphology"        "feOffset"            "fePointLight"
+##  [67] "feSpecularLighting"  "feSpotLight"         "feTile"
+##  [70] "feTurbulence"        "fieldset"            "figcaption"
+##  [73] "figure"              "filter"              "footer"
+##  [76] "foreignObject"       "form"                "g"
+##  [79] "h1"                  "h2"                  "h3"
+##  [82] "h4"                  "h5"                  "h6"
+##  [85] "hatch"               "hatchpath"           "head"
+##  [88] "header"              "hgroup"              "hr"
+##  [91] "html"                "i"                   "iframe"
+##  [94] "image"               "img"                 "input"
+##  [97] "ins"                 "kbd"                 "keygen"
+## [100] "label"               "legend"              "li"
+## [103] "line"                "linearGradient"      "link"
+## [106] "main"                "map"                 "mark"
+## [109] "marker"              "mask"                "menu"
+## [112] "meta"                "metadata"            "meter"
+## [115] "mpath"               "nav"                 "noscript"
+## [118] "object"              "ol"                  "optgroup"
+## [121] "option"              "output"              "p"
+## [124] "param"               "path"                "pattern"
+## [127] "picture"             "polygon"             "polyline"
+## [130] "pre"                 "progress"            "q"
+## [133] "radialGradient"      "rb"                  "rect"
+## [136] "rp"                  "rt"                  "rtc"
+## [139] "ruby"                "s"                   "samp"
+## [142] "script"              "section"             "select"
+## [145] "set"                 "slot"                "small"
+## [148] "solidcolor"          "source"              "span"
+## [151] "stop"                "strong"              "style"
+## [154] "sub"                 "summary"             "sup"
+## [157] "svg"                 "switch"              "symbol"
+## [160] "table"               "tbody"               "td"
+## [163] "template"            "text"                "textarea"
+## [166] "textPath"            "tfoot"               "th"
+## [169] "thead"               "time"                "title"
+## [172] "tr"                  "track"               "tspan"
+## [175] "u"                   "ul"                  "use"
+## [178] "var"                 "video"               "view"
+## [181] "wbr"
+```
+:::
+
+### tag -> HTML
+
+For example, let's use the `b` tag, which is used for bolding text in HTML. The function is `tags$b()`.
+
+You can pass a text string, in quotation marks, to this function, like "This is my first app".
+
+```r
+tags$b("This is my first app")
+```
+
+Then R translates the text string to HTML:
+
+```html
+<b>This is my first app</b>
+```
+
+The HTML is then rendered as bolded text when the user sees it:
+
+**This is my first app**
+
+
+### Header tags
+
+So how would you use these tags in building an app?
+
+You might use the various levels of headers if it makes sense for to have subheadings in my app.
+
+For example `tags$h1()`, `tags$h2()`, and `tags$h3()` to create first, second, and third level headings, etc.
+
+```r
+library(shiny)
+library(bslib)
+
+# Define UI with tags
+ui <- page_fluid(
+  tags$h1("First level heading"),
+  tags$h2("Second level heading"),
+  tags$h3("Third level heading")
+)
+
+# Define server function that does nothing :)
+server <- function(input, output, session) {}
+
+# Create the app object
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+# First level heading
+## Second level heading
+### Third level heading
+
+---
+
+### Linked text
+
+If you have references you want to link to at the bottom of you app, you can use the a tag with the `href` argument for specifying a URL.
+
+```r
+library(shiny)
+library(bslib)
+
+# Define UI with tags
+ui <- page_fluid(
+  tags$h1("Awesome title"),
+  tags$br(), # line break
+  tags$a("This app is built with Shiny.", href = "https://shiny.posit.co/")
+)
+
+# Define server fn that does nothing :)
+server <- function(input, output, session) {}
+
+# Create the app object
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+Awesome title
+
+[This app is built with Shiny.](https://shiny.posit.co/)
+
+---
+
+### Nested tags
+
+You can also nest tags within each other to create something like a new paragraph with the `p` tag and some text in that paragraph where certain words are italicized with the `em` tag and certain are bolded with the `b` tag.
+
+```r
+library(shiny)
+library(bslib)
+
+# Define UI with tags
+ui <- page_fluid(
+  tags$p(
+    "Lorem ipsum",
+    tags$em("dolor"),
+    "sit amet,",
+    tags$b("consectetur"),
+    "adipiscing elit."
+    )
+  )
+
+# Define server fn that does nothing :)
+server <- function(input, output, session) {}
+
+# Create the app object
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+Lorem ipsum _dolor_ sit amet, **consectetur** adipiscing elit.
+
+---
+
+### Common tags
+
+Additionally, the most commonly used tags are wrapped in their own functions and you can use them without the tags list.
+
+```r
+tags$p(...)       -> p(...)
+tags$h1(...)      -> h1(...)
+tags$h2(...)      -> h2(...)
+tags$h3(...)      -> h3(...)
+tags$h4(...)      -> h4(...)
+tags$h5(...)      -> h5(...)
+tags$h6(...)      -> h6(...)
+tags$a(...)       -> a(...)
+tags$br(...)      -> br(...)
+tags$div(...)     -> div(...)
+tags$span(...)    -> span(...)
+tags$pre(...)     -> pre(...)
+tags$code(...)    -> code(...)
+tags$img(...)     -> img(...)
+tags$strong(...)  -> strong(...)
+tags$em(...)      -> em(...)
+tags$hr(...)      -> hr(...)
+```
+
+###
+
+These are functions like:
+
+* `a()` for anchor text.
+
+    ```r
+    tags$a("Anchor text")
+    ```
+    ```html
+    <a>Anchor text</a>
+    ```
+    ```r
+    a("Anchor text")
+    ```
+    ```html
+    <a>Anchor text</a>
+    ```
+
+
+* `br()` for a line break.
+
+    ```r
+    tags$br()
+    ```
+    ```html
+    <br>
+    ```
+
+    ```r
+    br()
+    ```
+    ```html
+    <br>
+    ```
+
+
+
+*   `code()` for displaying code in monospace form
+
+    ```r
+    tags$code("Monospace text")
+    ```
+
+    ```html
+    <code>Monospace text</code>
+    ```
+
+    ```r
+    code("Monospace text")
+    ```
+
+    ```html
+    <code>Monospace text</code>
+    ```
+
+
+
+* And the heading functions we mentioned earlier
+
+    ```r
+    tags$h1("First level header")
+    ```
+    ```html
+    <h1>First level header</h1>
+    ```
+
+    ```r
+    h1("First level header")
+    ```
+
+    ```html
+    <h1>First level header</h1>
+    ```
+
+
+The function names correspond to the tag names, and the functions accept text strings as arguments. For example `tags$h1("First level heading")` is equivalent to `h1("First level heading")`.
+
+### HTML
+
+If you're comfortable with HTML, an alternative is to directly use HTML syntax and wrap your HTML code with the HTML function.
+
+```r
+HTML("Hello world, <br/> and then a line break.")
+```
+
+```html
+Hello world, <br/> and then a line break.
+```
+
+## Practice
+
+Next, let's work on some exercises on adding HTML elements to our apps to customize appearance.
+
+These next exercises will demo a few of the simpler interface builder options with HTML code.
+
+## Practice - Add text with HTML tags
+
+### Your turn
+
+1. Add explanatory text to your movie app by using HTML tags in the main panel.
+
+2. Below is some sample text you can add. Note that you should replace `[NUMBER OF MOVIES]` with with the number of movies in the sample, and instead of hardcoding this value,
+you can use `nrow(movies)` to calculate it.
+
+```html
+These data were obtained from <a href="http://www.imbd.com/">IMBD</a> and
+<a href="https://www.rottentomatoes.com/">Rotten Tomatoes</a>.
+
+The data represent _[NUMBER OF MOVIES]_ randomly sampled movies released between 1972 to 2014 in the United States.
+```
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Navigate to the Posit Cloud Project titled __4-1a Add text with HTML tags__ in your Posit Cloud Workspace to see this code in action*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+
+:::
+
+::: {.callout-note collapse="true"}
+## Work locally in your RStudio IDE
+
+-   Download the data if you haven't already
+
+```{{r}}
+# Get the data
+
+file <- "https://github.com/rstudio-education/shiny-course/raw/main/movies.RData"
+destfile <- "movies.RData"
+
+download.file(file, destfile)
+```
+
+-   Copy the code below into an R script
+:::
+
+```r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(tools)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    sidebar = sidebar(
+      selectInput(
+        inputId = "y",
+        label = "Y-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "audience_score"
+      ),
+
+      selectInput(
+        inputId = "x",
+        label = "X-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "critics_score"
+      ),
+
+      selectInput(
+        inputId = "z",
+        label = "Color by:",
+        choices = c(
+          "Title Type" = "title_type",
+          "Genre" = "genre",
+          "MPAA Rating" = "mpaa_rating",
+          "Critics Rating" = "critics_rating",
+          "Audience Rating" = "audience_rating"
+        ),
+        selected = "mpaa_rating"
+      ),
+
+      sliderInput(
+        inputId = "alpha",
+        label = "Alpha:",
+        min = 0, max = 1,
+        value = 0.5
+      ),
+
+      sliderInput(
+        inputId = "size",
+        label = "Size:",
+        min = 0, max = 5,
+        value = 2
+      ),
+
+      textInput(
+        inputId = "plot_title",
+        label = "Plot title",
+        placeholder = "Enter text to be used as plot title"
+      ),
+
+      actionButton(
+        inputId = "update_plot_title",
+        label = "Update plot title"
+      )
+    ),
+
+    card(
+      tags$br(),
+      ___, # add text here
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  new_plot_title <- eventReactive(
+    eventExpr = input$update_plot_title,
+    valueExpr = {
+      toTitleCase(input$plot_title)
+    }
+  )
+
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y, color = input$z)) +
+      geom_point(alpha = input$alpha, size = input$size) +
+      labs(title = new_plot_title())
+  })
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+```r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(tools)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    sidebar = sidebar(
+      selectInput(
+        inputId = "y",
+        label = "Y-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "audience_score"
+      ),
+
+      selectInput(
+        inputId = "x",
+        label = "X-axis:",
+        choices = c(
+          "IMDB rating" = "imdb_rating",
+          "IMDB number of votes" = "imdb_num_votes",
+          "Critics Score" = "critics_score",
+          "Audience Score" = "audience_score",
+          "Runtime" = "runtime"
+        ),
+        selected = "critics_score"
+      ),
+
+      selectInput(
+        inputId = "z",
+        label = "Color by:",
+        choices = c(
+          "Title Type" = "title_type",
+          "Genre" = "genre",
+          "MPAA Rating" = "mpaa_rating",
+          "Critics Rating" = "critics_rating",
+          "Audience Rating" = "audience_rating"
+        ),
+        selected = "mpaa_rating"
+      ),
+
+      sliderInput(
+        inputId = "alpha",
+        label = "Alpha:",
+        min = 0, max = 1,
+        value = 0.5
+      ),
+
+      sliderInput(
+        inputId = "size",
+        label = "Size:",
+        min = 0, max = 5,
+        value = 2
+      ),
+
+      textInput(
+        inputId = "plot_title",
+        label = "Plot title",
+        placeholder = "Enter text to be used as plot title"
+      ),
+
+      actionButton(
+        inputId = "update_plot_title",
+        label = "Update plot title"
+      )
+    ),
+
+    card(
+      tags$br(),
+      tags$p(
+        "These data were obtained from",
+        tags$a("IMBD", href = "http://www.imbd.com/"), "and",
+        tags$a("Rotten Tomatoes", href = "https://www.rottentomatoes.com/"), "."
+      ),
+      tags$p("The data represent", nrow(movies), "randomly sampled movies released between 1972 to 2014 in the United States."),
+
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  new_plot_title <- eventReactive(
+    eventExpr = input$update_plot_title,
+    valueExpr = {
+      toTitleCase(input$plot_title)
+    }
+  )
+
+  output$scatterplot <- renderPlot({
+    ggplot(data = movies, aes_string(x = input$x, y = input$y, color = input$z)) +
+      geom_point(alpha = input$alpha, size = input$size) +
+      labs(title = new_plot_title())
+  })
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+## Practice - Add image with the `img` tag
+
+### Your turn
+
+1. Now let's practice adding an image to a very simple app.
+
+2. Note that if you'd like to use a local image for with your app, you'll first have to save the image in a folder `www/` within your root directory. You'll see what we mean when you run the demo in the Posit Cloud Project. Set a height and width for your image as well.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Navigate to the Posit Cloud Project titled __4-1b Add image with img tag__ in your Posit Cloud Workspace for the demo*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+
+:::
+
+
+```r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_fluid(
+  titlePanel("An image"),
+  tags$img(___),
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {}
+
+# Create the Shiny app ---------------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+```r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_fluid(
+  titlePanel("An image"),
+  tags$img(height = 100, width = 300, src = "roles_implement.png"),
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {}
+
+# Create the Shiny app ---------------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+:::
+

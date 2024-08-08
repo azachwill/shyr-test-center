@@ -1,0 +1,280 @@
+---
+layout: newframe-bare
+title: Shiny
+categories: overview
+---
+
+<script src="lib/bxslider/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/bxslider/jquery.bxslider.css"/>
+
+<script>
+
+$(document).ready(function() {
+
+  $('#menuToggler').on('click', function(event) {
+    if ($('#menuItems').hasClass('showMenu')) {
+      $('#menuItems').removeClass("showMenu");
+    }
+    else {
+      $('#menuItems').addClass("showMenu");
+    }
+  });
+
+  function updateShrinkHeader(event) {
+    var scrollPos = window.scrollY;
+    if (scrollPos > 20) {
+      $('#appShinySite').addClass("shrinkHeader");
+    }
+    else {
+      $('#appShinySite').removeClass("shrinkHeader");
+    }
+  }$(window).on('scroll', updateShrinkHeader);
+  updateShrinkHeader();
+
+  $(".bxslider").bxSlider();
+
+});
+
+</script>
+
+<div id="appShinySite" class="shrinkHeader alwaysShrinkHeader">
+  <div id="main">
+    {% include header.html %}
+
+    <!-- page -->
+    <div id="homeContent" class="pushFooter">
+      <div class="band first rightText">
+        <div class="bandContent">
+          <div class="blurb">
+            <div class="tagline">Interact. Analyze. Communicate.</div>
+            <div>
+              Take a fresh, interactive approach to telling your data story with Shiny.
+              Let users interact with your data and your analysis. And do it all with R.
+            </div>
+          </div>
+          <div class="imageOne"></div>
+        </div> <!-- bandContent -->
+      </div>  <!-- band -->
+
+<br><br>
+
+      <div class="band standard third leftText">
+        <div class="bandContent">
+          <div class="blurb">
+            Shiny is an R package that makes it easy to build interactive web apps straight from R.
+            You can host standalone apps on a webpage or embed them in <a href="http://rmarkdown.rstudio.com/">R Markdown</a> documents or build <a href="http://rstudio.github.io/shinydashboard/">dashboards</a>.
+            You can also extend your Shiny apps with <a href="http://rstudio.github.io/shinythemes/">CSS themes</a>, <a href="http://www.htmlwidgets.org/">htmlwidgets</a>, and JavaScript <a href="https://github.com/daattali/shinyjs/blob/master/README.md">actions</a>.
+          </div>
+          <div class="imageThree"></div>
+        </div> <!-- bandContent -->
+      </div> <!-- band -->
+
+      <div class="band standard fourth rightText">
+        <div class="bandContent">
+
+          <div class="blurb">
+            Shiny combines the computational power of R with the interactivity of the modern web.
+            <div class="actions" style="padding-top: 20px;">
+              <a class="bigButton blue" href="tutorial/">Get Started</a>
+              <a class="bigButton link" href="gallery/">See Gallery</a>
+            </div>
+          </div>
+
+          <div class="slideshow-container">
+            <ul class="bxslider">
+              <li><a href="gallery/superzip-example.html"><img class="slide" src="gallery/images/screenshots/superzip-example.png"/></a></li>
+              <li><a href="gallery/movie-explorer.html"><img class="slide" src="gallery/images/screenshots/movie-explorer.png"/></a></li>
+              <li><a href="gallery/retirement-simulation.html"><img class="slide" src="gallery/images/screenshots/retirement-simulation.png"/></a></li>
+              <li><a href="gallery/datatables-options.html"><img class="slide" src="gallery/images/screenshots/datatables-options.png"/></a></li>
+            </ul>
+          </div>
+
+        </div> <!-- bandContent -->
+      </div> <!-- band -->
+
+            <div class="band standard second leftText">
+        <div class="bandContent">
+          <div class="blurb">
+            <div class="tagline">Here is a Shiny app</div>
+            <div>Shiny apps are easy to write. No web development skills are required.</div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div id="example1-container">
+                <iframe id="example1" src="https://gallery.shinyapps.io/goog-trend-index/" style="border: none; width: 100%; height: 850px" frameborder="0"></iframe>
+              </div>
+            </div>
+            <div class="col-xs-12 visible-xs">
+              <br/>
+            </div>
+            <div id="example1-code-container" class="col-sm-6">
+
+              <ul class='nav nav-tabs'>
+                <li class='active'>
+                  <a data-toggle="tab" href="#code-desc">Description</a>
+                </li>
+                <li>
+                  <a data-toggle="tab" href="#code-app">app.R</a>
+                </li>
+              </ul>
+              <div class='tab-content' id='example1-code'>
+                <div class="tab-pane active" id="code-desc">
+                  Shiny comes with a variety of built in input widgets. With minimal syntax it is possible to include widgets like the ones shown on the left in your apps:
+                  <pre class="code"><code class="r">
+# Select type of trend to plot
+selectInput(inputId = "type", label = strong("Trend index"),
+            choices = unique(trend_data$type),
+            selected = "Travel")
+
+# Select date range to be plotted
+dateRangeInput("date", strong("Date range"),
+               start = "2007-01-01", end = "2017-07-31",
+               min = "2007-01-01", max = "2017-07-31")</code></pre>
+
+                  Displaying outputs is equally hassle-free:
+                  <pre class="code"><code class="r">
+mainPanel(
+  plotOutput(outputId = "lineplot", height = "300px"),
+  textOutput(outputId = "desc"),
+  tags$a(href = "https://www.google.com/finance/domestic_trends",
+         "Source: Google Domestic Trends", target = "_blank")
+)
+                  </code></pre>
+                  Build your plots or tables as you normally would in R, and make them reactive with a call to the appropriate render function:
+                  <pre class="code"><code class="r">
+  output$lineplot <- renderPlot({
+    plot(x = selected_trends()$date, y = selected_trends()$close, type = "l",
+         xlab = "Date", ylab = "Trend index")
+  })
+                  </code></pre>
+                  Want to find out how we built the Google Trend Index app shown on the left? See the next tab for the complete source code.<br><br>
+                </div>
+                <div class='tab-pane' id='code-app'>
+                  <pre class="code"><code class="r"># Load packages
+library(shiny)
+library(shinythemes)
+library(dplyr)
+library(readr)
+
+# Load data
+trend_data <- read_csv("data/trend_data.csv")
+trend_description <- read_csv("data/trend_description.csv")
+
+# Define UI
+ui <- fluidPage(theme = shinytheme("lumen"),
+  titlePanel("Google Trend Index"),
+  sidebarLayout(
+    sidebarPanel(
+
+      # Select type of trend to plot
+      selectInput(inputId = "type", label = strong("Trend index"),
+                  choices = unique(trend_data$type),
+                  selected = "Travel"),
+
+      # Select date range to be plotted
+      dateRangeInput("date", strong("Date range"), start = "2007-01-01", end = "2017-07-31",
+                     min = "2007-01-01", max = "2017-07-31"),
+
+      # Select whether to overlay smooth trend line
+      checkboxInput(inputId = "smoother", label = strong("Overlay smooth trend line"), value = FALSE),
+
+      # Display only if the smoother is checked
+      conditionalPanel(condition = "input.smoother == true",
+                       sliderInput(inputId = "f", label = "Smoother span:",
+                                   min = 0.01, max = 1, value = 0.67, step = 0.01,
+                                   animate = animationOptions(interval = 100)),
+                       HTML("Higher values give more smoothness.")
+      )
+    ),
+
+    # Output: Description, lineplot, and reference
+    mainPanel(
+      plotOutput(outputId = "lineplot", height = "300px"),
+      textOutput(outputId = "desc"),
+      tags$a(href = "https://www.google.com/finance/domestic_trends", "Source: Google Domestic Trends", target = "_blank")
+    )
+  )
+)
+
+# Define server function
+server <- function(input, output) {
+
+  # Subset data
+  selected_trends <- reactive({
+    req(input$date)
+    validate(need(!is.na(input$date[1]) & !is.na(input$date[2]), "Error: Please provide both a start and an end date."))
+    validate(need(input$date[1] < input$date[2], "Error: Start date should be earlier than end date."))
+    trend_data %>%
+      filter(
+        type == input$type,
+        date > as.POSIXct(input$date[1]) & date < as.POSIXct(input$date[2]
+        ))
+  })
+
+
+  # Create scatterplot object the plotOutput function is expecting
+  output$lineplot <- renderPlot({
+    color = "#434343"
+    par(mar = c(4, 4, 1, 1))
+    plot(x = selected_trends()$date, y = selected_trends()$close, type = "l",
+         xlab = "Date", ylab = "Trend index", col = color, fg = color, col.lab = color, col.axis = color)
+    # Display only if smoother is checked
+    if(input$smoother){
+      smooth_curve <- lowess(x = as.numeric(selected_trends()$date), y = selected_trends()$close, f = input$f)
+      lines(smooth_curve, col = "#E6553A", lwd = 3)
+    }
+  })
+
+  # Pull in description of trend
+  output$desc <- renderText({
+    trend_text <- filter(trend_description, type == input$type) %>% pull(text)
+    paste(trend_text, "The index is set to 1.0 on January 1, 2004 and is calculated only for US search traffic.")
+  })
+}
+
+# Create Shiny object
+shinyApp(ui = ui, server = server)
+</pre></code>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+        </div> <!-- bandContent -->
+      </div> <!-- band -->
+
+      <div class="band standard fifth text-center">
+        <div class="bandContent">
+          <div class="blurb" style="text-align: center;">
+            <div class="tagline">Hosting and Deployment</div>
+            <div>
+              <p>Put your Shiny app on the web by using your own servers or Posit's hosting service.</p>
+              <a class="btn btn-default btn-lg" href="/deploy">Learn more</a>
+            </div>
+          </div>
+
+        </div> <!-- bandContent -->
+      </div> <!-- band -->
+    </div> <!-- homeContent -->
+
+    <!-- rstudio footer -->
+    <div id="rStudioFooter" class="band">
+      <div class="bandContent">
+        <div id="copyright">
+          <div>Proudly supported by <a href="https://www.posit.co/"><img src="/images/posit-logo-white-tm.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></div>
+        </div>
+        <div id="logos">
+          <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+          <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+          <a href="https://www.linkedin.com/company/rstudio-pbc/" class="footerLogo linkedIn"></a>
+          <a href="https://www.facebook.com/rstudiopbc/" class="footerLogo facebook"></a>
+        </div>
+      </div>
+    </div>
+
+  </div>  <!-- main -->
+</div>  <!-- app -->

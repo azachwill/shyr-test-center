@@ -1,0 +1,42 @@
+---
+layout: reference
+title: "showModal"
+categories: reference
+---
+<h1>Show or remove a modal dialog</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='showModal.html'>showModal</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='showModal.html'>removeModal</a></span><span class="keyword">(</span><span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>ui</th>
+    <td>UI content to show in the modal.</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This causes a modal dialog to be displayed in the client browser, and is
+typically used with <code><a href='modalDialog.html'>modalDialog</a></code>.</p>
+
+</div>
+<!-- <ul>
+  <li>removeModal</li><li>showModal</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='modalDialog.html'>modalDialog</a></code> for examples.</p>
+</div>

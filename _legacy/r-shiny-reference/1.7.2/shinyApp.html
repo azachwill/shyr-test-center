@@ -1,0 +1,129 @@
+---
+layout: reference
+title: "Create a Shiny app object — shinyApp"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a Shiny app object</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/shinyapp.R" class="external-link"><code>R/shinyapp.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>These functions create Shiny app objects from either an explicit UI/server
+pair (<code>shinyApp</code>), or by passing the path of a directory that contains a
+Shiny app (<code>shinyAppDir</code>).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  ui,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  server,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">onStart =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">uiPattern =</span> <span class="st">"/"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">enableBookmarking =</span> <span class="cn">NULL</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyAppDir</span>(appDir, <span class="at">options =</span> <span class="fu">list</span>())</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyAppFile</span>(appFile, <span class="at">options =</span> <span class="fu">list</span>())</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>ui</dt>
+<dd><p>The UI definition of the app (for example, a call to
+<code><a href="fluidPage.html">fluidPage()</a></code> with nested controls).</p>
+<p>If bookmarking is enabled (see <code>enableBookmarking</code>), this must be
+a single argument function that returns the UI definition.</p></dd>
+
+
+<dt>server</dt>
+<dd><p>A function with three parameters: <code>input</code>, <code>output</code>, and
+<code>session</code>. The function is called once for each session ensuring that each
+app is independent.</p></dd>
+
+
+<dt>onStart</dt>
+<dd><p>A function that will be called before the app is actually run.
+This is only needed for <code>shinyAppObj</code>, since in the <code>shinyAppDir</code>
+case, a <code>global.R</code> file can be used for this purpose.</p></dd>
+
+
+<dt>options</dt>
+<dd><p>Named options that should be passed to the <code>runApp</code> call
+(these can be any of the following: "port", "launch.browser", "host", "quiet",
+"display.mode" and "test.mode"). You can also specify <code>width</code> and
+<code>height</code> parameters which provide a hint to the embedding environment
+about the ideal height/width for the app.</p></dd>
+
+
+<dt>uiPattern</dt>
+<dd><p>A regular expression that will be applied to each <code>GET</code>
+request to determine whether the <code>ui</code> should be used to handle the
+request. Note that the entire request path must match the regular
+expression in order for the match to be considered successful.</p></dd>
+
+
+<dt>enableBookmarking</dt>
+<dd><p>Can be one of <code>"url"</code>, <code>"server"</code>, or
+<code>"disable"</code>. The default value, <code>NULL</code>, will respect the setting from
+any previous calls to  <code><a href="enableBookmarking.html">enableBookmarking()</a></code>. See <code><a href="enableBookmarking.html">enableBookmarking()</a></code>
+for more information on bookmarking your app.</p></dd>
+
+
+<dt>appDir</dt>
+<dd><p>Path to directory that contains a Shiny app (i.e. a server.R
+file and either ui.R or www/index.html)</p></dd>
+
+
+<dt>appFile</dt>
+<dd><p>Path to a .R file containing a Shiny application</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>An object that represents the app. Printing the object or passing it
+to <code><a href="runApp.html">runApp()</a></code> will run the app.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Normally when this function is used at the R console, the Shiny app object is
+automatically passed to the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> function, which runs the app. If
+this is called in the middle of a function, the value will not be passed to
+<code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> and the app will not be run. To make the app run, pass the app
+object to <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> or <code><a href="runApp.html">runApp()</a></code>.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Only run this example in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">options</span>(<span class="at">device.ask.default =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">"n"</span>, <span class="st">"n"</span>, <span class="dv">1</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>( <span class="fu">plot</span>(<span class="fu">head</span>(cars, input<span class="sc">$</span>n)) )</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyAppDir</span>(<span class="fu">system.file</span>(<span class="st">"examples/01_hello"</span>, <span class="at">package=</span><span class="st">"shiny"</span>))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The object can be passed to runApp()</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  app <span class="ot">&lt;-</span> <span class="fu">shinyApp</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">numericInput</span>(<span class="st">"n"</span>, <span class="st">"n"</span>, <span class="dv">1</span>),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>( <span class="fu">plot</span>(<span class="fu">head</span>(cars, input<span class="sc">$</span>n)) )</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">runApp</span>(app)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>

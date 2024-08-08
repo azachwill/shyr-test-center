@@ -1,0 +1,100 @@
+---
+layout: reference
+title: "checkboxGroupInput"
+categories: reference
+
+---
+<h1>Checkbox Group Input Control</h1>
+
+<pre class="code"><code class="r"><div>checkboxGroupInput(inputId, label, choices, selected&nbsp;=&nbsp;NULL, inline&nbsp;=&nbsp;FALSE)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>Input variable to assign the control's value to.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code>.</td>
+  </tr>
+  <tr>
+    <th>choices</th>
+    <td>List of values to show checkboxes for. If elements of the list
+are named then that name rather than the value is displayed to the user.</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The values that should be initially selected, if any.</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>If <code>TRUE</code>, render the choices inline (i.e. horizontally)</td>
+  </tr>
+</table>
+
+<div data-section="Checkbox Group Input Control">
+  <h3 data-swiftype-index="false">Checkbox Group Input Control</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A list of HTML elements that can be added to a UI definition.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Create a group of checkboxes that can be used to toggle multiple choices
+independently. The server will receive the input as a character vector of the
+selected values.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>checkboxGroupInput(&quot;variable&quot;, &quot;Variable:&quot;,
+                   c(&quot;Cylinders&quot; = &quot;cyl&quot;,
+                     &quot;Transmission&quot; = &quot;am&quot;,
+                     &quot;Gears&quot; = &quot;gear&quot;))
+</div>
+<div class='output'>&lt;div id=&quot;variable&quot; class=&quot;control-group shiny-input-checkboxgroup&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;variable&quot;&gt;Variable:&lt;/label&gt;
+  &lt;label class=&quot;checkbox&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;variable&quot; id=&quot;variable1&quot; value=&quot;cyl&quot;/&gt;
+    &lt;span&gt;Cylinders&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;checkbox&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;variable&quot; id=&quot;variable2&quot; value=&quot;am&quot;/&gt;
+    &lt;span&gt;Transmission&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;checkbox&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;variable&quot; id=&quot;variable3&quot; value=&quot;gear&quot;/&gt;
+    &lt;span&gt;Gears&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>checkboxGroupInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='updateCheckboxGroupInput.html'>updateCheckboxGroupInput</a></code>
+
+Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='actionButton.html'>actionLink</a></code>; <code><a href='sliderInput.html'>animationOptions</a></code>,
+  <code><a href='sliderInput.html'>sliderInput</a></code>; <code><a href='checkboxInput.html'>checkboxInput</a></code>;
+  <code><a href='dateInput.html'>dateInput</a></code>; <code><a href='dateRangeInput.html'>dateRangeInput</a></code>;
+  <code><a href='fileInput.html'>fileInput</a></code>; <code><a href='numericInput.html'>numericInput</a></code>;
+  <code><a href='radioButtons.html'>radioButtons</a></code>; <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='selectInput.html'>selectizeInput</a></code>; <code><a href='submitButton.html'>submitButton</a></code>;
+  <code><a href='textInput.html'>textInput</a></code>
+
+</div>

@@ -1,0 +1,50 @@
+---
+title: "Exclude inputs from bookmarking — setBookmarkExclude"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>setBookmarkExclude</span>(<span class='kw'>names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>),
+  <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>names</p></th>
+    <td><p>A character vector containing names of inputs to exclude from
+bookmarking.</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>A shiny session object.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>This function tells Shiny which inputs should be excluded from bookmarking.
+It should be called from inside the application's server function.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>This function can also be called from a module's server function, in which
+case it will exclude inputs with the specified names, from that module. It
+will not affect inputs from other modules or from the top level of the Shiny
+application.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='enableBookmarking.html'>enableBookmarking()</a></code> for examples.</p></div>
+  
+  </div>
+
+</div>
+
+
+```

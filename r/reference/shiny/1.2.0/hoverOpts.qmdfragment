@@ -1,0 +1,59 @@
+---
+title: "hoverOpts"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='hoverOpts.html'>hoverOpts</a></span><span class="keyword">(</span><span class="argument">id</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">delay</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">300</span><span class="keyword">,</span> <span class="argument">delayType</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"debounce"</span><span class="keyword">,</span>
+  <span class="string">"throttle"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">clip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">nullOutside</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>id</th>
+    <td>Input value name. For example, if the value is <code>&quot;plot_hover&quot;</code>,
+then the hover coordinates will be available as <code>input$plot_hover</code>.</td>
+  </tr>
+  <tr>
+    <th>delay</th>
+    <td>How long to delay (in milliseconds) when debouncing or
+throttling, before sending the mouse location to the server.</td>
+  </tr>
+  <tr>
+    <th>delayType</th>
+    <td>The type of algorithm for limiting the number of hover
+events. Use <code>&quot;throttle&quot;</code> to limit the number of hover events to one
+every <code>delay</code> milliseconds. Use <code>&quot;debounce&quot;</code> to suspend events
+while the cursor is moving, and wait until the cursor has been at rest for
+<code>delay</code> milliseconds before sending an event.</td>
+  </tr>
+  <tr>
+    <th>clip</th>
+    <td>Should the hover area be clipped to the plotting area? If FALSE,
+then the server will receive hover events even when the mouse is outside
+the plotting area, as long as it is still inside the image.</td>
+  </tr>
+  <tr>
+    <th>nullOutside</th>
+    <td>If <code>TRUE</code> (the default), the value will be set to
+<code>NULL</code> when the mouse exits the plotting area. If <code>FALSE</code>, the
+value will stop changing when the cursor exits the plotting area.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This generates an object representing hovering options, to be passed as the
+<code>hover</code> argument of <code><a href='plotOutput.html'>imageOutput</a></code> or
+<code><a href='plotOutput.html'>plotOutput</a></code>.</p>
+
+</div>
+<!-- <ul>
+  <li>hoverOpts</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

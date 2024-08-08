@@ -1,0 +1,116 @@
+---
+title: "Stop reactions with isolate()"
+date: 2017-06-28
+description: Sometimes it's useful for an observer/endpoint to access a reactive value or expression, but not to take a dependency on it. For example, if the observer performs a long calculation or downloads large data set, you might want it to execute only when a button is clicked.
+---
+
+## Isolation: avoiding dependency
+
+Sometimes it's useful for an observer/endpoint to access a reactive value or expression, but not to take a dependency on it. For example, if the observer performs a long calculation or downloads large data set, you might want it to execute only when a button is clicked. 
+
+For this, we'll use `actionButton`. We'll define a UI that lets the user choose number of observations to generate from the normal distribution, and has an `actionButton` labeled "Go!". You can see it in action [here](/r/gallery/reactive-programming/actionbutton-demo/).
+
+The actionButton includes some JavaScript code that sends numbers to the server. When the web browser first connects, it sends a value of 0, and on each click, it sends an incremented value: 1, 2, 3, and so on.
+
+````r
+ui <- pageWithSidebar(
+  headerPanel("Click the button"),
+  sidebarPanel(
+    sliderInput("obs", "Number of observations:",
+                min = 0, max = 1000, value = 500),
+    actionButton("goButton", "Go!")
+  ),
+  mainPanel(
+    plotOutput("distPlot")
+  )
+)
+````
+
+In our `server` function, there are two items to note. First, `output$distPlot` will take a dependency on `input$goButton`, simply by accessing it. When the button is clicked, the value of `input$goButton` increases, and so `output$distPlot` re-executes.
+
+The second is that the access to `input$obs` is wrapped with `isolate()`. This function takes an R expression, and it tells Shiny that the calling observer or reactive expression should not take a dependency on any reactive objects inside the expression.
+
+````r
+server <- function(input, output) {
+  output$distPlot <- renderPlot({
+    
+    # Take a dependency on input$goButton
+    input$goButton
+
+    # Use isolate() to avoid dependency on input$obs
+    dist <- isolate(rnorm(input$obs))
+    hist(dist)
+  })
+}
+````
+
+
+The resulting graph looks like this:
+
+![Isolated reactive value](isolate.png){fig-alt="Two reactive inputs, one labeled input$obs and the other input$goButton. One output labeled output$distPlot. An arrow from input$goButton to output$distPlot."}
+
+
+And here's a walkthrough of the process when `input$obs` is set to 1000, and then the Go button is clicked: 
+
+![](isolate_process_1.png){fig-alt="Diagram of the initial state. input$obs is 500. input$goButton is 0. An arrow goes from input$goButton to output$distPlot."}
+
+![](isolate_process_2.png){fig-alt="Diagram showing that input$obs changed to 1000. No invalidations occur."}
+
+![](isolate_process_3.png){fig-alt="Diagram showing that input$goButton clicked, changing value to 1. Descendents are invalidated and arrow from input$goButton to output$distPlot is removed."}
+
+![](isolate_process_4.png){fig-alt="Diagram showing that output$distPlot executes."}
+
+![](isolate_process_5.png){fig-alt="Diagram showing that output$distPlot accesses input $goButton and input$obs. input$obs is isolated, so no dependency arrow is drawn."}
+
+![](isolate_process_6.png){fig-alt="Diagram showing output$distPlot finishes executing. As a side effect, it sends data to the browser."}
+
+
+In the `actionButton` example, you might want to prevent it from returning a plot the first time, before the button has been clicked. Since the starting value of an `actionButton` is zero, this can be accomplished with the following:
+
+````r
+  output$distPlot <- renderPlot({
+    if (input$goButton == 0)
+      return()
+
+    # plot-making code here
+  })
+````
+
+
+Reactive values are not the only things that can be isolated; reactive expressions can also be put inside an `isolate()`. Building off the Fibonacci example from above, this would calculate the _n_th value only when the button is clicked:
+
+````r
+output$nthValue <- renderText({
+  if (input$goButton == 0)
+    return()
+
+  isolate({ fib(as.numeric(input$n)) })
+})
+````
+
+
+
+It's also possible to put multiple lines of code in `isolate()`. For example here are some blocks of code that have equivalent effect:
+
+````r
+# Separate calls to isolate -------------------------------
+x <- isolate({ input$xSlider }) + 100
+y <- isolate({ input$ySlider })  * 2
+z <- x/y
+
+# Single call to isolate ----------------------------------
+isolate({
+  x <- input$xSlider + 100
+  y <- input$ySlider * 2
+  z <- x/y
+})
+
+# Single call to isolate, use return value ----------------
+z <- isolate({
+  x <- input$xSlider + 100
+  y <- input$ySlider * 2
+  x/y
+})
+````
+
+In all of these cases, the calling function won't take a reactive dependency on either of the `input` variables.

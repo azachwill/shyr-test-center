@@ -1,0 +1,38 @@
+```{=html}
+<div class="grid blog-card pt-4 gap-4">
+  <% for (const item of items) { %>
+    <div class="g-col-lg-4 g-col-md-6 g-col-12">
+      <a href="<%- item.path %>" class="card-link text-decoration-none text-dark">
+        <div class="card border-0">
+
+          <div class="card-img">
+          <% if (item.image) { %>
+            <img src="<%= item.image %>" alt="<% if (item.imagealt) { %><%= item.imagealt %><% } %>">
+            <% } else {%>
+              <img src="../../images/shiny-thumb.png" alt="Shiny hexigon on a blue background">
+            <% } %>
+          </div>
+
+          <div class="card-body px-2 py-4">
+            <p class="card-meta d-inline p-75 mb-2">
+              <%= item.date %>
+            </p>
+
+            <h5 class="card-title mt-2">
+              <%= item.title %>
+            </h5>
+
+            <p class="p-85">
+              <%= item.description %>
+            </p>
+
+            <span class="card-author d-inline p-75">
+              <%= item.author %>
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <% } %>
+</div>
+```

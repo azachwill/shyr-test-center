@@ -1,0 +1,108 @@
+---
+layout: reference
+title: "reactive"
+categories: reference
+---
+<h1>Create a reactive expression</h1>
+
+<pre class="code"><code class="r"><div>reactive(x, env&nbsp;=&nbsp;parent.frame(), quoted&nbsp;=&nbsp;FALSE, label&nbsp;=&nbsp;NULL)</div>
+<div>is.reactive(x)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>For <code>reactive</code>, an expression (quoted or
+  unquoted). For <code>is.reactive</code>, an object to test.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The parent environment for the reactive
+  expression. By default, this is the calling environment,
+  the same as when defining an ordinary non-reactive
+  expression.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is the expression quoted? By default, this
+  is <code>FALSE</code>.  This is useful when you want to use an
+  expression that is stored in a variable; to do so, it
+  must be quoted with `quote()`.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>A label for the reactive expression, useful
+  for debugging.</td>
+  </tr>
+</table>
+
+<div data-section="Create a reactive expression">
+  <h3 data-swiftype-index="false">Create a reactive expression</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>a function, wrapped in a S3 class "reactive"</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Wraps a normal expression to create a reactive expression. Conceptually, a
+reactive expression is a expression whose result will change over time.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>Reactive expressions are expressions that can read reactive values and call other
+reactive expressions. Whenever a reactive value changes, any reactive expressions
+that depended on it are marked as "invalidated" and will automatically
+re-execute if necessary. If a reactive expression is marked as invalidated, any
+other reactive expressions that recently called it are also marked as
+invalidated. In this way, invalidations ripple through the expressions that
+depend on each other.</p>
+
+  <p>See the <a href = 'http://rstudio.github.com/shiny/tutorial/'>Shiny tutorial</a> for
+more information about reactive expressions.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>values &lt;- reactiveValues(A=1)
+
+reactiveB &lt;- reactive({
+  values$A + 1
+})
+
+# Can use quoted expressions
+reactiveC &lt;- reactive(quote({ values$A + 2 }), quoted = TRUE)
+
+# To store expressions for later conversion to reactive, use quote()
+expr_q &lt;- quote({ values$A + 3 })
+reactiveD &lt;- reactive(expr_q, quoted = TRUE)
+
+# View the values from the R console with isolate()
+isolate(reactiveB())
+</div>
+<div class='output'>[1] 2
+</div>
+<div class='input'>isolate(reactiveC())
+</div>
+<div class='output'>[1] 3
+</div>
+<div class='input'>isolate(reactiveD())
+</div>
+<div class='output'>[1] 4
+</div></pre>
+<!-- <ul>
+  <li>is.reactive</li><li>reactive</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

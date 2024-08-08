@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: isolate demo
+date: 2014-07-29
+tags: 
+ - isolate
+appurl: https://gallery.shinyapps.io/049-isolate-demo
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/049-isolate-demo
+---

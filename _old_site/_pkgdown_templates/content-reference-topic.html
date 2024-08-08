@@ -1,0 +1,26 @@
+<div class="reference">
+  <h1>{{{title}}}</h1>
+  {{#source}}<small class="dont-index">{{{.}}}</small>{{/source}}
+
+  {{#description}}
+  <div data-section="description"><h3>{{{title}}}</h3>{{{contents}}}</div>
+  {{/description}}
+
+  {{#usage}}
+  <div data-section="usage">{{{contents}}}</div>
+  {{/usage}}
+
+  {{#sections}}
+  <div data-section="{{{slug}}}">
+    <h3 id="{{{slug}}}">{{{title}}}</h3>
+    {{{contents}}}
+  </div>
+  {{/sections}}
+
+  {{#examples}}
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    {{{ . }}}
+  </div>
+  {{/examples}}
+</div>

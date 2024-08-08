@@ -1,0 +1,63 @@
+---
+layout: reference
+title: "viewer"
+categories: reference
+---
+<h1>Viewer options</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='viewer.html'>paneViewer</a></span><span class="keyword">(</span><span class="argument">minHeight</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='viewer.html'>dialogViewer</a></span><span class="keyword">(</span><span class="symbol">dialogName</span><span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">600</span><span class="keyword">,</span> <span class="argument">height</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">600</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='viewer.html'>browserViewer</a></span><span class="keyword">(</span><span class="argument">browser</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"browser"</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>minHeight</th>
+    <td>The minimum height (in pixels) desired to show the gadget in
+the viewer pane. If a positive number, resize the pane if necessary to show
+at least that many pixels. If <code>NULL</code>, use the existing viewer pane
+size. If <code>&quot;maximize&quot;</code>, use the maximum available vertical space.</td>
+  </tr>
+  <tr>
+    <th>dialogName</th>
+    <td>The window title to display for the dialog.</td>
+  </tr>
+  <tr>
+    <th>width, height</th>
+    <td>The desired dialog width/height, in pixels.</td>
+  </tr>
+  <tr>
+    <th>browser</th>
+    <td>See <code><a href='http://www.rdocumentation.org/packages/utils/topics/browseURL'>browseURL</a></code>.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A function that takes a single <code>url</code> parameter, suitable for
+  passing as the <code>viewer</code> argument of <code><a href='runGadget.html'>runGadget</a></code>.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Use these functions to control where the gadget is displayed in RStudio (or
+other R environments that emulate RStudio&#39;s viewer pane/dialog APIs). If
+viewer APIs are not available in the current R environment, then the gadget
+will be displayed in the system&#39;s default web browser (see
+<code><a href='http://www.rdocumentation.org/packages/utils/topics/browseURL'>browseURL</a></code>).</p>
+
+</div>
+<!-- <ul>
+  <li>viewer</li><li>paneViewer</li><li>dialogViewer</li><li>browserViewer</li>
+</ul>
+<ul>
+  
+</ul> -->
+

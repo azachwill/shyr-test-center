@@ -1,0 +1,81 @@
+---
+layout: reference
+title: "runGadget"
+categories: reference
+---
+<h1>Run a gadget</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='runGadget.html'>runGadget</a></span><span class="keyword">(</span><span class="symbol">app</span><span class="keyword">,</span> <span class="argument">server</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">port</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.port"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">viewer</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='viewer.html'>paneViewer</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">stopOnCancel</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>app</th>
+    <td>Either a Shiny app object as created by
+<code><a href='shiny-package.html'>shinyApp</a></code> et al, or, a UI object.</td>
+  </tr>
+  <tr>
+    <th>server</th>
+    <td>Ignored if <code>app</code> is a Shiny app object; otherwise, passed
+along to <code>shinyApp</code> (i.e. <code>shinyApp(ui = app, server = server)</code>).</td>
+  </tr>
+  <tr>
+    <th>port</th>
+    <td>See <code><a href='shiny-package.html'>runApp</a></code>.</td>
+  </tr>
+  <tr>
+    <th>viewer</th>
+    <td>Specify where the gadget should be displayed--viewer pane,
+dialog window, or external browser--by passing in a call to one of the
+<code><a href='viewer.html'>viewer</a></code> functions.</td>
+  </tr>
+  <tr>
+    <th>stopOnCancel</th>
+    <td>If <code>TRUE</code> (the default), then an <code>observeEvent</code>
+is automatically created that handles <code>input$cancel</code> by calling
+<code>stopApp()</code> with an error. Pass <code>FALSE</code> if you want to handle
+<code>input$cancel</code> yourself.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+The value returned by the gadget.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Similar to <code>runApp</code>, but handles <code>input$cancel</code> automatically, and
+if running in RStudio, defaults to viewing the app in the Viewer pane.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># library(shiny)</span>
+<span class="comment"># </span>
+<span class="comment"># ui &lt;- fillPage(...)</span>
+<span class="comment"># </span>
+<span class="comment"># server &lt;- function(input, output, session) {</span>
+<span class="comment">#   ...</span>
+<span class="comment"># }</span>
+<span class="comment"># </span>
+<span class="comment"># # Either pass ui/server as separate arguments...</span>
+<span class="comment"># runGadget(ui, server)</span>
+<span class="comment"># </span>
+<span class="comment"># # ...or as a single app object</span>
+<span class="comment"># runGadget(shinyApp(ui, server))</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>runGadget</li>
+</ul>
+<ul>
+  
+</ul> -->
+

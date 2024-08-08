@@ -1,0 +1,97 @@
+---
+layout: reference
+title: "Reactive testing for Shiny server functions and modules — testServer"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Reactive testing for Shiny server functions and modules</h1>
+  
+
+  <pre class="code"><span class='fu'>testServer</span>(<span class='kw'>app</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>expr</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>session</span> <span class='kw'>=</span> <span class='no'>MockShinySession</span>$<span class='fu'>new</span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>app</p></th>
+    <td><p>A server function (i.e. a function with <code>input</code>, <code>output</code>,
+and <code>session</code>), or a module function (i.e. a function with first
+argument <code>id</code> that calls <code><a href='moduleServer.html'>moduleServer()</a></code>.</p>
+<p>You can also provide an app, a path an app, or anything that
+<code><a href='shiny.appobj.html'>as.shiny.appobj()</a></code> can handle.</p></td>
+  </tr>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>Test code containing expectations. The objects from inside the
+server function environment will be made available in the environment of
+the test expression (this is done using a data mask with
+<code><a href='https://rlang.r-lib.org/reference/eval_tidy.html'>rlang::eval_tidy()</a></code>). This includes the parameters of the server function
+(e.g. <code>input</code>, <code>output</code>, and <code>session</code>), along with any other values
+created inside of the server function.</p></td>
+  </tr>
+  <tr>
+    <th><p>args</p></th>
+    <td><p>Additional arguments to pass to the module function. If <code>app</code> is
+a module, and no <code>id</code> argument is provided, one will be generated and
+supplied automatically.</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The <code><a href='MockShinySession.html'>MockShinySession</a></code> object to use as the <a href='domains.html'>reactive domain</a>. The same session object is used as the domain both
+during invocation of the server or module under test and during evaluation
+of <code>expr</code>.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>A way to test the reactive interactions in Shiny applications. Reactive
+interactions are defined in the server function of applications and in
+modules.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'># Testing a server function  ----------------------------------------------</span>
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactive.html'>reactive</a></span>(<span class='no'>input</span>$<span class='no'>a</span> * <span class='no'>input</span>$<span class='no'>b</span>)
+}
+
+<span class='fu'>testServer</span>(<span class='no'>server</span>, {
+  <span class='no'>session</span>$<span class='fu'>setInputs</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='fu'>x</span>() <span class='kw'>==</span> <span class='fl'>6</span>)
+})
+
+
+<span class='co'># Testing a module --------------------------------------------------------</span>
+<span class='no'>myModuleServer</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>id</span>, <span class='no'>multiplier</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>prefix</span> <span class='kw'>=</span> <span class='st'>"I am "</span>) {
+  <span class='fu'><a href='moduleServer.html'>moduleServer</a></span>(<span class='no'>id</span>, <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+    <span class='no'>myreactive</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactive.html'>reactive</a></span>({
+      <span class='no'>input</span>$<span class='no'>x</span> * <span class='no'>multiplier</span>
+    })
+    <span class='no'>output</span>$<span class='no'>txt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderText</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>prefix</span>, <span class='fu'>myreactive</span>())
+    })
+  })
+}
+
+<span class='fu'>testServer</span>(<span class='no'>myModuleServer</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>multiplier</span> <span class='kw'>=</span> <span class='fl'>2</span>), {
+  <span class='no'>session</span>$<span class='fu'>setInputs</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+  <span class='co'># You're also free to use third-party</span>
+  <span class='co'># testing packages like testthat:</span>
+  <span class='co'>#   expect_equal(myreactive(), 2)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='fu'>myreactive</span>() <span class='kw'>==</span> <span class='fl'>2</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='no'>output</span>$<span class='no'>txt</span> <span class='kw'>==</span> <span class='st'>"I am 2"</span>)
+
+  <span class='no'>session</span>$<span class='fu'>setInputs</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='fu'>myreactive</span>() <span class='kw'>==</span> <span class='fl'>4</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='no'>output</span>$<span class='no'>txt</span> <span class='kw'>==</span> <span class='st'>"I am 4"</span>)
+  <span class='co'># Any additional arguments, below, are passed along to the module.</span>
+})</pre>
+</div>
+
+

@@ -1,0 +1,111 @@
+---
+layout: newframe-nocontainer
+child_scope: /articles/
+---
+
+<script>
+
+$(document).ready(function() {
+
+  function selectSection(currentSectionName) {
+    $('.section').removeClass('expanded');
+    $('.section-title').removeClass('expanded');
+    $('.section.' + currentSectionName).addClass('expanded');
+    $('.section-title.' + currentSectionName).addClass('expanded');
+  }
+
+  // figure out what section we should initially select & expand, based on the current article we're displaying
+  var parentSectionClass = $('.article-title.current').closest(".section")[0].className;
+  var currentSectionName = parentSectionClass.replace("section ", "");
+  selectSection(currentSectionName);
+
+  // figure out which subsection's articles to expand
+  $('.article-title.current').closest('.subsection').addClass('expanded');
+
+
+  // select & expand a section
+  $('.section-title').on('click', function(event) {
+    var sectionTitleClass = this.className;
+    var currentSectionName = sectionTitleClass.replace("section-title ", "");
+    selectSection(currentSectionName);
+  });
+
+  // select & expand a subsection
+  $('.subsection-title').on('click', function(event) {
+    var subsection = $(this).closest('.subsection');
+
+    if (subsection.hasClass('expanded')) {
+      subsection.removeClass('expanded');
+    }
+    else {
+      $('.subsection').removeClass('expanded');
+      subsection.addClass('expanded');
+    }
+  });
+
+});
+
+</script>
+
+<div class="splitColumns withMobileMargins">
+  <div class="column75">
+    <h1>{{ page.title }}</h1>
+    <div class="metadata punchup">
+      {% if page.edited %}
+      <span class="published">Last Updated: {{ page.edited | date_to_string }}</span>
+      {% endif %}
+      {% if page.author %}
+      <br>
+      <span>By: {{ page.author }}</span>
+      {% endif %}
+    </div>
+    <div class="post constrain-image-width">
+    {{ content }}
+    </div>
+    <br>
+    <hr>
+    <p>If you have questions about this article or would like to discuss ideas presented here, please post on <a href="https://community.rstudio.com/c/shiny">RStudio Community</a>. Our developers monitor these forums and answer questions periodically. See <a href="/help">help</a> for more help with all things Shiny.</p>
+  
+  </div>
+
+  <div class="column25">
+    <div class="row article-actions punchup">
+      <div class="visible-sm"><br/></div>
+      {% if page.demo_url %}
+        <div class="article-action col-md-12 col-sm-3"><a class="btn btn-primary btn-sm fullwidth" href="{{ page.demo_url }}">View demo</a></div>
+      {% endif %}
+      {% if page.code_url %}
+      <div class="article-action col-md-12 col-sm-3"><a class="btn btn-default btn-sm fullwidth" href="{{ page.code_url }}">Download code</a></div>
+      {% endif %}
+    </div>
+
+    <div class="section-tabs">
+      {% for section in site.data.articles %}
+        <div class="section-title {{section.cssclass}}">{{ section.section }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="articles-outline sidebar">
+      {% for section in site.data.articles %}
+        <div class="section {{section.cssclass}}">
+          {% for sectiongroup in section.subsection-groups %}
+            <div class="subsection-group">
+              <div class="subsection-group-title">{{ sectiongroup.title }}</div>
+              {% for subsection in sectiongroup.subsections %}
+                <div class="subsection">
+                  <div class="subsection-title">{{ subsection.title }}</div>
+                  <div class="subsection-articles">
+                    {% for postname in subsection.children %}
+                      {% assign post = postname | find_post %}
+                      <div {% if page.url == post.url %} class="article-title current" {% else %} class="article-title" {% endif %}><a href="{{ post.url }}">{{ post.title }}</a></div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+---
+layout: reference
+title: "Create a non-reactive scope for an expression — isolate"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a non-reactive scope for an expression</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/reactives.R" class="external-link"><code>R/reactives.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Executes the given expression in a scope where reactive values or expression
+can be read, but they cannot cause the reactive scope of the caller to be
+re-evaluated when they change.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">isolate</span>(expr)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>expr</dt>
+<dd><p>An expression that can access reactive values or expressions.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Ordinarily, the simple act of reading a reactive value causes a relationship
+to be established between the caller and the reactive value, where a change
+to the reactive value will cause the caller to re-execute. (The same applies
+for the act of getting a reactive expression's value.) The <code>isolate</code>
+function lets you read a reactive value or expression without establishing this
+relationship.</p>
+<p>The expression given to <code>isolate()</code> is evaluated in the calling
+environment. This means that if you assign a variable inside the
+<code>isolate()</code>, its value will be visible outside of the <code>isolate()</code>.
+If you want to avoid this, you can use <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">base::local()</a></code> inside the
+<code>isolate()</code>.</p>
+<p>This function can also be useful for calling reactive expression at the
+console, which can be useful for debugging. To do so, simply wrap the
+calls to the reactive expression with <code>isolate()</code>.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">observe</span>({</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  input<span class="sc">$</span>saveButton  <span class="co"># Do take a dependency on input$saveButton</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># isolate a simple expression</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">isolate</span>(input<span class="sc">$</span>dataset))  <span class="co"># No dependency on input$dataset</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeToDatabase</span>(data)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">observe</span>({</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  input<span class="sc">$</span>saveButton  <span class="co"># Do take a dependency on input$saveButton</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># isolate a whole block</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">isolate</span>({</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    a <span class="ot">&lt;-</span> input<span class="sc">$</span>valueA   <span class="co"># No dependency on input$valueA or input$valueB</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    b <span class="ot">&lt;-</span> input<span class="sc">$</span>valueB</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="at">a=</span>a, <span class="at">b=</span>b)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeToDatabase</span>(data)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">observe</span>({</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x outside of isolate() is affected</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">isolate</span>(x <span class="ot">&lt;-</span> <span class="dv">2</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x) <span class="co"># 2</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use local() to avoid affecting calling environment</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">isolate</span>(<span class="fu">local</span>(y <span class="ot">&lt;-</span> <span class="dv">2</span>))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(y) <span class="co"># 1</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Can also use isolate to call reactive expressions from the R console</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">reactiveValues</span>(<span class="at">A=</span><span class="dv">1</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="fu">reactive</span>({ <span class="fu">as.character</span>(values<span class="sc">$</span>A) })</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">isolate</span>(<span class="fu">fun</span>())</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># "1"</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># isolate also works if the reactive expression accesses values from the</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># input object, like input$x</span></span></code></pre></div>
+  </div>
+</div>

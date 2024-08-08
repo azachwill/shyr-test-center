@@ -1,0 +1,83 @@
+---
+layout: reference
+title: "brushOpts"
+categories: reference
+---
+<h1>Create an object representing brushing options</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='brushOpts.html'>brushOpts</a></span><span class="keyword">(</span><span class="argument">id</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">fill</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#9cf"</span><span class="keyword">,</span> <span class="argument">stroke</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#036"</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.25</span><span class="keyword">,</span>
+  <span class="argument">delay</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">300</span><span class="keyword">,</span> <span class="argument">delayType</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"debounce"</span><span class="keyword">,</span> <span class="string">"throttle"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">clip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span>
+  <span class="argument">direction</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"xy"</span><span class="keyword">,</span> <span class="string">"x"</span><span class="keyword">,</span> <span class="string">"y"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">resetOnNew</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>id</th>
+    <td>Input value name. For example, if the value is <code>&quot;plot_brush&quot;</code>,
+then the coordinates will be available as <code>input$plot_brush</code>. Multiple
+<code>imageOutput</code>/<code>plotOutput</code> calls may share the same <code>id</code>
+value; brushing one image or plot will cause any other brushes with the
+same <code>id</code> to disappear.</td>
+  </tr>
+  <tr>
+    <th>fill</th>
+    <td>Fill color of the brush.</td>
+  </tr>
+  <tr>
+    <th>stroke</th>
+    <td>Outline color of the brush.</td>
+  </tr>
+  <tr>
+    <th>opacity</th>
+    <td>Opacity of the brush</td>
+  </tr>
+  <tr>
+    <th>delay</th>
+    <td>How long to delay (in milliseconds) when debouncing or
+throttling, before sending the brush data to the server.</td>
+  </tr>
+  <tr>
+    <th>delayType</th>
+    <td>The type of algorithm for limiting the number of brush
+events. Use <code>&quot;throttle&quot;</code> to limit the number of brush events to one
+every <code>delay</code> milliseconds. Use <code>&quot;debounce&quot;</code> to suspend events
+while the cursor is moving, and wait until the cursor has been at rest for
+<code>delay</code> milliseconds before sending an event.</td>
+  </tr>
+  <tr>
+    <th>clip</th>
+    <td>Should the brush area be clipped to the plotting area? If FALSE,
+then the user will be able to brush outside the plotting area, as long as
+it is still inside the image.</td>
+  </tr>
+  <tr>
+    <th>direction</th>
+    <td>The direction for brushing. If <code>&quot;xy&quot;</code>, the brush can be
+drawn and moved in both x and y directions. If <code>&quot;x&quot;</code>, or <code>&quot;y&quot;</code>,
+the brush wil work horizontally or vertically.</td>
+  </tr>
+  <tr>
+    <th>resetOnNew</th>
+    <td>When a new image is sent to the browser (via
+<code><a href='renderImage.html'>renderImage</a></code>), should the brush be reset? The default,
+<code>FALSE</code>, is useful if you want to update the plot while keeping the
+brush. Using <code>TRUE</code> is useful if you want to clear the brush whenever
+the plot is updated.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This generates an object representing brushing options, to be passed as the
+<code>brush</code> argument of <code><a href='plotOutput.html'>imageOutput</a></code> or
+<code><a href='plotOutput.html'>plotOutput</a></code>.</p>
+
+</div>
+<!-- <ul>
+  <li>brushOpts</li>
+</ul>
+<ul>
+  
+</ul> -->
+

@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Image interaction - basic
+date: 2015-05-29 
+tags: 
+ - plot interaction
+appurl: https://gallery.shinyapps.io/094-image-interaction-basic
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/094-image-interaction-basic
+---

@@ -1,0 +1,32 @@
+---
+title: "isRunning"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='isRunning.html'>isRunning</a></span><span class="keyword">(</span><span class="keyword">)</span></code></pre>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+<code>TRUE</code> if a Shiny application is currently running. Otherwise,
+  <code>FALSE</code>.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This function tests whether a Shiny application is currently running.</p>
+
+</div>
+<!-- <ul>
+  <li>isRunning</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

@@ -1,0 +1,33 @@
+---
+layout: reference
+title: "Register a theme dependency — registerThemeDependency"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Register a theme dependency</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.1/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This function registers a function that returns an <code>htmlDependency()</code> or list
+of such objects. If <code>session$setCurrentTheme()</code> is called, the function will
+be re-executed, and the resulting html dependency will be sent to the client.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">registerThemeDependency</span>(func)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>func</dt>
+<dd><p>A function that takes one argument, <code>theme</code> (which is a
+<code><a href="https://rstudio.github.io/sass/reference/sass_layer.html" class="external-link">sass::sass_layer()</a></code> object), and returns an htmlDependency object, or list
+of them.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Note that <code>func</code> should <strong>not</strong> be an anonymous function, or a function which
+is defined within the calling function. This is so that,
+<code>registerThemeDependency()</code> is called multiple times with the function, it
+tries to deduplicate them</p>
+  </div>
+
+</div>

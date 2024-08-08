@@ -1,0 +1,51 @@
+---
+layout: reference
+title: "setBookmarkExclude"
+categories: reference
+---
+<h1>Exclude inputs from bookmarking</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='setBookmarkExclude.html'>setBookmarkExclude</a></span><span class="keyword">(</span><span class="argument">names</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>character</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>names</th>
+    <td>A character vector containing names of inputs to exclude from
+bookmarking.</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>A shiny session object.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This function tells Shiny which inputs should be excluded from bookmarking.
+It should be called from inside the application&#39;s server function.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This function can also be called from a module&#39;s server function, in which
+case it will exclude inputs with the specified names, from that module. It
+will not affect inputs from other modules or from the top level of the Shiny
+application.</p>
+
+</div>
+<!-- <ul>
+  <li>setBookmarkExclude</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='enableBookmarking.html'>enableBookmarking</a></code> for examples.</p>
+</div>

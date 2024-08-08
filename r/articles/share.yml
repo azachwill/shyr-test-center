@@ -1,0 +1,34 @@
+ - title: "Deployment"
+   links:
+     - text: Deploying Shiny apps to the web 
+       href: ../../r/articles/share/deployment-web/index.qmd
+     - text: Getting started with shinyapps.io 
+       href: ../../r/articles/share/shinyapps/index.qmd
+     - text: Setting up custom domains on shinyapps.io 
+       href: ../../r/articles/share/custom-domains/index.qmd
+     - text: Sharing data across sessions on shinyapps.io 
+       href: ../../r/articles/share/share-data/index.qmd
+     - text: Migrating authentication on shinyapps.io
+       href: ../../r/articles/share/migration/index.qmd
+     - text: Introduction to Shiny Server 
+       href: ../../r/articles/share/shiny-server/index.qmd
+     - text: Allowing different libraries for different apps on Shiny Server, Shiny Server Pro, and Posit Connect 
+       href: ../../r/articles/share/libraries/index.qmd
+     - text: Creating user privileges on Posit Connect and Shiny Server Pro  
+       href: ../../r/articles/share/permissions/index.qmd
+     - text: Administrating Shiny Server, Shiny Server Pro, and Posit Connect
+       href: ../../r/articles/share/admin-deployment/index.qmd
+ - title: "Distribution"
+   links:
+     - text: Sharing apps to run locally 
+       href: ../../r/articles/share/deployment-local/index.qmd
+     - text: Save your app as a function 
+       href: ../../r/articles/share/function/index.qmd
+ - title: "Bookmarking"
+   links:
+     - text: Bookmarking state 
+       href: ../../r/articles/share/bookmarking-state/index.qmd
+     - text: Advanced bookmarking 
+       href: ../../r/articles/share/advanced-bookmarking/index.qmd
+     - text: Bookmarking and modules 
+       href: ../../r/articles/share/bookmarking-modules/index.qmd

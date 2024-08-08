@@ -1,0 +1,66 @@
+---
+title: "Create a Bootstrap page — bootstrapPage"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>bootstrapPage</span>(<span class='no'>...</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>responsive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>basicPage</span>(<span class='no'>...</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>The contents of the document body.</p></td>
+  </tr>
+  <tr>
+    <th><p>title</p></th>
+    <td><p>The browser window title (defaults to the host URL of the page)</p></td>
+  </tr>
+  <tr>
+    <th><p>responsive</p></th>
+    <td><p>This option is deprecated; it is no longer optional with
+Bootstrap 3.</p></td>
+  </tr>
+  <tr>
+    <th><p>theme</p></th>
+    <td><p>Alternative Bootstrap stylesheet (normally a css file within the
+www directory, e.g. <code>www/bootstrap.css</code>)</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Create a Shiny UI page that loads the CSS and JavaScript for
+<a href='http://getbootstrap.com/'>Bootstrap</a>, and has no content in the page
+body (other than what you provide).</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function.</p>
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>This function is primarily intended for users who are proficient in HTML/CSS,
+and know how to lay out pages in Bootstrap. Most applications should use
+<code><a href='fluidPage.html'>fluidPage()</a></code> along with layout functions like
+<code><a href='fluidPage.html'>fluidRow()</a></code> and <code><a href='sidebarLayout.html'>sidebarLayout()</a></code>.</p>
+  <h3 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h3>
+
+  <p>The <code>basicPage</code> function is deprecated, you should use the
+<code><a href='fluidPage.html'>fluidPage()</a></code> function instead.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='fluidPage.html'>fluidPage()</a></code>, <code><a href='fixedPage.html'>fixedPage()</a></code></p></div>
+  </div>
+
+</div>
+
+
+```

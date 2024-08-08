@@ -1,0 +1,31 @@
+---
+layout: reference
+title: "Add a function for preprocessing an input before taking a test snapshot — snapshotPreprocessInput"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Add a function for preprocessing an input before taking a test snapshot</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/snapshot.R" class="external-link"><code>R/snapshot.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Add a function for preprocessing an input before taking a test snapshot</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">snapshotPreprocessInput</span>(inputId, fun, <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>())</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>inputId</dt>
+<dd><p>Name of the input value.</p></dd>
+
+
+<dt>fun</dt>
+<dd><p>A function that takes the input value and returns a modified
+value. The returned value will be used for the test snapshot.</p></dd>
+
+
+<dt>session</dt>
+<dd><p>A Shiny session object.</p></dd>
+
+</dl></div>
+
+</div>

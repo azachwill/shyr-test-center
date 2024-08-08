@@ -1,0 +1,178 @@
+---
+layout: reference
+title: "insertTab"
+categories: reference
+---
+<h1>Dynamically insert/remove a tabPanel</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='insertTab.html'>insertTab</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">tab</span><span class="keyword">,</span> <span class="symbol">target</span><span class="keyword">,</span> <span class="argument">position</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"before"</span><span class="keyword">,</span> <span class="string">"after"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">select</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='insertTab.html'>prependTab</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">tab</span><span class="keyword">,</span> <span class="argument">select</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">menuName</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='insertTab.html'>appendTab</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">tab</span><span class="keyword">,</span> <span class="argument">select</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">menuName</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='insertTab.html'>removeTab</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">target</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>id</code> of the <code>tabsetPanel</code> (or
+<code>navlistPanel</code> or <code>navbarPage</code>) into which <code>tab</code> will
+be inserted/removed.</td>
+  </tr>
+  <tr>
+    <th>tab</th>
+    <td>The item to be added (must be created with <code>tabPanel</code>,
+or with <code>navbarMenu</code>).</td>
+  </tr>
+  <tr>
+    <th>target</th>
+    <td>If inserting: the <code>value</code> of an existing
+<code>tabPanel</code>, next to which <code>tab</code> will be added.
+If removing: the <code>value</code> of the <code>tabPanel</code> that
+you want to remove. See Details if you want to insert next to/remove
+an entire <code>navbarMenu</code> instead.</td>
+  </tr>
+  <tr>
+    <th>position</th>
+    <td>Should <code>tab</code> be added before or after the
+<code>target</code> tab?</td>
+  </tr>
+  <tr>
+    <th>select</th>
+    <td>Should <code>tab</code> be selected upon being inserted?</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>The shiny session within which to call this function.</td>
+  </tr>
+  <tr>
+    <th>menuName</th>
+    <td>This argument should only be used when you want to
+prepend (or append) <code>tab</code> to the beginning (or end) of an
+existing <code><a href='navbarPage.html'>navbarMenu</a></code> (which must itself be part of
+an existing <code><a href='navbarPage.html'>navbarPage</a></code>). In this case, this argument
+should be the <code>menuName</code> that you gave your <code>navbarMenu</code>
+when you first created it (by default, this is equal to the value
+of the <code>title</code> argument). Note that you still need to set the
+<code>inputId</code> argument to whatever the <code>id</code> of the parent
+<code>navbarPage</code> is. If <code>menuName</code> is left as <code>NULL</code>,
+<code>tab</code> will be prepended (or appended) to whatever
+<code>inputId</code> is.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Dynamically insert or remove a <code><a href='tabPanel.html'>tabPanel</a></code> (or a
+<code><a href='navbarPage.html'>navbarMenu</a></code>) from an existing <code><a href='tabsetPanel.html'>tabsetPanel</a></code>,
+<code><a href='navlistPanel.html'>navlistPanel</a></code> or <code><a href='navbarPage.html'>navbarPage</a></code>.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>When you want to insert a new tab before or after an existing tab, you
+should use <code>insertTab</code>. When you want to prepend a tab (i.e. add a
+tab to the beginning of the <code>tabsetPanel</code>), use <code>prependTab</code>.
+When you want to append a tab (i.e. add a tab to the end of the
+<code>tabsetPanel</code>), use <code>appendTab</code>.</p>
+
+  <p>For <code>navbarPage</code>, you can insert/remove conventional
+<code>tabPanel</code>s (whether at the top level or nested inside a
+<code>navbarMenu</code>), as well as an entire <code><a href='navbarPage.html'>navbarMenu</a></code>.
+For the latter case, <code>target</code> should be the <code>menuName</code> that
+you gave your <code>navbarMenu</code> when you first created it (by default,
+this is equal to the value of the <code>title</code> argument).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="comment"># example app for inserting/removing a tab</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='sidebarLayout.html'>sidebarLayout</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"add"</span><span class="keyword">,</span> <span class="string">"Add 'Dynamic' tab"</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"remove"</span><span class="keyword">,</span> <span class="string">"Remove 'Foo' tab"</span><span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='tabsetPanel.html'>tabsetPanel</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"tabs"</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Hello"</span><span class="keyword">,</span> <span class="string">"This is the hello tab"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Foo"</span><span class="keyword">,</span> <span class="string">"This is the foo tab"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Bar"</span><span class="keyword">,</span> <span class="string">"This is the bar tab"</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">add</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='insertTab.html'>insertTab</a></span><span class="keyword">(</span><span class="argument">inputId</span> <span class="argument">=</span> <span class="string">"tabs"</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Dynamic"</span><span class="keyword">,</span> <span class="string">"This a dynamically-added tab"</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="argument">target</span> <span class="argument">=</span> <span class="string">"Bar"</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">remove</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='insertTab.html'>removeTab</a></span><span class="keyword">(</span><span class="argument">inputId</span> <span class="argument">=</span> <span class="string">"tabs"</span><span class="keyword">,</span> <span class="argument">target</span> <span class="argument">=</span> <span class="string">"Foo"</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+<span class="comment"># example app for prepending/appending a navbarMenu</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='navbarPage.html'>navbarPage</a></span><span class="keyword">(</span><span class="string">"Navbar page"</span><span class="keyword">,</span> <span class="argument">id</span> <span class="argument">=</span> <span class="string">"tabs"</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Home"</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"prepend"</span><span class="keyword">,</span> <span class="string">"Prepend a navbarMenu"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"append"</span><span class="keyword">,</span> <span class="string">"Append a navbarMenu"</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">prepend</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="symbol">id</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span><span class="keyword">(</span><span class="string">"Dropdown"</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">prepend</span><span class="keyword">,</span> <span class="string">"p"</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='insertTab.html'>prependTab</a></span><span class="keyword">(</span><span class="argument">inputId</span> <span class="argument">=</span> <span class="string">"tabs"</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='navbarPage.html'>navbarMenu</a></span><span class="keyword">(</span><span class="symbol">id</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Drop1"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"Drop1 page from"</span><span class="keyword">,</span> <span class="symbol">id</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Drop2"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"Drop2 page from"</span><span class="keyword">,</span> <span class="symbol">id</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="string">"------"</span><span class="keyword">,</span>
+        <span class="string">"Header"</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Drop3"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"Drop3 page from"</span><span class="keyword">,</span> <span class="symbol">id</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">append</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="symbol">id</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span><span class="keyword">(</span><span class="string">"Dropdown"</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">append</span><span class="keyword">,</span> <span class="string">"a"</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='insertTab.html'>appendTab</a></span><span class="keyword">(</span><span class="argument">inputId</span> <span class="argument">=</span> <span class="string">"tabs"</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='navbarPage.html'>navbarMenu</a></span><span class="keyword">(</span><span class="symbol">id</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Drop1"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"Drop1 page from"</span><span class="keyword">,</span> <span class="symbol">id</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Drop2"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"Drop2 page from"</span><span class="keyword">,</span> <span class="symbol">id</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="string">"------"</span><span class="keyword">,</span>
+        <span class="string">"Header"</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Drop3"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"Drop3 page from"</span><span class="keyword">,</span> <span class="symbol">id</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>insertTab</li><li>prependTab</li><li>appendTab</li><li>removeTab</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='showTab.html'>showTab</a></code></p>
+</div>

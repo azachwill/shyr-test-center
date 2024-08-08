@@ -1,0 +1,149 @@
+---
+layout: reference
+title: "Insert and remove UI objects — insertUI"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Insert and remove UI objects</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/insert-ui.R" class="external-link"><code>R/insert-ui.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>These functions allow you to dynamically add and remove arbirary UI
+into your app, whenever you want, as many times as you want.
+Unlike <code><a href="renderUI.html">renderUI()</a></code>, the UI generated with <code>insertUI()</code> is persistent:
+once it's created, it stays there until removed by <code>removeUI()</code>. Each
+new call to <code>insertUI()</code> creates more UI objects, in addition to
+the ones already there (all independent from one another). To
+update a part of the UI (ex: an input object), you must use the
+appropriate <code>render</code> function or a customized <code>reactive</code>
+function.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">insertUI</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  selector,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">where =</span> <span class="fu">c</span>(<span class="st">"beforeBegin"</span>, <span class="st">"afterBegin"</span>, <span class="st">"beforeEnd"</span>, <span class="st">"afterEnd"</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  ui,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">multiple =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">immediate =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">removeUI</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  selector,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">multiple =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">immediate =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>selector</dt>
+<dd><p>A string that is accepted by jQuery's selector
+(i.e. the string <code>s</code> to be placed in a <code>$(s)</code> jQuery call).</p>
+<p>For <code>insertUI()</code> this determines the element(s) relative to which you
+want to insert your UI object. For <code>removeUI()</code> this determine the
+element(s) to be removed. If you want to remove a Shiny input or output,
+note that many of these are wrapped in <code>&lt;div&gt;</code>s, so you may need to use a
+somewhat complex selector --- see the Examples below. (Alternatively, you
+could also wrap the inputs/outputs that you want to be able to remove
+easily in a <code>&lt;div&gt;</code> with an id.)</p></dd>
+
+
+<dt>where</dt>
+<dd><p>Where your UI object should go relative to the selector:</p><dl><dt><code>beforeBegin</code></dt>
+<dd><p>Before the selector element itself</p></dd>
+
+<dt><code>afterBegin</code></dt>
+<dd><p>Just inside the selector element, before its
+first child</p></dd>
+
+<dt><code>beforeEnd</code></dt>
+<dd><p>Just inside the selector element, after its
+last child (default)</p></dd>
+
+<dt><code>afterEnd</code></dt>
+<dd><p>After the selector element itself</p></dd>
+
+
+</dl><p>Adapted from <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML" class="external-link">https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML</a>.</p></dd>
+
+
+<dt>ui</dt>
+<dd><p>The UI object you want to insert. This can be anything that
+you usually put inside your apps's <code>ui</code> function. If you're inserting
+multiple elements in one call, make sure to wrap them in either a
+<code><a href="tagList.html">tagList()</a></code> or a <code>tags$div()</code> (the latter option has the
+advantage that you can give it an <code>id</code> to make it easier to
+reference or remove it later on). If you want to insert raw html, use
+<code>ui = HTML()</code>.</p></dd>
+
+
+<dt>multiple</dt>
+<dd><p>In case your selector matches more than one element,
+<code>multiple</code> determines whether Shiny should insert the UI object
+relative to all matched elements or just relative to the first
+matched element (default).</p></dd>
+
+
+<dt>immediate</dt>
+<dd><p>Whether the UI object should be immediately inserted
+or removed, or whether Shiny should wait until all outputs have been
+updated and all observers have been run (default).</p></dd>
+
+
+<dt>session</dt>
+<dd><p>The shiny session. Advanced use only.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>It's particularly useful to pair <code>removeUI</code> with <code>insertUI()</code>, but there is
+no restriction on what you can use on. Any element that can be selected
+through a jQuery selector can be removed through this function.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Only run this example in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">"add"</span>, <span class="st">"Add UI"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Server logic</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>add, {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">insertUI</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">selector =</span> <span class="st">"#add"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">where =</span> <span class="st">"afterEnd"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">ui =</span> <span class="fu">textInput</span>(<span class="fu">paste0</span>(<span class="st">"txt"</span>, input<span class="sc">$</span>add),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"Insert some text"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete app with UI and server components</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">"rmv"</span>, <span class="st">"Remove UI"</span>),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">"txt"</span>, <span class="st">"This is no longer useful"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Server logic</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>rmv, {</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">removeUI</span>(</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">selector =</span> <span class="st">"div:has(&gt; #txt)"</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete app with UI and server components</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>

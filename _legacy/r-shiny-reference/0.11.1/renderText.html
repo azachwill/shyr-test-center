@@ -1,0 +1,132 @@
+---
+layout: reference
+title: "renderText"
+categories: reference
+---
+<h1>Text Output</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="argument">env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">func</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that returns an R object that can be used as an
+argument to <code>cat</code>.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
+is useful if you want to save an expression in a variable.</td>
+  </tr>
+  <tr>
+    <th>func</th>
+    <td>A function that returns an R object that can be used as an
+  argument to <code>cat</code>.(deprecated; use <code>expr</code> instead).</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Makes a reactive version of the given function that also uses
+<code><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></code> to turn its result into a single-element character
+vector.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The corresponding HTML output tag can be anything (though <code>pre</code> is
+recommended if you need a monospace font and whitespace preserved) and should
+have the CSS class name <code>shiny-text-output</code>.</p>
+
+  <p>The result of executing <code>func</code> will passed to <code>cat</code>, inside a
+<code><a href='http://www.rdocumentation.org/packages/utils/topics/capture.output'>capture.output</a></code> call.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="keyword">{</span>
+
+<span class="comment"># renderPrint captures any print output, converts it to a string, and</span>
+<span class="comment"># returns it</span>
+<span class="symbol">visFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="string">"foo"</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">visFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># '[1] "foo"'</span>
+
+<span class="symbol">invisFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/invisible'>invisible</a></span><span class="keyword">(</span><span class="string">"foo"</span><span class="keyword">)</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">invisFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># ''</span>
+
+<span class="symbol">multiprintFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span>
+  <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/print'>print</a></span><span class="keyword">(</span><span class="string">"foo"</span><span class="keyword">)</span><span class="keyword">;</span>
+  <span class="string">"bar"</span>
+<span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">multiprintFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># '[1] "foo"\n[1] "bar"'</span>
+
+<span class="symbol">nullFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span> NULL <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">nullFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># 'NULL'</span>
+
+<span class="symbol">invisNullFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/invisible'>invisible</a></span><span class="keyword">(</span>NULL<span class="keyword">)</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">invisNullFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># ''</span>
+
+<span class="symbol">vecFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="number">1</span><span class="keyword">:</span><span class="number">5</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">vecFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># '[1] 1 2 3 4 5'</span>
+
+
+<span class="comment"># Contrast with renderText, which takes the value returned from the function</span>
+<span class="comment"># and uses cat() to convert it to a string</span>
+<span class="symbol">visFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="string">"foo"</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">visFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># 'foo'</span>
+
+<span class="symbol">invisFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/invisible'>invisible</a></span><span class="keyword">(</span><span class="string">"foo"</span><span class="keyword">)</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">invisFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># 'foo'</span>
+
+<span class="symbol">multiprintFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span>
+  <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/print'>print</a></span><span class="keyword">(</span><span class="string">"foo"</span><span class="keyword">)</span><span class="keyword">;</span>
+  <span class="string">"bar"</span>
+<span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">multiprintFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># 'bar'</span>
+
+<span class="symbol">nullFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span> NULL <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">nullFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># ''</span>
+
+<span class="symbol">invisNullFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/invisible'>invisible</a></span><span class="keyword">(</span>NULL<span class="keyword">)</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">invisNullFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># ''</span>
+
+<span class="symbol">vecFun</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="number">1</span><span class="keyword">:</span><span class="number">5</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="functioncall">vecFun</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="comment"># '1 2 3 4 5'</span>
+
+<span class="keyword">}</span><span class="keyword">)</span></div>
+<div class='output'>[1] &quot;foo&quot;
+</div>
+<div class='output'>[1] &quot;1 2 3 4 5&quot;
+</div></code></pre>
+<!-- <ul>
+  <li>renderText</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='renderPrint.html'>renderPrint</a></code> for capturing the print output of a
+  function, rather than the returned text value.</p>
+</div>

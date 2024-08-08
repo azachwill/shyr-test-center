@@ -1,0 +1,88 @@
+---
+layout: reference
+title: "Create a navigation list panel — navlistPanel"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a navigation list panel</h1>
+  
+
+  <pre class="code"><span class='fu'>navlistPanel</span>(<span class='no'>...</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>well</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>fluid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>8</span>))</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p><code><a href='tabPanel.html'>tabPanel()</a></code> elements to include in the navlist</p></td>
+  </tr>
+  <tr>
+    <th><p>id</p></th>
+    <td><p>If provided, you can use <code>input$</code><em><code>id</code></em> in your
+server logic to determine which of the current navlist items is active. The
+value will correspond to the <code>value</code> argument that is passed to
+<code><a href='tabPanel.html'>tabPanel()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>selected</p></th>
+    <td><p>The <code>value</code> (or, if none was supplied, the <code>title</code>)
+of the navigation item that should be selected by default. If <code>NULL</code>,
+the first navigation will be selected.</p></td>
+  </tr>
+  <tr>
+    <th><p>well</p></th>
+    <td><p><code>TRUE</code> to place a well (gray rounded rectangle) around the
+navigation list.</p></td>
+  </tr>
+  <tr>
+    <th><p>fluid</p></th>
+    <td><p><code>TRUE</code> to use fluid layout; <code>FALSE</code> to use fixed
+layout.</p></td>
+  </tr>
+  <tr>
+    <th><p>widths</p></th>
+    <td><p>Column withs of the navigation list and tabset content areas
+respectively.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Create a navigation list panel that provides a list of links on the left
+which navigate to a set of tabPanels displayed to the right.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>You can include headers within the <code>navlistPanel</code> by including
+plain text elements in the list. Versions of Shiny before 0.11 supported
+separators with "------", but as of 0.11, separators were no longer
+supported. This is because version 0.11 switched to Bootstrap 3, which
+doesn't support separators.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='tabPanel.html'>tabPanel()</a></code>, <code><a href='updateTabsetPanel.html'>updateNavlistPanel()</a></code>,
+<code><a href='insertTab.html'>insertTab()</a></code>, <code><a href='showTab.html'>showTab()</a></code></p></div>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+
+  <span class='fu'><a href='titlePanel.html'>titlePanel</a></span>(<span class='st'>"Application Title"</span>),
+
+  <span class='fu'>navlistPanel</span>(
+    <span class='st'>"Header"</span>,
+    <span class='fu'><a href='tabPanel.html'>tabPanel</a></span>(<span class='st'>"First"</span>),
+    <span class='fu'><a href='tabPanel.html'>tabPanel</a></span>(<span class='st'>"Second"</span>),
+    <span class='fu'><a href='tabPanel.html'>tabPanel</a></span>(<span class='st'>"Third"</span>)
+  )
+)</pre>
+</div>
+
+

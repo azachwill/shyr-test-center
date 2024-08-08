@@ -1,0 +1,51 @@
+---
+title: "Set options for an output object. — outputOptions"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.0/R/shiny.R" class="external-link"><code>R/shiny.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>These are the available options for an output object:</p><ul><li><p>suspendWhenHidden. When <code>TRUE</code> (the default), the output object
+will be suspended (not execute) when it is hidden on the web page. When
+<code>FALSE</code>, the output object will not suspend when hidden, and if it
+was already hidden and suspended, then it will resume immediately.</p></li>
+<li><p>priority. The priority level of the output object. Queued outputs
+with higher priority values will execute before those with lower values.</p></li>
+</ul></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">outputOptions</span>(x, name, ...)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>x</dt>
+<dd><p>A shinyoutput object (typically <code>output</code>).</p></dd>
+
+
+<dt>name</dt>
+<dd><p>The name of an output observer in the shinyoutput object.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Options to set for the output observer.</p></dd>
+
+</dl></div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># Get the list of options for all observers within output</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">outputOptions</span>(output)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># Disable suspend for output$myplot</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">outputOptions</span>(output, <span class="st">"myplot"</span>, <span class="at">suspendWhenHidden =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># Change priority for output$myplot</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">outputOptions</span>(output, <span class="st">"myplot"</span>, <span class="at">priority =</span> <span class="dv">10</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># Get the list of options for output$myplot</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="fu">outputOptions</span>(output, <span class="st">"myplot"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

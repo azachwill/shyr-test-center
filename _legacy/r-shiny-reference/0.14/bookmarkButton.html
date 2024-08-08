@@ -1,0 +1,97 @@
+---
+layout: reference
+title: "bookmarkButton"
+categories: reference
+---
+<h1>Create a button for bookmarking/sharing</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"Bookmark..."</span><span class="keyword">,</span> <span class="argument">icon</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">shiny</span><span class="keyword">::</span><span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"link"</span><span class="keyword">,</span> <span class="argument">lib</span> <span class="argument">=</span>
+  <span class="string">"glyphicon"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">title</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"Bookmark this application's state and get a URL for sharing."</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span>
+  <span class="argument">id</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"._bookmark_"</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>label</th>
+    <td>The contents of the button or link--usually a text label, but
+you could also use any other HTML, like an image.</td>
+  </tr>
+  <tr>
+    <th>icon</th>
+    <td>An optional <code><a href='icon.html'>icon</a></code> to appear on the button.</td>
+  </tr>
+  <tr>
+    <th>title</th>
+    <td>A tooltip that is shown when the mouse cursor hovers over the
+button.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Named attributes to be applied to the button or link.</td>
+  </tr>
+  <tr>
+    <th>id</th>
+    <td>An ID for the bookmark button. The only time it is necessary to set
+the ID unless you have more than one bookmark button in your application.
+If you specify an input ID, it should be excluded from bookmarking with
+<code><a href='setBookmarkExclude.html'>setBookmarkExclude</a></code>, and you must create an observer that
+does the bookmarking when the button is pressed. See the examples below.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>A <code>bookmarkButton</code> is a <code><a href='actionButton.html'>actionButton</a></code> with a default label
+that consists of a link icon and the text &quot;Bookmark...&quot;. It is meant to be
+used for bookmarking state.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run these examples in interactive sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="comment"># This example shows how to use multiple bookmark buttons. If you only need</span>
+<span class="comment"># a single bookmark button, see examples in ?enableBookmarking.</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">request</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='tabsetPanel.html'>tabsetPanel</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"tabs"</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"One"</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"chk1"</span><span class="keyword">,</span> <span class="string">"Checkbox 1"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"bookmark1"</span><span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Two"</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"chk2"</span><span class="keyword">,</span> <span class="string">"Checkbox 2"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"bookmark2"</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="comment"># Need to exclude the buttons from themselves being bookmarked</span>
+  <span class="functioncall"><a href='setBookmarkExclude.html'>setBookmarkExclude</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"bookmark1"</span><span class="keyword">,</span> <span class="string">"bookmark2"</span><span class="keyword">)</span><span class="keyword">)</span>
+
+  <span class="comment"># Trigger bookmarking with either button</span>
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">bookmark1</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="symbol">session</span><span class="keyword">$</span><span class="functioncall">doBookmark</span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">bookmark2</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="symbol">session</span><span class="keyword">$</span><span class="functioncall">doBookmark</span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="argument">store</span> <span class="argument">=</span> <span class="string">"url"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>bookmarkButton</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='enableBookmarking.html'>enableBookmarking</a></code> for more examples.</p>
+</div>

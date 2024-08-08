@@ -1,0 +1,108 @@
+---
+layout: reference
+title: "Conditional Panel — conditionalPanel"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Conditional Panel</h1>
+  
+
+  <pre class="code"><span class='fu'>conditionalPanel</span>(<span class='no'>condition</span>, <span class='no'>...</span>, <span class='kw'>ns</span> <span class='kw'>=</span> <span class='fu'><a href='NS.html'>NS</a></span>(<span class='kw'>NULL</span>))</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>condition</p></th>
+    <td><p>A JavaScript expression that will be evaluated repeatedly to
+determine whether the panel should be displayed.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Elements to include in the panel.</p></td>
+  </tr>
+  <tr>
+    <th><p>ns</p></th>
+    <td><p>The <code><a href='NS.html'>namespace()</a></code> object of the current module, if
+any.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Creates a panel that is visible or not, depending on the value of a
+JavaScript expression. The JS expression is evaluated once at startup and
+whenever Shiny detects a relevant change in input/output.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>In the JS expression, you can refer to <code>input</code> and <code>output</code>
+JavaScript objects that contain the current values of input and output. For
+example, if you have an input with an id of <code>foo</code>, then you can use
+<code>input.foo</code> to read its value. (Be sure not to modify the input/output
+objects, as this may cause unpredictable behavior.)</p>
+    <h3 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h3>
+
+  <p>You are not recommended to use special JavaScript characters such as a
+period <code>.</code> in the input id's, but if you do use them anyway, for
+example, <code>inputId = "foo.bar"</code>, you will have to use
+<code>input["foo.bar"]</code> instead of <code>input.foo.bar</code> to read the input
+value.</p>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='sidebarLayout.html'>sidebarPanel</a></span>(
+      <span class='fu'><a href='selectInput.html'>selectInput</a></span>(<span class='st'>"plotType"</span>, <span class='st'>"Plot Type"</span>,
+        <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Scatter</span> <span class='kw'>=</span> <span class='st'>"scatter"</span>, <span class='kw'>Histogram</span> <span class='kw'>=</span> <span class='st'>"hist"</span>)
+      ),
+      <span class='co'># Only show this panel if the plot type is a histogram</span>
+      <span class='fu'>conditionalPanel</span>(
+        <span class='kw'>condition</span> <span class='kw'>=</span> <span class='st'>"input.plotType == 'hist'"</span>,
+        <span class='fu'><a href='selectInput.html'>selectInput</a></span>(
+          <span class='st'>"breaks"</span>, <span class='st'>"Breaks"</span>,
+          <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sturges"</span>, <span class='st'>"Scott"</span>, <span class='st'>"Freedman-Diaconis"</span>, <span class='st'>"[Custom]"</span> <span class='kw'>=</span> <span class='st'>"custom"</span>)
+        ),
+        <span class='co'># Only show this panel if Custom is selected</span>
+        <span class='fu'>conditionalPanel</span>(
+          <span class='kw'>condition</span> <span class='kw'>=</span> <span class='st'>"input.breaks == 'custom'"</span>,
+          <span class='fu'><a href='sliderInput.html'>sliderInput</a></span>(<span class='st'>"breakCount"</span>, <span class='st'>"Break Count"</span>, <span class='kw'>min</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+        )
+      )
+    ),
+    <span class='fu'><a href='sidebarLayout.html'>mainPanel</a></span>(
+      <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"plot"</span>)
+    )
+  )
+
+  <span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+    <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)
+    <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)
+
+    <span class='no'>output</span>$<span class='no'>plot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>({
+      <span class='kw'>if</span> (<span class='no'>input</span>$<span class='no'>plotType</span> <span class='kw'>==</span> <span class='st'>"scatter"</span>) {
+        <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
+      } <span class='kw'>else</span> {
+        <span class='no'>breaks</span> <span class='kw'>&lt;-</span> <span class='no'>input</span>$<span class='no'>breaks</span>
+        <span class='kw'>if</span> (<span class='no'>breaks</span> <span class='kw'>==</span> <span class='st'>"custom"</span>) {
+          <span class='no'>breaks</span> <span class='kw'>&lt;-</span> <span class='no'>input</span>$<span class='no'>breakCount</span>
+        }
+
+        <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>x</span>, <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='no'>breaks</span>)
+      }
+    })
+  }
+
+  <span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+

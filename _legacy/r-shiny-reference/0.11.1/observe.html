@@ -1,0 +1,165 @@
+---
+layout: reference
+title: "observe"
+categories: reference
+---
+<h1>Create a reactive observer</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="argument">env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">suspended</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">priority</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0</span><span class="keyword">,</span> <span class="argument">domain</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">autoDestroy</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>An expression (quoted or unquoted). Any return value will be
+ignored.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is the expression quoted? By default, this is <code>FALSE</code>.
+This is useful when you want to use an expression that is stored in a
+variable; to do so, it must be quoted with `quote()`.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>A label for the observer, useful for debugging.</td>
+  </tr>
+  <tr>
+    <th>suspended</th>
+    <td>If <code>TRUE</code>, start the observer in a suspended state.
+If <code>FALSE</code> (the default), start in a non-suspended state.</td>
+  </tr>
+  <tr>
+    <th>priority</th>
+    <td>An integer or numeric that controls the priority with which
+this observer should be executed. An observer with a given priority level
+will always execute sooner than all observers with a lower priority level.
+Positive, negative, and zero values are allowed.</td>
+  </tr>
+  <tr>
+    <th>domain</th>
+    <td>See <a href='domains.html'>domains</a>.</td>
+  </tr>
+  <tr>
+    <th>autoDestroy</th>
+    <td>If <code>TRUE</code> (the default), the observer will be
+automatically destroyed when its domain (if any) ends.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+An observer reference class object. This object has the following
+  methods:
+  <dl>
+    <dt><code>suspend()</code></dt><dd>
+      Causes this observer to stop scheduling flushes (re-executions) in
+      response to invalidations. If the observer was invalidated prior to
+      this call but it has not re-executed yet then that re-execution will
+      still occur, because the flush is already scheduled.
+    </dd></p>
+
+  <p><dt><code>resume()</code></dt><dd>
+      Causes this observer to start re-executing in response to
+      invalidations. If the observer was invalidated while suspended, then it
+      will schedule itself for re-execution.
+    </dd></p>
+
+  <p><dt><code>destroy()</code></dt><dd>
+      Stops the observer from executing ever again, even if it is currently
+      scheduled for re-execution.
+    </dd></p>
+
+  <p><dt><code>setPriority(priority = 0)</code></dt><dd>
+      Change this observer&#39;s priority. Note that if the observer is currently
+      invalidated, then the change in priority will not take effect until the
+      next invalidation--unless the observer is also currently suspended, in
+      which case the priority change will be effective upon resume.
+    </dd></p>
+
+  <p><dt><code>setAutoDestroy(autoDestroy)</code></dt><dd>
+      Sets whether this observer should be automatically destroyed when its
+      domain (if any) ends. If autoDestroy is TRUE and the domain already
+      ended, then destroy() is called immediately.&quot;
+    </dd></p>
+
+  <p><dt><code>onInvalidate(callback)</code></dt><dd>
+      Register a callback function to run when this observer is invalidated.
+      No arguments will be provided to the callback function when it is
+      invoked.
+    </dd></p>
+
+  <p></dl></p>
+
+  <p></dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Creates an observer from the given expression.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>An observer is like a reactive expression in that it can read reactive values
+and call reactive expressions, and will automatically re-execute when those
+dependencies change. But unlike reactive expressions, it doesn&#39;t yield a
+result and can&#39;t be used as an input to other reactive expressions. Thus,
+observers are only useful for their side effects (for example, performing
+I/O).</p>
+
+  <p>Another contrast between reactive expressions and observers is their
+execution strategy. Reactive expressions use lazy evaluation; that is, when
+their dependencies change, they don&#39;t re-execute right away but rather wait
+until they are called by someone else. Indeed, if they are not called then
+they will never re-execute. In contrast, observers use eager evaluation; as
+soon as their dependencies change, they schedule themselves to re-execute.</p>
+
+  <p>Starting with Shiny 0.10.0, observers are automatically destroyed by default
+when the <a href='domains.html'>domain</a> that owns them ends (e.g. when a Shiny session
+ends).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="symbol">values</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveValues.html'>reactiveValues</a></span><span class="keyword">(</span><span class="argument">A</span><span class="argument">=</span><span class="number">1</span><span class="keyword">)</span>
+
+<span class="symbol">obsB</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="keyword">{</span>
+  <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/print'>print</a></span><span class="keyword">(</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">A</span> <span class="keyword">+</span> <span class="number">1</span><span class="keyword">)</span>
+<span class="keyword">}</span><span class="keyword">)</span>
+
+<span class="comment"># Can use quoted expressions</span>
+<span class="symbol">obsC</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/substitute'>quote</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/print'>print</a></span><span class="keyword">(</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">A</span> <span class="keyword">+</span> <span class="number">2</span><span class="keyword">)</span> <span class="keyword">}</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># To store expressions for later conversion to observe, use quote()</span>
+<span class="symbol">expr_q</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/substitute'>quote</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/print'>print</a></span><span class="keyword">(</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">A</span> <span class="keyword">+</span> <span class="number">3</span><span class="keyword">)</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="symbol">obsD</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="symbol">expr_q</span><span class="keyword">,</span> <span class="argument">quoted</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># In a normal Shiny app, the web client will trigger flush events. If you</span>
+<span class="comment"># are at the console, you can force a flush with flushReact()</span>
+<span class="package">shiny</span><span class="keyword">:::</span><span class="functioncall">flushReact</span><span class="keyword">(</span><span class="keyword">)</span></div>
+<div class='output'>[1] 2
+[1] 3
+[1] 4
+</div></code></pre>
+<!-- <ul>
+  <li>observe</li>
+</ul>
+<ul>
+  
+</ul> -->
+

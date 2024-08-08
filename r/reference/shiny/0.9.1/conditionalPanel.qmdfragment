@@ -1,0 +1,107 @@
+---
+title: "conditionalPanel"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>conditionalPanel(condition, ...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>condition</th>
+    <td>A JavaScript expression that will be
+  evaluated repeatedly to determine whether the panel
+  should be displayed.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Elements to include in the panel.</td>
+  </tr>
+</table>
+
+<div data-section="Conditional Panel">
+  <h3 data-swiftype-index="false">Conditional Panel</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Creates a panel that is visible or not, depending on the value of a
+JavaScript expression. The JS expression is evaluated once at startup and
+whenever Shiny detects a relevant change in input/output.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>In the JS expression, you can refer to <code>input</code> and <code>output</code>
+JavaScript objects that contain the current values of input and output. For
+example, if you have an input with an id of <code>foo</code>, then you can use
+<code>input.foo</code> to read its value. (Be sure not to modify the input/output
+objects, as this may cause unpredictable behavior.)</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>sidebarPanel(
+   selectInput(
+      &quot;plotType&quot;, &quot;Plot Type&quot;,
+      c(Scatter = &quot;scatter&quot;,
+        Histogram = &quot;hist&quot;)),
+
+   # Only show this panel if the plot type is a histogram
+   conditionalPanel(
+      condition = &quot;input.plotType == &#39;hist&#39;&quot;,
+      selectInput(
+         &quot;breaks&quot;, &quot;Breaks&quot;,
+         c(&quot;Sturges&quot;,
+           &quot;Scott&quot;,
+           &quot;Freedman-Diaconis&quot;,
+           &quot;[Custom]&quot; = &quot;custom&quot;)),
+
+      # Only show this panel if Custom is selected
+      conditionalPanel(
+         condition = &quot;input.breaks == &#39;custom&#39;&quot;,
+         sliderInput(&quot;breakCount&quot;, &quot;Break Count&quot;, min=1, max=1000, value=10)
+      )
+   )
+)
+</div>
+<div class='output'>&lt;div class=&quot;span4&quot;&gt;
+  &lt;form class=&quot;well&quot;&gt;
+    &lt;label class=&quot;control-label&quot; for=&quot;plotType&quot;&gt;Plot Type&lt;/label&gt;
+    &lt;select id=&quot;plotType&quot;&gt;
+      &lt;option value=&quot;scatter&quot; selected=&quot;selected&quot;&gt;Scatter&lt;/option&gt;
+      &lt;option value=&quot;hist&quot;&gt;Histogram&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;script type=&quot;application/json&quot; data-for=&quot;plotType&quot; data-nonempty=&quot;&quot;&gt;{}&lt;/script&gt;
+    &lt;div data-display-if=&quot;input.plotType == &amp;#39;hist&amp;#39;&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;breaks&quot;&gt;Breaks&lt;/label&gt;
+      &lt;select id=&quot;breaks&quot;&gt;
+        &lt;option value=&quot;Sturges&quot; selected=&quot;selected&quot;&gt;Sturges&lt;/option&gt;
+        &lt;option value=&quot;Scott&quot;&gt;Scott&lt;/option&gt;
+        &lt;option value=&quot;Freedman-Diaconis&quot;&gt;Freedman-Diaconis&lt;/option&gt;
+        &lt;option value=&quot;custom&quot;&gt;[Custom]&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;script type=&quot;application/json&quot; data-for=&quot;breaks&quot; data-nonempty=&quot;&quot;&gt;{}&lt;/script&gt;
+      &lt;div data-display-if=&quot;input.breaks == &amp;#39;custom&amp;#39;&quot;&gt;
+        &lt;div&gt;
+          &lt;label class=&quot;control-label&quot; for=&quot;breakCount&quot;&gt;Break Count&lt;/label&gt;
+          &lt;input id=&quot;breakCount&quot; type=&quot;slider&quot; name=&quot;breakCount&quot; value=&quot;10&quot; class=&quot;jslider&quot; data-from=&quot;1&quot; data-to=&quot;1000&quot; data-step=&quot;1&quot; data-skin=&quot;plastic&quot; data-round=&quot;FALSE&quot; data-locale=&quot;us&quot; data-format=&quot;#,##0.#####&quot; data-smooth=&quot;FALSE&quot;/&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>conditionalPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

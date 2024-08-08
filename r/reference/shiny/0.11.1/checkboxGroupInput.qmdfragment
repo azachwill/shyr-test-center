@@ -1,0 +1,100 @@
+---
+title: "checkboxGroupInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='checkboxGroupInput.html'>checkboxGroupInput</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="symbol">choices</span><span class="keyword">,</span> <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">inline</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>input</code> slot that will be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code> for no label.</td>
+  </tr>
+  <tr>
+    <th>choices</th>
+    <td>List of values to show checkboxes for. If elements of the list
+are named then that name rather than the value is displayed to the user.</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The values that should be initially selected, if any.</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>If <code>TRUE</code>, render the choices inline (i.e. horizontally)</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A list of HTML elements that can be added to a UI definition.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a group of checkboxes that can be used to toggle multiple choices
+independently. The server will receive the input as a character vector of the
+selected values.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='checkboxGroupInput.html'>checkboxGroupInput</a></span><span class="keyword">(</span><span class="string">"variable"</span><span class="keyword">,</span> <span class="string">"Variable:"</span><span class="keyword">,</span>
+                   <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"Cylinders"</span> <span class="argument">=</span> <span class="string">"cyl"</span><span class="keyword">,</span>
+                     <span class="string">"Transmission"</span> <span class="argument">=</span> <span class="string">"am"</span><span class="keyword">,</span>
+                     <span class="string">"Gears"</span> <span class="argument">=</span> <span class="string">"gear"</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;div id=&quot;variable&quot; class=&quot;form-group shiny-input-checkboxgroup shiny-input-container&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;variable&quot;&gt;Variable:&lt;/label&gt;
+  &lt;div class=&quot;shiny-options-group&quot;&gt;
+    &lt;div class=&quot;checkbox&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;checkbox&quot; name=&quot;variable&quot; id=&quot;variable1&quot; value=&quot;cyl&quot;/&gt;
+        &lt;span&gt;Cylinders&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;checkbox&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;checkbox&quot; name=&quot;variable&quot; id=&quot;variable2&quot; value=&quot;am&quot;/&gt;
+        &lt;span&gt;Transmission&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;checkbox&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;checkbox&quot; name=&quot;variable&quot; id=&quot;variable3&quot; value=&quot;gear&quot;/&gt;
+        &lt;span&gt;Gears&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>checkboxGroupInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='updateCheckboxGroupInput.html'>updateCheckboxGroupInput</a></code></p>
+  <p>Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='actionButton.html'>actionLink</a></code>; <code><a href='sliderInput.html'>animationOptions</a></code>,
+  <code><a href='sliderInput.html'>sliderInput</a></code>; <code><a href='checkboxInput.html'>checkboxInput</a></code>;
+  <code><a href='dateInput.html'>dateInput</a></code>; <code><a href='dateRangeInput.html'>dateRangeInput</a></code>;
+  <code><a href='fileInput.html'>fileInput</a></code>; <code><a href='numericInput.html'>numericInput</a></code>;
+  <code><a href='passwordInput.html'>passwordInput</a></code>; <code><a href='radioButtons.html'>radioButtons</a></code>;
+  <code><a href='selectInput.html'>selectInput</a></code>, <code><a href='selectInput.html'>selectizeInput</a></code>;
+  <code><a href='submitButton.html'>submitButton</a></code>; <code><a href='textInput.html'>textInput</a></code></p>
+</div>
+```

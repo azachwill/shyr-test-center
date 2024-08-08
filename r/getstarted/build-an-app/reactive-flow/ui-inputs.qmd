@@ -1,0 +1,716 @@
+---
+title: "UI Inputs"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+---
+
+###
+
+The goal of this section is to build familiarity with a few UI input functions.
+
+###
+
+Once again, we'll build on our simple movie browser app.
+
+![](../images/app-selectinput-scatterplot.png){.lightbox .shadow style="width:80%;" fig-alt="Shiny app with Y-axis of audience_score and X-axis of critics_score from the movies.RData dataset. Those variables are in a box on the left. On the right is a scatterplot of the data. Points cover the whole plot, but have a general linear upward trend with a slope of 1. This will be our Shiny app that we'll be using and modifying in this lesson."}
+
+###
+
+Shiny provides a wide selection of input widgets. The Shiny cheatsheet is a great place to see a list of them all at once.
+
+Once you know which one you want to use, you can find out more about it in the package documentation. You'll also get a chance to work with some of them in the following exercises.
+
+![](../images/cheatsheet-inputs.png){.lightbox .shadow style="width:80%;" fig-alt="Section of the Shiny cheatsheet on Inputs."}
+
+### checkboxInput
+
+Let's start with a `checkboxInput()`.
+
+Suppose we want to add checkbox input to our app to specify whether the data plotted should be shown in a data table. We need to make three modifications to our app to accomplish this.
+
+1.  In the **ui**: Add an input widget that the user can interact with to check/uncheck the box.
+
+2.  In the **ui**: Add an output to the UI defining where the data table should appear.
+
+3.  In the **server** function: Add a reactive expression that creates the data table if the checkbox is checked.
+
+We'll go through these steps one by one.
+
+### 1. **ui**: Add an input widget that the user can interact with to check/uncheck the box
+
+``` r
+# Show data table
+checkboxInput(inputId = "show_data",
+              label = "Show data table",
+              value = TRUE)
+```
+
+-   The first argument is the `inputId`, which we can define to be anything we want, but short and informative names are the best.
+-   Next is the `label`, which is the user facing description of the widget.
+-   And last is the `value`, the initial value of the widget. `TRUE` means the box is initially checked. If you want it to not be checked initially, you'd set it to `FALSE` instead.
+
+### Watch for commas!
+
+A cautionary tale before we move on -- watch for your commas! Remember that this widget definition goes in the `sidebar()`. In this panel we separate out widget with commas.
+
+``` r
+sidebar(
+    # Select variable for y-axis
+    selectInput(inputId = "y", label = "Y-axis:",
+                choices = c("imdb_rating", "imdb_num_votes", "critics_score", "audience_score", "runtime"),
+                selected = "audience_score"),
+    # Select variable for x-axis
+    selectInput(inputId = "x", label = "X-axis:",
+                choices = c("imdb_rating", "imdb_num_votes", "critics_score", "audience_score", "runtime"),
+                selected = "critics_score"),
+    # Show data table 
+    checkboxInput(inputId = "show_data",
+                  label = "Show data table", value = TRUE)
+)
+```
+
+![](../images/commas.png){.lightbox .shadow style="width:80%;" fig-alt="Code block of the sidebar section, highlighting the '),' at the end of each 'selectInput' section."}
+
+For example:
+
+-   The first is the `selectInput` widget for y, then we have a comma,
+-   then another `selectInput` and another comma, and
+-   then our new `checkboxInput` and no comma after it since it's the last item in the list.
+
+### 2. **ui**: Add an output to the UI defining where the data table should appear.
+
+``` r
+card(
+  # Show scatterplot
+  plotOutput(outputId = "scatterplot"),
+  # Show data table
+  dataTableOutput(outputId = "moviestable")
+)
+```
+
+The second step was to add an output to the UI defining where the data table should appear. Note that for this we're using the `dataTableOutput()` function.
+
+This function takes one argument, the `outputId`. Again, you can define to be anything we want, but short and informative names are the best.
+
+### 3. **server**: Add a reactive expression that creates the data table if the checkbox is checked.
+
+``` r
+# Print data table if checked
+output$moviestable <- renderDataTable({
+  if(input$show_data){
+    DT::datatable(data = movies %>% select(1:7),
+                  options = list(pageLength = 10),
+                  rownames = FALSE)
+  }
+})
+```
+
+Lastly, in our server, we describe how this table should be calculated. We use the `renderDataTable()` function to build this table.
+
+Note that the first line of code in the function is an if statement, telling the app to only do this if `input$show_data` is `TRUE`. We also specify some other arguments to `datatable()`, mostly for cosmetic reasons.
+
+###
+
+Here is the resulting app, with the box **checked**:
+
+![](../images/app-datatable-checked.png){.lightbox .shadow style="width:80%;" fig-alt="Our Shiny app, with a checkbox 'Show data table' added. The checkbox is checked. Below the plot is now a table with the columns title, title_type, genre, runtime, mpaa_rating, studio, and thtr_rel_date. Rows are for 5 movies - Filly Brown, The Dish, Waiting for Guffman, The Age of Innocence, Malevolence."}
+
+and box **unchecked**:
+
+![](../images/app-datatable-unchecked.png){.lightbox .shadow style="width:80%;" fig-alt="Same Shiny app as above, but with the 'Show data table' button unchecked and no table showing."}
+
+### Scoping
+
+A quick note on scoping:
+
+We saw that the data loaded on top of the Shiny app, outside of ui and server definitions, is visible to the server. That's how we were able to plot the data simply by referring to the data frame by name. The data frame is actually also visible to the UI as well. So our UI inputs could be defined programmatically.
+
+We'll give an example for this, not with an interactive widget but instead with a static HTML statement:
+
+``` r
+# Display number of observations
+HTML(paste0("The dataset has ", nrow(movies),
+            "observations."))
+```
+
+## Practice: Add numericInput
+
+The app below allows users to randomly select a desired number of movies, and displays some information on the selected movies in a tabular output. This table is created using a new function, `renderDataTable()`, but for now we will keep our focus on the `numericInput()` widget. We will also learn to define variables outside of the app so that they can be used in multiple spots to make our code more efficient.
+
+### Your turn
+
+1.  Make sure entries in the `sidebar()` are separated by commas
+
+2.  Calculate `n_total` (total number of movies in the data set) as `nrow(movies)` before defining the UI.
+
+3.  Use `n_total` instead of the hard-coded `"651"` in the helper text.
+
+4.  Add `min` and `max` values to the `numericInput()` widget, where min is 1 and max is `n_total`.
+
+5.  Change the default `value` of the sample size to 30.
+
+6.  Change the `step` parameter of `numericInput()` such that values increase by 1 (instead of 10) when the up arrow is clicked in the numeric input widget in the app UI.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by navigating to the RStudio Cloud Project titled **2-2a Add numericInput** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to RStudio Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+::: {.callout-note collapse="true"}
+## Work locally in your RStudio IDE
+
+-   Copy the code below into an R script
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+library(DT)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  
+    sidebar = sidebar(
+      
+      HTML(paste("Enter a value between 1 and", "651"))
+
+      numericInput(inputId = "n",
+                   value = 3,
+                   step = 10)
+
+    ),
+    
+    card(
+      DT::dataTableOutput(outputId = "moviestable")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  output$moviestable <- DT::renderDataTable({
+    movies_sample <- movies %>%
+      sample_n(input$n) %>%
+      select(title:studio)
+    DT::datatable(data = movies_sample,
+                  options = list(pageLength = 10),
+                  rownames = FALSE)
+  })
+
+}
+
+# Create the Shiny app object --------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+library(DT)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+n_total <- nrow(movies)
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+
+    sidebar = sidebar(
+      HTML(paste("Enter a value between 1 and", n_total)),
+
+      numericInput(
+        inputId = "n",
+        label = "Sample size:",
+        value = 30,
+        min = 1, max = n_total,
+        step = 1
+      )
+    ),
+
+    card(
+      dataTableOutput(outputId = "moviestable")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  output$moviestable <- renderDataTable({
+    movies_sample <- movies %>%
+      sample_n(input$n) %>%
+      select(title:studio)
+    DT::datatable(
+      data = movies_sample,
+      options = list(pageLength = 10),
+      rownames = FALSE
+    )
+  })
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+
+## Practice: req
+
+The app below is the one you developed in the previous exercise.
+
+-   Highlight the code and run it.
+-   Then, delete the numeric value.
+
+You will encounter an error: `Error: size is not a numeric or integer vector`.
+
+In order to avoid such errors, which users of your app could very easily encounter, we need to hold back the output from being calculated if the input is missing.
+
+The `req()` function is the simplest and best way to do this, it ensures that values are available ("[truthy](https://shiny.posit.co/reference/shiny/latest/req.html)") before proceeding with a calculation or action. If any of the given values is not truthy, the operation is stopped by raising a "silent" exception (not logged by Shiny, nor displayed in the Shiny app's UI).
+
+### Your turn
+
+1.   Add `req(input$n)` in the `renderDataTable()` function in the server before `movies_sample` is calculated.
+
+2.  Run your app again and delete the input sample size to confirm that the error doesn't appear, and neither does the output table.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by navigating to the RStudio Cloud Project titled **2-2b req** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to RStudio Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+::: {.callout-note collapse="true"}
+## Work locally in your RStudio IDE
+
+-   Copy the code below into an R script
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+options("shiny.sanitize.errors" = FALSE) # Turn off error sanitization
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+n_total <- nrow(movies)
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  
+    sidebar = sidebar(
+      
+      HTML(paste("Enter a value between 1 and", n_total)),
+
+      numericInput(inputId = "n",
+                   label = "Sample size:",
+                   value = 30,
+                   min = 1, max = n_total,
+                   step = 1)
+
+    ),
+    
+    card(
+      DT::dataTableOutput(outputId = "moviestable")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  output$moviestable <- DT::renderDataTable({
+    movies_sample <- movies %>%
+      sample_n(input$n) %>%
+      select(title:studio)
+    datatable(data = movies_sample,
+              options = list(pageLength = 10),
+              rownames = FALSE)
+  })
+
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+options("shiny.sanitize.errors" = FALSE) # Turn off error sanitization
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+n_total <- nrow(movies)
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+
+    sidebar = sidebar(
+      HTML(paste("Enter a value between 1 and", n_total)),
+
+      numericInput(
+        inputId = "n",
+        label = "Sample size:",
+        value = 30,
+        min = 1, max = n_total,
+        step = 1
+      )
+    ),
+
+    card(
+      dataTableOutput(outputId = "moviestable")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  output$moviestable <- renderDataTable({
+    req(input$n)
+    movies_sample <- movies %>%
+      sample_n(input$n) %>%
+      select(title:studio)
+    datatable(
+      data = movies_sample,
+      options = list(pageLength = 10),
+      rownames = FALSE
+    )
+  })
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+
+## Practice: Select to selectize
+
+The app below can be used to display movies from selected studios. Currently you can only choose one studio, but we'll modify it to allow for multiple selections. Additionally, there are 211 unique studios represented in this dataset, we need a better way to select than to scroll through such a long list, and we address that with the `selectize` option, which will suggest names of studios as you type them.
+
+### Your turn
+
+1.   View the help function for the `selectInput` widget by typing `?selectInput` in the console, and figure out how to enable the `selectize` and `multiple` selection options (or whether they are enabled by default).
+
+2.  Based on your findings add the necessary arguments to the `selectInput` widget.
+
+3.  Add a call to the `req()` function in the server, just like you did in the previous exercise but this time `req`uiring that `input$studio` be available.
+
+4.  Run the app and (1) confirm that you can select multiple studios, (2) start typing "Warner Bros" to confirm `selectize` works, and (3) delete all selections to confirm `req` is preventing an error from being displayed.
+
+5.  Now try with `selectize = FALSE`: Start typing "Warner Bros" and see how the behaviour changed.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by navigating to the RStudio Cloud Project titled **2-2c Select to selectize** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to RStudio Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+::: {.callout-note collapse="true"}
+## Work locally in your RStudio IDE
+
+-   Copy the code below into an R script
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+library(DT)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+all_studios <- sort(unique(movies$studio))
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    
+    sidebar = sidebar(
+      selectInput(inputId = "studio",
+                  label = "Select studio:",
+                  choices = all_studios,
+                  selected = "20th Century Fox")
+
+    ),
+    
+    card(
+      DT::dataTableOutput(outputId = "moviestable")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  output$moviestable <- renderDataTable({
+    movies_from_selected_studios <- movies %>%
+      filter(studio == input$studio) %>%
+      select(title:studio)
+    DT::datatable(data = movies_from_selected_studios,
+              options = list(pageLength = 10),
+              rownames = FALSE)
+  })
+
+}
+
+# Create a Shiny app object ----------------------------------------------------
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+library(DT)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+all_studios <- sort(unique(movies$studio))
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+
+    # Input(s)
+    sidebar = sidebar(
+      selectInput(
+        inputId = "studio",
+        label = "Select studio:",
+        choices = all_studios,
+        selected = "20th Century Fox",
+        multiple = TRUE
+      )
+    ),
+
+    # Output(s)
+    card(
+      dataTableOutput(outputId = "moviestable")
+    )
+)
+
+# Server
+server <- function(input, output, session) {
+
+  # Create data table
+  output$moviestable <- renderDataTable({
+    req(input$studio)
+    movies_from_selected_studios <- movies %>%
+      filter(studio %in% input$studio) %>%
+      select(title:studio)
+    DT::datatable(
+      data = movies_from_selected_studios,
+      options = list(pageLength = 10),
+      rownames = FALSE
+    )
+  })
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+
+## Practice: Convert `dateInput` to `dateRangeInput`
+
+The app below can be used to display movies from a particular date onwards. Instead we would like to select movies between two given dates. Hence we need to convert the `dateInput` widget to `dateRangeInput`. This input will yield a vector (`input$date`) of length two: the first element is the start date and the second is the end date.
+
+### Your turn
+
+1.   Review the help files for the two widgets by typing `?dateInput` and `?dateRangeInput` in the console.
+
+2.  Update `dateInput` to `dateRangeInput`, instead of just a start date (`value`) specify `start` and `end` dates, Jan 1, 2013 and Jan 1, 2014, respectively.
+
+3.  Update the explanatory text to reflect the new functionality of the app.
+
+4.  Change the `startview` to `"year"` to make it a bit easier for the user to navigate the calendar.
+
+5.  Update how subsetting is being done in the server function: we need movies released at or after the start date and at or before the end date.
+
+6.  Add the necessary `req` statement to the server to stop the app from trying to create a plot when no dates are specified.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by navigating to the RStudio Cloud Project titled **2-2d Convert dateInput to dateRangeInput** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to RStudio Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+::: {.callout-note collapse="true"}
+## Work locally in your RStudio IDE
+
+-   Copy the code below into an R script
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+min_date <- min(movies$thtr_rel_date)
+max_date <- max(movies$thtr_rel_date)
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+    
+    sidebar = sidebar(
+      
+      HTML(paste0("Movies released since the following date will be plotted. 
+                 Pick a date between ", min_date, " and ", max_date, ".")),
+
+      br(), br(),
+
+      dateInput(inputId = "date",
+                label = "Select date:",
+                value = "2013-01-01",
+                min = min_date, max = max_date)
+    ),
+    
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  output$scatterplot <- renderPlot({
+    movies_selected_date <- movies %>%
+      filter(thtr_rel_date >= as.POSIXct(input$date))
+    ggplot(data = movies_selected_date, aes(x = critics_score, y = audience_score, color = mpaa_rating)) +
+      geom_point()
+  })
+
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+
+# Load data --------------------------------------------------------------------
+
+load("movies.RData")
+min_date <- min(movies$thtr_rel_date)
+max_date <- max(movies$thtr_rel_date)
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+
+    sidebar = sidebar(
+      HTML(paste0("Movies released between the following dates will be plotted. 
+                  Pick dates between ", min_date, " and ", max_date, ".")),
+
+      br(), br(),
+
+      dateRangeInput(
+        inputId = "date",
+        label = "Select dates:",
+        start = "2013-01-01", end = "2014-01-01",
+        min = min_date, max = max_date,
+        startview = "year"
+      )
+    ),
+
+    card(
+      plotOutput(outputId = "scatterplot")
+    )
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  output$scatterplot <- renderPlot({
+    req(input$date)
+    movies_selected_date <- movies %>%
+      filter(thtr_rel_date >= as.POSIXct(input$date[1]) & thtr_rel_date <= as.POSIXct(input$date[2]))
+    ggplot(data = movies_selected_date, aes(x = critics_score, y = audience_score, color = mpaa_rating)) +
+      geom_point()
+  })
+}
+
+# Create a Shiny app object ----------------------------------------------------
+
+shinyApp(ui = ui, server = server)
+```
+:::

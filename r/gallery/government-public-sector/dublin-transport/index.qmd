@@ -1,0 +1,23 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: The current Dublin Bus (Ireland) website and app will only allow you to view information for a single bus stop. This frustrated me into creating this Shiny app.
+title:        "Dublin Transport Info"
+author:    Aidan Boland
+authorurl:     http://aboland.ie/
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - transporation
+ - open data
+appurl:      https://aboland.shinyapps.io/DublinTransport/
+sourceurl:   https://github.com/aboland/DublinRTPI
+rscloudurl:  https://rstudio.cloud/project/164136
+---
+
+The current Dublin Bus (Ireland) website and app will only allow you to view information for a single bus stop. This frustrated me into creating this Shiny app.
+
+I can commute home using a number of different bus stops. This Shiny app will collate the information on a number of different bus stops and filter out the relevant buses for the user.
+The search query string in the URL can be used to pre-populate the bus stop numbers and buses selected.
+
+  

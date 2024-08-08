@@ -1,0 +1,22 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: The Pasture Potential Tool shows dairy farmers the amount of pasture eaten on comparable farms in their district, and provides them with a target to improve their profitability and environmental footprint.
+title:        "Pasture Potential Tool for improving dairy farm profitability and environmental impact"
+author:    Simon Woodward
+authorurl:     https://www.dairynz.co.nz/feed/pasture-management/assessing-farm-performance/pasture-and-crop-eaten/pasture-potential-tool/
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - leaflet
+ - map
+ - quantile regression
+ - agriculture
+ - environment
+appurl:      https://www.dairynz.co.nz/feed/pasture-management/assessing-farm-performance/pasture-and-crop-eaten/pasture-potential-tool/
+sourceurl:   https://rstudio.cloud/project/215333
+rscloudurl:  https://rstudio.cloud/project/215333
+---
+
+The Pasture Potential Tool shows dairy farmers the amount of pasture eaten on comparable farms in their district, and provides them with a target to improve their profitability and environmental footprint.
+  

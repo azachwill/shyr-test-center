@@ -1,0 +1,41 @@
+---
+title: "Create a web dependency — createWebDependency"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.0/R/html-deps.R" class="external-link"><code>R/html-deps.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Ensure that a file-based HTML dependency (from the htmltools package) can be
+served over Shiny's HTTP server. This function works by using
+<code><a href="resourcePaths.html">addResourcePath()</a></code> to map the HTML dependency's directory to a
+URL.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">createWebDependency</span>(dependency, <span class="at">scrubFile =</span> <span class="cn">TRUE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>dependency</dt>
+<dd><p>A single HTML dependency object, created using
+<code><a href="https://rstudio.github.io/htmltools/reference/htmlDependency.html" class="external-link">htmltools::htmlDependency()</a></code>. If the <code>src</code> value is named,
+then <code>href</code> and/or <code>file</code> names must be present.</p></dd>
+
+
+<dt>scrubFile</dt>
+<dd><p>If TRUE (the default), remove <code>src$file</code> for the
+dependency. This prevents the local file path from being sent to the client
+when dynamic web dependencies are used. If FALSE, don't remove
+<code>src$file</code>. Setting it to FALSE should be needed only in very unusual
+cases.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A single HTML dependency object that has an <code>href</code>-named element
+in its <code>src</code>.</p>
+  </div>
+
+</div>
+```

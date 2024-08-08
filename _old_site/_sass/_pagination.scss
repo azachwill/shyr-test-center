@@ -1,0 +1,22 @@
+/**************************************************************************************************
+ * Paginiation Styles
+ * These are the styles for the paginiation controls, they primarily appear on the tutorials pages.
+**************************************************************************************************/
+.pagination>li>a {
+  border: none;
+  padding: 3px 9px;
+  margin: 0 1px;
+  border-radius: 1.5px;
+}
+
+.pagination>li.active>a {
+  color: white;
+  background-color: #428bca;
+  font-weight: 600;
+}
+
+@media print {
+  .pagination {
+    display: none;
+  }
+}

@@ -1,0 +1,74 @@
+---
+layout: reference
+title: "UI Output — renderUI"
+categories: reference
+
+---
+<div class="reference">
+  <h1>UI Output</h1>
+  
+
+  <pre class="code"><span class='fu'>renderUI</span>(<span class='no'>expr</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(), <span class='kw'>quoted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>outputArgs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>An expression that returns a Shiny tag object, <code><a href='HTML.html'>HTML()</a></code>,
+or a list of such objects.</p></td>
+  </tr>
+  <tr>
+    <th><p>env</p></th>
+    <td><p>The environment in which to evaluate <code>expr</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>quoted</p></th>
+    <td><p>Is <code>expr</code> a quoted expression (with <code><a href='https://rdrr.io/r/base/substitute.html'>quote()</a></code>)? This
+is useful if you want to save an expression in a variable.</p></td>
+  </tr>
+  <tr>
+    <th><p>outputArgs</p></th>
+    <td><p>A list of arguments to be passed through to the implicit
+call to <code><a href='htmlOutput.html'>uiOutput()</a></code> when <code>renderUI</code> is used in an
+interactive R Markdown document.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Renders reactive HTML using the Shiny UI library.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>The corresponding HTML output tag should be <code>div</code> and have the CSS class
+name <code>shiny-html-output</code> (or use <code><a href='htmlOutput.html'>uiOutput()</a></code>).</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='htmlOutput.html'>uiOutput()</a></code></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'><a href='htmlOutput.html'>uiOutput</a></span>(<span class='st'>"moreControls"</span>)
+)
+
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+  <span class='no'>output</span>$<span class='no'>moreControls</span> <span class='kw'>&lt;-</span> <span class='fu'>renderUI</span>({
+    <span class='fu'><a href='tag.html'>tagList</a></span>(
+      <span class='fu'><a href='sliderInput.html'>sliderInput</a></span>(<span class='st'>"n"</span>, <span class='st'>"N"</span>, <span class='fl'>1</span>, <span class='fl'>1000</span>, <span class='fl'>500</span>),
+      <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"label"</span>, <span class='st'>"Label"</span>)
+    )
+  })
+}
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+

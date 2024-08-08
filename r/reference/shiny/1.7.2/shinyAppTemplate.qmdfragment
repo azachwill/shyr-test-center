@@ -1,0 +1,80 @@
+---
+title: "Generate a Shiny application from a template — shinyAppTemplate"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/app_template.R" class="external-link"><code>R/app_template.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This function populates a directory with files for a Shiny application.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">shinyAppTemplate</span>(<span class="at">path =</span> <span class="cn">NULL</span>, <span class="at">examples =</span> <span class="st">"default"</span>, <span class="at">dryrun =</span> <span class="cn">FALSE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>path</dt>
+<dd><p>Path to create new shiny application template.</p></dd>
+
+
+<dt>examples</dt>
+<dd><p>Either one of "default", "ask", "all", or any combination of
+"app", "rdir", "module", and "tests". In an
+interactive session, "default" falls back to "ask"; in a non-interactive
+session, "default" falls back to "all". With "ask", this function will
+prompt the user to select which template items will be added to the new app
+directory. With "all", all template items will be added to the app
+directory.</p></dd>
+
+
+<dt>dryrun</dt>
+<dd><p>If <code>TRUE</code>, don't actually write any files; just print out which
+files would be written.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>In an interactive R session, this function will, by default, prompt the user
+to select which components to add to the application. Choices are</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span> All</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span> app.R              <span class="sc">:</span> Main application file</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="dv">3</span><span class="sc">:</span> R<span class="sc">/</span>example.R        <span class="sc">:</span> Helper file with R code</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="dv">4</span><span class="sc">:</span> R<span class="sc">/</span>example<span class="sc">-</span>module.R <span class="sc">:</span> Example module</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="dv">5</span><span class="sc">:</span> tests<span class="sc">/</span>testthat<span class="sc">/</span>    <span class="er">:</span> Tests using the testthat and shinytest2 package</span></code></pre><p></p></div>
+<p>If option 1 is selected, the full example application including the
+following files and directories is created:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>appdir<span class="sc">/</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="er">|</span><span class="sc">-</span> app.R</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="sc">|-</span> R</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="sc">|</span>   <span class="er">|</span><span class="sc">-</span> example<span class="sc">-</span>module.R</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="sc">|</span>   <span class="st">`</span><span class="at">- example.R</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="st">`</span><span class="sc">-</span> tests</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="sc">|-</span> testthat.R</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="st">`</span><span class="at">- testthat</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="at">        |- test-examplemodule.R</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">        |- test-server.R</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">        |- test-shinytest2.R</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">        </span><span class="st">`</span><span class="sc">-</span> test<span class="sc">-</span>sort.R</span></code></pre><p></p></div>
+<p>Some notes about these files:</p><ul><li><p><code>app.R</code> is the main application file.</p></li>
+<li><p>All files in the <code>R/</code> subdirectory are automatically sourced when the
+application is run.</p></li>
+<li><p><code>R/example.R</code> and <code>R/example-module.R</code> are automatically sourced when
+the application is run. The first contains a function <code>lexical_sort()</code>,
+and the second contains code for module created by the
+<code><a href="moduleServer.html">moduleServer()</a></code> function, which is used in the application.</p></li>
+<li><p><code>tests/</code> contains various tests for the application. You may
+choose to use or remove any of them. They can be executed by the
+<code><a href="runTests.html">runTests()</a></code> function.</p></li>
+<li><p><code>tests/testthat.R</code> is a test runner for test files in the
+<code>tests/testthat/</code> directory using the
+<a href="https://rstudio.github.io/shinytest2/reference/test_app.html" class="external-link">shinytest2</a>
+package.</p></li>
+<li><p><code>tests/testthat/test-examplemodule.R</code> is a test for an application's module server function.</p></li>
+<li><p><code>tests/testthat/test-server.R</code> is a test for the application's server code</p></li>
+<li><p><code>tests/testthat/test-shinytest2.R</code> is a test that uses the
+<a href="https://rstudio.github.io/shinytest2/" class="external-link">shinytest2</a> package to do
+snapshot-based testing.</p></li>
+<li><p><code>tests/testthat/test-sort.R</code> is a test for a supporting function in the <code>R/</code> directory.</p></li>
+</ul></div>
+
+</div>
+```

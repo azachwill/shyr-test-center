@@ -1,0 +1,152 @@
+---
+layout: reference
+title: "modalDialog"
+categories: reference
+---
+<h1>Create a modal dialog UI</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='modalDialog.html'>modalDialog</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">title</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">footer</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='modalButton.html'>modalButton</a></span><span class="keyword">(</span><span class="string">"Dismiss"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">size</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"m"</span><span class="keyword">,</span> <span class="string">"s"</span><span class="keyword">,</span> <span class="string">"l"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">easyClose</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>UI elements for the body of the modal dialog box.</td>
+  </tr>
+  <tr>
+    <th>title</th>
+    <td>An optional title for the dialog.</td>
+  </tr>
+  <tr>
+    <th>footer</th>
+    <td>UI for footer. Use <code>NULL</code> for no footer.</td>
+  </tr>
+  <tr>
+    <th>size</th>
+    <td>One of <code>&quot;s&quot;</code> for small, <code>&quot;m&quot;</code> (the default) for medium,
+or <code>&quot;l&quot;</code> for large.</td>
+  </tr>
+  <tr>
+    <th>easyClose</th>
+    <td>If <code>TRUE</code>, the modal dialog can be dismissed by
+clicking outside the dialog box, or be pressing the Escape key. If
+<code>FALSE</code> (the default), the modal dialog can&#39;t be dismissed in those
+ways; instead it must be dismissed by clicking on the dismiss button, or
+from a call to <code><a href='showModal.html'>removeModal</a></code> on the server.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This creates the UI for a modal dialog, using Bootstrap&#39;s modal class. Modals
+are typically used for showing important messages, or for presenting UI that
+requires input from the user, such as a username and password input.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+<span class="comment"># Display an important message that can be dismissed only by clicking the</span>
+<span class="comment"># dismiss button.</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+  <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='bootstrapPage.html'>basicPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"show"</span><span class="keyword">,</span> <span class="string">"Show modal dialog"</span><span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">show</span><span class="keyword">,</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='showModal.html'>showModal</a></span><span class="keyword">(</span><span class="functioncall"><a href='modalDialog.html'>modalDialog</a></span><span class="keyword">(</span>
+        <span class="argument">title</span> <span class="argument">=</span> <span class="string">"Important message"</span><span class="keyword">,</span>
+        <span class="string">"This is an important message!"</span>
+      <span class="keyword">)</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+<span class="keyword">)</span>
+
+
+<span class="comment"># Display a message that can be dismissed by clicking outside the modal dialog,</span>
+<span class="comment"># or by pressing Esc.</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+  <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='bootstrapPage.html'>basicPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"show"</span><span class="keyword">,</span> <span class="string">"Show modal dialog"</span><span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">show</span><span class="keyword">,</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='showModal.html'>showModal</a></span><span class="keyword">(</span><span class="functioncall"><a href='modalDialog.html'>modalDialog</a></span><span class="keyword">(</span>
+        <span class="argument">title</span> <span class="argument">=</span> <span class="string">"Somewhat important message"</span><span class="keyword">,</span>
+        <span class="string">"This is a somewhat important message."</span><span class="keyword">,</span>
+        <span class="argument">easyClose</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">,</span>
+        <span class="argument">footer</span> <span class="argument">=</span> NULL
+      <span class="keyword">)</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+<span class="keyword">)</span>
+
+
+<span class="comment"># Display a modal that requires valid input before continuing.</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+  <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='bootstrapPage.html'>basicPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"show"</span><span class="keyword">,</span> <span class="string">"Show modal dialog"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"dataInfo"</span><span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="comment"># reactiveValues object for storing current data set.</span>
+    <span class="symbol">vals</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveValues.html'>reactiveValues</a></span><span class="keyword">(</span><span class="argument">data</span> <span class="argument">=</span> NULL<span class="keyword">)</span>
+
+    <span class="comment"># Return the UI for a modal dialog with data selection input. If 'failed' is</span>
+    <span class="comment"># TRUE, then display a message that the previous value was invalid.</span>
+    <span class="symbol">dataModal</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">failed</span> <span class="eqformalargs">=</span> <span class="number">FALSE</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='modalDialog.html'>modalDialog</a></span><span class="keyword">(</span>
+        <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"dataset"</span><span class="keyword">,</span> <span class="string">"Choose data set"</span><span class="keyword">,</span>
+          <span class="argument">placeholder</span> <span class="argument">=</span> <span class="string">'Try "mtcars" or "abc"'</span>
+        <span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='builder.html'>span</a></span><span class="keyword">(</span><span class="string">'(Try the name of a valid data object like "mtcars", '</span><span class="keyword">,</span>
+             <span class="string">'then a name of a non-existent object like "abc")'</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="keyword">if</span> <span class="keyword">(</span><span class="symbol">failed</span><span class="keyword">)</span>
+          <span class="functioncall"><a href='builder.html'>div</a></span><span class="keyword">(</span><span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall">b</span><span class="keyword">(</span><span class="string">"Invalid name of data object"</span><span class="keyword">,</span> <span class="argument">style</span> <span class="argument">=</span> <span class="string">"color: red;"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+
+        <span class="argument">footer</span> <span class="argument">=</span> <span class="functioncall"><a href='tag.html'>tagList</a></span><span class="keyword">(</span>
+          <span class="functioncall"><a href='modalButton.html'>modalButton</a></span><span class="keyword">(</span><span class="string">"Cancel"</span><span class="keyword">)</span><span class="keyword">,</span>
+          <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"ok"</span><span class="keyword">,</span> <span class="string">"OK"</span><span class="keyword">)</span>
+        <span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">}</span>
+
+    <span class="comment"># Show modal when button is clicked.</span>
+    <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">show</span><span class="keyword">,</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='showModal.html'>showModal</a></span><span class="keyword">(</span><span class="functioncall">dataModal</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+
+    <span class="comment"># When OK button is pressed, attempt to load the data set. If successful,</span>
+    <span class="comment"># remove the modal. If not show another modal, but this time with a failure</span>
+    <span class="comment"># message.</span>
+    <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">ok</span><span class="keyword">,</span> <span class="keyword">{</span>
+      <span class="comment"># Check that data object exists and is data frame.</span>
+      <span class="keyword">if</span> <span class="keyword">(</span><span class="keyword">!</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/NULL'>is.null</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">dataset</span><span class="keyword">)</span> <span class="keyword">&amp;&amp;</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/nchar'>nzchar</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">dataset</span><span class="keyword">)</span> <span class="keyword">&amp;&amp;</span>
+          <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/exists'>exists</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">dataset</span><span class="keyword">)</span> <span class="keyword">&amp;&amp;</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/as.data.frame'>is.data.frame</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/get'>get</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">dataset</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+        <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">data</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/get'>get</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">dataset</span><span class="keyword">)</span>
+        <span class="functioncall"><a href='showModal.html'>removeModal</a></span><span class="keyword">(</span><span class="keyword">)</span>
+      <span class="keyword">}</span> <span class="keyword">else</span> <span class="keyword">{</span>
+        <span class="functioncall"><a href='showModal.html'>showModal</a></span><span class="keyword">(</span><span class="functioncall">dataModal</span><span class="keyword">(</span><span class="argument">failed</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="keyword">}</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+
+    <span class="comment"># Display information about selected data</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">dataInfo</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/NULL'>is.null</a></span><span class="keyword">(</span><span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">data</span><span class="keyword">)</span><span class="keyword">)</span>
+        <span class="string">"No data selected"</span>
+      <span class="keyword">else</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span><span class="keyword">(</span><span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">data</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+<span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>modalDialog</li>
+</ul>
+<ul>
+  
+</ul> -->
+

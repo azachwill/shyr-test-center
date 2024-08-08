@@ -1,0 +1,98 @@
+---
+title: "exprToFunction"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>exprToFunction(expr, env&nbsp;=&nbsp;parent.frame(2), quoted&nbsp;=&nbsp;FALSE, caller_offset&nbsp;=&nbsp;1)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>A quoted or unquoted expression, or a function.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The desired environment for the function. Defaults to the
+calling environment two steps back.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is the expression quoted?</td>
+  </tr>
+  <tr>
+    <th>caller_offset</th>
+    <td>If specified, the offset in the callstack of the
+  functiont to be treated as the caller.</td>
+  </tr>
+</table>
+
+<div data-section="Convert an expression to a function">
+  <h3 data-swiftype-index="false">Convert an expression to a function</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>This is to be called from another function, because it will attempt to get
+an unquoted expression from two calls back.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>If expr is a quoted expression, then this just converts it to a function.
+If expr is a function, then this simply returns expr (and prints a
+  deprecation message).
+If expr was a non-quoted expression from two calls back, then this will
+  quote the original expression and convert it to a function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Example of a new renderer, similar to renderText
+# This is something that toolkit authors will do
+renderTriple &lt;- function(expr, env=parent.frame(), quoted=FALSE) {
+  # Convert expr to a function
+  func &lt;- shiny::exprToFunction(expr, env, quoted)
+
+  function() {
+    value &lt;- func()
+    paste(rep(value, 3), collapse=&quot;, &quot;)
+  }
+}
+
+
+# Example of using the renderer.
+# This is something that app authors will do.
+values &lt;- reactiveValues(A=&quot;text&quot;)
+
+## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # Create an output object
+# output$tripleA &lt;- renderTriple({
+#   values$A
+# })
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+# At the R console, you can experiment with the renderer using isolate()
+tripleA &lt;- renderTriple({
+  values$A
+})
+
+isolate(tripleA())
+</div>
+<div class='output'>[1] &quot;text, text, text&quot;
+</div>
+<div class='input'># &quot;text, text, text&quot;
+</div></pre>
+<!-- <ul>
+  <li>exprToFunction</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

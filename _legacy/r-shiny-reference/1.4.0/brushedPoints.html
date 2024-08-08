@@ -1,0 +1,94 @@
+---
+layout: reference
+title: "Find rows of data that are selected by a brush — brushedPoints"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Find rows of data that are selected by a brush</h1>
+  
+
+  <pre class="code"><span class='fu'>brushedPoints</span>(<span class='no'>df</span>, <span class='no'>brush</span>, <span class='kw'>xvar</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>yvar</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>panelvar1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>panelvar2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>allRows</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>df</p></th>
+    <td><p>A data frame from which to select rows.</p></td>
+  </tr>
+  <tr>
+    <th><p>brush</p></th>
+    <td><p>The data from a brush, such as <code>input$plot_brush</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>xvar, yvar</p></th>
+    <td><p>A string with the name of the variable on the x or y axis.
+This must also be the name of a column in <code>df</code>. If absent, then this
+function will try to infer the variable from the brush (only works for
+ggplot2).</p></td>
+  </tr>
+  <tr>
+    <th><p>panelvar1, panelvar2</p></th>
+    <td><p>Each of these is a string with the name of a panel
+variable. For example, if with ggplot2, you facet on a variable called
+<code>cyl</code>, then you can use <code>"cyl"</code> here. However, specifying the
+panel variable should not be necessary with ggplot2; Shiny should be able
+to auto-detect the panel variable.</p></td>
+  </tr>
+  <tr>
+    <th><p>allRows</p></th>
+    <td><p>If <code>FALSE</code> (the default) return a data frame containing
+the selected rows. If <code>TRUE</code>, the input data frame will have a new
+column, <code>selected_</code>, which indicates whether the row was inside the
+brush (<code>TRUE</code>) or outside the brush (<code>FALSE</code>).</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>This function returns rows from a data frame which are under a brush used
+with <code><a href='plotOutput.html'>plotOutput()</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>It is also possible for this function to return all rows from the input data
+frame, but with an additional column <code>selected_</code>, which indicates which
+rows of the input data frame are selected by the brush (<code>TRUE</code> for
+selected, <code>FALSE</code> for not-selected). This is enabled by setting
+<code>allRows=TRUE</code> option.</p>
+<p>The <code>xvar</code>, <code>yvar</code>, <code>panelvar1</code>, and <code>panelvar2</code>
+arguments specify which columns in the data correspond to the x variable, y
+variable, and panel variables of the plot. For example, if your plot is
+<code><a href='https://rdrr.io/r/graphics/plot.html'>plot(x=cars$speed, y=cars$dist)</a></code>, and your brush is named
+<code>"cars_brush"</code>, then you would use <code>brushedPoints(cars, input$cars_brush, "speed", "dist")</code>.</p>
+<p>For plots created with ggplot2, it should not be necessary to specify the
+column names; that information will already be contained in the brush,
+provided that variables are in the original data, and not computed. For
+example, with <code>ggplot(cars, aes(x=speed, y=dist)) + geom_point()</code>, you
+could use <code>brushedPoints(cars, input$cars_brush)</code>. If, however, you use
+a computed column, like <code>ggplot(cars, aes(x=speed/2, y=dist)) + geom_point()</code>, then it will not be able to automatically extract column names
+and filter on them. If you want to use this function to filter data, it is
+recommended that you not use computed columns; instead, modify the data
+first, and then make the plot with "raw" columns in the modified data.</p>
+<p>If a specified x or y column is a factor, then it will be coerced to an
+integer vector. If it is a character vector, then it will be coerced to a
+factor and then integer vector. This means that the brush will be considered
+to cover a given character/factor value when it covers the center value.</p>
+<p>If the brush is operating in just the x or y directions (e.g., with
+<code><a href='brushOpts.html'>brushOpts(direction = "x")</a></code>, then this function will filter out points
+using just the x or y variable, whichever is appropriate.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='plotOutput.html'>plotOutput()</a></code> for example usage.</p></div>
+  
+  </div>
+
+</div>
+
+

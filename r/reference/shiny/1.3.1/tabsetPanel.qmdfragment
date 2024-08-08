@@ -1,0 +1,107 @@
+---
+title: "tabsetPanel"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='tabsetPanel.html'>tabsetPanel</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">id</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">type</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"tabs"</span><span class="keyword">,</span>
+  <span class="string">"pills"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">position</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td><code><a href='tabPanel.html'>tabPanel</a></code> elements to include in the tabset</td>
+  </tr>
+  <tr>
+    <th>id</th>
+    <td>If provided, you can use <code>input$</code><em><code>id</code></em> in your
+server logic to determine which of the current tabs is active. The value
+will correspond to the <code>value</code> argument that is passed to
+<code><a href='tabPanel.html'>tabPanel</a></code>.</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The <code>value</code> (or, if none was supplied, the <code>title</code>)
+of the tab that should be selected by default. If <code>NULL</code>, the first
+tab will be selected.</td>
+  </tr>
+  <tr>
+    <th>type</th>
+    <td>Use &quot;tabs&quot; for the standard look; Use &quot;pills&quot; for a more plain
+look where tabs are selected using a background fill color.</td>
+  </tr>
+  <tr>
+    <th>position</th>
+    <td>This argument is deprecated; it has been discontinued in
+Bootstrap 3.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A tabset that can be passed to <code><a href='mainPanel.html'>mainPanel</a></code>
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a tabset that contains <code><a href='tabPanel.html'>tabPanel</a></code> elements. Tabsets are
+useful for dividing output into multiple independently viewable sections.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># Show a tabset that includes a plot, summary, and</span>
+<span class="comment"># table view of the generated distribution</span>
+<span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='tabsetPanel.html'>tabsetPanel</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Plot"</span><span class="keyword">,</span> <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Summary"</span><span class="keyword">,</span> <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"summary"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Table"</span><span class="keyword">,</span> <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">"table"</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;col-sm-8&quot;&gt;
+  &lt;div class=&quot;tabbable&quot;&gt;
+    &lt;ul class=&quot;nav nav-tabs&quot; data-tabsetid=&quot;3277&quot;&gt;
+      &lt;li class=&quot;active&quot;&gt;
+        &lt;a href=&quot;#tab-3277-1&quot; data-toggle=&quot;tab&quot; data-value=&quot;Plot&quot;&gt;Plot&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#tab-3277-2&quot; data-toggle=&quot;tab&quot; data-value=&quot;Summary&quot;&gt;Summary&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#tab-3277-3&quot; data-toggle=&quot;tab&quot; data-value=&quot;Table&quot;&gt;Table&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div class=&quot;tab-content&quot; data-tabsetid=&quot;3277&quot;&gt;
+      &lt;div class=&quot;tab-pane active&quot; data-value=&quot;Plot&quot; id=&quot;tab-3277-1&quot;&gt;
+        &lt;div id=&quot;plot&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;tab-pane&quot; data-value=&quot;Summary&quot; id=&quot;tab-3277-2&quot;&gt;
+        &lt;pre id=&quot;summary&quot; class=&quot;shiny-text-output noplaceholder&quot;&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;tab-pane&quot; data-value=&quot;Table&quot; id=&quot;tab-3277-3&quot;&gt;
+        &lt;div id=&quot;table&quot; class=&quot;shiny-html-output&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>tabsetPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='tabPanel.html'>tabPanel</a></code>, <code><a href='updateTabsetPanel.html'>updateTabsetPanel</a></code>,
+  <code><a href='insertTab.html'>insertTab</a></code>, <code><a href='showTab.html'>showTab</a></code></p>
+</div>
+```

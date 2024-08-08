@@ -1,0 +1,102 @@
+---
+layout: reference
+title: "tagList"
+categories: reference
+---
+<h1>HTML Tag Object</h1>
+
+<pre class="code"><code class="r"><div>tagList(...)</div>
+<div>tagAppendAttributes(tag, ...)</div>
+<div>tagAppendChild(tag, child)</div>
+<div>tagAppendChildren(tag, ..., list&nbsp;=&nbsp;NULL)</div>
+<div>tagSetChildren(tag, ..., list&nbsp;=&nbsp;NULL)</div>
+<div>tag(`_tag_name`, varArgs)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>_tag_name</th>
+    <td>HTML tag name</td>
+  </tr>
+  <tr>
+    <th>varArgs</th>
+    <td>List of attributes and children of the
+  element. Named list items become attributes, and unnamed
+  list items become children. Valid children are tags,
+  single-character character vectors (which become text
+  nodes), and raw HTML (see <code><a href='HTML.html'>HTML</a></code>). You can
+  also pass lists that contain tags, text nodes, and HTML.</td>
+  </tr>
+  <tr>
+    <th>tag</th>
+    <td>A tag to append child elements to.</td>
+  </tr>
+  <tr>
+    <th>child</th>
+    <td>A child element to append to a parent tag.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Unnamed items that comprise this list of
+  tags.</td>
+  </tr>
+  <tr>
+    <th>list</th>
+    <td>An optional list of elements. Can be used
+  with or instead of the <code>...</code> items.</td>
+  </tr>
+</table>
+
+<div data-section="HTML Tag Object">
+  <h3 data-swiftype-index="false">HTML Tag Object</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>An HTML tag object that can be rendered as HTML using
+  <code><a href='http://www.inside-r.org/r-doc/base/character'>as.character</a>()</code>.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p><code>tag()</code> creates an HTML tag definition. Note that all of the valid HTML5
+tags are already defined in the <code><a href='builder.html'>tags</a></code> environment so these
+functions should only be used to generate additional tags.
+<code>tagAppendChild()</code> and <code>tagList()</code> are for supporting package
+authors who wish to create their own sets of tags; see the contents of
+bootstrap.R for examples.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>tagList(tags$h1(&quot;Title&quot;),
+        tags$h2(&quot;Header text&quot;),
+        tags$p(&quot;Text here&quot;))
+</div>
+<div class='output'>&lt;h1&gt;Title&lt;/h1&gt;
+&lt;h2&gt;Header text&lt;/h2&gt;
+&lt;p&gt;Text here&lt;/p&gt; 
+</div>
+<div class='input'>
+# Can also convert a regular list to a tagList (internal data structure isn&#39;t
+# exactly the same, but when rendered to HTML, the output is the same).
+x &lt;- list(tags$h1(&quot;Title&quot;),
+          tags$h2(&quot;Header text&quot;),
+          tags$p(&quot;Text here&quot;))
+tagList(x)
+</div>
+<div class='output'>&lt;h1&gt;Title&lt;/h1&gt;
+&lt;h2&gt;Header text&lt;/h2&gt;
+&lt;p&gt;Text here&lt;/p&gt; 
+</div></pre>
+<!-- <ul>
+  <li>tag</li><li>tagAppendAttributes</li><li>tagAppendChild</li><li>tagAppendChildren</li><li>tagList</li><li>tagSetChildren</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

@@ -1,0 +1,60 @@
+---
+title: "reactiveValuesToList"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>reactiveValuesToList(x, all.names&nbsp;=&nbsp;FALSE)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>A reactivevalues object.</td>
+  </tr>
+  <tr>
+    <th>all.names</th>
+    <td>If <code>TRUE</code>, include objects with a
+  leading dot. If <code>FALSE</code> (the default) don't include
+  those objects.</td>
+  </tr>
+</table>
+
+<div data-section="Convert a reactivevalues object to a list">
+  <h3 data-swiftype-index="false">Convert a reactivevalues object to a list</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>This function does something similar to what you might <code><a href='http://www.inside-r.org/r-doc/base/list'>as.list</a></code>
+to do. The difference is that the calling context will take dependencies on
+every object in the reactivevalues object. To avoid taking dependencies on
+all the objects, you can wrap the call with <code><a href='isolate.html'>isolate</a>()</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>values &lt;- reactiveValues(a = 1)
+## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# reactiveValuesToList(values)
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+# To get the objects without taking dependencies on them, use isolate().
+# isolate() can also be used when calling from outside a reactive context (e.g.
+# at the console)
+isolate(reactiveValuesToList(values))
+</div>
+<div class='output'>$a
+[1] 1
+
+</div></pre>
+<!-- <ul>
+  <li>reactiveValuesToList</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

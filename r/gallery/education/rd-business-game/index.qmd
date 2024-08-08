@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: "R&D Business Game"
+author: "Paul Simmering"
+authorurl: "https://www.linkedin.com/in/paulsimmering/"
+date: "2019-05-31"
+no-app-padding: true
+tags:
+ - game
+ - ggplot2
+ - dplyr
+ - ggiraph
+appurl:      https://psim.shinyapps.io/business_game/
+sourceurl:   https://github.com/psimm/businessgame
+rscloudurl:  https://rstudio.cloud/project/246098
+---
+
+A business game where the player is the CEO of a tech company. Two companies use innovation & imitation strategies to compete, impress consumers and maximize profit.
+  

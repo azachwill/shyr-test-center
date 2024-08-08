@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Custom input control
+date: 2014-07-29 
+tags:
+ - javascript
+ - custom-input
+appurl: https://gallery.shinyapps.io/036-custom-input-control
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/036-custom-input-control
+---

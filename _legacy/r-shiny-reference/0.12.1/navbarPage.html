@@ -1,0 +1,204 @@
+---
+layout: reference
+title: "navbarPage"
+categories: reference
+---
+<h1>Create a page with a top level navigation bar</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='navbarPage.html'>navbarPage</a></span><span class="keyword">(</span><span class="symbol">title</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">id</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">position</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"static-top"</span><span class="keyword">,</span> <span class="string">"fixed-top"</span><span class="keyword">,</span>
+  <span class="string">"fixed-bottom"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">header</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">footer</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">inverse</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">collapsible</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="symbol">collapsable</span><span class="keyword">,</span> <span class="argument">fluid</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">responsive</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">theme</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">windowTitle</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">title</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='navbarPage.html'>navbarMenu</a></span><span class="keyword">(</span><span class="symbol">title</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">icon</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>title</th>
+    <td>The title to display in the navbar</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td><code><a href='tabPanel.html'>tabPanel</a></code> elements to include in the page</td>
+  </tr>
+  <tr>
+    <th>id</th>
+    <td>If provided, you can use <code>input$</code><em><code>id</code></em> in your
+server logic to determine which of the current tabs is active. The value
+will correspond to the <code>value</code> argument that is passed to
+<code><a href='tabPanel.html'>tabPanel</a></code>.</td>
+  </tr>
+  <tr>
+    <th>position</th>
+    <td>Determines whether the navbar should be displayed at the top
+of the page with normal scrolling behavior (<code>&quot;static-top&quot;</code>), pinned
+at the top (<code>&quot;fixed-top&quot;</code>), or pinned at the bottom
+(<code>&quot;fixed-bottom&quot;</code>). Note that using <code>&quot;fixed-top&quot;</code> or
+<code>&quot;fixed-bottom&quot;</code> will cause the navbar to overlay your body content,
+unless you add padding, e.g.:
+<code>tags$style(type=&quot;text/css&quot;, &quot;body {padding-top: 70px;}&quot;)</code></td>
+  </tr>
+  <tr>
+    <th>header</th>
+    <td>Tag or list of tags to display as a common header above all
+tabPanels.</td>
+  </tr>
+  <tr>
+    <th>footer</th>
+    <td>Tag or list of tags to display as a common footer below all
+tabPanels</td>
+  </tr>
+  <tr>
+    <th>inverse</th>
+    <td><code>TRUE</code> to use a dark background and light text for the
+navigation bar</td>
+  </tr>
+  <tr>
+    <th>collapsible</th>
+    <td><code>TRUE</code> to automatically collapse the navigation
+elements into a menu when the width of the browser is less than 940 pixels
+(useful for viewing on smaller touchscreen device)</td>
+  </tr>
+  <tr>
+    <th>collapsable</th>
+    <td>Deprecated; use <code>collapsible</code> instead.</td>
+  </tr>
+  <tr>
+    <th>fluid</th>
+    <td><code>TRUE</code> to use a fluid layout. <code>FALSE</code> to use a fixed
+layout.</td>
+  </tr>
+  <tr>
+    <th>responsive</th>
+    <td>This option is deprecated; it is no longer optional with
+Bootstrap 3.</td>
+  </tr>
+  <tr>
+    <th>theme</th>
+    <td>Alternative Bootstrap stylesheet (normally a css file within the
+www directory). For example, to use the theme located at
+<code>www/bootstrap.css</code> you would use <code>theme = &quot;bootstrap.css&quot;</code>.</td>
+  </tr>
+  <tr>
+    <th>windowTitle</th>
+    <td>The title that should be displayed by the browser window.
+Useful if <code>title</code> is not a string.</td>
+  </tr>
+  <tr>
+    <th>icon</th>
+    <td>Optional icon to appear on a <code>navbarMenu</code> tab.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a page that contains a top level navigation bar that can be used to
+toggle a set of <code><a href='tabPanel.html'>tabPanel</a></code> elements.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The <code>navbarMenu</code> function can be used to create an embedded
+  menu within the navbar that in turns includes additional tabPanels (see
+  example below).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='shinyUI.html'>shinyUI</a></span><span class="keyword">(</span><span class="functioncall"><a href='navbarPage.html'>navbarPage</a></span><span class="keyword">(</span><span class="string">"App Title"</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Plot"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Summary"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Table"</span><span class="keyword">)</span>
+<span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;nav class=&quot;navbar navbar-default navbar-static-top&quot; role=&quot;navigation&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;navbar-header&quot;&gt;
+      &lt;span class=&quot;navbar-brand&quot;&gt;App Title&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+      &lt;li class=&quot;active&quot;&gt;
+        &lt;a href=&quot;#tab-4513-1&quot; data-toggle=&quot;tab&quot; data-value=&quot;Plot&quot;&gt;Plot&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#tab-4513-2&quot; data-toggle=&quot;tab&quot; data-value=&quot;Summary&quot;&gt;Summary&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#tab-4513-3&quot; data-toggle=&quot;tab&quot; data-value=&quot;Table&quot;&gt;Table&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;div class=&quot;tab-content&quot;&gt;
+    &lt;div class=&quot;tab-pane active&quot; data-value=&quot;Plot&quot; id=&quot;tab-4513-1&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;tab-pane&quot; data-value=&quot;Summary&quot; id=&quot;tab-4513-2&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;tab-pane&quot; data-value=&quot;Table&quot; id=&quot;tab-4513-3&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div>
+<div class='input'>
+<span class="functioncall"><a href='shinyUI.html'>shinyUI</a></span><span class="keyword">(</span><span class="functioncall"><a href='navbarPage.html'>navbarPage</a></span><span class="keyword">(</span><span class="string">"App Title"</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Plot"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='navbarPage.html'>navbarMenu</a></span><span class="keyword">(</span><span class="string">"More"</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Summary"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Table"</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;nav class=&quot;navbar navbar-default navbar-static-top&quot; role=&quot;navigation&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;navbar-header&quot;&gt;
+      &lt;span class=&quot;navbar-brand&quot;&gt;App Title&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+      &lt;li class=&quot;active&quot;&gt;
+        &lt;a href=&quot;#tab-3709-1&quot; data-toggle=&quot;tab&quot; data-value=&quot;Plot&quot;&gt;Plot&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class=&quot;dropdown&quot;&gt;
+        &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&gt;
+          More
+          &lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;
+        &lt;/a&gt;
+        &lt;ul class=&quot;dropdown-menu&quot;&gt;
+          &lt;li&gt;
+            &lt;a href=&quot;#tab-8614-1&quot; data-toggle=&quot;tab&quot; data-value=&quot;Summary&quot;&gt;Summary&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href=&quot;#tab-8614-2&quot; data-toggle=&quot;tab&quot; data-value=&quot;Table&quot;&gt;Table&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;div class=&quot;tab-content&quot;&gt;
+    &lt;div class=&quot;tab-pane active&quot; data-value=&quot;Plot&quot; id=&quot;tab-3709-1&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;tab-pane&quot; data-value=&quot;Summary&quot; id=&quot;tab-8614-1&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;tab-pane&quot; data-value=&quot;Table&quot; id=&quot;tab-8614-2&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>navbarMenu</li><li>navbarPage</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='tabPanel.html'>tabPanel</a></code>, <code><a href='tabsetPanel.html'>tabsetPanel</a></code></p>
+</div>

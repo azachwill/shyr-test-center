@@ -1,0 +1,65 @@
+---
+title: "outputOptions"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='outputOptions.html'>outputOptions</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">name</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>A shinyoutput object (typically <code>output</code>).</td>
+  </tr>
+  <tr>
+    <th>name</th>
+    <td>The name of an output observer in the shinyoutput object.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Options to set for the output observer.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>These are the available options for an output object:
+<ul>
+<li> suspendWhenHidden. When <code>TRUE</code> (the default), the output object
+    will be suspended (not execute) when it is hidden on the web page. When
+    <code>FALSE</code>, the output object will not suspend when hidden, and if it
+    was already hidden and suspended, then it will resume immediately.
+  </li>
+<li> priority. The priority level of the output object. Queued outputs
+    with higher priority values will execute before those with lower values.
+</li>
+</ul></p>
+
+  <p></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># # Get the list of options for all observers within output</span>
+<span class="comment"># outputOptions(output)</span>
+<span class="comment"># </span>
+<span class="comment"># # Disable suspend for output$myplot</span>
+<span class="comment"># outputOptions(output, "myplot", suspendWhenHidden = FALSE)</span>
+<span class="comment"># </span>
+<span class="comment"># # Change priority for output$myplot</span>
+<span class="comment"># outputOptions(output, "myplot", priority = 10)</span>
+<span class="comment"># </span>
+<span class="comment"># # Get the list of options for output$myplot</span>
+<span class="comment"># outputOptions(output, "myplot")</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>outputOptions</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

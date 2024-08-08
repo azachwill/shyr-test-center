@@ -1,0 +1,111 @@
+---
+title: "Change the label or icon of an action button on the client — updateActionButton"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.0/R/update-input.R" class="external-link"><code>R/update-input.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Change the label or icon of an action button on the client</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">updateActionButton</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  inputId,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">icon =</span> <span class="cn">NULL</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">updateActionLink</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  inputId,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">icon =</span> <span class="cn">NULL</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>session</dt>
+<dd><p>The <code>session</code> object passed to function given to
+<code>shinyServer</code>. Default is <code><a href="domains.html">getDefaultReactiveDomain()</a></code>.</p></dd>
+
+
+<dt>inputId</dt>
+<dd><p>The id of the input object.</p></dd>
+
+
+<dt>label</dt>
+<dd><p>The label to set for the input object.</p></dd>
+
+
+<dt>icon</dt>
+<dd><p>An optional <code><a href="icon.html">icon()</a></code> to appear on the button.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+<p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href="numericInput.html">numericInput</a>()</code> and
+<code><a href="updateNumericInput.html">updateNumericInput()</a></code> take a similar set of arguments.</p>
+<p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+<p>For <code><a href="radioButtons.html">radioButtons</a>()</code>, <code><a href="checkboxGroupInput.html">checkboxGroupInput</a>()</code> and
+<code><a href="selectInput.html">selectInput</a>()</code>, the set of choices can be cleared by using
+<code>choices=character(0)</code>. Similarly, for these inputs, the selected item
+can be cleared by using <code>selected=character(0)</code>.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="actionButton.html">actionButton()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">"update"</span>, <span class="st">"Update other buttons and link"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">"goButton"</span>, <span class="st">"Go"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">"goButton2"</span>, <span class="st">"Go 2"</span>, <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">"area-chart"</span>)),</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">"goButton3"</span>, <span class="st">"Go 3"</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="fu">actionLink</span>(<span class="st">"goLink"</span>, <span class="st">"Go Link"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="fu">observe</span>({</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    <span class="fu">req</span>(input<span class="sc">$</span>update)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    <span class="co"># Updates goButton's label and icon</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    <span class="fu">updateActionButton</span>(session, <span class="st">"goButton"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>      <span class="at">label =</span> <span class="st">"New label"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>      <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">"calendar"</span>))</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>    <span class="co"># Leaves goButton2's label unchaged and</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    <span class="co"># removes its icon</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>    <span class="fu">updateActionButton</span>(session, <span class="st">"goButton2"</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>      <span class="at">icon =</span> <span class="fu">character</span>(<span class="dv">0</span>))</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>    <span class="co"># Leaves goButton3's icon, if it exists,</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>    <span class="co"># unchaged and changes its label</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>    <span class="fu">updateActionButton</span>(session, <span class="st">"goButton3"</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>      <span class="at">label =</span> <span class="st">"New label 3"</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>    <span class="co"># Updates goLink's label and icon</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>    <span class="fu">updateActionButton</span>(session, <span class="st">"goLink"</span>,</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>      <span class="at">label =</span> <span class="st">"New link label"</span>,</span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>      <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">"link"</span>))</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>  })</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>}</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

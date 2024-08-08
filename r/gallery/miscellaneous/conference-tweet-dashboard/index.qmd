@@ -1,0 +1,21 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: A Shiny app for tracking tweets around conferences and events. 
+title:        "A Dashboard for Conference Tweets"
+author:    Garrick Aden-Buie
+authorurl:     https://garrickadenbuie.com
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - twitter
+ - rtweet
+ - social media
+appurl:      https://gadenbuie.shinyapps.io/tweet-conf-dash/
+sourceurl:   https://github.com/gadenbuie/tweet-conf-dash
+rscloudurl:  https://rstudio.cloud/spaces/12362/project/258314
+---
+
+A Shiny app for tracking tweets around conferences and events. With a leader board and tools for exploring tweets sent with a conference hashtag, users can stay up to date with the online conversation, or explore the action after the fact.
+  
+This app is one of the runners up of the 2019 Shiny Contest. We have fond memories of rstudio::conf 2019, but nostalgia isn't the only thing going for this dashboard by Garrick Aden-Buie. There are a lot of great tweets we missed the first time around, and we added some new follows. We also loved the Top Emoji plot.

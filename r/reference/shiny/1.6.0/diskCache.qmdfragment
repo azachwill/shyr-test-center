@@ -1,0 +1,89 @@
+---
+title: "Create disk cache (deprecated) — diskCache"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>diskCache</span>(
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_size</span> <span class='kw'>=</span> <span class='fl'>500</span> * <span class='fl'>1024</span>^<span class='fl'>2</span>,
+  <span class='kw'>max_age</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>max_n</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>evict</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lru"</span>, <span class='st'>"fifo"</span>),
+  <span class='kw'>destroy_on_finalize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>missing</span> <span class='kw'>=</span> <span class='fu'><a href='key_missing.html'>key_missing</a></span>(),
+  <span class='kw'>exec_missing</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span>(),
+  <span class='kw'>logfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>dir</p></th>
+    <td><p>Directory to store files for the cache. If <code>NULL</code> (the default) it
+will create and use a temporary directory.</p></td>
+  </tr>
+  <tr>
+    <th><p>max_size</p></th>
+    <td><p>Maximum size of the cache, in bytes. If the cache exceeds
+this size, cached objects will be removed according to the value of the
+<code>evict</code>. Use <code>Inf</code> for no size limit. The default is 1 gigabyte.</p></td>
+  </tr>
+  <tr>
+    <th><p>max_age</p></th>
+    <td><p>Maximum age of files in cache before they are evicted, in
+seconds. Use <code>Inf</code> for no age limit.</p></td>
+  </tr>
+  <tr>
+    <th><p>max_n</p></th>
+    <td><p>Maximum number of objects in the cache. If the number of objects
+exceeds this value, then cached objects will be removed according to the
+value of <code>evict</code>. Use <code>Inf</code> for no limit of number of items.</p></td>
+  </tr>
+  <tr>
+    <th><p>evict</p></th>
+    <td><p>The eviction policy to use to decide which objects are removed
+when a cache pruning occurs. Currently, <code>"lru"</code> and <code>"fifo"</code> are supported.</p></td>
+  </tr>
+  <tr>
+    <th><p>destroy_on_finalize</p></th>
+    <td><p>If <code>TRUE</code>, then when the cache_disk object is
+garbage collected, the cache directory and all objects inside of it will be
+deleted from disk. If <code>FALSE</code> (the default), it will do nothing when
+finalized.</p></td>
+  </tr>
+  <tr>
+    <th><p>missing</p></th>
+    <td><p>A value to return when <code><a href='https://rdrr.io/r/base/get.html'>get(key)</a></code> is called but the key is not
+present in the cache. The default is a <code><a href='https://cachem.r-lib.org/reference/reexports.html'>key_missing()</a></code> object. It is
+actually an expression that is evaluated each time there is a cache miss.
+See section Missing keys for more information.</p></td>
+  </tr>
+  <tr>
+    <th><p>exec_missing</p></th>
+    <td><p>Deprecated.</p></td>
+  </tr>
+  <tr>
+    <th><p>logfile</p></th>
+    <td><p>An optional filename or connection object to where logging
+information will be written. To log to the console, use <code><a href='https://rdrr.io/r/base/showConnections.html'>stderr()</a></code> or
+<code><a href='https://rdrr.io/r/base/showConnections.html'>stdout()</a></code>.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Create disk cache (deprecated)</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+</div>
+
+
+```

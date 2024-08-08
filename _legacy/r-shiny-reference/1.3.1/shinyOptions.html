@@ -1,0 +1,61 @@
+---
+layout: reference
+title: "getShinyOption"
+categories: reference
+---
+<h1>Get or set Shiny options</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='shinyOptions.html'>getShinyOption</a></span><span class="keyword">(</span><span class="symbol">name</span><span class="keyword">,</span> <span class="argument">default</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='shinyOptions.html'>shinyOptions</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>name</th>
+    <td>Name of an option to get.</td>
+  </tr>
+  <tr>
+    <th>default</th>
+    <td>Value to be returned if the option is not currently set.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Options to set, with the form <code>name = value</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p><code>getShinyOption</code> retrieves the value of a Shiny option.
+<code>shinyOptions</code> sets the value of Shiny options; it can also be used to
+return a list of all currently-set Shiny options.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>There is a global option set, which is available by default. When a Shiny
+application is run with <code><a href='runApp.html'>runApp</a></code>, that option set is duplicated
+and the new option set is available for getting or setting values. If options
+are set from global.R, app.R, ui.R, or server.R, or if they are set from
+inside the server function, then the options will be scoped to the
+application. When the application exits, the new option set is discarded and
+the global option set is restored.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># shinyOptions(myOption = 10)</span>
+<span class="comment"># getShinyOption("myOption")</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>getShinyOption</li><li>shinyOptions</li>
+</ul>
+<ul>
+  
+</ul> -->
+

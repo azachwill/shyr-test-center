@@ -1,0 +1,245 @@
+---
+layout: reference
+title: "validate"
+categories: reference
+---
+<h1>Validate input values and other conditions</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='validate.html'>validate</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">errorClass</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>character</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='validate.html'>need</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="argument">message</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="symbol">label</span><span class="keyword">,</span> <span class="string">"must be provided"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>A list of tests. Each test should equal <code>NULL</code> for success,
+<code>FALSE</code> for silent failure, or a string for failure with an error
+message.</td>
+  </tr>
+  <tr>
+    <th>errorClass</th>
+    <td>A CSS class to apply. The actual CSS string will have
+<code>shiny-output-error-</code> prepended to this value.</td>
+  </tr>
+  <tr>
+    <th>expr</th>
+    <td>An expression to test. The condition will pass if the expression
+meets the conditions spelled out in Details.</td>
+  </tr>
+  <tr>
+    <th>message</th>
+    <td>A message to convey to the user if the validation condition is
+not met. If no message is provided, one will be created using <code>label</code>.
+To fail with no message, use <code>FALSE</code> for the message.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>A human-readable name for the field that may be missing. This
+parameter is not needed if <code>message</code> is provided, but must be provided
+otherwise.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>For an output rendering function (e.g. <code><a href='renderPlot.html'>renderPlot</a>()</code>), you may
+need to check that certain input values are available and valid before you
+can render the output. <code>validate</code> gives you a convenient mechanism for
+doing so.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The <code>validate</code> function takes any number of (unnamed) arguments, each of
+which represents a condition to test. If any of the conditions represent
+failure, then a special type of error is signaled which stops execution. If
+this error is not handled by application-specific code, it is displayed to
+the user by Shiny.</p>
+
+  <p>An easy way to provide arguments to <code>validate</code> is to use the <code>need</code>
+function, which takes an expression and a string; if the expression is
+considered a failure, then the string will be used as the error message. The
+<code>need</code> function considers its expression to be a failure if it is any of
+the following:</p>
+
+  <p><ul>
+<li><code>FALSE</code>
+  </li>
+<li><code>NULL</code>
+  </li>
+<li><code>&quot;&quot;</code>
+  </li>
+<li>An empty atomic vector
+  </li>
+<li>An atomic vector that contains only missing values
+  </li>
+<li>A logical vector that contains all <code>FALSE</code> or missing values
+  </li>
+<li>An object of class <code>&quot;try-error&quot;</code>
+  </li>
+<li>A value that represents an unclicked <code><a href='actionButton.html'>actionButton</a></code>
+</li>
+</ul></p>
+
+  <p>If any of these values happen to be valid, you can explicitly turn them to
+logical values. For example, if you allow <code>NA</code> but not <code>NULL</code>, you
+can use the condition <code>!is.null(input$foo)</code>, because <code>!is.null(NA)
+== TRUE</code>.</p>
+
+  <p>If you need validation logic that differs significantly from <code>need</code>, you
+can create other validation test functions. A passing test should return
+<code>NULL</code>. A failing test should return an error message as a
+single-element character vector, or if the failure should happen silently,
+<code>FALSE</code>.</p>
+
+  <p>Because validation failure is signaled as an error, you can use
+<code>validate</code> in reactive expressions, and validation failures will
+automatically propagate to outputs that use the reactive expression. In
+other words, if reactive expression <code>a</code> needs <code>input$x</code>, and two
+outputs use <code>a</code> (and thus depend indirectly on <code>input$x</code>), it&#39;s
+not necessary for the outputs to validate <code>input$x</code> explicitly, as long
+as <code>a</code> does validate it.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># in ui.R</span>
+<span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='checkboxGroupInput.html'>checkboxGroupInput</a></span><span class="keyword">(</span><span class="string">'in1'</span><span class="keyword">,</span> <span class="string">'Check some letters'</span><span class="keyword">,</span> <span class="argument">choices</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/head'>head</a></span><span class="keyword">(</span><span class="symbol">LETTERS</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='selectInput.html'>selectizeInput</a></span><span class="keyword">(</span><span class="string">'in2'</span><span class="keyword">,</span> <span class="string">'Select a state'</span><span class="keyword">,</span> <span class="argument">choices</span> <span class="argument">=</span> <span class="symbol">state.name</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">'plot'</span><span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;div id=&quot;in1&quot; class=&quot;form-group shiny-input-checkboxgroup shiny-input-container&quot;&gt;
+    &lt;label class=&quot;control-label&quot; for=&quot;in1&quot;&gt;Check some letters&lt;/label&gt;
+    &lt;div class=&quot;shiny-options-group&quot;&gt;
+      &lt;div class=&quot;checkbox&quot;&gt;
+        &lt;label&gt;
+          &lt;input type=&quot;checkbox&quot; name=&quot;in1&quot; value=&quot;A&quot;/&gt;
+          &lt;span&gt;A&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;checkbox&quot;&gt;
+        &lt;label&gt;
+          &lt;input type=&quot;checkbox&quot; name=&quot;in1&quot; value=&quot;B&quot;/&gt;
+          &lt;span&gt;B&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;checkbox&quot;&gt;
+        &lt;label&gt;
+          &lt;input type=&quot;checkbox&quot; name=&quot;in1&quot; value=&quot;C&quot;/&gt;
+          &lt;span&gt;C&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;checkbox&quot;&gt;
+        &lt;label&gt;
+          &lt;input type=&quot;checkbox&quot; name=&quot;in1&quot; value=&quot;D&quot;/&gt;
+          &lt;span&gt;D&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;checkbox&quot;&gt;
+        &lt;label&gt;
+          &lt;input type=&quot;checkbox&quot; name=&quot;in1&quot; value=&quot;E&quot;/&gt;
+          &lt;span&gt;E&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;checkbox&quot;&gt;
+        &lt;label&gt;
+          &lt;input type=&quot;checkbox&quot; name=&quot;in1&quot; value=&quot;F&quot;/&gt;
+          &lt;span&gt;F&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+    &lt;label class=&quot;control-label&quot; for=&quot;in2&quot;&gt;Select a state&lt;/label&gt;
+    &lt;div&gt;
+      &lt;select id=&quot;in2&quot; class=&quot;form-control&quot;&gt;&lt;option value=&quot;Alabama&quot; selected&gt;Alabama&lt;/option&gt;
+&lt;option value=&quot;Alaska&quot;&gt;Alaska&lt;/option&gt;
+&lt;option value=&quot;Arizona&quot;&gt;Arizona&lt;/option&gt;
+&lt;option value=&quot;Arkansas&quot;&gt;Arkansas&lt;/option&gt;
+&lt;option value=&quot;California&quot;&gt;California&lt;/option&gt;
+&lt;option value=&quot;Colorado&quot;&gt;Colorado&lt;/option&gt;
+&lt;option value=&quot;Connecticut&quot;&gt;Connecticut&lt;/option&gt;
+&lt;option value=&quot;Delaware&quot;&gt;Delaware&lt;/option&gt;
+&lt;option value=&quot;Florida&quot;&gt;Florida&lt;/option&gt;
+&lt;option value=&quot;Georgia&quot;&gt;Georgia&lt;/option&gt;
+&lt;option value=&quot;Hawaii&quot;&gt;Hawaii&lt;/option&gt;
+&lt;option value=&quot;Idaho&quot;&gt;Idaho&lt;/option&gt;
+&lt;option value=&quot;Illinois&quot;&gt;Illinois&lt;/option&gt;
+&lt;option value=&quot;Indiana&quot;&gt;Indiana&lt;/option&gt;
+&lt;option value=&quot;Iowa&quot;&gt;Iowa&lt;/option&gt;
+&lt;option value=&quot;Kansas&quot;&gt;Kansas&lt;/option&gt;
+&lt;option value=&quot;Kentucky&quot;&gt;Kentucky&lt;/option&gt;
+&lt;option value=&quot;Louisiana&quot;&gt;Louisiana&lt;/option&gt;
+&lt;option value=&quot;Maine&quot;&gt;Maine&lt;/option&gt;
+&lt;option value=&quot;Maryland&quot;&gt;Maryland&lt;/option&gt;
+&lt;option value=&quot;Massachusetts&quot;&gt;Massachusetts&lt;/option&gt;
+&lt;option value=&quot;Michigan&quot;&gt;Michigan&lt;/option&gt;
+&lt;option value=&quot;Minnesota&quot;&gt;Minnesota&lt;/option&gt;
+&lt;option value=&quot;Mississippi&quot;&gt;Mississippi&lt;/option&gt;
+&lt;option value=&quot;Missouri&quot;&gt;Missouri&lt;/option&gt;
+&lt;option value=&quot;Montana&quot;&gt;Montana&lt;/option&gt;
+&lt;option value=&quot;Nebraska&quot;&gt;Nebraska&lt;/option&gt;
+&lt;option value=&quot;Nevada&quot;&gt;Nevada&lt;/option&gt;
+&lt;option value=&quot;New Hampshire&quot;&gt;New Hampshire&lt;/option&gt;
+&lt;option value=&quot;New Jersey&quot;&gt;New Jersey&lt;/option&gt;
+&lt;option value=&quot;New Mexico&quot;&gt;New Mexico&lt;/option&gt;
+&lt;option value=&quot;New York&quot;&gt;New York&lt;/option&gt;
+&lt;option value=&quot;North Carolina&quot;&gt;North Carolina&lt;/option&gt;
+&lt;option value=&quot;North Dakota&quot;&gt;North Dakota&lt;/option&gt;
+&lt;option value=&quot;Ohio&quot;&gt;Ohio&lt;/option&gt;
+&lt;option value=&quot;Oklahoma&quot;&gt;Oklahoma&lt;/option&gt;
+&lt;option value=&quot;Oregon&quot;&gt;Oregon&lt;/option&gt;
+&lt;option value=&quot;Pennsylvania&quot;&gt;Pennsylvania&lt;/option&gt;
+&lt;option value=&quot;Rhode Island&quot;&gt;Rhode Island&lt;/option&gt;
+&lt;option value=&quot;South Carolina&quot;&gt;South Carolina&lt;/option&gt;
+&lt;option value=&quot;South Dakota&quot;&gt;South Dakota&lt;/option&gt;
+&lt;option value=&quot;Tennessee&quot;&gt;Tennessee&lt;/option&gt;
+&lt;option value=&quot;Texas&quot;&gt;Texas&lt;/option&gt;
+&lt;option value=&quot;Utah&quot;&gt;Utah&lt;/option&gt;
+&lt;option value=&quot;Vermont&quot;&gt;Vermont&lt;/option&gt;
+&lt;option value=&quot;Virginia&quot;&gt;Virginia&lt;/option&gt;
+&lt;option value=&quot;Washington&quot;&gt;Washington&lt;/option&gt;
+&lt;option value=&quot;West Virginia&quot;&gt;West Virginia&lt;/option&gt;
+&lt;option value=&quot;Wisconsin&quot;&gt;Wisconsin&lt;/option&gt;
+&lt;option value=&quot;Wyoming&quot;&gt;Wyoming&lt;/option&gt;&lt;/select&gt;
+      &lt;script type=&quot;application/json&quot; data-for=&quot;in2&quot;&gt;{}&lt;/script&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;plot&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</div>
+<div class='input'>
+<span class="comment"># in server.R</span>
+<span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='validate.html'>validate</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='validate.html'>need</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">in1</span><span class="keyword">,</span> <span class="string">'Check at least one letter!'</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='validate.html'>need</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">in2</span> <span class="keyword">!=</span> <span class="string">''</span><span class="keyword">,</span> <span class="string">'Please choose a state.'</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">:</span><span class="number">10</span><span class="keyword">,</span> <span class="argument">main</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">in1</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">in2</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">collapse</span> <span class="argument">=</span> <span class="string">', '</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span></div>
+<div class='output'>function(input, output) {
+  output$plot &lt;- renderPlot({
+    validate(
+      need(input$in1, &#39;Check at least one letter!&#39;),
+      need(input$in2 != &#39;&#39;, &#39;Please choose a state.&#39;)
+    )
+    plot(1:10, main = paste(c(input$in1, input$in2), collapse = &#39;, &#39;))
+  })
+}
+&lt;environment: 0x7f8f7a6ed918&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>need</li><li>validate</li>
+</ul>
+<ul>
+  
+</ul> -->
+

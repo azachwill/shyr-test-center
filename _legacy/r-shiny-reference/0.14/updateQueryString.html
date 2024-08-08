@@ -1,0 +1,40 @@
+---
+layout: reference
+title: "updateQueryString"
+categories: reference
+---
+<h1>Update URL in browser&#39;s location bar</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='updateQueryString.html'>updateQueryString</a></span><span class="keyword">(</span><span class="symbol">queryString</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>queryString</th>
+    <td>The new query string to show in the location bar.</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>A Shiny session object.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This function updates the client browser&#39;s query string in the location bar.
+It typically is called from an observer. Note that this will not work in
+Internet Explorer 9 and below.</p>
+
+</div>
+<!-- <ul>
+  <li>updateQueryString</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='enableBookmarking.html'>enableBookmarking</a></code> for examples.</p>
+</div>

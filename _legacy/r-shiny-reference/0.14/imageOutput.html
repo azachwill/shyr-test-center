@@ -1,0 +1,314 @@
+---
+layout: reference
+title: "imageOutput"
+categories: reference
+
+---
+<h1>Create an plot or image output element</h1>
+
+<pre class="code"><code class="r"><div>imageOutput(outputId, width&nbsp;=&nbsp;"100%", height&nbsp;=&nbsp;"400px", click&nbsp;=&nbsp;NULL, dblclick&nbsp;=&nbsp;NULL, hover&nbsp;=&nbsp;NULL, hoverDelay&nbsp;=&nbsp;NULL, hoverDelayType&nbsp;=&nbsp;NULL, brush&nbsp;=&nbsp;NULL, clickId&nbsp;=&nbsp;NULL, hoverId&nbsp;=&nbsp;NULL, inline&nbsp;=&nbsp;FALSE)</div>
+<div>plotOutput(outputId, width&nbsp;=&nbsp;"100%", height&nbsp;=&nbsp;"400px", click&nbsp;=&nbsp;NULL, dblclick&nbsp;=&nbsp;NULL, hover&nbsp;=&nbsp;NULL, hoverDelay&nbsp;=&nbsp;NULL, hoverDelayType&nbsp;=&nbsp;NULL, brush&nbsp;=&nbsp;NULL, clickId&nbsp;=&nbsp;NULL, hoverId&nbsp;=&nbsp;NULL, inline&nbsp;=&nbsp;FALSE)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the plot/image from.</td>
+  </tr>
+  <tr>
+    <th>width,height</th>
+    <td>Image width/height. Must be a valid CSS unit (like
+<code>"100%"</code>, <code>"400px"</code>, <code>"auto"</code>) or a number, which will be
+coerced to a string and have <code>"px"</code> appended. These two arguments are
+ignored when <code>inline = TRUE</code>, in which case the width/height of a plot
+must be specified in <code>renderPlot()</code>. Note that, for height, using
+<code>"auto"</code> or <code>"100%"</code> generally will not work as expected,
+because of how height is computed with HTML/CSS.</td>
+  </tr>
+  <tr>
+    <th>click</th>
+    <td>This can be <code>NULL</code> (the default), a string, or an object
+created by the <code><a href='clickOpts.html'>clickOpts</a></code> function. If you use a value like
+<code>"plot_click"</code> (or equivalently, <code>clickOpts(id="plot_click")</code>),
+the plot will send coordinates to the server whenever it is clicked, and
+the value will be accessible via <code>input$plot_click</code>. The value will
+be a named list  with <code>x</code> and <code>y</code> elements indicating the mouse
+position.</td>
+  </tr>
+  <tr>
+    <th>dblclick</th>
+    <td>This is just like the <code>click</code> argument, but for
+double-click events.</td>
+  </tr>
+  <tr>
+    <th>hover</th>
+    <td>Similar to the <code>click</code> argument, this can be <code>NULL</code>
+(the default), a string, or an object created by the
+<code><a href='hoverOpts.html'>hoverOpts</a></code> function. If you use a value like
+<code>"plot_hover"</code> (or equivalently, <code>hoverOpts(id="plot_hover")</code>),
+the plot will send coordinates to the server pauses on the plot, and the
+value will be accessible via <code>input$plot_hover</code>. The value will be a
+named list with <code>x</code> and <code>y</code> elements indicating the mouse
+position. To control the hover time or hover delay type, you must use
+<code><a href='hoverOpts.html'>hoverOpts</a></code>.</td>
+  </tr>
+  <tr>
+    <th>hoverDelay</th>
+    <td>Deprecated; use <code>hover</code> instead. Also see the
+<code><a href='hoverOpts.html'>hoverOpts</a></code> function.</td>
+  </tr>
+  <tr>
+    <th>hoverDelayType</th>
+    <td>Deprecated; use <code>hover</code> instead. Also see the
+<code><a href='hoverOpts.html'>hoverOpts</a></code> function.</td>
+  </tr>
+  <tr>
+    <th>brush</th>
+    <td>Similar to the <code>click</code> argument, this can be <code>NULL</code>
+(the default), a string, or an object created by the
+<code><a href='brushOpts.html'>brushOpts</a></code> function. If you use a value like
+<code>"plot_brush"</code> (or equivalently, <code>brushOpts(id="plot_brush")</code>),
+the plot will allow the user to "brush" in the plotting area, and will send
+information about the brushed area to the server, and the value will be
+accessible via <code>input$plot_brush</code>. Brushing means that the user will
+be able to draw a rectangle in the plotting area and drag it around. The
+value will be a named list with <code>xmin</code>, <code>xmax</code>, <code>ymin</code>, and
+<code>ymax</code> elements indicating the brush area. To control the brush
+behavior, use <code><a href='brushOpts.html'>brushOpts</a></code>.</td>
+  </tr>
+  <tr>
+    <th>clickId</th>
+    <td>Deprecated; use <code>click</code> instead. Also see the
+<code><a href='clickOpts.html'>clickOpts</a></code> function.</td>
+  </tr>
+  <tr>
+    <th>hoverId</th>
+    <td>Deprecated; use <code>hover</code> instead. Also see the
+<code><a href='hoverOpts.html'>hoverOpts</a></code> function.</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>use an inline (<code>span()</code>) or block container (<code>div()</code>)
+for the output</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p><dl>
+A plot or image output element that can be included in a panel.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Render a <code><a href='renderPlot.html'>renderPlot</a></code> or <code><a href='renderImage.html'>renderImage</a></code> within an
+application page.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+  
+  <p>The arguments <code>clickId</code> and <code>hoverId</code> only work for R base
+  graphics (see the <span class = "pkg"><a href='http://www.inside-r.org/r-doc/graphics/graphics-package'>graphics</a></span> package). They do not work for
+  <span class = "pkg"><a href='http://www.inside-r.org/r-doc/grid/grid-package'>grid</a></span>-based graphics, such as <span class = "pkg">ggplot2</span>,
+  <span class = "pkg">lattice</span>, and so on.</p>
+
+</div>
+
+<div data-section="Interactive plots">
+  <h3 data-swiftype-index="false">Interactive plots</h3>
+  
+  <p></p>
+
+  <p>Plots and images in Shiny support mouse-based interaction, via clicking,
+  double-clicking, hovering, and brushing. When these interaction events
+  occur, the mouse coordinates will be sent to the server as <code>input$</code>
+  variables, as specified by <code>click</code>, <code>dblclick</code>, <code>hover</code>, or
+  <code>brush</code>.</p>
+
+  <p>For <code>plotOutput</code>, the coordinates will be sent scaled to the data
+  space, if possible. (At the moment, plots generated by base graphics
+  support this scaling, although plots generated by grid or ggplot2 do not.)
+  If scaling is not possible, the raw pixel coordinates will be sent. For
+  <code>imageOutput</code>, the coordinates will be sent in raw pixel coordinates.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Only run these examples in interactive R sessions
+if (interactive()) {
+
+# A basic shiny app with a plotOutput
+shinyApp(
+  ui = fluidPage(
+    sidebarLayout(
+      sidebarPanel(
+        actionButton(&quot;newplot&quot;, &quot;New plot&quot;)
+      ),
+      mainPanel(
+        plotOutput(&quot;plot&quot;)
+      )
+    )
+  ),
+  server = function(input, output) {
+    output$plot &lt;- renderPlot({
+      input$newplot
+      # Add a little noise to the cars data
+      cars2 &lt;- cars + rnorm(nrow(cars))
+      plot(cars2)
+    })
+  }
+)
+
+
+# A demonstration of clicking, hovering, and brushing
+shinyApp(
+  ui = basicPage(
+    fluidRow(
+      column(width = 4,
+        plotOutput(&quot;plot&quot;, height=300,
+          click = &quot;plot_click&quot;,  # Equiv, to click=clickOpts(id=&quot;plot_click&quot;)
+          hover = hoverOpts(id = &quot;plot_hover&quot;, delayType = &quot;throttle&quot;),
+          brush = brushOpts(id = &quot;plot_brush&quot;)
+        ),
+        h4(&quot;Clicked points&quot;),
+        tableOutput(&quot;plot_clickedpoints&quot;),
+        h4(&quot;Brushed points&quot;),
+        tableOutput(&quot;plot_brushedpoints&quot;)
+      ),
+      column(width = 4,
+        verbatimTextOutput(&quot;plot_clickinfo&quot;),
+        verbatimTextOutput(&quot;plot_hoverinfo&quot;)
+      ),
+      column(width = 4,
+        wellPanel(actionButton(&quot;newplot&quot;, &quot;New plot&quot;)),
+        verbatimTextOutput(&quot;plot_brushinfo&quot;)
+      )
+    )
+  ),
+  server = function(input, output, session) {
+    data &lt;- reactive({
+      input$newplot
+      # Add a little noise to the cars data so the points move
+      cars + rnorm(nrow(cars))
+    })
+    output$plot &lt;- renderPlot({
+      d &lt;- data()
+      plot(d$speed, d$dist)
+    })
+    output$plot_clickinfo &lt;- renderPrint({
+      cat(&quot;Click:\n&quot;)
+      str(input$plot_click)
+    })
+    output$plot_hoverinfo &lt;- renderPrint({
+      cat(&quot;Hover (throttled):\n&quot;)
+      str(input$plot_hover)
+    })
+    output$plot_brushinfo &lt;- renderPrint({
+      cat(&quot;Brush (debounced):\n&quot;)
+      str(input$plot_brush)
+    })
+    output$plot_clickedpoints &lt;- renderTable({
+      # For base graphics, we need to specify columns, though for ggplot2,
+      # it&#39;s usually not necessary.
+      res &lt;- nearPoints(data(), input$plot_click, &quot;speed&quot;, &quot;dist&quot;)
+      if (nrow(res) == 0)
+        return()
+      res
+    })
+    output$plot_brushedpoints &lt;- renderTable({
+      res &lt;- brushedPoints(data(), input$plot_brush, &quot;speed&quot;, &quot;dist&quot;)
+      if (nrow(res) == 0)
+        return()
+      res
+    })
+  }
+)
+
+
+# Demo of clicking, hovering, brushing with imageOutput
+# Note that coordinates are in pixels
+shinyApp(
+  ui = basicPage(
+    fluidRow(
+      column(width = 4,
+        imageOutput(&quot;image&quot;, height=300,
+          click = &quot;image_click&quot;,
+          hover = hoverOpts(
+            id = &quot;image_hover&quot;,
+            delay = 500,
+            delayType = &quot;throttle&quot;
+          ),
+          brush = brushOpts(id = &quot;image_brush&quot;)
+        )
+      ),
+      column(width = 4,
+        verbatimTextOutput(&quot;image_clickinfo&quot;),
+        verbatimTextOutput(&quot;image_hoverinfo&quot;)
+      ),
+      column(width = 4,
+        wellPanel(actionButton(&quot;newimage&quot;, &quot;New image&quot;)),
+        verbatimTextOutput(&quot;image_brushinfo&quot;)
+      )
+    )
+  ),
+  server = function(input, output, session) {
+    output$image &lt;- renderImage({
+      input$newimage
+
+      # Get width and height of image output
+      width  &lt;- session$clientData$output_image_width
+      height &lt;- session$clientData$output_image_height
+
+      # Write to a temporary PNG file
+      outfile &lt;- tempfile(fileext = &quot;.png&quot;)
+
+      png(outfile, width=width, height=height)
+      plot(rnorm(200), rnorm(200))
+      dev.off()
+
+      # Return a list containing information about the image
+      list(
+        src = outfile,
+        contentType = &quot;image/png&quot;,
+        width = width,
+        height = height,
+        alt = &quot;This is alternate text&quot;
+      )
+    })
+    output$image_clickinfo &lt;- renderPrint({
+      cat(&quot;Click:\n&quot;)
+      str(input$image_click)
+    })
+    output$image_hoverinfo &lt;- renderPrint({
+      cat(&quot;Hover (throttled):\n&quot;)
+      str(input$image_hover)
+    })
+    output$image_brushinfo &lt;- renderPrint({
+      cat(&quot;Brush (debounced):\n&quot;)
+      str(input$image_brush)
+    })
+  }
+)
+
+}
+</div></pre>
+<!-- <ul>
+  <li>imageOutput</li><li>plotOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+For the corresponding server-side functions, see
+  <code><a href='renderPlot.html'>renderPlot</a></code> and  <code><a href='renderImage.html'>renderImage</a></code>.
+
+</div>

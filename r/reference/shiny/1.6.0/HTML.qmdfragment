@@ -1,0 +1,51 @@
+---
+title: "Mark Characters as HTML — HTML"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>HTML</span>(<span class='no'>text</span>, <span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>text</p></th>
+    <td><p>The text value to mark with HTML</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Any additional values to be converted to character and
+concatenated together</p></td>
+  </tr>
+  <tr>
+    <th><p>.noWS</p></th>
+    <td><p>Character vector used to omit some of the whitespace that would
+normally be written around this HTML. Valid options include <code>before</code>,
+<code>after</code>, and <code>outside</code> (equivalent to <code>before</code> and
+<code>end</code>).</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Marks the given text as HTML, which means the <a href='tag.html'>tag</a> functions will know
+not to perform HTML escaping on it.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>The same value, but marked as HTML.</p>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='no'>el</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='builder.html'>div</a></span>(<span class='fu'>HTML</span>(<span class='st'>"I like &lt;u&gt;turtles&lt;/u&gt;"</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>el</span>))</pre>
+</div>
+
+
+```

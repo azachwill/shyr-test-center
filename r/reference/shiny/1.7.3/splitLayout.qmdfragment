@@ -1,0 +1,86 @@
+---
+title: "Split layout — splitLayout"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.3</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.3/R/bootstrap-layout.R" class="external-link"><code>R/bootstrap-layout.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Lays out elements horizontally, dividing the available horizontal space into
+equal parts (by default).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">splitLayout</span>(..., <span class="at">cellWidths =</span> <span class="cn">NULL</span>, <span class="at">cellArgs =</span> <span class="fu">list</span>())</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>Unnamed arguments will become child elements of the layout. Named
+arguments will become HTML attributes on the outermost tag.</p></dd>
+
+
+<dt>cellWidths</dt>
+<dd><p>Character or numeric vector indicating the widths of the
+individual cells. Recycling will be used if needed. Character values will
+be interpreted as CSS lengths (see <code><a href="validateCssUnit.html">validateCssUnit()</a></code>), numeric
+values as pixels.</p></dd>
+
+
+<dt>cellArgs</dt>
+<dd><p>Any additional attributes that should be used for each cell
+of the layout.</p></dd>
+
+</dl></div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p>Other layout functions: 
+<code><a href="fillPage.html">fillPage</a>()</code>,
+<code><a href="fixedPage.html">fixedPage</a>()</code>,
+<code><a href="flowLayout.html">flowLayout</a>()</code>,
+<code><a href="fluidPage.html">fluidPage</a>()</code>,
+<code><a href="navbarPage.html">navbarPage</a>()</code>,
+<code><a href="sidebarLayout.html">sidebarLayout</a>()</code>,
+<code><a href="verticalLayout.html">verticalLayout</a>()</code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">device.ask.default =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># Server code used for all examples</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>(<span class="fu">plot</span>(cars))</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  output<span class="sc">$</span>plot2 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>(<span class="fu">plot</span>(pressure))</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  output<span class="sc">$</span>plot3 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>(<span class="fu">plot</span>(AirPassengers))</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>}</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># Equal sizing</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">splitLayout</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot1"</span>),</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot2"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="co"># Custom widths</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">splitLayout</span>(<span class="at">cellWidths =</span> <span class="fu">c</span>(<span class="st">"25%"</span>, <span class="st">"75%"</span>),</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot1"</span>),</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot2"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>)</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="co"># All cells at 300 pixels wide, with cell padding</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="co"># and a border around everything</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">splitLayout</span>(</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">"border: 1px solid silver;"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>  <span class="at">cellWidths =</span> <span class="dv">300</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>  <span class="at">cellArgs =</span> <span class="fu">list</span>(<span class="at">style =</span> <span class="st">"padding: 6px"</span>),</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot1"</span>),</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot2"</span>),</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot3"</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>)</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

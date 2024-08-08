@@ -1,0 +1,22 @@
+---
+title: "Input panel — inputPanel"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.9.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.9.0/R/bootstrap-layout.R" class="external-link"><code>R/bootstrap-layout.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>A <code><a href="flowLayout.html">flowLayout()</a></code> with a grey border and light grey background,
+suitable for wrapping inputs.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">inputPanel</span>(...)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>Input controls or other HTML elements.</p></dd>
+
+</dl></div>
+
+</div>
+```

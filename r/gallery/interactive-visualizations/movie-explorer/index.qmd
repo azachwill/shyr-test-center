@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Movie explorer
+date: 2014-07-29 
+tags: 
+ - ggvis 
+ - sliderinput
+appurl: https://gallery.shinyapps.io/051-movie-explorer
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/051-movie-explorer
+---

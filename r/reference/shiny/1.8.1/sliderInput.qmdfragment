@@ -1,0 +1,200 @@
+---
+title: "Slider Input Widget — sliderInput"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.1</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.1/R/input-slider.R" class="external-link"><code>R/input-slider.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Constructs a slider widget to select a number, date, or date-time from a
+range.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">sliderInput</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  inputId,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  label,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  min,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  max,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  value,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">step =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="at">round =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="at">ticks =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">animate =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">width =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">","</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="at">pre =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="at">post =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  <span class="at">timeFormat =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="at">timezone =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="at">dragRange =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="fu">animationOptions</span>(</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  <span class="at">interval =</span> <span class="dv">1000</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  <span class="at">loop =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  <span class="at">playButton =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>  <span class="at">pauseButton =</span> <span class="cn">NULL</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>inputId</dt>
+<dd><p>The <code>input</code> slot that will be used to access the value.</p></dd>
+
+
+<dt>label</dt>
+<dd><p>Display label for the control, or <code>NULL</code> for no label.</p></dd>
+
+
+<dt>min, max</dt>
+<dd><p>The minimum and maximum values (inclusive) that can be
+selected.</p></dd>
+
+
+<dt>value</dt>
+<dd><p>The initial value of the slider, either a number, a date
+(class Date), or a date-time (class POSIXt). A length one vector will
+create a regular slider; a length two vector will create a double-ended
+range slider. Must lie between <code>min</code> and <code>max</code>.</p></dd>
+
+
+<dt>step</dt>
+<dd><p>Specifies the interval between each selectable value on the
+slider. Either <code>NULL</code>, the default, which uses a heuristic to determine the
+step size or a single number. If the values are dates, <code>step</code> is in days;
+if the values are date-times, <code>step</code> is in seconds.</p></dd>
+
+
+<dt>round</dt>
+<dd><p><code>TRUE</code> to round all values to the nearest integer;
+<code>FALSE</code> if no rounding is desired; or an integer to round to that
+number of digits (for example, 1 will round to the nearest 10, and -2 will
+round to the nearest .01). Any rounding will be applied after snapping to
+the nearest step.</p></dd>
+
+
+<dt>ticks</dt>
+<dd><p><code>FALSE</code> to hide tick marks, <code>TRUE</code> to show them
+according to some simple heuristics.</p></dd>
+
+
+<dt>animate</dt>
+<dd><p><code>TRUE</code> to show simple animation controls with default
+settings; <code>FALSE</code> not to; or a custom settings list, such as those
+created using <code>animationOptions()</code>.</p></dd>
+
+
+<dt>width</dt>
+<dd><p>The width of the input, e.g. <code>'400px'</code>, or <code>'100%'</code>;
+see <code><a href="validateCssUnit.html">validateCssUnit()</a></code>.</p></dd>
+
+
+<dt>sep</dt>
+<dd><p>Separator between thousands places in numbers.</p></dd>
+
+
+<dt>pre</dt>
+<dd><p>A prefix string to put in front of the value.</p></dd>
+
+
+<dt>post</dt>
+<dd><p>A suffix string to put after the value.</p></dd>
+
+
+<dt>timeFormat</dt>
+<dd><p>Only used if the values are Date or POSIXt objects. A time
+format string, to be passed to the Javascript strftime library. See
+<a href="https://github.com/samsonjs/strftime" class="external-link">https://github.com/samsonjs/strftime</a> for more details. The allowed
+format specifications are very similar, but not identical, to those for R's
+<code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">base::strftime()</a></code> function. For Dates, the default is <code>"%F"</code>
+(like <code>"2015-07-01"</code>), and for POSIXt, the default is <code>"%F %T"</code>
+(like <code>"2015-07-01 15:32:10"</code>).</p></dd>
+
+
+<dt>timezone</dt>
+<dd><p>Only used if the values are POSIXt objects. A string
+specifying the time zone offset for the displayed times, in the format
+<code>"+HHMM"</code> or <code>"-HHMM"</code>. If <code>NULL</code> (the default), times will
+be displayed in the browser's time zone. The value <code>"+0000"</code> will
+result in UTC time.</p></dd>
+
+
+<dt>dragRange</dt>
+<dd><p>This option is used only if it is a range slider (with two
+values). If <code>TRUE</code> (the default), the range can be dragged. In other
+words, the min and max can be dragged together. If <code>FALSE</code>, the range
+cannot be dragged.</p></dd>
+
+
+<dt>interval</dt>
+<dd><p>The interval, in milliseconds, between each animation step.</p></dd>
+
+
+<dt>loop</dt>
+<dd><p><code>TRUE</code> to automatically restart the animation when it
+reaches the end.</p></dd>
+
+
+<dt>playButton</dt>
+<dd><p>Specifies the appearance of the play button. Valid values
+are a one-element character vector (for a simple text label), an HTML tag
+or list of tags (using <code><a href="builder.html">tag()</a></code> and friends), or raw HTML (using
+<code><a href="HTML.html">HTML()</a></code>).</p></dd>
+
+
+<dt>pauseButton</dt>
+<dd><p>Similar to <code>playButton</code>, but for the pause button.</p></dd>
+
+</dl></div>
+  <div data-section="server-value">
+    <h3 id="server-value">Server value</h3>
+    
+
+<p>A number, date, or date-time (depending on the class of <code>value</code>), or
+in the case of slider range, a vector of two numbers/dates/date-times.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="updateSliderInput.html">updateSliderInput()</a></code></p>
+<p>Other input elements: 
+<code><a href="actionButton.html">actionButton</a>()</code>,
+<code><a href="checkboxGroupInput.html">checkboxGroupInput</a>()</code>,
+<code><a href="checkboxInput.html">checkboxInput</a>()</code>,
+<code><a href="dateInput.html">dateInput</a>()</code>,
+<code><a href="dateRangeInput.html">dateRangeInput</a>()</code>,
+<code><a href="fileInput.html">fileInput</a>()</code>,
+<code><a href="numericInput.html">numericInput</a>()</code>,
+<code><a href="passwordInput.html">passwordInput</a>()</code>,
+<code><a href="radioButtons.html">radioButtons</a>()</code>,
+<code><a href="selectInput.html">selectInput</a>()</code>,
+<code><a href="submitButton.html">submitButton</a>()</code>,
+<code><a href="textAreaInput.html">textAreaInput</a>()</code>,
+<code><a href="textInput.html">textInput</a>()</code>,
+<code><a href="varSelectInput.html">varSelectInput</a>()</code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">device.ask.default =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">"obs"</span>, <span class="st">"Number of observations:"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1000</span>, <span class="at">value =</span> <span class="dv">500</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  ),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"distPlot"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># Server logic</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  output<span class="sc">$</span>distPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    <span class="fu">hist</span>(<span class="fu">rnorm</span>(input<span class="sc">$</span>obs))</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  })</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>}</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="co"># Complete app with UI and server components</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

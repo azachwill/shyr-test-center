@@ -1,0 +1,116 @@
+---
+title: "Check for required values — req"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.4</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Ensure that values are available (<a href="isTruthy.html">"truthy"</a>) before proceeding
+with a calculation or action. If any of the given values is not truthy, the
+operation is stopped by raising a "silent" exception (not logged by Shiny,
+nor displayed in the Shiny app's UI).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">req</span>(..., <span class="at">cancelOutput =</span> <span class="cn">FALSE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>Values to check for truthiness.</p></dd>
+
+
+<dt>cancelOutput</dt>
+<dd><p>If <code>TRUE</code> and an output is being evaluated, stop
+processing as usual but instead of clearing the output, leave it in
+whatever state it happens to be in.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>The first value that was passed in.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The <code>req</code> function was designed to be used in one of two ways. The first
+is to call it like a statement (ignoring its return value) before attempting
+operations using the required values:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>rv <span class="ot">&lt;-</span> <span class="fu">reactiveValues</span>(<span class="at">state =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="fu">req</span>(input<span class="sc">$</span>a, input<span class="sc">$</span>b, rv<span class="sc">$</span>state)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="co"># Code that uses input$a, input$b, and/or rv$state...</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>})</span></code></pre><p></p></div>
+<p>In this example, if <code>r()</code> is called and any of <code>input$a</code>,
+<code>input$b</code>, and <code>rv$state</code> are <code>NULL</code>, <code>FALSE</code>, <code>""</code>,
+etc., then the <code>req</code> call will trigger an error that propagates all the
+way up to whatever render block or observer is executing.</p>
+<p>The second is to use it to wrap an expression that must be truthy:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">req</span>(input<span class="sc">$</span>plotType) <span class="sc">==</span> <span class="st">"histogram"</span>) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="fu">hist</span>(<span class="fu">dataset</span>())</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (input<span class="sc">$</span>plotType <span class="sc">==</span> <span class="st">"scatter"</span>) {</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="fu">qplot</span>(<span class="fu">dataset</span>(), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y))</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  }</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>})</span></code></pre><p></p></div>
+<p>In this example, <code>req(input$plotType)</code> first checks that
+<code>input$plotType</code> is truthy, and if so, returns it. This is a convenient
+way to check for a value "inline" with its first use.</p>
+  </div>
+  <div data-section="using-req-false-">
+    <h3 id="using-req-false-">Using <code>req(FALSE)</code></h3>
+    
+
+
+<p>You can use <code>req(FALSE)</code> (i.e. no condition) if you've already performed
+all the checks you needed to by that point and just want to stop the reactive
+chain now. There is no advantange to this, except perhaps ease of readibility
+if you have a complicated condition to check for (or perhaps if you'd like to
+divide your condition into nested <code>if</code> statements).</p>
+  </div>
+  <div data-section="using-canceloutput-true">
+    <h3 id="using-canceloutput-true">Using <code>cancelOutput = TRUE</code></h3>
+    
+
+
+<p>When <code>req(..., cancelOutput = TRUE)</code> is used, the "silent" exception is
+also raised, but it is treated slightly differently if one or more outputs are
+currently being evaluated. In those cases, the reactive chain does not proceed
+or update, but the output(s) are left is whatever state they happen to be in
+(whatever was their last valid state).</p>
+<p>Note that this is always going to be the case if
+this is used inside an output context (e.g. <code>output$txt &lt;- ...</code>). It may
+or may not be the case if it is used inside a non-output context (e.g.
+<code><a href="reactive.html">reactive()</a></code>, <code><a href="observe.html">observe()</a></code> or <code><a href="observeEvent.html">observeEvent()</a></code>)
+--- depending on whether or not there is an <code>output$...</code> that is triggered
+as a result of those calls. See the examples below for concrete scenarios.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="fu">textInput</span>(<span class="st">'data'</span>, <span class="st">'Enter a dataset from the "datasets" package'</span>, <span class="st">'cars'</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="fu">p</span>(<span class="st">'(E.g. "cars", "mtcars", "pressure", "faithful")'</span>), <span class="fu">hr</span>(),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="fu">tableOutput</span>(<span class="st">'tbl'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  )</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    output<span class="sc">$</span>tbl <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>      <span class="do">## to require that the user types something, use: `req(input$data)`</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>      <span class="do">## but better: require that input$data is valid and leave the last</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>      <span class="do">## valid table up</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>      <span class="fu">req</span>(<span class="fu">exists</span>(input<span class="sc">$</span>data, <span class="st">"package:datasets"</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>          <span class="at">cancelOutput =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>      <span class="fu">head</span>(<span class="fu">get</span>(input<span class="sc">$</span>data, <span class="st">"package:datasets"</span>, <span class="at">inherits =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    })</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  }</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  <span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

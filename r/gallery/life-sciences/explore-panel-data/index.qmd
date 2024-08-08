@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: ExPanD allows you to interactively explore your data. It is based on the ExPanDaR package and can be used with any dataset. 
+title:        "ExPanD: Explore Your Data Interactively"
+author:    Joachim Gassen
+authorurl:     https://joachim-gassen.github.io
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - eda
+ - visualization
+appurl:      https://jgassen.shinyapps.io/expand_fuel_economy/
+sourceurl:   https://github.com/joachim-gassen/ExPanDaR
+rscloudurl:  https://rstudio.cloud/project/231190
+---
+
+ExPanD allows you to interactively explore your data. It is based on the ExPanDaR package and can be used with any dataset. It allows users to explore data and to export their analysis along with the data as an R notebook. Below you find an example exploring fuel economy data.
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

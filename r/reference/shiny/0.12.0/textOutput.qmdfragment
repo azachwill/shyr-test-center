@@ -1,0 +1,64 @@
+---
+title: "textOutput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='textOutput.html'>textOutput</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">,</span> <span class="argument">container</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="keyword">if</span> <span class="keyword">(</span><span class="symbol">inline</span><span class="keyword">)</span> <span class="symbol">span</span> <span class="keyword">else</span> <span class="symbol">div</span><span class="keyword">,</span> <span class="argument">inline</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the value from</td>
+  </tr>
+  <tr>
+    <th>container</th>
+    <td>a function to generate an HTML element to contain the text</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>use an inline (<code>span()</code>) or block container (<code>div()</code>)
+for the output</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A text output element that can be included in a panel
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Render a reactive output variable as text within an application page. The
+text will be included within an HTML <code>div</code> tag by default.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Text is HTML-escaped prior to rendering. This element is often used
+  to display <a href='renderText.html'>renderText</a> output variables.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='builder.html'>h3</a></span><span class="keyword">(</span><span class="functioncall"><a href='textOutput.html'>textOutput</a></span><span class="keyword">(</span><span class="string">"caption"</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;h3&gt;
+  &lt;div id=&quot;caption&quot; class=&quot;shiny-text-output&quot;&gt;&lt;/div&gt;
+&lt;/h3&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>textOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

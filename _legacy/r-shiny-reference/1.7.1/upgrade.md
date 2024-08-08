@@ -1,0 +1,12 @@
+---
+layout: upgrade-note
+title: Upgrade notes for Shiny 1.7.1
+---
+
+
+## Bug Fixes
+
+- Closed [#3516](https://github.com/rstudio/shiny/issues/3516): Fix regression in repeated calls to [`appendTab()`](./insertTab.html) when [`navbarMenu()`](./navbarPage.html) is already present within a [`tabsetPanel()`](./tabsetPanel.html)/[`navbarPage()`](./navbarPage.html). ([#3518](https://github.com/rstudio/shiny/issues/3518))
+
+- Re-arranged conditions for testthat 1.0.0 compatibility. ([#3512](https://github.com/rstudio/shiny/issues/3512))
+

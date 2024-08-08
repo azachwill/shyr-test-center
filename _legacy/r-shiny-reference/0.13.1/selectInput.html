@@ -1,0 +1,145 @@
+---
+layout: reference
+title: "selectInput"
+categories: reference
+---
+<h1>Create a select list input control</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='selectInput.html'>selectInput</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="symbol">choices</span><span class="keyword">,</span> <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">multiple</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">selectize</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">size</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='selectInput.html'>selectizeInput</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">options</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>input</code> slot that will be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code> for no label.</td>
+  </tr>
+  <tr>
+    <th>choices</th>
+    <td>List of values to select from. If elements of the list are
+named then that name rather than the value is displayed to the user.</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The initially selected value (or multiple values if
+<code>multiple = TRUE</code>). If not specified then defaults to the first value
+for single-select lists and no values for multiple select lists.</td>
+  </tr>
+  <tr>
+    <th>multiple</th>
+    <td>Is selection of multiple items allowed?</td>
+  </tr>
+  <tr>
+    <th>selectize</th>
+    <td>Whether to use <span class = "pkg">selectize.js</span> or not.</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the input, e.g. <code>&#39;400px&#39;</code>, or <code>&#39;100%&#39;</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>.</td>
+  </tr>
+  <tr>
+    <th>size</th>
+    <td>Number of items to show in the selection box; a larger number
+will result in a taller box. Not compatible with <code>selectize=TRUE</code>.
+Normally, when <code>multiple=FALSE</code>, a select input will be a drop-down
+list, but when <code>size</code> is set, it will be a box instead.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Arguments passed to <code>selectInput()</code>.</td>
+  </tr>
+  <tr>
+    <th>options</th>
+    <td>A list of options. See the documentation of <span class = "pkg">selectize.js</span>
+for possible options (character option values inside <code><a href='http://www.rdocumentation.org/packages/base/topics/AsIs'>I</a>()</code> will
+be treated as literal JavaScript code; see <code><a href='renderDataTable.html'>renderDataTable</a>()</code>
+for details).</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A select list control that can be added to a UI definition.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a select list that can be used to choose a single or multiple items
+from a list of values.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>By default, <code>selectInput()</code> and <code>selectizeInput()</code> use the
+JavaScript library <span class = "pkg">selectize.js</span>
+(<a href = 'https://github.com/brianreavis/selectize.js'>https://github.com/brianreavis/selectize.js</a>) to instead of the basic
+select input element. To use the standard HTML select input element, use
+<code>selectInput()</code> with <code>selectize=FALSE</code>.</p>
+
+  <p>In selectize mode, if the first element in <code>choices</code> has a value of
+<code>&quot;&quot;</code>, its name will be treated as a placeholder prompt. For example:
+<code>selectInput(&quot;letter&quot;, &quot;Letter&quot;, c(&quot;Choose one&quot; = &quot;&quot;, LETTERS))</code></p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+
+  <p>The selectize input created from <code>selectizeInput()</code> allows
+  deletion of the selected option even in a single select input, which will
+  return an empty string as its value. This is the default behavior of
+  <span class = "pkg">selectize.js</span>. However, the selectize input created from
+  <code>selectInput(..., selectize = TRUE)</code> will ignore the empty string
+  value when it is a single choice input and the empty string is not in the
+  <code>choices</code> argument. This is to keep compatibility with
+  <code>selectInput(..., selectize = FALSE)</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='selectInput.html'>selectInput</a></span><span class="keyword">(</span><span class="string">"variable"</span><span class="keyword">,</span> <span class="string">"Variable:"</span><span class="keyword">,</span>
+            <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"Cylinders"</span> <span class="argument">=</span> <span class="string">"cyl"</span><span class="keyword">,</span>
+              <span class="string">"Transmission"</span> <span class="argument">=</span> <span class="string">"am"</span><span class="keyword">,</span>
+              <span class="string">"Gears"</span> <span class="argument">=</span> <span class="string">"gear"</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;variable&quot;&gt;Variable:&lt;/label&gt;
+  &lt;div&gt;
+    &lt;select id=&quot;variable&quot;&gt;&lt;option value=&quot;cyl&quot; selected&gt;Cylinders&lt;/option&gt;
+&lt;option value=&quot;am&quot;&gt;Transmission&lt;/option&gt;
+&lt;option value=&quot;gear&quot;&gt;Gears&lt;/option&gt;&lt;/select&gt;
+    &lt;script type=&quot;application/json&quot; data-for=&quot;variable&quot; data-nonempty=&quot;&quot;&gt;{}&lt;/script&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>selectInput</li><li>selectizeInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='updateSelectInput.html'>updateSelectInput</a></code></p>
+  <p>Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>,
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='dateInput.html'>dateInput</a></code>,
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='fileInput.html'>fileInput</a></code>,
+  <code><a href='numericInput.html'>numericInput</a></code>, <code><a href='passwordInput.html'>passwordInput</a></code>,
+  <code><a href='radioButtons.html'>radioButtons</a></code>, <code><a href='sliderInput.html'>sliderInput</a></code>,
+  <code><a href='submitButton.html'>submitButton</a></code>, <code><a href='textInput.html'>textInput</a></code></p>
+</div>

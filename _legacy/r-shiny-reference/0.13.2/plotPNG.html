@@ -1,0 +1,73 @@
+---
+layout: reference
+title: "plotPNG"
+categories: reference
+---
+<h1>Run a plotting function and save the output as a PNG</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='plotPNG.html'>plotPNG</a></span><span class="keyword">(</span><span class="symbol">func</span><span class="keyword">,</span> <span class="argument">filename</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span><span class="keyword">(</span><span class="argument">fileext</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">".png"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">400</span><span class="keyword">,</span>
+  <span class="argument">height</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">400</span><span class="keyword">,</span> <span class="argument">res</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">72</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>func</th>
+    <td>A function that generates a plot.</td>
+  </tr>
+  <tr>
+    <th>filename</th>
+    <td>The name of the output file. Defaults to a temp file with
+extension <code>.png</code>.</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>Width in pixels.</td>
+  </tr>
+  <tr>
+    <th>height</th>
+    <td>Height in pixels.</td>
+  </tr>
+  <tr>
+    <th>res</th>
+    <td>Resolution in pixels per inch. This value is passed to
+<code><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a></code>. Note that this affects the resolution of PNG rendering in
+R; it won&#39;t change the actual ppi of the browser.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Arguments to be passed through to <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a></code>.
+These can be used to set the width, height, background color, etc.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This function returns the name of the PNG file that it generates. In
+essence, it calls <code>png()</code>, then <code>func()</code>, then <code>dev.off()</code>.
+So <code>func</code> must be a function that will generate a plot when used this
+way.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>For output, it will try to use the following devices, in this order:
+quartz (via <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a></code>), then <code><a href='http://www.rdocumentation.org/packages/Cairo/topics/Cairo'>CairoPNG</a></code>,
+and finally <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a></code>. This is in order of quality of
+output. Notably, plain <code>png</code> output on Linux and Windows may not
+antialias some point shapes, resulting in poor quality output.</p>
+
+  <p>In some cases, <code>Cairo()</code> provides output that looks worse than
+<code>png()</code>. To disable Cairo output for an app, use
+<code>options(shiny.usecairo=FALSE)</code>.</p>
+
+</div>
+<!-- <ul>
+  <li>plotPNG</li>
+</ul>
+<ul>
+  
+</ul> -->
+

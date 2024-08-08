@@ -1,0 +1,224 @@
+---
+title: "Reactive Recap"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+always_allow_html: true
+---
+
+Let's recap what we have learned about reactivity and discuss best practices.
+
+### Three Lessons
+
+There are three main takeaway messages about reactivity that all Shiny developers should be familiar with.
+
+1.  Reactives are like functions, but they are lazily evaluated, meaning they will only evaluate when their inputs change, not each time they are called.
+2.  Reactive inputs and expressions are for their values and observers are for their side effects.
+3.  Do not define a `reactive()` inside a `render*()` function.
+
+### What's wrong?
+
+We'll wrap up the chapter with a simple but important example.
+
+Here we have an app that adds 2 to the current value of x.
+
+``` r
+library(shiny)
+library(bslib)
+
+ui <- page_sidebar(
+  title = "Add 2",
+  sidebar = sliderInput("x", "Select x", min = 1, max = 50, value = 30),
+  textOutput("x_updated")
+)
+
+server <- function(input, output, session) {
+  add_2 <- function(x) {
+    x + 2
+  }
+  current_x <- add_2(input$x)
+  output$x_updated <- renderText({
+    current_x
+  })
+}
+
+shinyApp(ui, server)
+```
+
+###
+
+Here is what the app should look like:
+
+![](../images/add-2.png){.lightbox .shadow fig-alt="Slider of 'Add 2' with the selection on 26 and showing 28 to the right of the slider."}
+
+###
+
+And here again is the code. What's wrong here?
+
+``` r
+library(shiny)
+
+ui <- page_sidebar(
+  title = "Add 2",
+  sidebar = sliderInput("x", "Select x", min = 1, max = 50, value = 30),
+  textOutput("x_updated")
+)
+
+server <- function(input, output, session) {
+  add_2 <- function(x) {
+    x + 2
+  }
+  current_x <- add_2(input$x)
+  output$x_updated <- renderText({
+    current_x
+  })
+}
+
+shinyApp(ui, server)
+```
+
+###
+
+The object `current_x` is used in the render function, but it's not currently a reactive expression.
+
+###
+
+So we need to put the definition of `current_x` in the reactive function, like this:
+
+``` r
+library(shiny)
+library(bslib)
+
+ui <- page_sidebar(
+  title = "Add 2",
+  sidebar = sliderInput("x", "Select x", min = 1, max = 50, value = 30),
+  textOutput("x_updated")
+)
+
+server <- function(input, output, session) {
+  add_2 <- function(x) {
+    x + 2
+  }
+  current_x <- reactive({
+    add_2(input$x)
+  })
+  output$x_updated <- renderText({
+    current_x
+  })
+}
+
+shinyApp(ui, server)
+```
+
+But that's still not enough...
+
+###
+
+We also need to refer to `current_x` with parantheses after its name.
+
+``` r
+library(shiny)
+library(bslib)
+
+ui <- page_sidebar(
+  title = "Add 2",
+  sidebar = sliderInput("x", "Select x", min = 1, max = 50, value = 30),
+  textOutput("x_updated")
+)
+
+server <- function(input, output, session) {
+  add_2 <- function(x) {
+    x + 2
+  }
+  current_x <- reactive({
+    add_2(input$x)
+  })
+  output$x_updated <- renderText({
+    current_x()
+  })
+}
+
+shinyApp(ui, server)
+```
+
+Missing the parentheses is a common error when working with reactives. So add this to your list! When developing Shiny apps, be wary of missing commas, and of missing parentheses when calling reactive expressions.
+
+## Practice - What's wrong?
+
+### Your turn
+
+1.  What's wrong with this? Fix it.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by navigating to the Posit Cloud Project titled **3-5 Whats wrong** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+library(bslib)
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  title = "Multiply by 3",
+  sidebar = sliderInput("x", "Select x", min = 1, max = 50, value = 30),
+  textOutput("x_updated")
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+
+  mult_3 <- function(x) {
+    x * 3
+  }
+  output$x_updated <- mult_3(input$x)
+
+}
+
+# Create the Shiny app ---------------------------------------------------------
+shinyApp(ui, server)
+```
+
+::: {.callout-note collapse="true"}
+## Show solution - see the code for the solution to the exercise above
+
+``` r
+# Load packages ----------------------------------------------------------------
+
+library(shiny)
+
+# Define UI --------------------------------------------------------------------
+
+ui <- page_sidebar(
+  title = "Multiply by 3",
+  sidebar = sliderInput("x", "Select x", min = 1, max = 50, value = 30),
+  textOutput("x_updated")
+)
+
+# Define server ----------------------------------------------------------------
+
+server <- function(input, output, session) {
+  mult_3 <- function(x) {
+    x * 3
+  }
+  current_x <- reactive({
+    mult_3(input$x)
+  })
+  output$x_updated <- renderText({
+    current_x()
+  })
+}
+
+# Create the Shiny app ---------------------------------------------------------
+shinyApp(ui = ui, server = server)
+```
+:::

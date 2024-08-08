@@ -1,0 +1,75 @@
+---
+layout: reference
+title: "NS"
+categories: reference
+---
+<h1>Namespaced IDs for inputs/outputs</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='NS.html'>NS</a></span><span class="keyword">(</span><span class="symbol">namespace</span><span class="keyword">,</span> <span class="argument">id</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="symbol">ns.sep</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>namespace</th>
+    <td>The character vector to use for the namespace. This can have
+any length, though a single element is most common. Length 0 will cause the
+<code>id</code> to be returned without a namespace, and length 2 will be
+interpreted as multiple namespaces, in increasing order of specificity
+(i.e. starting with the top-level namespace).</td>
+  </tr>
+  <tr>
+    <th>id</th>
+    <td>The id string to be namespaced (optional).</td>
+  </tr>
+</table>
+
+<div data-section="Format">
+  <h3 data-swiftype-index="false">Format</h3>
+
+  <p>An object of class <code>character</code> of length 1.</p>
+
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+If <code>id</code> is missing, returns a function that expects an id string
+  as its only argument and returns that id with the namespace prepended.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>The <code>NS</code> function creates namespaced IDs out of bare IDs, by joining
+them using <code>ns.sep</code> as the delimiter. It is intended for use in Shiny
+modules. See <a href = 'https://shiny.posit.co/articles/modules.html'>https://shiny.posit.co/articles/modules.html</a>.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Shiny applications use IDs to identify inputs and outputs. These IDs must be
+unique within an application, as accidentally using the same input/output ID
+more than once will result in unexpected behavior. The traditional solution
+for preventing name collisions is <em>namespaces</em>; a namespace is to an ID
+as a directory is to a file. Use the <code>NS</code> function to turn a bare ID
+into a namespaced one, by combining them with <code>ns.sep</code> in between.</p>
+
+</div>
+<!-- <ul>
+  <li>NS</li><li>ns.sep</li>
+</ul>
+<ul>
+  <li>datasets</li>
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><a href = 'https://shiny.posit.co/articles/modules.html'>https://shiny.posit.co/articles/modules.html</a></p>
+</div>

@@ -1,0 +1,73 @@
+---
+layout: reference
+title: "outputOptions"
+categories: reference
+---
+<h1>Set options for an output object.</h1>
+
+<pre class="code"><code class="r"><div>outputOptions(x, name, ...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>A shinyoutput object (typically <code>output</code>).</td>
+  </tr>
+  <tr>
+    <th>name</th>
+    <td>The name of an output observer in the
+  shinyoutput object.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Options to set for the output observer.</td>
+  </tr>
+</table>
+
+<div data-section="Set options for an output object.">
+  <h3 data-swiftype-index="false">Set options for an output object.</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>These are the available options for an output object:
+<ul>
+<li> suspendWhenHidden. When <code>TRUE</code> (the default), the output object
+    will be suspended (not execute) when it is hidden on the web page. When
+    <code>FALSE</code>, the output object will not suspend when hidden, and if it
+    was already hidden and suspended, then it will resume immediately.
+  </li>
+<li> priority. The priority level of the output object. Queued outputs
+    with higher priority values will execute before those with lower values.
+</li>
+</ul></p>
+
+  <p></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # Get the list of options for all observers within output
+# outputOptions(output)
+# 
+# # Disable suspend for output$myplot
+# outputOptions(output, &quot;myplot&quot;, suspendWhenHidden = FALSE)
+# 
+# # Change priority for output$myplot
+# outputOptions(output, &quot;myplot&quot;, priority = 10)
+# 
+# # Get the list of options for output$myplot
+# outputOptions(output, &quot;myplot&quot;)
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>outputOptions</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

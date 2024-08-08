@@ -1,0 +1,60 @@
+---
+title: "sizeGrowthRatio"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='sizeGrowthRatio.html'>sizeGrowthRatio</a></span><span class="keyword">(</span><span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">400</span><span class="keyword">,</span> <span class="argument">height</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">400</span><span class="keyword">,</span> <span class="argument">growthRate</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1.2</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>width, height</th>
+    <td>Base width and height.</td>
+  </tr>
+  <tr>
+    <th>growthRate</th>
+    <td>Growth rate multiplier.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Returns a function which takes a two-element vector representing an input
+width and height, and returns a two-element vector of width and height. The
+possible widths are the base width times the growthRate to any integer power.
+For example, with a base width of 500 and growth rate of 1.25, the possible
+widths include 320, 400, 500, 625, 782, and so on, both smaller and larger.
+Sizes are rounded up to the next pixel. Heights are computed the same way as
+widths.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="symbol">f</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='sizeGrowthRatio.html'>sizeGrowthRatio</a></span><span class="keyword">(</span><span class="number">500</span><span class="keyword">,</span> <span class="number">500</span><span class="keyword">,</span> <span class="number">1.25</span><span class="keyword">)</span>
+<span class="functioncall">f</span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="number">400</span><span class="keyword">,</span> <span class="number">400</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>[1] 500 500
+</div>
+<div class='input'><span class="functioncall">f</span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="number">500</span><span class="keyword">,</span> <span class="number">500</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>[1] 500 500
+</div>
+<div class='input'><span class="functioncall">f</span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="number">530</span><span class="keyword">,</span> <span class="number">550</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>[1] 625 625
+</div>
+<div class='input'><span class="functioncall">f</span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="number">625</span><span class="keyword">,</span> <span class="number">700</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>[1] 625 782
+</div>
+<div class='input'></div></code></pre>
+<!-- <ul>
+  <li>sizeGrowthRatio</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p>This is to be used with <code><a href='renderCachedPlot.html'>renderCachedPlot</a></code>.</p>
+</div>
+```

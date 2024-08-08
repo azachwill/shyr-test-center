@@ -1,0 +1,56 @@
+<style type="text/css">
+  #quarto-content>* {
+  padding-top: 0px;
+  }
+</style>
+<header id="title-block-header" class="quarto-title-block default$if(quarto-template-params.banner-header-class)$ $quarto-template-params.banner-header-class$$endif$">
+  <div class="quarto-title-banner">
+    <div class="quarto-title column-body">
+      $if(title)$<h1 class="title">$title$</h1>$endif$
+      $if(subtitle)$
+      <p class="subtitle lead">$subtitle$</p>
+      $endif$
+      $if(description)$
+      <div>
+        <div class="description">
+          $description$
+        </div>
+      </div>
+      $endif$
+      $if(categories)$
+        $if(quarto-template-params.title-block-categories)$
+      <div class="quarto-categories">
+        $for(categories)$
+        <div class="quarto-category">$categories$</div>
+        $endfor$
+      </div>
+        $endif$
+      $endif$
+    </div>
+  </div>
+
+  $title-metadata.html()$
+
+  </header>
+
+    $if(image-video)$
+    <div class="column-body-outset blog-image-container pb-5">
+      <video muted autoplay playsinline style="width: 100%; height: auto;">
+        <source src="$image-video$" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    $elseif(image)$
+    <div class="column-body-outset blog-image-container pb-5">
+      <img
+        $if(image-header)$
+          src="$image-header$"
+          $if(image-header-alt)$ alt="$image-header-alt$" $endif$
+        $elseif(image)$
+          src="$image$"
+          $if(imagealt)$ alt="$imagealt$" $endif$
+        $endif$
+        style="width: 100%; height: auto;">
+    </div>
+    $endif$
+

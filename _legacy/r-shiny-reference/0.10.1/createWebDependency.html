@@ -1,0 +1,49 @@
+---
+layout: reference
+title: "createWebDependency"
+categories: reference
+
+---
+<h1>Create a web dependency</h1>
+
+<pre class="code"><code class="r"><div>createWebDependency(dependency)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>dependency</th>
+    <td>A single HTML dependency object, created using
+  <code><a href='http://www.inside-r.org/packages/cran/htmltools/docs/htmlDependency'>htmlDependency</a></code>. If the <code>src</code> value is named, then
+  <code>href</code> and/or <code>file</code> names must be present.</td>
+  </tr>
+</table>
+
+<div data-section="Create a web dependency">
+  <h3 data-swiftype-index="false">Create a web dependency</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A single HTML dependency object that has an <code>href</code>-named element
+  in its <code>src</code>.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Ensure that a file-based HTML dependency (from the htmltools package) can be
+served over Shiny's HTTP server. This function works by using
+<code><a href='addResourcePath.html'>addResourcePath</a></code> to map the HTML dependency's directory to a
+URL.</p>
+
+</div>
+<!-- <ul>
+  <li>createWebDependency</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

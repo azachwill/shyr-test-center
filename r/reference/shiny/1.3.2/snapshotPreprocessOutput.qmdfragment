@@ -1,0 +1,35 @@
+---
+title: "snapshotPreprocessOutput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='snapshotPreprocessOutput.html'>snapshotPreprocessOutput</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">fun</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>A reactive which will be assigned to an output.</td>
+  </tr>
+  <tr>
+    <th>fun</th>
+    <td>A function that takes the output value as an input and returns a
+modified value. The returned value will be used for the test snapshot.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Add a function for preprocessing an output before taking a test snapshot</p>
+
+</div>
+<!-- <ul>
+  <li>snapshotPreprocessOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

@@ -1,0 +1,143 @@
+---
+title: "renderText"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>renderText(expr, env&nbsp;=&nbsp;parent.frame(), quoted&nbsp;=&nbsp;FALSE, func&nbsp;=&nbsp;NULL)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that returns an R object that
+  can be used as an argument to <code>cat</code>.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate
+  <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with
+  <code>quote()</code>)? This is useful if you want to save an
+  expression in a variable.</td>
+  </tr>
+  <tr>
+    <th>func</th>
+    <td>A function that returns an R object that can
+  be used as an argument to <code>cat</code>.(deprecated; use
+  <code>expr</code> instead).</td>
+  </tr>
+</table>
+
+<div data-section="Text Output">
+  <h3 data-swiftype-index="false">Text Output</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Makes a reactive version of the given function that also uses
+<code><a href='http://www.inside-r.org/r-doc/base/cat'>cat</a></code> to turn its result into a single-element character
+vector.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The corresponding HTML output tag can be anything (though <code>pre</code> is
+recommended if you need a monospace font and whitespace preserved) and should
+have the CSS class name <code>shiny-text-output</code>.</p>
+
+  <p>The result of executing <code>func</code> will passed to <code>cat</code>, inside a
+<code><a href='http://www.inside-r.org/r-doc/utils/capture.output'>capture.output</a></code> call.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>isolate({
+
+# renderPrint captures any print output, converts it to a string, and
+# returns it
+visFun &lt;- renderPrint({ &quot;foo&quot; })
+visFun()
+# &#39;[1] &quot;foo&quot;&#39;
+
+invisFun &lt;- renderPrint({ invisible(&quot;foo&quot;) })
+invisFun()
+# &#39;&#39;
+
+multiprintFun &lt;- renderPrint({
+  print(&quot;foo&quot;);
+  &quot;bar&quot;
+})
+multiprintFun()
+# &#39;[1] &quot;foo&quot;\n[1] &quot;bar&quot;&#39;
+
+nullFun &lt;- renderPrint({ NULL })
+nullFun()
+# &#39;NULL&#39;
+
+invisNullFun &lt;- renderPrint({ invisible(NULL) })
+invisNullFun()
+# &#39;&#39;
+
+vecFun &lt;- renderPrint({ 1:5 })
+vecFun()
+# &#39;[1] 1 2 3 4 5&#39;
+
+
+# Contrast with renderText, which takes the value returned from the function
+# and uses cat() to convert it to a string
+visFun &lt;- renderText({ &quot;foo&quot; })
+visFun()
+# &#39;foo&#39;
+
+invisFun &lt;- renderText({ invisible(&quot;foo&quot;) })
+invisFun()
+# &#39;foo&#39;
+
+multiprintFun &lt;- renderText({
+  print(&quot;foo&quot;);
+  &quot;bar&quot;
+})
+multiprintFun()
+# &#39;bar&#39;
+
+nullFun &lt;- renderText({ NULL })
+nullFun()
+# &#39;&#39;
+
+invisNullFun &lt;- renderText({ invisible(NULL) })
+invisNullFun()
+# &#39;&#39;
+
+vecFun &lt;- renderText({ 1:5 })
+vecFun()
+# &#39;1 2 3 4 5&#39;
+
+})
+</div>
+<div class='output'>[1] &quot;foo&quot;
+</div>
+<div class='output'>[1] &quot;1 2 3 4 5&quot;
+</div></pre>
+<!-- <ul>
+  <li>renderText</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='renderPrint.html'>renderPrint</a></code> for capturing the print output of a
+  function, rather than the returned text value.
+
+</div>
+```

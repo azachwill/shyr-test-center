@@ -1,0 +1,79 @@
+---
+layout: reference
+title: "renderUI"
+categories: reference
+---
+<h1>UI Output</h1>
+
+<pre class="code"><code class="r"><div>renderUI(expr, env&nbsp;=&nbsp;parent.frame(), quoted&nbsp;=&nbsp;FALSE, func&nbsp;=&nbsp;NULL)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that returns a Shiny tag
+  object, <code><a href='HTML.html'>HTML</a></code>, or a list of such objects.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate
+  <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with
+  <code>quote()</code>)? This is useful if you want to save an
+  expression in a variable.</td>
+  </tr>
+  <tr>
+    <th>func</th>
+    <td>A function that returns a Shiny tag object,
+  <code><a href='HTML.html'>HTML</a></code>, or a list of such objects
+  (deprecated; use <code>expr</code> instead).</td>
+  </tr>
+</table>
+
+<div data-section="UI Output">
+  <h3 data-swiftype-index="false">UI Output</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p><b>Experimental feature.</b> Makes a reactive version of a function that
+generates HTML using the Shiny UI library.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The corresponding HTML output tag should be <code>div</code> and have the CSS class
+name <code>shiny-html-output</code> (or use <code><a href='htmlOutput.html'>uiOutput</a></code>).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+#   output$moreControls &lt;- renderUI({
+#     list(
+# 
+#     )
+#   })
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>renderUI</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+conditionalPanel
+
+</div>

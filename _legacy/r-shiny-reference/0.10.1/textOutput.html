@@ -1,0 +1,64 @@
+---
+layout: reference
+title: "textOutput"
+categories: reference
+
+---
+<h1>Create a text output element</h1>
+
+<pre class="code"><code class="r"><div>textOutput(outputId, container&nbsp;=&nbsp;div)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the value from</td>
+  </tr>
+  <tr>
+    <th>container</th>
+    <td>a function to generate an HTML element to contain the text</td>
+  </tr>
+</table>
+
+<div data-section="Create a text output element">
+  <h3 data-swiftype-index="false">Create a text output element</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A text output element that can be included in a panel</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Render a reactive output variable as text within an application page. The
+text will be included within an HTML <code>div</code> tag by default.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>Text is HTML-escaped prior to rendering. This element is often used
+to display <a href='renderText.html'>renderText</a> output variables.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>h3(textOutput(&quot;caption&quot;))
+</div>
+<div class='output'>&lt;h3&gt;
+  &lt;div id=&quot;caption&quot; class=&quot;shiny-text-output&quot;&gt;&lt;/div&gt;
+&lt;/h3&gt; 
+</div></pre>
+<!-- <ul>
+  <li>textOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

@@ -1,0 +1,285 @@
+---
+title: Using custom CSS in your app
+date: 2021-01-07
+author: Nick Strayer
+description: Adding custom styling to your app can help make it stand out. Here we go over the various ways to add your own CSS styles to your apps.
+---
+
+
+
+## Startpoint
+
+We will be styling the ever-familiar "Old Faithful Geyser Data" app; this is the app that you get whenever you request a new Shiny app in RStudio. We will be working with a single-file shiny app, so all the code is in this single `app.R` file. (The line spacing and comments are changed to make the code more compact.)
+
+
+
+````{.r filename="app.R"}
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Old Faithful Geyser Data"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30)
+    ),
+    mainPanel(plotOutput("distPlot"))
+  )
+)
+
+server <- function(input, output) {
+  output$distPlot <- renderPlot({
+    x    <- faithful[, 2]
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+  })
+}
+
+shinyApp(ui = ui, server = server)
+````
+
+
+![](vanilla_app.png){fig-alt="Shiny app of Old Faithful Geyser Data with a white background."}
+
+
+## Our custom styles
+To update our app's style, we will implement a pseudo-dark-mode and change the app title's font using a font from [Google Fonts.](https://fonts.google.com/) To do this, we will add the following CSS:
+
+````css
+/* Get a fancy font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+body {
+  background-color: black;
+  color: white; /* text color */
+}
+
+/* Change header text to imported font */
+h2 {
+  font-family: 'Yusei Magic', sans-serif;
+}
+
+/* Make text visible on inputs */
+.shiny-input-container {
+  color: #474747;
+}
+````
+
+![](dark_mode.png){fig-alt="Shiny app of Old Faithful Geyser Data with a black background."}
+
+So, while it's not a proper dark mode, our app does look a lot different.
+
+
+## Getting our CSS into the app
+
+So how do we go about getting the above CSS into our Shiny app? There are many ways to do this, but they revolve around main options: inline CSS or file-based CSS. "Inline" CSS in the case of a Shiny app is where we write our preferred styles using character strings right in our UI declaration. "File-based" is when we write the styles in their own separate `.css` file and point our app to that file. There are multiple ways to do both options, but we will show the best way to do both for 99% of use-cases in this post. At the end, we will briefly cover the other methods and explain their pros and cons.
+
+## Inline CSS
+
+The quickest and easiest way to get CSS into your app is by "inlining" it. The way to do this in Shiny is using the `head` and `styles` `tags`:
+
+
+````{.r filename="app.R"}
+...
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+  tags$head(
+    # Note the wrapping of the string in HTML()
+    tags$style(HTML("
+      @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+      body {
+        background-color: black;
+        color: white;
+      }
+      h2 {
+        font-family: 'Yusei Magic', sans-serif;
+      }
+      .shiny-input-container {
+        color: #474747;
+      }"))
+  ),
+  titlePanel("Old Faithful Geyser Data"),
+  ...
+)
+...
+````
+
+### Inlining Pros
+
+A significant plus inlining is the **CSS sits right in the main app script, and the developer does not need to go far to make changes, reducing the amount of flipping back and forth between files** required to make changes. Adding inlined styles is also **super quick:** no files need to be created and then linked; just type your code and reload the app.
+
+### Inlining Cons
+
+A downside of your styles living in the same file as your app logic is your **UI function can get cumbersome with anything more than a few lines of CSS.** In terms of developer convenience, you also lose great editor features like syntax highlighting and auto-complete, as the editor won't know your writing CSS inside that string.
+
+
+### When to use inlining
+
+When developing a Shiny app with custom styles, a balance needs to be struck between easy access to custom styling afforded by inline CSS and having an app script of manageable length. A typical development workflow will involve initial style work being done inline. Once the CSS gets to longer than a few rules, the app is refactored into the file-based workflow.
+
+
+
+## File-based CSS
+
+
+````{.css filename="www/dark_mode.css"}
+/* Get a fancy font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+body {
+  background-color: black;
+  color: white; /* text color */
+}
+
+/* Change header text to imported font */
+h2 {
+  font-family: 'Yusei Magic', sans-serif;
+}
+
+/* Make text visible on inputs */
+.shiny-input-container {
+  color: #474747;
+}
+````
+
+
+
+
+````{.r filename="app.R"}
+...
+ui <- fluidPage(
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "dark_mode.css")
+  )
+  ...
+)
+...
+
+````
+
+
+### A note about `www/`
+
+One thing you may notice is that we placed our CSS file in the subfolder `www/`, but we only specified the CSS file's name (`dark_mode.css`) in our `href` or "hyperlink reference" argument. The `www/` folder is a special one for Shiny. Resources your app may link to, such as images---or in this case, scripts---are placed in the `www/` folder. Shiny then knows to make these files available for access from the web browser. If we had placed `dark_mode.css` at the same file hierarchy next as app.R, Shiny would not know that it needs to host it, and your app would tell the browser to look for a file that was not available to it.
+
+  
+### Pros of file-based CSS
+
+The benefits of file-based CSS inclusion follow naturally from the cons of the inline approach. You can **encapsulate all your styling logic in its own file.** This way, style declarations do not clutter your app logic, and---if your editor supports it---you can use proper **syntax highlighting and auto-complete.** Another big positive is the ability to **use tools like SASS or LESS** to build your styles and have them transpile to your external CSS file instead of having to copy and paste the results right into a string within your app script.
+
+
+
+### Cons of file-based CSS
+
+While a modular workflow can make managing large and complex apps easier, it can also make managing small and simple apps more complicated. As mentioned in the pros of the inline section, the **developer needs to flip between files and keep track of class or id dependencies** between the UI declaration and the custom CSS. File-based CSS workflows **can make sharing your code more difficult.** It's a lot easier to copy and paste the contents of a single R script rather than layout the creation of files (of course, you could use a service like GitHub to avoid these issues.)
+
+
+### When to use file-based 
+
+Reach for file-based CSS when your CSS is more complicated than a few basic rules. 
+
+
+## Other methods
+
+Those familiar with Shiny may have noticed I left out a couple of ways of getting CSS into your app.
+
+### `theme = "styles.css"`
+
+You can pass a CSS file directly to your app using the theme argument in your UI function, much the same as the `tags$link()` method. However, it's not recommended anymore because the `theme` argument is now commonly used by the [`bslib` package](https://rstudio.github.io/bslib/) to pass in custom bootstrap theming options. (`bslib` also provides its own functionality for adding additional CSS to a given bootstrap theme with the function [`bslib::bs_add_rules()`.](https://rstudio.github.io/bslib/reference/bs_bundle.html))
+
+
+  
+### `includeCSS()`
+
+The function `includeCSS()` is an amalgamation of inline and file-based CSS. It takes as its argument a file path---this time not necessarily in the `www/` folder---and pastes that file's contents directly into the HTML of your app instead of using a file link. This means
+
+````{.r filename="app.R"}
+...
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+  includeCSS("www/dark_mode.css"),
+  titlePanel("Old Faithful Geyser Data"),
+  ...
+)
+...
+````
+
+
+
+makes Shiny build the same HTML as doing
+
+````{.r filename="app.R"}
+...
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+  tags$head(
+    tags$style(HTML("
+      @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+      body {
+        background-color: black;
+        color: white;
+      }
+      /* Change font of header text */
+      h2 {
+        font-family: 'Yusei Magic', sans-serif;
+      }
+      /* Make text visible on inputs */
+      .shiny-input-container {
+        color: #474747;
+      }"))
+  ),
+  titlePanel("Old Faithful Geyser Data"),
+    ...
+)
+...
+````
+
+
+_As a bonus, you can verify this by viewing your app in a browser and right-clicking and selecting "view source." You'll see the same source for both approaches above, but not with the original file-based method._
+
+For almost every Shiny app, the difference between including CSS via inlining and with a link is negligible, and there is no need to worry about performance implications. However, when you have a large amount of CSS (which can sometimes occur when using CSS generating languages like SCSS) it's better to link to the styles rather than directly place them in the HTML.
+
+
+### Element `style` argument
+
+When dealing with plain tag objects in Shiny, such as is we had declared the title of the app with an `h2()` instead of `titlePanel()` you can place any custom CSS you want in the style argument. These styles just apply to that specific element.
+
+
+````{.r filename="app.R"}
+...
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+  # titlePanel("Old Faithful Geyser Data"),
+  h2("Old Faithful Geyser Data", style = "font-family: monospace;"),
+  ...
+)
+...
+````
+
+
+
+_Note: If you wanted to use the nice Google font we used before, you'd have to still import that in a chunk of CSS added somewhere else._
+
+This type of CSS is good for simple bespoke styling modifications, but, like inlining CSS in general, can quickly get out of hand if styles become too complicated. When this happens it's often better to give the element to be styled a unique id and target that id in your general CSS declarations. 
+
+````{.r filename="app.R"}
+...
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+  tags$head(
+    # Note the wrapping of the string in HTML()
+    tags$style(HTML("
+      /* Change font style for our monospaced title element */
+      #monospaced-title {
+        font-family: monospace;
+      }"))
+  ),
+  # Application title
+  # titlePanel("Old Faithful Geyser Data"),
+  h2("Old Faithful Geyser Data", id = "monospaced-title"),
+  ...
+)
+...
+````

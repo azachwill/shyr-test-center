@@ -1,0 +1,64 @@
+---
+title: "mainPanel"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>mainPanel(..., width&nbsp;=&nbsp;8)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Output elements to include in the main panel</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the main panel. For fluid layouts this is out of 12
+total units; for fixed layouts it is out of whatever the width of the main
+panel's parent column is.</td>
+  </tr>
+</table>
+
+<div data-section="Create a main panel">
+  <h3 data-swiftype-index="false">Create a main panel</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A main panel that can be passed to <code><a href='sidebarLayout.html'>sidebarLayout</a></code>.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Create a main panel containing output elements that can in turn be passed to
+<code><a href='sidebarLayout.html'>sidebarLayout</a></code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Show the caption and plot of the requested variable against mpg
+mainPanel(
+   h3(textOutput(&quot;caption&quot;)),
+   plotOutput(&quot;mpgPlot&quot;)
+)
+</div>
+<div class='output'>&lt;div class=&quot;span8&quot;&gt;
+  &lt;h3&gt;
+    &lt;div id=&quot;caption&quot; class=&quot;shiny-text-output&quot;&gt;&lt;/div&gt;
+  &lt;/h3&gt;
+  &lt;div id=&quot;mpgPlot&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>mainPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

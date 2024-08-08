@@ -1,0 +1,92 @@
+---
+layout: reference
+title: "Change the selected tab on the client — updateTabsetPanel"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Change the selected tab on the client</h1>
+  
+
+  <pre class="code"><span class='fu'>updateTabsetPanel</span>(
+  <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>(),
+  <span class='no'>inputId</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
+
+<span class='fu'>updateNavbarPage</span>(
+  <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>(),
+  <span class='no'>inputId</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
+
+<span class='fu'>updateNavlistPanel</span>(
+  <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>(),
+  <span class='no'>inputId</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The <code>session</code> object passed to function given to
+<code>shinyServer</code>. Default is <code><a href='domains.html'>getDefaultReactiveDomain()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>inputId</p></th>
+    <td><p>The id of the <code>tabsetPanel</code>, <code>navlistPanel</code>,
+or <code>navbarPage</code> object.</p></td>
+  </tr>
+  <tr>
+    <th><p>selected</p></th>
+    <td><p>The <code>value</code> (or, if none was supplied, the <code>title</code>)
+of the tab that should be selected by default. If <code>NULL</code>, the first
+tab will be selected.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Change the selected tab on the client</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='tabsetPanel.html'>tabsetPanel()</a></code>, <code><a href='navlistPanel.html'>navlistPanel()</a></code>,
+<code><a href='navbarPage.html'>navbarPage()</a></code></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(<span class='fu'><a href='sidebarLayout.html'>sidebarLayout</a></span>(
+  <span class='fu'><a href='sidebarLayout.html'>sidebarPanel</a></span>(
+    <span class='fu'><a href='sliderInput.html'>sliderInput</a></span>(<span class='st'>"controller"</span>, <span class='st'>"Controller"</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>1</span>)
+  ),
+  <span class='fu'><a href='sidebarLayout.html'>mainPanel</a></span>(
+    <span class='fu'><a href='tabsetPanel.html'>tabsetPanel</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"inTabset"</span>,
+      <span class='fu'><a href='tabPanel.html'>tabPanel</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Panel 1"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"panel1"</span>, <span class='st'>"Panel 1 content"</span>),
+      <span class='fu'><a href='tabPanel.html'>tabPanel</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Panel 2"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"panel2"</span>, <span class='st'>"Panel 2 content"</span>),
+      <span class='fu'><a href='tabPanel.html'>tabPanel</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Panel 3"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"panel3"</span>, <span class='st'>"Panel 3 content"</span>)
+    )
+  )
+))
+
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>controller</span>, {
+    <span class='fu'>updateTabsetPanel</span>(<span class='no'>session</span>, <span class='st'>"inTabset"</span>,
+      <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"panel"</span>, <span class='no'>input</span>$<span class='no'>controller</span>)
+    )
+  })
+}
+
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+

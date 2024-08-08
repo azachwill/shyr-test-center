@@ -1,0 +1,135 @@
+---
+title: "updateRadioButtons"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='updateRadioButtons.html'>updateRadioButtons</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="symbol">inputId</span><span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">choices</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">inline</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">choiceNames</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">choiceValues</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</td>
+  </tr>
+  <tr>
+    <th>inputId</th>
+    <td>The id of the input object.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>The label to set for the input object.</td>
+  </tr>
+  <tr>
+    <th>choices</th>
+    <td>List of values to select from (if elements of the list are
+named then that name rather than the value is displayed to the user). If
+this argument is provided, then <code>choiceNames</code> and <code>choiceValues</code>
+must not be provided, and vice-versa. The values should be strings; other
+types (such as logicals and numbers) will be coerced to strings.</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The initially selected value (if not specified then defaults
+to the first value)</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>If <code>TRUE</code>, render the choices inline (i.e. horizontally)</td>
+  </tr>
+  <tr>
+    <th>choiceNames</th>
+    <td>List of names and values, respectively, that
+are displayed to the user in the app and correspond to the each choice (for
+this reason, <code>choiceNames</code> and <code>choiceValues</code> must have the same
+length). If either of these arguments is provided, then the other
+<em>must</em> be provided and <code>choices</code> <em>must not</em> be provided. The
+advantage of using both of these over a named list for <code>choices</code> is
+that <code>choiceNames</code> allows any type of UI object to be passed through
+(tag objects, icons, HTML code, ...), instead of just simple text. See
+Examples.</td>
+  </tr>
+  <tr>
+    <th>choiceValues</th>
+    <td>List of names and values, respectively, that
+are displayed to the user in the app and correspond to the each choice (for
+this reason, <code>choiceNames</code> and <code>choiceValues</code> must have the same
+length). If either of these arguments is provided, then the other
+<em>must</em> be provided and <code>choices</code> <em>must not</em> be provided. The
+advantage of using both of these over a named list for <code>choices</code> is
+that <code>choiceNames</code> allows any type of UI object to be passed through
+(tag objects, icons, HTML code, ...), instead of just simple text. See
+Examples.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Change the value of a radio input on the client</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+
+  <p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href='numericInput.html'>numericInput</a>()</code> and
+<code>updateNumericInput()</code> take a similar set of arguments.</p>
+
+  <p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+
+  <p>For <code><a href='radioButtons.html'>radioButtons</a>()</code>, <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a>()</code> and
+<code><a href='selectInput.html'>selectInput</a>()</code>, the set of choices can be cleared by using
+<code>choices=character(0)</code>. Similarly, for these inputs, the selected item
+can be cleared by using <code>selected=character(0)</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='builder.html'>p</a></span><span class="keyword">(</span><span class="string">"The first radio button group controls the second"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='radioButtons.html'>radioButtons</a></span><span class="keyword">(</span><span class="string">"inRadioButtons"</span><span class="keyword">,</span> <span class="string">"Input radio buttons"</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"Item A"</span><span class="keyword">,</span> <span class="string">"Item B"</span><span class="keyword">,</span> <span class="string">"Item C"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='radioButtons.html'>radioButtons</a></span><span class="keyword">(</span><span class="string">"inRadioButtons2"</span><span class="keyword">,</span> <span class="string">"Input radio buttons 2"</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"Item A"</span><span class="keyword">,</span> <span class="string">"Item B"</span><span class="keyword">,</span> <span class="string">"Item C"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="symbol">x</span> <span class="assignement">&lt;-</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">inRadioButtons</span>
+
+    <span class="comment"># Can also set the label and select items</span>
+    <span class="functioncall"><a href='updateRadioButtons.html'>updateRadioButtons</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="string">"inRadioButtons2"</span><span class="keyword">,</span>
+      <span class="argument">label</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"radioButtons label"</span><span class="keyword">,</span> <span class="symbol">x</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="argument">choices</span> <span class="argument">=</span> <span class="symbol">x</span><span class="keyword">,</span>
+      <span class="argument">selected</span> <span class="argument">=</span> <span class="symbol">x</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>updateRadioButtons</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='radioButtons.html'>radioButtons</a></code></p>
+</div>
+```

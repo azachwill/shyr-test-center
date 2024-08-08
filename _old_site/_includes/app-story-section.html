@@ -1,0 +1,22 @@
+<div class="col-xs-12 article-group">
+  <h2 id="{{ include.group.title | identifier }}">{{ include.group.title }}</h2>
+  <div class="app-story-section-description">{{ include.group.description }}</div>
+  <div class="app-story-section-links">
+    <i class="fas fa-lg fa-desktop fa-fw"></i> <a href="{{include.group.app-loc}}" target="_blank">View app</a>
+    <i class="fab fa-lg fa-github fa-fw"></i> <a href="{{include.group.app-code}}" target="_blank">View code</a>
+  </div>
+  <div class="app-story-post-holder">
+    {% for postname in include.group.children %}
+    {% assign post = postname | find_post %}
+      <div class="app-story-post">
+        <div class="app-story-thumbnail" style="background-image:url(images/thumbnails/{{ post.data["thumbnail"] }})">
+        </div>
+        <a href="{{ post.url }}" class="main-link" target="_blank">
+          <p class="app-story-post-title">{{post.data["title"]}}</p>
+        </a>
+        <p class="app-story-post-blurb">{{post.data["blurb"]}}</p>
+      </div>
+    {% cycle include.group.title: '', '', '', '<div class="clearfix"></div>' %}
+    {% endfor %}
+  </div>
+</div>

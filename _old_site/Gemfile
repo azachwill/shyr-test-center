@@ -1,0 +1,12 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+gem "jekyll"
+gem "kramdown"
+
+gem "treetop-dcf"
+
+gem "jekyll-sitemap"
+
+gem "jekyll-feed"
+

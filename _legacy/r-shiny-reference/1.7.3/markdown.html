@@ -1,0 +1,79 @@
+---
+layout: reference
+title: "Insert inline Markdown — markdown"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Insert inline Markdown</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.3/R/shiny.R" class="external-link"><code>R/shiny.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This function accepts
+<a href="https://en.wikipedia.org/wiki/Markdown" class="external-link">Markdown</a>-syntax text and returns
+HTML that may be included in Shiny UIs.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">markdown</span>(mds, <span class="at">extensions =</span> <span class="cn">TRUE</span>, <span class="at">.noWS =</span> <span class="cn">NULL</span>, ...)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>mds</dt>
+<dd><p>A character vector of Markdown source to convert to HTML. If the
+vector has more than one element, a single-element character vector of
+concatenated HTML is returned.</p></dd>
+
+
+<dt>extensions</dt>
+<dd><p>Enable Github syntax extensions; defaults to <code>TRUE</code>.</p></dd>
+
+
+<dt>.noWS</dt>
+<dd><p>Character vector used to omit some of the whitespace that would
+normally be written around generated HTML. Valid options include <code>before</code>,
+<code>after</code>, and <code>outside</code> (equivalent to <code>before</code> and <code>end</code>).</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Additional arguments to pass to <code><a href="https://docs.ropensci.org/commonmark/reference/commonmark.html" class="external-link">commonmark::markdown_html()</a></code>.
+These arguments are <em><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic</a></em>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>a character vector marked as HTML.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Leading whitespace is trimmed from Markdown text with <code><a href="https://glue.tidyverse.org/reference/trim.html" class="external-link">glue::trim()</a></code>.
+Whitespace trimming ensures Markdown is processed correctly even when the
+call to <code>markdown()</code> is indented within surrounding R code.</p>
+<p>By default, <a href="https://docs.ropensci.org/commonmark/reference/extensions.html" class="external-link">Github extensions</a> are enabled, but this
+can be disabled by passing <code>extensions = FALSE</code>.</p>
+<p>Markdown rendering is performed by <code><a href="https://docs.ropensci.org/commonmark/reference/commonmark.html" class="external-link">commonmark::markdown_html()</a></code>. Additional
+arguments to <code>markdown()</code> are passed as arguments to <code>markdown_html()</code></p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">markdown</span>(<span class="st">"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">    # Markdown Example</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">    This is a markdown paragraph, and will be contained within a `&lt;p&gt;` tag</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">    in the UI.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    The following is an unordered list, which will be represented in the UI as</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">    a `&lt;ul&gt;` with `&lt;li&gt;` children:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">    * a bullet</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">    * another</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st">    [Links](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) work;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st">    so does *emphasis*.</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="st">    To see more of what's possible, check out [commonmark.org/help](https://commonmark.org/help).</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="st">    "</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+  </div>
+</div>

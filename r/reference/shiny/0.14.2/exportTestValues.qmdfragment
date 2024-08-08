@@ -1,0 +1,95 @@
+---
+title: "exportTestValues"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='exportTestValues.html'>exportTestValues</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">quoted_</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">env_</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">session_</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Named arguments that are quoted or unquoted expressions that will
+be captured and evaluated when API endpoint is visited.</td>
+  </tr>
+  <tr>
+    <th>quoted_</th>
+    <td>Are the expression quoted? Default is <code>FALSE</code>.</td>
+  </tr>
+  <tr>
+    <th>env_</th>
+    <td>The environment in which the expression should be evaluated.</td>
+  </tr>
+  <tr>
+    <th>session_</th>
+    <td>A Shiny session object.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This function registers expressions that will be evaluated when a test export
+event occurs. These events are triggered by accessing an API endpoint URL.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This function only has an effect if the global option <code>shiny.testmode</code>
+is set to <code>TRUE</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>options</a></span><span class="keyword">(</span><span class="argument">shiny.testmode</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># This application shows the test endpoint URL; clicking on it will</span>
+<span class="comment"># fetch the input, output, and exported values in JSON format.</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+  <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='bootstrapPage.html'>basicPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='builder.html'>h4</a></span><span class="keyword">(</span><span class="string">"Snapshot URL: "</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='htmlOutput.html'>uiOutput</a></span><span class="keyword">(</span><span class="string">"url"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='builder.html'>h4</a></span><span class="keyword">(</span><span class="string">"Current values:"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"values"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"inc"</span><span class="keyword">,</span> <span class="string">"Increment x"</span><span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">vals</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveValues.html'>reactiveValues</a></span><span class="keyword">(</span><span class="argument">x</span> <span class="argument">=</span> <span class="number">1</span><span class="keyword">)</span>
+    <span class="symbol">y</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactive.html'>reactive</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">x</span> <span class="keyword">+</span> <span class="number">1</span> <span class="keyword">}</span><span class="keyword">)</span>
+
+    <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">inc</span><span class="keyword">,</span> <span class="keyword">{</span>
+      <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">x</span> <span class="assignement">&lt;&lt;-</span> <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">x</span> <span class="keyword">+</span> <span class="number">1</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+
+    <span class="functioncall"><a href='exportTestValues.html'>exportTestValues</a></span><span class="keyword">(</span>
+      <span class="argument">x</span> <span class="argument">=</span> <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">x</span><span class="keyword">,</span>
+      <span class="argument">y</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes_position'>y</a></span><span class="keyword">(</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">url</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderUI.html'>renderUI</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="symbol">url</span> <span class="assignement">&lt;-</span> <span class="symbol">session</span><span class="keyword">$</span><span class="functioncall">getTestEndpointUrl</span><span class="keyword">(</span><span class="argument">format</span><span class="argument">=</span><span class="string">"json"</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='builder.html'>a</a></span><span class="keyword">(</span><span class="argument">href</span> <span class="argument">=</span> <span class="symbol">url</span><span class="keyword">,</span> <span class="symbol">url</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">values</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span><span class="keyword">(</span><span class="string">"vals$x: "</span><span class="keyword">,</span> <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">x</span><span class="keyword">,</span> <span class="string">"\ny: "</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes_position'>y</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+<span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>exportTestValues</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

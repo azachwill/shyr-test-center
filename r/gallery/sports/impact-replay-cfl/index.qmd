@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This shiny app (which doesn't look like one!) was the winner of the 2015 Canada Sports Hackathon.
+title:        "Impact Replays: Relive the Best Moments of the CFL"
+author:    Dean Attali
+authorurl:     https://deanattali.com/
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - sports
+ - visualization
+appurl:      https://daattali.com/shiny/cfl/
+sourceurl:   https://github.com/daattali/shiny-server/tree/master/cfl
+rscloudurl:  https://rstudio.cloud/project/220158
+---
+
+Using play-by-play data, visualize the progression of Canadian Football League matches by showing the passes, rushes, and touchdowns. This shiny app (which doesn't look like one!) was the winner of the 2015 Canada Sports Hackathon.
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

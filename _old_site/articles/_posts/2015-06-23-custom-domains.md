@@ -1,0 +1,24 @@
+---
+layout: post
+title: Setting up custom domains on shinyapps.io
+edited: 2015-06-23
+description: The shinyapps.io Professional plan offers customers the ability to host their Shiny applications using their own domains. This can be useful if you want to control the URL that is viewed by the end-user when you share your application with them.
+---
+
+The shinyapps.io Professional plan offers customers the ability to host their Shiny applications using their own domains. This can be useful if you want to control the URL that is viewed by the end-user when you share your application with them.
+
+In order to enable this feature you will want to follow these steps:
+
+1. Decide on domain(s) or subdomain(s) that you would want to host your applications on: (Example: _acmeshinyapps.com_ or _apps.acme.com_)
+
+2. Ask your IT administrator to setup a CNAME from that domain/subdomain to your account domain. (Example: If your account name is acme and your domain you would like to setup is _apps.acme.com_, then you must create a CNAME from _apps.acme.com_ to _acme.shinyapps.io_.) Steps to complete this can vary depending on domain registrar or DNS provider, so we recommend you consult your provider’s documentation for exact instructions on completing this step.
+
+3. Once the domain record has been created, log into the shinyapps.io dashboard, and navigate to Account->Domains. From here you can add the domain or subdomain from above and then click Add Domain.
+![](/images/custom-domains-1.png)
+
+4. Now you are ready to add additional URLs to any of your existing applications. Within the dashboard, find your application in the Applications tab and click on the URLs menu bar choice.  You will notice that there is already a single URL which is the one that is created by default. (Note the default URL cannot be removed)
+
+5. Click on Add URL. You can now select from the list of domains you have entered (Example: _apps.acme.com_) and can now specify the path to the application. The URL field below will show you what the final URL would look like. 
+![](/images/custom-domains-2.png)
+
+**Note**: a single application can be hosted on multiple domains and using different paths, and that all paths are case sensitive.

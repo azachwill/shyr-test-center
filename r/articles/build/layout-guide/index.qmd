@@ -1,0 +1,449 @@
+---
+title: Application layout guide
+date: 2024-01-10
+description: bslib includes a number of facilities for laying out the components of a Shiny application. This guide describes a variety of application layout features.
+---
+
+### Overview ###
+
+Shiny apps use [Bootstrap](https://getbootstrap.com/), an extremely popular HTML/CSS framework, (though no prior experience with Bootstrap is necessary). As a result, the best way to customize the layout of a Shiny app is with R's [bslib](https://rstudio.github.io/bslib/index.html) package. This guide will teach you how to use bslib to build:
+
+* [Sidebars](https://rstudio.github.io/bslib/articles/sidebars/index.html)
+* [Multi-page apps that have a navigation bar](https://rstudio.github.io/bslib/articles/dashboards/index.html#multi-page)
+* [Multi-page _panels_, like a tabset](https://rstudio.github.io/bslib/articles/dashboards/index.html#multi-panel)
+* [Accordions](https://rstudio.github.io/bslib/reference/accordion.html)
+* [Multi-column apps that leverage a grid layout](https://rstudio.github.io/bslib/reference/layout_columns.html)
+
+For more information on any of these items, visit the bslib package site at the links above.
+
+### Sidebar Layout ###
+
+The sidebar layout is a useful starting point for most applications. This layout provides a sidebar for inputs and a large main area for output:
+
+![Sidebar Layout](sidebarLayout.png){fig-alt="Base Hello Shiny! Shiny app with a slider of Number of bins on the left and a histogram of waiting times on the right." class="shadow"}
+
+Here's the code used to create this layout:
+
+
+````r
+ui <- page_sidebar(
+
+  title = "Hello Shiny!",
+
+  sidebar = sidebar(
+    sliderInput(
+      "bins", label = "Number of bins:",
+      min = 1, value = 30, max = 50
+    )
+  ),
+
+  plotOutput("distPlot")
+)
+````
+
+Note that the sidebar can be positioned to the left (the default) or right of the main area. For example, to position the sidebar to the right you would use this code:
+
+
+````r
+ui <- page_sidebar(
+
+  title = "Hello Shiny!",
+
+  sidebar = sidebar(
+    position = "right",
+    # Inputs excluded for brevity
+  ),
+
+  # Outputs excluded for brevity 
+)
+````
+
+`page_sidebar()` described above makes use of bslib's lower level `layout_sidebar()` function. `layout_sidebar()` provides a way to add a sidebar to individual bslib components, like `nav_panel()`s and `card()`s. For example, this app contains two cards, one of which has a sidebar.
+
+![Card with sidebar](sidebarCard.png){fig-alt="Shiny app with two cards that contain text, one of which features a sidebar." class="shadow"}
+
+Here's the code used to create this layout:
+
+````r
+ui <- page_fillable(
+
+  card(
+    card_header("Card without sidebar"),
+    "No Sidebar"
+  ),
+  
+  card(
+    card_header("Card with sidebar"),
+    layout_sidebar(
+      sidebar = sidebar(
+        bg = "lightgrey",
+        "Sidebar"
+      ),
+      "Main Content"
+    )
+  )
+  
+)
+````
+Visit the [Sidebars article](https://rstudio.github.io/bslib/articles/sidebars/index.html) on the bslib site to learn more about bslib sidebars.
+
+### Multi-page apps
+
+To add multiple pages to an app, change `page_sidebar()` to `page_navbar()` and use `nav_panel()` to supply the title and content for each page. Here you can also take advantage of `bslib`'s:
+
+- `nav_spacer()` 
+- `nav_menu()` 
+- `nav_item()` 
+
+to add items or menus to the navbar, and to control their alignment.
+
+![Multi-page app](navbarPage.png){fig-alt="Shiny app that contains three pages, connected by a navigation bar at the top of the app. On the right of the navigation bar is a dropdown menu that contains two hyperlinks." class="shadow"}
+
+
+Here's the code used to create this layout:
+
+````r
+ui <- page_navbar(
+  title = "My App",
+  bg = "#2D89C8",
+  inverse = TRUE,
+  nav_panel(title = "One", p("First page content.")),
+  nav_panel(title = "Two", p("Second page content.")),
+  nav_panel(title = "Three", p("Third page content.")),
+  nav_spacer(),
+  nav_menu(
+    title = "Links",
+    align = "right",
+    nav_item(tags$a("Posit", href = "https://posit.co")),
+    nav_item(tags$a("Shiny", href = "https://shiny.posit.co"))
+  )
+)
+````
+
+Be wary that `page_navbar()`'s `sidebar` argument puts the same sidebar on every page, which may or may not be desirable. Sometimes it is better that only particular pages have such a sidebar layout. To achieve this, use `layout_sidebar()` within the `nav_panel()`s that should have a sidebar.
+
+Sometimes it is useful for an app to know which page is active. To make this information available, pass an optional `id` argument to the `page_navbar()`, e.g. `page_navbar(id = "page", ...)`. The title of the active `nav_panel()` will be available in reactive contexts as `input$<id>`, e.g. `input$page`.
+
+#### Secondary Navigation ###
+
+You can add a second level of navigation to the page by using the `nav_menu()` function, as above. This adds a menu to the top level navbar which can in turn refer to additional `nav_panel()`s.
+
+#### Additional Options ####
+
+See the `page_navbar()` [reference page](https://rstudio.github.io/bslib/reference/page_navbar.html) for additional measures of customization.
+
+### Tabsets (Multi-page panels) ###
+
+Multiple `nav_panel()`s don’t necessarily need to go directly into `page_navbar()`. They can also be consumed by any `navset_*()` component, including `navset_card_underline()`, which makes a streamlined tabset.
+
+![Tabsets](tabsets.png){fig-alt="Shiny app with tabset on the left with radio buttons for normal, uniform, log-normal and exponential, and a slider bar with number of observations. Plot has three tabs - plot, summary and table." class="shadow"}
+
+Here is the code that creates the above layout.
+
+````r
+ui <- page_sidebar(
+  title = "Penguins dashboard",
+  sidebar = sidebar(
+    varSelectInput(
+      "color_by",
+      "Color by",
+      penguins[c("species", "island", "sex")],
+      selected = "species"
+    )
+  ),
+
+  navset_card_underline(
+    title = "Histograms by species",
+    nav_panel("Bill Length", plotOutput("bill_length")),
+    nav_panel("Bill Depth", plotOutput("bill_depth")),
+    nav_panel("Body Mass", plotOutput("body_mass"))
+  )
+)
+````
+
+The `bslib` package provides many styles of `navset_*()` containers for combining panels, including:
+
+- `navset_underline()` and `navset_card_underline()`
+- `navset_tab()` and `navset_card_tab()`
+- `navset_pill_list()`
+- `navset_pill()` and `navset_card_pill()`
+- `navset_hidden()`
+- `navset_bar()`
+
+Each allows the user to navigate the panels in a different way. Functions that contain `card` in their name place the navigation container within its own card. Learn more in the [tabsets](../tabsets/index.html) article.
+
+### Accordions ###
+
+An `accordion()` uses vertical collapsing to provide scalable navigation through many sections of content. Accordions can be placed anywhere on the page, including in a `sidebar`, which is convenient for grouping sections of input controls. 
+
+![Accordions](accordions.png){fig-alt="A Shiny app with a sidebar whose content is divded into two accordion sections: Primary controls and other controls, and whose main content is divided into three accordion sections." class="shadow"}
+
+Here is the code to make this app. Notice that it uses accordions in both the sidebar and the main content.
+
+````r
+library(shiny)
+library(bslib)
+library(ggplot2)
+data(penguins, package = "palmerpenguins")
+
+# Define UI for random distribution app ----
+# Sidebar layout with input and output definitions ----
+ui <- page_sidebar(
+  title = "Penguins dashboard",
+
+  sidebar = sidebar(
+    bg = "white",
+    accordion(
+      accordion_panel(
+        "Primary controls",
+        varSelectInput(
+          "color_by", "Color by",
+          penguins[c("species", "island", "sex")],
+          selected = "species"
+        )
+      ),
+      accordion_panel(
+        "Other controls",
+        "Other controls go here"
+      )
+    )
+  ),
+
+  accordion(
+    open = c("Bill Length", "About"),
+    accordion_panel(
+      "Bill Length",
+      plotOutput("bill_length")
+    ),
+    accordion_panel(
+      "Bill Depth",
+      plotOutput("bill_depth")
+    ),
+    accordion_panel(
+      "Body Mass",
+      plotOutput("body_mass")
+    )
+  )
+)
+
+
+# Define server logic required to draw a histogram ----
+server <- function(input, output) {
+  gg_plot <- reactive({
+    ggplot(penguins) +
+      geom_density(aes(fill = !!input$color_by), alpha = 0.2) +
+      theme_bw(base_size = 16) +
+      theme(axis.title = element_blank())
+  })
+
+  output$bill_length <- renderPlot(gg_plot() + aes(bill_length_mm))
+  output$bill_depth <- renderPlot(gg_plot() + aes(bill_depth_mm))
+  output$body_mass <- renderPlot(gg_plot() + aes(body_mass_g))
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+````
+
+Similar to `page_navbar()` and tabsets, the title of the currently active accordion panel can be accessed from reactive contexts as `input$<id>`, provided an `id` argument is passed to `accordion()`.
+
+Learn more about accordions on their [reference page](https://rstudio.github.io/bslib/reference/accordion.html).
+
+### Multi-column apps ###
+
+A simple way to create an app without a sidebar is `page_fillable()`. Shiny will scale whatever components you place in `page_fillable()` to use the available vertical and horizontal space of the app.
+
+By default, Shiny apps place each new component beneath the last, as if it placed each piece of content into a new _row_. For example, we can use this code to layout three cards:
+
+````r
+ui <- page_fillable(
+
+  card(card_header("Card 1")),
+  card(card_header("Card 2")),
+  card(card_header("Card 3"))
+  
+)
+````
+
+![Rowwise layout](rows.png){fig-alt="A Shiny app with three cards arranged one on top of the other, as if each card appeared in its own row." class="shadow"}
+
+To place components *beside* each other, as if each appeared in a new _column_, wrap the components with `layout_columns()`, like this:
+
+````r
+ui <- page_fillable(
+
+  layout_columns(
+     card(card_header("Card 1")),
+     card(card_header("Card 2")),
+     card(card_header("Card 3"))
+  )
+  
+)
+````
+
+This creates the following layout:
+
+![Columnwise layout](columns.png){fig-alt="A Shiny app with three cards arranged one beside the other, as if each card appeared in its own column." class="shadow"}
+
+
+You can mix, match, and nest these methods to create bespoke, grid based layouts. For example, this app uses both row and column-based placement. It also nests rows within a column.
+
+![Mixed layout](mixed.png){fig-alt="A Shiny app with four cards arranged into two rows. The first row contains one card beside two smaller cards stacked atop one another." class="shadow"}
+
+Here is the code that makes the layout. Notice that it calls `layout_columns()` in a nested fashion. It also uses a `col_widths` argument. Let's look at `col_widths` next.
+
+````r
+ui <- page_fillable(
+
+  layout_columns(
+     card(card_header("Card 1")),
+     layout_columns(
+       card(card_header("Card 2")),
+       card(card_header("Card 3")),
+       col_widths = c(12, 12)
+     )
+  ),
+     card(card_header("Card 4"))
+
+)
+````
+
+#### Column widths ####
+
+If no `col_widths` are specified, `layout_columns` divides space evenly among the UI elements in a row. A vector of column widths may also be supplied to allocate a given number of units (out of 12) to each element. Consider these units to be relative to the area that `layout_columns()` spans within the app. `layout_columns()` will divide the area into 12 and assign widths to columns accordingly.
+
+![Column widths](column-widths.png){fig-alt="A Shiny app with three cards arranged into three columns. The column width vary at a ratio of 4:6:2." class="shadow"}
+
+Here is the code that makes the layout:
+
+````r
+ui <- page_fillable(
+
+  layout_columns(
+    card(card_header("Card 1")),
+    card(card_header("Card 2")),
+    card(card_header("Card 3")),
+    col_widths = c(4, 6, 2)
+  )
+
+)
+````
+
+And, if elements go beyond the 12 unit mark, they get wrapped onto a new row. 
+
+![Column wrapping](column-wrap.png){fig-alt="A Shiny app with three cards arranged into three columns. The third column appears beneath the other two, creating a second row." class="shadow"}
+
+Here is the code that makes the layout:
+
+````r
+ui <- page_fillable(
+
+  layout_columns(
+    card(card_header("Card 1")),
+    card(card_header("Card 2")),
+    card(card_header("Card 3")),
+    col_widths = c(6, 6, 8)
+  )
+
+)
+````
+
+#### Row heights ####
+
+By default, all row heights are equal, but this can be customized with the `row_heights` argument (numeric values are interpreted as fractional units, but fixed length units are also supported).
+
+![Row heights](row-heights.png){fig-alt="A Shiny app with three cards arranged into three columns. The third column appears beneath the other two, creating a second row. The height of the second row is twice as high as the height of the first row." class="shadow"}
+
+Here is the code that makes the layout:
+
+````r
+ui <- page_fillable(
+
+  layout_columns(
+    card(card_header("Card 1")),
+    card(card_header("Card 2")),
+    card(card_header("Card 3")),
+    col_widths = c(6, 6, 8),
+    row_heights = c(1, 2)
+  )
+
+)
+````
+
+#### Negative Space ####
+
+Negative `col_widths` may also be provided to easily create negative/empty space:
+
+![Negative space](negative-space.png){fig-alt="A Shiny app with three cards arranged into three columns. The third column appears beneath the other two, creating a second row. Negative space appears on either side of the third column, centering it in the second row." class="shadow"}
+
+Here is the code that makes the layout:
+
+````r
+ui <- page_fillable(
+
+  layout_columns(
+    card(card_header("Card 1")),
+    card(card_header("Card 2")),
+    card(card_header("Card 3")),
+    col_widths = c(4, 8, -2, 8, -2)
+  )
+
+)
+
+shinyApp(ui, server)
+````
+
+Although we don't show it here, `layout_columns()` also supports different `col_widths` and `row_heights` at different `breakpoints()`. This is useful for creating responsive layouts that adapt to different screen sizes. To learn more, visit [`layout_columns()`](https://rstudio.github.io/bslib/reference/layout_columns.html).
+
+### Filling layout ###
+
+bslib provides three functions that allow you to layout elements on a sub-dividable 12-column grid, as with `page_fillable()`. Each resizes the components that you pass it dynamically (or not) as the size of the app changes, to make use of the available space.
+
+- `page_fixed()` places components into a grid that occupies a fixed width of 940 pixels by default. It may assume other widths when Bootstrap’s responsive layout kicks in (e.g., when on a tablet).
+
+- `page_fluid()` places components into a grid that always occupies the full _width_ of the web page, and it re-sizes its components dynamically as the _width_ of the page changes.
+
+- `page_fillable()` places components into a grid that always occupies the full _width and height_ of the web page, and it re-sizes its components dynamically as the _width and height_ of the page changes.
+
+!["Differences between the three functions"](pages.png)
+
+
+### Responsive Layout ###
+
+The Bootstrap grid system supports responsive CSS, which enables your application to automatically adapt its layout for viewing on different sized devices. Responsive layout includes the following:
+
+1. Modifying the width of columns in the grid
+2. Stacking elements instead of using float wherever necessary
+3. Resizing headings and text to be more appropriate for devices
+
+Responsive layout is enabled by default for all Shiny page types.
+
+#### Available breakpoints ####
+
+Bootstrap 5 includes six default breakpoints, which are customizable via Sass. By default, many column-wise layouts (e.g., `layout_columns()`) only apply at the `sm` breakpoint and larger.
+
+Breakpoint        | Class infix  | Dimensions 
+----------------- | ------------ | ----------- 
+Extra small       | _None_       | < 576 px
+Small             | `sm`         | < 768 px
+Medium            | `md`         | < 992 px
+Large             | `lg`         | < 1200 px
+Extra large       | `xl`         | < 1400 px
+Extra extra large | `xxl`        | >= 1400 px
+
+That said, you can use `breakpoints()` with `layout_columns()` to customize column widths for different screen sizes:
+
+````r
+layout_columns(
+    card(card_header("Card 1"), "foo"),
+    card(card_header("Card 2"), "foo"),
+    card(card_header("Card 3"), "foo"),
+    col_widths = breakpoints(
+        sm = c(4, 4, 4), 
+        md = c(3, 3, 6), 
+        lg = c(-2, 8, -2)
+    )
+)
+````
+
+See the [Bootsrap website](https://getbootstrap.com/docs/5.3/layout/breakpoints/#available-breakpoints) for more details.

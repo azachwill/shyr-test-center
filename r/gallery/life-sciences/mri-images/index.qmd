@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This app visualizes 3D MRI images interactively using pure R shiny mechanism.
+title:        "ShinyMRI - View MRI images in Shiny"
+author:    Hao Zhuname
+authorurl:     https://zhuhao.org
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - bioimaging
+ - 3dplot
+appurl:      https://haozhu233.shinyapps.io/shinyMRI-contest/
+sourceurl:   https://github.com/hebrewseniorlife/shinyMRI-contest
+rscloudurl:  https://rstudio.cloud/project/186453
+---
+
+This app visualizes 3D MRI images interactively using pure R shiny mechanism.
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

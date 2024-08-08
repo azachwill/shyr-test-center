@@ -1,0 +1,122 @@
+---
+title: "runApp"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='runApp.html'>runApp</a></span><span class="keyword">(</span><span class="argument">appDir</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/getwd'>getwd</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">port</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">launch.browser</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.launch.browser"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">host</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.host"</span><span class="keyword">,</span> <span class="string">"127.0.0.1"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">workerId</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">""</span><span class="keyword">,</span>
+  <span class="argument">quiet</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">display.mode</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"auto"</span><span class="keyword">,</span> <span class="string">"normal"</span><span class="keyword">,</span> <span class="string">"showcase"</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>appDir</th>
+    <td>The directory of the application. Should contain
+<code>server.R</code>, plus, either <code>ui.R</code> or a <code>www</code> directory that
+contains the file <code>index.html</code>. Defaults to the working directory.
+Instead of a directory, this could be a list with <code>ui</code> and
+<code>server</code> components, or a Shiny app object created by
+<code><a href='shinyApp.html'>shinyApp</a></code>.</td>
+  </tr>
+  <tr>
+    <th>port</th>
+    <td>The TCP port that the application should listen on. Defaults to
+choosing a random port.</td>
+  </tr>
+  <tr>
+    <th>launch.browser</th>
+    <td>If true, the system&#39;s default web browser will be
+launched automatically after the app is started. Defaults to true in
+interactive sessions only. This value of this parameter can also be a
+function to call with the application&#39;s URL.</td>
+  </tr>
+  <tr>
+    <th>host</th>
+    <td>The IPv4 address that the application should listen on. Defaults
+to the <code>shiny.host</code> option, if set, or <code>&quot;127.0.0.1&quot;</code> if not. See
+Details.</td>
+  </tr>
+  <tr>
+    <th>workerId</th>
+    <td>Can generally be ignored. Exists to help some editions of
+Shiny Server Pro route requests to the correct process.</td>
+  </tr>
+  <tr>
+    <th>quiet</th>
+    <td>Should Shiny status messages be shown? Defaults to FALSE.</td>
+  </tr>
+  <tr>
+    <th>display.mode</th>
+    <td>The mode in which to display the application. If set to
+  the value <code>&quot;showcase&quot;</code>, shows application code and metadata from a
+  <code>DESCRIPTION</code> file in the application directory alongside the
+  application. If set to <code>&quot;normal&quot;</code>, displays the application normally.
+  Defaults to <code>&quot;auto&quot;</code>, which displays the application in the mode given
+  in its <code>DESCRIPTION</code> file, if any.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Runs a Shiny application. This function normally does not return; interrupt R
+to stop the application (usually by pressing Ctrl+C or Esc).</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The host parameter was introduced in Shiny 0.9.0. Its default value of
+<code>&quot;127.0.0.1&quot;</code> means that, contrary to previous versions of Shiny, only
+the current machine can access locally hosted Shiny apps. To allow other
+clients to connect, use the value <code>&quot;0.0.0.0&quot;</code> instead (which was the
+value that was hard-coded into Shiny in 0.8.0 and earlier).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># # Start app in the current working directory</span>
+<span class="comment"># runApp()</span>
+<span class="comment"># </span>
+<span class="comment"># # Start app in a subdirectory called myapp</span>
+<span class="comment"># runApp("myapp")</span>
+<span class="comment">## ---------------------------------------------</span>
+
+<span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># # Apps can be run without a server.r and ui.r file</span>
+<span class="comment"># runApp(list(</span>
+<span class="comment">#   ui = bootstrapPage(</span>
+<span class="comment">#     numericInput('n', 'Number of obs', 100),</span>
+<span class="comment">#     plotOutput('plot')</span>
+<span class="comment">#   ),</span>
+<span class="comment">#   server = function(input, output) {</span>
+<span class="comment">#     output$plot &lt;- renderPlot({ hist(runif(input$n)) })</span>
+<span class="comment">#   }</span>
+<span class="comment"># ))</span>
+<span class="comment"># </span>
+<span class="comment"># </span>
+<span class="comment"># # Running a Shiny app object</span>
+<span class="comment"># app &lt;- shinyApp(</span>
+<span class="comment">#   ui = bootstrapPage(</span>
+<span class="comment">#     numericInput('n', 'Number of obs', 100),</span>
+<span class="comment">#     plotOutput('plot')</span>
+<span class="comment">#   ),</span>
+<span class="comment">#   server = function(input, output) {</span>
+<span class="comment">#     output$plot &lt;- renderPlot({ hist(runif(input$n)) })</span>
+<span class="comment">#   }</span>
+<span class="comment"># )</span>
+<span class="comment"># </span>
+<span class="comment"># runApp(app)</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>runApp</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

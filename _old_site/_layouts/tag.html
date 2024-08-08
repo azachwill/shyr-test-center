@@ -1,0 +1,15 @@
+---
+layout: default
+categories: gallery
+---
+<h1>Gallery <small>tag: {{ page.tag }}</small></h1>
+
+<hr/>
+
+{% assign tagged = site.tags[page.tag] %}
+<div class="gallery-app-list thumbnails row">
+  {% for app_item in tagged %}
+    {% include app_item.html cols=4 %}
+    {% cycle "tagged": '', '', '<div class="clearfix"></div>' %}
+  {% endfor %}
+</div>

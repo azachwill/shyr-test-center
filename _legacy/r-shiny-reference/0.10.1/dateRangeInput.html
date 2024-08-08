@@ -1,0 +1,219 @@
+---
+layout: reference
+title: "dateRangeInput"
+categories: reference
+
+---
+<h1>Create date range input</h1>
+
+<pre class="code"><code class="r"><div>dateRangeInput(inputId, label, start&nbsp;=&nbsp;NULL, end&nbsp;=&nbsp;NULL, min&nbsp;=&nbsp;NULL, max&nbsp;=&nbsp;NULL, format&nbsp;=&nbsp;"yyyy-mm-dd", startview&nbsp;=&nbsp;"month", weekstart&nbsp;=&nbsp;0, language&nbsp;=&nbsp;"en", separator&nbsp;=&nbsp;" to ")</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>start</th>
+    <td>The initial start date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format. If NULL (the default), will use the current
+date in the client's time zone.</td>
+  </tr>
+  <tr>
+    <th>end</th>
+    <td>The initial end date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format. If NULL (the default), will use the current
+date in the client's time zone.</td>
+  </tr>
+  <tr>
+    <th>separator</th>
+    <td>String to display between the start and end input boxes.</td>
+  </tr>
+  <tr>
+    <th>inputId</th>
+    <td>Input variable to assign the control's value to.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code>.</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>The minimum allowed date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format.</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>The maximum allowed date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format.</td>
+  </tr>
+  <tr>
+    <th>format</th>
+    <td>The format of the date to display in the browser. Defaults to
+<code>"yyyy-mm-dd"</code>.</td>
+  </tr>
+  <tr>
+    <th>startview</th>
+    <td>The date range shown when the input object is first
+clicked. Can be "month" (the default), "year", or "decade".</td>
+  </tr>
+  <tr>
+    <th>weekstart</th>
+    <td>Which day is the start of the week. Should be an integer
+from 0 (Sunday) to 6 (Saturday).</td>
+  </tr>
+  <tr>
+    <th>language</th>
+    <td>The language used for month and day names. Default is "en".
+  Other valid values include "bg", "ca", "cs", "da", "de", "el", "es", "fi",
+  "fr", "he", "hr", "hu", "id", "is", "it", "ja", "kr", "lt", "lv", "ms",
+  "nb", "nl", "pl", "pt", "pt-BR", "ro", "rs", "rs-latin", "ru", "sk", "sl",
+  "sv", "sw", "th", "tr", "uk", "zh-CN", and "zh-TW".</td>
+  </tr>
+</table>
+
+<div data-section="Create date range input">
+  <h3 data-swiftype-index="false">Create date range input</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Creates a pair of text inputs which, when clicked on, bring up calendars that
+the user can click on to select dates.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The date <code>format</code> string specifies how the date will be displayed in
+the browser. It allows the following values:</p>
+
+  <p><ul>
+<li> <code>yy</code> Year without century (12)
+  </li>
+<li> <code>yyyy</code> Year with century (2012)
+  </li>
+<li> <code>mm</code> Month number, with leading zero (01-12)
+  </li>
+<li> <code>m</code> Month number, without leading zero (01-12)
+  </li>
+<li> <code>M</code> Abbreviated month name
+  </li>
+<li> <code>MM</code> Full month name
+  </li>
+<li> <code>dd</code> Day of month with leading zero
+  </li>
+<li> <code>d</code> Day of month without leading zero
+  </li>
+<li> <code>D</code> Abbreviated weekday name
+  </li>
+<li> <code>DD</code> Full weekday name
+</li>
+</ul></p>
+
+  <p></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>dateRangeInput(&quot;daterange&quot;, &quot;Date range:&quot;,
+               start = &quot;2001-01-01&quot;,
+               end   = &quot;2010-12-31&quot;)
+</div>
+<div class='output'>&lt;div id=&quot;daterange&quot; class=&quot;shiny-date-range-input input-daterange&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;daterange&quot;&gt;Date range:&lt;/label&gt;
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;month&quot; data-initial-date=&quot;2001-01-01&quot;/&gt;
+   to 
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;month&quot; data-initial-date=&quot;2010-12-31&quot;/&gt;
+&lt;/div&gt; 
+</div>
+<div class='input'>
+# Default start and end is the current date in the client&#39;s time zone
+dateRangeInput(&quot;daterange&quot;, &quot;Date range:&quot;)
+</div>
+<div class='output'>&lt;div id=&quot;daterange&quot; class=&quot;shiny-date-range-input input-daterange&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;daterange&quot;&gt;Date range:&lt;/label&gt;
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;month&quot;/&gt;
+   to 
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;month&quot;/&gt;
+&lt;/div&gt; 
+</div>
+<div class='input'>
+# start and end are always specified in yyyy-mm-dd, even if the display
+# format is different
+dateRangeInput(&quot;daterange&quot;, &quot;Date range:&quot;,
+               start  = &quot;2001-01-01&quot;,
+               end    = &quot;2010-12-31&quot;,
+               min    = &quot;2001-01-01&quot;,
+               max    = &quot;2012-12-21&quot;,
+               format = &quot;mm/dd/yy&quot;,
+               separator = &quot; - &quot;)
+</div>
+<div class='output'>&lt;div id=&quot;daterange&quot; class=&quot;shiny-date-range-input input-daterange&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;daterange&quot;&gt;Date range:&lt;/label&gt;
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;mm/dd/yy&quot; data-date-start-view=&quot;month&quot; data-min-date=&quot;2001-01-01&quot; data-max-date=&quot;2012-12-21&quot; data-initial-date=&quot;2001-01-01&quot;/&gt;
+   - 
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;mm/dd/yy&quot; data-date-start-view=&quot;month&quot; data-min-date=&quot;2001-01-01&quot; data-max-date=&quot;2012-12-21&quot; data-initial-date=&quot;2010-12-31&quot;/&gt;
+&lt;/div&gt; 
+</div>
+<div class='input'>
+# Pass in Date objects
+dateRangeInput(&quot;daterange&quot;, &quot;Date range:&quot;,
+               start = Sys.Date()-10,
+               end = Sys.Date()+10)
+</div>
+<div class='output'>&lt;div id=&quot;daterange&quot; class=&quot;shiny-date-range-input input-daterange&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;daterange&quot;&gt;Date range:&lt;/label&gt;
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;month&quot; data-initial-date=&quot;2014-06-08&quot;/&gt;
+   to 
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;month&quot; data-initial-date=&quot;2014-06-28&quot;/&gt;
+&lt;/div&gt; 
+</div>
+<div class='input'>
+# Use different language and different first day of week
+dateRangeInput(&quot;daterange&quot;, &quot;Date range:&quot;,
+               language = &quot;de&quot;,
+               weekstart = 1)
+</div>
+<div class='output'>&lt;div id=&quot;daterange&quot; class=&quot;shiny-date-range-input input-daterange&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;daterange&quot;&gt;Date range:&lt;/label&gt;
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;de&quot; data-date-weekstart=&quot;1&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;month&quot;/&gt;
+   to 
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;de&quot; data-date-weekstart=&quot;1&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;month&quot;/&gt;
+&lt;/div&gt; 
+</div>
+<div class='input'>
+# Start with decade view instead of default month view
+dateRangeInput(&quot;daterange&quot;, &quot;Date range:&quot;,
+               startview = &quot;decade&quot;)
+</div>
+<div class='output'>&lt;div id=&quot;daterange&quot; class=&quot;shiny-date-range-input input-daterange&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;daterange&quot;&gt;Date range:&lt;/label&gt;
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;decade&quot;/&gt;
+   to 
+  &lt;input class=&quot;input-small&quot; type=&quot;text&quot; data-date-language=&quot;en&quot; data-date-weekstart=&quot;0&quot; data-date-format=&quot;yyyy-mm-dd&quot; data-date-start-view=&quot;decade&quot;/&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>dateRangeInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='dateInput.html'>dateInput</a></code>, <code><a href='updateDateRangeInput.html'>updateDateRangeInput</a></code>
+
+Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='actionButton.html'>actionLink</a></code>; <code><a href='sliderInput.html'>animationOptions</a></code>,
+  <code><a href='sliderInput.html'>sliderInput</a></code>;
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>;
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>; <code><a href='dateInput.html'>dateInput</a></code>;
+  <code><a href='fileInput.html'>fileInput</a></code>; <code><a href='numericInput.html'>numericInput</a></code>;
+  <code><a href='radioButtons.html'>radioButtons</a></code>; <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='selectInput.html'>selectizeInput</a></code>; <code><a href='submitButton.html'>submitButton</a></code>;
+  <code><a href='textInput.html'>textInput</a></code>
+
+</div>

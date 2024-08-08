@@ -1,0 +1,50 @@
+---
+title: Two-file Shiny apps
+author: Mine Cetinkaya-Rundel
+date: 2017-06-28
+description: Before of version 0.10.2, Shiny applications needed to be split into two separate files that include the code needed to define the UI and server components, respectively. This method is still supported in later versions of Shiny.
+---
+
+Before version 0.10.2, Shiny applications needed to be split into two separate files, `server.R` and `ui.R`, that include the code needed to define the UI and server components, respectively. This method is still supported in later versions of Shiny.
+
+## Example
+
+To create a two-file app, create a new directory (for example, `newdir/`) and place two files, called `ui.R` and `server.R`, in the directory.
+
+<pre><code>~/newdir
+|-- ui.R
+|-- server.R
+</code></pre>
+
+To run it, call `runApp("newdir")`.
+
+#### ui.R
+
+We place the user interface definition in `ui.R`:
+
+````r
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
+    ),
+    mainPanel(plotOutput("distPlot"))
+  )
+)
+````
+
+#### server.R
+
+And we place the server function definition in `server.R`:
+
+````r
+server <- function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs), col = 'darkgray', border = 'white')
+  })
+}
+````
+
+For applications defined this way, the `server.R` file must return the server function, and the `ui.R` file must return the UI object (in this case, the UI object is created by `fluidPage()`). In other words, if the files contained other code (like utility functions) you must make sure that the last expression in the file is the server function or UI object.
+
+If you have larger apps, you may find that having separate `ui.R` and `server.R` files makes your code easier to manage.

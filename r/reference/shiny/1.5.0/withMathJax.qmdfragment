@@ -1,0 +1,40 @@
+---
+title: "Load the MathJax library and typeset math expressions — withMathJax"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>withMathJax</span>(<span class='no'>...</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>any HTML elements to apply MathJax to</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>This function adds MathJax to the page and typeset the math expressions (if
+found) in the content <code>...</code>. It only needs to be called once in an app
+unless the content is rendered <em>after</em> the page is loaded, e.g. via
+<code><a href='renderUI.html'>renderUI()</a></code>, in which case we have to call it explicitly every
+time we write math expressions to the output.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='fu'>withMathJax</span>(<span class='fu'><a href='helpText.html'>helpText</a></span>(<span class='st'>"Some math here $$\\alpha+\\beta$$"</span>))
+<span class='co'># now we can just write "static" content without withMathJax()</span>
+<span class='fu'><a href='builder.html'>div</a></span>(<span class='st'>"more math here $$\\sqrt{2}$$"</span>)</pre>
+</div>
+
+
+```

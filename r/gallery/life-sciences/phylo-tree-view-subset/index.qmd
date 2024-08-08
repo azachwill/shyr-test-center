@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This app allows for users to upload a .tree file (or other common phylogenetic tree file types) and visually explore it. 
+title:        "Interactively view and subset phylogenetic trees"
+author:    Tyler Bradley
+authorurl:     https://tbradley1013.github.io/
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - ggtree
+ - treeio
+ - phylogeny
+appurl:      https://tbradley.shinyapps.io/tree-subset-shiny/
+sourceurl:   https://github.com/tbradley1013/tree-subset-shiny
+rscloudurl:  https://rstudio.cloud/project/165227
+---
+
+This app allows for users to upload a .tree file (or other common phylogenetic tree file types) and visually explore it. You can leave the tree its full size, or you can subset it by looking at specific branches to easily zoom in on related species.
+  

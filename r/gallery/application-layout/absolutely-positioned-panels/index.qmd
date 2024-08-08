@@ -1,0 +1,13 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Absolutely-positioned panels
+date: 2014-07-29 
+no-app-padding: true
+tags:
+ - absolutePanel
+ - css
+ - markdown
+appurl: https://gallery.shinyapps.io/027-absolutely-positioned-panels
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/027-absolutely-positioned-panels
+---

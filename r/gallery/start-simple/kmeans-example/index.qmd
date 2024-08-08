@@ -1,0 +1,15 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Kmeans example
+date: 2014-07-29 
+tags:
+ - getting-started
+ - kmeans
+ - plotoutput
+ - sliderinput
+ - numericinput
+ - reactivity
+appurl: https://gallery.shinyapps.io/050-kmeans-example
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/050-kmeans-example
+---

@@ -1,0 +1,59 @@
+---
+layout: newframe-tutorial
+---
+{% assign lessonCount = 7 %}
+{% include answer.html %}
+<div class="col-md-8 col-sm-12 tutorial constrain-image-width">
+  <ul class="pagination">
+    {% if page.lesson == 1 %}
+    <li class="disabled"><a href="#" onclick="return false;"><i class="fas fa-chevron-left"></i></a></li>
+    {% else %}
+    <li><a href="../lesson{{page.lesson | decr}}"><i class="fas fa-chevron-left"></i></a></li>
+    {% endif %}
+
+    {% for i in (1..lessonCount) %}
+    <li{% if page.lesson == forloop.index %} class="active"{% endif %}><a href="../lesson{{ forloop.index }}">{% if page.lesson == forloop.index %}Lesson {%endif%}{{ forloop.index }}</a></li>
+    {% endfor %}
+
+    {% if page.lesson == lessonCount %}
+    <li class="disabled"><a href="#" onclick="return false;"><i class="fas fa-chevron-right"></i></a></li>
+    {% else %}
+    <li><a href="../lesson{{page.lesson | incr}}"><i class="fas fa-chevron-right"></i></a></li>
+    {% endif %}
+  </ul>
+
+  <h1>
+    <small class="tutorial-lesson-number punchup">Lesson {{ page.lesson }}</small><br/>
+    {{ page.title }}
+  </h1>
+  {{ content }}
+
+  {% if page.lesson != lessonCount %}
+    <p>
+      <a class="btn btn-primary" href="../lesson{{page.lesson | incr}}">
+        Continue to lesson {{page.lesson|incr}}
+      </a>
+    </p>
+  {% endif %}
+    <br>
+  <hr>
+    <p>If you have questions about this article or would like to discuss ideas presented here, please post on <a href="https://community.rstudio.com/c/shiny">RStudio Community</a>. Our developers monitor these forums and answer questions periodically. See <a href="/help">help</a> for more help with all things Shiny.</p>
+<!--
+<p>We love it when R users help each other, but RStudio does not monitor or answer the comments in this thread. If you'd like to get specific help, we recommend the <a href="https://groups.google.com/forum/#!forum/shiny-discuss">Shiny Discussion Forum</a> for in depth discussion of Shiny related questions and <a href="http://shiny.rstudio.com/articles/help.html">How to get help</a> for a list of the best ways to get help with R code.</p>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'shiny-rstudio'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+-->
+</div>

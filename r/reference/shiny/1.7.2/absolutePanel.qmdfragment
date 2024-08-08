@@ -1,0 +1,122 @@
+---
+title: "Panel with absolute positioning — absolutePanel"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/jqueryui.R" class="external-link"><code>R/jqueryui.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Creates a panel whose contents are absolutely positioned.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">absolutePanel</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  ...,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">top =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">left =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">right =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">bottom =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">width =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="at">height =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="at">draggable =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">cursor =</span> <span class="fu">c</span>(<span class="st">"auto"</span>, <span class="st">"move"</span>, <span class="st">"default"</span>, <span class="st">"inherit"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="fu">fixedPanel</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  ...,</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="at">top =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="at">left =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  <span class="at">right =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>  <span class="at">bottom =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  <span class="at">width =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  <span class="at">height =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  <span class="at">draggable =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  <span class="at">cursor =</span> <span class="fu">c</span>(<span class="st">"auto"</span>, <span class="st">"move"</span>, <span class="st">"default"</span>, <span class="st">"inherit"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>Attributes (named arguments) or children (unnamed arguments) that
+should be included in the panel.</p></dd>
+
+
+<dt>top</dt>
+<dd><p>Distance between the top of the panel, and the top of the page or
+parent container.</p></dd>
+
+
+<dt>left</dt>
+<dd><p>Distance between the left side of the panel, and the left of the
+page or parent container.</p></dd>
+
+
+<dt>right</dt>
+<dd><p>Distance between the right side of the panel, and the right of
+the page or parent container.</p></dd>
+
+
+<dt>bottom</dt>
+<dd><p>Distance between the bottom of the panel, and the bottom of the
+page or parent container.</p></dd>
+
+
+<dt>width</dt>
+<dd><p>Width of the panel.</p></dd>
+
+
+<dt>height</dt>
+<dd><p>Height of the panel.</p></dd>
+
+
+<dt>draggable</dt>
+<dd><p>If <code>TRUE</code>, allows the user to move the panel by
+clicking and dragging.</p></dd>
+
+
+<dt>fixed</dt>
+<dd><p>Positions the panel relative to the browser window and prevents
+it from being scrolled with the rest of the page.</p></dd>
+
+
+<dt>cursor</dt>
+<dd><p>The type of cursor that should appear when the user mouses over
+the panel. Use <code>"move"</code> for a north-east-south-west icon,
+<code>"default"</code> for the usual cursor arrow, or <code>"inherit"</code> for the
+usual cursor behavior (including changing to an I-beam when the cursor is
+over text). The default is <code>"auto"</code>, which is equivalent to
+<code>ifelse(draggable, "move", "inherit")</code>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>An HTML element or list of elements.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The <code>absolutePanel</code> function creates a <code>&lt;div&gt;</code> tag whose CSS
+position is set to <code>absolute</code> (or fixed if <code>fixed = TRUE</code>). The way
+absolute positioning works in HTML is that absolute coordinates are specified
+relative to its nearest parent element whose position is not set to
+<code>static</code> (which is the default), and if no such parent is found, then
+relative to the page borders. If you're not sure what that means, just keep
+in mind that you may get strange results if you use <code>absolutePanel</code> from
+inside of certain types of panels.</p>
+<p>The <code>fixedPanel</code> function is the same as <code>absolutePanel</code> with
+<code>fixed = TRUE</code>.</p>
+<p>The position (<code>top</code>, <code>left</code>, <code>right</code>, <code>bottom</code>) and size
+(<code>width</code>, <code>height</code>) parameters are all optional, but you should
+specify exactly two of <code>top</code>, <code>bottom</code>, and <code>height</code> and
+exactly two of <code>left</code>, <code>right</code>, and <code>width</code> for predictable
+results.</p>
+<p>Like most other distance parameters in Shiny, the position and size
+parameters take a number (interpreted as pixels) or a valid CSS size string,
+such as <code>"100px"</code> (100 pixels) or <code>"25%"</code>.</p>
+<p>For arcane HTML reasons, to have the panel fill the page or parent you should
+specify <code>0</code> for <code>top</code>, <code>left</code>, <code>right</code>, and <code>bottom</code>
+rather than the more obvious <code>width = "100%"</code> and <code>height = "100%"</code>.</p>
+  </div>
+
+</div>
+```

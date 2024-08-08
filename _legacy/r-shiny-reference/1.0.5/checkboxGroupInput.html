@@ -1,0 +1,131 @@
+---
+layout: reference
+title: "checkboxGroupInput"
+categories: reference
+---
+<h1>Checkbox Group Input Control</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='checkboxGroupInput.html'>checkboxGroupInput</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="argument">choices</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">inline</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">choiceNames</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">choiceValues</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>input</code> slot that will be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code> for no label.</td>
+  </tr>
+  <tr>
+    <th>choices</th>
+    <td>List of values to show checkboxes for. If elements of the list
+are named then that name rather than the value is displayed to the user. If
+this argument is provided, then <code>choiceNames</code> and <code>choiceValues</code>
+must not be provided, and vice-versa. The values should be strings; other
+types (such as logicals and numbers) will be coerced to strings.</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The values that should be initially selected, if any.</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>If <code>TRUE</code>, render the choices inline (i.e. horizontally)</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the input, e.g. <code>&#39;400px&#39;</code>, or <code>&#39;100%&#39;</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>.</td>
+  </tr>
+  <tr>
+    <th>choiceNames, choiceValues</th>
+    <td>List of names and values, respectively,
+that are displayed to the user in the app and correspond to the each
+choice (for this reason, <code>choiceNames</code> and <code>choiceValues</code>
+must have the same length). If either of these arguments is
+provided, then the other <em>must</em> be provided and <code>choices</code>
+<em>must not</em> be provided. The advantage of using both of these over
+a named list for <code>choices</code> is that <code>choiceNames</code> allows any
+type of UI object to be passed through (tag objects, icons, HTML code,
+...), instead of just simple text. See Examples.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A list of HTML elements that can be added to a UI definition.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a group of checkboxes that can be used to toggle multiple choices
+independently. The server will receive the input as a character vector of the
+selected values.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='checkboxGroupInput.html'>checkboxGroupInput</a></span><span class="keyword">(</span><span class="string">"variable"</span><span class="keyword">,</span> <span class="string">"Variables to show:"</span><span class="keyword">,</span>
+                     <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"Cylinders"</span> <span class="argument">=</span> <span class="string">"cyl"</span><span class="keyword">,</span>
+                       <span class="string">"Transmission"</span> <span class="argument">=</span> <span class="string">"am"</span><span class="keyword">,</span>
+                       <span class="string">"Gears"</span> <span class="argument">=</span> <span class="string">"gear"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">"data"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">data</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderTable.html'>renderTable</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="symbol">mtcars</span><span class="keyword">[</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"mpg"</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">variable</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">drop</span> <span class="argument">=</span> <span class="number">FALSE</span><span class="keyword">]</span>
+  <span class="keyword">}</span><span class="keyword">,</span> <span class="argument">rownames</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='checkboxGroupInput.html'>checkboxGroupInput</a></span><span class="keyword">(</span><span class="string">"icons"</span><span class="keyword">,</span> <span class="string">"Choose icons:"</span><span class="keyword">,</span>
+    <span class="argument">choiceNames</span> <span class="argument">=</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"calendar"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"bed"</span><span class="keyword">)</span><span class="keyword">,</span>
+           <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"cog"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"bug"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="argument">choiceValues</span> <span class="argument">=</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="string">"calendar"</span><span class="keyword">,</span> <span class="string">"bed"</span><span class="keyword">,</span> <span class="string">"cog"</span><span class="keyword">,</span> <span class="string">"bug"</span><span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='textOutput.html'>textOutput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">txt</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="symbol">icons</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">icons</span><span class="keyword">,</span> <span class="argument">collapse</span> <span class="argument">=</span> <span class="string">", "</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"You chose"</span><span class="keyword">,</span> <span class="symbol">icons</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>checkboxGroupInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='updateCheckboxGroupInput.html'>updateCheckboxGroupInput</a></code></p>
+  <p>Other input elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='dateInput.html'>dateInput</a></code>,
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='fileInput.html'>fileInput</a></code>,
+  <code><a href='numericInput.html'>numericInput</a></code>, <code><a href='passwordInput.html'>passwordInput</a></code>,
+  <code><a href='radioButtons.html'>radioButtons</a></code>, <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='sliderInput.html'>sliderInput</a></code>, <code><a href='submitButton.html'>submitButton</a></code>,
+  <code><a href='textAreaInput.html'>textAreaInput</a></code>, <code><a href='textInput.html'>textInput</a></code></p>
+</div>

@@ -1,0 +1,189 @@
+/**************************************************************************************************
+ * Base Styles
+ * These are the base tag styles for the site, the styling that you'd get if you didn't give
+ * a tag a class or id. (These could include Bootstrap overwrites)
+**************************************************************************************************/
+
+body {
+  color: #333;
+  padding: 0;
+}
+
+html,
+body {
+  /* to help push the footer down */
+  height: 100%;
+}
+body,
+button,
+input,
+textarea {
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: -0.2px;
+  font-size: 16px;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+// TS Sept '19: Not sure if we're actually using these classes or not?
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: "Open Sans", sans-serif;
+  color: inherit;
+  font-weight: 500;
+  scroll-margin-top: 1rem;
+}
+
+h1 {
+  font-size: 2.4em;
+  margin: .75em 0 .5em 0;
+}
+
+h2 {
+  font-size: 2.0em;
+  margin: .75em 0 .5em 0;
+}
+
+h3 {
+  font-size: 1.6em;
+  margin: .75em 0 .5em 0;
+}
+
+h4 {
+  font-size: 1.2em;
+  margin: .75em 0 .5em 0;
+}
+
+.monospace,
+code,
+tt {
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+code{
+   line-height: 150%;
+   color: #606060;
+   display: inline-block;
+   margin: 1px 3px;
+   padding: 1px 2px;
+   border-radius: 3px;
+}
+
+
+pre {
+  box-shadow: 5px 5px 0 #DDD;
+  margin-bottom: 16px;
+  padding: 10px;
+  line-height: 1.7em;
+  margin-bottom: 1em;
+  word-wrap: normal;
+  word-break: normal;
+  border-radius: 3px;
+  border: 1px solid #e4e4e4;
+}
+
+pre,
+code {
+  font-family: "Source Code Pro", monospace;
+  background-color: #f8f8f8;
+}
+
+pre code {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  background-color: inherit;
+  border-radius: 0;
+  border: none;
+}
+
+// TS Sept '19: Are we really putting code in header tags?!
+/* No gray background for code in headers */
+h1>code,
+h2>code,
+h3>code,
+h4>code,
+h5>code,
+h6>code {
+  background-color: inherit;
+}
+
+p {
+  line-height: 1.6em;
+  margin-bottom: 1em;
+}
+
+ul,
+ol {
+  line-height: 2em;
+  padding-left: 2em;
+  margin-bottom: 1em;
+}
+
+ul {
+  list-style: disc outside none;
+}
+
+ol {
+  list-style: decimal outside none;
+}
+
+blockquote {
+  font-size: 1.1em;
+  font-weight: 400;
+  font-style: italic;
+  margin: 20px 0 20px .9em;
+  padding-left: 1em;
+  border-left: 3px solid #e4e4e4;
+}
+
+@media screen and (max-width: 1023px) {
+  blockquote {
+    margin-left: 20px;
+  }
+}
+
+a {
+  color: #007bc2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #42709b;
+  text-decoration: underline;
+}
+
+a.iconLink {
+  display: inline-block;
+  line-height: 40px;
+  padding-left: 24px;
+  text-decoration: none;
+  color: #007bc2;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 20px 20px;
+  background-image: url(../images/iconLink.svg);
+  font-size: 16px;
+}
+
+a.iconLink:hover {
+  text-decoration: underline;
+}
+
+th {
+  font-weight: 600;
+}
+
+.swiftype-hidden-content {
+  display: none;
+}

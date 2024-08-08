@@ -1,0 +1,41 @@
+---
+title: "Convert a reactivevalues object to a list — reactiveValuesToList"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/reactives.R" class="external-link"><code>R/reactives.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This function does something similar to what you might want or expect
+<code><a href="https://rdrr.io/r/base/list.html" class="external-link">base::as.list()</a></code> to do. The difference is that the calling context will take
+dependencies on every object in the <code>reactivevalue</code>s object. To avoid taking
+dependencies on all the objects, you can wrap the call with <code><a href="isolate.html">isolate()</a></code>.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">reactiveValuesToList</span>(x, <span class="at">all.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>x</dt>
+<dd><p>A <code>reactivevalues</code> object.</p></dd>
+
+
+<dt>all.names</dt>
+<dd><p>If <code>TRUE</code>, include objects with a leading dot. If <code>FALSE</code>
+(the default) don't include those objects.</p></dd>
+
+</dl></div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">reactiveValues</span>(<span class="at">a =</span> <span class="dv">1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">reactiveValuesToList</span>(values)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>}</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># To get the objects without taking dependencies on them, use isolate().</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># isolate() can also be used when calling from outside a reactive context (e.g.</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># at the console)</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">isolate</span>(<span class="fu">reactiveValuesToList</span>(values))</span></code></pre></div>
+  </div>
+</div>
+```

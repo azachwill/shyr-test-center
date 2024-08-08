@@ -1,0 +1,117 @@
+---
+title: Themes
+date: 2024-01-11
+author: Carson Sievert
+description: Easily customize the look of Shiny apps and R Markdown documents with the bslib and thematic packages.
+---
+
+Shiny v1.6 and higher integrates with the [`{bslib}` package](https://rstudio.github.io/bslib) providing easy access to modern versions of [Bootstrap](https://getbootstrap.com/), [Bootswatch](https://bootswatch.com/) themes, as well as [custom themes](#custom-themes) that can even be modified in [real time](#real-time)!
+
+## Using bslib in Shiny
+
+To use `{bslib}` in your own Shiny app, pass a [`bs_theme()`](https://rstudio.github.io/bslib/reference/bs_theme.html) object to the `theme` argument of the relevant page layout function, such as `page_navbar()` or `page_fillable()`. Inside `bs_theme()`, you can specify a version of [Bootstrap](https://getbootstrap.com/docs/4.6/getting-started/introduction/) and (optionally) a [Bootswatch](https://bootswatch.com/) theme (e.g. [minty](https://bootswatch.com/minty/))
+
+````r
+library(shiny)
+library(bslib)
+
+ui <- page_navbar(
+  theme = bs_theme(version = 5, bootswatch = "minty"),
+  ...
+)
+````
+
+<img src="minty.png" alt="A Shiny app with Bootswatch's minty theme." width="100%" style="border: 1px solid #ddd; box-shadow:5px 5px 5px #eee;"/>
+
+While Bootswatch themes make it very easy to change the default look of an application, you may want to design your own custom theme. In this case, `{bslib}`'s custom theming options make this _much_ easier than writing [custom CSS](/r/articles/build/css/).
+
+## Custom themes {#custom-themes}
+
+The `bs_theme()` function provides direct access to Bootstrap's [main colors & fonts](https://rstudio.github.io/bslib/articles/bslib.html#custom-themes) as well as any of the [100s of more specific theming options](https://rstudio.github.io/bslib/articles/bslib.html#everything-else). Also, when it comes to custom font(s) that may not be available on the end users machine, make sure to leverage `{bslib}`'s helper functions like [`font_google()`](https://rstudio.github.io/bslib/reference/font_face.html), [`font_link()`](https://rstudio.github.io/bslib/reference/font_face.html), and [`font_face()`](https://rstudio.github.io/bslib/reference/font_face.html), which assist in including font file(s) in an convenient, efficient, and responsible way.
+
+````r
+library(bslib)
+theme <- bs_theme(
+  bg = "#0b3d91", fg = "white", primary = "#FCC780",
+  base_font = font_google("Space Mono"),
+  code_font = font_google("Space Mono")
+)
+bs_theme_preview(theme)
+````
+
+<img src="custom-theme.png" alt="A Shiny app with a Material dark mode look." width="100%" style="border: 1px solid #ddd; box-shadow:5px 5px 5px #eee;"/>
+
+The main reason why `{bslib}` makes it so much easier to implement custom themes is that `bs_theme()` leverages [Bootstrap Sass variables](https://rstudio.github.io/bslib/articles/bs5-variables/index.html), allowing you to change only a few color(s) and font(s) to impact potentially hundreds of Bootstrap's CSS rules. Also, thanks to [CSS Utility Classes](https://rstudio.github.io/bslib/articles/utility-classes.html), you can now more easily tackle complicated UI issues that Sass variables alone can't solve such as adjustments to spacing, alignment, borders, background colors, and more. To learn more about leveraging `{bslib}` to tackle more custom theming tasks, see the [article on custom theming](https://rstudio.github.io/bslib/articles/bslib.html#custom-themes).
+
+And while a lot of custom theming can be done via `bs_theme()` (i.e., CSS), it fundamentally can't effect [`renderPlot()`](/r/reference/shiny/latest/renderPlot.html), because the image is rendered by R, not by the web browser. To help solve this problem, we've also created the [`{thematic}` package](https://rstudio.github.io/thematic/) which can effectively translate CSS to new R plotting defaults by just calling [`thematic::thematic_shiny()`](https://rstudio.github.io/thematic/reference/thematic_on.html) before running an app.
+
+<div align="center">
+  <img src="thematic-before.png" alt="A ggplot2 plot with default R styling" width="80%" style='border: 1px solid #ddd; box-shadow:5px 5px 5px #eee;'/>
+  <img src="thematic-after.png" alt="A ggplot2 plot with default styling defaults informed by CSS" width="80%" style='border: 1px solid #ddd; box-shadow:5px 5px 5px #eee;'/>
+</div>
+
+This 'auto theming' behavior that `{thematic}` provides works great in Shiny with any CSS framework (not just `{bslib}`). Also, more generally, `{thematic}` can help simplify plot theming inside any R environment, using any graphics device, and also makes it super easy to use [Google Fonts](https://fonts.google.com/) inside your R plots.
+
+
+## Real-time theming {#real-time}
+
+The `{bslib}` package also provides an interactive theming widget that you can use to theme any Shiny app in real-time, or any `rmarkdown::html_document` that uses `runtime: shiny`. To use it in your own Shiny app, call `bs_themer()` inside your server function with a UI that uses Bootstrap 4 (or higher).
+
+````r
+library(shiny)
+library(bslib)
+thematic::thematic_shiny(font = "auto")
+
+ui <- fluidPage(
+  theme = bs_theme(),
+  ...
+)
+
+server <- function(input, output) {
+  bs_themer()
+  
+  ...
+}
+
+shinyApp(ui, server)
+````
+
+<video src="real-time-theming.mp4" controls="" width="100%" alt="A screen recording of interaction applying different colors and fonts to a Shiny application.">
+  <a href="real-time-theming.mp4" alt="A screen recording of interaction applying different colors and fonts to a Shiny application."></a>
+</video>
+
+
+If you want the real-time theming changes to effect static R plots, make sure `{thematic}` auto-theming is enabled, and that plots are generated with `renderPlot()`
+
+````
+---
+runtime: shiny
+output:
+  html_document:
+    theme: !expr bslib::bs_theme()
+---
+
+```{{r, echo = FALSE}}
+bslib::bs_themer()
+thematic::thematic_shiny(font = "auto")
+```
+
+# Here's a plot
+
+Make sure to use `renderPlot()` if you want R plots to respond to real-time theming!
+
+```{{r}}
+renderPlot({
+  plot(pressure)
+})
+```
+````
+
+
+## Custom real-time theming
+
+Shiny 1.6 introduced `session$setCurrentTheme()` and `session$getCurrentTheme()` [`session` methods](/r/reference/shiny/latest/session.html) for dynamically updating the Bootstrap `theme` after initial load. These methods power [`bs_themer()`](https://rstudio.github.io/bslib/reference/run_with_themer.html), but they can also be used to implement custom real-time theming widgets [like a dark mode switch](https://rstudio.github.io/bslib/articles/bslib.html#dynamic-theming).
+
+## Learn more
+
+To learn more about the `{bslib}` and `{thematic}` packages, see <https://rstudio.github.io/bslib/articles/theming/index.html> and <https://rstudio.github.io/thematic>

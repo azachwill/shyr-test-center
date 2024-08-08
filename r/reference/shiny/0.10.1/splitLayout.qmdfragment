@@ -1,0 +1,106 @@
+---
+title: "splitLayout"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>splitLayout(..., cellWidths&nbsp;=&nbsp;NULL, cellArgs&nbsp;=&nbsp;list())</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Unnamed arguments will become child elements of the layout. Named
+arguments will become HTML attributes on the outermost tag.</td>
+  </tr>
+  <tr>
+    <th>cellWidths</th>
+    <td>Character or numeric vector indicating the widths of the
+individual cells. Recycling will be used if needed. Character values will
+be interpreted as CSS lengths (see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>), numeric
+values as pixels.</td>
+  </tr>
+  <tr>
+    <th>cellArgs</th>
+    <td>Any additional attributes that should be used for each cell
+  of the layout.</td>
+  </tr>
+</table>
+
+<div data-section="Split layout">
+  <h3 data-swiftype-index="false">Split layout</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Lays out elements horizontally, dividing the available horizontal space into
+equal parts (by default).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Equal sizing
+splitLayout(
+  plotOutput(&quot;plot1&quot;),
+  plotOutput(&quot;plot2&quot;)
+)
+</div>
+<div class='output'>&lt;div class=&quot;shiny-split-layout&quot;&gt;
+  &lt;div style=&quot;width: 50.000%;&quot;&gt;
+    &lt;div id=&quot;plot1&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;width: 50.000%;&quot;&gt;
+    &lt;div id=&quot;plot2&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt; 
+</div>
+<div class='input'>
+# Custom widths
+splitLayout(cellWidths = c(&quot;25%&quot;, &quot;75%&quot;),
+  plotOutput(&quot;plot1&quot;),
+  plotOutput(&quot;plot2&quot;)
+)
+</div>
+<div class='output'>&lt;div class=&quot;shiny-split-layout&quot;&gt;
+  &lt;div style=&quot;width: 25%;&quot;&gt;
+    &lt;div id=&quot;plot1&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;width: 75%;&quot;&gt;
+    &lt;div id=&quot;plot2&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt; 
+</div>
+<div class='input'>
+# All cells at 300 pixels wide, with cell padding
+# and a border around everything
+splitLayout(
+  style = &quot;border: 1px solid silver;&quot;,
+  cellWidths = 300,
+  cellArgs = list(style = &quot;padding: 6px&quot;),
+  plotOutput(&quot;plot1&quot;),
+  plotOutput(&quot;plot2&quot;),
+  plotOutput(&quot;plot3&quot;)
+)
+</div>
+<div class='output'>&lt;div class=&quot;shiny-split-layout&quot; style=&quot;border: 1px solid silver;&quot;&gt;
+  &lt;div style=&quot;width: 300px; padding: 6px&quot;&gt;
+    &lt;div id=&quot;plot1&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;width: 300px; padding: 6px&quot;&gt;
+    &lt;div id=&quot;plot2&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;width: 300px; padding: 6px&quot;&gt;
+    &lt;div id=&quot;plot3&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>splitLayout</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

@@ -1,0 +1,339 @@
+---
+title: "Event handler — observeEvent"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.4</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/reactives.R" class="external-link"><code>R/reactives.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Respond to "event-like" reactive inputs, values, and expressions. As of Shiny
+1.6.0, we recommend using <code><a href="bindEvent.html">bindEvent()</a></code> instead of <code>eventReactive()</code> and
+<code>observeEvent()</code>. This is because <code><a href="bindEvent.html">bindEvent()</a></code> can be composed with
+<code><a href="bindCache.html">bindCache()</a></code>, and because it can also be used with <code>render</code> functions (like
+<code><a href="renderPrint.html">renderText()</a></code> and <code><a href="renderPlot.html">renderPlot()</a></code>).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">observeEvent</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  eventExpr,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  handlerExpr,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">event.env =</span> <span class="fu">parent.frame</span>(),</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">event.quoted =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">handler.env =</span> <span class="fu">parent.frame</span>(),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">handler.quoted =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  ...,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">suspended =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">priority =</span> <span class="dv">0</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">domain =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="at">autoDestroy =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="at">ignoreNULL =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  <span class="at">ignoreInit =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="at">once =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="fu">eventReactive</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  eventExpr,</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  valueExpr,</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  <span class="at">event.env =</span> <span class="fu">parent.frame</span>(),</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  <span class="at">event.quoted =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>  <span class="at">value.env =</span> <span class="fu">parent.frame</span>(),</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>  <span class="at">value.quoted =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>  ...,</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>  <span class="at">domain =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>  <span class="at">ignoreNULL =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>  <span class="at">ignoreInit =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>eventExpr</dt>
+<dd><p>A (quoted or unquoted) expression that represents the event;
+this can be a simple reactive value like <code>input$click</code>, a call to a
+reactive expression like <code>dataset()</code>, or even a complex expression
+inside curly braces</p></dd>
+
+
+<dt>handlerExpr</dt>
+<dd><p>The expression to call whenever <code>eventExpr</code> is
+invalidated. This should be a side-effect-producing action (the return
+value will be ignored). It will be executed within an <code><a href="isolate.html">isolate()</a></code>
+scope.</p></dd>
+
+
+<dt>event.env</dt>
+<dd><p>The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression. If <code>eventExpr</code> is a quosure and <code>event.quoted</code> is <code>TRUE</code>,
+then <code>event.env</code> is ignored.</p></dd>
+
+
+<dt>event.quoted</dt>
+<dd><p>If it is <code>TRUE</code>, then the <code><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote()</a></code>ed value of <code>eventExpr</code>
+will be used when <code>eventExpr</code> is evaluated. If <code>eventExpr</code> is a quosure and you
+would like to use its expression as a value for <code>eventExpr</code>, then you must set
+<code>event.quoted</code> to <code>TRUE</code>.</p></dd>
+
+
+<dt>handler.env</dt>
+<dd><p>The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression. If <code>handlerExpr</code> is a quosure and <code>handler.quoted</code> is <code>TRUE</code>,
+then <code>handler.env</code> is ignored.</p></dd>
+
+
+<dt>handler.quoted</dt>
+<dd><p>If it is <code>TRUE</code>, then the <code><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote()</a></code>ed value of <code>handlerExpr</code>
+will be used when <code>handlerExpr</code> is evaluated. If <code>handlerExpr</code> is a quosure and you
+would like to use its expression as a value for <code>handlerExpr</code>, then you must set
+<code>handler.quoted</code> to <code>TRUE</code>.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Currently not used.</p></dd>
+
+
+<dt>label</dt>
+<dd><p>A label for the observer or reactive, useful for debugging.</p></dd>
+
+
+<dt>suspended</dt>
+<dd><p>If <code>TRUE</code>, start the observer in a suspended state. If
+<code>FALSE</code> (the default), start in a non-suspended state.</p></dd>
+
+
+<dt>priority</dt>
+<dd><p>An integer or numeric that controls the priority with which
+this observer should be executed. An observer with a given priority level
+will always execute sooner than all observers with a lower priority level.
+Positive, negative, and zero values are allowed.</p></dd>
+
+
+<dt>domain</dt>
+<dd><p>See <a href="domains.html">domains</a>.</p></dd>
+
+
+<dt>autoDestroy</dt>
+<dd><p>If <code>TRUE</code> (the default), the observer will be
+automatically destroyed when its domain (if any) ends.</p></dd>
+
+
+<dt>ignoreNULL</dt>
+<dd><p>Whether the action should be triggered (or value
+calculated, in the case of <code>eventReactive</code>) when the input is
+<code>NULL</code>. See Details.</p></dd>
+
+
+<dt>ignoreInit</dt>
+<dd><p>If <code>TRUE</code>, then, when this <code>observeEvent</code> is
+first created/initialized, ignore the <code>handlerExpr</code> (the second
+argument), whether it is otherwise supposed to run or not. The default is
+<code>FALSE</code>. See Details.</p></dd>
+
+
+<dt>once</dt>
+<dd><p>Whether this <code>observeEvent</code> should be immediately destroyed
+after the first time that the code in <code>handlerExpr</code> is run. This
+pattern is useful when you want to subscribe to a event that should only
+happen once.</p></dd>
+
+
+<dt>valueExpr</dt>
+<dd><p>The expression that produces the return value of the
+<code>eventReactive</code>. It will be executed within an <code><a href="isolate.html">isolate()</a></code>
+scope.</p></dd>
+
+
+<dt>value.env</dt>
+<dd><p>The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression. If <code>valueExpr</code> is a quosure and <code>value.quoted</code> is <code>TRUE</code>,
+then <code>value.env</code> is ignored.</p></dd>
+
+
+<dt>value.quoted</dt>
+<dd><p>If it is <code>TRUE</code>, then the <code><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote()</a></code>ed value of <code>valueExpr</code>
+will be used when <code>valueExpr</code> is evaluated. If <code>valueExpr</code> is a quosure and you
+would like to use its expression as a value for <code>valueExpr</code>, then you must set
+<code>value.quoted</code> to <code>TRUE</code>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p><code>observeEvent</code> returns an observer reference class object (see
+<code><a href="observe.html">observe()</a></code>). <code>eventReactive</code> returns a reactive expression
+object (see <code><a href="reactive.html">reactive()</a></code>).</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Shiny's reactive programming framework is primarily designed for calculated
+values (reactive expressions) and side-effect-causing actions (observers)
+that respond to <em>any</em> of their inputs changing. That's often what is
+desired in Shiny apps, but not always: sometimes you want to wait for a
+specific action to be taken from the user, like clicking an
+<code><a href="actionButton.html">actionButton()</a></code>, before calculating an expression or taking an
+action. A reactive value or expression that is used to trigger other
+calculations in this way is called an <em>event</em>.</p>
+<p>These situations demand a more imperative, "event handling" style of
+programming that is possible--but not particularly intuitive--using the
+reactive programming primitives <code><a href="observe.html">observe()</a></code> and
+<code><a href="isolate.html">isolate()</a></code>. <code>observeEvent</code> and <code>eventReactive</code> provide
+straightforward APIs for event handling that wrap <code>observe</code> and
+<code>isolate</code>.</p>
+<p>Use <code>observeEvent</code> whenever you want to <em>perform an action</em> in
+response to an event. (Note that "recalculate a value" does not generally
+count as performing an action--see <code>eventReactive</code> for that.) The first
+argument is the event you want to respond to, and the second argument is a
+function that should be called whenever the event occurs. Note that
+<code>observeEvent()</code> is equivalent to using <code>observe() %&gt;% bindEvent()</code> and as of
+Shiny 1.6.0, we recommend the latter.</p>
+<p>Use <code>eventReactive</code> to create a <em>calculated value</em> that only
+updates in response to an event. This is just like a normal
+<a href="reactive.html">reactive expression</a> except it ignores all the usual
+invalidations that come from its reactive dependencies; it only invalidates
+in response to the given event. Note that
+<code>eventReactive()</code> is equivalent to using <code>reactive() %&gt;% bindEvent()</code> and as of
+Shiny 1.6.0, we recommend the latter.</p>
+  </div>
+  <div data-section="ignorenull-and-ignoreinit">
+    <h3 id="ignorenull-and-ignoreinit">ignoreNULL and ignoreInit</h3>
+    
+
+
+<p>Both <code>observeEvent</code> and <code>eventReactive</code> take an <code>ignoreNULL</code>
+parameter that affects behavior when the <code>eventExpr</code> evaluates to
+<code>NULL</code> (or in the special case of an <code><a href="actionButton.html">actionButton()</a></code>,
+<code>0</code>). In these cases, if <code>ignoreNULL</code> is <code>TRUE</code>, then an
+<code>observeEvent</code> will not execute and an <code>eventReactive</code> will raise a
+silent <a href="validate.html">validation</a> error. This is useful behavior if you
+don't want to do the action or calculation when your app first starts, but
+wait for the user to initiate the action first (like a "Submit" button);
+whereas <code>ignoreNULL=FALSE</code> is desirable if you want to initially perform
+the action/calculation and just let the user re-initiate it (like a
+"Recalculate" button).</p>
+<p>Likewise, both <code>observeEvent</code> and <code>eventReactive</code> also take in an
+<code>ignoreInit</code> argument. By default, both of these will run right when they
+are created (except if, at that moment, <code>eventExpr</code> evaluates to <code>NULL</code>
+and <code>ignoreNULL</code> is <code>TRUE</code>). But when responding to a click of an action
+button, it may often be useful to set <code>ignoreInit</code> to <code>TRUE</code>. For
+example, if you're setting up an <code>observeEvent</code> for a dynamically created
+button, then <code>ignoreInit = TRUE</code> will guarantee that the action (in
+<code>handlerExpr</code>) will only be triggered when the button is actually clicked,
+instead of also being triggered when it is created/initialized. Similarly,
+if you're setting up an <code>eventReactive</code> that responds to a dynamically
+created button used to refresh some data (then returned by that <code>eventReactive</code>),
+then you should use <code>eventReactive([...], ignoreInit = TRUE)</code> if you want
+to let the user decide if/when they want to refresh the data (since, depending
+on the app, this may be a computationally expensive operation).</p>
+<p>Even though <code>ignoreNULL</code> and <code>ignoreInit</code> can be used for similar
+purposes they are independent from one another. Here's the result of combining
+these:</p>
+<dl><dt><code>ignoreNULL = TRUE</code> and <code>ignoreInit = FALSE</code></dt>
+<dd><p>This is the default. This combination means that <code>handlerExpr</code>/
+<code>valueExpr</code> will run every time that <code>eventExpr</code> is not
+<code>NULL</code>. If, at the time of the creation of the
+<code>observeEvent</code>/<code>eventReactive</code>, <code>eventExpr</code> happens
+to <em>not</em> be <code>NULL</code>, then the code runs.</p></dd>
+
+<dt><code>ignoreNULL = FALSE</code> and <code>ignoreInit = FALSE</code></dt>
+<dd><p>This combination means that <code>handlerExpr</code>/<code>valueExpr</code> will
+run every time no matter what.</p></dd>
+
+<dt><code>ignoreNULL = FALSE</code> and <code>ignoreInit = TRUE</code></dt>
+<dd><p>This combination means that <code>handlerExpr</code>/<code>valueExpr</code> will
+<em>not</em> run when the <code>observeEvent</code>/<code>eventReactive</code> is
+created (because <code>ignoreInit = TRUE</code>), but it will run every
+other time.</p></dd>
+
+<dt><code>ignoreNULL = TRUE</code> and <code>ignoreInit = TRUE</code></dt>
+<dd><p>This combination means that <code>handlerExpr</code>/<code>valueExpr</code> will
+<em>not</em> run when the <code>observeEvent</code>/<code>eventReactive</code> is
+created (because  <code>ignoreInit = TRUE</code>). After that,
+<code>handlerExpr</code>/<code>valueExpr</code> will run every time that
+<code>eventExpr</code> is not <code>NULL</code>.</p></dd>
+
+
+</dl></div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="actionButton.html">actionButton()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="do">## App 1: Sample usage</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>      <span class="fu">column</span>(<span class="dv">4</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>        <span class="fu">numericInput</span>(<span class="st">"x"</span>, <span class="st">"Value"</span>, <span class="dv">5</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>        <span class="fu">br</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>        <span class="fu">actionButton</span>(<span class="st">"button"</span>, <span class="st">"Show"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>      ),</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>      <span class="fu">column</span>(<span class="dv">8</span>, <span class="fu">tableOutput</span>(<span class="st">"table"</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    ),</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>      <span class="co"># Take an action every time button is pressed;</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>      <span class="co"># here, we just print a message to the console</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>      <span class="fu">observeEvent</span>(input<span class="sc">$</span>button, {</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>        <span class="fu">cat</span>(<span class="st">"Showing"</span>, input<span class="sc">$</span>x, <span class="st">"rows</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>      })</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>      <span class="co"># The observeEvent() above is equivalent to:</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>      <span class="co"># observe({</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>      <span class="co">#    cat("Showing", input$x, "rows\n")</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>      <span class="co">#   }) %&gt;%</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>      <span class="co">#   bindEvent(input$button)</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>      <span class="co"># Take a reactive dependency on input$button, but</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>      <span class="co"># not on any of the stuff inside the function</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>      df <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(input<span class="sc">$</span>button, {</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>        <span class="fu">head</span>(cars, input<span class="sc">$</span>x)</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>      })</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>      output<span class="sc">$</span>table <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>        <span class="fu">df</span>()</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>      })</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>    }</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>  )</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>  <span class="do">## App 2: Using `once`</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">basicPage</span>( <span class="fu">actionButton</span>(<span class="st">"go"</span>, <span class="st">"Go"</span>)),</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>      <span class="fu">observeEvent</span>(input<span class="sc">$</span>go, {</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>        <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"This will only be printed once; all"</span>,</span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a>              <span class="st">"subsequent button clicks won't do anything"</span>))</span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a>      }, <span class="at">once =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a>      <span class="co"># The observeEvent() above is equivalent to:</span></span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>      <span class="co"># observe({</span></span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>      <span class="co">#   print(paste("This will only be printed once; all",</span></span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>      <span class="co">#         "subsequent button clicks won't do anything"))</span></span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a>      <span class="co">#   }) %&gt;%</span></span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a>      <span class="co">#   bindEvent(input$go, once = TRUE)</span></span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a>    }</span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a>  )</span>
+<span id="cb1-53"><a href="#cb1-53" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" tabindex="-1"></a>  <span class="do">## App 3: Using `ignoreInit` and `once`</span></span>
+<span id="cb1-55"><a href="#cb1-55" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb1-56"><a href="#cb1-56" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">basicPage</span>(<span class="fu">actionButton</span>(<span class="st">"go"</span>, <span class="st">"Go"</span>)),</span>
+<span id="cb1-57"><a href="#cb1-57" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-58"><a href="#cb1-58" tabindex="-1"></a>      <span class="fu">observeEvent</span>(input<span class="sc">$</span>go, {</span>
+<span id="cb1-59"><a href="#cb1-59" tabindex="-1"></a>        <span class="fu">insertUI</span>(<span class="st">"#go"</span>, <span class="st">"afterEnd"</span>,</span>
+<span id="cb1-60"><a href="#cb1-60" tabindex="-1"></a>                 <span class="fu">actionButton</span>(<span class="st">"dynamic"</span>, <span class="st">"click to remove"</span>))</span>
+<span id="cb1-61"><a href="#cb1-61" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" tabindex="-1"></a>        <span class="co"># set up an observer that depends on the dynamic</span></span>
+<span id="cb1-63"><a href="#cb1-63" tabindex="-1"></a>        <span class="co"># input, so that it doesn't run when the input is</span></span>
+<span id="cb1-64"><a href="#cb1-64" tabindex="-1"></a>        <span class="co"># created, and only runs once after that (since</span></span>
+<span id="cb1-65"><a href="#cb1-65" tabindex="-1"></a>        <span class="co"># the side effect is remove the input from the DOM)</span></span>
+<span id="cb1-66"><a href="#cb1-66" tabindex="-1"></a>        <span class="fu">observeEvent</span>(input<span class="sc">$</span>dynamic, {</span>
+<span id="cb1-67"><a href="#cb1-67" tabindex="-1"></a>          <span class="fu">removeUI</span>(<span class="st">"#dynamic"</span>)</span>
+<span id="cb1-68"><a href="#cb1-68" tabindex="-1"></a>        }, <span class="at">ignoreInit =</span> <span class="cn">TRUE</span>, <span class="at">once =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" tabindex="-1"></a>      })</span>
+<span id="cb1-70"><a href="#cb1-70" tabindex="-1"></a>    }</span>
+<span id="cb1-71"><a href="#cb1-71" tabindex="-1"></a>  )</span>
+<span id="cb1-72"><a href="#cb1-72" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

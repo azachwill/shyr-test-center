@@ -1,0 +1,110 @@
+---
+title: "HTML Tag Object — tag"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>tagList</span>(<span class='no'>...</span>)
+
+<span class='fu'>tagAppendAttributes</span>(<span class='no'>tag</span>, <span class='no'>...</span>)
+
+<span class='fu'>tagHasAttribute</span>(<span class='no'>tag</span>, <span class='no'>attr</span>)
+
+<span class='fu'>tagGetAttribute</span>(<span class='no'>tag</span>, <span class='no'>attr</span>)
+
+<span class='fu'>tagAppendChild</span>(<span class='no'>tag</span>, <span class='no'>child</span>)
+
+<span class='fu'>tagAppendChildren</span>(<span class='no'>tag</span>, <span class='no'>...</span>, <span class='kw'>list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>tagSetChildren</span>(<span class='no'>tag</span>, <span class='no'>...</span>, <span class='kw'>list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>tag</span>(<span class='no'>`_tag_name`</span>, <span class='no'>varArgs</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Unnamed items that comprise this list of tags.</p></td>
+  </tr>
+  <tr>
+    <th><p>tag</p></th>
+    <td><p>A tag to append child elements to.</p></td>
+  </tr>
+  <tr>
+    <th><p>attr</p></th>
+    <td><p>The name of an attribute.</p></td>
+  </tr>
+  <tr>
+    <th><p>child</p></th>
+    <td><p>A child element to append to a parent tag.</p></td>
+  </tr>
+  <tr>
+    <th><p>list</p></th>
+    <td><p>An optional list of elements. Can be used with or instead of the
+<code>...</code> items.</p></td>
+  </tr>
+  <tr>
+    <th><p>_tag_name</p></th>
+    <td><p>HTML tag name</p></td>
+  </tr>
+  <tr>
+    <th><p>varArgs</p></th>
+    <td><p>List of attributes and children of the element. Named list
+items become attributes, and unnamed list items become children. Valid
+children are tags, single-character character vectors (which become text
+nodes), and raw HTML (see <code><a href='HTML.html'>HTML</a></code>). You can also pass lists that
+contain tags, text nodes, and HTML.</p></td>
+  </tr>
+  <tr>
+    <th><p>.noWS</p></th>
+    <td><p>Character vector used to omit some of the whitespace that would
+normally be written around this tag. Valid options include <code>before</code>,
+<code>after</code>, <code>outside</code>, <code>after-begin</code>, and <code>before-end</code>.
+Any number of these options can be specified.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p><code>tag()</code> creates an HTML tag definition. Note that all of the valid HTML5
+tags are already defined in the <code><a href='builder.html'>tags</a></code> environment so these
+functions should only be used to generate additional tags.
+<code>tagAppendChild()</code> and <code>tagList()</code> are for supporting package
+authors who wish to create their own sets of tags; see the contents of
+bootstrap.R for examples.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>An HTML tag object that can be rendered as HTML using
+  <code><a href='https://rdrr.io/r/base/character.html'>as.character</a>()</code>.</p>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='fu'>tagList</span>(<span class='no'>tags</span>$<span class='fu'><a href='builder.html'>h1</a></span>(<span class='st'>"Title"</span>),
+        <span class='no'>tags</span>$<span class='fu'><a href='builder.html'>h2</a></span>(<span class='st'>"Header text"</span>),
+        <span class='no'>tags</span>$<span class='fu'><a href='builder.html'>p</a></span>(<span class='st'>"Text here"</span>))
+
+<span class='co'># Can also convert a regular list to a tagList (internal data structure isn't</span>
+<span class='co'># exactly the same, but when rendered to HTML, the output is the same).</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>tags</span>$<span class='fu'><a href='builder.html'>h1</a></span>(<span class='st'>"Title"</span>),
+          <span class='no'>tags</span>$<span class='fu'><a href='builder.html'>h2</a></span>(<span class='st'>"Header text"</span>),
+          <span class='no'>tags</span>$<span class='fu'><a href='builder.html'>p</a></span>(<span class='st'>"Text here"</span>))
+<span class='fu'>tagList</span>(<span class='no'>x</span>)
+
+<span class='co'># suppress the whitespace between tags</span>
+<span class='no'>oneline</span> <span class='kw'>&lt;-</span> <span class='fu'>tag</span>(<span class='st'>"span"</span>,
+  <span class='fu'>tag</span>(<span class='st'>"strong"</span>, <span class='st'>"Super strong"</span>, <span class='kw'>.noWS</span><span class='kw'>=</span><span class='st'>"outside"</span>)
+)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>oneline</span>))</pre>
+</div>
+
+
+```

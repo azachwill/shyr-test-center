@@ -1,0 +1,149 @@
+---
+title: "Change the value of a select input on the client — updateSelectInput"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/update-input.R" class="external-link"><code>R/update-input.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Change the value of a select input on the client</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">updateSelectInput</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  inputId,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">choices =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">selected =</span> <span class="cn">NULL</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">updateSelectizeInput</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  inputId,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="at">choices =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="at">selected =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(),</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="at">server =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="fu">updateVarSelectInput</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  inputId,</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  <span class="at">data =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>  <span class="at">selected =</span> <span class="cn">NULL</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>)</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="fu">updateVarSelectizeInput</span>(</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>  inputId,</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>  <span class="at">data =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>  <span class="at">selected =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(),</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>  <span class="at">server =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>session</dt>
+<dd><p>The <code>session</code> object passed to function given to
+<code>shinyServer</code>. Default is <code><a href="domains.html">getDefaultReactiveDomain()</a></code>.</p></dd>
+
+
+<dt>inputId</dt>
+<dd><p>The id of the input object.</p></dd>
+
+
+<dt>label</dt>
+<dd><p>The label to set for the input object.</p></dd>
+
+
+<dt>choices</dt>
+<dd><p>List of values to select from. If elements of the list are
+named, then that name --- rather than the value --- is displayed to the
+user. It's also possible to group related inputs by providing a named list
+whose elements are (either named or unnamed) lists, vectors, or factors. In
+this case, the outermost names will be used as the group labels (leveraging
+the <code>&lt;optgroup&gt;</code> HTML tag) for the elements in the respective sublist. See
+the example section for a small demo of this feature.</p></dd>
+
+
+<dt>selected</dt>
+<dd><p>The initially selected value (or multiple values if <code>multiple = TRUE</code>). If not specified then defaults to the first value for
+single-select lists and no values for multiple select lists.</p></dd>
+
+
+<dt>options</dt>
+<dd><p>A list of options. See the documentation of <span class="pkg">selectize.js</span>
+for possible options (character option values inside <code><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">base::I()</a></code> will
+be treated as literal JavaScript code; see <code><a href="renderDataTable.html">renderDataTable()</a></code>
+for details).</p></dd>
+
+
+<dt>server</dt>
+<dd><p>whether to store <code>choices</code> on the server side, and load
+the select options dynamically on searching, instead of writing all
+<code>choices</code> into the page at once (i.e., only use the client-side
+version of <span class="pkg">selectize.js</span>)</p></dd>
+
+
+<dt>data</dt>
+<dd><p>A data frame. Used to retrieve the column names as choices for a <code><a href="selectInput.html">selectInput()</a></code></p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+<p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href="numericInput.html">numericInput</a>()</code> and
+<code><a href="updateNumericInput.html">updateNumericInput()</a></code> take a similar set of arguments.</p>
+<p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+<p>For <code><a href="radioButtons.html">radioButtons</a>()</code>, <code><a href="checkboxGroupInput.html">checkboxGroupInput</a>()</code> and
+<code><a href="selectInput.html">selectInput</a>()</code>, the set of choices can be cleared by using
+<code>choices=character(0)</code>. Similarly, for these inputs, the selected item
+can be cleared by using <code>selected=character(0)</code>.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="selectInput.html">selectInput()</a></code> <code><a href="varSelectInput.html">varSelectInput()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="fu">p</span>(<span class="st">"The checkbox group controls the select input"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">checkboxGroupInput</span>(<span class="st">"inCheckboxGroup"</span>, <span class="st">"Input checkbox"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Item A"</span>, <span class="st">"Item B"</span>, <span class="st">"Item C"</span>)),</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">"inSelect"</span>, <span class="st">"Select input"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Item A"</span>, <span class="st">"Item B"</span>, <span class="st">"Item C"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="fu">observe</span>({</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    x <span class="ot">&lt;-</span> input<span class="sc">$</span>inCheckboxGroup</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="co"># Can use character(0) to remove all choices</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(x))</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>      x <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    <span class="co"># Can also set the label and select items</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    <span class="fu">updateSelectInput</span>(session, <span class="st">"inSelect"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Select input label"</span>, <span class="fu">length</span>(x)),</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>      <span class="at">choices =</span> x,</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>      <span class="at">selected =</span> <span class="fu">tail</span>(x, <span class="dv">1</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>    )</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>  })</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>}</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

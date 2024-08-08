@@ -1,0 +1,50 @@
+---
+title: "Runs the tests associated with this Shiny app — runTests"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.0/R/test.R" class="external-link"><code>R/test.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Sources the <code>.R</code> files in the top-level of <code>tests/</code> much like <code>R CMD check</code>.
+These files are typically simple runners for tests nested in other
+directories under <code>tests/</code>.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">runTests</span>(<span class="at">appDir =</span> <span class="st">"."</span>, <span class="at">filter =</span> <span class="cn">NULL</span>, <span class="at">assert =</span> <span class="cn">TRUE</span>, <span class="at">envir =</span> <span class="fu">globalenv</span>())</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>appDir</dt>
+<dd><p>The base directory for the application.</p></dd>
+
+
+<dt>filter</dt>
+<dd><p>If not <code>NULL</code>, only tests with file names matching this regular
+expression will be executed. Matching is performed on the file name
+including the extension.</p></dd>
+
+
+<dt>assert</dt>
+<dd><p>Logical value which determines if an error should be thrown if any error is captured.</p></dd>
+
+
+<dt>envir</dt>
+<dd><p>Parent testing environment in which to base the individual testing environments.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A data frame classed with the supplemental class <code>"shiny_runtests"</code>.
+The data frame has the following columns:</p><table class="table table"><tr><td><strong>Name</strong></td><td><strong>Type</strong></td><td><strong>Meaning</strong></td></tr><tr><td><code>file</code></td><td><code>character(1)</code></td><td>File name of the runner script in <code>tests/</code> that was sourced.</td></tr><tr><td><code>pass</code></td><td><code>logical(1)</code></td><td>Whether or not the runner script signaled an error when sourced.</td></tr><tr><td><code>result</code></td><td>any or <code>NA</code></td><td>The return value of the runner</td></tr></table></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Historically, <a href="https://rstudio.github.io/shinytest/" class="external-link">shinytest</a>
+recommended placing tests at the top-level of the <code>tests/</code> directory.
+This older folder structure is not supported by runTests.
+Please see <code><a href="shinyAppTemplate.html">shinyAppTemplate()</a></code> for more details.</p>
+  </div>
+
+</div>
+```

@@ -1,0 +1,48 @@
+---
+title: "Validate proper CSS formatting of a unit — validateCssUnit"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.4</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/tags.R" class="external-link"><code>R/tags.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Checks that the argument is valid for use as a CSS unit of length.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">validateCssUnit</span>(x)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>x</dt>
+<dd><p>The unit to validate. Will be treated as a number of pixels if a
+unit is not specified.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A properly formatted CSS unit of length, if possible. Otherwise, will
+throw an error.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p><code>NULL</code> and <code>NA</code> are returned unchanged.</p>
+<p>Single element numeric vectors are returned as a character vector with the
+number plus a suffix of <code>"px"</code>.</p>
+<p>Single element character vectors must be <code>"auto"</code>, <code>"fit-content"</code>
+or <code>"inherit"</code>, a number, or a length calculated by the <code>"calc"</code>
+CSS function. If the number has a suffix, it must be valid: <code>px</code>,
+<code>\%</code>, <code>ch</code>, <code>em</code>, <code>rem</code>, <code>pt</code>, <code>in</code>, <code>cm</code>,
+<code>mm</code>, <code>ex</code>, <code>pc</code>, <code>vh</code>, <code>vw</code>, <code>vmin</code>, or
+<code>vmax</code>.
+If the number has no suffix, the suffix <code>"px"</code> is appended.</p>
+<p>Any other value will cause an error to be thrown.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">validateCssUnit</span>(<span class="st">"10%"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">validateCssUnit</span>(<span class="dv">400</span>)  <span class="co">#treated as '400px'</span></span></code></pre></div>
+  </div>
+</div>
+```

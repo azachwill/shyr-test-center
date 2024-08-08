@@ -1,0 +1,13 @@
+- title: "Your first Shiny app"
+  links:
+    - text: The basic parts of a Shiny app
+      href: ../articles/start/basics/index.qmd
+    - text: How to build a Shiny app
+      href: ../articles/start/build/index.qmd
+    - text: How to launch a Shiny app
+      href: ../articles/start/running/index.qmd
+
+- title: "Help"
+  links:
+    - text: Shiny cheatsheet
+      href: ../articles/start/cheatsheet/index.qmd

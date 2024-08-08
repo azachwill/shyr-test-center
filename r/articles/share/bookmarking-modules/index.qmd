@@ -1,0 +1,108 @@
+---
+title: Bookmarking and modules
+date: 2016-08-03
+author: Winston Chang
+description: Shiny's bookmarking works with modules. As with Shiny applications, if the state of your module's outputs are fully determined by the state of the inputs at a given time, then no modifications are necessary. If bookmarking is enabled by the application, then it will work for the module.
+---
+
+Shiny's bookmarking works with modules. As with Shiny applications, if the state of your module's outputs are fully determined by the state of the inputs at a given time, then no modifications are necessary. If bookmarking is enabled by the application, then it will work for the module.
+
+This application contains a very simple module, and bookmarking works for it just by calling `enableBookmarking()` as we did in other applications:
+
+````r
+# A simple module that captializes input text
+capitalizerUI <- function(id) {
+  ns <- NS(id)
+  wellPanel(
+    h4("Text captializer module"),
+    textInput(ns("txt"), "Enter text:"),
+    verbatimTextOutput(ns("out"))
+  )
+}
+capitalizerServer <- function(input, output, session) {
+  output$out <- renderText({
+    toupper(input$txt)
+  })
+}
+
+# Main app code
+ui <- function(request) {
+  fluidPage(
+    capitalizerUI("tc"),
+    bookmarkButton()
+  )
+}
+server <- function(input, output, session) {
+  callModule(capitalizerServer, "tc")
+}
+shinyApp(ui, server, enableBookmarking = "url")
+````
+
+
+If the bookmarking for the module requires customization, the API is the same as for a full Shiny application. Modules can have their own `onBookmark`, `onRestore`, and `onRestored` callbacks (they can't have `onBookmarked`, because that one is meant to display UI for the app as a whole), and they can have their own set of excluded inputs by calling `setBookmarkExclude()`. Using these functions in the module will not affect the parent application, and vice versa.
+
+In the following example, the module has its own `input$text`, as well as `onBookmark` and `onRestore` callbacks which store a value in `state$values$hash`. The main application also has `input$text`, as well as `onBookmark` and `onRestore` callbacks which store a value in `state$values$hash`. Even though the variable names look the same, Shiny's module logic namespaces them and prevents the module's code and application's code from interfering with each other.
+
+````r
+# A basic module that captializes text. When bookmarked, it saves the text and a
+# hash of the text.
+capitalizerUI <- function(id) {
+  ns <- NS(id)
+  wellPanel(
+    h4("Text captializer module"),
+    textInput(ns("text"), "Enter text:"),
+    "Capitalized text:", 
+    verbatimTextOutput(ns("out"))
+  )
+}
+capitalizerServer <- function(input, output, session) {
+  output$out <- renderText({
+    toupper(input$text)
+  })
+  onBookmark(function(state) {
+    state$values$hash <- digest::digest(input$text, "md5")
+  })
+  onRestore(function(state) {
+    if (identical(digest::digest(input$text, "md5"), state$values$hash)) {
+      showNotification(paste0('Module\'s input text "', input$text,
+        '" matches hash ', state$values$hash))
+    } else {
+      showNotification(paste0('Module\'s input text "', input$text,
+        '" does not match hash ', state$values$hash))
+    }
+  })
+}
+
+# The main application calls the module, and also saves its own text and a hash
+# of the text.
+ui <- function(request) {
+  basicPage(
+    capitalizerUI("tc"),
+    h4("Main app"),
+    textInput("text", "Enter text:"),
+    "Verbatim text:",
+    verbatimTextOutput("out"),
+    bookmarkButton()
+  )
+}
+server <- function(input, output, session) {
+  callModule(capitalizerServer, "tc")
+
+  output$out <- renderText({
+    input$text
+  })
+  onBookmark(function(state) {
+    state$values$hash <- digest::digest(input$text, "md5")
+  })
+  onRestore(function(state) {
+    if (identical(digest::digest(input$text, "md5"), state$values$hash)) {
+      showNotification(paste0('App\'s input text "', input$text,
+        '" matches hash ', state$values$hash))
+    } else {
+      showNotification(paste0('App\'s input text "', input$text,
+        '" does not match hash ', state$values$hash))
+    }
+  })
+}
+shinyApp(ui, server, enableBookmarking = "url")
+````

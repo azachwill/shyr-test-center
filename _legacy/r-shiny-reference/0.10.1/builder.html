@@ -1,0 +1,95 @@
+---
+layout: reference
+title: "builder"
+categories: reference
+
+---
+<h1>HTML Builder Functions</h1>
+
+<pre class="code"><code class="r"><div>tags</div>
+<div>p(...)</div>
+<div>h1(...)</div>
+<div>h2(...)</div>
+<div>h3(...)</div>
+<div>h4(...)</div>
+<div>h5(...)</div>
+<div>h6(...)</div>
+<div>a(...)</div>
+<div>br(...)</div>
+<div>div(...)</div>
+<div>span(...)</div>
+<div>pre(...)</div>
+<div>code(...)</div>
+<div>img(...)</div>
+<div>strong(...)</div>
+<div>em(...)</div>
+<div>hr(...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Attributes and children of the element. Named arguments become
+attributes, and positional arguments become children. Valid children are
+tags, single-character character vectors (which become text nodes), and raw
+HTML (see <code><a href='HTML.html'>HTML</a></code>). You can also pass lists that contain tags,
+text nodes, and HTML.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Simple functions for constructing HTML documents.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The <code>tags</code> environment contains convenience functions for all valid
+HTML5 tags. To generate tags that are not part of the HTML5 specification,
+you can use the <code><a href='tag.html'>tag</a>()</code> function.</p>
+
+  <p>Dedicated functions are available for the most common HTML tags that do not
+conflict with common R functions.</p>
+
+  <p>The result from these functions is a tag object, which can be converted using
+<code><a href='http://www.inside-r.org/packages/cran/base/docs/character'>as.character</a>()</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>doc &lt;- tags$html(
+  tags$head(
+    tags$title(&#39;My first page&#39;)
+  ),
+  tags$body(
+    h1(&#39;My first heading&#39;),
+    p(&#39;My first paragraph, with some &#39;,
+      strong(&#39;bold&#39;),
+      &#39; text.&#39;),
+    div(id=&#39;myDiv&#39;, class=&#39;simpleDiv&#39;,
+        &#39;Here is a div with some attributes.&#39;)
+  )
+)
+cat(as.character(doc))
+</div>
+<div class='output'>&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My first heading&lt;/h1&gt;
+    &lt;p&gt;
+      My first paragraph, with some 
+      &lt;strong&gt;bold&lt;/strong&gt;
+       text.
+    &lt;/p&gt;
+    &lt;div id=&quot;myDiv&quot; class=&quot;simpleDiv&quot;&gt;Here is a div with some attributes.&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</div></pre>
+<!-- <ul>
+  <li>a</li><li>br</li><li>builder</li><li>code</li><li>div</li><li>em</li><li>h1</li><li>h2</li><li>h3</li><li>h4</li><li>h5</li><li>h6</li><li>hr</li><li>img</li><li>p</li><li>pre</li><li>span</li><li>strong</li><li>tags</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

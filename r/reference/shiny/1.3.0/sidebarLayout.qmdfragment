@@ -1,0 +1,87 @@
+---
+title: "sidebarLayout"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='sidebarLayout.html'>sidebarLayout</a></span><span class="keyword">(</span><span class="symbol">sidebarPanel</span><span class="keyword">,</span> <span class="symbol">mainPanel</span><span class="keyword">,</span> <span class="argument">position</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"left"</span><span class="keyword">,</span> <span class="string">"right"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">fluid</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>sidebarPanel</th>
+    <td>The <a href='sidebarPanel.html'>sidebarPanel</a> containing input controls</td>
+  </tr>
+  <tr>
+    <th>mainPanel</th>
+    <td>The <a href='mainPanel.html'>mainPanel</a> containing outputs</td>
+  </tr>
+  <tr>
+    <th>position</th>
+    <td>The position of the sidebar relative to the main area (&quot;left&quot;
+or &quot;right&quot;)</td>
+  </tr>
+  <tr>
+    <th>fluid</th>
+    <td><code>TRUE</code> to use fluid layout; <code>FALSE</code> to use fixed
+layout.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a layout with a sidebar and main area. The sidebar is displayed with a
+distinct background color and typically contains input controls. The main
+area occupies 2/3 of the horizontal width and typically contains outputs.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>options</a></span><span class="keyword">(</span><span class="argument">device.ask.default</span> <span class="argument">=</span> <span class="number">FALSE</span><span class="keyword">)</span>
+
+<span class="comment"># Define UI</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+
+  <span class="comment"># Application title</span>
+  <span class="functioncall"><a href='titlePanel.html'>titlePanel</a></span><span class="keyword">(</span><span class="string">"Hello Shiny!"</span><span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="functioncall"><a href='sidebarLayout.html'>sidebarLayout</a></span><span class="keyword">(</span>
+
+    <span class="comment"># Sidebar with a slider input</span>
+    <span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"obs"</span><span class="keyword">,</span>
+                  <span class="string">"Number of observations:"</span><span class="keyword">,</span>
+                  <span class="argument">min</span> <span class="argument">=</span> <span class="number">0</span><span class="keyword">,</span>
+                  <span class="argument">max</span> <span class="argument">=</span> <span class="number">1000</span><span class="keyword">,</span>
+                  <span class="argument">value</span> <span class="argument">=</span> <span class="number">500</span><span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+
+    <span class="comment"># Show a plot of the generated distribution</span>
+    <span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"distPlot"</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="comment"># Server logic</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">distPlot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">obs</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="comment"># Complete app with UI and server components</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>sidebarLayout</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

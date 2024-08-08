@@ -1,0 +1,150 @@
+---
+layout: reference
+title: "Insert and remove UI objects — insertUI"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Insert and remove UI objects</h1>
+  
+
+  <pre class="code"><span class='fu'>insertUI</span>(
+  <span class='no'>selector</span>,
+  <span class='kw'>where</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"beforeBegin"</span>, <span class='st'>"afterBegin"</span>, <span class='st'>"beforeEnd"</span>, <span class='st'>"afterEnd"</span>),
+  <span class='no'>ui</span>,
+  <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>immediate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>()
+)
+
+<span class='fu'>removeUI</span>(
+  <span class='no'>selector</span>,
+  <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>immediate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>()
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>selector</p></th>
+    <td><p>A string that is accepted by jQuery's selector
+(i.e. the string <code>s</code> to be placed in a <code>$(s)</code> jQuery call).</p>
+<p>For <code>insertUI()</code> this determines the element(s) relative to which you
+want to insert your UI object. For <code>removeUI()</code> this determine the
+element(s) to be removed. If you want to remove a Shiny input or output,
+note that many of these are wrapped in <code>&lt;div&gt;</code>s, so you may need to use a
+somewhat complex selector --- see the Examples below. (Alternatively, you
+could also wrap the inputs/outputs that you want to be able to remove
+easily in a <code>&lt;div&gt;</code> with an id.)</p></td>
+  </tr>
+  <tr>
+    <th><p>where</p></th>
+    <td><p>Where your UI object should go relative to the selector:</p><dl class='dl-horizontal'>
+<dt><code>beforeBegin</code></dt><dd><p>Before the selector element itself</p></dd>
+<dt><code>afterBegin</code></dt><dd><p>Just inside the selector element, before its
+first child</p></dd>
+<dt><code>beforeEnd</code></dt><dd><p>Just inside the selector element, after its
+last child (default)</p></dd>
+<dt><code>afterEnd</code></dt><dd><p>After the selector element itself</p></dd>
+
+</dl><p>Adapted from <a href='https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML'>https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML</a>.</p></td>
+  </tr>
+  <tr>
+    <th><p>ui</p></th>
+    <td><p>The UI object you want to insert. This can be anything that
+you usually put inside your apps's <code>ui</code> function. If you're inserting
+multiple elements in one call, make sure to wrap them in either a
+<code><a href='tag.html'>tagList()</a></code> or a <code>tags$div()</code> (the latter option has the
+advantage that you can give it an <code>id</code> to make it easier to
+reference or remove it later on). If you want to insert raw html, use
+<code>ui = HTML()</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>multiple</p></th>
+    <td><p>In case your selector matches more than one element,
+<code>multiple</code> determines whether Shiny should insert the UI object
+relative to all matched elements or just relative to the first
+matched element (default).</p></td>
+  </tr>
+  <tr>
+    <th><p>immediate</p></th>
+    <td><p>Whether the UI object should be immediately inserted
+or removed, or whether Shiny should wait until all outputs have been
+updated and all observers have been run (default).</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The shiny session. Advanced use only.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>These functions allow you to dynamically add and remove arbirary UI
+into your app, whenever you want, as many times as you want.
+Unlike <code><a href='renderUI.html'>renderUI()</a></code>, the UI generated with <code>insertUI()</code> is persistent:
+once it's created, it stays there until removed by <code>removeUI()</code>. Each
+new call to <code>insertUI()</code> creates more UI objects, in addition to
+the ones already there (all independent from one another). To
+update a part of the UI (ex: an input object), you must use the
+appropriate <code>render</code> function or a customized <code>reactive</code>
+function.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>It's particularly useful to pair <code>removeUI</code> with <code>insertUI()</code>, but there is
+no restriction on what you can use on. Any element that can be selected
+through a jQuery selector can be removed through this function.</p>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+<span class='co'># Define UI</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'><a href='actionButton.html'>actionButton</a></span>(<span class='st'>"add"</span>, <span class='st'>"Add UI"</span>)
+)
+
+<span class='co'># Server logic</span>
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>add</span>, {
+    <span class='fu'>insertUI</span>(
+      <span class='kw'>selector</span> <span class='kw'>=</span> <span class='st'>"#add"</span>,
+      <span class='kw'>where</span> <span class='kw'>=</span> <span class='st'>"afterEnd"</span>,
+      <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"txt"</span>, <span class='no'>input</span>$<span class='no'>add</span>),
+                     <span class='st'>"Insert some text"</span>)
+    )
+  })
+}
+
+<span class='co'># Complete app with UI and server components</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}
+
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+<span class='co'># Define UI</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'><a href='actionButton.html'>actionButton</a></span>(<span class='st'>"rmv"</span>, <span class='st'>"Remove UI"</span>),
+  <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"txt"</span>, <span class='st'>"This is no longer useful"</span>)
+)
+
+<span class='co'># Server logic</span>
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>rmv</span>, {
+    <span class='fu'>removeUI</span>(
+      <span class='kw'>selector</span> <span class='kw'>=</span> <span class='st'>"div:has(&gt; #txt)"</span>
+    )
+  })
+}
+
+<span class='co'># Complete app with UI and server components</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+

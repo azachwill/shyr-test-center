@@ -1,0 +1,18 @@
+---
+image: thumbnail.png
+title: "NCAA Swimming Team Finder for Incoming College Athletes"
+author: "Greg Pilgrimname"
+authorurl: "https://community.rstudio.com/u/gpilgrim"
+date: "2019-05-31"
+no-app-padding: true
+imagealt: ""
+tags:
+ - ggplot2
+ - visualization
+appurl:      https://gpilgrim.shinyapps.io/SwimmingProject-Click/
+sourceurl:   https://github.com/gpilgrim2670/SwimMap
+rscloudurl:  https://rstudio.cloud/project/199532
+---
+
+A look at college swimming programs to help incoming student athletes in selecting schools and programs that would fit them athletically, academically, locationally and financially.  Provides interactive maps and charts to display programs sorted by swimming times/events, US News college rankings, etc.
+  

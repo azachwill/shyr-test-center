@@ -1,0 +1,71 @@
+---
+title: "verbatimTextOutput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">,</span> <span class="argument">placeholder</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the value from</td>
+  </tr>
+  <tr>
+    <th>placeholder</th>
+    <td>if the output is empty or <code>NULL</code>, should an empty
+rectangle be displayed to serve as a placeholder? (does not affect
+behavior when the the output in nonempty)</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A verbatim text output element that can be included in a panel
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Render a reactive output variable as verbatim text within an
+application page. The text will be included within an HTML <code>pre</code> tag.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Text is HTML-escaped prior to rendering. This element is often used
+  with the <a href='renderPrint.html'>renderPrint</a> function to preserve fixed-width formatting
+  of printed objects.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+    <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='bootstrapPage.html'>basicPage</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Enter the text to display below:"</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"default"</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"placeholder"</span><span class="keyword">,</span> <span class="argument">placeholder</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">default</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">txt</span> <span class="keyword">}</span><span class="keyword">)</span>
+      <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">placeholder</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">txt</span> <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>verbatimTextOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

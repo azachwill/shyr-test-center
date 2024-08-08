@@ -1,0 +1,240 @@
+iframe<!DOCTYPE html>
+<html>
+<head>
+  <script src="jquery-1.10.2.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
+  <script src="bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="font-awesome/css/all.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400" rel="stylesheet" type="text/css">
+  <style type="text/css">
+
+  .punchup {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  header .nav {
+    display: block;
+    font-size: 12px;
+    color: white;
+  }
+  header .nav li a {
+    padding: 1px 6px 1px 6px;
+    color: white;
+    text-decoration: none;
+  }
+
+  body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans';
+  }
+  body {
+    color: #333;
+  }
+  h3 {
+    font-size: 28px;
+  }
+  .container {
+    max-width: 960px;
+  }
+  .action {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .fa {
+    color: #DDD;
+  }
+  .action .fa {
+    color: #428bca;
+    margin-bottom: 8px;
+  }
+  .fa:hover,
+  .action:hover .fa {
+    color: #428bca;
+  }
+  header, section, .section {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  section, .section {
+    padding-bottom: 50px;
+    background-image: url(hr.png);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+  header {
+    background-color: #428bca;
+    color: white;
+    padding: 10px 10px 32px 10px;
+  }
+  header h1 {
+    font-size: 120px;
+    margin-bottom: 32px;
+  }
+  header h5 {
+    font-weight: 200;
+    font-size: 17px;
+  }
+  header h5.first {
+    font-weight: 600;
+  }
+  header a {
+    color: white;
+  }
+  .subaction {
+    color: #C3C3C3;
+    font-size: 24px;
+  }
+  #example1-container {
+    padding: 24px 0 0 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+  }
+  iframe#example1 {
+    border: none;
+    width: 600px;
+    height: 480px;
+  }
+  #example1-code {
+    padding-top: 16px;
+  }
+  #example1-code pre, #example1-code code {
+    text-align: left;
+    font-size: 11px;
+    line-height: 1.2;
+    overflow: auto;
+    white-space: pre;
+  }
+
+  header ul li {
+    display: inline-block;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav punchup">
+      <ul class="list-unstyled">
+        <li><a href="#">Tutorial</a></li>
+        <li><a href="#">Articles</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Reference</a></li>
+        <li><a href="#">Getting help</a></li>
+      </ul>
+    </div>
+
+    <h1>Shiny</h1>
+    <h5 class="first">A web application framework for R</h5>
+    <h5>Turn your analyses into interactive web applications</h5>
+    <h5>No HTML, CSS, or JavaScript knowledge required</h5>
+  </header>
+
+  <div class="container">
+
+    <div class="row section">
+      <div class="col-sm-4 col-md-offset-1 col-md-3">
+        <div class="action">
+          <h3>
+            <a href="gallery/">
+              <i class="far fa-image fa-3x hidden-xs"></i>
+              Get inspired<br/>
+            </a>
+            <span class="subaction">(examples)</span>
+          </h3>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="action">
+          <h3>
+            <a href="tutorial/">
+              <i class="fas fa-road fa-3x hidden-xs"></i>
+              Get started<br/>
+            </a>
+            <span class="subaction">(tutorial)</span>
+          </h3>
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-3">
+        <div class="action">
+          <h3>
+            <a href="articles/">
+              <i class="fas fa-cogs fa-3x hidden-xs"></i>
+              Go deeper<br/>
+            </a>
+            <span class="subaction">(articles)</span>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <h3>This is a Shiny app</h3>
+      <p>They're easy to write, and no web development skills are required.</p>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div id="example1-container">
+            <iframe id="example1" src="http://glimmer.rstudio.com/rstudio/faithful/" style="border: none; width: 100%; height: 500px"></iframe>
+          </div>
+        </div>
+        <div class="col-sm-6">
+
+          <ul class='nav nav-tabs'>
+            <li class='active'>
+              <a data-toggle="tab" href="#code-ui">ui.R</a>
+            </li>
+            <li>
+              <a data-toggle="tab" href="#code-server">server.R</a>
+            </li>
+          </ul>
+          <div class='tab-content' id='example1-code'>
+            <div class='tab-pane active' id='code-ui'>
+              <pre class="code"><code class="r">shinyUI(bootstrapPage(&#x000A;&#x000A;  selectInput(inputId = &quot;n_breaks&quot;,&#x000A;      label = &quot;Number of bins in histogram (approximate):&quot;,&#x000A;      choices = c(10, 20, 35, 50),&#x000A;      selected = 20),&#x000A;&#x000A;  checkboxInput(inputId = &quot;individual_obs&quot;,&#x000A;      label = strong(&quot;Show individual observations&quot;),&#x000A;      value = FALSE),&#x000A;&#x000A;  checkboxInput(inputId = &quot;density&quot;,&#x000A;      label = strong(&quot;Show density estimate&quot;),&#x000A;      value = FALSE),&#x000A;&#x000A;  plotOutput(outputId = &quot;main_plot&quot;, height = &quot;300px&quot;),&#x000A;&#x000A;  # Display this only if the density is shown&#x000A;  conditionalPanel(condition = &quot;input.density == true&quot;,&#x000A;    sliderInput(inputId = &quot;bw_adjust&quot;,&#x000A;        label = &quot;Bandwidth adjustment:&quot;,&#x000A;        min = 0.2, max = 2, value = 1, step = 0.2)&#x000A;  )&#x000A;&#x000A;))</pre></code>
+            </div>
+            <div class='tab-pane' id='code-server'>
+              <pre class="code"><code class="r">shinyServer(function(input, output) {&#x000A;&#x000A;  output$main_plot &lt;- renderPlot({&#x000A;&#x000A;    hist(faithful$eruptions,&#x000A;      probability = TRUE,&#x000A;      breaks = as.numeric(input$n_breaks),&#x000A;      xlab = &quot;Duration (minutes)&quot;,&#x000A;      main = &quot;Geyser eruption duration&quot;)&#x000A;&#x000A;    if (input$individual_obs) {&#x000A;      rug(faithful$eruptions)&#x000A;    }&#x000A;&#x000A;    if (input$density) {&#x000A;      dens &lt;- density(faithful$eruptions,&#x000A;          adjust = input$bw_adjust)&#x000A;      lines(dens, col = &quot;blue&quot;)&#x000A;    }&#x000A;&#x000A;  })&#x000A;})</pre></code>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Use Shiny apps to</h3>
+      <div class="row">
+        <div class="col-sm-4">
+          <div><i class="fas fa-compass fa-5x"></i></div>
+          <h4>explore data</h4>
+        </div>
+        <div class="col-sm-4">
+          <div><i class="fas fa-share-square fa-5x"></i></div>
+          <h4>share analyses</h4>
+        </div>
+        <div class="col-sm-4">
+          <div><i class="fas fa-bullhorn fa-5x"></i></div>
+          <h4>report findings</h4>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Hosting and deployment</h3>
+      <p>When it's time to put your Shiny app on the web, you can choose to deploy on your own servers or on our hosting service.</p>
+      <div class="row">
+        <div class="col-sm-6">
+          <div><i class="far fa-building fa-5x"></i></div>
+          <h6>Deploy your apps on-premises with Shiny Server or RStudio Connect</h6>
+        </div>
+        <div class="col-sm-6">
+          <div><i class="fas fa-cloud fa-5x"></i></div>
+          <h6>Host your apps in the cloud with ShinyApps.io</h6>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

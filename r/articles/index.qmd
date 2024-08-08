@@ -1,0 +1,95 @@
+---
+title: "Articles"
+description: A comprehensive guide to using Shiny.
+page-layout: full
+anchor-sections: false
+sidebar: articles
+listing:
+  - id: build-links
+    template: guide.ejs
+    contents: build.yml
+  - id: improve-links
+    template: guide.ejs
+    contents: improve.yml
+  - id: share-links
+    template: guide.ejs
+    contents: share.yml
+image: /images/shiny-thumb.png
+---
+
+::: {.column-page-inset-right}
+
+:::{.lead}
+A comprehensive guide to using Shiny. If you are just starting out, you may want to  explore the [Get Started Tutorials](../getstarted/) to learn the basics. Otherwise, choose your own path with the articles below!
+:::
+
+:::{.border-bottom .border-primary}
+## Start
+:::
+
+
+::: {.grid .bg-blue}
+
+::: {.g-col-12 .g-col-sm-4 .p-4 .m-auto }
+
+[![](/images/masteringshiny.png){width="200" title="Mastering Shiny by Hadley Wickham" fig-alt="An picture of the cover of Hadley Wickham's book, Mastering Shiny."}](https://mastering-shiny.org/){.no-icon}
+
+:::
+
+::: {.g-col-12 .g-col-sm-8 .p-4}
+
+#### THE BEST PLACE TO START{.p-85}
+
+## Mastering Shiny {.my-0 .d-inline .me-2}
+
+###### By Hadley Wickham {.mt-0 .p-90 .d-inline}
+
+<div class="pb-4"></div>
+
+A free, online book designed to take you from basic Shiny to creating your own customized apps.
+
+[Read Now](https://mastering-shiny.org/){.btn .btn-primary .no-icon}
+
+:::
+
+:::
+
+:::
+
+
+::: {.column-page-inset-right .mt-5}
+
+
+#### If you are beginning to learn Shiny for R, here are a few resources you'll want to consider:
+
+ * Hadley Wickham's [Mastering Shiny book](https://mastering-shiny.org/)
+ * Shiny for R's [Get Started Tutorials](/r/getstarted/)
+ * The [Shiny Cheat Sheet](../articles/start/cheatsheet/)
+ * Posit's [Demos and Tutorials on YouTube](https://youtube.com/playlist?list=PL9HYL-VRX0oTOK4cpbCbRk15K2roEgzVW)
+
+
+:::
+
+::: {.column-page-right}
+:::{.border-bottom .border-primary}
+## Build
+:::
+:::{#build-links}
+:::
+:::
+
+::: {.column-page-right}
+:::{.border-bottom .border-primary}
+## Improve
+:::
+:::{#improve-links}
+:::
+:::
+
+::: {.column-page-right}
+:::{.border-bottom .border-primary}
+## Share
+:::
+:::{#share-links}
+:::
+:::

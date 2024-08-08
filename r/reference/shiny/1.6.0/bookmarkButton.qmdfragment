@@ -1,0 +1,100 @@
+---
+title: "Create a button for bookmarking/sharing — bookmarkButton"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>bookmarkButton</span>(
+  <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Bookmark..."</span>,
+  <span class='kw'>icon</span> <span class='kw'>=</span> <span class='kw pkg'>shiny</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/icon.html'>icon</a></span>(<span class='st'>"link"</span>, <span class='kw'>lib</span> <span class='kw'>=</span> <span class='st'>"glyphicon"</span>),
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Bookmark this application's state and get a URL for sharing."</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"._bookmark_"</span>
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>label</p></th>
+    <td><p>The contents of the button or link--usually a text label, but
+you could also use any other HTML, like an image.</p></td>
+  </tr>
+  <tr>
+    <th><p>icon</p></th>
+    <td><p>An optional <code><a href='icon.html'>icon()</a></code> to appear on the button.</p></td>
+  </tr>
+  <tr>
+    <th><p>title</p></th>
+    <td><p>A tooltip that is shown when the mouse cursor hovers over the
+button.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Named attributes to be applied to the button or link.</p></td>
+  </tr>
+  <tr>
+    <th><p>id</p></th>
+    <td><p>An ID for the bookmark button. The only time it is necessary to set
+the ID unless you have more than one bookmark button in your application.
+If you specify an input ID, it should be excluded from bookmarking with
+<code><a href='setBookmarkExclude.html'>setBookmarkExclude()</a></code>, and you must create an observer that
+does the bookmarking when the button is pressed. See the examples below.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>A <code>bookmarkButton</code> is a <code><a href='actionButton.html'>actionButton()</a></code> with a default label
+that consists of a link icon and the text "Bookmark...". It is meant to be
+used for bookmarking state.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='enableBookmarking.html'>enableBookmarking()</a></code> for more examples.</p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run these examples in interactive sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='co'># This example shows how to use multiple bookmark buttons. If you only need</span>
+<span class='co'># a single bookmark button, see examples in ?enableBookmarking.</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>request</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='tabsetPanel.html'>tabsetPanel</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"tabs"</span>,
+      <span class='fu'><a href='tabPanel.html'>tabPanel</a></span>(<span class='st'>"One"</span>,
+        <span class='fu'><a href='checkboxInput.html'>checkboxInput</a></span>(<span class='st'>"chk1"</span>, <span class='st'>"Checkbox 1"</span>),
+        <span class='fu'>bookmarkButton</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"bookmark1"</span>)
+      ),
+      <span class='fu'><a href='tabPanel.html'>tabPanel</a></span>(<span class='st'>"Two"</span>,
+        <span class='fu'><a href='checkboxInput.html'>checkboxInput</a></span>(<span class='st'>"chk2"</span>, <span class='st'>"Checkbox 2"</span>),
+        <span class='fu'>bookmarkButton</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"bookmark2"</span>)
+      )
+    )
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='co'># Need to exclude the buttons from themselves being bookmarked</span>
+  <span class='fu'><a href='setBookmarkExclude.html'>setBookmarkExclude</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bookmark1"</span>, <span class='st'>"bookmark2"</span>))
+
+  <span class='co'># Trigger bookmarking with either button</span>
+  <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>bookmark1</span>, {
+    <span class='no'>session</span>$<span class='fu'>doBookmark</span>()
+  })
+  <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>bookmark2</span>, {
+    <span class='no'>session</span>$<span class='fu'>doBookmark</span>()
+  })
+}
+<span class='fu'><a href='enableBookmarking.html'>enableBookmarking</a></span>(<span class='kw'>store</span> <span class='kw'>=</span> <span class='st'>"url"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+
+```

@@ -1,0 +1,66 @@
+---
+title: "createRenderFunction"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='createRenderFunction.html'>createRenderFunction</a></span><span class="keyword">(</span><span class="symbol">func</span><span class="keyword">,</span> <span class="argument">transform</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">value</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">,</span> <span class="formalargs">name</span><span class="keyword">,</span> <span class="formalargs">...</span><span class="keyword">)</span>
+  <span class="symbol">value</span><span class="keyword">,</span> <span class="argument">outputFunc</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">outputArgs</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>func</th>
+    <td>A function without parameters, that returns user data. If the
+returned value is a promise, then the render function will proceed in async
+mode.</td>
+  </tr>
+  <tr>
+    <th>transform</th>
+    <td>A function that takes four arguments: <code>value</code>,
+<code>session</code>, <code>name</code>, and <code>...</code> (for future-proofing). This
+function will be invoked each time a value is returned from <code>func</code>,
+and is responsible for changing the value into a JSON-ready value to be
+JSON-encoded and sent to the browser.</td>
+  </tr>
+  <tr>
+    <th>outputFunc</th>
+    <td>The UI function that is used (or most commonly used) with
+this render function. This can be used in R Markdown documents to create
+complete output widgets out of just the render function.</td>
+  </tr>
+  <tr>
+    <th>outputArgs</th>
+    <td>A list of arguments to pass to the <code>outputFunc</code>.
+Render functions should include <code>outputArgs = list()</code> in their own
+parameter list, and pass through the value as this argument, to allow app
+authors to customize outputs. (Currently, this is only supported for
+dynamically generated UIs, such as those created by Shiny code snippets
+embedded in R Markdown documents).</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+An annotated render function, ready to be assigned to an
+  <code>output</code> slot.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Implement render functions</p>
+
+</div>
+<!-- <ul>
+  <li>createRenderFunction</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

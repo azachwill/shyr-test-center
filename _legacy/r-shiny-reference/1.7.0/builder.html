@@ -1,0 +1,139 @@
+---
+layout: reference
+title: "Create HTML tags — builder"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create HTML tags</h1>
+  
+
+  <pre class="code"><span class='no'>tags</span>
+
+<span class='fu'>p</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>h1</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>h2</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>h3</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>h4</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>h5</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>h6</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>a</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>br</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>div</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>span</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>pre</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>code</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>img</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>strong</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>em</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>hr</span>(<span class='no'>...</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>tag</span>(<span class='no'>`_tag_name`</span>, <span class='no'>varArgs</span>, <span class='kw'>.noWS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.renderHook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Tag attributes (named arguments) and children (unnamed arguments).
+A named argument with an <code>NA</code> value is rendered as a boolean attributes
+(see example). Children may include any combination of:</p><ul>
+<li><p>Other tags objects</p></li>
+<li><p><code><a href='HTML.html'>HTML()</a></code> strings</p></li>
+<li><p><code>htmlDependency()</code>s</p></li>
+<li><p>Single-element atomic vectors</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>s containing any combination of the above</p></li>
+</ul></td>
+  </tr>
+  <tr>
+    <th><p>.noWS</p></th>
+    <td><p>Character vector used to omit some of the whitespace that would
+normally be written around this tag. Valid options include <code>before</code>,
+<code>after</code>, <code>outside</code>, <code>after-begin</code>, and <code>before-end</code>.
+Any number of these options can be specified.</p></td>
+  </tr>
+  <tr>
+    <th><p>.renderHook</p></th>
+    <td><p>A function (or list of functions) to call when the <code>tag</code> is rendered. This
+function should have at least one argument (the <code>tag</code>) and return anything
+that can be converted into tags via <code>as.tags()</code>. Additional hooks may also be
+added to a particular <code>tag</code> via <code>tagAddRenderHook()</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>_tag_name</p></th>
+    <td><p>A character string to use for the tag name.</p></td>
+  </tr>
+  <tr>
+    <th><p>varArgs</p></th>
+    <td><p>List of tag attributes and children.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Create an R object that represents an HTML tag. For convenience, common HTML
+tags (e.g., <code>&lt;div&gt;</code>) can be created by calling for their tag name directly
+(e.g., <code>div()</code>). To create less common HTML5 (or SVG) tags (e.g.,
+<code>&lt;article&gt;</code>), use the <code>tags</code> list collection (e.g., <code>tags$article()</code>). To
+create other non HTML/SVG tags, use the lower-level <code>tag()</code> constructor.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> with a <code>shiny.tag</code> class that can be converted into an
+HTML string via <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code> and saved to a file with <code>save_html()</code>.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='tagList.html'>tagList()</a></code>, <code><a href='withTags.html'>withTags()</a></code>, <code><a href='tagAppendAttributes.html'>tagAppendAttributes()</a></code>, <code>tagQuery()</code></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='no'>tags</span>$<span class='fu'>html</span>(
+  <span class='no'>tags</span>$<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(
+    <span class='no'>tags</span>$<span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>'My first page'</span>)
+  ),
+  <span class='no'>tags</span>$<span class='fu'><a href='https://rdrr.io/r/base/body.html'>body</a></span>(
+    <span class='fu'>h1</span>(<span class='st'>'My first heading'</span>),
+    <span class='fu'>p</span>(<span class='st'>'My first paragraph, with some '</span>, <span class='fu'>strong</span>(<span class='st'>'bold'</span>), <span class='st'>' text.'</span>),
+    <span class='fu'>div</span>(
+      <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>'myDiv'</span>, <span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>'simpleDiv'</span>,
+      <span class='st'>'Here is a div with some attributes.'</span>
+     )
+  )
+)
+
+<span class='co'># html5 &lt;audio&gt; with boolean control attribute</span>
+<span class='co'># https://www.w3.org/TR/html5/infrastructure.html#sec-boolean-attributes</span>
+<span class='no'>tags</span>$<span class='fu'>audio</span>(
+  <span class='kw'>controls</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='no'>tags</span>$<span class='fu'><a href='https://rdrr.io/r/base/source.html'>source</a></span>(
+    <span class='kw'>src</span> <span class='kw'>=</span> <span class='st'>"myfile.wav"</span>,
+    <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"audio/wav"</span>
+  )
+)
+
+<span class='co'># suppress the whitespace between tags</span>
+<span class='no'>tags</span>$<span class='fu'>span</span>(
+  <span class='no'>tags</span>$<span class='fu'>strong</span>(<span class='st'>"I'm strong"</span>, <span class='kw'>.noWS</span><span class='kw'>=</span><span class='st'>"outside"</span>)
+)</pre>
+</div>
+
+

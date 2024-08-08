@@ -1,0 +1,61 @@
+---
+title: "Resource Publishing — addResourcePath"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.0/R/server-resource-paths.R" class="external-link"><code>R/server-resource-paths.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Add, remove, or list directory of static resources to Shiny's web server,
+with the given path prefix. Primarily intended for package authors to make
+supporting JavaScript/CSS files available to their components.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">addResourcePath</span>(prefix, directoryPath)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">resourcePaths</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">removeResourcePath</span>(prefix)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>prefix</dt>
+<dd><p>The URL prefix (without slashes). Valid characters are a-z,
+A-Z, 0-9, hyphen, period, and underscore. For example, a value of 'foo'
+means that any request paths that begin with '/foo' will be mapped to the
+given directory.</p></dd>
+
+
+<dt>directoryPath</dt>
+<dd><p>The directory that contains the static resources to be
+served.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Shiny provides two ways of serving static files (i.e., resources):</p><ol><li><p>Static files under the <code>www/</code> directory are automatically made available
+under a request path that begins with <code>/</code>.</p></li>
+<li><p><code>addResourcePath()</code> makes static files in a <code>directoryPath</code> available
+under a request path that begins with <code>prefix</code>.</p></li>
+</ol><p>The second approach is primarily intended for package authors to make
+supporting JavaScript/CSS files available to their components.</p>
+<p>Tools for managing static resources published by Shiny's web server:</p><ul><li><p><code>addResourcePath()</code> adds a directory of static resources.</p></li>
+<li><p><code>resourcePaths()</code> lists the currently active resource mappings.</p></li>
+<li><p><code>removeResourcePath()</code> removes a directory of static resources.</p></li>
+</ul></div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="singleton.html">singleton()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">addResourcePath</span>(<span class="st">'datasets'</span>, <span class="fu">system.file</span>(<span class="st">'data'</span>, <span class="at">package=</span><span class="st">'datasets'</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">resourcePaths</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">removeResourcePath</span>(<span class="st">'datasets'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">resourcePaths</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># make sure all resources are removed</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">names</span>(<span class="fu">resourcePaths</span>()), removeResourcePath)</span></code></pre></div>
+  </div>
+</div>
+```

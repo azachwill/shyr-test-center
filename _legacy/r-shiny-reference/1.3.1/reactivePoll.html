@@ -1,0 +1,138 @@
+---
+layout: reference
+title: "reactivePoll"
+categories: reference
+---
+<h1>Reactive polling</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='reactivePoll.html'>reactivePoll</a></span><span class="keyword">(</span><span class="symbol">intervalMillis</span><span class="keyword">,</span> <span class="symbol">session</span><span class="keyword">,</span> <span class="symbol">checkFunc</span><span class="keyword">,</span> <span class="symbol">valueFunc</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>intervalMillis</th>
+    <td>Approximate number of milliseconds to wait between
+calls to <code>checkFunc</code>. This can be either a numeric value, or a
+function that returns a numeric value.</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>The user session to associate this file reader with, or
+<code>NULL</code> if none. If non-null, the reader will automatically stop when
+the session ends.</td>
+  </tr>
+  <tr>
+    <th>checkFunc</th>
+    <td>A relatively cheap function whose values over time will be
+tested for equality; inequality indicates that the underlying value has
+changed and needs to be invalidated and re-read using <code>valueFunc</code>. See
+Details.</td>
+  </tr>
+  <tr>
+    <th>valueFunc</th>
+    <td>A function that calculates the underlying value. See
+Details.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A reactive expression that returns the result of <code>valueFunc</code>,
+  and invalidates when <code>checkFunc</code> changes.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Used to create a reactive data source, which works by periodically polling a
+non-reactive data source.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p><code>reactivePoll</code> works by pairing a relatively cheap &quot;check&quot; function with
+a more expensive value retrieval function. The check function will be
+executed periodically and should always return a consistent value until the
+data changes. When the check function returns a different value, then the
+value retrieval function will be used to re-populate the data.</p>
+
+  <p>Note that the check function doesn&#39;t return <code>TRUE</code> or <code>FALSE</code> to
+indicate whether the underlying data has changed. Rather, the check function
+indicates change by returning a different value from the previous time it was
+called.</p>
+
+  <p>For example, <code>reactivePoll</code> is used to implement
+<code>reactiveFileReader</code> by pairing a check function that simply returns the
+last modified timestamp of a file, and a value retrieval function that
+actually reads the contents of the file.</p>
+
+  <p>As another example, one might read a relational database table reactively by
+using a check function that does <code>SELECT MAX(timestamp) FROM table</code> and
+a value retrieval function that does <code>SELECT * FROM table</code>.</p>
+
+  <p>The <code>intervalMillis</code>, <code>checkFunc</code>, and <code>valueFunc</code> functions
+will be executed in a reactive context; therefore, they may read reactive
+values and reactive expressions.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+  <span class="symbol">data</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactivePoll.html'>reactivePoll</a></span><span class="keyword">(</span><span class="number">1000</span><span class="keyword">,</span> <span class="symbol">session</span><span class="keyword">,</span>
+    <span class="comment"># This function returns the time that log_file was last modified</span>
+    <span class="argument">checkFunc</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/files'>file.exists</a></span><span class="keyword">(</span><span class="symbol">log_file</span><span class="keyword">)</span><span class="keyword">)</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/file.info'>file.info</a></span><span class="keyword">(</span><span class="symbol">log_file</span><span class="keyword">)</span><span class="keyword">$</span><span class="symbol">mtime</span><span class="keyword">[</span><span class="number">1</span><span class="keyword">]</span>
+      <span class="keyword">else</span>
+        <span class="string">""</span>
+    <span class="keyword">}</span><span class="keyword">,</span>
+    <span class="comment"># This function returns the content of log_file</span>
+    <span class="argument">valueFunc</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/read.table'>read.csv</a></span><span class="keyword">(</span><span class="symbol">log_file</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">)</span>
+
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">dataTable</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderTable.html'>renderTable</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/data'>data</a></span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span></div>
+<div class='output'>function(input, output, session) {
+
+  data &lt;- reactivePoll(1000, session,
+    # This function returns the time that log_file was last modified
+    checkFunc = function() {
+      if (file.exists(log_file))
+        file.info(log_file)$mtime[1]
+      else
+        &quot;&quot;
+    },
+    # This function returns the content of log_file
+    valueFunc = function() {
+      read.csv(log_file)
+    }
+  )
+
+  output$dataTable &lt;- renderTable({
+    data()
+  })
+}
+&lt;environment: 0x55e1ff93c8d0&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>reactivePoll</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='reactiveFileReader.html'>reactiveFileReader</a></code></p>
+</div>

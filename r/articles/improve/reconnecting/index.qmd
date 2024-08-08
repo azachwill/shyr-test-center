@@ -1,0 +1,91 @@
+---
+title: Reconnecting to Shiny apps
+date: 2016-09-02
+author: Winston Chang
+description: In the past, users of Shiny applications would get disconnected from the server and see the browser window "gray out" if the network connection was interrupted, even if it was just briefly. There are now two ways that the client browser can reconnect to a session on the server -- it can reconnect to the existing session, or it can reconnect to a new session.
+---
+
+In the past, users of Shiny applications would get disconnected from the server and see the browser window "gray out" if the network connection was interrupted, even if it was just briefly. This could frustrate and confuse users, and it could lead to the impression that the application was unstable, when in fact the problem was the network connection.
+
+To improve the user experience, we've made changes in Shiny Server (Pro and Open Source) 1.4.7, Posit Connect 1.5.10, and in Shiny 0.14 to allow a Shiny client to seamlessly reconnect to the server even when there is disruption of network service.
+
+In the normal course of running a Shiny application, the user's client web browser maintains a connection to the server running R. In prior versions of Shiny and Shiny Server, if the connection between the client and server is lost, then the client browser will "gray out" and the server will close the server session.
+
+There are now two ways that the client browser can reconnect to a session on the server: it can reconnect to the **existing session**, or it can reconnect to a **new** session. To understand how these two kinds of reconnections differ from each other and from simply reloading the page in the browser, keep in mind that a running application has two parts that contain some state: the client web browser, and the server running R.
+
+If you reload a shiny application by clicking on your browser's Reload button, it will start a new session on both the client and the server, losing the state on both sides. With an existing-session reconnection, it will keep the existing session on both the client and server. With a new-session reconnection, it will keep the existing session on the client, and start a new session on the server.
+
+:::{.p-90 .pt-4}
+
+|                               | Client (web browser)  | Server (R process)    |
+|-------------------------------|-----------------------|-----------------------|
+| Reload page in browser        | Start new session     | Start new session     |
+| Existing-session reconnection | Keep existing session | Keep existing session |
+| New-session reconnection      | Keep existing session | Start new session     |
+
+:::
+
+## Reconnecting to existing sessions
+
+To reconnect to an **existing session**, Shiny Server (Pro or Open Source) 1.4.7+ or Posit Connect 1.4.6+ must be used. This kind of reconnection is enabled by default -- all you need to do is update Shiny Server or Posit Connect. No modification of the application is needed. When an existing-session reconnection happens, it will be as though nothing happened except for a temporary pause in communication.
+
+
+### Technical details
+
+Here's how existing-session reconnections work:
+
+* When the server detects that the connection has been lost, it keeps the session running for 15 more seconds.
+* When the client detects that the connection has been lost, it will try to reconnect to the server for 15 seconds.
+* If the client successfully reconnects in those 15 seconds that the server keeps the session alive, then the application will continue running as though nothing happened. Any updates that still need to be sent to the server will be sent sequentially; if you update a slider twice while they are disconnected, then after the reconnect, both of the slider values will be sent to the server, one after another.
+* If the client fails to reconnect within 15 seconds, then the server will close the session, and, on the client side, the application will gray out and display a box with a button labeled "Reload".
+* If the "Reload" button is clicked, the browser will try to reload the page.
+
+This kind of reconnection smooths over occasional connectivity problems, and users may not even notice that it is occurring.
+
+
+## Reconnecting to new sessions
+
+To reconnect to a **new session**, it requires Shiny 0.14 (or higher), as well as Shiny Server 1.4.7+ or Posit Connect 1.5.10+. This behavior is opt-in on a per-application basis, because it is suitable for some applications, but not all. After the client has disconnected from the server (and has reached a gray-out state), it will try to reconnect to the server. If it successfully reaches the server, a new session will be started on the server, and the client will send the current state of the inputs to the server.
+
+An example use case is a dashboard: imagine that you have a dashboard that you want to keep open on a laptop computer, even after that laptop is put to sleep. Every time the laptop wakes up, it will reconnect to server and display updated data for the dashboard.
+
+For your application to work with this kind of reconnection, the state of the inputs must fully determine the state of the outputs. This kind of reconnection will not work for applications that store intermediate state on the server and require, for example, inputs to occur *in a particular sequence* in order to reach the desired output state. Here are some things that will cause problems for this type of reconnection:
+
+* The server function stores some values in a `reactiveValues` object, or in other variables that are not part of a standard reactive flow. An example: a variable that counts the number of times an `actionButton` is pressed.
+* The user uploads a file to a `fileInput()`.
+* The application generates random values (with `rnorm()`, `runif()`, or similar).
+
+To enable new-session reconnections, put `session$allowReconnect(TRUE)` somewhere in the server function. For example:
+
+````r
+shinyApp(
+  ui = fluidPage(sidebarLayout(
+    sidebarPanel(
+      sliderInput("bins", "Number of bins:", min = 1, max = 75, value = 30)
+    ),
+    mainPanel(
+      plotOutput("distPlot")
+    )
+  )),
+  server = function(input, output, session) {
+    output$distPlot <- renderPlot({
+      hist(faithful$eruptions, breaks = input$bins)
+    })
+
+    # Set this to "force" instead of TRUE for testing locally (without Shiny Server)
+    session$allowReconnect(TRUE)
+  }
+)
+````
+
+If you'd like to try this out in a local development environment (without Shiny Server or Connect), you can use `session$allowReconnect("force")` in the server function. If you are running inside of RStudio, you will also need to use `options(shiny.launch.browser=FALSE)`, and use a separate web browser to visit the app. Start up your app, visit it with the web browser, and then stop the app in R, and the client should gray out. If you restart the app in R, then the client should automatically reconnect.
+
+
+### Technical details
+
+Here's how new-session reconnections work:
+
+* The client detects that it has disconnected from the server and "grays out". (If the server supports existing-session reconnections, this is what happens after it tries and fails to make that type of reconnection.)
+* At this point the server will have closed the session on its side.
+* The client displays a box that says "Attempting to reconnect..." and attempts to connect to a new session on the server.
+* If the connection is successful, the client sends all of its current input values to the server, and then the server sends the output values to the client.

@@ -1,0 +1,150 @@
+---
+title: "shinyApp"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="argument">ui</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">server</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">onStart</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">options</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">uiPattern</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"/"</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyAppDir</a></span><span class="keyword">(</span><span class="symbol">appDir</span><span class="keyword">,</span> <span class="argument">options</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyAppFile</a></span><span class="keyword">(</span><span class="symbol">appFile</span><span class="keyword">,</span> <span class="argument">options</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='shinyApp.html'>as.shiny.appobj</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span>
+
+<span class="comment"># S3 method for shiny.appobj</span>
+<span class="functioncall"><a href='shinyApp.html'>as.shiny.appobj</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span>
+
+<span class="comment"># S3 method for list</span>
+<span class="functioncall"><a href='shinyApp.html'>as.shiny.appobj</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span>
+
+<span class="comment"># S3 method for character</span>
+<span class="functioncall"><a href='shinyApp.html'>as.shiny.appobj</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='shinyApp.html'>is.shiny.appobj</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span>
+
+<span class="comment"># S3 method for shiny.appobj</span>
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/print'>print</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="comment"># S3 method for shiny.appobj</span>
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/htmltools/topics/as.tags'>as.tags</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>ui</th>
+    <td>The UI definition of the app (for example, a call to
+<code>fluidPage()</code> with nested controls)</td>
+  </tr>
+  <tr>
+    <th>server</th>
+    <td>A server function</td>
+  </tr>
+  <tr>
+    <th>onStart</th>
+    <td>A function that will be called before the app is actually run.
+This is only needed for <code>shinyAppObj</code>, since in the <code>shinyAppDir</code>
+case, a <code>global.R</code> file can be used for this purpose.</td>
+  </tr>
+  <tr>
+    <th>options</th>
+    <td>Named options that should be passed to the `runApp` call. You
+can also specify <code>width</code> and <code>height</code> parameters which provide a
+hint to the embedding environment about the ideal height/width for the app.</td>
+  </tr>
+  <tr>
+    <th>uiPattern</th>
+    <td>A regular expression that will be applied to each <code>GET</code>
+request to determine whether the <code>ui</code> should be used to handle the
+request. Note that the entire request path must match the regular
+expression in order for the match to be considered successful.</td>
+  </tr>
+  <tr>
+    <th>appDir</th>
+    <td>Path to directory that contains a Shiny app (i.e. a server.R
+file and either ui.R or www/index.html)</td>
+  </tr>
+  <tr>
+    <th>appFile</th>
+    <td>Path to a .R file containing a Shiny application</td>
+  </tr>
+  <tr>
+    <th>x</th>
+    <td>Object to convert to a Shiny app.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Additional parameters to be passed to print.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+An object that represents the app. Printing the object or passing it
+  to <code><a href='runApp.html'>runApp</a></code> will run the app.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>These functions create Shiny app objects from either an explicit UI/server
+pair (<code>shinyApp</code>), or by passing the path of a directory that contains a
+Shiny app (<code>shinyAppDir</code>). You generally shouldn&#39;t need to use these
+functions to create/run applications; they are intended for interoperability
+purposes, such as embedding Shiny apps inside a <span class = "pkg">knitr</span> document.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Normally when this function is used at the R console, the Shiny app object is
+automatically passed to the <code>print()</code> function, which runs the app. If
+this is called in the middle of a function, the value will not be passed to
+<code>print()</code> and the app will not be run. To make the app run, pass the app
+object to <code>print()</code> or <code><a href='runApp.html'>runApp</a>()</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+    <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='numericInput.html'>numericInput</a></span><span class="keyword">(</span><span class="string">"n"</span><span class="keyword">,</span> <span class="string">"n"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/head'>head</a></span><span class="keyword">(</span><span class="symbol">cars</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">n</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">)</span>
+
+  <span class="functioncall"><a href='shinyApp.html'>shinyAppDir</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/devtools/topics/system.file'>system.file</a></span><span class="keyword">(</span><span class="string">"examples/01_hello"</span><span class="keyword">,</span> <span class="argument">package</span><span class="argument">=</span><span class="string">"shiny"</span><span class="keyword">)</span><span class="keyword">)</span>
+
+
+  <span class="comment"># The object can be passed to runApp()</span>
+  <span class="symbol">app</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+    <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='numericInput.html'>numericInput</a></span><span class="keyword">(</span><span class="string">"n"</span><span class="keyword">,</span> <span class="string">"n"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/head'>head</a></span><span class="keyword">(</span><span class="symbol">cars</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">n</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">)</span>
+
+  <span class="functioncall"><a href='runApp.html'>runApp</a></span><span class="keyword">(</span><span class="symbol">app</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>as.shiny.appobj</li><li>as.shiny.appobj.character</li><li>as.shiny.appobj.list</li><li>as.shiny.appobj.shiny.appobj</li><li>as.tags.shiny.appobj</li><li>is.shiny.appobj</li><li>print.shiny.appobj</li><li>shinyApp</li><li>shinyAppDir</li><li>shinyAppFile</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

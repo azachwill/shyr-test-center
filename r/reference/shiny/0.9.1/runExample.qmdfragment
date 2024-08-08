@@ -1,0 +1,74 @@
+---
+title: "runExample"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>runExample(example&nbsp;=&nbsp;NA, port&nbsp;=&nbsp;NULL, launch.browser&nbsp;=&nbsp;getOption("shiny.launch.browser", interactive()), host&nbsp;=&nbsp;getOption("shiny.host", "127.0.0.1"), display.mode&nbsp;=&nbsp;c("auto", "normal", "showcase"))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>example</th>
+    <td>The name of the example to run, or
+  <code>NA</code> (the default) to list the available examples.</td>
+  </tr>
+  <tr>
+    <th>port</th>
+    <td>The TCP port that the application should
+  listen on. Defaults to choosing a random port.</td>
+  </tr>
+  <tr>
+    <th>launch.browser</th>
+    <td>If true, the system's default web
+  browser will be launched automatically after the app is
+  started. Defaults to true in interactive sessions only.</td>
+  </tr>
+  <tr>
+    <th>host</th>
+    <td>The IPv4 address that the application should
+  listen on. Defaults to the <code>shiny.host</code> option, if
+  set, or <code>"127.0.0.1"</code> if not.</td>
+  </tr>
+  <tr>
+    <th>display.mode</th>
+    <td>The mode in which to display the
+  example. Defaults to <code>showcase</code>, but may be set to
+  <code>normal</code> to see the example without code or
+  commentary.</td>
+  </tr>
+</table>
+
+<div data-section="Run Shiny Example Applications">
+  <h3 data-swiftype-index="false">Run Shiny Example Applications</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Launch Shiny example applications, and optionally, your system's web browser.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # List all available examples
+# runExample()
+# 
+# # Run one of the examples
+# runExample(&quot;01_hello&quot;)
+# 
+# # Print the directory containing the code for all examples
+# system.file(&quot;examples&quot;, package=&quot;shiny&quot;)
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>runExample</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

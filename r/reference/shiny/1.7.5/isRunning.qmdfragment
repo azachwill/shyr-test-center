@@ -1,0 +1,22 @@
+---
+title: "Check whether a Shiny application is running — isRunning"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.5</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.5/R/server.R" class="external-link"><code>R/server.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This function tests whether a Shiny application is currently running.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">isRunning</span>()</span></code></pre></div></div>
+
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p><code>TRUE</code> if a Shiny application is currently running. Otherwise,
+<code>FALSE</code>.</p>
+  </div>
+
+</div>
+```

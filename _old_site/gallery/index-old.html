@@ -1,0 +1,81 @@
+---
+layout: default
+showcase_feature: "Shiny Contest 2019"
+showcase_feature_text: "Shiny apps are a great way to communicate your data science insights with striking, dynamic, interactive visualizations and reports. We love seeing Shiny developers openly sharing their code and process for building apps so that others can learn from them and improve their apps. That's why we ran the Shiny Contest! Here are some of the winners and runners-up." 
+showcase_minifeature: "Demos"
+showcase_minifeature_text: "Shiny apps that are tailored to teach you new skills"
+---
+<main>
+  <h1>Gallery</h1>
+  <div class="showcase-home" role="list">
+    <section class="feature-block">
+      <h2 class="feature-block-title">
+        <a class="showcase-home-title-link" href="{/category/{{page.showcase_feature | downcase | url_encode }}">
+          {{page.showcase_feature}}
+        </a>
+      </h2>
+      <ul class="feature-block-items-list">
+      {% for post in site.categories[page.showcase_feature] limit:4 %} 
+        <li class="feature-block-item feature-card-{{forloop.index}}">
+          {% include category_card.html 
+          card_thumbnail="https://www.fillmurray.com/330/200"
+          card_thumb_alt="this is a placeholder image that should be replaced. Bill Murray, as an older man, dressed as a Ghostbuster."
+          card_app_page=post.url
+          card_app_title=post.title
+          card_author_url=post.user_url
+          card_author=post.user_name
+          %}
+        </li>
+      {% endfor %}
+      </ul>
+      <p class="feature-block-desc">
+        {{page.showcase_feature_text}} 
+        <a href="/category/{{page.showcase_feature | downcase | url_encode }}">See all&hellip;</a>
+      <p>
+    </section>
+    <section class="mini-feature-block">
+      <h2 class="mini-feature-block-title">
+        <a class="showcase-home-title-link" href="/category/{{page.showcase_minifeature | downcase | url_encode }}">
+          {{page.showcase_minifeature}} 
+        </a>
+      </h2>
+      <h3>
+        {{page.showcase_minifeature_text}} 
+        <span class="showcase-home-seeall">
+          <a href="/category/{{page.showcase_minifeature | downcase | url_encode }}">See all&hellip;</a>
+        </span>
+      </h3>
+      <ul class="mini-feature-block-list">
+        {% for post in site.categories[page.showcase_minifeature] limit:5 %}
+        <li class="mini-feature-block-item">
+          {% include category_card.html 
+                  card_thumbnail="https://www.fillmurray.com/330/200"
+                  card_thumb_alt="this is a placeholder image that should be replaced. Bill Murray, as an older man, dressed as a Ghostbuster."
+                  card_app_page=post.url
+                  card_app_title=post.title
+                  %}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    {% if site.categories.size > 0 %}
+      {% for category in site.categories %}
+        {% assign category_name = category[0] %}
+        {% if category_name != page.showcase_feature and category_name != page.showcase_minifeature %}
+          <div class="category-card" role="listitem">
+            <h2>
+              <a class="showcase-home-title-link" href="/category/{{category_name | downcase | url_encode }}">
+                {{category_name}}
+              </a>
+            </h2>
+            {% for post in site.categories[category_name] limit:1 %}
+              <a href="/category/{{category_name | downcase | url_encode }}">
+                <img src="https://www.fillmurray.com/330/200" />
+              </a>
+            {% endfor %}
+            </div>
+        {% endif %}
+      {% endfor %}
+  {% endif %} 
+</main>

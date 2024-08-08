@@ -1,0 +1,136 @@
+---
+layout: reference
+title: "renderImage"
+categories: reference
+
+---
+<h1>Image file output</h1>
+
+<pre class="code"><code class="r"><div>renderImage(expr, env&nbsp;=&nbsp;parent.frame(), quoted&nbsp;=&nbsp;FALSE, deleteFile&nbsp;=&nbsp;TRUE)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that returns a list.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
+is useful if you want to save an expression in a variable.</td>
+  </tr>
+  <tr>
+    <th>deleteFile</th>
+    <td>Should the file in <code>func()$src</code> be deleted after
+  it is sent to the client browser? Generally speaking, if the image is a
+  temp file generated within <code>func</code>, then this should be <code>TRUE</code>;
+  if the image is not a temp file, this should be <code>FALSE</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Image file output">
+  <h3 data-swiftype-index="false">Image file output</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Renders a reactive image that is suitable for assigning to an <code>output</code>
+slot.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The expression <code>expr</code> must return a list containing the attributes for
+the <code>img</code> object on the client web page. For the image to display,
+properly, the list must have at least one entry, <code>src</code>, which is the
+path to the image file. It may also useful to have a <code>contentType</code>
+entry specifying the MIME type of the image. If one is not provided,
+<code>renderImage</code> will try to autodetect the type, based on the file
+extension.</p>
+
+  <p>Other elements such as <code>width</code>, <code>height</code>, <code>class</code>, and
+<code>alt</code>, can also be added to the list, and they will be used as
+attributes in the <code>img</code> object.</p>
+
+  <p>The corresponding HTML output tag should be <code>div</code> or <code>img</code> and have
+the CSS class name <code>shiny-image-output</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# 
+# shinyServer(function(input, output, clientData) {
+# 
+#   # A plot of fixed size
+#   output$plot1 &lt;- renderImage({
+#     # A temp file to save the output. It will be deleted after renderImage
+#     # sends it, because deleteFile=TRUE.
+#     outfile &lt;- tempfile(fileext=&#39;.png&#39;)
+# 
+#     # Generate a png
+#     png(outfile, width=400, height=400)
+#     hist(rnorm(input$n))
+#     dev.off()
+# 
+#     # Return a list
+#     list(src = outfile,
+#          alt = &quot;This is alternate text&quot;)
+#   }, deleteFile = TRUE)
+# 
+#   # A dynamically-sized plot
+#   output$plot2 &lt;- renderImage({
+#     # Read plot2&#39;s width and height. These are reactive values, so this
+#     # expression will re-run whenever these values change.
+#     width  &lt;- clientData$output_plot2_width
+#     height &lt;- clientData$output_plot2_height
+# 
+#     # A temp file to save the output.
+#     outfile &lt;- tempfile(fileext=&#39;.png&#39;)
+# 
+#     png(outfile, width=width, height=height)
+#     hist(rnorm(input$obs))
+#     dev.off()
+# 
+#     # Return a list containing the filename
+#     list(src = outfile,
+#          width = width,
+#          height = height,
+#          alt = &quot;This is alternate text&quot;)
+#   }, deleteFile = TRUE)
+# 
+#   # Send a pre-rendered image, and don&#39;t delete the image after sending it
+#   output$plot3 &lt;- renderImage({
+#     # When input$n is 1, filename is ./images/image1.jpeg
+#     filename &lt;- normalizePath(file.path(&#39;./images&#39;,
+#                               paste(&#39;image&#39;, input$n, &#39;.jpeg&#39;, sep=&#39;&#39;)))
+# 
+#     # Return a list containing the filename
+#     list(src = filename)
+#   }, deleteFile = FALSE)
+# })
+# 
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+</div></pre>
+<!-- <ul>
+  <li>renderImage</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+For more details on how the images are generated, and how to control
+  the output, see <code><a href='plotPNG.html'>plotPNG</a></code>.
+
+</div>

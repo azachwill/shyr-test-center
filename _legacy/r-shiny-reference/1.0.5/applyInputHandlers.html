@@ -1,0 +1,51 @@
+---
+layout: reference
+title: "applyInputHandlers"
+categories: reference
+---
+<h1>Apply input handlers to raw input values</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='applyInputHandlers.html'>applyInputHandlers</a></span><span class="keyword">(</span><span class="symbol">inputs</span><span class="keyword">,</span> <span class="argument">shinysession</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputs</th>
+    <td>A named list of input values.</td>
+  </tr>
+  <tr>
+    <th>shinysession</th>
+    <td>A Shiny session object.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>The purpose of this function is to make it possible for external packages to
+test Shiny inputs. It takes a named list of raw input values, applies input
+handlers to those values, and then returns a named list of the processed
+values.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The raw input values should be in a named list. Some values may have names
+like <code>&quot;x:shiny.date&quot;</code>. This function would apply the <code>&quot;shiny.date&quot;</code>
+input handler to the value, and then rename the result to <code>&quot;x&quot;</code>, in the
+output.</p>
+
+</div>
+<!-- <ul>
+  <li>applyInputHandlers</li>
+</ul>
+<ul>
+  <li>internal</li>
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p>registerInputHandler</p>
+</div>

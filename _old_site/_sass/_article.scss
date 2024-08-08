@@ -1,0 +1,558 @@
+/**************************************************************************************************
+ * Article Styles
+ * These are the shared styles for the article pages
+**************************************************************************************************/
+
+.article-action {
+  margin-bottom: 12px;
+}
+
+.article-action a.btn {
+  font-size: 12px;
+}
+
+@media print {
+  .answer-content {
+    display: block;
+  }
+
+  .answer-toggle {
+    display: none;
+  }
+}
+
+.post img {
+  border: 1px solid #ddd;
+  box-shadow: 1px 2px 20px -5px rgba(0, 0, 0, 0.25);
+}
+
+.metadata {
+  color: #848484;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin-bottom: 24px;
+}
+
+.metadata span {
+  margin-right: 24px;
+  white-space: nowrap;
+}
+
+.mainContent .container .articlesColumns {
+  display: flex;
+  justify-content: space-between;
+  display: -ms-flexbox;
+  -ms-flex-pack: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+}
+
+.mainContent .container .articlesColumns .articlesColumn {
+  padding: 0 25px;
+  border-right: 1px dotted #c8c8c8;
+  width: 100%;
+}
+
+.mainContent .container .articlesColumns .articlesColumn:first-of-type {
+  border-left: 1px dotted #c8c8c8;
+}
+
+.mainContent .container .articlesColumns .articlesColumn .articlesColumnHeader {
+  margin-left: -10px;
+  margin-right: -10px;
+  padding: 10px 10px;
+  background-color: #f8f8f8;
+}
+
+.mainContent .container .articlesColumns .articlesColumn .articlesColumnDescription {
+  margin-bottom: 50px;
+}
+
+.mainContent .container .articlesColumns .articlesColumn .articleGroup {
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 767px) {
+  .mainContent .container .articlesColumns {
+    display: block;
+  }
+
+  .mainContent .container .articlesColumns .articlesColumn {
+    padding: 0;
+    border: none;
+  }
+
+  .mainContent .container .articlesColumns .articlesColumn:first-of-type {
+    border: none;
+  }
+}
+
+.splitColumns {
+  display: flex;
+  justify-content: space-between;
+  display: -ms-flexbox;
+  -ms-flex-pack: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  align-items: flex-start;
+}
+
+.splitColumns .column75 {
+  width: 73%;
+}
+
+.splitColumns .column67 {
+  width: 65%;
+}
+
+.splitColumns .column50 {
+  width: 48%;
+}
+
+.splitColumns .column33 {
+  width: 31%;
+}
+
+.splitColumns .column25 {
+  width: 23%;
+}
+
+.splitColumns .column25 .columnImage {
+  width: 276px;
+}
+
+.splitColumns .columnImage {
+  max-width: 100%;
+  margin-bottom: 1em;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media screen and (max-width: 1023px) {
+  .splitColumns {
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+  }
+
+  .splitColumns .column75,
+  .splitColumns .column67,
+  .splitColumns .column50,
+  .splitColumns .column33,
+  .splitColumns .column25 {
+    width: 100%;
+  }
+
+  .splitColumns.withMobileMargins .column75,
+  .splitColumns.withMobileMargins .column67,
+  .splitColumns.withMobileMargins .column50,
+  .splitColumns.withMobileMargins .column33,
+  .splitColumns.withMobileMargins .column25 {
+    margin-bottom: 30px;
+  }
+}
+
+.band.articlesBand {
+  background-color: #f8f8f8;
+  padding-top: 20px;
+  padding-bottom: 1px;
+}
+
+.listArticle {
+  padding-left: 10px;
+}
+
+.listArticle.current {
+  background-color: #f8f8f8;
+}
+
+.article-list li {
+  line-height: 20px;
+  padding: 5px;
+}
+
+.article-list li.current {
+  background-color: #007bc2;
+}
+
+.article-list li.current a {
+  color: #fff;
+}
+
+.articles-outline {
+  margin-bottom: 30px;
+}
+
+.articles-outline.sidebar {
+  font-size: 13px;
+}
+
+.articles-outline.full {
+  margin: 30px 0 30px 0;
+}
+
+.articles-outline .section-title {
+  font-size: 2.0em;
+  font-weight: 400;
+  background-image: url(../images/shinySectionArrow.svg);
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.articles-outline .subsection-title {
+  font-size: 16px;
+  color: #007bc2;
+  cursor: pointer;
+  line-height: 20px;
+  padding: 5px 0 5px 0;
+  background-size: 30px 120px;
+  background-repeat: no-repeat;
+  background-position: -50px 0px;
+  /* quick test to hide the icons */
+}
+
+.articles-outline .subsection-title.current {
+  background-position: -50px -90px;
+  /* quick test to hide the icons */
+}
+
+.articles-outline .subsection-title:hover {
+  background-color: #f8f8f8;
+}
+
+.articles-outline .subsection-group-title {
+  line-height: 20px;
+  padding: 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #808080;
+}
+
+.articles-outline .article-title {
+  line-height: 20px;
+  padding: 5px 0 5px 30px;
+  background-size: 30px 120px;
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+}
+
+.articles-outline .article-title.current {
+  background-position: 0px -90px;
+}
+
+.articles-outline .subsection-group {
+  margin-bottom: 10px;
+}
+
+.articles-outline .start .section-title {
+  color: #f9b02d;
+}
+
+.articles-outline .start .subsection-title {
+  background-image: url(../images/shinySectionStartBullet.svg);
+}
+
+.articles-outline .start .article-title {
+  background-image: url(../images/shinySectionStartBullet.svg);
+}
+
+.articles-outline .build .section-title {
+  color: #d54a30;
+}
+
+.articles-outline .build .subsection-title {
+  background-image: url(../images/shinySectionBuildBullet.svg);
+}
+
+.articles-outline .build .article-title {
+  background-image: url(../images/shinySectionBuildBullet.svg);
+}
+
+.articles-outline .improve .section-title {
+  color: #4d3c35;
+}
+
+.articles-outline .improve .subsection-title {
+  background-image: url(../images/shinySectionImproveBullet.svg);
+}
+
+.articles-outline .improve .article-title {
+  background-image: url(../images/shinySectionImproveBullet.svg);
+}
+
+.articles-outline .share .section-title {
+  color: #789d57;
+}
+
+.articles-outline .share .subsection-title {
+  background-image: url(../images/shinySectionShareBullet.svg);
+}
+
+.articles-outline .share .article-title {
+  background-image: url(../images/shinySectionShareBullet.svg);
+}
+
+.articles-outline .section {
+  display: none;
+}
+
+.articles-outline .section.expanded {
+  display: block;
+}
+
+.articles-outline .subsection .subsection-articles {
+  max-height: 0px;
+  overflow: hidden;
+  -webkit-transition-property: max-height;
+  -moz-transition-property: max-height;
+  -o-transition-property: max-height;
+  transition-property: max-height;
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+
+.articles-outline .subsection.expanded .subsection-articles {
+  max-height: 500px;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+.subsection-link {
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.articles-subsection {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.articles-subsection .subsection-header {
+  display: flex;
+  justify-content: space-between;
+  display: -ms-flexbox;
+  -ms-flex-pack: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+}
+
+.articles-subsection .subsection-header .subsection-title {
+  font-size: 2.0em;
+  font-weight: 400;
+}
+
+.articles-subsection .subsection-header .subsection-title .titleText {
+  color: #a0a0a0;
+}
+
+.articles-subsection .subsection-header .top-link {
+  display: block;
+  height: 40px;
+  padding-left: 22px;
+  background-image: url(../images/backToTop.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 20px 20px;
+}
+
+.articles-subsection .subsection-header .top-link .top-label {
+  font-size: 11px;
+  line-height: 40px;
+}
+
+.articles-subsection .subsection-description {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 30px;
+}
+
+.articles-subsection.start .subsection-title {
+  color: #f9b02d;
+}
+
+.articles-subsection.build .subsection-title {
+  color: #d54a30;
+}
+
+.articles-subsection.improve .subsection-title {
+  color: #4d3c35;
+}
+
+.articles-subsection.share .subsection-title {
+  color: #789d57;
+}
+
+.articles-subsection .articles {
+  margin-bottom: 30px;
+}
+
+.articles-subsection .articles .article {
+  display: inline-block;
+  width: 45%;
+  margin-right: 4%;
+  margin-bottom: 20px;
+  vertical-align: top;
+}
+
+.articles-subsection .articles .article .article-title {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.articles-subsection .articles .article .article-description {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.article-container {
+  margin: 30px 0 30px 0;
+}
+
+.article-container .article-nav-bar .outline-section {
+  display: none;
+}
+
+.article-container .article-nav-bar .article-sections {
+  font-size: 16px;
+  color: #007bc2;
+  margin-bottom: 10px;
+}
+
+.article-container .article-nav-bar .article-sections .article-section {
+  display: inline-block;
+  line-height: 30px;
+  cursor: pointer;
+  width: 24%;
+  padding-left: 2px;
+  background-image: url(../images/shinySectionArrow.svg);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.article-container .article-nav-bar .article-sections .article-section:hover {
+  background-color: #f8f8f8;
+}
+
+.article-container .article-nav-bar.start .article-section.start {
+  color: #f9b02d;
+}
+
+.article-container .article-nav-bar.start .outline-section.start {
+  display: block;
+}
+
+.article-container .article-nav-bar.build .article-section.build {
+  color: #d54a30;
+}
+
+.article-container .article-nav-bar.build .outline-section.build {
+  display: block;
+}
+
+.article-container .article-nav-bar.improve .article-section.improve {
+  color: #4d3c35;
+}
+
+.article-container .article-nav-bar.improve .outline-section.improve {
+  display: block;
+}
+
+.article-container .article-nav-bar.share .article-section.share {
+  color: #789d57;
+}
+
+.article-container .article-nav-bar.share .outline-section.share {
+  display: block;
+}
+
+.section-tabs {
+  display: flex;
+  justify-content: space-between;
+  display: -ms-flexbox;
+  -ms-flex-pack: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.section-tabs .section-title {
+  font-size: 16px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.section-tabs .section-title:hover {
+  background-color: #f8f8f8;
+}
+
+.section-tabs .section-title.expanded {
+  border-color: #e4e4e4;
+}
+
+.section-tabs .section-title.start {
+  color: #f9b02d;
+}
+
+.section-tabs .section-title.build {
+  color: #d54a30;
+}
+
+.section-tabs .section-title.improve {
+  color: #4d3c35;
+}
+
+.section-tabs .section-title.share {
+  color: #789d57;
+}
+
+.noShow {
+  display: none;
+}
+
+@media screen and (max-width: 1023px) {
+  .articles-subsection .subsection-header .top-link .top-label {
+    display: none;
+  }
+
+  .articles-subsection .articles .article {
+    display: block;
+    width: auto;
+  }
+
+  .articles-outline .section-title {
+    background-image: none;
+  }
+}
+
+// Code chunks that correspond to files. Places a small box in upper right of a
+// code chunk with the name of the file as provided by the attribute file_name.
+// To use, after a code chunk place {: .named-code file_name="<name of file>"}
+.named-code {
+  position: relative;
+}
+.named-code::after {
+  content: attr(file_name);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.3rem 0.4rem;
+  border-bottom-left-radius: 4px;
+  font-family: "Source Code Pro", monospace;
+  border-bottom: 1px solid #e4e4e4;
+  border-left: 1px solid #e4e4e4;
+  color: #4e4e4e;
+}

@@ -1,0 +1,158 @@
+---
+title: "dateInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='dateInput.html'>dateInput</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="argument">value</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">min</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">max</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">format</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"yyyy-mm-dd"</span><span class="keyword">,</span> <span class="argument">startview</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"month"</span><span class="keyword">,</span> <span class="argument">weekstart</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0</span><span class="keyword">,</span>
+  <span class="argument">language</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"en"</span><span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>input</code> slot that will be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code> for no label.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>The starting date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format. If NULL (the default), will use the current date
+in the client&#39;s time zone.</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>The minimum allowed date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format.</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>The maximum allowed date. Either a Date object, or a string in
+<code>yyyy-mm-dd</code> format.</td>
+  </tr>
+  <tr>
+    <th>format</th>
+    <td>The format of the date to display in the browser. Defaults to
+<code>&quot;yyyy-mm-dd&quot;</code>.</td>
+  </tr>
+  <tr>
+    <th>startview</th>
+    <td>The date range shown when the input object is first clicked.
+Can be &quot;month&quot; (the default), &quot;year&quot;, or &quot;decade&quot;.</td>
+  </tr>
+  <tr>
+    <th>weekstart</th>
+    <td>Which day is the start of the week. Should be an integer
+from 0 (Sunday) to 6 (Saturday).</td>
+  </tr>
+  <tr>
+    <th>language</th>
+    <td>The language used for month and day names. Default is &quot;en&quot;.
+Other valid values include &quot;ar&quot;, &quot;az&quot;, &quot;bg&quot;, &quot;bs&quot;, &quot;ca&quot;, &quot;cs&quot;, &quot;cy&quot;, &quot;da&quot;,
+&quot;de&quot;, &quot;el&quot;, &quot;en-AU&quot;, &quot;en-GB&quot;, &quot;eo&quot;, &quot;es&quot;, &quot;et&quot;, &quot;eu&quot;, &quot;fa&quot;, &quot;fi&quot;, &quot;fo&quot;,
+&quot;fr-CH&quot;, &quot;fr&quot;, &quot;gl&quot;, &quot;he&quot;, &quot;hr&quot;, &quot;hu&quot;, &quot;hy&quot;, &quot;id&quot;, &quot;is&quot;, &quot;it-CH&quot;, &quot;it&quot;,
+&quot;ja&quot;, &quot;ka&quot;, &quot;kh&quot;, &quot;kk&quot;, &quot;ko&quot;, &quot;kr&quot;, &quot;lt&quot;, &quot;lv&quot;, &quot;me&quot;, &quot;mk&quot;, &quot;mn&quot;, &quot;ms&quot;,
+&quot;nb&quot;, &quot;nl-BE&quot;, &quot;nl&quot;, &quot;no&quot;, &quot;pl&quot;, &quot;pt-BR&quot;, &quot;pt&quot;, &quot;ro&quot;, &quot;rs-latin&quot;, &quot;rs&quot;,
+&quot;ru&quot;, &quot;sk&quot;, &quot;sl&quot;, &quot;sq&quot;, &quot;sr-latin&quot;, &quot;sr&quot;, &quot;sv&quot;, &quot;sw&quot;, &quot;th&quot;, &quot;tr&quot;, &quot;uk&quot;,
+&quot;vi&quot;, &quot;zh-CN&quot;, and &quot;zh-TW&quot;.</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the input, e.g. <code>&#39;400px&#39;</code>, or <code>&#39;100%&#39;</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Creates a text input which, when clicked on, brings up a calendar that
+the user can click on to select dates.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The date <code>format</code> string specifies how the date will be displayed in
+the browser. It allows the following values:</p>
+
+  <p><ul>
+<li> <code>yy</code> Year without century (12)
+  </li>
+<li> <code>yyyy</code> Year with century (2012)
+  </li>
+<li> <code>mm</code> Month number, with leading zero (01-12)
+  </li>
+<li> <code>m</code> Month number, without leading zero (1-12)
+  </li>
+<li> <code>M</code> Abbreviated month name
+  </li>
+<li> <code>MM</code> Full month name
+  </li>
+<li> <code>dd</code> Day of month with leading zero
+  </li>
+<li> <code>d</code> Day of month without leading zero
+  </li>
+<li> <code>D</code> Abbreviated weekday name
+  </li>
+<li> <code>DD</code> Full weekday name
+</li>
+</ul></p>
+
+  <p></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='dateInput.html'>dateInput</a></span><span class="keyword">(</span><span class="string">"date1"</span><span class="keyword">,</span> <span class="string">"Date:"</span><span class="keyword">,</span> <span class="argument">value</span> <span class="argument">=</span> <span class="string">"2012-02-29"</span><span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="comment"># Default value is the date in client's time zone</span>
+  <span class="functioncall"><a href='dateInput.html'>dateInput</a></span><span class="keyword">(</span><span class="string">"date2"</span><span class="keyword">,</span> <span class="string">"Date:"</span><span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="comment"># value is always yyyy-mm-dd, even if the display format is different</span>
+  <span class="functioncall"><a href='dateInput.html'>dateInput</a></span><span class="keyword">(</span><span class="string">"date3"</span><span class="keyword">,</span> <span class="string">"Date:"</span><span class="keyword">,</span> <span class="argument">value</span> <span class="argument">=</span> <span class="string">"2012-02-29"</span><span class="keyword">,</span> <span class="argument">format</span> <span class="argument">=</span> <span class="string">"mm/dd/yy"</span><span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="comment"># Pass in a Date object</span>
+  <span class="functioncall"><a href='dateInput.html'>dateInput</a></span><span class="keyword">(</span><span class="string">"date4"</span><span class="keyword">,</span> <span class="string">"Date:"</span><span class="keyword">,</span> <span class="argument">value</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">-</span><span class="number">10</span><span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="comment"># Use different language and different first day of week</span>
+  <span class="functioncall"><a href='dateInput.html'>dateInput</a></span><span class="keyword">(</span><span class="string">"date5"</span><span class="keyword">,</span> <span class="string">"Date:"</span><span class="keyword">,</span>
+          <span class="argument">language</span> <span class="argument">=</span> <span class="string">"ru"</span><span class="keyword">,</span>
+          <span class="argument">weekstart</span> <span class="argument">=</span> <span class="number">1</span><span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="comment"># Start with decade view instead of default month view</span>
+  <span class="functioncall"><a href='dateInput.html'>dateInput</a></span><span class="keyword">(</span><span class="string">"date6"</span><span class="keyword">,</span> <span class="string">"Date:"</span><span class="keyword">,</span>
+            <span class="argument">startview</span> <span class="argument">=</span> <span class="string">"decade"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>dateInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='updateDateInput.html'>updateDateInput</a></code></p>
+  <p>Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>,
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>,
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='fileInput.html'>fileInput</a></code>,
+  <code><a href='numericInput.html'>numericInput</a></code>, <code><a href='passwordInput.html'>passwordInput</a></code>,
+  <code><a href='radioButtons.html'>radioButtons</a></code>, <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='sliderInput.html'>sliderInput</a></code>, <code><a href='submitButton.html'>submitButton</a></code>,
+  <code><a href='textAreaInput.html'>textAreaInput</a></code>, <code><a href='textInput.html'>textInput</a></code></p>
+</div>
+```

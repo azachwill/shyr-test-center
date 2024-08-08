@@ -1,0 +1,427 @@
+---
+title: "Layout Components"
+description: "Understanding how to build a user interface"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+always_allow_html: true
+---
+
+In this section we discuss how to layout a Shiny app. Shiny apps are built upon [Bootstrap](https://getbootstrap.com/), an extremely popular CSS/HTML framework. As a result, we recommend that you use the `{bslib}` package to build your layout. `{bslib}` makes the most modern Bootstrap features available to Shiny developers, without assuming that you know how to use Bootsrap.
+
+### Cards
+
+You can use `card()` from `{bslib}` to group multiple elements into a single element that has its own properties. You can then use the card to place the group of elements within the layout.
+
+This is especially important for complex apps with a large number of inputs and outputs such that it might not be clear to the user where to get started. By default, Shiny will layout each new card beneath the previous card.
+
+```r
+library(shiny)
+library(bslib)
+
+ui <- page_fillable(
+  card("Row 1"),
+  card("Row 2"),
+  card("Row 3")
+)
+
+server <- function(input, output, session) {}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+:::{.border .mb-3 .py-2 .bg-gray}
+<p class="my-2 ms-3">Row 1</p>
+:::
+
+:::{.border .mb-3 .py-2 .bg-gray}
+<p class="my-2 ms-3">Row 2</p>
+:::
+
+:::{.border .mb-3 .py-2 .bg-gray}
+<p class="my-2 ms-3">Row 3 </p>
+:::
+
+---
+
+### layout_columns()
+
+You can place cards into columns with `layout_columns()` from `{bslib}`. If no `col_widths` are specified, it divides space evenly among the UI elements in a row.
+
+```r
+library(shiny)
+library(bslib)
+
+ui <- page_fillable(
+  layout_columns(
+    card("Column 1"),
+    card("Column 2"),
+    card("Column 3")
+  )
+)
+
+server <- function(input, output, session) {}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+:::{.grid}
+:::{.g-col-4}
+
+:::{.border .bg-gray .p-4}
+Column 1
+:::
+
+:::
+
+:::{.g-col-4}
+
+:::{.border .bg-gray .p-4}
+Column 2
+:::
+
+:::
+
+:::{.g-col-4}
+
+:::{.border .bg-gray .p-4}
+Column 3
+:::
+
+:::
+
+
+
+:::
+
+---
+
+#### Widths are relative
+
+A vector of `col_widths` may also be supplied to allocate a given number of units (out of 12) to each element. These units are relative to the horizontal space available to `layout_columns()`.
+
+```r
+library(shiny)
+library(bslib)
+
+
+ui <- page_fillable(
+  layout_columns(
+    card("Width 3"), # Column 1
+    card("Width 4"), # Column 2
+    card("Width 5"), # Column 3
+    col_widths = c(3, 4, 5)
+  )
+)
+
+server <- function(input, output, session) {}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+:::{.grid}
+:::{.g-col-3}
+
+:::{.border .bg-gray .p-4}
+Width 3
+:::
+
+:::
+
+:::{.g-col-4}
+
+:::{.border .bg-gray .p-4}
+Width 4
+:::
+
+:::
+
+:::{.g-col-5}
+
+:::{.border .bg-gray .p-4}
+Width 5
+:::
+
+:::
+
+
+
+:::
+
+---
+
+### Rows
+
+If widths go beyond the 12 unit mark, subsequent elements get wrapped onto a new row. By default, all row heights are equal, but this can be customized with the `row_heights` argument (numeric values are interpreted as fractional units, but fixed length units are also supported).
+
+```r
+library(shiny)
+library(bslib)
+
+ui <- page_fillable(
+  layout_columns(
+    card("Row 1 (Width 4)"),
+    card("Row 1 (Width 8)"),
+    card("Row 2 (Width 12)"),
+    col_widths = c(4, 8, 12),
+    row_heights = c(1, 2)
+  )
+)
+
+server <- function(input, output, session) {}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+:::{.grid}
+:::{.g-col-4}
+
+:::{.border .bg-gray .p-4}
+Row 1 (Width 4)
+:::
+
+:::
+
+:::{.g-col-8}
+
+:::{.border .bg-gray .p-4}
+Row 1 (Width 8)
+:::
+
+:::
+
+:::{.g-col-12}
+
+:::{.border .bg-gray .p-4}
+Row 2 (Width 12)
+:::
+
+:::
+
+
+
+:::
+
+---
+
+### Negative space
+
+Negative col_widths may also be provided to easily create negative/empty space:
+
+```r
+library(shiny)
+library(bslib)
+
+ui <- page_fillable(
+  layout_columns(
+    card("Row 1 (Width 4)"),
+    card("Row 1 (Width 8)"),
+    card("Row 2 (Width 8)"),
+    col_widths = c(4, 8, -2, 8, -2),
+    row_heights = c(1, 2)
+  )
+)
+
+server <- function(input, output, session) {}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+:::{.grid}
+:::{.g-col-4}
+
+:::{.border .bg-gray .p-4}
+Row 1 (Width 4)
+:::
+
+:::
+
+:::{.g-col-8}
+
+:::{.border .bg-gray .p-4}
+Row 1 (Width 8)
+:::
+
+:::
+
+:::{.g-col-2}
+
+:::{.p-4}
+ 
+:::
+
+:::
+
+:::{.g-col-8}
+
+:::{.border .bg-gray .p-4}
+Row 2 (Width 8)
+:::
+
+:::
+
+:::{.g-col-2}
+
+:::{.p-4}
+  
+:::
+
+:::
+
+
+
+:::
+
+---
+
+
+
+### Sidebars
+
+We have made heavy use of `page_sidebar()` and `sidebar()` in our apps in this course. However we mostly stuck with the default width and position for the sidebar. 
+
+The default width for a `sidebar()` is 250px. If you wanted to make an app where the `sidebar()` is thinner or wider, you can do so by setting the `width` argument of sidebar.
+
+```r
+ui <- page_sidebar(
+  sidebar = sidebar(
+    width = 500, 
+    ...
+  ),
+  ...
+)
+```
+
+The default location of a sidebar is on the left side of a container. If you would like to have the sidebar appear on the right side of its container, set the `position` argument of `sidebar()`.
+
+```r
+ui <- page_sidebar(
+  sidebar = sidebar(
+    position = "right", 
+    ...
+  ),
+  ...
+)
+```
+
+### Titles
+
+Each `page_*()` function provided by `{bslib}` accepts a `title` argument to set the application's title. But in addition to the title on the page, you might want to also change the text that shows up on the browser tab for your app, especially if the app title is long. 
+
+To customize this text you specify the `window_title` argument of the `page_*()` function, which is by default equal to the application title. For example, your application title might be "Movie browser, 1970 to 2014", but you might just want to make your window title "Movies".
+
+```r
+library(shiny)
+library(bslib)
+
+ui <- page_sidebar(
+  title = "Movie browser, 1970 to 2014",
+  windowTitle = "Movies",
+  sidebar = sidebar("Some inputs"),
+  "Some outputs"
+)
+
+server <- function(input, output, session) {}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+## Movie browser, 1970 to 2014
+
+:::{.grid}
+
+:::{.g-col-4 .border .mb-3 .py-2 .bg-gray}
+<p class="my-2 ms-3">Some inputs</p>
+:::
+
+:::{.g-col-8}
+<p class="my-2 ms-3">Some outputs</p>
+:::
+
+:::
+
+---
+
+### `conditionalPanel()`
+
+The last layout element we will consider is `conditionalPanel()`, which comes from the `{shiny}` package. `conditionalPanel()` creates a panel that is visible conditional upon the value of an input or an output. 
+
+First, let's see it in action in the app below. Click the check box next to "Click to select number of digits" to see how the sidebar panel changes.
+
+---
+
+:::{.column-screen-inset-right .border .mb-5 style="max-width:1100px;"}
+
+<iframe style="width:99%;height:400px;background-color:red;" src="https://gallery.shinyapps.io/502-random-number/" title="">
+</iframe>
+
+:::
+
+
+---
+
+###
+
+And here is the code that creates the app with the conditional panel.
+
+Under the hood this function evaluates a JavaScript expression once at start up and then whenever Shiny detects a relevant change or input/output. 
+
+Being able to display panels conditional on previous user selections is a powerful feature of Shiny.
+
+```r
+library(shiny)
+library(bslib)
+
+# Define UI with conditionalPanel
+ui <- page_sidebar(
+  title ="Random number generator",
+  sidebar = sidebar(
+      width = 325,
+      checkboxInput(
+        "select_digits", "Click to select number of digits",
+        value = FALSE
+      ),
+      conditionalPanel(
+        condition = "input.select_digits == true",
+        sliderInput("digit_count", "How many digits?",
+                    min = 1, max = 10, value = 4
+        )
+      ),
+      actionButton("go", "Generate new random number")
+    ),
+
+    "Your random number is",
+    h4(textOutput("random_number"))
+)
+
+# Define server logic that generates a random number based on user input
+server <- function(input, output, session) {
+  output$random_number <- renderText({
+    input$go
+    raw <- runif(1)
+    digits <- if (input$select_digits == FALSE) {
+      sample(1:10, size = 1)
+    } else {
+      input$digit_count
+    }
+    round(raw * 10^digits)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+

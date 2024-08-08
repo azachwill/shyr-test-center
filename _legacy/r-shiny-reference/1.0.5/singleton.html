@@ -1,0 +1,39 @@
+---
+layout: reference
+title: "singleton"
+categories: reference
+---
+<h1>Include content only once</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='singleton.html'>singleton</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="argument">value</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='singleton.html'>is.singleton</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>A <code><a href='tag.html'>tag</a></code>, text, <code><a href='HTML.html'>HTML</a></code>, or list.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>Whether the object should be a singleton.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Use <code>singleton</code> to wrap contents (tag, text, HTML, or lists) that should
+be included in the generated document only once, yet may appear in the
+document-generating code more than once. Only the first appearance of the
+content (in document order) will be used.</p>
+
+</div>
+<!-- <ul>
+  <li>is.singleton</li><li>singleton</li>
+</ul>
+<ul>
+  
+</ul> -->
+

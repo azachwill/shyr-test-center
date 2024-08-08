@@ -1,0 +1,49 @@
+---
+pagetitle: "Get Started"
+pagesubtitle: Quickly create into your first Shiny app.
+page-layout: article
+sidebar: getstarted-r
+image: /images/shiny-thumb.png
+---
+::: {.grid .step .column-body .pt-5}
+::: {.g-col-lg-3 .g-col-12}
+
+<h3 class="my-0">Step 1</h3>
+
+<h5 class="my-2 fw-light">Install Shiny </h5>
+
+:::
+
+::: {.g-col-lg-9 .g-col-12 }
+
+
+
+Open an R session, connect to the internet, and run:
+
+```r
+install.packages("shiny")
+```
+
+
+:::
+:::
+
+::: {.grid .step .column-body .pt-5}
+::: {.g-col-lg-3 .g-col-12}
+
+<h3 class="my-0">Step 2</h3>
+
+<h5 class="my-2 fw-light">Create your first app </h5>
+
+:::
+
+::: {.g-col-lg-9 .g-col-12 }
+
+
+
+CTA to the first tutorial 
+
+
+
+:::
+:::

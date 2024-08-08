@@ -1,0 +1,26 @@
+---
+title: Deploying Shiny apps to the web
+date: 2017-10-04
+description: Once you've written your Shiny app, you can make it available to anyone who has a web browser, using our Shiny Server software. You can either host the applications on your own server or let us host your Shiny applications for you.
+---
+
+Once you've written your Shiny app, you can make it available to anyone who has a web browser, using our Shiny Server software. You can either host the applications on your own server, or let us host your Shiny applications for you.
+
+If you want a simple way to distribute your Shiny app so that users can run them on their own computers, see [Sharing apps to run locally](../../share/deployment-local/index.qmd).
+
+However if you want your users to access your apps easily via their browser, you will need to deploy your apps to the web. The following four
+
+
+### Shinyapps.io
+
+Want to deploy to the web but prefer not to run your own server? You can host your Shiny apps on the web in minutes with Shinyapps.io. It is easy to use, secure, and scalable. No hardware, installation, or annual purchase contract required. If you choose to use Shinyapps.io for deploying your apps to the web, you do niot need to run your own server and you can easily deploy to the web at the push of a button (or one line of R code). However it is important to keep in mind that your code and data must be copied to our servers since this service is hosted by Posit. Free and paid options available. Find out more about Shinyapps.io [here](http://www.shinyapps.io/).
+
+
+### Shiny Server
+
+With our open-source [Shiny Server](https://www.rstudio.com/products/shiny/shiny-server/) software, you can deploy Shiny applications to the web so that users need only a web browser and your application's URL. Shiny Server allows you to take advantage of centralized computing resources, and requires a Linux server that you will need to set up and maintain. To can find out more about Shiny Server, see [Introduction to Shiny Server](../../share/shiny-server/index.qmd).
+
+
+### Posit Connect
+
+Posit Connect is RStudio's publishing platform for the work your teams create in R. With Posit Connect, you can share Shiny applications, R Markdown reports, dashboards, plots, Jupyter Notebooks, and more in one convenient place with push-button publishing from the RStudio IDE. Features include scheduled execution of reports and flexible security policies to bring the power of data science to your entire enterprise. Find out more about Posit Connect [here](https://www.rstudio.com/products/connect/).

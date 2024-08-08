@@ -1,0 +1,124 @@
+---
+layout: reference
+title: "absolutePanel"
+categories: reference
+
+---
+<h1>Panel with absolute positioning</h1>
+
+<pre class="code"><code class="r"><div>absolutePanel(..., top&nbsp;=&nbsp;NULL, left&nbsp;=&nbsp;NULL, right&nbsp;=&nbsp;NULL, bottom&nbsp;=&nbsp;NULL, width&nbsp;=&nbsp;NULL, height&nbsp;=&nbsp;NULL, draggable&nbsp;=&nbsp;FALSE, fixed&nbsp;=&nbsp;FALSE, cursor&nbsp;=&nbsp;c("auto", "move", "default", "inherit"))</div>
+<div>fixedPanel(..., top&nbsp;=&nbsp;NULL, left&nbsp;=&nbsp;NULL, right&nbsp;=&nbsp;NULL, bottom&nbsp;=&nbsp;NULL, width&nbsp;=&nbsp;NULL, height&nbsp;=&nbsp;NULL, draggable&nbsp;=&nbsp;FALSE, cursor&nbsp;=&nbsp;c("move", "default", "inherit"))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Attributes (named arguments) or children (unnamed arguments) that
+  should be included in the panel.</td>
+  </tr>
+  <tr>
+    <th>top</th>
+    <td>Distance between the top of the panel, and the top of the page or
+parent container.</td>
+  </tr>
+  <tr>
+    <th>left</th>
+    <td>Distance between the left side of the panel, and the left of the
+page or parent container.</td>
+  </tr>
+  <tr>
+    <th>right</th>
+    <td>Distance between the right side of the panel, and the right of
+the page or parent container.</td>
+  </tr>
+  <tr>
+    <th>bottom</th>
+    <td>Distance between the bottom of the panel, and the bottom of the
+page or parent container.</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>Width of the panel.</td>
+  </tr>
+  <tr>
+    <th>height</th>
+    <td>Height of the panel.</td>
+  </tr>
+  <tr>
+    <th>draggable</th>
+    <td>If <code>TRUE</code>, allows the user to move the panel by
+clicking and dragging.</td>
+  </tr>
+  <tr>
+    <th>fixed</th>
+    <td>Positions the panel relative to the browser window and prevents
+it from being scrolled with the rest of the page.</td>
+  </tr>
+  <tr>
+    <th>cursor</th>
+    <td>The type of cursor that should appear when the user mouses over
+the panel. Use <code>"move"</code> for a north-east-south-west icon,
+<code>"default"</code> for the usual cursor arrow, or <code>"inherit"</code> for the
+usual cursor behavior (including changing to an I-beam when the cursor is
+over text). The default is <code>"auto"</code>, which is equivalent to
+<code>ifelse(draggable, "move", "inherit")</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Panel with absolute positioning">
+  <h3 data-swiftype-index="false">Panel with absolute positioning</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>An HTML element or list of elements.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Creates a panel whose contents are absolutely positioned.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The <code>absolutePanel</code> function creates a <code><div></code> tag whose CSS
+position is set to <code>absolute</code> (or fixed if <code>fixed = TRUE</code>). The way
+absolute positioning works in HTML is that absolute coordinates are specified
+relative to its nearest parent element whose position is not set to
+<code>static</code> (which is the default), and if no such parent is found, then
+relative to the page borders. If you're not sure what that means, just keep
+in mind that you may get strange results if you use <code>absolutePanel</code> from
+inside of certain types of panels.</p>
+
+  <p>The <code>fixedPanel</code> function is the same as <code>absolutePanel</code> with
+<code>fixed = TRUE</code>.</p>
+
+  <p>The position (<code>top</code>, <code>left</code>, <code>right</code>, <code>bottom</code>) and size
+(<code>width</code>, <code>height</code>) parameters are all optional, but you should
+specify exactly two of <code>top</code>, <code>bottom</code>, and <code>height</code> and
+exactly two of <code>left</code>, <code>right</code>, and <code>width</code> for predictable
+results.</p>
+
+  <p>Like most other distance parameters in Shiny, the position and size
+parameters take a number (interpreted as pixels) or a valid CSS size string,
+such as <code>"100px"</code> (100 pixels) or <code>"25%"</code>.</p>
+
+  <p>For arcane HTML reasons, to have the panel fill the page or parent you should
+specify <code>0</code> for <code>top</code>, <code>left</code>, <code>right</code>, and <code>bottom</code>
+rather than the more obvious <code>width = "100%"</code> and <code>height =
+"100%"</code>.</p>
+
+</div>
+<!-- <ul>
+  <li>absolutePanel</li><li>fixedPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

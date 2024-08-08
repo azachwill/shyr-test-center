@@ -1,0 +1,19 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This is a fun, simple app around 20 Questions, but instead of random objects, it is Pokemon.
+title:        "Pokémon 20 Questions"
+author:    Ashley Baldry
+authorurl:     https://community.rstudio.com/u/ashbaldry
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - game
+  - pokemon
+appurl:      https://ashbaldry.shinyapps.io/Pokemon_20Q/
+sourceurl:   https://www.github.com/ashbaldry/Pokemon_20Q
+rscloudurl:  https://rstudio.cloud/project/255378
+---
+
+This is a fun, simple app around 20 Questions, but instead of random objects, it is Pokemon. Select any one up until generation 6 and go through the questions 1 by 1 until it tries to guess the Pokemon you are thinking of. For certain details that are relevant to the quiz that might not be aware of, there is a reference table included.
+  

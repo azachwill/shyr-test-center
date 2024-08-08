@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Selectize Examples
+date: 2014-07-29 
+tags: 
+ - selectize
+appurl: https://gallery.shinyapps.io/013-selectize
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/013-selectize
+---

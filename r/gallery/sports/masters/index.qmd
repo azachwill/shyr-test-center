@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: The app offers users a tool to explore and visualize the history of The Masters golf tournament. Among other things, you can see whether scores have changed over time, play with aggregated historical leaderboards, and review players' scoring averages.
+title:        "The Masters"
+author:    Chris
+authorurl:     https://www.cteeter.ca/
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - visualization
+ - tidyverse
+ - golf
+appurl:      https://cjteeter.shinyapps.io/MastersGolf/
+sourceurl:   https://github.com/cjteeter/ShinyTeeter/tree/master/3_MastersGolf
+rscloudurl:  https://rstudio.cloud/project/256137
+---
+
+The app offers users a tool to explore and visualize the history of The Masters golf tournament. Among other things, you can see whether scores have changed over time, play with aggregated historical leaderboards, and review players' scoring averages.
+  

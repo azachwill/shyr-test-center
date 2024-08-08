@@ -1,0 +1,50 @@
+---
+title: "HTML"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='HTML.html'>HTML</a></span><span class="keyword">(</span><span class="symbol">text</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>text</th>
+    <td>The text value to mark with HTML</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Any additional values to be converted to character and
+concatenated together</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+The same value, but marked as HTML.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Marks the given text as HTML, which means the <a href='tag.html'>tag</a> functions will know
+not to perform HTML escaping on it.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="symbol">el</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='builder.html'>div</a></span><span class="keyword">(</span><span class="functioncall"><a href='HTML.html'>HTML</a></span><span class="keyword">(</span><span class="string">"I like &lt;u&gt;turtles&lt;/u&gt;"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>as.character</a></span><span class="keyword">(</span><span class="symbol">el</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;div&gt;I like &lt;u&gt;turtles&lt;/u&gt;&lt;/div&gt;</div></code></pre>
+<!-- <ul>
+  <li>HTML</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

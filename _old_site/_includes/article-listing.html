@@ -1,0 +1,17 @@
+<div>
+  <h2>Articles</h2>
+  {% for section in site.data.articles %}
+      {% for group in section.subsections %}
+        <h3>{{ group.title }}</h3>
+        <ul class="list-unstyled article-list">
+          {% for postname in group.children %}
+            {% assign post = postname | find_post %}
+            <li {% if page.url == post.url %} class="current" {% else %} class="" {% endif %}>
+              <a href="{{ post.url }}">{{ post.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+
+      {% endfor %}
+  {% endfor %}
+</div>

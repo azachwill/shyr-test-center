@@ -1,0 +1,136 @@
+---
+layout: post
+title: Using dplyr and pool to query a database
+edited: 2017-06-14
+author: Bárbara Borges Ribeiro
+description: The advantage of using pool with dplyr, rather than just using dplyr to query a database, is performance and connection management. In order to reap these benefits within a Shiny app, however, you need to be careful about where you create your pool and where you use tbl (or equivalent).
+---
+
+**_Note_ (6/22/17):** `pool` is now compatible with `dplyr` 0.7.0 and the brand new `dbplyr`. If you want to continue using pool with an older version of dplyr, please install `pool@dplyr-pre-0.7.0-compat` (`devtools::install_github("rstudio/pool@dplyr-pre-0.7.0-compat`).
+
+## Installation 
+There are four packages that you need throughout this series of articles. Here are the installation instructions, so your code runs smoothly:
+
+{% highlight r %}
+# get shiny, DBI, dplyr and dbplyr from CRAN
+install.packages("shiny")
+install.packages("DBI")
+install.packages("dplyr")
+install.packages("dbplyr")
+
+# get pool from GitHub, since it's not yet on CRAN
+devtools::install_github("rstudio/pool")
+{% endhighlight %}
+
+## Motivation
+
+Many of you might be using `dplyr` to connect to your database, especially because it allows you to query it using R code, rather than the more cumbersome SQL equivalent. For this reason and for performance, we'd actually recommend users to use `dplyr` by default, unless they actually need more functionality and must turn to `DBI` instead (when it comes to databases, `dplyr` only allows you to do queries that can be transformed into a `SELECT` SQL statement). If you're not familiar with `dplyr` applied to databases, make sure to read [the section about this on the first article of this series](/articles/overview.html#dplyr-package).
+
+Here's why `dplyr` tends to perform better than `DBI` ([from `dplyr`'s vignette about databases](http://dbplyr.tidyverse.org/articles/dbplyr.html)):
+
+> When working with databases, dplyr tries to be as lazy as possible:
+> 
+> - It never pulls data into R unless you explicitly ask for it.
+> - It delays doing any work until the last possible moment: it collects together everything you want to do and then sends it to the database in one step.
+
+But on top of this, it's possible to get even better performance by using a pool. Most importantly, however, you should use a pool for its connection management benefits. To do so, you only need to do minor changes to your existing code.
+
+## Combining `dplyr` and `pool`
+
+### Comparison to `dplyr` code
+
+First, let's consider how you'd connect to and query a MySQL database using only `dplyr`:
+
+{% highlight r %}
+library(dplyr)
+
+my_db <- dbPool(
+  RMySQL::MySQL(), 
+  dbname = "shinydemo",
+  host = "shiny-demo.csa7qlmguqrf.us-east-1.rds.amazonaws.com",
+  username = "guest",
+  password = "guest"
+)
+
+# get the first 5 rows:
+my_db %>% tbl("City") %>% head(5)
+## # Source:   lazy query [?? x 5]
+## # Database: mysql 10.0.17-MariaDB [guest@shiny-demo.csa7qlmguqrf.us-east-1.rds.amazonaws.com:/shinydemo]
+##      ID           Name CountryCode      District Population
+##   <dbl>          <chr>       <chr>         <chr>      <dbl>
+## 1     1          Kabul         AFG         Kabol    1780000
+## 2     2       Qandahar         AFG      Qandahar     237500
+## 3     3          Herat         AFG         Herat     186800
+## 4     4 Mazar-e-Sharif         AFG         Balkh     127800
+## 5     5      Amsterdam         NLD Noord-Holland     731200
+{% endhighlight %}
+
+Now, let's do the same thing using a Pool object:
+
+{% highlight r %}
+library(pool)
+library(dplyr)
+
+pool <- dbPool(
+  drv = RMySQL::MySQL(),
+  dbname = "shinydemo",
+  host = "shiny-demo.csa7qlmguqrf.us-east-1.rds.amazonaws.com",
+  username = "guest",
+  password = "guest"
+)
+
+# get the first 5 rows:
+pool %>% tbl("City") %>% head(5)
+## # Source:   lazy query [?? x 5]
+## # Database: mysql 10.0.17-MariaDB [guest@shiny-demo.csa7qlmguqrf.us-east-1.rds.amazonaws.com:/shinydemo]
+##      ID           Name CountryCode      District Population
+##   <dbl>          <chr>       <chr>         <chr>      <dbl>
+## 1     1          Kabul         AFG         Kabol    1780000
+## 2     2       Qandahar         AFG      Qandahar     237500
+## 3     3          Herat         AFG         Herat     186800
+## 4     4 Mazar-e-Sharif         AFG         Balkh     127800
+## 5     5      Amsterdam         NLD Noord-Holland     731200
+{% endhighlight %}
+
+### Shiny apps
+
+What's the advantage of using `pool` with `dplyr`, rather than just using `dplyr` to query a database? As usual with `pool`, the answer is performance and connection management. In order to reap these benefits within a Shiny app, however, you need to be careful about where you create your pool and where you use `tbl` (or equivalent). The same idea that we used for combining `DBI` and `pool`, also applies here. First, you should create your pool at the top of `server.R` (or in `global.R`), but outside the actual server function. Then, for each query, you should use `tbl` (or equivalent). In a Shiny app, this means that each reactive or function that queries the database has its own call to `tbl`. For example, here's the same app used in the [`pool` basics article](/articles/pool-basics.html), but written with `dplyr` instead of `DBI`:
+
+{% highlight r %}
+library(shiny)
+library(DBI)
+library(pool)
+
+pool <- dbPool(
+  drv = RMySQL::MySQL(),
+  dbname = "shinydemo",
+  host = "shiny-demo.csa7qlmguqrf.us-east-1.rds.amazonaws.com",
+  username = "guest",
+  password = "guest"
+)
+
+ui <- fluidPage(
+  textInput("ID", "Enter your ID:", "5"),
+  tableOutput("tbl"),
+  numericInput("nrows", "How many cities to show?", 10),
+  plotOutput("popPlot")
+)
+
+server <- function(input, output, session) {
+  output$tbl <- renderTable({
+    pool %>% tbl("City") %>%
+      filter(ID == input$ID)
+  })
+  output$popPlot <- renderPlot({
+    df <- pool %>% tbl("City") %>%
+      head(as.integer(input$nrows)[1]) %>% collect()
+    pop <- df$Population
+    names(pop) <- df$Name
+    barplot(pop)
+  })
+}
+
+shinyApp(ui, server)
+{% endhighlight %}
+
+You'll note that there is no need to do our own input sanitizing for SQL injection prevention (i.e. no need to call a function like DBI's `sqlInterpolate`). This is because `dplyr` acts a middleman between you and the actual SQL query sent to the database; as that middleman, it also sanitizes your inputs for you.

@@ -1,0 +1,63 @@
+---
+title: "Create an object representing hover options — hoverOpts"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>hoverOpts</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>delay</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>delayType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"debounce"</span>,
+  <span class='st'>"throttle"</span>), <span class='kw'>clip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>nullOutside</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>id</p></th>
+    <td><p>Input value name. For example, if the value is <code>"plot_hover"</code>,
+then the hover coordinates will be available as <code>input$plot_hover</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>delay</p></th>
+    <td><p>How long to delay (in milliseconds) when debouncing or
+throttling, before sending the mouse location to the server.</p></td>
+  </tr>
+  <tr>
+    <th><p>delayType</p></th>
+    <td><p>The type of algorithm for limiting the number of hover
+events. Use <code>"throttle"</code> to limit the number of hover events to one
+every <code>delay</code> milliseconds. Use <code>"debounce"</code> to suspend events
+while the cursor is moving, and wait until the cursor has been at rest for
+<code>delay</code> milliseconds before sending an event.</p></td>
+  </tr>
+  <tr>
+    <th><p>clip</p></th>
+    <td><p>Should the hover area be clipped to the plotting area? If FALSE,
+then the server will receive hover events even when the mouse is outside
+the plotting area, as long as it is still inside the image.</p></td>
+  </tr>
+  <tr>
+    <th><p>nullOutside</p></th>
+    <td><p>If <code>TRUE</code> (the default), the value will be set to
+<code>NULL</code> when the mouse exits the plotting area. If <code>FALSE</code>, the
+value will stop changing when the cursor exits the plotting area.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>This generates an object representing hovering options, to be passed as the
+<code>hover</code> argument of <code><a href='plotOutput.html'>imageOutput()</a></code> or
+<code><a href='plotOutput.html'>plotOutput()</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+
+  </div>
+
+</div>
+
+
+```

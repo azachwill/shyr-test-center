@@ -1,0 +1,86 @@
+---
+title: "numericInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>numericInput(inputId, label, value, min&nbsp;=&nbsp;NA, max&nbsp;=&nbsp;NA, step&nbsp;=&nbsp;NA)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>Input variable to assign the control's value to</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>Initial value</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>Minimum allowed value</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>Maximum allowed value</td>
+  </tr>
+  <tr>
+    <th>step</th>
+    <td>Interval to use when stepping between min and max</td>
+  </tr>
+</table>
+
+<div data-section="Create a numeric input control">
+  <h3 data-swiftype-index="false">Create a numeric input control</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A numeric input control that can be added to a UI definition.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Create an input control for entry of numeric values</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>numericInput(&quot;obs&quot;, &quot;Observations:&quot;, 10,
+             min = 1, max = 100)
+</div>
+<div class='output'>&lt;label for=&quot;obs&quot;&gt;Observations:&lt;/label&gt;
+&lt;input id=&quot;obs&quot; type=&quot;number&quot; value=&quot;10&quot; min=&quot;1&quot; max=&quot;100&quot;/&gt; 
+</div></pre>
+<!-- <ul>
+  <li>numericInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='updateNumericInput.html'>updateNumericInput</a></code>
+
+Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='actionButton.html'>actionLink</a></code>; <code><a href='sliderInput.html'>animationOptions</a></code>,
+  <code><a href='sliderInput.html'>sliderInput</a></code>;
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>;
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>; <code><a href='dateInput.html'>dateInput</a></code>;
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>; <code><a href='fileInput.html'>fileInput</a></code>;
+  <code><a href='radioButtons.html'>radioButtons</a></code>; <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='selectInput.html'>selectizeInput</a></code>; <code><a href='submitButton.html'>submitButton</a></code>;
+  <code><a href='textInput.html'>textInput</a></code>
+
+</div>
+```

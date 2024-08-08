@@ -1,0 +1,115 @@
+---
+layout: reference
+title: "reactiveFileReader"
+categories: reference
+---
+<h1>Reactive file reader</h1>
+
+<pre class="code"><code class="r"><div>reactiveFileReader(intervalMillis, session, filePath, readFunc, ...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>intervalMillis</th>
+    <td>Approximate number of milliseconds
+  to wait between checks of the file's last modified time.
+  This can be a numeric value, or a function that returns a
+  numeric value.</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>The user session to associate this file
+  reader with, or <code>NULL</code> if none. If non-null, the
+  reader will automatically stop when the session ends.</td>
+  </tr>
+  <tr>
+    <th>filePath</th>
+    <td>The file path to poll against and to pass
+  to <code>readFunc</code>.  This can either be a single-element
+  character vector, or a function that returns one.</td>
+  </tr>
+  <tr>
+    <th>readFunc</th>
+    <td>The function to use to read the file;
+  must expect the first argument to be the file path to
+  read. The return value of this function is used as the
+  value of the reactive file reader.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Any additional arguments to pass to
+  <code>readFunc</code> whenever it is invoked.</td>
+  </tr>
+</table>
+
+<div data-section="Reactive file reader">
+  <h3 data-swiftype-index="false">Reactive file reader</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A reactive expression that returns the contents of the file, and
+  automatically invalidates when the file changes on disk (as determined by
+  last modified time).</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Given a file path and read function, returns a reactive data source for the
+contents of the file.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p><code>reactiveFileReader</code> works by periodically checking the file's last
+modified time; if it has changed, then the file is re-read and any reactive
+dependents are invalidated.</p>
+
+  <p>The <code>intervalMillis</code>, <code>filePath</code>, and <code>readFunc</code> functions
+will each be executed in a reactive context; therefore, they may read
+reactive values and reactive expressions.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # Per-session reactive file reader
+# shinyServer(function(input, output, session)) {
+#   fileData &lt;- reactiveFileReader(1000, session, &#39;data.csv&#39;, read.csv)
+# 
+#   output$data &lt;- renderTable({
+#     fileData()
+#   })
+# }
+# 
+# # Cross-session reactive file reader. In this example, all sessions share
+# # the same reader, so read.csv only gets executed once no matter how many
+# # user sessions are connected.
+# fileData &lt;- reactiveFileReader(1000, session, &#39;data.csv&#39;, read.csv)
+# shinyServer(function(input, output, session)) {
+#   output$data &lt;- renderTable({
+#     fileData()
+#   })
+# }
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>reactiveFileReader</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='reactivePoll.html'>reactivePoll</a></code>
+
+</div>

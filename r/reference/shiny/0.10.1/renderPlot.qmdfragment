@@ -1,0 +1,92 @@
+---
+title: "renderPlot"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>renderPlot(expr, width&nbsp;=&nbsp;"auto", height&nbsp;=&nbsp;"auto", res&nbsp;=&nbsp;72, ..., env&nbsp;=&nbsp;parent.frame(), quoted&nbsp;=&nbsp;FALSE, func&nbsp;=&nbsp;NULL)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that generates a plot.</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the rendered plot, in pixels; or <code>'auto'</code> to
+use the <code>offsetWidth</code> of the HTML element that is bound to this plot.
+You can also pass in a function that returns the width in pixels or
+<code>'auto'</code>; in the body of the function you may reference reactive
+values and functions.</td>
+  </tr>
+  <tr>
+    <th>height</th>
+    <td>The height of the rendered plot, in pixels; or <code>'auto'</code> to
+use the <code>offsetHeight</code> of the HTML element that is bound to this plot.
+You can also pass in a function that returns the width in pixels or
+<code>'auto'</code>; in the body of the function you may reference reactive
+values and functions.</td>
+  </tr>
+  <tr>
+    <th>res</th>
+    <td>Resolution of resulting plot, in pixels per inch. This value is
+passed to <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/png'>png</a></code>. Note that this affects the resolution of PNG
+rendering in R; it won't change the actual ppi of the browser.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Arguments to be passed through to <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/png'>png</a></code>.
+These can be used to set the width, height, background color, etc.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
+is useful if you want to save an expression in a variable.</td>
+  </tr>
+  <tr>
+    <th>func</th>
+    <td>A function that generates a plot (deprecated; use <code>expr</code>
+  instead).</td>
+  </tr>
+</table>
+
+<div data-section="Plot Output">
+  <h3 data-swiftype-index="false">Plot Output</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Renders a reactive plot that is suitable for assigning to an <code>output</code>
+slot.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The corresponding HTML output tag should be <code>div</code> or <code>img</code> and have
+the CSS class name <code>shiny-plot-output</code>.</p>
+
+</div>
+<!-- <ul>
+  <li>renderPlot</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+For more details on how the plots are generated, and how to control
+  the output, see <code><a href='plotPNG.html'>plotPNG</a></code>.
+
+</div>
+```

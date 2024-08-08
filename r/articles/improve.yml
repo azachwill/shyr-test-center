@@ -1,0 +1,57 @@
+ - title: "Refactor: Code quality"
+   links:
+     - text: Debugging Shiny applications 
+       href: ../../r/articles/improve/debugging/index.qmd
+     - text: Upgrading to a new version of R 
+       href: ../../r/articles/improve/upgrade-R/index.qmd
+     - text: Handling missing inputs with req(...) 
+       href: ../../r/articles/improve/req/index.qmd
+     - text: Scoping rules for Shiny apps 
+       href: ../../r/articles/improve/scoping/index.qmd
+     - text: Reconnecting to Shiny apps 
+       href: ../../r/articles/improve/reconnecting/index.qmd
+     - text: Sanitizing error messages 
+       href: ../../r/articles/improve/sanitize-errors/index.qmd
+     - text: Write error messages for your UI with validate 
+       href: ../../r/articles/improve/validation/index.qmd
+     - text: Unicode characters in Shiny apps 
+       href: ../../r/articles/improve/unicode/index.qmd
+ - title: "Refactor: Testing"
+   links:
+     - text: Shiny testing overview 
+       href: ../../r/articles/improve/testing-overview/index.qmd
+     - text: shinytest 
+       href: ../../r/articles/improve/shinytest/index.qmd
+     - text: Server function testing with Shiny 
+       href: ../../r/articles/improve/server-function-testing/index.qmd
+ - title: "Refactor: Modules"
+   links:
+     - text: Modularizing Shiny app code 
+       href: ../../r/articles/improve/modules/index.qmd
+     - text: Communication between modules 
+       href: ../../r/articles/improve/communicate-bet-modules/index.qmd
+ - title: "Scale: Measure usage"
+   links:
+     - text: Shiny App Usage Tracking 
+       href: ../../r/articles/improve/usage-metrics/index.qmd
+     - text: Add Google Analytics to a Shiny app 
+       href: ../../r/articles/improve/google-analytics/index.qmd
+ - title: "Scale: Performance and scalability"
+   links:
+     - text: Using caching in Shiny to maximize performance 
+       href: ../../r/articles/improve/caching/index.qmd
+     - text: Plot Caching 
+       href: ../../r/articles/improve/plot-caching/index.qmd
+     - text: Profiling your Shiny app
+       href: ../../r/articles/improve/profiling/index.qmd
+     - text: Performance 
+       href: ../../r/articles/improve/performance/index.qmd
+     - text: Non-blocking operations
+       href: ../../r/articles/improve/nonblocking/index.qmd
+ - title: "Scale: Tuning"
+   links:
+     - text: Scaling and Performance Tuning with shinyapps.io 
+       href: ../../r/articles/improve/scaling-and-tuning/index.qmd
+     - text: Scaling and Performance Tuning with Shiny Server Pro and Posit Connect 
+       href: ../../r/articles/improve/scaling-and-tuning-ssp-rsc/index.qmd
+ 

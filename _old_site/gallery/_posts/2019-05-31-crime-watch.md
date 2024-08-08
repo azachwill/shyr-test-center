@@ -1,0 +1,23 @@
+---
+layout:       app-showcase
+title:        "Crime Watch"
+user_name:    Paul Campbell
+user_url:     https://www.cultureofinsight.com/
+date:         2019-05-31
+tags:         crime
+app_url:      https://cultureofinsight.shinyapps.io/crime-watch/
+source_url:   https://github.com/PaulC91/crime-watch
+rscloud_url:  https://rstudio.cloud/project/192971
+contest:      yes
+contest_year: 2019
+thumbnail:    crime-watch.png
+---
+
+This is an example of how shiny can be used to democratise a data source by connected users to an API via a simple, effective user interface.
+
+This application uses geocoding and GPS to allow users to retrieve and map data from the UK Police data base at a location of their choice within England, Wales or Northern Ireland.
+
+Currently the app will return data for the most recent month available in the data base. Functionality could be added to allow users to request data from previous months.
+
+Criminal incidents within a 1 mile radius of the users chosen location are retrieved and mapped at the latitude + longitude recorded by the police. A summary count of all incidents, grouped by category, is also visualised in a bar chart.
+  

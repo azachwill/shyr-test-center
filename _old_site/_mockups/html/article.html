@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
+  <script src="bootstrap.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="main.css"/>
+  <style type="text/css">
+  /* Page-specific styles */
+  .article-body {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .article-body pre {
+    border: none;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    border-radius: 0;
+    box-shadow: 5px 5px 0 #DDD;
+  }
+  .article-action {
+    margin-bottom: 12px;
+  }
+  .article-action a.btn {
+    font-size: 12px;
+  }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="container brand">
+      Shiny Developer Center
+    </div>
+  </div>
+  <div class="container content">
+    <div class="row">
+      <div class="col-md-2 col-sm-12">
+        <div class="nav punchup hidden-xs hidden-sm">
+          <ul class="list-unstyled">
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Tutorial</a></li>
+            <li><a href="#">Articles</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">API reference</a></li>
+            <li><a href="#">Extensions</a></li>
+            <li><a href="#">Getting help</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-10 col-sm-12">
+        <h1>Isolation: Avoiding dependency</h1>
+        <div class="metadata punchup">
+          <span class="author">By: <a href="#">Winston Chang</a></span>
+          <span class="published">Added: Jan 20 2014</span>
+          <span class="tags">Tagged: <a href="#">reactivity</a>, <a href="#">intermediate</a></span>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12 article-body">
+        <p>Sometimes it’s useful for an observer/endpoint to access a reactive value or expression, but not to take a dependency on it. For example, if the observer performs a long calculation or downloads large data set, you might want it to execute only when a button is clicked.</p>
+
+        <p>For this, we’ll use actionButton. We’ll define a ui.R that is a slight modification of the one from 01_hello – the only difference is that it has an actionButton labeled “Go!”. You can see it in action at http://glimmer.rstudio.com/winston/actionbutton/.</p>
+
+        <p>The actionButton includes some JavaScript code that sends numbers to the server. When the web browser first connects, it sends a value of 0, and on each click, it sends an incremented value: 1, 2, 3, and so on.</p>
+
+        <pre><code>shinyUI(pageWithSidebar(
+  headerPanel("Click the button"),
+  sidebarPanel(
+    sliderInput("obs", "Number of observations:",
+                min = 0, max = 1000, value = 500),
+    actionButton("goButton", "Go!")
+  ),
+  mainPanel(
+    plotOutput("distPlot")
+  )
+))</code></pre>
+
+        <p>In our server.R, there are two changes to note. First, <code>output$distPlot</code> will take a dependency on <code>input$goButton</code>, simply by accessing it. When the button is clicked, the value of input$goButton increases, and so <code>output$distPlot</code> re-executes.</p>
+
+        <p>The second change is that the access to <code>input$obs</code> is wrapped with <code>isolate()</code>. This function takes an R expression, and it tells Shiny that the calling observer or reactive expression should not take a dependency on any reactive objects inside the expression.</p>
+
+        <pre><code>shinyServer(function(input, output) {
+  output$distPlot &lt;- renderPlot({
+    # Take a dependency on input$goButton
+    input$goButton
+
+    # Use isolate() to avoid dependency on input$obs
+    dist &lt;- isolate(rnorm(input$obs))
+    hist(dist)
+  })
+})</code></pre>
+
+      </div>
+      <div class="col-md-2 col-sm-12 article-actions punchup">
+        <div class="row">
+          <div class="article-action col-md-12 col-sm-3"><a class="btn btn-primary btn-sm fullwidth">View demo</a></div>
+          <div class="article-action col-md-12 col-sm-3"><a class="btn btn-default btn-sm fullwidth">Download code</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-inner">
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> Posit Software, PBC
+    </div>
+  </div>
+</body>
+</html>

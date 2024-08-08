@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Initial Connection and Disconnection</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>A number of JavaScript events have been supported in Shiny after v0.12.2. These events can be used to keep track of the app progress, or even manipulate the values of inputs/outputs. All event names have the prefix <code>shiny:</code>, e.g., <code>shiny:connected</code>. We can listen to these events using <code>.on()</code> in jQuery, e.g.,</p>
+
+<pre><code class="javascript">$(document).on(&#39;shiny:connected&#39;, function(event) {
+  alert(&#39;Connected to the server&#39;);
+});
+</code></pre>
+
+<p>When an event is triggered in Shiny, the <code>event</code> object may have some additional properties that can be used to query or modify the information in Shiny, as we will see later in this document. Some events can cancel the process in Shiny, e.g., stop the propogation of an input or output change to the server. Such events include <code>shiny:inputchanged</code>, <code>shiny:message</code>, <code>shiny:value</code>, <code>shiny:error</code>, <code>shiny:updateinput</code>. To cancel the Shiny process, you can use <code>event.preventDefault()</code>, e.g.,</p>
+
+<pre><code class="javascript">// no outputs will be updated since we canceled the output changes
+$(document).on(&#39;shiny:value&#39;, function(event) {
+  event.preventDefault();
+});
+</code></pre>
+
+<p>All events currently supported in Shiny are listed below. You can find a live example at <a href="https://gallery.shinyapps.io/107-events">https://gallery.shinyapps.io/107-events</a> (<a href="https://github.com/rstudio/shiny-examples/tree/master/107-events">source</a>).</p>
+
+<h1>Initial Connection and Disconnection</h1>
+
+<p>The events <code>shiny:connected</code> and <code>shiny:disconnected</code> are triggered when an initial connection to server is established, and when a session is ended or the connection is lost for some reason, respectively.</p>
+
+<p>A property <code>socket</code> in the event object is used to store the web socket that is used to communicate between R and JavaScript. For example, you may query the state of the web socket via <code>event.socket.readyState</code>.</p>
+
+<h1>Server Status: Busy/Idle</h1>
+
+<p>The event <code>shiny:busy</code> is triggered when something is happening on the server (e.g. an observer is running), and the event <code>shiny:idle</code> indicates when the server is idle. The event object does not carry any special properties related to Shiny.</p>
+
+<h1>Messages</h1>
+
+<p>The event <code>shiny:inputchanged</code> is triggered when an input has a new value, e.g., when you click an action button, or type in a text input. The event object has properties <code>name</code> (the id of the input), <code>value</code> (the value of the input), and <code>inputType</code> (the type of the input, e.g. <code>shiny.action</code>). </p>
+
+<p>For example, suppose you have a numeric input with id <code>foo</code>, you may double its value through this event:</p>
+
+<pre><code class="javascript">$(document).on(&#39;shiny:inputchanged&#39;, function(event) {
+  if (event.name === &#39;foo&#39;) {
+    event.value *= 2;
+  }
+});
+</code></pre>
+
+<p>The <code>shiny:message</code> is triggered when any messages are received from the server. The event has a property <code>message</code>, which is the message object (a JavaScript object).</p>
+
+<h1>Conditional Panels</h1>
+
+<p>When conditional panels (see <code>?shiny::conditionalPanel</code>) are updated, the event <code>shiny:conditional</code> is triggered on the document.</p>
+
+<h1>Binding/Unbinding Inputs/Outputs</h1>
+
+<p>All the events above are triggered on the document. There are a few events triggered on specific HTML elements, including the events in the following sections on input and output elements.</p>
+
+<p>When an input or output is bound to Shiny, the event <code>shiny:bound</code> is triggered. Similarly, there is a <code>shiny:unbound</code> event after an input/output is unbound. In these events, the event object has properties <code>binding</code> (the input/output binding object) and <code>bindingType</code> (may be <code>&#39;input&#39;</code> or <code>&#39;output&#39;</code> depending on the binding is for an input or output).</p>
+
+<h1>Output Events</h1>
+
+<p>The <code>shiny:value</code> event is triggered when an output receives a value from the server. The event object has three properties: <code>name</code> (output id), <code>value</code> (output value), and <code>binding</code> (output binding).</p>
+
+<p>The <code>shiny:error</code> event is triggered when an error is propogated to an output. The event also has three properties like the <code>shiny:value</code> event: <code>name</code>, <code>error</code> (the error message), and <code>binding</code>.</p>
+
+<p>The <code>shiny:recalculating</code> and <code>shiny:recalculated</code> events are triggered before and after an output value is recalculated, respectively. Please note <code>shiny:recalculated</code> is triggered after the output value has been recalculated in R, but that does not imply the output value has been displayed on the page. Use <code>shiny:value</code> instead if you want to do something when the output value is rendered.</p>
+
+<p>The <code>shiny:visualchange</code> event is triggered when an output is resized, hidden, or shown. The event object has properties <code>visible</code> (<code>true</code> or <code>false</code>) and <code>binding</code> (the output binding).</p>
+
+<p>Since these events are triggered specifically on an output element, you may add the listener on the output element instead of the document, although the latter also works, e.g.</p>
+
+<pre><code class="javascript">$(&#39;#foo&#39;).on(&#39;shiny:value&#39;, function(event) {
+  // append a character string to the output value
+  event.value += &#39; Oh that is nice!&#39;;
+});
+
+// use event.target to obtain the output element
+$(document).on(&#39;shiny:value&#39;, function(event) {
+  // cancel the output of the element with id &#39;foo&#39;
+  if (event.target.id === &#39;foo&#39;) {
+    event.preventDefault();
+  }
+});
+</code></pre>
+
+<h1>Input Events</h1>
+
+<p>The <code>shiny:updateinput</code> event is triggered when an input is updated, e.g., when you call <code>updateTextInput()</code> in R to update the label or value of a text input. The event object has properties <code>message</code> (the update message sent from the server) and <code>binding</code> (the input binding).</p>
+
+<h1>Summary</h1>
+
+<p>Here is a summary of the events. The ones that are cancelable can also be modified by users, e.g., you can change <code>event.value</code> in the <code>shiny:inputchanged</code> event, and the new <code>event.value</code> will be used as the input value (to be passed to R).</p>
+
+<table><thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Event Properties</th>
+<th align="left">Cancelable</th>
+<th align="left">Target</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">shiny:connected</td>
+<td align="left">socket</td>
+<td align="left">No</td>
+<td align="left">document</td>
+</tr>
+<tr>
+<td align="left">shiny:disconnected</td>
+<td align="left">socket</td>
+<td align="left">No</td>
+<td align="left">document</td>
+</tr>
+<tr>
+<td align="left">shiny:busy</td>
+<td align="left"></td>
+<td align="left">No</td>
+<td align="left">document</td>
+</tr>
+<tr>
+<td align="left">shiny:idle</td>
+<td align="left"></td>
+<td align="left">No</td>
+<td align="left">document</td>
+</tr>
+<tr>
+<td align="left">shiny:inputchanged</td>
+<td align="left">name, value, inputType</td>
+<td align="left">Yes</td>
+<td align="left">document</td>
+</tr>
+<tr>
+<td align="left">shiny:message</td>
+<td align="left">message</td>
+<td align="left">Yes</td>
+<td align="left">document</td>
+</tr>
+<tr>
+<td align="left">shiny:conditional</td>
+<td align="left"></td>
+<td align="left">No</td>
+<td align="left">document</td>
+</tr>
+<tr>
+<td align="left">shiny:bound</td>
+<td align="left">binding, bindingType</td>
+<td align="left">No</td>
+<td align="left">input/output element</td>
+</tr>
+<tr>
+<td align="left">shiny:unbound</td>
+<td align="left">binding, bindingType</td>
+<td align="left">No</td>
+<td align="left">input/output element</td>
+</tr>
+<tr>
+<td align="left">shiny:value</td>
+<td align="left">name, value, binding</td>
+<td align="left">Yes</td>
+<td align="left">output element</td>
+</tr>
+<tr>
+<td align="left">shiny:error</td>
+<td align="left">name, error, binding</td>
+<td align="left">Yes</td>
+<td align="left">output element</td>
+</tr>
+<tr>
+<td align="left">shiny:recalculating</td>
+<td align="left"></td>
+<td align="left">No</td>
+<td align="left">output element</td>
+</tr>
+<tr>
+<td align="left">shiny:recalculated</td>
+<td align="left"></td>
+<td align="left">No</td>
+<td align="left">output element</td>
+</tr>
+<tr>
+<td align="left">shiny:visualchange</td>
+<td align="left">visible, binding</td>
+<td align="left">No</td>
+<td align="left">output element</td>
+</tr>
+<tr>
+<td align="left">shiny:updateinput</td>
+<td align="left">message, binding</td>
+<td align="left">Yes</td>
+<td align="left">input element</td>
+</tr>
+</tbody></table>
+
+</body>
+
+</html>

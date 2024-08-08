@@ -1,0 +1,76 @@
+---
+layout: post
+title: Sharing data across sessions on shinyapps.io
+edited: 2014-09-29
+author: Jeff Allen
+description: shinyapps.io expects your applications to be portable across servers. It uses this feature to maintain a smooth user experience. For example, shinyapps.io will scale up your application by adding more running instances, or shinyapps.io will keep your application available by starting your application on a server that has sufficient resources to host it. Both of these features will fail if your app is not portable.
+---
+
+shinyapps.io expects your applications to be portable across servers. It uses this feature to maintain a smooth user experience. For example, shinyapps.io will scale up your application by adding more running instances, or shinyapps.io will keep your application available by starting your application on a server that has sufficient resources to host it. Both of these features will fail if your app is not portable.
+
+One of the consequences of this design is that files written to the file system will be deleted when your application shuts down or moves to another server. These transitions shouldn't happen while a user's session is active, so you can safely write temporary files associated with a particular session to the filesystem and expect to read these files back in during the same session. However, local files created by your application will not persist beyond the session in which they are created. If you want to access files after the session has closed, you will need to design your application so that it saves its temporary files to an external service.
+
+This article will introduce three ways to save—and use—data over multiple sessions. You can: 
+
+1. Store arbitrary data of any size in an object storage system—just like you would with a filesystem 
+2. Store semi-structured data in an easily scalable NoSQL database
+3. Store rigidly structured data in a formal relational database like MySQL, SQL Server, or PostgreSQL.
+
+We will not trace out each step required to set up these storage services, but we will provide enough context to help you determine which options would be most appropriate for your application. We will then point you to the appropriate resources that will help you store your data. 
+
+Regardless of which option you choose, we recommend using a "hosted" solution to store your data if you don't already have a server capable of the appropriate option. Amazon Web Services products can support the first and last options. AWS provides `S3` object storage and `RDS` for a relational database. R has packages to support NoSQL servers like MongoDB. One hosted provider for MongoDB is [MongoLab](https://www.mongolab.com/home).
+
+We'll walk through an example application that collects names and comments from users. We want to accrue all comments across user sessions. We'll begin with a functioning app that relies on local file storage, available here
+
+[https://gist.github.com/trestletech/3679b34c5a83f521387b](https://gist.github.com/trestletech/3679b34c5a83f521387b)
+
+Note that this code is **not** compatible with ShinyApps, since the modified copy of `log.txt` would be overwritten with the original version of `log.txt` every time the application is stopped or moved. The next three sections will present three ways to make the application portable for work on ShinyApps.
+
+## 1. Object Storage (Amazon S3)
+
+Object storage is the simplest of the three alternatives and works the most like a traditional filesystem. You can put an "object" (file) into the store at a particular location, update it as often as you'd like, and then retrieve it from that same location. 
+
+This option allows users to continue to use a local file in their code assuming they 
+
+1. retrieve the most updated file when the application starts, and 
+2. write the updates to the file back to their object storage system before the application closes and the changes are lost.
+
+You can do this every time the data changes, or every time a session exits ([`session$onEnded`](http://shiny.rstudio.com/reference/shiny/latest/session.html)).
+
+We'll update our comment example from above using the [RAmazonS3](http://www.omegahat.net/RAmazonS3/) package which can be installed using the following command:
+
+{% highlight r %}
+install.packages("RAmazonS3", repos = "http://www.omegahat.net/R")
+{% endhighlight %}
+
+You can view the updated demo [here](https://gist.github.com/trestletech/3679b34c5a83f521387b/c3c02c0f613d138f1301a330fdbd8d4aeca37060). In short, rather than reading in the log from a file when the application starts, we'll read in the object from S3. And rather than writing out to a file, we'll write to S3. That way we can be sure that, when the process closes, our updated log has been written somewhere where it will persist and can be retrieved later.
+
+One important caveat is that this code is not safe to use in multiple processes simultaneously, so you should be sure to configure your application to have a maximum of 1 process if you're using this approach. As an example, if you started two processes, both would read the up-to-date log file from S3 at startup. They would then write back to S3 any time a comment was posted without ever updating from S3 to capture each other's updates—meaning that they would just overwrite each other as long as they were both running.
+
+This problem is solved in more formal database systems as will be discussed below using the concept of "transactions" which can ensure that only one update occurs to a data set at a time.
+
+## 2. NoSQL Storage (MongoDB, etc.)
+
+NoSQL databases offer a flexible storage system that offers a bit more control than object storage, but without the overhead of a formal relational database. NoSQL is an appropriate option if your data can easily be divided into individual "entries" that can be created, updated, and deleted and there aren't strong relationships between those entities. 
+
+There are a couple of R packages that will enable you to communicate with MongoDB, one of which is [rmongodb](https://github.com/mongosoup/rmongodb), but you can choose the one that is right for your project. 
+
+Adapting our example to use MongoDB storage would be fairly simple. Each comment could be treated as a separate record (or "document," in mongoDB parlance) with two fields:`name` and `comment` (and perhaps the `date-time` if it was posted). To add a comment, we might use `mongo.insert`. To query the list of comments initially we could use `mongo.find`.
+
+Because we're using a proper database, the information can be maintained more granularly which allows us to get around the problems we had previously with concurrency. If multiple processes call `mongo.insert` simultaneously, both records will get inserted into the data store without any data loss. One possible enhancement to our application would be to periodically query the MongoDB database to ensure that we're showing any new comments that have been written into the database by other processes.
+
+## 3. Relational Database (MySQL, PostgreSQL, etc. with Amazon RDS)
+
+The final option for storage would be to use a formal relational database like MySQL or PostgreSQL. Most major databases have associated R packages to ease interaction from R (see [RPostgreSQL](https://code.google.com/p/rpostgresql/) or [RMySQL](http://biostat.mc.vanderbilt.edu/wiki/Main/RMySQL).
+
+Relational databases excel when data is highly structured and there are well-defined relationships between entities. However, relational databases are often the most cumbersome of the above options and require the most know-how to setup and manage. If you do not have any prior experience with relational databases or know someone who does, you may be better served starting with one of the other options.
+
+The architecture of our sample application using a relational database would be very similar to the solution described for a NoSQL server—run an `INSERT` when a new comment is posted and a `SELECT` to retrieve the existing comments from the database. Most relational databases include a feature called "transactions" which allow you to guarantee data accuracy when performing complex operations on your data (like querying a bank account balance, then updating it). If you find that you're encountering such problems with NoSQL or an object store, it may be worth the learning curve to get acquainted with a relational database like PostgreSQL.
+
+## Recap
+
+To summarize, shinyapps.io expects your apps to be portable, which means that your app cannot pass data from session to session with local files. Instead, your app should save data to an external source that future sessions can access. You can do this by saving different types of data to different storage services.
+
+1. Save arbitrary data of any size in an object storage system like Amazon S3 
+2. Save semi-structured data in an easily scalable NoSQL database like MongoDB
+3. Save rigidly structured data in a formal relational database like MySQL, SQL Server, or PostgreSQL.

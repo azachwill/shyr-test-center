@@ -1,0 +1,13 @@
+@media only screen and (min-width:991px) {
+  #title-block-header {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #quarto-content {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .content p {
+    line-height: 1.75em;
+  }
+}

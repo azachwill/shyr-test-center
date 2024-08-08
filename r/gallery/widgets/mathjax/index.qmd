@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: MathJax
+date: 2014-07-29 
+tags: 
+ - MathJax
+appurl: https://gallery.shinyapps.io/019-mathjax
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/019-mathjax
+---

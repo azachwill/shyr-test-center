@@ -1,0 +1,304 @@
+---
+pagetitle: Shiny for R Gallery
+description: A myriad of Shiny apps to be inspired by and to learn from
+format:
+  html:
+    page-layout: article
+    sidebar: false
+    toc: false
+
+listing: 
+  - id: "start-simple"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: start-simple
+  - id: "interactive-visualizations"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: interactive-visualizations
+  - id: "widgets"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: widgets
+  - id: "application-layout"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: application-layout
+  - id: "dynamic-user-interface"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: dynamic-user-interface
+  - id: "reactive-programming"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: reactive-programming
+  - id: "advanced-shiny"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: advanced-shiny
+  - id: "interactive-plots"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: interactive-plots
+  - id: "internationalization"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: internationalization
+  - id: "education"
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: education
+  - id: finance-banking
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: finance-banking
+  - id: government-public-sector
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: government-public-sector
+  - id: life-sciences
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: life-sciences
+  - id: sports
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: sports
+  - id: technology
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: technology
+  - id: miscellaneous
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: miscellaneous
+  - id: extending-shiny
+    type: grid
+    grid-item-border: false
+    fields: [image, title]
+    contents: extending-shiny
+image: /images/shiny-thumb.png
+---
+
+::: {.column-page .mb-4}
+
+
+# Gallery
+:::{.lead}
+Welcome to the Shiny Gallery! Below you can find a myriad of Shiny apps to be inspired by and to learn from. We have organized the apps in two main categories:
+:::
+:::
+::: {.column-body}
+```{=html}
+<div class="grid py-4">
+  <div class="g-col-6 text-center option mb-3">
+    <a href="#feature-demos" class="text-decoration-none">
+      <div class="block h-100 pt-4 pb-1">
+        <div class="icon-box" style="font-size:3rem;">
+         <i class="bi bi-sliders"></i>
+        </div>
+        <div class="content text-center">
+          <p>Feature Demos</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="g-col-6 text-center option mb-3">
+    <a href="#user-showcase" class="text-decoration-none">
+      <div class="block h-100 pt-4 pb-1">
+        <div class="icon-box" style="font-size:3rem;">
+          <i class="bi bi-people-fill"></i>
+        </div>
+        <div class="content text-center">
+          <p>User Showcase</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+```
+:::
+
+
+
+
+::: {.column-page .border-bottom .border-primary}
+## Feature Demos
+:::
+
+::: {.column-page .py-4}
+Shiny Demos are a series of apps created by the Shiny developers and are designed to highlight specific features of the shiny package. Each app is presented along with its source code to help you implement these features in your apps. Many of these apps are linked from relevant articles as well.
+:::
+
+::: {.column-page .mb-4}
+### Start Simple
+If you're new to Shiny, these simple but complete applications are designed for you to learn from.
+:::
+
+:::{#start-simple .column-page .mb-4}
+:::
+
+
+
+::: {.column-page .mb-4}
+### Interactive visualizations
+Shiny is designed for fully interactive visualization, using JavaScript libraries like [d3](http://www.htmlwidgets.org/showcase_networkD3.html), [Leaflet](http://rstudio.github.io/leaflet/?_ga=2.234317847.806400225.1677009802-1368179896.1612812949), and [Google Charts](https://github.com/mages/googleVis/).
+
+:::
+
+:::{#interactive-visualizations .column-page}
+:::
+
+
+::: {.column-page .mb-4}
+### Widgets
+Get to know many of the input and output widgets that are available in Shiny with these examples.
+:::
+
+:::{#widgets .column-page}
+:::
+
+
+::: {.column-page .mb-4}
+### Application layout
+Each example in this category demonstrates one or more of the functions you can use to organize app UI.
+:::
+
+:::{#application-layout .column-page}
+:::
+
+
+
+::: {.column-page .mb-4}
+### Dynamic user interface
+These examples show how to create a user interface that changes dynamically.
+:::
+
+:::{#dynamic-user-interface .column-page}
+:::
+
+
+
+::: {.column-page .mb-4}
+### Reactive programming
+These examples illustrate some useful features and idioms of Shiny's reactive programming framework.
+:::
+
+:::{#reactive-programming .column-page}
+:::
+
+
+
+::: {.column-page .mb-4}
+### Advanced Shiny
+These examples show how to extend Shiny and use advanced features.
+:::
+
+:::{#advanced-shiny .column-page}
+:::
+
+
+
+::: {.column-page .mb-4}
+### Interactive plots
+These examples show how to use Shiny's interactive plotting features
+:::
+
+:::{#interactive-plots .column-page}
+:::
+
+::: {.column-page .mb-4}
+### Internationalization
+Include multi-byte characters in Shiny apps.
+:::
+
+:::{#internationalization .column-page}
+:::
+
+
+
+::: {.column-page .border-bottom .border-primary}
+## User Showcase
+:::
+
+
+::: {.column-page .py-4}
+
+The Shiny User Showcase is comprised of contributions from the Shiny app developer community. The apps are categorized into application areas and presented with a brief description, tags, and for many, the source code. Note that many of these apps are winners and honorable mentions of our [annual Shiny contest!](https://blog.rstudio.com/2019/04/05/first-shiny-contest-winners/?_ga=2.241564288.343450016.1676318944-1368179896.1612812949)
+
+:::
+
+
+::: {.column-page .mb-4}
+### Education
+Apps designed for teaching
+:::
+
+:::{#education .column-page}
+:::
+
+::: {.column-page .mb-4}
+### Finance Banking
+:::
+
+:::{#finance-banking .column-page}
+:::
+
+::: {.column-page .mb-4}
+### Government Public Sector
+Mostly open data
+:::
+
+:::{#government-public-sector .column-page}
+:::
+
+::: {.column-page .mb-4}
+### Life Sciences
+:::
+
+:::{#life-sciences .column-page}
+:::
+
+::: {.column-page .mb-4}
+### Sports
+:::
+
+:::{#sports .column-page}
+:::
+
+::: {.column-page .mb-4}
+### Technology
+:::
+
+:::{#technology .column-page}
+:::
+
+::: {.column-page .mb-4}
+### Miscellaneous
+:::
+
+:::{#miscellaneous .column-page}
+:::
+
+::: {.column-page .mb-4}
+### Extending Shiny
+:::
+
+:::{#extending-shiny .column-page}
+:::

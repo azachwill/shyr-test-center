@@ -1,0 +1,129 @@
+---
+title: "updateQueryString"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='updateQueryString.html'>updateQueryString</a></span><span class="keyword">(</span><span class="symbol">queryString</span><span class="keyword">,</span> <span class="argument">mode</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"replace"</span><span class="keyword">,</span> <span class="string">"push"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>queryString</th>
+    <td>The new query string to show in the location bar.</td>
+  </tr>
+  <tr>
+    <th>mode</th>
+    <td>When the query string is updated, should the the current history
+entry be replaced (default), or should a new history entry be pushed onto
+the history stack? The former should only be used in a live bookmarking
+context. The latter is useful if you want to navigate between states using
+the browser&#39;s back and forward buttons. See Examples.</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>A Shiny session object.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This function updates the client browser&#39;s query string in the location bar.
+It typically is called from an observer. Note that this will not work in
+Internet Explorer 9 and below.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>For <code>mode = &quot;push&quot;</code>, only three updates are currently allowed:
+<ol>
+<li> the query string (format: <code>?param1=val1&amp;param2=val2</code>)
+  </li>
+<li> the hash (format: <code>#hash</code>)
+  </li>
+<li> both the query string and the hash
+    (format: <code>?param1=val1&amp;param2=val2#hash</code>)
+</li>
+</ol></p>
+
+  <p>In other words, if <code>mode = &quot;push&quot;</code>, the <code>queryString</code> must start
+with either <code>?</code> or with <code>#</code>.</p>
+
+  <p>A technical curiosity: under the hood, this function is calling the HTML5
+history API (which is where the names for the <code>mode</code> argument come from).
+When <code>mode = &quot;replace&quot;</code>, the function called is
+<code>window.history.replaceState(null, null, queryString)</code>.
+When <code>mode = &quot;push&quot;</code>, the function called is
+<code>window.history.pushState(null, null, queryString)</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run these examples in interactive sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+  <span class="comment">## App 1: Doing "live" bookmarking</span>
+  <span class="comment">## Update the browser's location bar every time an input changes.</span>
+  <span class="comment">## This should not be used with enableBookmarking("server"),</span>
+  <span class="comment">## because that would create a new saved state on disk every time</span>
+  <span class="comment">## the user changes an input.</span>
+  <span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"url"</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+    <span class="argument">ui</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">req</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+        <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Text"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"chk"</span><span class="keyword">,</span> <span class="string">"Checkbox"</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">,</span>
+    <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="keyword">{</span>
+        <span class="comment"># Trigger this observer every time an input changes</span>
+        <span class="functioncall"><a href='reactiveValuesToList.html'>reactiveValuesToList</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">)</span>
+        <span class="symbol">session</span><span class="keyword">$</span><span class="functioncall">doBookmark</span><span class="keyword">(</span><span class="keyword">)</span>
+      <span class="keyword">}</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='onBookmark.html'>onBookmarked</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">url</span><span class="keyword">)</span> <span class="keyword">{</span>
+        <span class="functioncall"><a href='updateQueryString.html'>updateQueryString</a></span><span class="keyword">(</span><span class="symbol">url</span><span class="keyword">)</span>
+      <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">)</span>
+
+  <span class="comment">## App 2: Printing the value of the query string</span>
+  <span class="comment">## (Use the back and forward buttons to see how the browser</span>
+  <span class="comment">## keeps a record of each state)</span>
+  <span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+    <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Enter new query string"</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='helpText.html'>helpText</a></span><span class="keyword">(</span><span class="string">"Format: ?param1=val1&amp;param2=val2"</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"go"</span><span class="keyword">,</span> <span class="string">"Update"</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='builder.html'>hr</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"query"</span><span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">go</span><span class="keyword">,</span> <span class="keyword">{</span>
+        <span class="functioncall"><a href='updateQueryString.html'>updateQueryString</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">txt</span><span class="keyword">,</span> <span class="argument">mode</span> <span class="argument">=</span> <span class="string">"push"</span><span class="keyword">)</span>
+      <span class="keyword">}</span><span class="keyword">)</span>
+      <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">query</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span>
+        <span class="symbol">query</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='getQueryString.html'>getQueryString</a></span><span class="keyword">(</span><span class="keyword">)</span>
+        <span class="symbol">queryText</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/names'>names</a></span><span class="keyword">(</span><span class="symbol">query</span><span class="keyword">)</span><span class="keyword">,</span> <span class="symbol">query</span><span class="keyword">,</span>
+                       <span class="argument">sep</span> <span class="argument">=</span> <span class="string">"="</span><span class="keyword">,</span> <span class="argument">collapse</span><span class="argument">=</span><span class="string">", "</span><span class="keyword">)</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"Your query string is:\n"</span><span class="keyword">,</span> <span class="symbol">queryText</span><span class="keyword">)</span>
+      <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>updateQueryString</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='enableBookmarking.html'>enableBookmarking</a></code>, <code><a href='getQueryString.html'>getQueryString</a></code></p>
+</div>
+```

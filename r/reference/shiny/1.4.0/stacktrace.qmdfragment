@@ -1,0 +1,184 @@
+---
+title: "Stack trace manipulation functions — stacktrace"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>captureStackTraces</span>(<span class='no'>expr</span>)
+
+<span class='fu'>withLogErrors</span>(<span class='no'>expr</span>, <span class='kw'>full</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.fullstacktrace"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.stacktraceoffset"</span>, <span class='fl'>TRUE</span>))
+
+<span class='fu'>printError</span>(<span class='no'>cond</span>, <span class='kw'>full</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.fullstacktrace"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.stacktraceoffset"</span>, <span class='fl'>TRUE</span>))
+
+<span class='fu'>printStackTrace</span>(<span class='no'>cond</span>, <span class='kw'>full</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.fullstacktrace"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.stacktraceoffset"</span>, <span class='fl'>TRUE</span>))
+
+<span class='fu'>extractStackTrace</span>(<span class='no'>calls</span>, <span class='kw'>full</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.fullstacktrace"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.stacktraceoffset"</span>, <span class='fl'>TRUE</span>))
+
+<span class='fu'>formatStackTrace</span>(<span class='no'>calls</span>, <span class='kw'>indent</span> <span class='kw'>=</span> <span class='st'>"    "</span>,
+  <span class='kw'>full</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.fullstacktrace"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"shiny.stacktraceoffset"</span>, <span class='fl'>TRUE</span>))
+
+<span class='fu'>conditionStackTrace</span>(<span class='no'>cond</span>)
+
+<span class='fu'>conditionStackTrace</span>(<span class='no'>cond</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='fu'>..stacktraceon..</span>(<span class='no'>expr</span>)
+
+<span class='fu'>..stacktraceoff..</span>(<span class='no'>expr</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>The expression to wrap.</p></td>
+  </tr>
+  <tr>
+    <th><p>full</p></th>
+    <td><p>If <code>TRUE</code>, then every element of <code><a href='https://rdrr.io/r/base/sys.parent.html'>sys.calls()</a></code> will be
+included in the stack trace. By default (<code>FALSE</code>), calls that Shiny
+deems uninteresting will be hidden.</p></td>
+  </tr>
+  <tr>
+    <th><p>offset</p></th>
+    <td><p>If <code>TRUE</code> (the default), srcrefs will be reassigned from
+the calls they originated from, to the destinations of those calls. If
+you're used to stack traces from other languages, this feels more
+intuitive, as the definition of the function indicated in the call and the
+location specified by the srcref match up. If <code>FALSE</code>, srcrefs will be
+left alone (traditional R treatment where the srcref is of the callsite).</p></td>
+  </tr>
+  <tr>
+    <th><p>cond</p></th>
+    <td><p>An condition object (generally, an error).</p></td>
+  </tr>
+  <tr>
+    <th><p>indent</p></th>
+    <td><p>A string to prefix every line of the stack trace.</p></td>
+  </tr>
+  <tr>
+    <th><p>value</p></th>
+    <td><p>The stack trace value to assign to the condition.</p></td>
+  </tr>
+  <tr>
+    <th><p>cond</p></th>
+    <td><p>A condition that may have previously been annotated by
+<code>captureStackTraces</code> (or <code>withLogErrors</code>).</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Advanced (borderline internal) functions for capturing, printing, and
+manipulating stack traces.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p><code>printError</code> and <code>printStackTrace</code> return
+<code><a href='https://rdrr.io/r/base/invisible.html'>invisible()</a></code>. The other functions pass through the results of
+<code>expr</code>.</p>
+    <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p><code>captureStackTraces</code> runs the given <code>expr</code> and if any
+<em>uncaught</em> errors occur, annotates them with stack trace info for use
+by <code>printError</code> and <code>printStackTrace</code>. It is not necessary to use
+<code>captureStackTraces</code> around the same expression as
+<code>withLogErrors</code>, as the latter includes a call to the former. Note
+that if <code>expr</code> contains calls (either directly or indirectly) to
+<code>try</code>, or <code>tryCatch</code> with an error handler, stack traces therein
+cannot be captured unless another <code>captureStackTraces</code> call is
+inserted in the interior of the <code>try</code> or <code>tryCatch</code>. This is
+because these calls catch the error and prevent it from traveling up to the
+condition handler installed by <code>captureStackTraces</code>.</p>
+<p><code>withLogErrors</code> captures stack traces and logs errors that
+occur in <code>expr</code>, but does allow errors to propagate beyond this point
+(i.e. it doesn't catch the error). The same caveats that apply to
+<code>captureStackTraces</code> with regard to <code>try</code>/<code>tryCatch</code> apply
+to <code>withLogErrors</code>.</p>
+<p><code>printError</code> prints the error and stack trace (if any) using
+<code><a href='https://rdrr.io/r/base/warning.html'>warning(immediate.=TRUE)</a></code>. <code>printStackTrace</code> prints the stack
+trace only.</p>
+<p><code>extractStackTrace</code> takes a list of calls (e.g. as returned
+from <code>conditionStackTrace(cond)</code>) and returns a data frame with one
+row for each stack frame and the columns <code>num</code> (stack frame number),
+<code>call</code> (a function name or similar), and <code>loc</code> (source file path
+and line number, if available). It was deprecated after shiny 1.0.5 because
+it doesn't support deep stack traces.</p>
+<p><code>formatStackTrace</code> is similar to <code>extractStackTrace</code>, but
+it returns a preformatted character vector instead of a data frame. It was
+deprecated after shiny 1.0.5 because it doesn't support deep stack traces.</p>
+<p><code>conditionStackTrace</code> and <code>conditionStackTrace&lt;-</code> are
+accessor functions for getting/setting stack traces on conditions.</p>
+<p>The two functions <code>..stacktraceon..</code> and
+<code>..stacktraceoff..</code> have no runtime behavior during normal execution;
+they exist only to create artifacts on the stack trace (sys.call()) that
+instruct the stack trace pretty printer what parts of the stack trace are
+interesting or not. The initial state is 1 and we walk from the outermost
+call inwards. Each ..stacktraceoff.. decrements the state by one, and each
+..stacktraceon.. increments the state by one. Any stack trace frame whose
+value is less than 1 is hidden, and finally, the ..stacktraceon.. and
+..stacktraceoff.. calls themselves are hidden too.</p>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'># Keeps tryCatch and withVisible related calls off the</span>
+<span class='co'># pretty-printed stack trace</span>
+
+<span class='no'>visibleFunction1</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() {
+  <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"Kaboom!"</span>)
+}
+
+<span class='no'>visibleFunction2</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() {
+  <span class='fu'>visibleFunction1</span>()
+}
+
+<span class='no'>hiddenFunction</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>expr</span>) {
+  <span class='no'>expr</span>
+}
+
+<span class='co'># An example without ..stacktraceon/off.. manipulation.</span>
+<span class='co'># The outer "try" is just to prevent example() from stopping.</span>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>({
+  <span class='co'># The withLogErrors call ensures that stack traces are captured</span>
+  <span class='co'># and that errors that bubble up are logged using warning().</span>
+  <span class='fu'>withLogErrors</span>({
+    <span class='co'># tryCatch and withVisible are just here to add some noise to</span>
+    <span class='co'># the stack trace.</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(
+      <span class='fu'><a href='https://rdrr.io/r/base/withVisible.html'>withVisible</a></span>({
+        <span class='fu'>hiddenFunction</span>(<span class='fu'>visibleFunction2</span>())
+      })
+    )
+  })
+})
+
+<span class='co'># Now the same example, but with ..stacktraceon/off.. to hide some</span>
+<span class='co'># of the less-interesting bits (tryCatch and withVisible).</span>
+<span class='fu'>..stacktraceoff..</span>({
+  <span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>({
+    <span class='fu'>withLogErrors</span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(
+        <span class='fu'><a href='https://rdrr.io/r/base/withVisible.html'>withVisible</a></span>(
+          <span class='fu'>hiddenFunction</span>(
+            <span class='fu'>..stacktraceon..</span>(<span class='fu'>visibleFunction2</span>())
+          )
+        )
+      )
+    })
+  })
+})</pre>
+</div>
+
+
+```

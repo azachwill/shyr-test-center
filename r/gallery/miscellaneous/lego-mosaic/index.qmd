@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: ShinyLEGO is a Shiny app that creates a mosaic composed of LEGO bricks from any image file! 
+title:        "The Shiny LEGO mosaic creator"
+author:    Eric Nantz
+authorurl:     https://r-podcast.org
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - game 
+ - lego
+appurl:      https://rpodcast.shinyapps.io/shinylego/
+sourceurl:   https://github.com/rpodcast/shinylego
+rscloudurl:  https://rstudio.cloud/project/257906
+---
+
+ShinyLEGO is a Shiny app that creates a mosaic composed of LEGO bricks from any image file!  Customize various settings for your mosaic such as dimensions, brightness, and colors. Best of all, you can download instructions so that you can build the mosaic yourself IRL!
+  
+This app is one of the runers up of the 2019 Shiny Contest. Upload any (relatively small) image and within seconds this app will design a LEGO mosaic for you, complete with a list of required bricks and build instructions!

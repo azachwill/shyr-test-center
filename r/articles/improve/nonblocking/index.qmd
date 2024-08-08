@@ -1,0 +1,150 @@
+---
+title: Non-blocking operations
+author: Joe Cheng
+date: 2024-03-20
+description: Keep your Shiny apps responsive while running long-running operations, with the Extended Task feature.
+---
+
+Sometimes in a Shiny app, you need to perform a long-running operation, like loading a large dataset or doing an expensive computation.
+If you do this in a reactive context, it will block the rest of the application from running until the operation completes.
+This can be frustrating for users, who may think that the app has crashed.
+
+Worse, if you have multiple users, then one user's long-running operation will block the other users' apps from running as well.
+These other users will not even be aware that their slow performance is due to another user's actions.
+
+In this article, you'll learn how you can keep your Shiny apps responsive in the face of these long operations, by using the Extended Task feature.
+
+::: {.callout-note}
+## What about async reactive programming?
+
+In versions of Shiny before 1.8.1, we recommended using [promises](https://rstudio.github.io/promises/) and [async programming](https://shiny.posit.co/r/articles/improve/async/) directly in your app's reactive expressions, observers, and outputs to handle long-running operations. Compared to the advice in this article, that approach is much harder to learn, and doesn't result in a more responsive app for a single user (only multiple concurrent users).
+
+Still, there may be cases where you need to use async programming directly in your reactive code, and in those cases, you can refer to the [async programming article](https://shiny.posit.co/r/articles/improve/async/).
+:::
+
+## A blocking app example
+
+In the app below, the first thing in the UI is a reactive output that displays the current time.
+Click the button and notice that, during the five seconds that the app is waiting for the (artificially slow) sum calculation to complete, the time does not update.
+
+::: {.border}
+<iframe
+  src="https://gallery.shinyapps.io/extended-task-sync/"
+  frameborder="0"
+  width="100%"
+  height="350"
+  class="mb-0"
+></iframe>
+:::
+
+```{.r}
+{{< include apps/sync/app.R >}}
+```
+
+In this app, the `sum_values` reactive expression is where the slow work is done.
+Pressing the button causes the `sum_values` reactive expression to run, and the app will be unresponsive until it completes.
+You can see that the current time stops updating for five seconds.
+
+## Adding `ExtendedTask`
+
+Now we'll adapt the example to use an `ExtendedTask` instead of a reactive expression.
+Click the button, and you'll notice that the time continues to update every second, even while the sum is being calculated.
+
+::: {.border}
+<iframe
+  src="https://gallery.shinyapps.io/extended-task-nonblocking/"
+  frameborder="0"
+  width="100%"
+  height="350"
+  class="mb-0"
+></iframe>
+:::
+
+```{.r}
+{{< include apps/nonblocking/app-future.R >}}
+```
+
+The slow logic used to be part of an `eventReactive`, and now it's been moved to an `ExtendedTask` object.
+The code looks not _too_ different from the original, but something very different is now happening under the hood.
+
+First, this slow code is no longer running in the same R process as the rest of the Shiny app--it's running in a separate R process, thanks to the `future_promise()` call that wraps the slow code.
+(If you haven't heard of the `future` package, it's a convenient way to run R code in the background, in separate R processes. Note the call to `future::plan(multisession)` at the top--this is essential future configuration that tells the future package to use multiple R processes.)
+
+Second, the slow code is no longer running in a reactive context.
+Rather than being run inside of a reactive context (`eventReactive` in this case, but it could've been `observeEvent`, `reactive`, or a `renderXXX`, etc.) the `ExtendedTask` object is specifically designed to run _outside_ of the reactive graph.
+This extremely important detail is why the rest of the app can remain responsive while the slow code is running--the reactive graph can quickly go back to being idle while the `ExtendedTask` object manages the running of the code.
+
+There are certain rules you need to know when using `ExtendedTask`.
+
+## Creating an ExtendedTask object
+
+When creating the `ExtendedTask` object, you pass in a function that takes the inputs to the task as arguments.
+In this function, it's your responsibility to run the long-running task in a non-blocking way; if you simply put blocking code in this function, you won't get the benefits of `ExtendedTask`.
+The most common way to do this is to wrap the slow code in a `future_promise({...})` call, as shown in the example above.
+(See the two articles on the promises website about [`future`](https://rstudio.github.io/promises/articles/promises_04_futures.html) and [`future_promise`](https://rstudio.github.io/promises/articles/promises_05_future_promise.html) for more details.
+But technically, you can use any method you like to run the code in a non-blocking way--as long as you return a `promise` object from this function.
+
+You can have setup code in this function that runs outside of a `future`, but keep in mind that this code will run in the main R process, and will block the rest of the app from running--so try to minimize how much work you do here.
+
+In the body of the function you pass to `ExtendedTask`, you cannot directly read reactive inputs, reactive values, reactive expressions, or any other reactive objects.
+(And Shiny goes out of its way to remind you if you forget: if you try, you'll get an error.)
+Because this code is executing outside of the reactive graph, those values could be changing while the code is running, and that would make it impossible to reason about the behavior of the code.
+Instead, any values you need to perform the extended task should be declared as parameters on the function (`x` and `y` in this example), and passed in when you call the `invoke` method (`sum_values$invoke(input$x, input$y)`).
+In this way, those values are snapshotted at the time of the call, while it's still safe to access reactive values.
+
+It's also worth noting _where_ the extended task object is declared: it's declared at the top level of the server function (not the top level of the app.R file), outside of any reactive context.
+By putting it at the top level of the server function, it's created once per Shiny session; it "belongs" to an individual visitor to the app, and is not shared across visitors.[^1]
+
+[^1]: It's conceivable that you might want to share an extended task across all visitors, so anyone can invoke it and everyone can see the results--if that's the case, you'd declare it at the top level of the app.R file, outside of any function.
+
+## Binding to a task button
+
+Before assigning the `ExtendedTask` object to the `sum_values` variable name, the example above uses the `bind_task_button` method to bind the task to the `btn` input. This is an important step whenever you use a `bslib::input_task_button` to invoke an `ExtendedTask` object, as it synchronizes the two objects so the button can give a "Processing..." visual cue while the task is running.
+
+If you use some other UI gesture or condition besides `bslib::input_task_button` to invoke the task, don't bother including the `bind_task_button` method--it doesn't work with `shiny::actionButton`, for example.
+
+## Invoking the task
+
+Unlike `reactive` or `eventReactive`, an `ExtendedTask` object does not automatically run when you try to access its results for the first time.
+Instead, you need to explicitly call its `invoke` method, passing in the inputs to the task.
+Most commonly, you'll call `invoke` from an `observeEvent` tied to some kind of user action, like a button click, as is the case in our example.
+
+If necessary, you can call `invoke` on an `ExtendedTask` object that's already running, and it will queue up the new invocation to run when any previous invocations are done.
+(If you were hoping for a way to run the same long-running task multiple times concurrently, we'd love to hear your use case--please [file a GitHub issue](https://github.com/rstudio/shiny/issues/new) telling us what you're trying to do.)
+
+Remember that whatever parameters are expected by the `ExtendedTask` object's function should be passed to `invoke` as arguments.
+These arguments will be eagerly evaluated at the time of the `invoke` call.
+
+## Retrieving results
+
+The `ExtendedTask` object has a `result` method that you can call to get the result of the task.
+This is the most subtle and interesting aspect of `ExtendedTask`, as it serves as the bridge back from the background task to the realm of reactive programming.
+
+Here's how it's used above:
+
+```{.r}
+output$sum <- renderText({
+  sum_values$result()
+})
+```
+
+The `sum` output is a regular `renderText`, which reads `sum_values$result()` to get the result of the extended task. This output actually does not "wait for" the extended task to complete, exactly; instead, it will run multiple times, as the extended task goes through different states. For each state, `sum_values$result()` will behave differently:
+
+* **Not yet invoked:** Raises a silent exception, which will cause the `sum` output to display nothing.
+* **Running:** Raises a special type of exception that tells Shiny to put the output in the "in progress" state.
+* **Successfully completed:** Returns the return value of the `ExtendedTask` object's function. This is not a promise object, but the actual value that the promise resolved to.
+* **Completed with an exception:** If the `ExtendedTask` object's function raised an exception while processing, then re-raises that same exception, causing it to be displayed to the user in the `sum` output.
+
+It's not necessary to memorize these states. Just remember that `sum_values$result()` is a reactive, synchronous method that knows how to do right thing based on the state of the extended task, and will trigger a reactive invalidation whenever the task's state changes.
+
+## Multiple invocations
+
+An extended task can run concurrently to reactive code and to other extended tasks; that's its whole purpose. However, a single extended task object cannot run itself multiple times concurrently. If you call `sum_values$invoke()` while it is already running, it will enqueue the new invocation and run it after the first one completes.
+
+This is often not the behavior you want, especially if the task takes a long time to complete. A user may accidentally click an action button twice, or they may click it again because they think the first click didn't work. To prevent this, use `bslib::input_action_button` instead of `shiny::actionButton` to invoke the task, since the former automatically prevents subsequent clicks until the task completes.
+
+## Summary
+
+To achieve non-blocking behavior in Shiny applications, factor your slow code into an `ExtendedTask` object and wrap it with `future_promise({...})`.
+Take out any reactive reads and turn those into parameters.
+Then call its `$invoke()` method from a reactive effect, and read its `result()` method from a render function or reactive expression.

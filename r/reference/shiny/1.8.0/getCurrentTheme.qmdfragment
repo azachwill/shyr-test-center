@@ -1,0 +1,30 @@
+---
+title: "Obtain Shiny's Bootstrap Sass theme — getCurrentTheme"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.0/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Intended for use by Shiny developers to create Shiny bindings with intelligent
+styling based on the <code><a href="bootstrapLib.html">bootstrapLib()</a></code>'s <code>theme</code> value.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">getCurrentTheme</span>()</span></code></pre></div></div>
+
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>If called at render-time (i.e., inside a <code><a href="https://rstudio.github.io/htmltools/reference/tagFunction.html" class="external-link">htmltools::tagFunction()</a></code>),
+and <code><a href="bootstrapLib.html">bootstrapLib()</a></code>'s <code>theme</code> has been set to a <code><a href="https://rdrr.io/pkg/bslib/man/bs_theme.html" class="external-link">bslib::bs_theme()</a></code></p>
+
+
+<p>object, then this returns the <code>theme</code>. Otherwise, this returns <code>NULL</code>.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="getCurrentOutputInfo.html">getCurrentOutputInfo()</a></code>, <code><a href="bootstrapLib.html">bootstrapLib()</a></code>, <code><a href="https://rstudio.github.io/htmltools/reference/tagFunction.html" class="external-link">htmltools::tagFunction()</a></code></p></div>
+  </div>
+
+</div>
+```

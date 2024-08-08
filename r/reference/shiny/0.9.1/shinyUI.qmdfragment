@@ -1,0 +1,54 @@
+---
+title: "shinyUI"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>shinyUI(ui, path&nbsp;=&nbsp;"/")</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>ui</th>
+    <td>A user-interace definition</td>
+  </tr>
+  <tr>
+    <th>path</th>
+    <td>The web server path to server the UI from</td>
+  </tr>
+</table>
+
+<div data-section="Create a Shiny UI handler">
+  <h3 data-swiftype-index="false">Create a Shiny UI handler</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>Called for its side-effect of registering a UI handler</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Register a UI handler by providing a UI definition (created with e.g.
+<a href='pageWithSidebar.html'>pageWithSidebar</a>) and web server path (typically "/", the default
+value).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>el &lt;- div(HTML(&quot;I like &lt;u&gt;turtles&lt;/u&gt;&quot;))
+cat(as.character(el))
+</div>
+<div class='output'>&lt;div&gt;I like &lt;u&gt;turtles&lt;/u&gt;&lt;/div&gt;</div></pre>
+<!-- <ul>
+  <li>shinyUI</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

@@ -1,0 +1,45 @@
+---
+layout: reference
+title: "Invoke a Shiny module — callModule"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Invoke a Shiny module</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/modules.R" class="external-link"><code>R/modules.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Note: As of Shiny 1.5.0, we recommend using <code><a href="moduleServer.html">moduleServer()</a></code> instead of
+<code>callModule()</code>, because the syntax is a little easier
+to understand, and modules created with <code>moduleServer</code> can be tested with
+<code><a href="testServer.html">testServer()</a></code>.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">callModule</span>(module, id, ..., <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>())</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>module</dt>
+<dd><p>A Shiny module server function</p></dd>
+
+
+<dt>id</dt>
+<dd><p>An ID string that corresponds with the ID used to call the module's
+UI function</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Additional parameters to pass to module server function</p></dd>
+
+
+<dt>session</dt>
+<dd><p>Session from which to make a child scope (the default should
+almost always be used)</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>The return value, if any, from executing the module server function</p>
+  </div>
+
+</div>

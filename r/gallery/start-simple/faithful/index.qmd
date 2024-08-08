@@ -1,0 +1,8 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Faithful
+date: 2014-08-11 
+appurl: https://gallery.shinyapps.io/083-front-page
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/083-front-page
+---

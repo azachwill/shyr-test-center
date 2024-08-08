@@ -1,0 +1,91 @@
+---
+layout: reference
+title: "Create an object representing brushing options — brushOpts"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create an object representing brushing options</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.3/R/image-interact-opts.R" class="external-link"><code>R/image-interact-opts.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This generates an object representing brushing options, to be passed as the
+<code>brush</code> argument of <code><a href="plotOutput.html">imageOutput()</a></code> or
+<code><a href="plotOutput.html">plotOutput()</a></code>.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">brushOpts</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  id,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"#9cf"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stroke =</span> <span class="st">"#036"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">opacity =</span> <span class="fl">0.25</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">delay =</span> <span class="dv">300</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">delayType =</span> <span class="fu">c</span>(<span class="st">"debounce"</span>, <span class="st">"throttle"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">clip =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="fu">c</span>(<span class="st">"xy"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">resetOnNew =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>id</dt>
+<dd><p>Input value name. For example, if the value is <code>"plot_brush"</code>,
+then the coordinates will be available as <code>input$plot_brush</code>. Multiple
+<code>imageOutput</code>/<code>plotOutput</code> calls may share the same <code>id</code>
+value; brushing one image or plot will cause any other brushes with the
+same <code>id</code> to disappear.</p></dd>
+
+
+<dt>fill</dt>
+<dd><p>Fill color of the brush. If <code>'auto'</code>, it derives from the link
+color of the plot's HTML container (if <strong>thematic</strong> is enabled, and <code>accent</code>
+is a non-<code>'auto'</code> value, that color is used instead).</p></dd>
+
+
+<dt>stroke</dt>
+<dd><p>Outline color of the brush. If <code>'auto'</code>, it derives from the
+foreground color of the plot's HTML container (if <strong>thematic</strong> is enabled,
+and <code>fg</code> is a non-<code>'auto'</code> value, that color is used instead).</p></dd>
+
+
+<dt>opacity</dt>
+<dd><p>Opacity of the brush</p></dd>
+
+
+<dt>delay</dt>
+<dd><p>How long to delay (in milliseconds) when debouncing or
+throttling, before sending the brush data to the server.</p></dd>
+
+
+<dt>delayType</dt>
+<dd><p>The type of algorithm for limiting the number of brush
+events. Use <code>"throttle"</code> to limit the number of brush events to one
+every <code>delay</code> milliseconds. Use <code>"debounce"</code> to suspend events
+while the cursor is moving, and wait until the cursor has been at rest for
+<code>delay</code> milliseconds before sending an event.</p></dd>
+
+
+<dt>clip</dt>
+<dd><p>Should the brush area be clipped to the plotting area? If FALSE,
+then the user will be able to brush outside the plotting area, as long as
+it is still inside the image.</p></dd>
+
+
+<dt>direction</dt>
+<dd><p>The direction for brushing. If <code>"xy"</code>, the brush can be
+drawn and moved in both x and y directions. If <code>"x"</code>, or <code>"y"</code>,
+the brush wil work horizontally or vertically.</p></dd>
+
+
+<dt>resetOnNew</dt>
+<dd><p>When a new image is sent to the browser (via
+<code><a href="renderImage.html">renderImage()</a></code>), should the brush be reset? The default,
+<code>FALSE</code>, is useful if you want to update the plot while keeping the
+brush. Using <code>TRUE</code> is useful if you want to clear the brush whenever
+the plot is updated.</p></dd>
+
+</dl></div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="clickOpts.html">clickOpts()</a></code> for clicking events.</p></div>
+  </div>
+
+</div>

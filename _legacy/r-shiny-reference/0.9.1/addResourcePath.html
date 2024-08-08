@@ -1,0 +1,67 @@
+---
+layout: reference
+title: "addResourcePath"
+categories: reference
+---
+<h1>Resource Publishing</h1>
+
+<pre class="code"><code class="r"><div>addResourcePath(prefix, directoryPath)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>prefix</th>
+    <td>The URL prefix (without slashes). Valid
+  characters are a-z, A-Z, 0-9, hyphen, and underscore; and
+  must begin with a-z or A-Z. For example, a value of 'foo'
+  means that any request paths that begin with '/foo' will
+  be mapped to the given directory.</td>
+  </tr>
+  <tr>
+    <th>directoryPath</th>
+    <td>The directory that contains the
+  static resources to be served.</td>
+  </tr>
+</table>
+
+<div data-section="Resource Publishing">
+  <h3 data-swiftype-index="false">Resource Publishing</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Adds a directory of static resources to Shiny's web server, with the given
+path prefix. Primarily intended for package authors to make supporting
+JavaScript/CSS files available to their components.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>You can call <code>addResourcePath</code> multiple times for a given
+  <code>prefix</code>; only the most recent value will be retained. If the
+  normalized <code>directoryPath</code> is different than the directory that's
+  currently mapped to the <code>prefix</code>, a warning will be issued.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>addResourcePath(&#39;datasets&#39;, system.file(&#39;data&#39;, package=&#39;datasets&#39;))
+</div>
+<strong class='message'>Shiny URLs starting with /datasets will mapped to /usr/lib/R/library/datasets/data</strong></pre>
+<!-- <ul>
+  <li>addResourcePath</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='singleton.html'>singleton</a></code>
+
+</div>

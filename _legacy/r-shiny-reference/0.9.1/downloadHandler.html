@@ -1,0 +1,81 @@
+---
+layout: reference
+title: "downloadHandler"
+categories: reference
+---
+<h1>File Downloads</h1>
+
+<pre class="code"><code class="r"><div>downloadHandler(filename, content, contentType&nbsp;=&nbsp;NA)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>filename</th>
+    <td>A string of the filename, including
+  extension, that the user's web browser should default to
+  when downloading the file; or a function that returns
+  such a string. (Reactive values and functions may be used
+  from this function.)</td>
+  </tr>
+  <tr>
+    <th>content</th>
+    <td>A function that takes a single argument
+  <code>file</code> that is a file path (string) of a nonexistent
+  temp file, and writes the content to that file path.
+  (Reactive values and functions may be used from this
+  function.)</td>
+  </tr>
+  <tr>
+    <th>contentType</th>
+    <td>A string of the download's
+  <a href = 'http://en.wikipedia.org/wiki/Internet_media_type'>content
+  type</a>, for example <code>"text/csv"</code> or
+  <code>"image/png"</code>. If <code>NULL</code> or <code>NA</code>, the
+  content type will be guessed based on the filename
+  extension, or <code>application/octet-stream</code> if the
+  extension is unknown.</td>
+  </tr>
+</table>
+
+<div data-section="File Downloads">
+  <h3 data-swiftype-index="false">File Downloads</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Allows content from the Shiny application to be made available to the user as
+file downloads (for example, downloading the currently visible data as a CSV
+file). Both filename and contents can be calculated dynamically at the time
+the user initiates the download. Assign the return value to a slot on
+<code>output</code> in your server function, and in the UI use
+<code><a href='downloadButton.html'>downloadButton</a></code> or <code><a href='downloadButton.html'>downloadLink</a></code> to make the
+download available.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # In server.R:
+# output$downloadData &lt;- downloadHandler(
+#   filename = function() {
+#     paste(&#39;data-&#39;, Sys.Date(), &#39;.csv&#39;, sep=&#39;&#39;)
+#   },
+#   content = function(file) {
+#     write.csv(data, file)
+#   }
+# )
+# 
+# # In ui.R:
+# downloadLink(&#39;downloadData&#39;, &#39;Download&#39;)
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>downloadHandler</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

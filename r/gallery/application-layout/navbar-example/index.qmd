@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Navbar Example
+date: 2014-07-30 
+tags:
+ - navbar
+ - layout
+appurl: https://gallery.shinyapps.io/052-navbar-example
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/052-navbar-example
+---

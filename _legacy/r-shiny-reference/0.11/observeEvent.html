@@ -1,0 +1,208 @@
+---
+layout: reference
+title: "observeEvent"
+categories: reference
+---
+<h1>Event handler</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">eventExpr</span><span class="keyword">,</span> <span class="symbol">handlerExpr</span><span class="keyword">,</span> <span class="argument">event.env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">event.quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">handler.env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">handler.quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">suspended</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">priority</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0</span><span class="keyword">,</span>
+  <span class="argument">domain</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">autoDestroy</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span>
+  <span class="argument">ignoreNULL</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='observeEvent.html'>eventReactive</a></span><span class="keyword">(</span><span class="symbol">eventExpr</span><span class="keyword">,</span> <span class="symbol">valueExpr</span><span class="keyword">,</span> <span class="argument">event.env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">event.quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">value.env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">value.quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">domain</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">ignoreNULL</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>eventExpr</th>
+    <td>A (quoted or unquoted) expression that represents the event;
+this can be a simple reactive value like `input$click`, a call to a
+reactive expression like `dataset()`, or even a complex expression inside
+curly braces</td>
+  </tr>
+  <tr>
+    <th>handlerExpr</th>
+    <td>The expression to call whenever <code>eventExpr</code> is
+invalidated. This should be a side-effect-producing action (the return
+value will be ignored). It will be executed within an <code><a href='isolate.html'>isolate</a></code>
+scope.</td>
+  </tr>
+  <tr>
+    <th>event.env</th>
+    <td>The parent environment for <code>eventExpr</code>. By default,
+this is the calling environment.</td>
+  </tr>
+  <tr>
+    <th>event.quoted</th>
+    <td>Is the <code>eventExpr</code> expression quoted? By default,
+this is <code>FALSE</code>. This is useful when you want to use an expression
+that is stored in a variable; to do so, it must be quoted with `quote()`.</td>
+  </tr>
+  <tr>
+    <th>handler.env</th>
+    <td>The parent environment for <code>handlerExpr</code>. By default,
+this is the calling environment.</td>
+  </tr>
+  <tr>
+    <th>handler.quoted</th>
+    <td>Is the <code>handlerExpr</code> expression quoted? By
+default, this is <code>FALSE</code>. This is useful when you want to use an
+expression that is stored in a variable; to do so, it must be quoted with
+`quote()`.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>A label for the observer or reactive, useful for debugging.</td>
+  </tr>
+  <tr>
+    <th>suspended</th>
+    <td>If <code>TRUE</code>, start the observer in a suspended state. If
+<code>FALSE</code> (the default), start in a non-suspended state.</td>
+  </tr>
+  <tr>
+    <th>priority</th>
+    <td>An integer or numeric that controls the priority with which
+this observer should be executed. An observer with a given priority level
+will always execute sooner than all observers with a lower priority level.
+Positive, negative, and zero values are allowed.</td>
+  </tr>
+  <tr>
+    <th>domain</th>
+    <td>See <a href='domains.html'>domains</a>.</td>
+  </tr>
+  <tr>
+    <th>autoDestroy</th>
+    <td>If <code>TRUE</code> (the default), the observer will be
+automatically destroyed when its domain (if any) ends.</td>
+  </tr>
+  <tr>
+    <th>ignoreNULL</th>
+    <td>Whether the action should be triggered (or value
+calculated, in the case of <code>eventReactive</code>) when the input is
+<code>NULL</code>. See Details.</td>
+  </tr>
+  <tr>
+    <th>valueExpr</th>
+    <td>The expression that produces the return value of the
+<code>eventReactive</code>. It will be executed within an <code><a href='isolate.html'>isolate</a></code>
+scope.</td>
+  </tr>
+  <tr>
+    <th>value.env</th>
+    <td>The parent environment for <code>valueExpr</code>. By default,
+this is the calling environment.</td>
+  </tr>
+  <tr>
+    <th>value.quoted</th>
+    <td>Is the <code>valueExpr</code> expression quoted? By
+default, this is <code>FALSE</code>. This is useful when you want to use an
+expression that is stored in a variable; to do so, it must be quoted with
+`quote()`.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+<code>observeEvent</code> returns an observer reference class object (see
+  <code><a href='observe.html'>observe</a></code>). <code>eventReactive</code> returns a reactive expression
+  object (see <code><a href='reactive.html'>reactive</a></code>).
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Respond to &quot;event-like&quot; reactive inputs, values, and expressions.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Shiny&#39;s reactive programming framework is primarily designed for calculated
+values (reactive expressions) and side-effect-causing actions (observers)
+that respond to <em>any</em> of their inputs changing. That&#39;s often what is
+desired in Shiny apps, but not always: sometimes you want to wait for a
+specific action to be taken from the user, like clicking an
+<code><a href='actionButton.html'>actionButton</a></code>, before calculating an expression or taking an
+action. A reactive value or expression that is used to trigger other
+calculations in this way is called an <em>event</em>.</p>
+
+  <p>These situations demand a more imperative, &quot;event handling&quot; style of
+programming that is possible--but not particularly intuitive--using the
+reactive programming primitives <code><a href='observe.html'>observe</a></code> and
+<code><a href='isolate.html'>isolate</a></code>. <code>observeEvent</code> and <code>eventReactive</code> provide
+straightforward APIs for event handling that wrap <code>observe</code> and
+<code>isolate</code>.</p>
+
+  <p>Use <code>observeEvent</code> whenever you want to <em>perform an action</em> in
+response to an event. (Note that &quot;recalculate a value&quot; does not generally
+count as performing an action--see <code>eventReactive</code> for that.) The first
+argument is the event you want to respond to, and the second argument is a
+function that should be called whenever the event occurs.</p>
+
+  <p>Use <code>eventReactive</code> to create a <em>calculated value</em> that only
+updates in response to an event. This is just like a normal
+<a href='reactive.html'>reactive expression</a> except it ignores all the usual
+invalidations that come from its reactive dependencies; it only invalidates
+in response to the given event.</p>
+
+  <p>Both <code>observeEvent</code> and <code>eventReactive</code> take an <code>ignoreNULL</code>
+parameter that affects behavior when the <code>eventExpr</code> evaluates to
+<code>NULL</code> (or in the special case of an <code><a href='actionButton.html'>actionButton</a></code>,
+<code>0</code>). In these cases, if <code>ignoreNULL</code> is <code>TRUE</code>, then an
+<code>observeEvent</code> will not execute and an <code>eventReactive</code> will raise a
+silent <a href='validate.html'>validation</a> error. This is useful behavior if you
+don&#39;t want to do the action or calculation when your app first starts, but
+wait for the user to initiate the action first (like a &quot;Submit&quot; button);
+whereas <code>ignoreNULL=FALSE</code> is desirable if you want to initially perform
+the action/calculation and just let the user re-initiate it (like a
+&quot;Recalculate&quot; button).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># ui &lt;- fluidPage(</span>
+<span class="comment">#   column(4,</span>
+<span class="comment">#     numericInput("x", "Value", 5),</span>
+<span class="comment">#     br(),</span>
+<span class="comment">#     actionButton("button", "Show")</span>
+<span class="comment">#   ),</span>
+<span class="comment">#   column(8, tableOutput("table"))</span>
+<span class="comment"># )</span>
+<span class="comment"># server &lt;- function(input, output) {</span>
+<span class="comment">#   # Take an action every time button is pressed;</span>
+<span class="comment">#   # here, we just print a message to the console</span>
+<span class="comment">#   observeEvent(input$button, function() {</span>
+<span class="comment">#     cat("Showing", input$x, "rows\n")</span>
+<span class="comment">#   })</span>
+<span class="comment">#   # Take a reactive dependency on input$button, but</span>
+<span class="comment">#   # not on any of the stuff inside the function</span>
+<span class="comment">#   df &lt;- eventReactive(input$button, function() {</span>
+<span class="comment">#     head(cars, input$x)</span>
+<span class="comment">#   })</span>
+<span class="comment">#   output$table &lt;- renderTable({</span>
+<span class="comment">#     df()</span>
+<span class="comment">#   })</span>
+<span class="comment"># }</span>
+<span class="comment"># shinyApp(ui=ui, server=server)</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>eventReactive</li><li>observeEvent</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='actionButton.html'>actionButton</a></code></p>
+</div>

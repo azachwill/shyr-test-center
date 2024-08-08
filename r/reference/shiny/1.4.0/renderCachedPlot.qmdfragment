@@ -1,0 +1,203 @@
+---
+title: "Plot output with cached images — renderCachedPlot"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>renderCachedPlot</span>(<span class='no'>expr</span>, <span class='no'>cacheKeyExpr</span>, <span class='kw'>sizePolicy</span> <span class='kw'>=</span> <span class='fu'><a href='sizeGrowthRatio.html'>sizeGrowthRatio</a></span>(<span class='kw'>width</span> <span class='kw'>=</span>
+  <span class='fl'>400</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>400</span>, <span class='kw'>growthRate</span> <span class='kw'>=</span> <span class='fl'>1.2</span>), <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>72</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='st'>"app"</span>, <span class='no'>...</span>,
+  <span class='kw'>outputArgs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>An expression that generates a plot.</p></td>
+  </tr>
+  <tr>
+    <th><p>cacheKeyExpr</p></th>
+    <td><p>An expression that returns a cache key. This key should
+be a unique identifier for a plot: the assumption is that if the cache key
+is the same, then the plot will be the same.</p></td>
+  </tr>
+  <tr>
+    <th><p>sizePolicy</p></th>
+    <td><p>A function that takes two arguments, <code>width</code> and
+<code>height</code>, and returns a list with <code>width</code> and <code>height</code>. The
+purpose is to round the actual pixel dimensions from the browser to some
+other dimensions, so that this will not generate and cache images of every
+possible pixel dimension. See <code><a href='sizeGrowthRatio.html'>sizeGrowthRatio()</a></code> for more
+information on the default sizing policy.</p></td>
+  </tr>
+  <tr>
+    <th><p>res</p></th>
+    <td><p>The resolution of the PNG, in pixels per inch.</p></td>
+  </tr>
+  <tr>
+    <th><p>cache</p></th>
+    <td><p>The scope of the cache, or a cache object. This can be
+<code>"app"</code> (the default), <code>"session"</code>, or a cache object like
+a <code><a href='diskCache.html'>diskCache()</a></code>. See the Cache Scoping section for more
+information.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Arguments to be passed through to <code><a href='https://rdrr.io/r/grDevices/png.html'>grDevices::png()</a></code>.
+These can be used to set the width, height, background color, etc.</p></td>
+  </tr>
+  <tr>
+    <th><p>outputArgs</p></th>
+    <td><p>A list of arguments to be passed through to the implicit
+call to <code><a href='plotOutput.html'>plotOutput()</a></code> when <code>renderPlot</code> is used in an
+interactive R Markdown document.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Renders a reactive plot, with plot images cached to disk.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p><code>expr</code> is an expression that generates a plot, similar to that in
+<code>renderPlot</code>. Unlike with <code>renderPlot</code>, this expression does not
+take reactive dependencies. It is re-executed only when the cache key
+changes.</p>
+<p><code>cacheKeyExpr</code> is an expression which, when evaluated, returns an object
+which will be serialized and hashed using the <code><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest::digest()</a></code>
+function to generate a string that will be used as a cache key. This key is
+used to identify the contents of the plot: if the cache key is the same as a
+previous time, it assumes that the plot is the same and can be retrieved from
+the cache.</p>
+<p>This <code>cacheKeyExpr</code> is reactive, and so it will be re-evaluated when any
+upstream reactives are invalidated. This will also trigger re-execution of
+the plotting expression, <code>expr</code>.</p>
+<p>The key should consist of "normal" R objects, like vectors and lists. Lists
+should in turn contain other normal R objects. If the key contains
+environments, external pointers, or reference objects --- or even if it has
+such objects attached as attributes --- then it is possible that it will
+change unpredictably even when you do not expect it to. Additionally, because
+the entire key is serialized and hashed, if it contains a very large object
+--- a large data set, for example --- there may be a noticeable performance
+penalty.</p>
+<p>If you face these issues with the cache key, you can work around them by
+extracting out the important parts of the objects, and/or by converting them
+to normal R objects before returning them. Your expression could even
+serialize and hash that information in an efficient way and return a string,
+which will in turn be hashed (very quickly) by the
+<code><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest::digest()</a></code> function.</p>
+<p>Internally, the result from <code>cacheKeyExpr</code> is combined with the name of
+the output (if you assign it to <code>output$plot1</code>, it will be combined
+with <code>"plot1"</code>) to form the actual key that is used. As a result, even
+if there are multiple plots that have the same <code>cacheKeyExpr</code>, they
+will not have cache key collisions.</p>
+    <h3 class="hasAnchor" id="cache-scoping"><a class="anchor" href="#cache-scoping"></a>Cache scoping</h3>
+
+  
+
+
+<p>There are a number of different ways you may want to scope the cache. For
+example, you may want each user session to have their own plot cache, or
+you may want each run of the application to have a cache (shared among
+possibly multiple simultaneous user sessions), or you may want to have a
+cache that persists even after the application is shut down and started
+again.</p>
+<p>To control the scope of the cache, use the <code>cache</code> parameter. There
+are two ways of having Shiny automatically create and clean up the disk
+cache.</p>
+<dl class='dl-horizontal'>
+<dt>1</dt><dd><p>To scope the cache to one run of a Shiny application (shared
+among possibly multiple user sessions), use <code>cache="app"</code>. This
+is the default. The cache will be shared across multiple sessions, so
+there is potentially a large performance benefit if there are many users
+of the application. When the application stops running, the cache will
+be deleted. If plots cannot be safely shared across users, this should
+not be used.</p></dd>
+<dt>2</dt><dd><p>To scope the cache to one session, use <code>cache="session"</code>.
+When a new user session starts --- in other words, when a web browser
+visits the Shiny application --- a new cache will be created on disk
+for that session. When the session ends, the cache will be deleted.
+The cache will not be shared across multiple sessions.</p></dd>
+
+</dl>
+
+<p>If either <code>"app"</code> or <code>"session"</code> is used, the cache will be 10 MB
+in size, and will be stored stored in memory, using a
+<code><a href='memoryCache.html'>memoryCache()</a></code> object. Note that the cache space will be shared
+among all cached plots within a single application or session.</p>
+<p>In some cases, you may want more control over the caching behavior. For
+example, you may want to use a larger or smaller cache, share a cache
+among multiple R processes, or you may want the cache to persist across
+multiple runs of an application, or even across multiple R processes.</p>
+<p>To use different settings for an application-scoped cache, you can call
+<code><a href='shinyOptions.html'>shinyOptions()</a></code> at the top of your app.R, server.R, or
+global.R. For example, this will create a cache with 20 MB of space
+instead of the default 10 MB:</p><pre>
+  shinyOptions(cache = memoryCache(size = 20e6))
+  </pre>
+
+<p>To use different settings for a session-scoped cache, you can call
+<code><a href='shinyOptions.html'>shinyOptions()</a></code> at the top of your server function. To use
+the session-scoped cache, you must also call <code>renderCachedPlot</code> with
+<code>cache="session"</code>. This will create a 20 MB cache for the session:</p><pre>
+  function(input, output, session) {
+    shinyOptions(cache = memoryCache(size = 20e6))
+
+    output$plot &lt;- renderCachedPlot(
+      ...,
+      cache = "session"
+    )
+  }
+  </pre>
+
+<p>If you want to create a cache that is shared across multiple concurrent
+R processes, you can use a <code><a href='diskCache.html'>diskCache()</a></code>. You can create an
+application-level shared cache by putting this at the top of your app.R,
+server.R, or global.R:</p><pre>
+  shinyOptions(cache = diskCache(file.path(dirname(tempdir()), "myapp-cache"))
+  </pre>
+
+<p>This will create a subdirectory in your system temp directory named
+<code>myapp-cache</code> (replace <code>myapp-cache</code> with a unique name of
+your choosing). On most platforms, this directory will be removed when
+your system reboots. This cache will persist across multiple starts and
+stops of the R process, as long as you do not reboot.</p>
+<p>To have the cache persist even across multiple reboots, you can create the
+cache in a location outside of the temp directory. For example, it could
+be a subdirectory of the application:</p><pre>
+  shinyOptions(cache = diskCache("./myapp-cache"))
+  </pre>
+
+<p>In this case, resetting the cache will have to be done manually, by deleting
+the directory.</p>
+<p>You can also scope a cache to just one plot, or selected plots. To do that,
+create a <code><a href='memoryCache.html'>memoryCache()</a></code> or <code><a href='diskCache.html'>diskCache()</a></code>, and pass it
+as the <code>cache</code> argument of <code>renderCachedPlot</code>.</p>
+    <h3 class="hasAnchor" id="interactive-plots"><a class="anchor" href="#interactive-plots"></a>Interactive plots</h3>
+
+  
+
+
+<p><code>renderCachedPlot</code> can be used to create interactive plots. See
+<code><a href='plotOutput.html'>plotOutput()</a></code> for more information and examples.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p>See <code><a href='renderPlot.html'>renderPlot()</a></code> for the regular, non-cached version of
+this function. For more about configuring caches, see
+<code><a href='memoryCache.html'>memoryCache()</a></code> and <code><a href='diskCache.html'>diskCache()</a></code>.</p></div>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"></pre>
+</div>
+
+
+```

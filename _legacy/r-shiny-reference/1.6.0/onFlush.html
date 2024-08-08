@@ -1,0 +1,60 @@
+---
+layout: reference
+title: "Add callbacks for Shiny session events — onFlush"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Add callbacks for Shiny session events</h1>
+  
+
+  <pre class="code"><span class='fu'>onFlush</span>(<span class='no'>fun</span>, <span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())
+
+<span class='fu'>onFlushed</span>(<span class='no'>fun</span>, <span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())
+
+<span class='fu'>onSessionEnded</span>(<span class='no'>fun</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>fun</p></th>
+    <td><p>A callback function.</p></td>
+  </tr>
+  <tr>
+    <th><p>once</p></th>
+    <td><p>Should the function be run once, and then cleared, or should it
+re-run each time the event occurs. (Only for <code>onFlush</code> and
+<code>onFlushed</code>.)</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>A shiny session object.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>These functions are for registering callbacks on Shiny session events.
+<code>onFlush</code> registers a function that will be called before Shiny flushes
+the reactive system. <code>onFlushed</code> registers a function that will be
+called after Shiny flushes the reactive system. <code>onSessionEnded</code>
+registers a function to be called after the client has disconnected.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>These functions should be called within the application's server function.</p>
+<p>All of these functions return a function which can be called with no
+arguments to cancel the registration.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='onStop.html'>onStop()</a></code> for registering callbacks that will be
+invoked when the application exits, or when a session ends.</p></div>
+  </div>
+
+</div>
+
+

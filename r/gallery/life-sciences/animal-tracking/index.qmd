@@ -1,0 +1,22 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: ctmmweb is built on ctmm, an R package for analyzing animal tracking data as a continuous-time stochastic processes. 
+title:        "ctmmweb, a web app to analysis Animal tracking data"
+author:    Xianghui Dong
+authorurl:     https://dracodoc.github.io
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - visualization
+ - analysis
+ - interactive
+ - reproducible
+appurl:      https://tiny.cc/ctmmweb
+sourceurl:   https://github.com/ctmm-initiative/ctmmweb/
+rscloudurl:  https://rstudio.cloud/project/196548
+---
+
+ctmmweb is built on ctmm, an R package for analyzing animal tracking data as a continuous-time stochastic processes. The web app provided a streamlined workflow so general users can upload their own data and get sophisticated analyses result in an interactive interface.
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

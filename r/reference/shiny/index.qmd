@@ -1,0 +1,56 @@
+---
+title: Reference
+---
+
+:::{.lead}
+Below you can find upgrade notes and function references for latest and previous versions of the Shiny package.
+:::
+
+## Latest version
+:::{.table-spacing-md .shiny-version-table}
+
+|  |  |  |
+| --- | :---: | :---: |
+| shiny 1.9.0 | [Upgrade notes](latest/upgrade.html) | [Function reference](latest/) |
+:::
+
+### Previous versions{.mt-5 .mb-4}
+
+:::{.table-spacing-md .table-simple .shiny-version-table }
+
+|  |  |  |
+| --- | :---: | :---: |
+| shiny 1.8.1 | [Upgrade notes](1.8.1/upgrade.html) | [Function reference](1.8.1/) |
+| shiny 1.8.0 | [Upgrade notes](1.8.0/upgrade.html) | [Function reference](1.8.0/) |
+| shiny 1.7.5 | [Upgrade notes](1.7.5/upgrade.html) | [Function reference](1.7.5/) |
+| shiny 1.7.4 | [Upgrade notes](1.7.4/upgrade.html) | [Function reference](1.7.4/) |
+| shiny 1.7.3 | [Upgrade notes](1.7.3/upgrade.html) | [Function reference](1.7.3/) |
+| shiny 1.7.2 | [Upgrade notes](1.7.2/upgrade.html) | [Function reference](1.7.2/) |
+| shiny 1.7.1 | [Upgrade notes](1.7.1/upgrade.html) | [Function reference](1.7.1/) |
+| shiny 1.7.0 | [Upgrade notes](1.7.0/upgrade.html) | [Function reference](1.7.0/) |
+| shiny 1.6.0 | [Upgrade notes](1.6.0/upgrade.html) | [Function reference](1.6.0/) |
+| shiny 1.5.0 | [Upgrade notes](1.5.0/upgrade.html) | [Function reference](1.5.0/) |
+| shiny 1.4.0 | [Upgrade notes](1.4.0/upgrade.html) | [Function reference](1.4.0/) |
+| shiny 1.3.2 | [Upgrade notes](1.3.2/upgrade.html) | [Function reference](1.3.2/) |
+| shiny 1.3.1 | [Upgrade notes](1.3.1/upgrade.html) | [Function reference](1.3.1/) |
+| shiny 1.3.0 | [Upgrade notes](1.3.0/upgrade.html) | [Function reference](1.3.0/) |
+| shiny 1.2.0 | [Upgrade notes](1.2.0/upgrade.html) | [Function reference](1.2.0/) |
+| shiny 1.1.0 | [Upgrade notes](1.1.0/upgrade.html) | [Function reference](1.1.0/) |
+| shiny 1.0.5 | [Upgrade notes](1.0.5/upgrade.html) | [Function reference](1.0.5/) |
+| shiny 1.0.4 | [Upgrade notes](1.0.4/upgrade.html) | [Function reference](1.0.4/) |
+| shiny 1.0.3 | [Upgrade notes](1.0.3/upgrade.html) | [Function reference](1.0.3/) |
+| shiny 1.0.2 | [Upgrade notes](1.0.2/upgrade.html) | [Function reference](1.0.2/) |
+| shiny 1.0.1 | [Upgrade notes](1.0.1/upgrade.html) | [Function reference](1.0.1/) |
+| shiny 1.0.0 | [Upgrade notes](1.0.0/upgrade.html) | [Function reference](1.0.0/) |
+| shiny 0.14.2 | [Upgrade notes](0.14.2/upgrade.html) | [Function reference](0.14.2/) |
+| shiny 0.14.1 | [Upgrade notes](0.14.1/upgrade.html) | [Function reference](0.14.1/) |
+| shiny 0.14 | [Upgrade notes](0.14/upgrade.html) | [Function reference](0.14/) |
+| shiny 0.13.2 | [Upgrade notes](0.13.2/upgrade.html) | [Function reference](0.13.2/) |
+| shiny 0.13.1 | [Upgrade notes](0.13.1/upgrade.html) | [Function reference](0.13.1/) |
+| shiny 0.13.0 | [Upgrade notes](0.13.0/upgrade.html) | [Function reference](0.13.0/) |
+| shiny 0.12.2 | [Upgrade notes](0.12.2/upgrade.html) | [Function reference](0.12.2/) |
+| shiny 0.12.1 | [Upgrade notes](0.12.1/upgrade.html) | [Function reference](0.12.1/) |
+| shiny 0.12.0 | [Upgrade notes](0.12.0/upgrade.html) | [Function reference](0.12.0/) |
+| shiny 0.11.1 | [Upgrade notes](0.11.1/upgrade.html) | [Function reference](0.11.1/) |
+| shiny 0.11 | [Upgrade notes](0.11/upgrade.html) | [Function reference](0.11/) |
+:::

@@ -1,0 +1,66 @@
+---
+title: "Parse a GET query string from a URL — parseQueryString"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>parseQueryString</span>(<span class='no'>str</span>, <span class='kw'>nested</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>str</p></th>
+    <td><p>The query string. It can have a leading <code>"?"</code> or not.</p></td>
+  </tr>
+  <tr>
+    <th><p>nested</p></th>
+    <td><p>Whether to parse the query string of as a nested list when it
+contains pairs of square brackets <code>[]</code>. For example, the query
+<samp>a[i1][j1]=x&amp;b[i1][j1]=y&amp;b[i2][j1]=z</samp> will be parsed as <code><a href='https://rdrr.io/r/base/list.html'>list(a =
+list(i1 = list(j1 = 'x')), b = list(i1 = list(j1 = 'y'), i2 = list(j1 =
+'z')))</a></code> when <code>nested = TRUE</code>, and <code><a href='https://rdrr.io/r/base/list.html'>list(`a[i1][j1]` = 'x',
+`b[i1][j1]` = 'y', `b[i2][j1]` = 'z')</a></code> when <code>nested = FALSE</code>.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Returns a named list of key-value pairs.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='fu'>parseQueryString</span>(<span class='st'>"?foo=1&amp;bar=b%20a%20r"</span>)
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Example of usage within a Shiny app</span>
+<span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+
+  <span class='no'>output</span>$<span class='no'>queryText</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderText.html'>renderText</a></span>({
+    <span class='no'>query</span> <span class='kw'>&lt;-</span> <span class='fu'>parseQueryString</span>(<span class='no'>session</span>$<span class='no'>clientData</span>$<span class='no'>url_search</span>)
+
+    <span class='co'># Ways of accessing the values</span>
+    <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>query</span>$<span class='no'>foo</span>) <span class='kw'>==</span> <span class='fl'>1</span>) {
+      <span class='co'># Do something</span>
+    }
+    <span class='kw'>if</span> (<span class='no'>query</span><span class='kw'>[[</span><span class='st'>"bar"</span>]] <span class='kw'>==</span> <span class='st'>"targetstring"</span>) {
+      <span class='co'># Do something else</span>
+    }
+
+    <span class='co'># Return a string with key-value pairs</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>query</span>), <span class='no'>query</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"="</span>, <span class='kw'>collapse</span><span class='kw'>=</span><span class='st'>", "</span>)
+  })
+}
+}</pre>
+</div>
+
+
+```

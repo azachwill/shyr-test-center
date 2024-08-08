@@ -1,0 +1,134 @@
+---
+title: "Create a page with fluid layout — fluidPage"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/bootstrap-layout.R" class="external-link"><code>R/bootstrap-layout.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Functions for creating fluid page layouts. A fluid page layout consists of
+rows which in turn include columns. Rows exist for the purpose of making sure
+their elements appear on the same line (if the browser has adequate width).
+Columns exist for the purpose of defining how much horizontal space within a
+12-unit wide grid it's elements should occupy. Fluid pages scale their
+components in realtime to fill all available browser width.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">fluidPage</span>(..., <span class="at">title =</span> <span class="cn">NULL</span>, <span class="at">theme =</span> <span class="cn">NULL</span>, <span class="at">lang =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">fluidRow</span>(...)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>Elements to include within the page</p></dd>
+
+
+<dt>title</dt>
+<dd><p>The browser window title (defaults to the host URL of the page).
+Can also be set as a side effect of the <code><a href="titlePanel.html">titlePanel()</a></code> function.</p></dd>
+
+
+<dt>theme</dt>
+<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (the default), which implies a "stock" build of Bootstrap 3.</p></li>
+<li><p>A <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html" class="external-link">bslib::bs_theme()</a></code> object. This can be used to replace a stock
+build of Bootstrap 3 with a customized version of Bootstrap 3 or higher.</p></li>
+<li><p>A character string pointing to an alternative Bootstrap stylesheet
+(normally a css file within the www directory, e.g. <code>www/bootstrap.css</code>).</p></li>
+</ul></dd>
+
+
+<dt>lang</dt>
+<dd><p>ISO 639-1 language code for the HTML page, such as "en" or "ko".
+This will be used as the lang in the <code>&lt;html&gt;</code> tag, as in <code>&lt;html lang="en"&gt;</code>.
+The default (NULL) results in an empty string.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A UI definition that can be passed to the <a href="shinyUI.html">shinyUI</a> function.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>To create a fluid page use the <code>fluidPage</code> function and include
+instances of <code>fluidRow</code> and <code><a href="column.html">column()</a></code> within it. As an
+alternative to low-level row and column functions you can also use
+higher-level layout functions like <code><a href="sidebarLayout.html">sidebarLayout()</a></code>.</p>
+  </div>
+  <div data-section="note">
+    <h3 id="note">Note</h3>
+    <p>See the <a href="https://shiny.posit.co/articles/layout-guide.html" class="external-link"> Shiny-Application-Layout-Guide</a> for additional details on laying out fluid
+pages.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="column.html">column()</a></code></p>
+<p>Other layout functions: 
+<code><a href="fillPage.html">fillPage</a>()</code>,
+<code><a href="fixedPage.html">fixedPage</a>()</code>,
+<code><a href="flowLayout.html">flowLayout</a>()</code>,
+<code><a href="navbarPage.html">navbarPage</a>()</code>,
+<code><a href="sidebarLayout.html">sidebarLayout</a>()</code>,
+<code><a href="splitLayout.html">splitLayout</a>()</code>,
+<code><a href="verticalLayout.html">verticalLayout</a>()</code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Example of UI with fluidPage</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="co"># Application title</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"Hello Shiny!"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    <span class="co"># Sidebar with a slider input</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>      <span class="fu">sliderInput</span>(<span class="st">"obs"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>                  <span class="st">"Number of observations:"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>                  <span class="at">min =</span> <span class="dv">0</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>                  <span class="at">max =</span> <span class="dv">1000</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>                  <span class="at">value =</span> <span class="dv">500</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    ),</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    <span class="co"># Show a plot of the generated distribution</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"distPlot"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>    )</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>  )</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>)</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="co"># Server logic</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>  output<span class="sc">$</span>distPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>    <span class="fu">hist</span>(<span class="fu">rnorm</span>(input<span class="sc">$</span>obs))</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>  })</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>}</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="co"># Complete app with UI and server components</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a><span class="co"># UI demonstrating column layouts</span></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Hello Shiny!"</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a>    <span class="fu">column</span>(<span class="at">width =</span> <span class="dv">4</span>,</span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a>      <span class="st">"4"</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a>    ),</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>    <span class="fu">column</span>(<span class="at">width =</span> <span class="dv">3</span>, <span class="at">offset =</span> <span class="dv">2</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>      <span class="st">"3 offset 2"</span></span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>    )</span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a>  )</span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a>)</span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, <span class="at">server =</span> <span class="cf">function</span>(input, output) { })</span>
+<span id="cb1-53"><a href="#cb1-53" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

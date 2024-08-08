@@ -1,0 +1,170 @@
+---
+title: "Create a page with a top level navigation bar — navbarPage"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.1</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.1/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Create a page that contains a top level navigation bar that can be used to
+toggle a set of <code><a href="tabPanel.html">tabPanel()</a></code> elements.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">navbarPage</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  title,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  ...,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">id =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">selected =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"static-top"</span>, <span class="st">"fixed-top"</span>, <span class="st">"fixed-bottom"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="at">footer =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="at">inverse =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">collapsible =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">fluid =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">theme =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="at">windowTitle =</span> <span class="cn">NA</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="at">lang =</span> <span class="cn">NULL</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="fu">navbarMenu</span>(title, ..., <span class="at">menuName =</span> title, <span class="at">icon =</span> <span class="cn">NULL</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>title</dt>
+<dd><p>The title to display in the navbar</p></dd>
+
+
+<dt>...</dt>
+<dd><p><code><a href="tabPanel.html">tabPanel()</a></code> elements to include in the page. The
+<code>navbarMenu</code> function also accepts strings, which will be used as menu
+section headers. If the string is a set of dashes like <code>"----"</code> a
+horizontal separator will be displayed in the menu.</p></dd>
+
+
+<dt>id</dt>
+<dd><p>If provided, you can use <code>input$</code><em><code>id</code></em> in your
+server logic to determine which of the current tabs is active. The value
+will correspond to the <code>value</code> argument that is passed to
+<code><a href="tabPanel.html">tabPanel()</a></code>.</p></dd>
+
+
+<dt>selected</dt>
+<dd><p>The <code>value</code> (or, if none was supplied, the <code>title</code>)
+of the tab that should be selected by default. If <code>NULL</code>, the first
+tab will be selected.</p></dd>
+
+
+<dt>position</dt>
+<dd><p>Determines whether the navbar should be displayed at the top
+of the page with normal scrolling behavior (<code>"static-top"</code>), pinned at
+the top (<code>"fixed-top"</code>), or pinned at the bottom
+(<code>"fixed-bottom"</code>). Note that using <code>"fixed-top"</code> or
+<code>"fixed-bottom"</code> will cause the navbar to overlay your body content,
+unless you add padding, e.g.: <code>tags$style(type="text/css", "body
+  {padding-top: 70px;}")</code></p></dd>
+
+
+<dt>header</dt>
+<dd><p>Tag or list of tags to display as a common header above all
+tabPanels.</p></dd>
+
+
+<dt>footer</dt>
+<dd><p>Tag or list of tags to display as a common footer below all
+tabPanels</p></dd>
+
+
+<dt>inverse</dt>
+<dd><p><code>TRUE</code> to use a dark background and light text for the
+navigation bar</p></dd>
+
+
+<dt>collapsible</dt>
+<dd><p><code>TRUE</code> to automatically collapse the navigation
+elements into a menu when the width of the browser is less than 940 pixels
+(useful for viewing on smaller touchscreen device)</p></dd>
+
+
+<dt>fluid</dt>
+<dd><p><code>TRUE</code> to use a fluid layout. <code>FALSE</code> to use a fixed
+layout.</p></dd>
+
+
+<dt>theme</dt>
+<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (the default), which implies a "stock" build of Bootstrap 3.</p></li>
+<li><p>A <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html" class="external-link">bslib::bs_theme()</a></code> object. This can be used to replace a stock
+build of Bootstrap 3 with a customized version of Bootstrap 3 or higher.</p></li>
+<li><p>A character string pointing to an alternative Bootstrap stylesheet
+(normally a css file within the www directory, e.g. <code>www/bootstrap.css</code>).</p></li>
+</ul></dd>
+
+
+<dt>windowTitle</dt>
+<dd><p>the browser window title (as a character string). The
+default value, <code>NA</code>, means to use any character strings that appear in
+<code>title</code> (if none are found, the host URL of the page is displayed by
+default).</p></dd>
+
+
+<dt>lang</dt>
+<dd><p>ISO 639-1 language code for the HTML page, such as "en" or "ko".
+This will be used as the lang in the <code>&lt;html&gt;</code> tag, as in <code>&lt;html lang="en"&gt;</code>.
+The default (NULL) results in an empty string.</p></dd>
+
+
+<dt>menuName</dt>
+<dd><p>A name that identifies this <code>navbarMenu</code>. This
+is needed if you want to insert/remove or show/hide an entire
+<code>navbarMenu</code>.</p></dd>
+
+
+<dt>icon</dt>
+<dd><p>Optional icon to appear on a <code>navbarMenu</code> tab.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A UI defintion that can be passed to the <a href="shinyUI.html">shinyUI</a> function.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The <code>navbarMenu</code> function can be used to create an embedded
+menu within the navbar that in turns includes additional tabPanels (see
+example below).</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="tabPanel.html">tabPanel()</a></code>, <code><a href="tabsetPanel.html">tabsetPanel()</a></code>,
+<code><a href="updateTabsetPanel.html">updateNavbarPage()</a></code>, <code><a href="insertTab.html">insertTab()</a></code>,
+<code><a href="showTab.html">showTab()</a></code></p>
+<p>Other layout functions: 
+<code><a href="fillPage.html">fillPage</a>()</code>,
+<code><a href="fixedPage.html">fixedPage</a>()</code>,
+<code><a href="flowLayout.html">flowLayout</a>()</code>,
+<code><a href="fluidPage.html">fluidPage</a>()</code>,
+<code><a href="sidebarLayout.html">sidebarLayout</a>()</code>,
+<code><a href="splitLayout.html">splitLayout</a>()</code>,
+<code><a href="verticalLayout.html">verticalLayout</a>()</code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">navbarPage</span>(<span class="st">"App Title"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"Plot"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"Summary"</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"Table"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">navbarPage</span>(<span class="st">"App Title"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"Plot"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="fu">navbarMenu</span>(<span class="st">"More"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary"</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="st">"----"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    <span class="st">"Section header"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Table"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  )</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>)</span></code></pre></div>
+  </div>
+</div>
+```

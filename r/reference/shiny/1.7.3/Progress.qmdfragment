@@ -1,0 +1,233 @@
+---
+title: "Reporting progress (object-oriented API) — Progress"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.3</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.3/R/progress.R" class="external-link"><code>R/progress.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Reporting progress (object-oriented API)</p>
+<p>Reporting progress (object-oriented API)</p></div>
+
+
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Reports progress to the user during long-running operations.</p>
+<p>This package exposes two distinct programming APIs for working with
+progress. <code><a href="withProgress.html">withProgress()</a></code> and <code><a href="withProgress.html">setProgress()</a></code>
+together provide a simple function-based interface, while the
+<code>Progress</code> reference class provides an object-oriented API.</p>
+<p>Instantiating a <code>Progress</code> object causes a progress panel to be
+created, and it will be displayed the first time the <code>set</code>
+method is called. Calling <code>close</code> will cause the progress panel
+to be removed.</p>
+<p>As of version 0.14, the progress indicators use Shiny's new notification API.
+If you want to use the old styling (for example, you may have used customized
+CSS), you can use <code>style="old"</code> each time you call
+<code>Progress$new()</code>. If you don't want to set the style each time
+<code>Progress$new</code> is called, you can instead call
+<code><a href="shinyOptions.html">shinyOptions(progress.style="old")</a></code> just once, inside the server
+function.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="withProgress.html">withProgress()</a></code></p></div>
+  </div>
+  <div data-section="methods">
+    <h3 id="methods">Methods</h3>
+    
+<div class="section">
+<h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
+
+<ul><li><p><a href="#method-Progress-new"><code>Progress$new()</code></a></p></li>
+<li><p><a href="#method-Progress-set"><code>Progress$set()</code></a></p></li>
+<li><p><a href="#method-Progress-inc"><code>Progress$inc()</code></a></p></li>
+<li><p><a href="#method-Progress-getMin"><code>Progress$getMin()</code></a></p></li>
+<li><p><a href="#method-Progress-getMax"><code>Progress$getMax()</code></a></p></li>
+<li><p><a href="#method-Progress-getValue"><code>Progress$getValue()</code></a></p></li>
+<li><p><a href="#method-Progress-close"><code>Progress$close()</code></a></p></li>
+<li><p><a href="#method-Progress-clone"><code>Progress$clone()</code></a></p></li>
+</ul></div><p></p><hr><a id="method-Progress-new"></a><div class="section">
+<h3 id="method-new-">Method <code><a href="https://rdrr.io/r/methods/new.html" class="external-link">new()</a></code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+<p>Creates a new progress panel (but does not display it).</p><div class="section">
+<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Progress.html">Progress</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  session <span class="op">=</span> <span class="fu"><a href="../reference/domains.html">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  min <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  max <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  style <span class="op">=</span> <span class="fu"><a href="../reference/shinyOptions.html">getShinyOption</a></span><span class="op">(</span><span class="st">"progress.style"</span>, default <span class="op">=</span> <span class="st">"notification"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>session</code></dt>
+<dd><p>The Shiny session object, as provided by <code>shinyServer</code> to
+the server function.</p></dd>
+
+
+<dt><code>min</code></dt>
+<dd><p>The value that represents the starting point of the progress
+bar. Must be less than <code>max</code>.</p></dd>
+
+
+<dt><code>max</code></dt>
+<dd><p>The value that represents the end of the progress bar. Must be
+greater than <code>min</code>.</p></dd>
+
+
+<dt><code>style</code></dt>
+<dd><p>Progress display style. If <code>"notification"</code> (the default),
+the progress indicator will show using Shiny's notification API. If
+<code>"old"</code>, use the same HTML and CSS used in Shiny 0.13.2 and below (this
+is for backward-compatibility).</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-Progress-set"></a><div class="section">
+<h3 id="method-set-">Method <code>set()</code><a class="anchor" aria-label="anchor" href="#method-set-"></a></h3>
+<p>Updates the progress panel. When called the first time, the
+progress panel is displayed.</p><div class="section">
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Progress</span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>value <span class="op">=</span> <span class="cn">NULL</span>, message <span class="op">=</span> <span class="cn">NULL</span>, detail <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>value</code></dt>
+<dd><p>Single-element numeric vector; the value at which to set the
+progress bar, relative to <code>min</code> and <code>max</code>. <code>NULL</code> hides the progress
+bar, if it is currently visible.</p></dd>
+
+
+<dt><code>message</code></dt>
+<dd><p>A single-element character vector; the message to be
+displayed to the user, or <code>NULL</code> to hide the current message (if any).</p></dd>
+
+
+<dt><code>detail</code></dt>
+<dd><p>A single-element character vector; the detail message to be
+displayed to the user, or <code>NULL</code> to hide the current detail message (if
+any). The detail message will be shown with a de-emphasized appearance
+relative to <code>message</code>.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-Progress-inc"></a><div class="section">
+<h3 id="method-inc-">Method <code>inc()</code><a class="anchor" aria-label="anchor" href="#method-inc-"></a></h3>
+<p>Like <code>set</code>, this updates the progress panel. The difference
+is that <code>inc</code> increases the progress bar by <code>amount</code>, instead of
+setting it to a specific value.</p><div class="section">
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Progress</span><span class="op">$</span><span class="fu">inc</span><span class="op">(</span>amount <span class="op">=</span> <span class="fl">0.1</span>, message <span class="op">=</span> <span class="cn">NULL</span>, detail <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>amount</code></dt>
+<dd><p>For the <code>inc()</code> method, a numeric value to increment the
+progress bar.</p></dd>
+
+
+<dt><code>message</code></dt>
+<dd><p>A single-element character vector; the message to be
+displayed to the user, or <code>NULL</code> to hide the current message (if any).</p></dd>
+
+
+<dt><code>detail</code></dt>
+<dd><p>A single-element character vector; the detail message to be
+displayed to the user, or <code>NULL</code> to hide the current detail message (if
+any). The detail message will be shown with a de-emphasized appearance
+relative to <code>message</code>.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-Progress-getMin"></a><div class="section">
+<h3 id="method-getmin-">Method <code>getMin()</code><a class="anchor" aria-label="anchor" href="#method-getmin-"></a></h3>
+<p>Returns the minimum value.</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Progress</span><span class="op">$</span><span class="fu">getMin</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-Progress-getMax"></a><div class="section">
+<h3 id="method-getmax-">Method <code>getMax()</code><a class="anchor" aria-label="anchor" href="#method-getmax-"></a></h3>
+<p>Returns the maximum value.</p><div class="section">
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Progress</span><span class="op">$</span><span class="fu">getMax</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-Progress-getValue"></a><div class="section">
+<h3 id="method-getvalue-">Method <code>getValue()</code><a class="anchor" aria-label="anchor" href="#method-getvalue-"></a></h3>
+<p>Returns the current value.</p><div class="section">
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Progress</span><span class="op">$</span><span class="fu">getValue</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-Progress-close"></a><div class="section">
+<h3 id="method-close-">Method <code><a href="https://rdrr.io/r/base/connections.html" class="external-link">close()</a></code><a class="anchor" aria-label="anchor" href="#method-close-"></a></h3>
+<p>Removes the progress panel. Future calls to <code>set</code> and
+<code>close</code> will be ignored.</p><div class="section">
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Progress</span><span class="op">$</span><span class="fu">close</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-Progress-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Progress</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>deep</code></dt>
+<dd><p>Whether to make a deep clone.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div>
+
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    progress <span class="ot">&lt;-</span> Progress<span class="sc">$</span><span class="fu">new</span>(session, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="dv">15</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="fu">on.exit</span>(progress<span class="sc">$</span><span class="fu">close</span>())</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    progress<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="st">'Calculation in progress'</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>                 <span class="at">detail =</span> <span class="st">'This may take a while...'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>) {</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>      progress<span class="sc">$</span><span class="fu">set</span>(<span class="at">value =</span> i)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>      <span class="fu">Sys.sleep</span>(<span class="fl">0.5</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    }</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    <span class="fu">plot</span>(cars)</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  })</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

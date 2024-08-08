@@ -1,0 +1,58 @@
+---
+title: "Evaluate an expression using <code>tags</code> — withTags"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>withTags</span>(<span class='no'>code</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>code</p></th>
+    <td><p>A set of tags.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>This function makes it simpler to write HTML-generating code. Instead of
+needing to specify <code>tags</code> each time a tag function is used, as in
+<code>tags$div()</code> and <code>tags$p()</code>, code inside <code>withTags</code> is
+evaluated with <code>tags</code> searched first, so you can simply use
+<code><a href='builder.html'>div()</a></code> and <code><a href='builder.html'>p()</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>If your code uses an object which happens to have the same name as an
+HTML tag function, such as <code><a href='https://rdrr.io/r/base/source.html'>source()</a></code> or <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code>, it will call
+the tag function. To call the intended (non-tags function), specify the
+namespace, as in <code><a href='https://rdrr.io/r/base/source.html'>base::source()</a></code> or <code><a href='https://rdrr.io/r/base/summary.html'>base::summary()</a></code>.</p>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'># Using tags$ each time</span>
+<span class='no'>tags</span>$<span class='fu'><a href='builder.html'>div</a></span>(<span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"myclass"</span>,
+  <span class='no'>tags</span>$<span class='fu'><a href='builder.html'>h3</a></span>(<span class='st'>"header"</span>),
+  <span class='no'>tags</span>$<span class='fu'><a href='builder.html'>p</a></span>(<span class='st'>"text"</span>)
+)
+
+<span class='co'># Equivalent to above, but using withTags</span>
+<span class='fu'>withTags</span>(
+  <span class='fu'><a href='builder.html'>div</a></span>(<span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"myclass"</span>,
+    <span class='fu'><a href='builder.html'>h3</a></span>(<span class='st'>"header"</span>),
+    <span class='fu'><a href='builder.html'>p</a></span>(<span class='st'>"text"</span>)
+  )
+)</pre>
+</div>
+
+
+```

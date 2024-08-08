@@ -1,0 +1,30 @@
+---
+layout: reference
+title: "Collect information about the Shiny Server environment — serverInfo"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Collect information about the Shiny Server environment</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This function returns the information about the current Shiny Server, such as
+its version, and whether it is the open source edition or professional
+edition. If the app is not served through the Shiny Server, this function
+just returns <code>list(shinyServer = FALSE)</code>.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">serverInfo</span>()</span></code></pre></div></div>
+
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A list of the Shiny Server information.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>This function will only return meaningful data when using Shiny Server
+version 1.2.2 or later.</p>
+  </div>
+
+</div>

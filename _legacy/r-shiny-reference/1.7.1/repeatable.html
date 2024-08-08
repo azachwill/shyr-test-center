@@ -1,0 +1,49 @@
+---
+layout: reference
+title: "Make a random number generator repeatable — repeatable"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Make a random number generator repeatable</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.1/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Given a function that generates random data, returns a wrapped version of
+that function that always uses the same seed when called. The seed to use can
+be passed in explicitly if desired; otherwise, a random number is used.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">repeatable</span>(rngfunc, <span class="at">seed =</span> stats<span class="sc">::</span><span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, .Machine<span class="sc">$</span>integer.max))</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>rngfunc</dt>
+<dd><p>The function that is affected by the R session's seed.</p></dd>
+
+
+<dt>seed</dt>
+<dd><p>The seed to set every time the resulting function is called.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A repeatable version of the function that was passed in.</p>
+  </div>
+  <div data-section="note">
+    <h3 id="note">Note</h3>
+    <p>When called, the returned function attempts to preserve the R session's
+current seed by snapshotting and restoring
+<code><a href="https://rdrr.io/r/base/Random.html" class="external-link">base::.Random.seed()</a></code>.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rnormA <span class="ot">&lt;-</span> <span class="fu">repeatable</span>(rnorm)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>rnormB <span class="ot">&lt;-</span> <span class="fu">repeatable</span>(rnorm)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnormA</span>(<span class="dv">3</span>)  <span class="co"># [1]  1.8285879 -0.7468041 -0.4639111</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rnormA</span>(<span class="dv">3</span>)  <span class="co"># [1]  1.8285879 -0.7468041 -0.4639111</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rnormA</span>(<span class="dv">5</span>)  <span class="co"># [1]  1.8285879 -0.7468041 -0.4639111 -1.6510126 -1.4686924</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rnormB</span>(<span class="dv">5</span>)  <span class="co"># [1] -0.7946034  0.2568374 -0.6567597  1.2451387 -0.8375699</span></span></code></pre></div>
+  </div>
+</div>

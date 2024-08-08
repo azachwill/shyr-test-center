@@ -1,0 +1,21 @@
+/**************************************************************************************************
+ * Utility Classes
+ * These are Utility classes
+**************************************************************************************************/
+.fullwidth {
+  width: 100%;
+}
+
+.punchup {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.constrain-image-width img {
+  max-width: 100%;
+}
+
+.img-thumbnail {
+  border-radius: 0;
+}

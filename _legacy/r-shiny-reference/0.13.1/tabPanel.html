@@ -1,0 +1,96 @@
+---
+layout: reference
+title: "tabPanel"
+categories: reference
+---
+<h1>Create a tab panel</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="symbol">title</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">value</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">title</span><span class="keyword">,</span> <span class="argument">icon</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>title</th>
+    <td>Display title for tab</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>UI elements to include within the tab</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>The value that should be sent when <code>tabsetPanel</code> reports
+that this tab is selected. If omitted and <code>tabsetPanel</code> has an
+<code>id</code>, then the title will be used..</td>
+  </tr>
+  <tr>
+    <th>icon</th>
+    <td>Optional icon to appear on the tab. This attribute is only
+valid when using a <code>tabPanel</code> within a <code><a href='navbarPage.html'>navbarPage</a></code>.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A tab that can be passed to <code><a href='tabsetPanel.html'>tabsetPanel</a></code>
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a tab panel that can be included within a <code><a href='tabsetPanel.html'>tabsetPanel</a></code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># Show a tabset that includes a plot, summary, and</span>
+<span class="comment"># table view of the generated distribution</span>
+<span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='tabsetPanel.html'>tabsetPanel</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Plot"</span><span class="keyword">,</span> <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Summary"</span><span class="keyword">,</span> <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"summary"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Table"</span><span class="keyword">,</span> <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">"table"</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;col-sm-8&quot;&gt;
+  &lt;div class=&quot;tabbable tabs-above&quot;&gt;
+    &lt;ul class=&quot;nav nav-tabs&quot;&gt;
+      &lt;li class=&quot;active&quot;&gt;
+        &lt;a href=&quot;#tab-5289-1&quot; data-toggle=&quot;tab&quot; data-value=&quot;Plot&quot;&gt;Plot&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#tab-5289-2&quot; data-toggle=&quot;tab&quot; data-value=&quot;Summary&quot;&gt;Summary&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#tab-5289-3&quot; data-toggle=&quot;tab&quot; data-value=&quot;Table&quot;&gt;Table&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div class=&quot;tab-content&quot;&gt;
+      &lt;div class=&quot;tab-pane active&quot; data-value=&quot;Plot&quot; id=&quot;tab-5289-1&quot;&gt;
+        &lt;div id=&quot;plot&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;tab-pane&quot; data-value=&quot;Summary&quot; id=&quot;tab-5289-2&quot;&gt;
+        &lt;pre id=&quot;summary&quot; class=&quot;shiny-text-output&quot;&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;tab-pane&quot; data-value=&quot;Table&quot; id=&quot;tab-5289-3&quot;&gt;
+        &lt;div id=&quot;table&quot; class=&quot;shiny-html-output&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>tabPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='tabsetPanel.html'>tabsetPanel</a></code></p>
+</div>

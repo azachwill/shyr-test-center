@@ -1,0 +1,39 @@
+---
+title: "Print message for deprecated functions in Shiny — shinyDeprecated"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.4</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/deprecated.R" class="external-link"><code>R/deprecated.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>To disable these messages, use <code>options(shiny.deprecation.messages=FALSE)</code>.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">shinyDeprecated</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  version,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  what,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">with =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">details =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"deprecated"</span>, <span class="st">"superseded"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>version</dt>
+<dd><p>Shiny version when the function was deprecated</p></dd>
+
+
+<dt>what</dt>
+<dd><p>Function with possible arguments</p></dd>
+
+
+<dt>with</dt>
+<dd><p>Possible function with arguments that should be used instead</p></dd>
+
+
+<dt>details</dt>
+<dd><p>Additional information to be added after a new line to the displayed message</p></dd>
+
+</dl></div>
+
+</div>
+```

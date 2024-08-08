@@ -1,0 +1,317 @@
+---
+layout: reference
+title: "imageOutput"
+categories: reference
+---
+<h1>Create an plot or image output element</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='plotOutput.html'>imageOutput</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"100%"</span><span class="keyword">,</span> <span class="argument">height</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"400px"</span><span class="keyword">,</span> <span class="argument">click</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">dblclick</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">hover</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">hoverDelay</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">hoverDelayType</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">brush</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">clickId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">hoverId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">inline</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"100%"</span><span class="keyword">,</span> <span class="argument">height</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"400px"</span><span class="keyword">,</span> <span class="argument">click</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">dblclick</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">hover</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">hoverDelay</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">hoverDelayType</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">brush</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">clickId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">hoverId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">inline</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the plot/image from.</td>
+  </tr>
+  <tr>
+    <th>width,height</th>
+    <td>Image width/height. Must be a valid CSS unit (like
+<code>&quot;100%&quot;</code>, <code>&quot;400px&quot;</code>, <code>&quot;auto&quot;</code>) or a number, which will be
+coerced to a string and have <code>&quot;px&quot;</code> appended. These two arguments are
+ignored when <code>inline = TRUE</code>, in which case the width/height of a plot
+must be specified in <code>renderPlot()</code>. Note that, for height, using
+<code>&quot;auto&quot;</code> or <code>&quot;100%&quot;</code> generally will not work as expected,
+because of how height is computed with HTML/CSS.</td>
+  </tr>
+  <tr>
+    <th>click</th>
+    <td>This can be <code>NULL</code> (the default), a string, or an object
+created by the <code><a href='clickOpts.html'>clickOpts</a></code> function. If you use a value like
+<code>&quot;plot_click&quot;</code> (or equivalently, <code>clickOpts(id=&quot;plot_click&quot;)</code>),
+the plot will send coordinates to the server whenever it is clicked, and
+the value will be accessible via <code>input$plot_click</code>. The value will
+be a named list  with <code>x</code> and <code>y</code> elements indicating the mouse
+position.</td>
+  </tr>
+  <tr>
+    <th>dblclick</th>
+    <td>This is just like the <code>click</code> argument, but for
+double-click events.</td>
+  </tr>
+  <tr>
+    <th>hover</th>
+    <td>Similar to the <code>click</code> argument, this can be <code>NULL</code>
+(the default), a string, or an object created by the
+<code><a href='hoverOpts.html'>hoverOpts</a></code> function. If you use a value like
+<code>&quot;plot_hover&quot;</code> (or equivalently, <code>hoverOpts(id=&quot;plot_hover&quot;)</code>),
+the plot will send coordinates to the server pauses on the plot, and the
+value will be accessible via <code>input$plot_hover</code>. The value will be a
+named list with <code>x</code> and <code>y</code> elements indicating the mouse
+position. To control the hover time or hover delay type, you must use
+<code><a href='hoverOpts.html'>hoverOpts</a></code>.</td>
+  </tr>
+  <tr>
+    <th>hoverDelay</th>
+    <td>Deprecated; use <code>hover</code> instead. Also see the
+<code><a href='hoverOpts.html'>hoverOpts</a></code> function.</td>
+  </tr>
+  <tr>
+    <th>hoverDelayType</th>
+    <td>Deprecated; use <code>hover</code> instead. Also see the
+<code><a href='hoverOpts.html'>hoverOpts</a></code> function.</td>
+  </tr>
+  <tr>
+    <th>brush</th>
+    <td>Similar to the <code>click</code> argument, this can be <code>NULL</code>
+(the default), a string, or an object created by the
+<code><a href='brushOpts.html'>brushOpts</a></code> function. If you use a value like
+<code>&quot;plot_brush&quot;</code> (or equivalently, <code>brushOpts(id=&quot;plot_brush&quot;)</code>),
+the plot will allow the user to &quot;brush&quot; in the plotting area, and will send
+information about the brushed area to the server, and the value will be
+accessible via <code>input$plot_brush</code>. Brushing means that the user will
+be able to draw a rectangle in the plotting area and drag it around. The
+value will be a named list with <code>xmin</code>, <code>xmax</code>, <code>ymin</code>, and
+<code>ymax</code> elements indicating the brush area. To control the brush
+behavior, use <code><a href='brushOpts.html'>brushOpts</a></code>.</td>
+  </tr>
+  <tr>
+    <th>clickId</th>
+    <td>Deprecated; use <code>click</code> instead. Also see the
+<code><a href='clickOpts.html'>clickOpts</a></code> function.</td>
+  </tr>
+  <tr>
+    <th>hoverId</th>
+    <td>Deprecated; use <code>hover</code> instead. Also see the
+<code><a href='hoverOpts.html'>hoverOpts</a></code> function.</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>use an inline (<code>span()</code>) or block container (<code>div()</code>)
+for the output</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A plot or image output element that can be included in a panel.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Render a <code><a href='renderPlot.html'>renderPlot</a></code> or <code><a href='renderImage.html'>renderImage</a></code> within an
+application page.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+
+  <p>The arguments <code>clickId</code> and <code>hoverId</code> only work for R base
+  graphics (see the <span class = "pkg"><a href='http://www.rdocumentation.org/packages/graphics/topics/graphics-package'>graphics</a></span> package). They do not work for
+  <span class = "pkg"><a href='http://www.rdocumentation.org/packages/grid/topics/grid-package'>grid</a></span>-based graphics, such as <span class = "pkg">ggplot2</span>,
+  <span class = "pkg">lattice</span>, and so on.</p>
+
+</div>
+
+<div data-section="Interactive plots">
+  <h3 data-swiftype-index="false">Interactive plots</h3>
+
+  <p></p>
+
+  <p>Plots and images in Shiny support mouse-based interaction, via clicking,
+  double-clicking, hovering, and brushing. When these interaction events
+  occur, the mouse coordinates will be sent to the server as <code>input$</code>
+  variables, as specified by <code>click</code>, <code>dblclick</code>, <code>hover</code>, or
+  <code>brush</code>.</p>
+
+  <p>For <code>plotOutput</code>, the coordinates will be sent scaled to the data
+  space, if possible. (At the moment, plots generated by base graphics
+  support this scaling, although plots generated by grid or ggplot2 do not.)
+  If scaling is not possible, the raw pixel coordinates will be sent. For
+  <code>imageOutput</code>, the coordinates will be sent in raw pixel coordinates.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># Only run these examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="comment"># A basic shiny app with a plotOutput</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+  <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='sidebarLayout.html'>sidebarLayout</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+        <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"newplot"</span><span class="keyword">,</span> <span class="string">"New plot"</span><span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+        <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">newplot</span>
+      <span class="comment"># Add a little noise to the cars data</span>
+      <span class="symbol">cars2</span> <span class="assignement">&lt;-</span> <span class="symbol">cars</span> <span class="keyword">+</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span><span class="keyword">(</span><span class="symbol">cars</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">cars2</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+<span class="keyword">)</span>
+
+
+<span class="comment"># A demonstration of clicking, hovering, and brushing</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+  <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='bootstrapPage.html'>basicPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='fluidPage.html'>fluidRow</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">,</span> <span class="argument">height</span><span class="argument">=</span><span class="number">300</span><span class="keyword">,</span>
+          <span class="argument">click</span> <span class="argument">=</span> <span class="string">"plot_click"</span><span class="keyword">,</span>  <span class="comment"># Equiv, to click=clickOpts(id="plot_click")</span>
+          <span class="argument">hover</span> <span class="argument">=</span> <span class="functioncall"><a href='hoverOpts.html'>hoverOpts</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"plot_hover"</span><span class="keyword">,</span> <span class="argument">delayType</span> <span class="argument">=</span> <span class="string">"throttle"</span><span class="keyword">)</span><span class="keyword">,</span>
+          <span class="argument">brush</span> <span class="argument">=</span> <span class="functioncall"><a href='brushOpts.html'>brushOpts</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"plot_brush"</span><span class="keyword">)</span>
+        <span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='builder.html'>h4</a></span><span class="keyword">(</span><span class="string">"Clicked points"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">"plot_clickedpoints"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='builder.html'>h4</a></span><span class="keyword">(</span><span class="string">"Brushed points"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">"plot_brushedpoints"</span><span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"plot_clickinfo"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"plot_hoverinfo"</span><span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='wellPanel.html'>wellPanel</a></span><span class="keyword">(</span><span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"newplot"</span><span class="keyword">,</span> <span class="string">"New plot"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"plot_brushinfo"</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">data</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactive.html'>reactive</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">newplot</span>
+      <span class="comment"># Add a little noise to the cars data so the points move</span>
+      <span class="symbol">cars</span> <span class="keyword">+</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span><span class="keyword">(</span><span class="symbol">cars</span><span class="keyword">)</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="symbol">d</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/data'>data</a></span><span class="keyword">(</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">d</span><span class="keyword">$</span><span class="symbol">speed</span><span class="keyword">,</span> <span class="symbol">d</span><span class="keyword">$</span><span class="symbol">dist</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot_clickinfo</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="string">"Click:\n"</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/str'>str</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">plot_click</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot_hoverinfo</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="string">"Hover (throttled):\n"</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/str'>str</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">plot_hover</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot_brushinfo</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="string">"Brush (debounced):\n"</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/str'>str</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">plot_brush</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot_clickedpoints</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderTable.html'>renderTable</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="comment"># For base graphics, we need to specify columns, though for ggplot2,</span>
+      <span class="comment"># it's usually not necessary.</span>
+      <span class="symbol">res</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='nearPoints.html'>nearPoints</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/data'>data</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">plot_click</span><span class="keyword">,</span> <span class="string">"speed"</span><span class="keyword">,</span> <span class="string">"dist"</span><span class="keyword">)</span>
+      <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span><span class="keyword">(</span><span class="symbol">res</span><span class="keyword">)</span> == <span class="number">0</span><span class="keyword">)</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/function'>return</a></span><span class="keyword">(</span><span class="keyword">)</span>
+      <span class="symbol">res</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot_brushedpoints</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderTable.html'>renderTable</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="symbol">res</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='brushedPoints.html'>brushedPoints</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/data'>data</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">plot_brush</span><span class="keyword">,</span> <span class="string">"speed"</span><span class="keyword">,</span> <span class="string">"dist"</span><span class="keyword">)</span>
+      <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span><span class="keyword">(</span><span class="symbol">res</span><span class="keyword">)</span> == <span class="number">0</span><span class="keyword">)</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/function'>return</a></span><span class="keyword">(</span><span class="keyword">)</span>
+      <span class="symbol">res</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+<span class="keyword">)</span>
+
+
+<span class="comment"># Demo of clicking, hovering, brushing with imageOutput</span>
+<span class="comment"># Note that coordinates are in pixels</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span>
+  <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='bootstrapPage.html'>basicPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='fluidPage.html'>fluidRow</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='plotOutput.html'>imageOutput</a></span><span class="keyword">(</span><span class="string">"image"</span><span class="keyword">,</span> <span class="argument">height</span><span class="argument">=</span><span class="number">300</span><span class="keyword">,</span>
+          <span class="argument">click</span> <span class="argument">=</span> <span class="string">"image_click"</span><span class="keyword">,</span>
+          <span class="argument">hover</span> <span class="argument">=</span> <span class="functioncall"><a href='hoverOpts.html'>hoverOpts</a></span><span class="keyword">(</span>
+            <span class="argument">id</span> <span class="argument">=</span> <span class="string">"image_hover"</span><span class="keyword">,</span>
+            <span class="argument">delay</span> <span class="argument">=</span> <span class="number">500</span><span class="keyword">,</span>
+            <span class="argument">delayType</span> <span class="argument">=</span> <span class="string">"throttle"</span>
+          <span class="keyword">)</span><span class="keyword">,</span>
+          <span class="argument">brush</span> <span class="argument">=</span> <span class="functioncall"><a href='brushOpts.html'>brushOpts</a></span><span class="keyword">(</span><span class="argument">id</span> <span class="argument">=</span> <span class="string">"image_brush"</span><span class="keyword">)</span>
+        <span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"image_clickinfo"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"image_hoverinfo"</span><span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='column.html'>column</a></span><span class="keyword">(</span><span class="argument">width</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='wellPanel.html'>wellPanel</a></span><span class="keyword">(</span><span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"newimage"</span><span class="keyword">,</span> <span class="string">"New image"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"image_brushinfo"</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">image</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderImage.html'>renderImage</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">newimage</span>
+
+      <span class="comment"># Get width and height of image output</span>
+      <span class="symbol">width</span>  <span class="assignement">&lt;-</span> <span class="symbol">session</span><span class="keyword">$</span><span class="symbol">clientData</span><span class="keyword">$</span><span class="symbol">output_image_width</span>
+      <span class="symbol">height</span> <span class="assignement">&lt;-</span> <span class="symbol">session</span><span class="keyword">$</span><span class="symbol">clientData</span><span class="keyword">$</span><span class="symbol">output_image_height</span>
+
+      <span class="comment"># Write to a temporary PNG file</span>
+      <span class="symbol">outfile</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span><span class="keyword">(</span><span class="argument">fileext</span> <span class="argument">=</span> <span class="string">".png"</span><span class="keyword">)</span>
+
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a></span><span class="keyword">(</span><span class="symbol">outfile</span><span class="keyword">,</span> <span class="argument">width</span><span class="argument">=</span><span class="symbol">width</span><span class="keyword">,</span> <span class="argument">height</span><span class="argument">=</span><span class="symbol">height</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">200</span><span class="keyword">)</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">200</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/grDevices/topics/dev'>dev.off</a></span><span class="keyword">(</span><span class="keyword">)</span>
+
+      <span class="comment"># Return a list containing information about the image</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span>
+        <span class="argument">src</span> <span class="argument">=</span> <span class="symbol">outfile</span><span class="keyword">,</span>
+        <span class="argument">contentType</span> <span class="argument">=</span> <span class="string">"image/png"</span><span class="keyword">,</span>
+        <span class="argument">width</span> <span class="argument">=</span> <span class="symbol">width</span><span class="keyword">,</span>
+        <span class="argument">height</span> <span class="argument">=</span> <span class="symbol">height</span><span class="keyword">,</span>
+        <span class="argument">alt</span> <span class="argument">=</span> <span class="string">"This is alternate text"</span>
+      <span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">image_clickinfo</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="string">"Click:\n"</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/str'>str</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">image_click</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">image_hoverinfo</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="string">"Hover (throttled):\n"</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/str'>str</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">image_hover</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">image_brushinfo</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPrint.html'>renderPrint</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="string">"Brush (debounced):\n"</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/str'>str</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">image_brush</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+<span class="keyword">)</span>
+
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>imageOutput</li><li>plotOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p>For the corresponding server-side functions, see
+  <code><a href='renderPlot.html'>renderPlot</a></code> and  <code><a href='renderImage.html'>renderImage</a></code>.</p>
+</div>

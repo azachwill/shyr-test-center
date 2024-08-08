@@ -1,0 +1,18 @@
+---
+# This file only builds the main CSS file from the partials in _sass
+# No styles should ever live in this file
+---
+
+@import "base";
+@import "syntax_colors";
+@import "utils";
+@import "rstudio_header";
+@import "content_area";
+@import "rstudio_footer";
+@import "pagination";
+@import "homepage";
+@import "tutorials";
+@import "gallery";
+@import "app-stories";
+@import "article";
+@import "blog";

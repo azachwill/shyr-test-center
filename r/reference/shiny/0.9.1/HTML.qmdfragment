@@ -1,0 +1,54 @@
+---
+title: "HTML"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>HTML(text, ...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>text</th>
+    <td>The text value to mark with HTML</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Any additional values to be converted to
+  character and concatenated together</td>
+  </tr>
+</table>
+
+<div data-section="Mark Characters as HTML">
+  <h3 data-swiftype-index="false">Mark Characters as HTML</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>The same value, but marked as HTML.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Marks the given text as HTML, which means the <a href='tag.html'>tag</a> functions will know
+not to perform HTML escaping on it.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>el &lt;- div(HTML(&quot;I like &lt;u&gt;turtles&lt;/u&gt;&quot;))
+cat(as.character(el))
+</div>
+<div class='output'>&lt;div&gt;I like &lt;u&gt;turtles&lt;/u&gt;&lt;/div&gt;</div></pre>
+<!-- <ul>
+  <li>HTML</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

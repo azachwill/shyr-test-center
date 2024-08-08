@@ -1,0 +1,20 @@
+---
+title: Upgrade notes for Shiny 1.7.4
+---
+
+## Full changelog
+
+### Breaking changes
+
+- Closed [#3719](https://github.com/rstudio/shiny/issues/3719): Output container sizes, which are available via [`session$clientData` and `getCurrentOutputInfo()`](https://shiny.posit.co/articles/client-data.html), no longer round to the nearest pixel (i.e., they are now more exact, possibly fractional values). ([#3720](https://github.com/rstudio/shiny/issues/3720))
+
+- Closed [#3704](https://github.com/rstudio/shiny/issues/3704), [#3735](https://github.com/rstudio/shiny/issues/3735), and [#3740](https://github.com/rstudio/shiny/issues/3740): [`renderPlot()`](./renderPlot.html) no longer generates an error (or segfault) when it executes before the output is visible. Instead, it'll now use the graphics device's default size for it's initial size. Relatedly, [`plotPNG()`](./plotPNG.html) now ignores `NULL` values for `width`/`height` (and uses the device's default `width`/`height` instead). ([#3739](https://github.com/rstudio/shiny/issues/3739))
+
+### New features and improvements
+
+- [`plotOutput()`](./plotOutput.html), [`imageOutput()`](./plotOutput.html), and [`uiOutput()`](./htmlOutput.html) gain a `fill` argument. If `TRUE` (the default for [`plotOutput()`](./plotOutput.html)), the output container is allowed to grow/shrink to fit a fill container (created via [`htmltools::bindFillRole()`](https://rstudio.github.io/htmltools/reference/bindFillRole.html)) with an opinionated height. This means [`plotOutput()`](./plotOutput.html) will grow/shrink by default [inside of `bslib::card_body_fill()`](https://rstudio.github.io/bslib/articles/cards.html#responsive-sizing), but [`imageOutput()`](./plotOutput.html) and [`uiOutput()`](./htmlOutput.html) will have to opt-in to similar behavior with `fill = TRUE`. ([#3715](https://github.com/rstudio/shiny/issues/3715))
+
+- Closed [#3687](https://github.com/rstudio/shiny/issues/3687): Updated jQuery-UI to v1.13.2. ([#3697](https://github.com/rstudio/shiny/issues/3697))
+
+- Internal: Added clearer and strict TypeScript type definitions ([#3644](https://github.com/rstudio/shiny/issues/3644))
+

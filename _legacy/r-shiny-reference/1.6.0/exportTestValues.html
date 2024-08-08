@@ -1,0 +1,98 @@
+---
+layout: reference
+title: "Register expressions for export in test mode — exportTestValues"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Register expressions for export in test mode</h1>
+  
+
+  <pre class="code"><span class='fu'>exportTestValues</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>quoted_</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>env_</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(),
+  <span class='kw'>session_</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>()
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Named arguments that are quoted or unquoted expressions that will
+be captured and evaluated when snapshot URL is visited.</p></td>
+  </tr>
+  <tr>
+    <th><p>quoted_</p></th>
+    <td><p>Are the expression quoted? Default is <code>FALSE</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>env_</p></th>
+    <td><p>The environment in which the expression should be evaluated.</p></td>
+  </tr>
+  <tr>
+    <th><p>session_</p></th>
+    <td><p>A Shiny session object.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>This function registers expressions that will be evaluated when a test export
+event occurs. These events are triggered by accessing a snapshot URL.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>This function only has an effect if the app is launched in test mode. This is
+done by calling <code><a href='runApp.html'>runApp()</a></code> with <code>test.mode=TRUE</code>, or by setting the
+global option <code>shiny.testmode</code> to <code>TRUE</code>.</p>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>shiny.testmode</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'># This application shows the test snapshot URL; clicking on it will</span>
+<span class='co'># fetch the input, output, and exported values in JSON format.</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+  <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='bootstrapPage.html'>basicPage</a></span>(
+    <span class='fu'><a href='builder.html'>h4</a></span>(<span class='st'>"Snapshot URL: "</span>),
+    <span class='fu'><a href='htmlOutput.html'>uiOutput</a></span>(<span class='st'>"url"</span>),
+    <span class='fu'><a href='builder.html'>h4</a></span>(<span class='st'>"Current values:"</span>),
+    <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"values"</span>),
+    <span class='fu'><a href='actionButton.html'>actionButton</a></span>(<span class='st'>"inc"</span>, <span class='st'>"Increment x"</span>)
+  ),
+
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+    <span class='no'>vals</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactiveValues.html'>reactiveValues</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+    <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactive.html'>reactive</a></span>({ <span class='no'>vals</span>$<span class='no'>x</span> + <span class='fl'>1</span> })
+
+    <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>inc</span>, {
+      <span class='no'>vals</span>$<span class='no'>x</span> <span class='kw'>&lt;&lt;-</span> <span class='no'>vals</span>$<span class='no'>x</span> + <span class='fl'>1</span>
+    })
+
+    <span class='fu'>exportTestValues</span>(
+      <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>vals</span>$<span class='no'>x</span>,
+      <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>y</span>()
+    )
+
+    <span class='no'>output</span>$<span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderUI.html'>renderUI</a></span>({
+      <span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='no'>session</span>$<span class='fu'>getTestSnapshotUrl</span>(<span class='kw'>format</span><span class='kw'>=</span><span class='st'>"json"</span>)
+      <span class='fu'><a href='builder.html'>a</a></span>(<span class='kw'>href</span> <span class='kw'>=</span> <span class='no'>url</span>, <span class='no'>url</span>)
+    })
+
+    <span class='no'>output</span>$<span class='no'>values</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderText</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"vals$x: "</span>, <span class='no'>vals</span>$<span class='no'>x</span>, <span class='st'>"\ny: "</span>, <span class='fu'>y</span>())
+    })
+  }
+)
+}</pre>
+</div>
+
+

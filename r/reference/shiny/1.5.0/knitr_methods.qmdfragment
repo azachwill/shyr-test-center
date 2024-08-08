@@ -1,0 +1,45 @@
+---
+title: "Knitr S3 methods — knitr_methods"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>knit_print.shiny.appobj</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>knit_print.shiny.render.function</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>inline</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>knit_print.reactive</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>inline</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>x</p></th>
+    <td><p>Object to knit_print</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Additional knit_print arguments</p></td>
+  </tr>
+  <tr>
+    <th><p>inline</p></th>
+    <td><p>Whether the object is printed inline.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>These S3 methods are necessary to help Shiny applications and UI chunks embed
+themselves in knitr/rmarkdown documents.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+</div>
+
+
+```

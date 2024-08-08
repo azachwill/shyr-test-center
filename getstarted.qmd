@@ -1,0 +1,48 @@
+---
+pagetitle: "Get Started with Shiny"
+layout: article
+---
+
+
+
+:::{style="border-bottom: 2px solid #007bc2;margin-bottom: 1.5rem;"}
+# Interact. Analyze. Communicate. {.title} 
+:::
+
+#### Take a fresh, interactive approach to telling your data story with Shiny. Let users interact with your data and your analysis. And do it all with R or Python:{style="line-height: 1.5;"}
+
+
+```{=html}
+<div class="grid py-5">
+  <div class="g-col-sm-6 g-col-12 text-center option mb-3">
+    <a href="r/getstarted/" class="text-decoration-none">
+      <div class="block h-100 pt-4 pb-1">
+        <div class="icon-box">
+         <img src="images/r-logo.svg" class="w-100 pb-3">
+        </div>
+        <div class="content text-center">
+          <p class="p-85">Get Started in R</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="g-col-sm-6 g-col-12 text-center option mb-3">
+    <a href="https://shiny.posit.co/py/docs/overview.html" class="text-decoration-none" target>
+      <div class="block h-100 pt-4 pb-1">
+        <div class="icon-box">
+         <img src="images/python-logo.svg" class="w-100 pb-3">
+        </div>
+        <div class="content text-center">
+          <p class="p-85">Get Started in Python</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+```
+
+
+:::{.column-screen .bottom-image .text-center}
+![](images/py-hero-plot.svg){.mb-0}
+:::
+

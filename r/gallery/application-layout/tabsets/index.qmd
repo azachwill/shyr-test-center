@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Tabsets
+date: 2014-07-30
+tags: 
+ - getting started
+appurl: https://gallery.shinyapps.io/006-tabsets
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/006-tabsets
+---

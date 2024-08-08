@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Single-file shiny app
+date: 2014-10-01 
+tags: 
+ - single file
+appurl: https://gallery.shinyapps.io/084-single-file
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/084-single-file
+---

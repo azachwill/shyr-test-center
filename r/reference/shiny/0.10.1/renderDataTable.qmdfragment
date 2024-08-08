@@ -1,0 +1,113 @@
+---
+title: "renderDataTable"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>renderDataTable(expr, options&nbsp;=&nbsp;NULL, searchDelay&nbsp;=&nbsp;500, callback&nbsp;=&nbsp;"function(oTable) {}", env&nbsp;=&nbsp;parent.frame(), quoted&nbsp;=&nbsp;FALSE)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that returns a data frame or a matrix.</td>
+  </tr>
+  <tr>
+    <th>options</th>
+    <td>A list of initialization options to be passed to DataTables,
+or a function to return such a list.</td>
+  </tr>
+  <tr>
+    <th>searchDelay</th>
+    <td>The delay for searching, in milliseconds (to avoid too
+frequent search requests).</td>
+  </tr>
+  <tr>
+    <th>callback</th>
+    <td>A JavaScript function to be applied to the DataTable object.
+This is useful for DataTables plug-ins, which often require the DataTable
+instance to be available (<a href = 'http://datatables.net/extras/'>http://datatables.net/extras/</a>).</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
+is useful if you want to save an expression in a variable.</td>
+  </tr>
+</table>
+
+<div data-section="Table output with the JavaScript library DataTables">
+  <h3 data-swiftype-index="false">Table output with the JavaScript library DataTables</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Makes a reactive version of the given function that returns a data frame (or
+matrix), which will be rendered with the DataTables library. Paging,
+searching, filtering, and sorting can be done on the R side using Shiny as
+the server infrastructure.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>For the <code>options</code> argument, the character elements that have the class
+<code>"AsIs"</code> (usually returned from <code><a href='http://www.inside-r.org/packages/cran/base/docs/AsIs'>I</a>()</code>) will be evaluated in
+JavaScript. This is useful when the type of the option value is not supported
+in JSON, e.g., a JavaScript function, which can be obtained by evaluating a
+character string.</p>
+
+</div>
+
+<div data-section="References">
+  <h3 data-swiftype-index="false">References</h3>
+  
+  <p><a href = 'http://datatables.net'>http://datatables.net</a></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># pass a callback function to DataTables using I()
+renderDataTable(iris,
+  options = list(
+    iDisplayLength = 5,
+    fnInitComplete = I(&quot;function(oSettings, json) {alert(&#39;Done.&#39;);}&quot;)
+  )
+)
+</div>
+<div class='output'>function(shinysession, name, ...) {
+    res &lt;- checkAsIs(if (is.function(options)) options() else options)
+    data &lt;- func()
+    if (length(dim(data)) != 2) return() # expects a rectangular data object
+    action &lt;- shinysession$registerDataObj(name, data, dataTablesJSON)
+    list(
+      colnames = colnames(data), action = action, options = res$options,
+      evalOptions = if (length(res$eval)) I(res$eval), searchDelay = searchDelay,
+      callback = paste(callback, collapse = &#39;\n&#39;)
+    )
+  }
+&lt;environment: 0x57f4f18&gt;
+attr(,&quot;class&quot;)
+[1] &quot;shiny.render.function&quot; &quot;function&quot;             
+attr(,&quot;outputFunc&quot;)
+function (outputId) 
+{
+    attachDependencies(div(id = outputId, class = &quot;shiny-datatable-output&quot;), 
+        dataTableDependency)
+}
+&lt;environment: namespace:shiny&gt;
+</div></pre>
+<!-- <ul>
+  <li>renderDataTable</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

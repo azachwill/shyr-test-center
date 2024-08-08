@@ -1,0 +1,303 @@
+---
+title: "Create an plot or image output element — plotOutput"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>imageOutput</span>(
+  <span class='no'>outputId</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>,
+  <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"400px"</span>,
+  <span class='kw'>click</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dblclick</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>hover</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>brush</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>inline</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
+
+<span class='fu'>plotOutput</span>(
+  <span class='no'>outputId</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>,
+  <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"400px"</span>,
+  <span class='kw'>click</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dblclick</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>hover</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>brush</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>inline</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>outputId</p></th>
+    <td><p>output variable to read the plot/image from.</p></td>
+  </tr>
+  <tr>
+    <th><p>width, height</p></th>
+    <td><p>Image width/height. Must be a valid CSS unit (like
+<code>"100%"</code>, <code>"400px"</code>, <code>"auto"</code>) or a number, which will be
+coerced to a string and have <code>"px"</code> appended. These two arguments are
+ignored when <code>inline = TRUE</code>, in which case the width/height of a plot
+must be specified in <code><a href='renderPlot.html'>renderPlot()</a></code>. Note that, for height, using
+<code>"auto"</code> or <code>"100%"</code> generally will not work as expected,
+because of how height is computed with HTML/CSS.</p></td>
+  </tr>
+  <tr>
+    <th><p>click</p></th>
+    <td><p>This can be <code>NULL</code> (the default), a string, or an object
+created by the <code><a href='clickOpts.html'>clickOpts()</a></code> function. If you use a value like
+<code>"plot_click"</code> (or equivalently, <code><a href='clickOpts.html'>clickOpts(id="plot_click")</a></code>),
+the plot will send coordinates to the server whenever it is clicked, and
+the value will be accessible via <code>input$plot_click</code>. The value will be
+a named list  with <code>x</code> and <code>y</code> elements indicating the mouse
+position.</p></td>
+  </tr>
+  <tr>
+    <th><p>dblclick</p></th>
+    <td><p>This is just like the <code>click</code> argument, but for
+double-click events.</p></td>
+  </tr>
+  <tr>
+    <th><p>hover</p></th>
+    <td><p>Similar to the <code>click</code> argument, this can be <code>NULL</code>
+(the default), a string, or an object created by the
+<code><a href='clickOpts.html'>hoverOpts()</a></code> function. If you use a value like
+<code>"plot_hover"</code> (or equivalently, <code><a href='clickOpts.html'>hoverOpts(id="plot_hover")</a></code>),
+the plot will send coordinates to the server pauses on the plot, and the
+value will be accessible via <code>input$plot_hover</code>. The value will be a
+named list with <code>x</code> and <code>y</code> elements indicating the mouse
+position. To control the hover time or hover delay type, you must use
+<code><a href='clickOpts.html'>hoverOpts()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>brush</p></th>
+    <td><p>Similar to the <code>click</code> argument, this can be <code>NULL</code>
+(the default), a string, or an object created by the
+<code><a href='brushOpts.html'>brushOpts()</a></code> function. If you use a value like
+<code>"plot_brush"</code> (or equivalently, <code><a href='brushOpts.html'>brushOpts(id="plot_brush")</a></code>),
+the plot will allow the user to "brush" in the plotting area, and will send
+information about the brushed area to the server, and the value will be
+accessible via <code>input$plot_brush</code>. Brushing means that the user will
+be able to draw a rectangle in the plotting area and drag it around. The
+value will be a named list with <code>xmin</code>, <code>xmax</code>, <code>ymin</code>, and
+<code>ymax</code> elements indicating the brush area. To control the brush
+behavior, use <code><a href='brushOpts.html'>brushOpts()</a></code>. Multiple
+<code>imageOutput</code>/<code>plotOutput</code> calls may share the same <code>id</code>
+value; brushing one image or plot will cause any other brushes with the
+same <code>id</code> to disappear.</p></td>
+  </tr>
+  <tr>
+    <th><p>inline</p></th>
+    <td><p>use an inline (<code><a href='builder.html'>span()</a></code>) or block container (<code><a href='builder.html'>div()</a></code>)
+for the output</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Render a <code><a href='renderPlot.html'>renderPlot()</a></code> or <code><a href='renderImage.html'>renderImage()</a></code> within an
+application page.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A plot or image output element that can be included in a panel.</p>
+  <h3 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h3>
+
+  <p>The arguments <code>clickId</code> and <code>hoverId</code> only work for R base graphics
+(see the <span class="pkg"><a href='https://rdrr.io/r/graphics/graphics-package.html'>graphics</a></span> package). They do
+not work for <span class="pkg"><a href='https://rdrr.io/r/grid/grid-package.html'>grid</a></span>-based graphics, such as
+<span class="pkg">ggplot2</span>, <span class="pkg">lattice</span>, and so on.</p>
+  <h3 class="hasAnchor" id="interactive-plots"><a class="anchor" href="#interactive-plots"></a>Interactive plots</h3>
+
+  
+
+
+<p>Plots and images in Shiny support mouse-based interaction, via clicking,
+double-clicking, hovering, and brushing. When these interaction events
+occur, the mouse coordinates will be sent to the server as <code>input$</code>
+variables, as specified by <code>click</code>, <code>dblclick</code>, <code>hover</code>, or
+<code>brush</code>.</p>
+<p>For <code>plotOutput</code>, the coordinates will be sent scaled to the data
+space, if possible. (At the moment, plots generated by base graphics and
+ggplot2 support this scaling, although plots generated by lattice and
+others do not.) If scaling is not possible, the raw pixel coordinates will
+be sent. For <code>imageOutput</code>, the coordinates will be sent in raw pixel
+coordinates.</p>
+<p>With ggplot2 graphics, the code in <code>renderPlot</code> should return a ggplot
+object; if instead the code prints the ggplot2 object with something like
+<code><a href='https://rdrr.io/r/base/print.html'>print(p)</a></code>, then the coordinates for interactive graphics will not be
+properly scaled to the data space.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p>For the corresponding server-side functions, see <code><a href='renderPlot.html'>renderPlot()</a></code> and
+<code><a href='renderImage.html'>renderImage()</a></code>.</p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'># Only run these examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='co'># A basic shiny app with a plotOutput</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+  <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='sidebarLayout.html'>sidebarLayout</a></span>(
+      <span class='fu'><a href='sidebarLayout.html'>sidebarPanel</a></span>(
+        <span class='fu'><a href='actionButton.html'>actionButton</a></span>(<span class='st'>"newplot"</span>, <span class='st'>"New plot"</span>)
+      ),
+      <span class='fu'><a href='sidebarLayout.html'>mainPanel</a></span>(
+        <span class='fu'>plotOutput</span>(<span class='st'>"plot"</span>)
+      )
+    )
+  ),
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+    <span class='no'>output</span>$<span class='no'>plot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>({
+      <span class='no'>input</span>$<span class='no'>newplot</span>
+      <span class='co'># Add a little noise to the cars data</span>
+      <span class='no'>cars2</span> <span class='kw'>&lt;-</span> <span class='no'>cars</span> + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>cars</span>))
+      <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>cars2</span>)
+    })
+  }
+)
+
+
+<span class='co'># A demonstration of clicking, hovering, and brushing</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+  <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='bootstrapPage.html'>basicPage</a></span>(
+    <span class='fu'><a href='fluidPage.html'>fluidRow</a></span>(
+      <span class='fu'><a href='column.html'>column</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+        <span class='fu'>plotOutput</span>(<span class='st'>"plot"</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>300</span>,
+          <span class='kw'>click</span> <span class='kw'>=</span> <span class='st'>"plot_click"</span>,  <span class='co'># Equiv, to click=clickOpts(id="plot_click")</span>
+          <span class='kw'>hover</span> <span class='kw'>=</span> <span class='fu'><a href='clickOpts.html'>hoverOpts</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"plot_hover"</span>, <span class='kw'>delayType</span> <span class='kw'>=</span> <span class='st'>"throttle"</span>),
+          <span class='kw'>brush</span> <span class='kw'>=</span> <span class='fu'><a href='brushOpts.html'>brushOpts</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"plot_brush"</span>)
+        ),
+        <span class='fu'><a href='builder.html'>h4</a></span>(<span class='st'>"Clicked points"</span>),
+        <span class='fu'><a href='tableOutput.html'>tableOutput</a></span>(<span class='st'>"plot_clickedpoints"</span>),
+        <span class='fu'><a href='builder.html'>h4</a></span>(<span class='st'>"Brushed points"</span>),
+        <span class='fu'><a href='tableOutput.html'>tableOutput</a></span>(<span class='st'>"plot_brushedpoints"</span>)
+      ),
+      <span class='fu'><a href='column.html'>column</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+        <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"plot_clickinfo"</span>),
+        <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"plot_hoverinfo"</span>)
+      ),
+      <span class='fu'><a href='column.html'>column</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+        <span class='fu'><a href='wellPanel.html'>wellPanel</a></span>(<span class='fu'><a href='actionButton.html'>actionButton</a></span>(<span class='st'>"newplot"</span>, <span class='st'>"New plot"</span>)),
+        <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"plot_brushinfo"</span>)
+      )
+    )
+  ),
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+    <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactive.html'>reactive</a></span>({
+      <span class='no'>input</span>$<span class='no'>newplot</span>
+      <span class='co'># Add a little noise to the cars data so the points move</span>
+      <span class='no'>cars</span> + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>cars</span>))
+    })
+    <span class='no'>output</span>$<span class='no'>plot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>({
+      <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>()
+      <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>d</span>$<span class='no'>speed</span>, <span class='no'>d</span>$<span class='no'>dist</span>)
+    })
+    <span class='no'>output</span>$<span class='no'>plot_clickinfo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderPrint</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Click:\n"</span>)
+      <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>input</span>$<span class='no'>plot_click</span>)
+    })
+    <span class='no'>output</span>$<span class='no'>plot_hoverinfo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderPrint</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Hover (throttled):\n"</span>)
+      <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>input</span>$<span class='no'>plot_hover</span>)
+    })
+    <span class='no'>output</span>$<span class='no'>plot_brushinfo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderPrint</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Brush (debounced):\n"</span>)
+      <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>input</span>$<span class='no'>plot_brush</span>)
+    })
+    <span class='no'>output</span>$<span class='no'>plot_clickedpoints</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderTable.html'>renderTable</a></span>({
+      <span class='co'># For base graphics, we need to specify columns, though for ggplot2,</span>
+      <span class='co'># it's usually not necessary.</span>
+      <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='brushedPoints.html'>nearPoints</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(), <span class='no'>input</span>$<span class='no'>plot_click</span>, <span class='st'>"speed"</span>, <span class='st'>"dist"</span>)
+      <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>res</span>) <span class='kw'>==</span> <span class='fl'>0</span>)
+        <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>()
+      <span class='no'>res</span>
+    })
+    <span class='no'>output</span>$<span class='no'>plot_brushedpoints</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderTable.html'>renderTable</a></span>({
+      <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='brushedPoints.html'>brushedPoints</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(), <span class='no'>input</span>$<span class='no'>plot_brush</span>, <span class='st'>"speed"</span>, <span class='st'>"dist"</span>)
+      <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>res</span>) <span class='kw'>==</span> <span class='fl'>0</span>)
+        <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>()
+      <span class='no'>res</span>
+    })
+  }
+)
+
+
+<span class='co'># Demo of clicking, hovering, brushing with imageOutput</span>
+<span class='co'># Note that coordinates are in pixels</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+  <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='bootstrapPage.html'>basicPage</a></span>(
+    <span class='fu'><a href='fluidPage.html'>fluidRow</a></span>(
+      <span class='fu'><a href='column.html'>column</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+        <span class='fu'>imageOutput</span>(<span class='st'>"image"</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>300</span>,
+          <span class='kw'>click</span> <span class='kw'>=</span> <span class='st'>"image_click"</span>,
+          <span class='kw'>hover</span> <span class='kw'>=</span> <span class='fu'><a href='clickOpts.html'>hoverOpts</a></span>(
+            <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"image_hover"</span>,
+            <span class='kw'>delay</span> <span class='kw'>=</span> <span class='fl'>500</span>,
+            <span class='kw'>delayType</span> <span class='kw'>=</span> <span class='st'>"throttle"</span>
+          ),
+          <span class='kw'>brush</span> <span class='kw'>=</span> <span class='fu'><a href='brushOpts.html'>brushOpts</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"image_brush"</span>)
+        )
+      ),
+      <span class='fu'><a href='column.html'>column</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+        <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"image_clickinfo"</span>),
+        <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"image_hoverinfo"</span>)
+      ),
+      <span class='fu'><a href='column.html'>column</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+        <span class='fu'><a href='wellPanel.html'>wellPanel</a></span>(<span class='fu'><a href='actionButton.html'>actionButton</a></span>(<span class='st'>"newimage"</span>, <span class='st'>"New image"</span>)),
+        <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"image_brushinfo"</span>)
+      )
+    )
+  ),
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+    <span class='no'>output</span>$<span class='no'>image</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderImage.html'>renderImage</a></span>({
+      <span class='no'>input</span>$<span class='no'>newimage</span>
+
+      <span class='co'># Get width and height of image output</span>
+      <span class='no'>width</span>  <span class='kw'>&lt;-</span> <span class='no'>session</span>$<span class='no'>clientData</span>$<span class='no'>output_image_width</span>
+      <span class='no'>height</span> <span class='kw'>&lt;-</span> <span class='no'>session</span>$<span class='no'>clientData</span>$<span class='no'>output_image_height</span>
+
+      <span class='co'># Write to a temporary PNG file</span>
+      <span class='no'>outfile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".png"</span>)
+
+      <span class='fu'><a href='https://rdrr.io/r/grDevices/png.html'>png</a></span>(<span class='no'>outfile</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='no'>width</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='no'>height</span>)
+      <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>200</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>200</span>))
+      <span class='fu'><a href='https://rdrr.io/r/grDevices/dev.html'>dev.off</a></span>()
+
+      <span class='co'># Return a list containing information about the image</span>
+      <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+        <span class='kw'>src</span> <span class='kw'>=</span> <span class='no'>outfile</span>,
+        <span class='kw'>contentType</span> <span class='kw'>=</span> <span class='st'>"image/png"</span>,
+        <span class='kw'>width</span> <span class='kw'>=</span> <span class='no'>width</span>,
+        <span class='kw'>height</span> <span class='kw'>=</span> <span class='no'>height</span>,
+        <span class='kw'>alt</span> <span class='kw'>=</span> <span class='st'>"This is alternate text"</span>
+      )
+    })
+    <span class='no'>output</span>$<span class='no'>image_clickinfo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderPrint</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Click:\n"</span>)
+      <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>input</span>$<span class='no'>image_click</span>)
+    })
+    <span class='no'>output</span>$<span class='no'>image_hoverinfo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderPrint</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Hover (throttled):\n"</span>)
+      <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>input</span>$<span class='no'>image_hover</span>)
+    })
+    <span class='no'>output</span>$<span class='no'>image_brushinfo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderPrint</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Brush (debounced):\n"</span>)
+      <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>input</span>$<span class='no'>image_brush</span>)
+    })
+  }
+)
+
+}</pre>
+</div>
+
+
+```

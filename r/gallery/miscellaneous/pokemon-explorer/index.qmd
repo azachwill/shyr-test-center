@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This app is a showcase for the tablerDash package, a bootstrap 4 dashboard template for shiny.
+title:        "Gotta Catch' Em (Almost) All"
+author:    David Granjon
+authorurl:     https://divadnojnarg.github.io
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - pokemon
+ - dashboard
+ - network
+appurl:      https://dgranjon.shinyapps.io/shinyMons/
+sourceurl:   https://github.com/DivadNojnarg/shinyMons
+rscloudurl:  https://rstudio.cloud/project/255837
+---
+
+This app is a showcase for the tablerDash package, a bootstrap 4 dashboard template for shiny. Explore the 151 first pokemons from the Green, Red and Blue versions, respectively (#pokeApi). It also includes a preliminary fighting system implemented in R and shiny modules.
+  

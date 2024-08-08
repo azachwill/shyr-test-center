@@ -1,0 +1,62 @@
+---
+layout: reference
+title: "makeReactiveBinding"
+categories: reference
+---
+<h1>Make a reactive variable</h1>
+
+<pre class="code"><code class="r"><div>makeReactiveBinding(symbol, env&nbsp;=&nbsp;parent.frame())</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>symbol</th>
+    <td>A character string indicating the name of
+  the variable that should be made reactive</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment that will contain the reactive
+  variable</td>
+  </tr>
+</table>
+
+<div data-section="Make a reactive variable">
+  <h3 data-swiftype-index="false">Make a reactive variable</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>None.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Turns a normal variable into a reactive variable, that is, one that has
+reactive semantics when assigned or read in the usual ways. The variable may
+already exist; if so, its value will be used as the initial value of the
+reactive variable (or <code>NULL</code> if the variable did not exist).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# a &lt;- 10
+# makeReactiveBinding(&quot;a&quot;)
+# b &lt;- reactive(a * -1)
+# observe(print(b()))
+# a &lt;- 20
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>makeReactiveBinding</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

@@ -1,0 +1,87 @@
+---
+layout: reference
+title: "shiny-options"
+categories: reference
+---
+<h1>Global options for Shiny</h1>
+
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>There are a number of global options that affect Shiny&#39;s behavior. These can
+be set with (for example) <code>options(shiny.trace=TRUE)</code>.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p><dl>
+  <dt>shiny.launch.browser</dt><dd>A boolean which controls the default behavior
+    when an app is run. See <code><a href='runApp.html'>runApp</a></code> for more information.</dd></p>
+
+  <p><dt>shiny.port</dt><dd>A port number that Shiny will listen on. See
+    <code><a href='runApp.html'>runApp</a></code> for more information.</dd></p>
+
+  <p><dt>shiny.trace</dt><dd>If <code>TRUE</code>, all of the messages sent between the R
+    server and the web browser client will be printed on the console. This
+    is useful for debugging.</dd></p>
+
+  <p><dt>shiny.reactlog</dt><dd>If <code>TRUE</code>, enable logging of reactive events,
+    which can be viewed later with the <code><a href='showReactLog.html'>showReactLog</a></code> function.
+    This incurs a substantial performance penalty and should not be used in
+    production.</dd></p>
+
+  <p><dt>shiny.usecairo</dt><dd>This is used to disable graphical rendering by the
+    Cairo package, if it is installed. See <code><a href='plotPNG.html'>plotPNG</a></code> for more
+    information.</dd></p>
+
+  <p><dt>shiny.maxRequestSize</dt><dd>This is a number which specifies the maximum
+    web request size, which serves as a size limit for file uploads. If
+    unset, the maximum request size defaults to 5MB.</dd></p>
+
+  <p><dt>shiny.suppressMissingContextError</dt><dd>Normally, invoking a reactive
+    outside of a reactive context (or <code><a href='isolate.html'>isolate</a>()</code>) results in
+    an error. If this is <code>TRUE</code>, don&#39;t error in these cases. This
+    should only be used for debugging or demonstrations of reactivity at the
+    console.</dd></p>
+
+  <p><dt>shiny.host</dt><dd>The IP address that Shiny should listen on. See
+    <code><a href='runApp.html'>runApp</a></code> for more information.</dd></p>
+
+  <p><dt>shiny.json.digits</dt><dd>The number of digits to use when converting
+    numbers to JSON format to send to the client web browser.</dd></p>
+
+  <p><dt>shiny.minified</dt><dd>If this is <code>TRUE</code> or unset (the default), then
+    Shiny will use minified JavaScript (<code>shiny.min.js</code>). If
+    <code>FALSE</code>, then Shiny will use the un-minified JavaScript
+    (<code>shiny.js</code>); this can be useful during development.</dd></p>
+
+  <p><dt>shiny.error</dt><dd>This can be a function which is called when an error
+    occurs. For example, <code>options(shiny.error=recover)</code> will result a
+    the debugger prompt when an error occurs.</dd></p>
+
+  <p><dt>shiny.observer.error</dt><dd>This can be a function that is called by an
+    observer when an unhandled error occurs in it or an upstream reactive.
+    By default, these errors will result in a warning at the console, and
+    the websocket connection will close.</dd></p>
+
+  <p><dt>shiny.table.class</dt><dd>CSS class names to use for tables.</dd></p>
+
+  <p><dt>shiny.deprecation.messages</dt><dd>This controls whether messages for
+    deprecated functions in Shiny will be printed. See
+    <code><a href='shinyDeprecated.html'>shinyDeprecated</a></code> for more information.</dd></p>
+
+  <p></dl></p>
+
+  <p></p>
+
+</div>
+<!-- <ul>
+  <li>shiny-options</li>
+</ul>
+<ul>
+  
+</ul> -->
+

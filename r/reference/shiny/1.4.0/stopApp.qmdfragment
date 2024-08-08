@@ -1,0 +1,36 @@
+---
+title: "Stop the currently running Shiny app — stopApp"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>stopApp</span>(<span class='kw'>returnValue</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/invisible.html'>invisible</a></span>())</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>returnValue</p></th>
+    <td><p>The value that should be returned from
+<code><a href='runApp.html'>runApp()</a></code>.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Stops the currently running Shiny app, returning control to the caller of
+<code><a href='runApp.html'>runApp()</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+
+  </div>
+
+</div>
+
+
+```

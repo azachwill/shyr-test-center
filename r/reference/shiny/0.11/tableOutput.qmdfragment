@@ -1,0 +1,80 @@
+---
+title: "tableOutput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='tableOutput.html'>dataTableOutput</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the table from</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A table output element that can be included in a panel
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Render a <code><a href='renderTable.html'>renderTable</a></code> or <code><a href='renderDataTable.html'>renderDataTable</a></code> within an
+application page. <code>renderTable</code> uses a standard HTML table, while
+<code>renderDataTable</code> uses the DataTables Javascript library to create an
+interactive table with more features.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># # table example</span>
+<span class="comment"># shinyApp(</span>
+<span class="comment">#   ui = fluidPage(</span>
+<span class="comment">#     fluidRow(</span>
+<span class="comment">#       column(12,</span>
+<span class="comment">#         tableOutput('table')</span>
+<span class="comment">#       )</span>
+<span class="comment">#     )</span>
+<span class="comment">#   ),</span>
+<span class="comment">#   server = function(input, output) {</span>
+<span class="comment">#     output$table &lt;- renderTable(iris)</span>
+<span class="comment">#   }</span>
+<span class="comment"># )</span>
+<span class="comment"># </span>
+<span class="comment"># </span>
+<span class="comment"># # DataTables example</span>
+<span class="comment"># shinyApp(</span>
+<span class="comment">#   ui = fluidPage(</span>
+<span class="comment">#     fluidRow(</span>
+<span class="comment">#       column(12,</span>
+<span class="comment">#         dataTableOutput('table')</span>
+<span class="comment">#       )</span>
+<span class="comment">#     )</span>
+<span class="comment">#   ),</span>
+<span class="comment">#   server = function(input, output) {</span>
+<span class="comment">#     output$table &lt;- renderDataTable(iris)</span>
+<span class="comment">#   }</span>
+<span class="comment"># )</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>dataTableOutput</li><li>tableOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='renderTable.html'>renderTable</a></code>, <code><a href='renderDataTable.html'>renderDataTable</a></code>.</p>
+</div>
+```

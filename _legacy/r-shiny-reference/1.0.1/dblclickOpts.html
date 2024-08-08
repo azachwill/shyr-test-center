@@ -1,0 +1,45 @@
+---
+layout: reference
+title: "dblclickOpts"
+categories: reference
+---
+<h1>Create an object representing double-click options</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='dblclickOpts.html'>dblclickOpts</a></span><span class="keyword">(</span><span class="argument">id</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">clip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">delay</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">400</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>id</th>
+    <td>Input value name. For example, if the value is
+<code>&quot;plot_dblclick&quot;</code>, then the click coordinates will be available as
+<code>input$plot_dblclick</code>.</td>
+  </tr>
+  <tr>
+    <th>clip</th>
+    <td>Should the click area be clipped to the plotting area? If FALSE,
+then the server will receive double-click events even when the mouse is
+outside the plotting area, as long as it is still inside the image.</td>
+  </tr>
+  <tr>
+    <th>delay</th>
+    <td>Maximum delay (in ms) between a pair clicks for them to be
+counted as a double-click.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This generates an object representing dobule-click options, to be passed as
+the <code>dblclick</code> argument of <code><a href='plotOutput.html'>imageOutput</a></code> or
+<code><a href='plotOutput.html'>plotOutput</a></code>.</p>
+
+</div>
+<!-- <ul>
+  <li>dblclickOpts</li>
+</ul>
+<ul>
+  
+</ul> -->
+

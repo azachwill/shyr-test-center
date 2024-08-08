@@ -1,0 +1,8 @@
+---
+pagetitle: PAGE_TITLE_HOLDER
+title: TITLE_PLACEHOLDER
+---
+
+```{=html}
+CONTENT_PLACEHOLDER
+```

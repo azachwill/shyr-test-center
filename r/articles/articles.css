@@ -1,0 +1,36 @@
+#quarto-sidebar>* {
+  padding: 1.5em 0.75em;
+}
+
+@media only screen and (min-width:992px) {
+  .sidebar-menu-container {
+    margin-top: 1em;
+  }
+} 
+
+.card-body li {
+  line-height: 22px;
+}
+
+@media only screen and (max-width:991px) {
+  #quarto-sidebar>* {
+  padding-top: 0px;
+  }
+} 
+
+.quarto-listing.quarto-listing-container-custom a {
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.quarto-listing.quarto-listing-container-custom a:hover {
+  border-bottom: 1px solid;
+}
+
+.quarto-listing.quarto-listing-container-custom li {
+  margin-bottom: .3rem;
+}
+
+.quarto-listing.quarto-listing-container-custom li p {
+  margin-bottom: 0px;
+}

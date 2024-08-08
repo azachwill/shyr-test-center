@@ -1,0 +1,44 @@
+---
+title: Improving scalability with async programming
+author: Joe Cheng
+date: 2019-10-15
+description: Asynchronous programming is a powerful but advanced technique for increasing the scalability of your Shiny apps. On its own, async programming doesn't increase the performance or responsiveness for a single user of your app, but can improve responsiveness (dramatically, in some cases) when multiple users are active at the same time.
+---
+
+::: {.callout-warning}
+## Before we begin
+
+Please be aware that the [Extended Tasks](../nonblocking/) feature is now our recommended starting point for performing long-running operations in Shiny. Extended Tasks can be used not only to allow multiple sessions to run concurrently, but also let a given session run long-running operations without blocking _its own_ reactives.
+
+There are still scenarios that require the use of async programming, and it remains a fully supported feature of Shiny, but we recommend starting with [Extended Tasks](../nonblocking/) first.
+:::
+
+Asynchronous programming is a powerful but advanced technique for increasing the scalability of your Shiny apps (starting with the Shiny 1.1.0 release). On its own, async programming _doesn't_ increase the performance or responsiveness for a single user of your app, but can improve responsiveness--dramatically, in some cases--when multiple users are active at the same time.
+
+Async programming is mainly effective when your app has one, or two, or a few spots where a lot of time is spent. This might be where you download a large amount of data from a web API, or run a slow query against a remote database, or ferret through a directory full of thousands of log files. You can use async to offload this kind of work to a background R process, leaving Shiny free to service other users while it waits for those calculations to complete.
+
+Shiny integrates with the [**promises**](https://rstudio.github.io/promises/) package, which you'll need to become intimately familiar with if you want to take advantage of async programming.
+
+## Optimize first!
+
+If your app doesn't scale well and you don't yet know why, _stop and figure that out first!_ Async programming should be your last resort in fixing performance and scalability problems. If you haven't tried [profiling](/r/articles/improve/profiling/) and removing common [bottlenecks](/r/articles/improve/performance/), definitely do that first, and only turn to async programming if you're sure the long-running tasks you're trying to offload are already run as quickly and as seldom as possible.
+
+## Watch the talk
+
+For a quick introduction to async programming with Shiny, check out this video introducing the feature at rstudio::conf 2018:
+
+::: {.video-container}
+
+ <script src="https://fast.wistia.com/embed/medias/4jbhc2becg.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_4jbhc2becg seo=false videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="https://fast.wistia.com/embed/medias/4jbhc2becg/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="Video of Joe Cheng's rstudio conf 2018 talk" aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>
+
+:::
+ 
+:::{.pt-3}
+[This video's page at Posit.co](https://posit.co/resources/videos/scaling-shiny-apps-with-async-programming/)
+:::
+
+
+
+## Get started
+
+If you're ready to get started learning about async programming in earnest, you'll find all the documentation you need at the [promises site](https://rstudio.github.io/promises/). Async programming is an advanced technique, so we highly recommend you read through the entire six-part article series there!

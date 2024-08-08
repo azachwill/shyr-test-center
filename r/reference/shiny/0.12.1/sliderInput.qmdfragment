@@ -1,0 +1,136 @@
+---
+title: "sliderInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="symbol">min</span><span class="keyword">,</span> <span class="symbol">max</span><span class="keyword">,</span> <span class="symbol">value</span><span class="keyword">,</span> <span class="argument">step</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">round</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">format</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">locale</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">ticks</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">animate</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">sep</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">","</span><span class="keyword">,</span> <span class="argument">pre</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">post</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='sliderInput.html'>animationOptions</a></span><span class="keyword">(</span><span class="argument">interval</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1000</span><span class="keyword">,</span> <span class="argument">loop</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">playButton</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">pauseButton</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>input</code> slot that will be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code> for no label.</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>The minimum value (inclusive) that can be selected.</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>The maximum value (inclusive) that can be selected.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>The initial value of the slider. A numeric vector of length
+one will create a regular slider; a numeric vector of length two will
+create a double-ended range slider. A warning will be issued if the
+value doesn&#39;t fit between <code>min</code> and <code>max</code>.</td>
+  </tr>
+  <tr>
+    <th>step</th>
+    <td>Specifies the interval between each selectable value on the
+slider (if <code>NULL</code>, a heuristic is used to determine the step size).</td>
+  </tr>
+  <tr>
+    <th>round</th>
+    <td><code>TRUE</code> to round all values to the nearest integer;
+<code>FALSE</code> if no rounding is desired; or an integer to round to that
+number of digits (for example, 1 will round to the nearest 10, and -2 will
+round to the nearest .01). Any rounding will be applied after snapping to
+the nearest step.</td>
+  </tr>
+  <tr>
+    <th>format</th>
+    <td>Deprecated.</td>
+  </tr>
+  <tr>
+    <th>locale</th>
+    <td>Deprecated.</td>
+  </tr>
+  <tr>
+    <th>ticks</th>
+    <td><code>FALSE</code> to hide tick marks, <code>TRUE</code> to show them
+according to some simple heuristics.</td>
+  </tr>
+  <tr>
+    <th>animate</th>
+    <td><code>TRUE</code> to show simple animation controls with default
+settings; <code>FALSE</code> not to; or a custom settings list, such as those
+created using <code><a href='sliderInput.html'>animationOptions</a></code>.</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the input, e.g. <code>&#39;400px&#39;</code>, or <code>&#39;100%&#39;</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>.</td>
+  </tr>
+  <tr>
+    <th>sep</th>
+    <td>Separator between thousands places in numbers.</td>
+  </tr>
+  <tr>
+    <th>pre</th>
+    <td>A prefix string to put in front of the value.</td>
+  </tr>
+  <tr>
+    <th>post</th>
+    <td>A suffix string to put after the value.</td>
+  </tr>
+  <tr>
+    <th>interval</th>
+    <td>The interval, in milliseconds, between each animation step.</td>
+  </tr>
+  <tr>
+    <th>loop</th>
+    <td><code>TRUE</code> to automatically restart the animation when it
+reaches the end.</td>
+  </tr>
+  <tr>
+    <th>playButton</th>
+    <td>Specifies the appearance of the play button. Valid values
+are a one-element character vector (for a simple text label), an HTML tag
+or list of tags (using <code><a href='tag.html'>tag</a></code> and friends), or raw HTML (using
+<code><a href='HTML.html'>HTML</a></code>).</td>
+  </tr>
+  <tr>
+    <th>pauseButton</th>
+    <td>Similar to <code>playButton</code>, but for the pause button.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Constructs a slider widget to select a numeric value from a range.</p>
+
+</div>
+<!-- <ul>
+  <li>animationOptions</li><li>sliderInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='updateSliderInput.html'>updateSliderInput</a></code></p>
+  <p>Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='actionButton.html'>actionLink</a></code>;
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>;
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>; <code><a href='dateInput.html'>dateInput</a></code>;
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>; <code><a href='fileInput.html'>fileInput</a></code>;
+  <code><a href='numericInput.html'>numericInput</a></code>; <code><a href='passwordInput.html'>passwordInput</a></code>;
+  <code><a href='radioButtons.html'>radioButtons</a></code>; <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='selectInput.html'>selectizeInput</a></code>; <code><a href='submitButton.html'>submitButton</a></code>;
+  <code><a href='textInput.html'>textInput</a></code></p>
+</div>
+```

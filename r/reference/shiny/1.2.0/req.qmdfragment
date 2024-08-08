@@ -1,0 +1,179 @@
+---
+title: "req"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='req.html'>req</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">cancelOutput</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='req.html'>isTruthy</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Values to check for truthiness.</td>
+  </tr>
+  <tr>
+    <th>cancelOutput</th>
+    <td>If <code>TRUE</code> and an output is being evaluated, stop
+processing as usual but instead of clearing the output, leave it in
+whatever state it happens to be in.</td>
+  </tr>
+  <tr>
+    <th>x</th>
+    <td>An expression whose truthiness value we want to determine</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+The first value that was passed in.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Ensure that values are available (&quot;truthy&quot;--see Details) before proceeding
+with a calculation or action. If any of the given values is not truthy, the
+operation is stopped by raising a &quot;silent&quot; exception (not logged by Shiny,
+nor displayed in the Shiny app&#39;s UI).</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The <code>req</code> function was designed to be used in one of two ways. The first
+is to call it like a statement (ignoring its return value) before attempting
+operations using the required values:</p>
+
+  <p><pre>rv &lt;- reactiveValues(state = FALSE)
+r &lt;- reactive({
+  req(input$a, input$b, rv$state)
+  # Code that uses input$a, input$b, and/or rv$state...
+})</pre></p>
+
+  <p>In this example, if <code>r()</code> is called and any of <code>input$a</code>,
+<code>input$b</code>, and <code>rv$state</code> are <code>NULL</code>, <code>FALSE</code>, <code>&quot;&quot;</code>,
+etc., then the <code>req</code> call will trigger an error that propagates all the
+way up to whatever render block or observer is executing.</p>
+
+  <p>The second is to use it to wrap an expression that must be truthy:</p>
+
+  <p><pre>output$plot &lt;- renderPlot({
+  if (req(input$plotType) == &quot;histogram&quot;) {
+    hist(dataset())
+  } else if (input$plotType == &quot;scatter&quot;) {
+    qplot(dataset(), aes(x = x, y = y))
+  }
+})</pre></p>
+
+  <p>In this example, <code>req(input$plotType)</code> first checks that
+<code>input$plotType</code> is truthy, and if so, returns it. This is a convenient
+way to check for a value &quot;inline&quot; with its first use.</p>
+
+  <p><strong>Truthy and falsy values</strong></p>
+
+  <p>The terms &quot;truthy&quot; and &quot;falsy&quot; generally indicate whether a value, when
+coerced to a <code><a href='http://www.rdocumentation.org/packages/base/topics/logical'>logical</a></code>, is <code>TRUE</code> or <code>FALSE</code>. We use
+the term a little loosely here; our usage tries to match the intuitive
+notions of &quot;Is this value missing or available?&quot;, or &quot;Has the user provided
+an answer?&quot;, or in the case of action buttons, &quot;Has the button been
+clicked?&quot;.</p>
+
+  <p>For example, a <code>textInput</code> that has not been filled out by the user has
+a value of <code>&quot;&quot;</code>, so that is considered a falsy value.</p>
+
+  <p>To be precise, <code>req</code> considers a value truthy <em>unless</em> it is one
+of:</p>
+
+  <p><ul>
+<li><code>FALSE</code>
+  </li>
+<li><code>NULL</code>
+  </li>
+<li><code>&quot;&quot;</code>
+  </li>
+<li>An empty atomic vector
+  </li>
+<li>An atomic vector that contains only missing values
+  </li>
+<li>A logical vector that contains all <code>FALSE</code> or missing values
+  </li>
+<li>An object of class <code>&quot;try-error&quot;</code>
+  </li>
+<li>A value that represents an unclicked <code><a href='actionButton.html'>actionButton</a></code>
+</li>
+</ul></p>
+
+  <p>Note in particular that the value <code>0</code> is considered truthy, even though
+<code>as.logical(0)</code> is <code>FALSE</code>.</p>
+
+  <p>If the built-in rules for truthiness do not match your requirements, you can
+always work around them. Since <code>FALSE</code> is falsy, you can simply provide
+the results of your own checks to <code>req</code>:</p>
+
+  <p><code>req(input$a != 0)</code></p>
+
+  <p><strong>Using <code>req(FALSE)</code></strong></p>
+
+  <p>You can use <code>req(FALSE)</code> (i.e. no condition) if you&#39;ve already performed
+all the checks you needed to by that point and just want to stop the reactive
+chain now. There is no advantange to this, except perhaps ease of readibility
+if you have a complicated condition to check for (or perhaps if you&#39;d like to
+divide your condition into nested <code>if</code> statements).</p>
+
+  <p><strong>Using <code>cancelOutput = TRUE</code></strong></p>
+
+  <p>When <code>req(..., cancelOutput = TRUE)</code> is used, the &quot;silent&quot; exception is
+also raised, but it is treated slightly differently if one or more outputs are
+currently being evaluated. In those cases, the reactive chain does not proceed
+or update, but the output(s) are left is whatever state they happen to be in
+(whatever was their last valid state).</p>
+
+  <p>Note that this is always going to be the case if
+this is used inside an output context (e.g. <code>output$txt &lt;- ...</code>). It may
+or may not be the case if it is used inside a non-output context (e.g.
+<code><a href='reactive.html'>reactive</a></code>, <code><a href='observe.html'>observe</a></code> or <code><a href='observeEvent.html'>observeEvent</a></code>)
+-- depending on whether or not there is an <code>output$...</code> that is triggered
+as a result of those calls. See the examples below for concrete scenarios.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">'data'</span><span class="keyword">,</span> <span class="string">'Enter a dataset from the "datasets" package'</span><span class="keyword">,</span> <span class="string">'cars'</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='builder.html'>p</a></span><span class="keyword">(</span><span class="string">'(E.g. "cars", "mtcars", "pressure", "faithful")'</span><span class="keyword">)</span><span class="keyword">,</span> <span class="functioncall"><a href='builder.html'>hr</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">'tbl'</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+
+  <span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">tbl</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderTable.html'>renderTable</a></span><span class="keyword">(</span><span class="keyword">{</span>
+
+      <span class="comment">## to require that the user types something, use: `req(input$data)`</span>
+      <span class="comment">## but better: require that input$data is valid and leave the last</span>
+      <span class="comment">## valid table up</span>
+      <span class="functioncall"><a href='req.html'>req</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/exists'>exists</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">data</span><span class="keyword">,</span> <span class="string">"package:datasets"</span><span class="keyword">,</span> <span class="argument">inherits</span> <span class="argument">=</span> <span class="number">FALSE</span><span class="keyword">)</span><span class="keyword">,</span>
+          <span class="argument">cancelOutput</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/head'>head</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/get'>get</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">data</span><span class="keyword">,</span> <span class="string">"package:datasets"</span><span class="keyword">,</span> <span class="argument">inherits</span> <span class="argument">=</span> <span class="number">FALSE</span><span class="keyword">)</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+
+  <span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>req</li><li>isTruthy</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

@@ -1,0 +1,97 @@
+---
+layout: reference
+title: "Flex Box-based row/column layouts — fillRow"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Flex Box-based row/column layouts</h1>
+  
+
+  <pre class="code"><span class='fu'>fillRow</span>(<span class='no'>...</span>, <span class='kw'>flex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"100%"</span>)
+
+<span class='fu'>fillCol</span>(<span class='no'>...</span>, <span class='kw'>flex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"100%"</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>UI objects to put in each row/column cell; each argument will
+occupy a single cell. (To put multiple items in a single cell, you can use
+<code><a href='tag.html'>tagList()</a></code> or <code><a href='builder.html'>div()</a></code> to combine them.) Named
+arguments will be used as attributes on the <code>div</code> element that
+encapsulates the row/column.</p></td>
+  </tr>
+  <tr>
+    <th><p>flex</p></th>
+    <td><p>Determines how space should be distributed to the cells. Can be a
+single value like <code>1</code> or <code>2</code> to evenly distribute the available
+space; or use a vector of numbers to specify the proportions. For example,
+<code>flex = c(2, 3)</code> would cause the space to be split 40%/60% between
+two cells. NA values will cause the corresponding cell to be sized
+according to its contents (without growing or shrinking).</p></td>
+  </tr>
+  <tr>
+    <th><p>width, height</p></th>
+    <td><p>The total amount of width and height to use for the
+entire row/column. For the default height of <code>"100%"</code> to be
+effective, the parent must be <code>fillPage</code>, another
+<code>fillRow</code>/<code>fillCol</code>, or some other HTML element whose height is
+not determined by the height of its contents.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Creates row and column layouts with proportionally-sized cells, using the
+Flex Box layout model of CSS3. These can be nested to create arbitrary
+proportional-grid layouts. <strong>Warning:</strong> Flex Box is not well supported
+by Internet Explorer, so these functions should only be used where modern
+browsers can be assumed.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>If you try to use <code>fillRow</code> and <code>fillCol</code> inside of other
+Shiny containers, such as <code><a href='sidebarLayout.html'>sidebarLayout()</a></code>,
+<code><a href='navbarPage.html'>navbarPage()</a></code>, or even <code>tags$div</code>, you will probably find
+that they will not appear. This is due to <code>fillRow</code> and <code>fillCol</code>
+defaulting to <code>height="100%"</code>, which will only work inside of
+containers that have determined their own size (rather than shrinking to
+the size of their contents, as is usually the case in HTML).</p>
+<p>To avoid this problem, you have two options:</p><ul>
+<li><p>only use <code>fillRow</code>/<code>fillCol</code> inside of <code>fillPage</code>,
+<code>fillRow</code>, or <code>fillCol</code></p></li>
+<li><p>provide an explicit <code>height</code> argument to
+<code>fillRow</code>/<code>fillCol</code></p></li>
+</ul>
+
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'># Only run this example in interactive R sessions.</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fillPage.html'>fillPage</a></span>(<span class='fu'>fillRow</span>(
+  <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"plotLeft"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"100%"</span>),
+  <span class='fu'>fillCol</span>(
+    <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"plotTopRight"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"100%"</span>),
+    <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"plotBottomRight"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"100%"</span>)
+  )
+))
+
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='no'>output</span>$<span class='no'>plotLeft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>cars</span>))
+  <span class='no'>output</span>$<span class='no'>plotTopRight</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>pressure</span>))
+  <span class='no'>output</span>$<span class='no'>plotBottomRight</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>AirPassengers</span>))
+}
+
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+}</pre>
+</div>
+
+

@@ -1,0 +1,119 @@
+---
+title: "req"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='req.html'>req</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Values to check for truthiness.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+The first value that was passed in.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Ensure that values are available (&quot;truthy&quot;--see Details) before proceeding
+with a calculation or action. If any of the given values is not truthy, the
+operation is stopped by raising a &quot;silent&quot; exception (not logged by Shiny,
+nor displayed in the Shiny app&#39;s UI).</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The <code>req</code> function was designed to be used in one of two ways. The first
+is to call it like a statement (ignoring its return value) before attempting
+operations using the required values:</p>
+
+  <p><pre>rv &lt;- reactiveValues(state = FALSE)
+r &lt;- reactive({
+  req(input$a, input$b, rv$state)
+  # Code that uses input$a, input$b, and/or rv$state...
+})</pre></p>
+
+  <p>In this example, if <code>r()</code> is called and any of <code>input$a</code>,
+<code>input$b</code>, and <code>rv$state</code> are <code>NULL</code>, <code>FALSE</code>, <code>&quot;&quot;</code>,
+etc., then the <code>req</code> call will trigger an error that propagates all the
+way up to whatever render block or observer is executing.</p>
+
+  <p>The second is to use it to wrap an expression that must be truthy:</p>
+
+  <p><pre>output$plot &lt;- renderPlot({
+  if (req(input$plotType) == &quot;histogram&quot;) {
+    hist(dataset())
+  } else if (input$plotType == &quot;scatter&quot;) {
+    qplot(dataset(), aes(x = x, y = y))
+  }
+})</pre></p>
+
+  <p>In this example, <code>req(input$plotType)</code> first checks that
+<code>input$plotType</code> is truthy, and if so, returns it. This is a convenient
+way to check for a value &quot;inline&quot; with its first use.</p>
+
+  <p><strong>Truthy and falsy values</strong></p>
+
+  <p>The terms &quot;truthy&quot; and &quot;falsy&quot; generally indicate whether a value, when
+coerced to a <code><a href='http://www.rdocumentation.org/packages/base/topics/logical'>logical</a></code>, is <code>TRUE</code> or <code>FALSE</code>. We use
+the term a little loosely here; our usage tries to match the intuitive
+notions of &quot;Is this value missing or available?&quot;, or &quot;Has the user provided
+an answer?&quot;, or in the case of action buttons, &quot;Has the button been
+clicked?&quot;.</p>
+
+  <p>For example, a <code>textInput</code> that has not been filled out by the user has
+a value of <code>&quot;&quot;</code>, so that is considered a falsy value.</p>
+
+  <p>To be precise, <code>req</code> considers a value truthy <em>unless</em> it is one
+of:</p>
+
+  <p><ul>
+<li><code>FALSE</code>
+  </li>
+<li><code>NULL</code>
+  </li>
+<li><code>&quot;&quot;</code>
+  </li>
+<li>An empty atomic vector
+  </li>
+<li>An atomic vector that contains only missing values
+  </li>
+<li>A logical vector that contains all <code>FALSE</code> or missing values
+  </li>
+<li>An object of class <code>&quot;try-error&quot;</code>
+  </li>
+<li>A value that represents an unclicked <code><a href='actionButton.html'>actionButton</a></code>
+</li>
+</ul></p>
+
+  <p>Note in particular that the value <code>0</code> is considered truthy, even though
+<code>as.logical(0)</code> is <code>FALSE</code>.</p>
+
+  <p>If the built-in rules for truthiness do not match your requirements, you can
+always work around them. Since <code>FALSE</code> is falsy, you can simply provide
+the results of your own checks to <code>req</code>:</p>
+
+  <p><code>req(input$a != 0)</code></p>
+
+</div>
+<!-- <ul>
+  <li>req</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

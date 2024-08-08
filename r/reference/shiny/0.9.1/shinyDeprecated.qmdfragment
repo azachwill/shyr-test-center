@@ -1,0 +1,44 @@
+---
+title: "shinyDeprecated"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>shinyDeprecated(new&nbsp;=&nbsp;NULL, msg&nbsp;=&nbsp;NULL, old&nbsp;=&nbsp;as.character(sys.call(sys.parent()))[1L])</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>new</th>
+    <td>Name of replacement function.</td>
+  </tr>
+  <tr>
+    <th>msg</th>
+    <td>Message to print. If used, this will override
+  the default message.</td>
+  </tr>
+  <tr>
+    <th>old</th>
+    <td>Name of deprecated function.</td>
+  </tr>
+</table>
+
+<div data-section="Print message for deprecated functions in Shiny">
+  <h3 data-swiftype-index="false">Print message for deprecated functions in Shiny</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>To disable these messages, use <code>options(shiny.deprecation.messages=FALSE)</code>.</p>
+
+</div>
+<!-- <ul>
+  <li>shinyDeprecated</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

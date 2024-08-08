@@ -1,0 +1,34 @@
+---
+title: "Create a help text element — helpText"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.0/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Create help text which can be added to an input form to provide additional
+explanation or context.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">helpText</span>(...)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>One or more help text strings (or other inline HTML elements)</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A help text element that can be added to a UI definition.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">helpText</span>(<span class="st">"Note: while the data view will show only"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>         <span class="st">"the specified number of observations, the"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>         <span class="st">"summary will be based on the full dataset."</span>)</span></code></pre></div>
+  </div>
+</div>
+```

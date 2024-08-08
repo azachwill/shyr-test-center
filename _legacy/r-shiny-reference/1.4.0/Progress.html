@@ -1,0 +1,139 @@
+---
+layout: reference
+title: "Reporting progress (object-oriented API) — Progress"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Reporting progress (object-oriented API)</h1>
+  
+
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The Shiny session object, as provided by
+<code>shinyServer</code> to the server function.</p></td>
+  </tr>
+  <tr>
+    <th><p>min</p></th>
+    <td><p>The value that represents the starting point of the
+progress bar. Must be less than <code>max</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>max</p></th>
+    <td><p>The value that represents the end of the progress bar.
+Must be greater than <code>min</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>message</p></th>
+    <td><p>A single-element character vector; the message to be
+displayed to the user, or <code>NULL</code> to hide the current message
+(if any).</p></td>
+  </tr>
+  <tr>
+    <th><p>detail</p></th>
+    <td><p>A single-element character vector; the detail message
+to be displayed to the user, or <code>NULL</code> to hide the current
+detail message (if any). The detail message will be shown with a
+de-emphasized appearance relative to <code>message</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>value</p></th>
+    <td><p>A numeric value at which to set
+the progress bar, relative to <code>min</code> and <code>max</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>style</p></th>
+    <td><p>Progress display style. If <code>"notification"</code> (the default),
+the progress indicator will show using Shiny's notification API. If
+<code>"old"</code>, use the same HTML and CSS used in Shiny 0.13.2 and below
+(this is for backward-compatibility).</p></td>
+  </tr>
+  <tr>
+    <th><p>amount</p></th>
+    <td><p>Single-element numeric vector; the value at which to set
+the progress bar, relative to <code>min</code> and <code>max</code>.
+<code>NULL</code> hides the progress bar, if it is currently visible.</p></td>
+  </tr>
+  <tr>
+    <th><p>amount</p></th>
+    <td><p>For the <code>inc()</code> method, a numeric value to increment the
+progress bar.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Reports progress to the user during long-running operations.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>This package exposes two distinct programming APIs for working with
+progress. <code><a href='withProgress.html'>withProgress()</a></code> and <code><a href='withProgress.html'>setProgress()</a></code>
+together provide a simple function-based interface, while the
+<code>Progress</code> reference class provides an object-oriented API.</p>
+<p>Instantiating a <code>Progress</code> object causes a progress panel to be
+created, and it will be displayed the first time the <code>set</code>
+method is called. Calling <code>close</code> will cause the progress panel
+to be removed.</p>
+<p>As of version 0.14, the progress indicators use Shiny's new notification API.
+If you want to use the old styling (for example, you may have used customized
+CSS), you can use <code>style="old"</code> each time you call
+<code>Progress$new()</code>. If you don't want to set the style each time
+<code>Progress$new</code> is called, you can instead call
+<code><a href='shinyOptions.html'>shinyOptions(progress.style="old")</a></code> just once, inside the server
+function.</p>
+<p><strong>Methods</strong></p><dl class='dl-horizontal'>
+<dt><code>initialize(session, min = 0, max = 1)</code></dt><dd><p>Creates a new progress panel (but does not display it).</p></dd>
+<dt><code>set(value = NULL, message = NULL, detail = NULL)</code></dt><dd><p>Updates the progress panel. When called the first time, the
+progress panel is displayed.</p></dd>
+<dt><code>inc(amount = 0.1, message = NULL, detail = NULL)</code></dt><dd><p>Like <code>set</code>, this updates the progress panel. The difference is
+that <code>inc</code> increases the progress bar by <code>amount</code>, instead
+of setting it to a specific value.</p></dd>
+<dt><code><a href='https://rdrr.io/r/base/connections.html'>close()</a></code></dt><dd><p>Removes the progress panel. Future calls to <code>set</code> and
+<code>close</code> will be ignored.</p></dd>
+
+</dl>
+
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='withProgress.html'>withProgress()</a></code></p></div>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"plot"</span>)
+)
+
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='no'>output</span>$<span class='no'>plot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>({
+    <span class='no'>progress</span> <span class='kw'>&lt;-</span> <span class='no'>Progress</span>$<span class='fu'>new</span>(<span class='no'>session</span>, <span class='kw'>min</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>15</span>)
+    <span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span>(<span class='no'>progress</span>$<span class='fu'><a href='https://rdrr.io/r/base/connections.html'>close</a></span>())
+
+    <span class='no'>progress</span>$<span class='fu'>set</span>(<span class='kw'>message</span> <span class='kw'>=</span> <span class='st'>'Calculation in progress'</span>,
+                 <span class='kw'>detail</span> <span class='kw'>=</span> <span class='st'>'This may take a while...'</span>)
+
+    <span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>15</span>) {
+      <span class='no'>progress</span>$<span class='fu'>set</span>(<span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>i</span>)
+      <span class='fu'><a href='https://rdrr.io/r/base/Sys.sleep.html'>Sys.sleep</a></span>(<span class='fl'>0.5</span>)
+    }
+    <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>cars</span>)
+  })
+}
+
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+

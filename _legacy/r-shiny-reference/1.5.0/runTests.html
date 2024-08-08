@@ -1,0 +1,66 @@
+---
+layout: reference
+title: "Runs the tests associated with this Shiny app — runTests"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Runs the tests associated with this Shiny app</h1>
+  
+
+  <pre class="code"><span class='fu'>runTests</span>(<span class='kw'>appDir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>assert</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/environment.html'>globalenv</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>appDir</p></th>
+    <td><p>The base directory for the application.</p></td>
+  </tr>
+  <tr>
+    <th><p>filter</p></th>
+    <td><p>If not <code>NULL</code>, only tests with file names matching this regular
+expression will be executed. Matching is performed on the file name
+including the extension.</p></td>
+  </tr>
+  <tr>
+    <th><p>assert</p></th>
+    <td><p>Logical value which determines if an error should be thrown if any error is captured.</p></td>
+  </tr>
+  <tr>
+    <th><p>envir</p></th>
+    <td><p>Parent testing environment in which to base the individual testing environments.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Sources the <code>.R</code> files in the top-level of <code>tests/</code> much like <code>R CMD check</code>.
+These files are typically simple runners for tests nested in other
+directories under <code>tests/</code>.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A data frame classed with the supplemental class <code>"shiny_runtests"</code>.
+The data frame has the following columns:</p><table class='table'>
+<tr><td><strong>Name</strong></td><td><strong>Type</strong></td><td><strong>Meaning</strong></td></tr>
+<tr><td><code>file</code></td><td><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code></td><td>File name of the runner script in <code>tests/</code> that was sourced.</td></tr>
+<tr><td><code>pass</code></td><td><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></td><td>Whether or not the runner script signaled an error when sourced.</td></tr>
+<tr><td><code>result</code></td><td>any or <code>NA</code></td><td>The return value of the runner</td></tr>
+</table>
+
+
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>Historically, <a href='https://rstudio.github.io/shinytest/'>shinytest</a>
+recommended placing tests at the top-level of the <code>tests/</code> directory.
+This older folder structure is not supported by runTests.
+Please see <code><a href='shinyAppTemplate.html'>shinyAppTemplate()</a></code> for more details.</p>
+  </div>
+
+</div>
+
+

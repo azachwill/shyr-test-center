@@ -1,0 +1,23 @@
+---
+title: Shiny for R cheatsheet
+date: 2021-08-09
+author: Garrett Grolemund
+description: The Shiny cheatsheet provides a tour of the shiny package and explains how to build and customize an interactive app.
+---
+
+:::{.text-center}
+![](cheatsheet2.jpg){.shadow .mb-5 fig-alt="Shiny cheatsheet"}
+::: 
+
+The Shiny for R cheatsheet provides a tour of the shiny package and explains how to build and customize an interactive app. 
+
+
+
+:::{.grid .pt-4}
+:::{.g-col-12 .g-col-lg-6}
+[Download Shiny Cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/shiny.pdf){.btn .btn-primary .no-icon .w-100} 
+:::
+:::{.g-col-12 .g-col-lg-6}
+[See all cheatsheets](https://github.com/rstudio/cheatsheets){.btn .btn-secondary .no-icon .w-100}
+:::
+:::

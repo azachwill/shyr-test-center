@@ -1,0 +1,18 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: Interactively change the css attributes of elements on a page with sliders and buttons.
+title:        "Interactive Button Styler"
+author:    Emil Hvitfeldt Hansen
+authorurl:     null
+date:         2019-05-31
+tags:       
+ - css
+ - html
+appurl:      https://emilhvitfeldt.shinyapps.io/project/
+sourceurl:   https://rstudio.cloud/project/210622
+rscloudurl:  https://rstudio.cloud/project/210622
+---
+
+Interactively change the css attributes of elements on a page with sliders and buttons.
+  

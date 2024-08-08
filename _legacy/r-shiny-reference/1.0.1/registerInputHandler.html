@@ -1,0 +1,92 @@
+---
+layout: reference
+title: "registerInputHandler"
+categories: reference
+---
+<h1>Register an Input Handler</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='registerInputHandler.html'>registerInputHandler</a></span><span class="keyword">(</span><span class="symbol">type</span><span class="keyword">,</span> <span class="symbol">fun</span><span class="keyword">,</span> <span class="argument">force</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>type</th>
+    <td>The type for which the handler should be added -- should be a
+single-element character vector.</td>
+  </tr>
+  <tr>
+    <th>fun</th>
+    <td>The handler function. This is the function that will be used to
+parse the data delivered from the client before it is available in the
+<code>input</code> variable. The function will be called with the following three
+parameters:
+ <ol>
+<li>The value of this input as provided by the client, deserialized
+   using jsonlite.
+   </li>
+<li>The <code>shinysession</code> in which the input exists.
+   </li>
+<li>The name of the input.
+ </li>
+</ol>
+</td>
+  </tr>
+  <tr>
+    <th>force</th>
+    <td>If <code>TRUE</code>, will overwrite any existing handler without
+warning. If <code>FALSE</code>, will throw an error if this class already has
+a handler defined.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Adds an input handler for data of this type. When called, Shiny will use the
+function provided to refine the data passed back from the client (after being
+deserialized by jsonlite) before making it available in the <code>input</code>
+variable of the <code>server.R</code> file.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This function will register the handler for the duration of the R process
+(unless Shiny is explicitly reloaded). For that reason, the <code>type</code> used
+should be very specific to this package to minimize the risk of colliding
+with another Shiny package which might use this data type name. We recommend
+the format of &quot;packageName.widgetName&quot;.</p>
+
+  <p>Currently Shiny registers the following handlers: <code>shiny.matrix</code>,
+<code>shiny.number</code>, and <code>shiny.date</code>.</p>
+
+  <p>The <code>type</code> of a custom Shiny Input widget will be deduced using the
+<code>getType()</code> JavaScript function on the registered Shiny inputBinding.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># # Register an input handler which rounds a input number to the nearest integer</span>
+<span class="comment"># registerInputHandler("mypackage.validint", function(x, shinysession, name) {</span>
+<span class="comment">#   if (is.null(x)) return(NA)</span>
+<span class="comment">#   round(x)</span>
+<span class="comment"># })</span>
+<span class="comment"># </span>
+<span class="comment"># ## On the Javascript side, the associated input binding must have a corresponding getType method:</span>
+<span class="comment"># getType: function(el) {</span>
+<span class="comment">#   return "mypackage.validint";</span>
+<span class="comment"># }</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>registerInputHandler</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='removeInputHandler.html'>removeInputHandler</a></code></p>
+</div>

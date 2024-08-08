@@ -1,0 +1,143 @@
+---
+layout: reference
+title: "Find rows of data selected on an interactive plot. — brushedPoints"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Find rows of data selected on an interactive plot.</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/image-interact.R" class="external-link"><code>R/image-interact.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p><code>brushedPoints()</code> returns rows from a data frame which are under a brush.
+<code>nearPoints()</code> returns rows from a data frame which are near a click, hover,
+or double-click. Alternatively, set <code>allRows = TRUE</code> to return all rows from
+the input data with an additional column <code>selected_</code> that indicates which
+rows of the would be selected.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">brushedPoints</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  df,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  brush,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xvar =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">yvar =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">panelvar1 =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">panelvar2 =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">allRows =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">nearPoints</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  df,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  coordinfo,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xvar =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">yvar =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">panelvar1 =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">panelvar2 =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="dv">5</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxpoints =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">addDist =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">allRows =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>df</dt>
+<dd><p>A data frame from which to select rows.</p></dd>
+
+
+<dt>brush, coordinfo</dt>
+<dd><p>The data from a brush or click/dblclick/hover event
+e.g. <code>input$plot_brush</code>, <code>input$plot_click</code>.</p></dd>
+
+
+<dt>xvar, yvar</dt>
+<dd><p>A string giving the name of the variable on the x or y axis.
+These are only required for base graphics, and must be the name of
+a column in <code>df</code>.</p></dd>
+
+
+<dt>panelvar1, panelvar2</dt>
+<dd><p>A string giving the name of a panel variable.
+For expert use only; in most cases these will be automatically
+derived from the ggplot2 spec.</p></dd>
+
+
+<dt>allRows</dt>
+<dd><p>If <code>FALSE</code> (the default) return a data frame containing
+the selected rows. If <code>TRUE</code>, the input data frame will have a new
+column, <code>selected_</code>, which indicates whether the row was selected or not.</p></dd>
+
+
+<dt>threshold</dt>
+<dd><p>A maximum distance (in pixels) to the pointer location.
+Rows in the data frame will be selected if the distance to the pointer is
+less than <code>threshold</code>.</p></dd>
+
+
+<dt>maxpoints</dt>
+<dd><p>Maximum number of rows to return. If <code>NULL</code> (the default),
+will return all rows within the threshold distance.</p></dd>
+
+
+<dt>addDist</dt>
+<dd><p>If TRUE, add a column named <code>dist_</code> that contains the
+distance from the coordinate to the point, in pixels. When no pointer
+event has yet occurred, the value of <code>dist_</code> will be <code>NA</code>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A data frame based on <code>df</code>, containing the observations selected by the
+brush or near the click event. For <code>nearPoints()</code>, the rows will be sorted
+by distance to the event.</p>
+
+
+<p>If <code>allRows = TRUE</code>, then all rows will returned, along with a new
+<code>selected_</code> column that indicates whether or not the point was selected.
+The output from <code>nearPoints()</code> will no longer be sorted, but you can
+set <code>addDist = TRUE</code> to get an additional column that gives the pixel
+distance to the pointer.</p>
+  </div>
+  <div data-section="ggplot-">
+    <h3 id="ggplot-">ggplot2</h3>
+    
+
+<p>For plots created with ggplot2, it is not necessary to specify the
+column names to <code>xvar</code>, <code>yvar</code>, <code>panelvar1</code>, and <code>panelvar2</code> as that
+information can be automatically derived from the plot specification.</p>
+<p>Note, however, that this will not work if you use a computed column, like
+<code>aes(speed/2, dist))</code>. Instead, we recommend that you modify the data
+first, and then make the plot with "raw" columns in the modified data.</p>
+  </div>
+  <div data-section="brushing">
+    <h3 id="brushing">Brushing</h3>
+    
+
+<p>If x or y column is a factor, then it will be coerced to an integer vector.
+If it is a character vector, then it will be coerced to a factor and then
+integer vector. This means that the brush will be considered to cover a
+given character/factor value when it covers the center value.</p>
+<p>If the brush is operating in just the x or y directions (e.g., with
+<code>brushOpts(direction = "x")</code>, then this function will filter out points
+using just the x or y variable, whichever is appropriate.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="plotOutput.html">plotOutput()</a></code> for example usage.</p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that in practice, these examples would need to go in reactives</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># or observers.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This would select all points within 5 pixels of the click</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nearPoints</span>(mtcars, input<span class="sc">$</span>plot_click)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Select just the nearest point within 10 pixels of the click</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nearPoints</span>(mtcars, input<span class="sc">$</span>plot_click, <span class="at">threshold =</span> <span class="dv">10</span>, <span class="at">maxpoints =</span> <span class="dv">1</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>

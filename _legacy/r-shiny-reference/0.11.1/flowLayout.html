@@ -1,0 +1,99 @@
+---
+layout: reference
+title: "flowLayout"
+categories: reference
+---
+<h1>Flow layout</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='flowLayout.html'>flowLayout</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">cellArgs</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Unnamed arguments will become child elements of the layout. Named
+arguments will become HTML attributes on the outermost tag.</td>
+  </tr>
+  <tr>
+    <th>cellArgs</th>
+    <td>Any additional attributes that should be used for each cell
+  of the layout.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Lays out elements in a left-to-right, top-to-bottom arrangement. The elements
+on a given row will be top-aligned with each other. This layout will not work
+well with elements that have a percentage-based width (e.g. `plotOutput` at
+its default setting of `width = &quot;100</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='flowLayout.html'>flowLayout</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='numericInput.html'>numericInput</a></span><span class="keyword">(</span><span class="string">"rows"</span><span class="keyword">,</span> <span class="string">"How many rows?"</span><span class="keyword">,</span> <span class="number">5</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='selectInput.html'>selectInput</a></span><span class="keyword">(</span><span class="string">"letter"</span><span class="keyword">,</span> <span class="string">"Which letter?"</span><span class="keyword">,</span> <span class="symbol">LETTERS</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"value"</span><span class="keyword">,</span> <span class="string">"What value?"</span><span class="keyword">,</span> <span class="number">0</span><span class="keyword">,</span> <span class="number">100</span><span class="keyword">,</span> <span class="number">50</span><span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;shiny-flow-layout&quot;&gt;
+  &lt;div&gt;
+    &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+      &lt;label for=&quot;rows&quot;&gt;How many rows?&lt;/label&gt;
+      &lt;input id=&quot;rows&quot; type=&quot;number&quot; class=&quot;form-control&quot; value=&quot;5&quot;/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;letter&quot;&gt;Which letter?&lt;/label&gt;
+      &lt;div&gt;
+        &lt;select id=&quot;letter&quot;&gt;&lt;option value=&quot;A&quot; selected&gt;A&lt;/option&gt;
+&lt;option value=&quot;B&quot;&gt;B&lt;/option&gt;
+&lt;option value=&quot;C&quot;&gt;C&lt;/option&gt;
+&lt;option value=&quot;D&quot;&gt;D&lt;/option&gt;
+&lt;option value=&quot;E&quot;&gt;E&lt;/option&gt;
+&lt;option value=&quot;F&quot;&gt;F&lt;/option&gt;
+&lt;option value=&quot;G&quot;&gt;G&lt;/option&gt;
+&lt;option value=&quot;H&quot;&gt;H&lt;/option&gt;
+&lt;option value=&quot;I&quot;&gt;I&lt;/option&gt;
+&lt;option value=&quot;J&quot;&gt;J&lt;/option&gt;
+&lt;option value=&quot;K&quot;&gt;K&lt;/option&gt;
+&lt;option value=&quot;L&quot;&gt;L&lt;/option&gt;
+&lt;option value=&quot;M&quot;&gt;M&lt;/option&gt;
+&lt;option value=&quot;N&quot;&gt;N&lt;/option&gt;
+&lt;option value=&quot;O&quot;&gt;O&lt;/option&gt;
+&lt;option value=&quot;P&quot;&gt;P&lt;/option&gt;
+&lt;option value=&quot;Q&quot;&gt;Q&lt;/option&gt;
+&lt;option value=&quot;R&quot;&gt;R&lt;/option&gt;
+&lt;option value=&quot;S&quot;&gt;S&lt;/option&gt;
+&lt;option value=&quot;T&quot;&gt;T&lt;/option&gt;
+&lt;option value=&quot;U&quot;&gt;U&lt;/option&gt;
+&lt;option value=&quot;V&quot;&gt;V&lt;/option&gt;
+&lt;option value=&quot;W&quot;&gt;W&lt;/option&gt;
+&lt;option value=&quot;X&quot;&gt;X&lt;/option&gt;
+&lt;option value=&quot;Y&quot;&gt;Y&lt;/option&gt;
+&lt;option value=&quot;Z&quot;&gt;Z&lt;/option&gt;&lt;/select&gt;
+        &lt;script type=&quot;application/json&quot; data-for=&quot;letter&quot; data-nonempty=&quot;&quot;&gt;{}&lt;/script&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;value&quot;&gt;What value?&lt;/label&gt;
+      &lt;input class=&quot;js-range-slider&quot; id=&quot;value&quot; data-min=&quot;0&quot; data-max=&quot;100&quot; data-from=&quot;50&quot; data-step=&quot;1&quot; data-grid=&quot;true&quot; data-grid-num=&quot;10&quot; data-grid-snap=&quot;false&quot; data-prettify-separator=&quot;,&quot; data-keyboard=&quot;true&quot; data-keyboard-step=&quot;1&quot;/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>flowLayout</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='verticalLayout.html'>verticalLayout</a></code></p>
+</div>

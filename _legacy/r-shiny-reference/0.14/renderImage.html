@@ -1,0 +1,145 @@
+---
+layout: reference
+title: "renderImage"
+categories: reference
+---
+<h1>Image file output</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='renderImage.html'>renderImage</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="argument">env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">deleteFile</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span>
+  <span class="argument">outputArgs</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that returns a list.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
+is useful if you want to save an expression in a variable.</td>
+  </tr>
+  <tr>
+    <th>deleteFile</th>
+    <td>Should the file in <code>func()$src</code> be deleted after
+it is sent to the client browser? Generally speaking, if the image is a
+temp file generated within <code>func</code>, then this should be <code>TRUE</code>;
+if the image is not a temp file, this should be <code>FALSE</code>.</td>
+  </tr>
+  <tr>
+    <th>outputArgs</th>
+    <td>A list of arguments to be passed through to the implicit
+call to <code><a href='plotOutput.html'>imageOutput</a></code> when <code>renderImage</code> is used in an
+interactive R Markdown document.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Renders a reactive image that is suitable for assigning to an <code>output</code>
+slot.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The expression <code>expr</code> must return a list containing the attributes for
+the <code>img</code> object on the client web page. For the image to display,
+properly, the list must have at least one entry, <code>src</code>, which is the
+path to the image file. It may also useful to have a <code>contentType</code>
+entry specifying the MIME type of the image. If one is not provided,
+<code>renderImage</code> will try to autodetect the type, based on the file
+extension.</p>
+
+  <p>Other elements such as <code>width</code>, <code>height</code>, <code>class</code>, and
+<code>alt</code>, can also be added to the list, and they will be used as
+attributes in the <code>img</code> object.</p>
+
+  <p>The corresponding HTML output tag should be <code>div</code> or <code>img</code> and have
+the CSS class name <code>shiny-image-output</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"n"</span><span class="keyword">,</span> <span class="string">"Number of observations"</span><span class="keyword">,</span> <span class="number">2</span><span class="keyword">,</span> <span class="number">1000</span><span class="keyword">,</span> <span class="number">500</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot2"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot3"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+  <span class="comment"># A plot of fixed size</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot1</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderImage.html'>renderImage</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="comment"># A temp file to save the output. It will be deleted after renderImage</span>
+    <span class="comment"># sends it, because deleteFile=TRUE.</span>
+    <span class="symbol">outfile</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span><span class="keyword">(</span><span class="argument">fileext</span><span class="argument">=</span><span class="string">'.png'</span><span class="keyword">)</span>
+
+    <span class="comment"># Generate a png</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a></span><span class="keyword">(</span><span class="symbol">outfile</span><span class="keyword">,</span> <span class="argument">width</span><span class="argument">=</span><span class="number">400</span><span class="keyword">,</span> <span class="argument">height</span><span class="argument">=</span><span class="number">400</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">n</span><span class="keyword">)</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/grDevices/topics/dev'>dev.off</a></span><span class="keyword">(</span><span class="keyword">)</span>
+
+    <span class="comment"># Return a list</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">src</span> <span class="argument">=</span> <span class="symbol">outfile</span><span class="keyword">,</span>
+         <span class="argument">alt</span> <span class="argument">=</span> <span class="string">"This is alternate text"</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">,</span> <span class="argument">deleteFile</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+
+  <span class="comment"># A dynamically-sized plot</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot2</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderImage.html'>renderImage</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="comment"># Read plot2's width and height. These are reactive values, so this</span>
+    <span class="comment"># expression will re-run whenever these values change.</span>
+    <span class="symbol">width</span>  <span class="assignement">&lt;-</span> <span class="symbol">session</span><span class="keyword">$</span><span class="symbol">clientData</span><span class="keyword">$</span><span class="symbol">output_plot2_width</span>
+    <span class="symbol">height</span> <span class="assignement">&lt;-</span> <span class="symbol">session</span><span class="keyword">$</span><span class="symbol">clientData</span><span class="keyword">$</span><span class="symbol">output_plot2_height</span>
+
+    <span class="comment"># A temp file to save the output.</span>
+    <span class="symbol">outfile</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span><span class="keyword">(</span><span class="argument">fileext</span><span class="argument">=</span><span class="string">'.png'</span><span class="keyword">)</span>
+
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a></span><span class="keyword">(</span><span class="symbol">outfile</span><span class="keyword">,</span> <span class="argument">width</span><span class="argument">=</span><span class="symbol">width</span><span class="keyword">,</span> <span class="argument">height</span><span class="argument">=</span><span class="symbol">height</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">n</span><span class="keyword">)</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/grDevices/topics/dev'>dev.off</a></span><span class="keyword">(</span><span class="keyword">)</span>
+
+    <span class="comment"># Return a list containing the filename</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">src</span> <span class="argument">=</span> <span class="symbol">outfile</span><span class="keyword">,</span>
+         <span class="argument">width</span> <span class="argument">=</span> <span class="symbol">width</span><span class="keyword">,</span>
+         <span class="argument">height</span> <span class="argument">=</span> <span class="symbol">height</span><span class="keyword">,</span>
+         <span class="argument">alt</span> <span class="argument">=</span> <span class="string">"This is alternate text"</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">,</span> <span class="argument">deleteFile</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+
+  <span class="comment"># Send a pre-rendered image, and don't delete the image after sending it</span>
+  <span class="comment"># NOTE: For this example to work, it would require files in a subdirectory</span>
+  <span class="comment"># named images/</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot3</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderImage.html'>renderImage</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="comment"># When input$n is 1, filename is ./images/image1.jpeg</span>
+    <span class="symbol">filename</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/normalizePath'>normalizePath</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span><span class="keyword">(</span><span class="string">'./images'</span><span class="keyword">,</span>
+                              <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">'image'</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">n</span><span class="keyword">,</span> <span class="string">'.jpeg'</span><span class="keyword">,</span> <span class="argument">sep</span><span class="argument">=</span><span class="string">''</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span>
+
+    <span class="comment"># Return a list containing the filename</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">src</span> <span class="argument">=</span> <span class="symbol">filename</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">,</span> <span class="argument">deleteFile</span> <span class="argument">=</span> <span class="number">FALSE</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>renderImage</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p>For more details on how the images are generated, and how to control
+  the output, see <code><a href='plotPNG.html'>plotPNG</a></code>.</p>
+</div>

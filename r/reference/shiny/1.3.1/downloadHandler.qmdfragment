@@ -1,0 +1,86 @@
+---
+title: "downloadHandler"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='downloadHandler.html'>downloadHandler</a></span><span class="keyword">(</span><span class="symbol">filename</span><span class="keyword">,</span> <span class="symbol">content</span><span class="keyword">,</span> <span class="argument">contentType</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">NA</span><span class="keyword">,</span>
+  <span class="argument">outputArgs</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>filename</th>
+    <td>A string of the filename, including extension, that the
+user&#39;s web browser should default to when downloading the file; or a
+function that returns such a string. (Reactive values and functions may be
+used from this function.)</td>
+  </tr>
+  <tr>
+    <th>content</th>
+    <td>A function that takes a single argument <code>file</code> that is a
+file path (string) of a nonexistent temp file, and writes the content to
+that file path. (Reactive values and functions may be used from this
+function.)</td>
+  </tr>
+  <tr>
+    <th>contentType</th>
+    <td>A string of the download&#39;s
+<a href = 'http://en.wikipedia.org/wiki/Internet_media_type'>content type</a>, for
+example <code>&quot;text/csv&quot;</code> or <code>&quot;image/png&quot;</code>. If <code>NULL</code> or
+<code>NA</code>, the content type will be guessed based on the filename
+extension, or <code>application/octet-stream</code> if the extension is unknown.</td>
+  </tr>
+  <tr>
+    <th>outputArgs</th>
+    <td>A list of arguments to be passed through to the implicit
+call to <code><a href='downloadButton.html'>downloadButton</a></code> when <code>downloadHandler</code> is used
+in an interactive R Markdown document.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Allows content from the Shiny application to be made available to the user as
+file downloads (for example, downloading the currently visible data as a CSV
+file). Both filename and contents can be calculated dynamically at the time
+the user initiates the download. Assign the return value to a slot on
+<code>output</code> in your server function, and in the UI use
+<code><a href='downloadButton.html'>downloadButton</a></code> or <code><a href='downloadButton.html'>downloadLink</a></code> to make the
+download available.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='downloadButton.html'>downloadLink</a></span><span class="keyword">(</span><span class="string">"downloadData"</span><span class="keyword">,</span> <span class="string">"Download"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="comment"># Our dataset</span>
+  <span class="symbol">data</span> <span class="assignement">&lt;-</span> <span class="symbol">mtcars</span>
+
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">downloadData</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='downloadHandler.html'>downloadHandler</a></span><span class="keyword">(</span>
+    <span class="argument">filename</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"data-"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="string">".csv"</span><span class="keyword">,</span> <span class="argument">sep</span><span class="argument">=</span><span class="string">""</span><span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">,</span>
+    <span class="argument">content</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">file</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/write.table'>write.csv</a></span><span class="keyword">(</span><span class="symbol">data</span><span class="keyword">,</span> <span class="symbol">file</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>downloadHandler</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

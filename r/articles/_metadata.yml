@@ -1,0 +1,11 @@
+format:
+  html:
+    code-overflow: wrap
+    toc: false
+    sidebar: true
+    css:
+      - articles.css
+      - ../../r/secondary-menu.css
+lightbox:
+  effect: fade
+layout: article

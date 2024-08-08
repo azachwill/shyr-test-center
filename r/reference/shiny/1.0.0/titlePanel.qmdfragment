@@ -1,0 +1,53 @@
+---
+title: "titlePanel"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='titlePanel.html'>titlePanel</a></span><span class="keyword">(</span><span class="symbol">title</span><span class="keyword">,</span> <span class="argument">windowTitle</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">title</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>title</th>
+    <td>An application title to display</td>
+  </tr>
+  <tr>
+    <th>windowTitle</th>
+    <td>The title that should be displayed by the browser window.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a panel containing an application title.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Calling this function has the side effect of including a
+  <code>title</code> tag within the head. You can also specify a page title
+  explicitly using the `title` parameter of the top-level page function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='titlePanel.html'>titlePanel</a></span><span class="keyword">(</span><span class="string">"Hello Shiny!"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="argument">server</span> <span class="argument">=</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>titlePanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

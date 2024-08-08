@@ -1,0 +1,52 @@
+---
+layout: reference
+title: "Include Content From a File — include"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Include Content From a File</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.1/R/tags.R" class="external-link"><code>R/tags.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Load HTML, text, or rendered Markdown from a file and turn into HTML.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">includeHTML</span>(path)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">includeText</span>(path)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">includeMarkdown</span>(path)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">includeCSS</span>(path, ...)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">includeScript</span>(path, ...)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>path</dt>
+<dd><p>The path of the file to be included. It is highly recommended to
+use a relative path (the base path being the Shiny application directory),
+not an absolute path.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Any additional attributes to be applied to the generated tag.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>These functions provide a convenient way to include an extensive amount of
+HTML, textual, Markdown, CSS, or JavaScript content, rather than using a
+large literal R string.</p>
+  </div>
+  <div data-section="note">
+    <h3 id="note">Note</h3>
+    <p><code>includeText</code> escapes its contents, but does no other processing.
+This means that hard breaks and multiple spaces will be rendered as they
+usually are in HTML: as a single space character. If you are looking for
+preformatted text, wrap the call with <code><a href="builder.html">pre()</a></code>, or consider using
+<code>includeMarkdown</code> instead.</p>
+<p>The <code>includeMarkdown</code> function requires the <code>markdown</code>
+package.</p>
+  </div>
+
+</div>

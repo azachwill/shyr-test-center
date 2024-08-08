@@ -1,0 +1,84 @@
+---
+title: "Enable/disable busy indication — useBusyIndicators"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.9.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.9.0/R/busy-indicators.R" class="external-link"><code>R/busy-indicators.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Busy indicators provide a visual cue to users when the server is busy
+calculating outputs or otherwise performing tasks (e.g., producing
+downloads). When enabled, a spinner is shown on each
+calculating/recalculating output, and a pulsing banner is shown at the top of
+the page when the app is otherwise busy. Busy indication is enabled by
+default for UI created with <span class="pkg">bslib</span>, but must be enabled otherwise. To
+enable/disable, include the result of this function in anywhere in the app's
+UI.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">useBusyIndicators</span>(..., <span class="at">spinners =</span> <span class="cn">TRUE</span>, <span class="at">pulse =</span> <span class="cn">TRUE</span>, <span class="at">fade =</span> <span class="cn">TRUE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>Currently ignored.</p></dd>
+
+
+<dt>spinners</dt>
+<dd><p>Whether to show a spinner on each calculating/recalculating
+output.</p></dd>
+
+
+<dt>pulse</dt>
+<dd><p>Whether to show a pulsing banner at the top of the page when the
+app is busy.</p></dd>
+
+
+<dt>fade</dt>
+<dd><p>Whether to fade recalculating outputs. A value of <code>FALSE</code> is
+equivalent to <code>busyIndicatorOptions(fade_opacity=1)</code>.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>When both <code>spinners</code> and <code>pulse</code> are set to <code>TRUE</code>, the pulse is
+automatically disabled when spinner(s) are active. When both <code>spinners</code> and
+<code>pulse</code> are set to <code>FALSE</code>, no busy indication is shown (other than the
+graying out of recalculating outputs).</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="busyIndicatorOptions.html">busyIndicatorOptions()</a></code> for customizing the appearance of the busy
+indicators.</p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) { <span class="co"># rlang::is_interactive()</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(bslib)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">page_fillable</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">useBusyIndicators</span>(),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="fu">card</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="fu">card_header</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>      <span class="st">"A plot"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>      <span class="fu">input_task_button</span>(<span class="st">"simulate"</span>, <span class="st">"Simulate"</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>      <span class="at">class =</span> <span class="st">"d-flex justify-content-between align-items-center"</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    ),</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="st">"p"</span>),</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  )</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  output<span class="sc">$</span>p <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    input<span class="sc">$</span>simulate</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    <span class="fu">Sys.sleep</span>(<span class="dv">4</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>), <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  })</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>}</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

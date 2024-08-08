@@ -1,0 +1,60 @@
+---
+layout: reference
+title: "runGist"
+categories: reference
+
+---
+<h1>Run a Shiny application from https://gist.github.com</h1>
+
+<pre class="code"><code class="r"><div>runGist(gist, port&nbsp;=&nbsp;NULL, launch.browser&nbsp;=&nbsp;getOption("shiny.launch.browser", interactive()))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>gist</th>
+    <td>The identifier of the gist. For example, if the gist is
+https://gist.github.com/jcheng5/3239667, then <code>3239667</code>,
+<code>'3239667'</code>, and <code>'https://gist.github.com/jcheng5/3239667'</code>
+are all valid values.</td>
+  </tr>
+  <tr>
+    <th>port</th>
+    <td>The TCP port that the application should listen on. Defaults to
+choosing a random port.</td>
+  </tr>
+  <tr>
+    <th>launch.browser</th>
+    <td>If true, the system's default web browser will be
+  launched automatically after the app is started. Defaults to true in
+  interactive sessions only.</td>
+  </tr>
+</table>
+
+<div data-section="Run a Shiny application from https://gist.github.com">
+  <h3 data-swiftype-index="false">Run a Shiny application from https://gist.github.com</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Download and launch a Shiny application that is hosted on GitHub as a gist.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# runGist(3239667)
+# runGist(&quot;https://gist.github.com/jcheng5/3239667&quot;)
+# 
+# # Old URL format without username
+# runGist(&quot;https://gist.github.com/3239667&quot;)
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+</div></pre>
+<!-- <ul>
+  <li>runGist</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

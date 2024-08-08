@@ -1,0 +1,59 @@
+---
+layout: reference
+title: "htmlOutput"
+categories: reference
+---
+<h1>Create an HTML output element</h1>
+
+<pre class="code"><code class="r"><div>htmlOutput(outputId)</div>
+<div>uiOutput(outputId)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the value from</td>
+  </tr>
+</table>
+
+<div data-section="Create an HTML output element">
+  <h3 data-swiftype-index="false">Create an HTML output element</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>An HTML output element that can be included in a panel</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Render a reactive output variable as HTML within an application page. The
+text will be included within an HTML <code>div</code> tag, and is presumed to
+contain HTML content which should not be escaped.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p><code>uiOutput</code> is intended to be used with <code>renderUI</code> on the
+server side. It is currently just an alias for <code>htmlOutput</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>htmlOutput(&quot;summary&quot;)
+</div>
+<div class='output'>&lt;div id=&quot;summary&quot; class=&quot;shiny-html-output&quot;&gt;&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>htmlOutput</li><li>uiOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

@@ -1,0 +1,65 @@
+---
+layout: reference
+title: "verbatimTextOutput"
+categories: reference
+---
+<h1>Create a verbatim text output element</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the value from</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A verbatim text output element that can be included in a panel
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Render a reactive output variable as verbatim text within an
+application page. The text will be included within an HTML <code>pre</code> tag.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Text is HTML-escaped prior to rendering. This element is often used
+with the <a href='renderPrint.html'>renderPrint</a> function to preserve fixed-width formatting
+of printed objects.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='builder.html'>h4</a></span><span class="keyword">(</span><span class="string">"Summary"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span><span class="keyword">(</span><span class="string">"summary"</span><span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="functioncall"><a href='builder.html'>h4</a></span><span class="keyword">(</span><span class="string">"Observations"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">"view"</span><span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;col-sm-8&quot;&gt;
+  &lt;h4&gt;Summary&lt;/h4&gt;
+  &lt;pre id=&quot;summary&quot; class=&quot;shiny-text-output&quot;&gt;&lt;/pre&gt;
+  &lt;h4&gt;Observations&lt;/h4&gt;
+  &lt;div id=&quot;view&quot; class=&quot;shiny-html-output&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>verbatimTextOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+

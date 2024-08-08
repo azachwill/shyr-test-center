@@ -1,0 +1,99 @@
+---
+title: "pageWithSidebar"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='pageWithSidebar.html'>pageWithSidebar</a></span><span class="keyword">(</span><span class="symbol">headerPanel</span><span class="keyword">,</span> <span class="symbol">sidebarPanel</span><span class="keyword">,</span> <span class="symbol">mainPanel</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>headerPanel</th>
+    <td>The <a href='headerPanel.html'>headerPanel</a> with the application title</td>
+  </tr>
+  <tr>
+    <th>sidebarPanel</th>
+    <td>The <a href='sidebarPanel.html'>sidebarPanel</a> containing input controls</td>
+  </tr>
+  <tr>
+    <th>mainPanel</th>
+    <td>The <a href='mainPanel.html'>mainPanel</a> containing outputs</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a Shiny UI that contains a header with the application title, a
+sidebar for input controls, and a main area for output.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+
+  <p>This function is deprecated. You should use <code><a href='fluidPage.html'>fluidPage</a></code>
+along with <code><a href='sidebarLayout.html'>sidebarLayout</a></code> to implement a page with a sidebar.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># Define UI</span>
+<span class="functioncall"><a href='shinyUI.html'>shinyUI</a></span><span class="keyword">(</span><span class="functioncall"><a href='pageWithSidebar.html'>pageWithSidebar</a></span><span class="keyword">(</span>
+
+  <span class="comment"># Application title</span>
+  <span class="functioncall"><a href='headerPanel.html'>headerPanel</a></span><span class="keyword">(</span><span class="string">"Hello Shiny!"</span><span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="comment"># Sidebar with a slider input</span>
+  <span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"obs"</span><span class="keyword">,</span>
+                <span class="string">"Number of observations:"</span><span class="keyword">,</span>
+                <span class="argument">min</span> <span class="argument">=</span> <span class="number">0</span><span class="keyword">,</span>
+                <span class="argument">max</span> <span class="argument">=</span> <span class="number">1000</span><span class="keyword">,</span>
+                <span class="argument">value</span> <span class="argument">=</span> <span class="number">500</span><span class="keyword">)</span>
+  <span class="keyword">)</span><span class="keyword">,</span>
+
+  <span class="comment"># Show a plot of the generated distribution</span>
+  <span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"distPlot"</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-sm-12&quot;&gt;
+      &lt;h1&gt;Hello Shiny!&lt;/h1&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-sm-4&quot;&gt;
+      &lt;form class=&quot;well&quot;&gt;
+        &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+          &lt;label class=&quot;control-label&quot; for=&quot;obs&quot;&gt;Number of observations:&lt;/label&gt;
+          &lt;input class=&quot;js-range-slider&quot; id=&quot;obs&quot; data-min=&quot;0&quot; data-max=&quot;1000&quot; data-from=&quot;500&quot; data-step=&quot;1&quot; data-grid=&quot;true&quot; data-grid-num=&quot;10&quot; data-grid-snap=&quot;false&quot; data-prettify-separator=&quot;,&quot; data-keyboard=&quot;true&quot; data-keyboard-step=&quot;0.1&quot;/&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col-sm-8&quot;&gt;
+      &lt;div id=&quot;distPlot&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>pageWithSidebar</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

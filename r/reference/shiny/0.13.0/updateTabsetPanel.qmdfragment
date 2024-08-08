@@ -1,0 +1,68 @@
+---
+title: "updateTabsetPanel"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='updateTabsetPanel.html'>updateTabsetPanel</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="symbol">inputId</span><span class="keyword">,</span> <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='updateTabsetPanel.html'>updateNavbarPage</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="symbol">inputId</span><span class="keyword">,</span> <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='updateTabsetPanel.html'>updateNavlistPanel</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="symbol">inputId</span><span class="keyword">,</span> <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</td>
+  </tr>
+  <tr>
+    <th>inputId</th>
+    <td>The id of the <code>tabsetPanel</code>, <code>navlistPanel</code>,
+or <code>navbarPage</code> object.</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The name of the tab to make active.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Change the selected tab on the client</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># shinyServer(function(input, output, session) {</span>
+<span class="comment"># </span>
+<span class="comment">#   observe({</span>
+<span class="comment">#     # TRUE if input$controller is even, FALSE otherwise.</span>
+<span class="comment">#     x_even &lt;- input$controller %% 2 == 0</span>
+<span class="comment"># </span>
+<span class="comment">#     # Change the selected tab.</span>
+<span class="comment">#     # Note that the tabset container must have been created with an 'id' argument</span>
+<span class="comment">#     if (x_even) {</span>
+<span class="comment">#       updateTabsetPanel(session, "inTabset", selected = "panel2")</span>
+<span class="comment">#     } else {</span>
+<span class="comment">#       updateTabsetPanel(session, "inTabset", selected = "panel1")</span>
+<span class="comment">#     }</span>
+<span class="comment">#   })</span>
+<span class="comment"># })</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>updateNavbarPage</li><li>updateNavlistPanel</li><li>updateTabsetPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='tabsetPanel.html'>tabsetPanel</a></code>, <code><a href='navlistPanel.html'>navlistPanel</a></code>,
+<code><a href='navbarPage.html'>navbarPage</a></code></p>
+</div>
+```

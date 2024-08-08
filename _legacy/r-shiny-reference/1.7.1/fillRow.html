@@ -1,0 +1,86 @@
+---
+layout: reference
+title: "Flex Box-based row/column layouts — fillRow"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Flex Box-based row/column layouts</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.1/R/bootstrap-layout.R" class="external-link"><code>R/bootstrap-layout.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Creates row and column layouts with proportionally-sized cells, using the
+Flex Box layout model of CSS3. These can be nested to create arbitrary
+proportional-grid layouts. <strong>Warning:</strong> Flex Box is not well supported
+by Internet Explorer, so these functions should only be used where modern
+browsers can be assumed.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fillRow</span>(..., <span class="at">flex =</span> <span class="dv">1</span>, <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"100%"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fillCol</span>(..., <span class="at">flex =</span> <span class="dv">1</span>, <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"100%"</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>UI objects to put in each row/column cell; each argument will
+occupy a single cell. (To put multiple items in a single cell, you can use
+<code><a href="tagList.html">tagList()</a></code> or <code><a href="builder.html">div()</a></code> to combine them.) Named
+arguments will be used as attributes on the <code>div</code> element that
+encapsulates the row/column.</p></dd>
+
+
+<dt>flex</dt>
+<dd><p>Determines how space should be distributed to the cells. Can be a
+single value like <code>1</code> or <code>2</code> to evenly distribute the available
+space; or use a vector of numbers to specify the proportions. For example,
+<code>flex = c(2, 3)</code> would cause the space to be split 40%/60% between
+two cells. NA values will cause the corresponding cell to be sized
+according to its contents (without growing or shrinking).</p></dd>
+
+
+<dt>width, height</dt>
+<dd><p>The total amount of width and height to use for the
+entire row/column. For the default height of <code>"100%"</code> to be
+effective, the parent must be <code>fillPage</code>, another
+<code>fillRow</code>/<code>fillCol</code>, or some other HTML element whose height is
+not determined by the height of its contents.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>If you try to use <code>fillRow</code> and <code>fillCol</code> inside of other
+Shiny containers, such as <code><a href="sidebarLayout.html">sidebarLayout()</a></code>,
+<code><a href="navbarPage.html">navbarPage()</a></code>, or even <code>tags$div</code>, you will probably find
+that they will not appear. This is due to <code>fillRow</code> and <code>fillCol</code>
+defaulting to <code>height="100%"</code>, which will only work inside of
+containers that have determined their own size (rather than shrinking to
+the size of their contents, as is usually the case in HTML).</p>
+<p>To avoid this problem, you have two options:</p><ul><li><p>only use <code>fillRow</code>/<code>fillCol</code> inside of <code>fillPage</code>,
+<code>fillRow</code>, or <code>fillCol</code></p></li>
+<li><p>provide an explicit <code>height</code> argument to
+<code>fillRow</code>/<code>fillCol</code></p></li>
+</ul></div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Only run this example in interactive R sessions.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fillPage</span>(<span class="fu">fillRow</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plotLeft"</span>, <span class="at">height =</span> <span class="st">"100%"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fillCol</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="st">"plotTopRight"</span>, <span class="at">height =</span> <span class="st">"100%"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="st">"plotBottomRight"</span>, <span class="at">height =</span> <span class="st">"100%"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plotLeft <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>(<span class="fu">plot</span>(cars))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plotTopRight <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>(<span class="fu">plot</span>(pressure))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plotBottomRight <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>(<span class="fu">plot</span>(AirPassengers))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>

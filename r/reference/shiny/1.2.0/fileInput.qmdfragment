@@ -1,0 +1,141 @@
+---
+title: "fileInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='fileInput.html'>fileInput</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="argument">multiple</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">accept</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">buttonLabel</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"Browse..."</span><span class="keyword">,</span>
+  <span class="argument">placeholder</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"No file selected"</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>input</code> slot that will be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code> for no label.</td>
+  </tr>
+  <tr>
+    <th>multiple</th>
+    <td>Whether the user should be allowed to select and upload
+multiple files at once. <b>Does not work on older browsers, including
+Internet Explorer 9 and earlier.</b></td>
+  </tr>
+  <tr>
+    <th>accept</th>
+    <td>A character vector of MIME types; gives the browser a hint of
+what kind of files the server is expecting.</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the input, e.g. <code>&#39;400px&#39;</code>, or <code>&#39;100%&#39;</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>.</td>
+  </tr>
+  <tr>
+    <th>buttonLabel</th>
+    <td>The label used on the button. Can be text or an HTML tag
+object.</td>
+  </tr>
+  <tr>
+    <th>placeholder</th>
+    <td>The text to show before a file has been uploaded.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a file upload control that can be used to upload one or more files.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Whenever a file upload completes, the corresponding input variable is set
+to a dataframe. This dataframe contains one row for each selected file, and
+the following columns:
+<dl>
+  <dt><code>name</code></dt><dd>The filename provided by the web browser. This is
+  <strong>not</strong> the path to read to get at the actual data that was uploaded
+  (see
+  <code>datapath</code> column).</dd></p>
+
+  <p><dt><code>size</code></dt><dd>The size of the uploaded data, in
+  bytes.</dd></p>
+
+  <p><dt><code>type</code></dt><dd>The MIME type reported by the browser (for example,
+  <code>text/plain</code>), or empty string if the browser didn&#39;t know.</dd></p>
+
+  <p><dt><code>datapath</code></dt><dd>The path to a temp file that contains the data that was
+  uploaded. This file may be deleted if the user performs another upload
+  operation.</dd></p>
+
+  <p></dl></p>
+
+  <p></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='sidebarLayout.html'>sidebarLayout</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='fileInput.html'>fileInput</a></span><span class="keyword">(</span><span class="string">"file1"</span><span class="keyword">,</span> <span class="string">"Choose CSV File"</span><span class="keyword">,</span>
+        <span class="argument">accept</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span>
+          <span class="string">"text/csv"</span><span class="keyword">,</span>
+          <span class="string">"text/comma-separated-values,text/plain"</span><span class="keyword">,</span>
+          <span class="string">".csv"</span><span class="keyword">)</span>
+        <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='builder.html'>hr</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"header"</span><span class="keyword">,</span> <span class="string">"Header"</span><span class="keyword">,</span> <span class="number">TRUE</span><span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">"contents"</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">contents</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderTable.html'>renderTable</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="comment"># input$file1 will be NULL initially. After the user selects</span>
+    <span class="comment"># and uploads a file, it will be a data frame with 'name',</span>
+    <span class="comment"># 'size', 'type', and 'datapath' columns. The 'datapath'</span>
+    <span class="comment"># column will contain the local filenames where the data can</span>
+    <span class="comment"># be found.</span>
+    <span class="symbol">inFile</span> <span class="assignement">&lt;-</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">file1</span>
+
+    <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/NULL'>is.null</a></span><span class="keyword">(</span><span class="symbol">inFile</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/function'>return</a></span><span class="keyword">(</span>NULL<span class="keyword">)</span>
+
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/read.table'>read.csv</a></span><span class="keyword">(</span><span class="symbol">inFile</span><span class="keyword">$</span><span class="symbol">datapath</span><span class="keyword">,</span> <span class="argument">header</span> <span class="argument">=</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">header</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>fileInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p>Other input elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>,
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='dateInput.html'>dateInput</a></code>,
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='numericInput.html'>numericInput</a></code>,
+  <code><a href='passwordInput.html'>passwordInput</a></code>, <code><a href='radioButtons.html'>radioButtons</a></code>,
+  <code><a href='selectInput.html'>selectInput</a></code>, <code><a href='sliderInput.html'>sliderInput</a></code>,
+  <code><a href='submitButton.html'>submitButton</a></code>, <code><a href='textAreaInput.html'>textAreaInput</a></code>,
+  <code><a href='textInput.html'>textInput</a></code>, <code><a href='varSelectInput.html'>varSelectInput</a></code></p>
+</div>
+```

@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Observer demo
+date: 2014-07-29 
+tags: 
+ - observer
+appurl: https://gallery.shinyapps.io/055-observer-demo
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/055-observer-demo
+---

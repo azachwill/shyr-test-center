@@ -1,0 +1,95 @@
+---
+title: "Tabs and tabset panels"
+description: "Understanding how to build a user interface"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+always_allow_html: true
+---
+
+If the amount of information you want to communicate to your users does not fit well on a page, or there is detailed information, like raw data, that you want to make available to your users but not necessarily feature prominently in your app, you can make use of tabs to distribute this information to stackable tab panels.
+
+### Tab panels
+
+Tabsets are created by combining `nav_panel()`s in a navigation container. The `bslib` package provides many styles of navigation containers, including:
+
+- `navset_underline()` and `navset_card_underline()`
+- `navset_tab()` and `navset_card_tab()`
+- `navset_pill_list()`
+- `navset_pill()` and `navset_card_pill()`
+- `navset_hidden()`
+- `navset_bar()`
+
+Below, we use `navset_card_underline()` and `nav_panel()` to create four tab panels. Each tab panel has a unique title and a list of output elements which are rendered vertically within the tab. 
+
+In this example we display
+
+- a plot of our data in the first tab,
+- summary statistics in the second tab,
+- raw data in the third tab,
+- and some background information on our dataset in the fourth tab.
+
+
+```r
+navset_card_underline(
+
+  nav_panel("Plot", plotOutput("plot")),
+
+  nav_panel("Summary", tableOutput("summary")),
+
+  nav_panel("Data", DT::dataTableOutput("data")),
+
+  nav_panel(
+    "Reference",
+    markdown(
+      glue::glue(
+        "These data were obtained from [IMDB](http://www.imdb.com/) and [Rotten Tomatoes](https://www.rottentomatoes.com/).
+  
+        The data represent {nrow(movies)} randomly sampled movies released between 1972 to 2014 in the United States.
+        "
+      )
+    )
+  )
+)
+```
+
+---
+
+:::{.column-screen-inset-right .border .mb-5 style="max-width:1100px;"}
+
+<iframe style="width:99%;height:500px;" src="https://gallery.shinyapps.io/movie-browser/" title="Movie browser"></iframe>
+
+:::
+
+---
+
+### Tabs and reactivity
+
+Note that in the previous example the user first selected a subset of the data, `movies_subset()`, then this new sampled data got used in four separate tabs.
+
+Introducing tabs into our user interface underlines the importance of creating reactive expressions for shared data.
+
+If the dataset is expensive to compute, then the user interface could be slow to render if each tab were required to do the computation.
+
+Instead, we calculate the data once in a reactive expression, and then have the result be shared by all of the output tabs.
+
+### `navset_pill_list`
+
+Another option for laying out tabs is using the `navset_pill_list()`, which lists the tabs vertically down the side, as opposed to horizontally across the screen.
+
+
+
+---
+
+:::{.column-screen-inset-right .border .mb-5 style="max-width:1100px;"}
+
+<iframe style="width:99%;height:500px;" src="https://gallery.shinyapps.io/movie-browser-nav/" title="Movie browser with nav"></iframe>
+
+:::
+
+### Tabs
+
+To recap, use tabs to add navigation to your app. bslib includes various `navset_*()` functions that define a navigation container. Then, use `nav_*()` functions to define navigation items. 
+

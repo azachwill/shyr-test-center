@@ -1,0 +1,142 @@
+ - title: "Structure: Standalone apps"
+   links:
+     - text: App formats and launching apps
+       href: ../../r/articles/build/app-formats/index.qmd
+     - text: Two-file Shiny apps
+       href: ../../r/articles/build/two-file/index.qmd
+  
+ - title: "Structure: Interactive documents"
+   links:
+     - text: Introduction to R Markdown
+       href: ../../r/articles/build/rmarkdown/index.qmd
+     - text: R Markdown integration in the RStudio IDE
+       href: ../../r/articles/build/rmd-integration/index.qmd
+     - text: Setting Output args via Render functions
+       href: ../../r/articles/build/output-args/index.qmd
+     - text: Introduction to interactive documents
+       href: ../../r/articles/build/interactive-docs/index.qmd
+     - text: The R Markdown cheatsheet
+       href: ../../r/articles/build/rm-cheatsheet/index.qmd
+     - text: Generating downloadable reports
+       href: ../../r/articles/build/generating-reports/index.qmd
+ - title: "Structure: Dashboards"
+   links:
+     - text: Dashboards
+       href: ../../r/articles/build/dashboards/index.qmd
+ - title: "Structure: Gadgets"
+   links:
+     - text: Shiny Gadgets
+       href: ../../r/articles/build/gadgets/index.qmd
+     - text: Designing Gadget UI
+       href: ../../r/articles/build/gadget-ui/index.qmd
+ - title: "Backend: Reactivity"
+   links:
+     - text: Reactivity - An overview
+       href: ../../r/articles/build/reactivity-overview/index.qmd
+     - text: Execution scheduling
+       href: ../../r/articles/build/execution-scheduling/index.qmd
+     - text: Learn about your user with session$clientData
+       href: ../../r/articles/build/client-data/index.qmd
+     - text: Stop reactions with isolate()
+       href: ../../r/articles/build/isolation/index.qmd
+     - text: How to understand reactivity in R
+       href: ../../r/articles/build/understanding-reactivity/index.qmd
+ - title: "Backend: Data"
+   links:
+     - text: Database basics - dplyr and DBI
+       href: ../../r/articles/build/overview/index.qmd
+     - text: SQL injection prevention
+       href: ../../r/articles/build/sql-injections/index.qmd
+     - text: Using the pool package (basics)
+       href: ../../r/articles/build/pool-basics/index.qmd
+     - text: Using the pool package (advanced)
+       href: ../../r/articles/build/pool-advanced/index.qmd
+     - text: Using dplyr and pool to query a database
+       href: ../../r/articles/build/pool-dplyr/index.qmd
+     - text: Persistent data storage in Shiny apps
+       href: ../../r/articles/build/persistent-data-storage/index.qmd
+ - title: "Frontend: User interface"
+   links:
+     - text: Application layout guide
+       href: ../../r/articles/build/layout-guide/index.qmd
+     - text: Display modes
+       href: ../../r/articles/build/display-modes/index.qmd
+     - text: Tabsets
+       href: ../../r/articles/build/tabsets/index.qmd
+     - text: Customize your UI with HTML
+       href: ../../r/articles/build/html-tags/index.qmd
+     - text: your entire UI with HTML
+       href: ../../r/articles/build/html-ui/index.qmd
+     - text: a dynamic UI that reacts to user input
+       href: ../../r/articles/build/dynamic-ui/index.qmd
+     - text: HTML Templates
+       href: ../../r/articles/build/templates/index.qmd
+     - text: Shiny HTML Tags Glossary
+       href: ../../r/articles/build/tag-glossary/index.qmd
+     - text: Progress indicators
+       href: ../../r/articles/build/progress/index.qmd
+     - text: Modal dialogs
+       href: ../../r/articles/build/modal-dialogs/index.qmd
+     - text: Notifications
+       href: ../../r/articles/build/notifications/index.qmd
+     - text: Themes
+       href: ../../r/articles/build/themes/index.qmd
+     - text: Render images in a Shiny app
+       href: ../../r/articles/build/images/index.qmd
+     - text: Displaying and customizing static tables
+       href: ../../r/articles/build/render-table/index.qmd
+     - text: How to use DataTables in a Shiny App
+       href: ../../r/articles/build/datatables/index.qmd
+     - text: Using Action Buttons
+       href: ../../r/articles/build/action-buttons/index.qmd
+     - text: Using sliders
+       href: ../../r/articles/build/sliders/index.qmd
+     - text: Help users download data from your app
+       href: ../../r/articles/build/download/index.qmd
+     - text: Help users upload files to your app
+       href: ../../r/articles/build/upload/index.qmd
+     - text: Using selectize input
+       href: ../../r/articles/build/selectize/index.qmd
+ - title: "Frontend: Graphics & visualization"
+   links:
+     - text: Interactive plots
+       href: ../../r/articles/build/plot-interaction/index.qmd
+     - text: Selecting rows of data
+       href: ../../r/articles/build/selecting-rows-of-data/index.qmd
+     - text: Interactive plots - advanced
+       href: ../../r/articles/build/plot-interaction-advanced/index.qmd
+ - title: "Frontend: Shiny extensions"
+   links:
+     - text: htmlwidgets
+       href: ../../r/articles/build/htmlwidgets/index.qmd
+     - text: JavaScript actions packaged for Shiny apps
+       href: ../../r/articles/build/shinyjs/index.qmd
+     - text: How to a JavaScript based widget
+       href: ../../r/articles/build/js-build-widget/index.qmd
+     - text: How to add functionality to JavaScript widgets
+       href: ../../r/articles/build/js-widget-functionality/index.qmd
+     - text: How to send messages from the browser to the server and back using Shiny 
+       href: ../../r/articles/build/js-send-message/index.qmd
+     - text: How to develop an interactive, dynamic help system for your app with introJS 
+       href: ../../r/articles/build/js-introjs/index.qmd
+     - text: How to create custom input bindings 
+       href: ../../r/articles/build/js-custom-input/index.qmd
+     - text: Putting everything together to create an interactive dashboard 
+       href: ../../r/articles/build/js-dashboard/index.qmd
+ - title: "Frontend: Customizing Shiny"
+   links: 
+     - text: Using custom CSS in your app
+       href: ../../r/articles/build/css/index.qmd
+     - text: Build custom input objects
+       href: ../../r/articles/build/building-inputs/index.qmd
+     - text: Build custom output objects 
+       href: ../../r/articles/build/building-outputs/index.qmd
+     - text: Add Google Analytics to a Shiny app 
+       href: ../../r/articles/build/google-analytics/index.qmd
+     - text: Packaging JavaScript code for Shiny 
+       href: ../../r/articles/build/packaging-javascript/index.qmd
+     - text: Communicating with Shiny via JavaScript 
+       href: ../../r/articles/build/communicating-with-js/index.qmd
+     - text: JavaScript Events in Shiny 
+       href: ../../r/articles/build/js-events/index.qmd
+ 

@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Widget Gallery
+date: 2014-07-30 
+no-app-padding: true
+tags: 
+ - widgets
+appurl: https://gallery.shinyapps.io/081-widgets-gallery
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/081-widgets-gallery
+---

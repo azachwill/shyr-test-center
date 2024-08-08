@@ -1,0 +1,176 @@
+---
+title: "Create a select list input control — selectInput"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>selectInput</span>(
+  <span class='no'>inputId</span>,
+  <span class='no'>label</span>,
+  <span class='no'>choices</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>selectize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
+
+<span class='fu'>selectizeInput</span>(<span class='no'>inputId</span>, <span class='no'>...</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>inputId</p></th>
+    <td><p>The <code>input</code> slot that will be used to access the value.</p></td>
+  </tr>
+  <tr>
+    <th><p>label</p></th>
+    <td><p>Display label for the control, or <code>NULL</code> for no label.</p></td>
+  </tr>
+  <tr>
+    <th><p>choices</p></th>
+    <td><p>List of values to select from. If elements of the list are
+named, then that name --- rather than the value --- is displayed to the
+user. It's also possible to group related inputs by providing a named list
+whose elements are (either named or unnamed) lists, vectors, or factors. In
+this case, the outermost names will be used as the group labels (leveraging
+the <code>&lt;optgroup&gt;</code> HTML tag) for the elements in the respective sublist. See
+the example section for a small demo of this feature.</p></td>
+  </tr>
+  <tr>
+    <th><p>selected</p></th>
+    <td><p>The initially selected value (or multiple values if <code>multiple = TRUE</code>). If not specified then defaults to the first value for
+single-select lists and no values for multiple select lists.</p></td>
+  </tr>
+  <tr>
+    <th><p>multiple</p></th>
+    <td><p>Is selection of multiple items allowed?</p></td>
+  </tr>
+  <tr>
+    <th><p>selectize</p></th>
+    <td><p>Whether to use <span class="pkg">selectize.js</span> or not.</p></td>
+  </tr>
+  <tr>
+    <th><p>width</p></th>
+    <td><p>The width of the input, e.g. <code>'400px'</code>, or <code>'100%'</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>size</p></th>
+    <td><p>Number of items to show in the selection box; a larger number
+will result in a taller box. Not compatible with <code>selectize=TRUE</code>.
+Normally, when <code>multiple=FALSE</code>, a select input will be a drop-down list,
+but when <code>size</code> is set, it will be a box instead.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Arguments passed to <code>selectInput()</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>options</p></th>
+    <td><p>A list of options. See the documentation of <span class="pkg">selectize.js</span>
+for possible options (character option values inside <code><a href='https://rdrr.io/r/base/AsIs.html'>base::I()</a></code> will
+be treated as literal JavaScript code; see <code><a href='renderDataTable.html'>renderDataTable()</a></code>
+for details).</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Create a select list that can be used to choose a single or multiple items
+from a list of values.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A select list control that can be added to a UI definition.</p>
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>By default, <code>selectInput()</code> and <code>selectizeInput()</code> use the JavaScript library
+<span class="pkg">selectize.js</span> (<a href='https://github.com/selectize/selectize.js'>https://github.com/selectize/selectize.js</a>) instead of
+the basic select input element. To use the standard HTML select input
+element, use <code>selectInput()</code> with <code>selectize=FALSE</code>.</p>
+<p>In selectize mode, if the first element in <code>choices</code> has a value of <code>""</code>, its
+name will be treated as a placeholder prompt. For example:
+<code>selectInput("letter", "Letter", c("Choose one" = "", LETTERS))</code></p>
+  <h3 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h3>
+
+  <p>The selectize input created from <code>selectizeInput()</code> allows
+deletion of the selected option even in a single select input, which will
+return an empty string as its value. This is the default behavior of
+<span class="pkg">selectize.js</span>. However, the selectize input created from
+<code>selectInput(..., selectize = TRUE)</code> will ignore the empty string
+value when it is a single choice input and the empty string is not in the
+<code>choices</code> argument. This is to keep compatibility with
+<code>selectInput(..., selectize = FALSE)</code>.</p>
+  <h3 class="hasAnchor" id="server-value"><a class="anchor" href="#server-value"></a>Server value</h3>
+
+  <p>A vector of character strings, usually of length
+1, with the value of the selected items. When <code>multiple=TRUE</code> and
+nothing is selected, this value will be <code>NULL</code>.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='updateSelectInput.html'>updateSelectInput()</a></code> <code><a href='varSelectInput.html'>varSelectInput()</a></code></p>
+<p>Other input elements: 
+<code><a href='actionButton.html'>actionButton</a>()</code>,
+<code><a href='checkboxGroupInput.html'>checkboxGroupInput</a>()</code>,
+<code><a href='checkboxInput.html'>checkboxInput</a>()</code>,
+<code><a href='dateInput.html'>dateInput</a>()</code>,
+<code><a href='dateRangeInput.html'>dateRangeInput</a>()</code>,
+<code><a href='fileInput.html'>fileInput</a>()</code>,
+<code><a href='numericInput.html'>numericInput</a>()</code>,
+<code><a href='passwordInput.html'>passwordInput</a>()</code>,
+<code><a href='radioButtons.html'>radioButtons</a>()</code>,
+<code><a href='sliderInput.html'>sliderInput</a>()</code>,
+<code><a href='submitButton.html'>submitButton</a>()</code>,
+<code><a href='textAreaInput.html'>textAreaInput</a>()</code>,
+<code><a href='textInput.html'>textInput</a>()</code>,
+<code><a href='varSelectInput.html'>varSelectInput</a>()</code></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='co'># basic example</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+  <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'>selectInput</span>(<span class='st'>"variable"</span>, <span class='st'>"Variable:"</span>,
+                <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Cylinders"</span> <span class='kw'>=</span> <span class='st'>"cyl"</span>,
+                  <span class='st'>"Transmission"</span> <span class='kw'>=</span> <span class='st'>"am"</span>,
+                  <span class='st'>"Gears"</span> <span class='kw'>=</span> <span class='st'>"gear"</span>)),
+    <span class='fu'><a href='tableOutput.html'>tableOutput</a></span>(<span class='st'>"data"</span>)
+  ),
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+    <span class='no'>output</span>$<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderTable.html'>renderTable</a></span>({
+      <span class='no'>mtcars</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mpg"</span>, <span class='no'>input</span>$<span class='no'>variable</span>), <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]
+    }, <span class='kw'>rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  }
+)
+
+<span class='co'># demoing group support in the `choices` arg</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+  <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'>selectInput</span>(<span class='st'>"state"</span>, <span class='st'>"Choose a state:"</span>,
+      <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>`East Coast`</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"NY"</span>, <span class='st'>"NJ"</span>, <span class='st'>"CT"</span>),
+           <span class='kw'>`West Coast`</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"WA"</span>, <span class='st'>"OR"</span>, <span class='st'>"CA"</span>),
+           <span class='kw'>`Midwest`</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"MN"</span>, <span class='st'>"WI"</span>, <span class='st'>"IA"</span>))
+    ),
+    <span class='fu'><a href='textOutput.html'>textOutput</a></span>(<span class='st'>"result"</span>)
+  ),
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+    <span class='no'>output</span>$<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderText.html'>renderText</a></span>({
+      <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"You chose"</span>, <span class='no'>input</span>$<span class='no'>state</span>)
+    })
+  }
+)
+}</pre>
+</div>
+
+
+```

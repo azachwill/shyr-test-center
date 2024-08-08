@@ -1,0 +1,68 @@
+---
+title: "downloadButton"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='downloadButton.html'>downloadButton</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"Download"</span><span class="keyword">,</span> <span class="argument">class</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='downloadButton.html'>downloadLink</a></span><span class="keyword">(</span><span class="symbol">outputId</span><span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"Download"</span><span class="keyword">,</span> <span class="argument">class</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>The name of the output slot that the <code>downloadHandler</code>
+is assigned to.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>The label that should appear on the button.</td>
+  </tr>
+  <tr>
+    <th>class</th>
+    <td>Additional CSS classes to apply to the tag, if any.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Other arguments to pass to the container tag function.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Use these functions to create a download button or link; when clicked, it
+will initiate a browser download. The filename and contents are specified by
+the corresponding <code><a href='downloadHandler.html'>downloadHandler</a></code> defined in the server
+function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># # In server.R:</span>
+<span class="comment"># output$downloadData &lt;- downloadHandler(</span>
+<span class="comment">#   filename = function() {</span>
+<span class="comment">#     paste('data-', Sys.Date(), '.csv', sep='')</span>
+<span class="comment">#   },</span>
+<span class="comment">#   content = function(con) {</span>
+<span class="comment">#     write.csv(data, con)</span>
+<span class="comment">#   }</span>
+<span class="comment"># )</span>
+<span class="comment"># </span>
+<span class="comment"># # In ui.R:</span>
+<span class="comment"># downloadLink('downloadData', 'Download')</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>downloadButton</li><li>downloadLink</li><li>downloadLink</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='downloadHandler.html'>downloadHandler</a></code></p>
+</div>
+```

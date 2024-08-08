@@ -1,0 +1,51 @@
+---
+title: "Viewer options — viewer"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.0/R/viewer.R" class="external-link"><code>R/viewer.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Use these functions to control where the gadget is displayed in RStudio (or
+other R environments that emulate RStudio's viewer pane/dialog APIs). If
+viewer APIs are not available in the current R environment, then the gadget
+will be displayed in the system's default web browser (see
+<code><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">utils::browseURL()</a></code>).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">paneViewer</span>(<span class="at">minHeight =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">dialogViewer</span>(dialogName, <span class="at">width =</span> <span class="dv">600</span>, <span class="at">height =</span> <span class="dv">600</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">browserViewer</span>(<span class="at">browser =</span> <span class="fu">getOption</span>(<span class="st">"browser"</span>))</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>minHeight</dt>
+<dd><p>The minimum height (in pixels) desired to show the gadget in
+the viewer pane. If a positive number, resize the pane if necessary to show
+at least that many pixels. If <code>NULL</code>, use the existing viewer pane
+size. If <code>"maximize"</code>, use the maximum available vertical space.</p></dd>
+
+
+<dt>dialogName</dt>
+<dd><p>The window title to display for the dialog.</p></dd>
+
+
+<dt>width, height</dt>
+<dd><p>The desired dialog width/height, in pixels.</p></dd>
+
+
+<dt>browser</dt>
+<dd><p>See <code><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">utils::browseURL()</a></code>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A function that takes a single <code>url</code> parameter, suitable for
+passing as the <code>viewer</code> argument of <code><a href="runGadget.html">runGadget()</a></code>.</p>
+  </div>
+
+</div>
+```

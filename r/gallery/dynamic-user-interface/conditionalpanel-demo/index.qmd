@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: conditionalPanel demo
+date: 2014-07-29 
+tags: 
+ - conditionalpanel
+appurl: https://gallery.shinyapps.io/033-conditionalpanel-demo
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/033-conditionalpanel-demo
+---

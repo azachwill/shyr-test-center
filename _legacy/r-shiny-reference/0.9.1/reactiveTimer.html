@@ -1,0 +1,102 @@
+---
+layout: reference
+title: "reactiveTimer"
+categories: reference
+---
+<h1>Timer</h1>
+
+<pre class="code"><code class="r"><div>reactiveTimer(intervalMs&nbsp;=&nbsp;1000, session)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>intervalMs</th>
+    <td>How often to fire, in milliseconds</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>A session object. This is needed to cancel
+  any scheduled invalidations after a user has ended the
+  session. If <code>NULL</code>, then this invalidation will not
+  be tied to any session, and so it will still occur.</td>
+  </tr>
+</table>
+
+<div data-section="Timer">
+  <h3 data-swiftype-index="false">Timer</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A no-parameter function that can be called from a reactive context,
+  in order to cause that context to be invalidated the next time the timer
+  interval elapses. Calling the returned function also happens to yield the
+  current time (as in <code><a href='http://www.inside-r.org/r-doc/base/Sys.time'>Sys.time</a></code>).</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Creates a reactive timer with the given interval. A reactive timer is like a
+reactive value, except reactive values are triggered when they are set, while
+reactive timers are triggered simply by the passage of time.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p><a href='reactive.html'>Reactive expressions</a> and observers that want to be
+invalidated by the timer need to call the timer function that
+<code>reactiveTimer</code> returns, even if the current time value is not actually
+needed.</p>
+
+  <p>See <code><a href='invalidateLater.html'>invalidateLater</a></code> as a safer and simpler alternative.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# shinyServer(function(input, output, session) {
+# 
+#   # Anything that calls autoInvalidate will automatically invalidate
+#   # every 2 seconds.
+#   autoInvalidate &lt;- reactiveTimer(2000, session)
+# 
+#   observe({
+#     # Invalidate and re-execute this reactive expression every time the
+#     # timer fires.
+#     autoInvalidate()
+# 
+#     # Do something each time this is invalidated.
+#     # The isolate() makes this observer _not_ get invalidated and re-executed
+#     # when input$n changes.
+#     print(paste(&quot;The value of input$n is&quot;, isolate(input$n)))
+#   })
+# 
+#   # Generate a new histogram each time the timer fires, but not when
+#   # input$n changes.
+#   output$plot &lt;- renderPlot({
+#     autoInvalidate()
+#     hist(isolate(input$n))
+#   })
+# })
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>reactiveTimer</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='invalidateLater.html'>invalidateLater</a></code>
+
+</div>

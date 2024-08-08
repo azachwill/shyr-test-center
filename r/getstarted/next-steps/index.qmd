@@ -1,0 +1,76 @@
+---
+title: "Next Steps"
+description: "You've built your first Shiny app... Now what? Here are some next steps."
+page-layout: article
+sidebar: getstarted-r
+toc: false
+
+lightbox:
+  effect: fade
+---
+
+Looking for next steps? We've got you covered.
+Here are resources to designed to help you learn whatever is next for you.
+
+[Quickly get your Shiny app on the web using shinyapps.io.](/r/articles/share/shinyapps/)
+
+
+::: {.column-page-inset-right}
+
+::: {.grid .bg-gray .mt-4}
+
+::: {.g-col-12 .g-col-sm-4 .p-3 .m-auto }
+
+![](/images/masteringshiny.png){width="200" title="Mastering Shiny by Hadley Wickham" fig-alt="An picture of the cover of Hadley Wickham's book, Mastering Shiny."}
+
+:::
+
+::: {.g-col-12 .g-col-sm-8 .py-3 .px-4}
+
+#### THE BEST PLACE TO START{.p-85}
+
+## Mastering Shiny {.my-0 .d-inline .me-2}
+
+###### By Hadley Wickham {.mt-0 .p-90 .d-inline}
+
+<div class="pb-4"></div>
+
+A free, online book designed to take you from basic Shiny to creating your own customized apps.
+
+[Read Now](#){.btn .btn-primary}
+
+:::
+
+:::
+
+:::
+
+
+
+## Gallery
+
+Check out the [Shiny Gallery](/r/gallery/)!
+Here you can find a myriad of Shiny apps to be inspired by and learn from.
+
+[Feature Demos](/r/gallery/#feature-demos) - Feature demos are a series of apps created by the Shiny developers, designed to highlight specific features of the shiny package. Each app is presented along with its source code to help you implement these features in your apps.
+
+[User Showcase](/r/gallery/#user-showcase) - The Shiny User Showcase is comprised of contributions from the Shiny app developer community. The apps are categorized into application areas and presented with a brief description, tags, and for many, the source code.
+
+
+## API Reference
+
+[Reference docs](/r/reference/shiny/) - Here you can find upgrade notes and function references for the latest, and previous, version(s) of the Shiny package.
+
+
+## Articles
+
+[Articles](/r/articles/) - See written tutorials ranging from beginner to intermediate, covering every step of the Shiny app development pipeline.
+
+
+## Shiny Videos
+
+[Shiny video series](https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe) - Learn about recent releases and features, and hear from Shiny team folks as they create and explain projects ranging from a deep dive into their favorite package, to building interactive games with Shiny, and everything in between!
+
+
+
+

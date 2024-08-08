@@ -1,0 +1,67 @@
+---
+title: "validateCssUnit"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='validateCssUnit.html'>validateCssUnit</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>The unit to validate. Will be treated as a number of pixels if a
+unit is not specified.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A properly formatted CSS unit of length, if possible. Otherwise, will
+  throw an error.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Checks that the argument is valid for use as a CSS unit of length.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p><code>NULL</code> and <code>NA</code> are returned unchanged.</p>
+
+  <p>Single element numeric vectors are returned as a character vector with the
+number plus a suffix of <code>&quot;px&quot;</code>.</p>
+
+  <p>Single element character vectors must be <code>&quot;auto&quot;</code> or <code>&quot;inherit&quot;</code>,
+or a number. If the number has a suffix, it must be valid: <code>px</code>,
+<code>%</code>, <code>em</code>, <code>pt</code>, <code>in</code>, <code>cm</code>, <code>mm</code>, <code>ex</code>,
+or <code>pc</code>. If the number has no suffix, the suffix <code>&quot;px&quot;</code> is
+appended.</p>
+
+  <p>Any other value will cause an error to be thrown.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='validateCssUnit.html'>validateCssUnit</a></span><span class="keyword">(</span><span class="string">"10%"</span><span class="keyword">)</span></div>
+<div class='output'>[1] &quot;10%&quot;
+</div>
+<div class='input'><span class="functioncall"><a href='validateCssUnit.html'>validateCssUnit</a></span><span class="keyword">(</span><span class="number">400</span><span class="keyword">)</span>  <span class="comment">#treated as '400px'</span></div>
+<div class='output'>[1] &quot;400px&quot;
+</div></code></pre>
+<!-- <ul>
+  <li>validateCssUnit</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

@@ -1,0 +1,12 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Dynamic UI
+date: 2014-07-29
+tags:
+ - dynamic-ui
+ - renderui
+ - uioutput
+appurl: https://gallery.shinyapps.io/041-dynamic-ui
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/041-dynamic-ui
+---

@@ -1,0 +1,53 @@
+---
+layout: reference
+title: "reactiveValuesToList"
+categories: reference
+---
+<h1>Convert a reactivevalues object to a list</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='reactiveValuesToList.html'>reactiveValuesToList</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="argument">all.names</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>A reactivevalues object.</td>
+  </tr>
+  <tr>
+    <th>all.names</th>
+    <td>If <code>TRUE</code>, include objects with a leading dot. If
+<code>FALSE</code> (the default) don&#39;t include those objects.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This function does something similar to what you might <code><a href='http://www.rdocumentation.org/packages/base/topics/list'>as.list</a></code>
+to do. The difference is that the calling context will take dependencies on
+every object in the reactivevalues object. To avoid taking dependencies on
+all the objects, you can wrap the call with <code><a href='isolate.html'>isolate</a>()</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="symbol">values</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveValues.html'>reactiveValues</a></span><span class="keyword">(</span><span class="argument">a</span> <span class="argument">=</span> <span class="number">1</span><span class="keyword">)</span>
+<span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># reactiveValuesToList(values)</span>
+<span class="comment">## ---------------------------------------------</span>
+
+<span class="comment"># To get the objects without taking dependencies on them, use isolate().</span>
+<span class="comment"># isolate() can also be used when calling from outside a reactive context (e.g.</span>
+<span class="comment"># at the console)</span>
+<span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="functioncall"><a href='reactiveValuesToList.html'>reactiveValuesToList</a></span><span class="keyword">(</span><span class="symbol">values</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>$a
+[1] 1
+
+</div></code></pre>
+<!-- <ul>
+  <li>reactiveValuesToList</li>
+</ul>
+<ul>
+  
+</ul> -->
+

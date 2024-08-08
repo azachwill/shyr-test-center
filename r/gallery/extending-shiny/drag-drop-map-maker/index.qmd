@@ -1,0 +1,18 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: A Shiny app allowing users to upload a CSV file with latitude and longitude coordinates to create and customize a U.S. map of point data. 
+title:        "Drag-and-drop U.S. mapmaker"
+author:    Aleszu Bajak
+authorurl:     https://twitter.com/aleszubajak
+date:         2019-05-31
+tags:         
+ - ggplot2
+ - visualization
+appurl:      https://storybench.shinyapps.io/mapmaker/
+sourceurl:   https://github.com/aleszu/textanalysis-shiny/tree/master/mapmaker
+rscloudurl:  https://rstudio.cloud/project/256681
+---
+
+A Shiny app allowing users to upload a CSV file with latitude and longitude coordinates to create and customize a U.S. map of point data. Users can modify points shape, size and color, as well as font type and size.
+  

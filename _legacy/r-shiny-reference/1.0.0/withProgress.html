@@ -1,0 +1,156 @@
+---
+layout: reference
+title: "withProgress"
+categories: reference
+---
+<h1>Reporting progress (functional API)</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='withProgress.html'>withProgress</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="argument">min</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0</span><span class="keyword">,</span> <span class="argument">max</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">value</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">min</span> <span class="keyword">+</span> <span class="keyword">(</span><span class="symbol">max</span> <span class="keyword">-</span> <span class="symbol">min</span><span class="keyword">)</span> <span class="keyword">*</span> <span class="number">0.1</span><span class="keyword">,</span>
+  <span class="argument">message</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">detail</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">style</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='shinyOptions.html'>getShinyOption</a></span><span class="keyword">(</span><span class="string">"progress.style"</span><span class="keyword">,</span>
+  <span class="argument">default</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"notification"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='withProgress.html'>setProgress</a></span><span class="keyword">(</span><span class="argument">value</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">message</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">detail</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='withProgress.html'>incProgress</a></span><span class="keyword">(</span><span class="argument">amount</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.1</span><span class="keyword">,</span> <span class="argument">message</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">detail</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>The work to be done. This expression should contain calls to
+<code>setProgress</code>.</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>The value that represents the starting point of the progress bar.
+Must be less tham <code>max</code>. Default is 0.</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>The value that represents the end of the progress bar. Must be
+greater than <code>min</code>. Default is 1.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>Single-element numeric vector; the value at which to set the
+progress bar, relative to <code>min</code> and <code>max</code>. <code>NULL</code> hides the
+progress bar, if it is currently visible.</td>
+  </tr>
+  <tr>
+    <th>message</th>
+    <td>A single-element character vector; the message to be displayed
+to the user, or <code>NULL</code> to hide the current message (if any).</td>
+  </tr>
+  <tr>
+    <th>detail</th>
+    <td>A single-element character vector; the detail message to be
+displayed to the user, or <code>NULL</code> to hide the current detail message
+(if any). The detail message will be shown with a de-emphasized appearance
+relative to <code>message</code>.</td>
+  </tr>
+  <tr>
+    <th>style</th>
+    <td>Progress display style. If <code>&quot;notification&quot;</code> (the default),
+the progress indicator will show using Shiny&#39;s notification API. If
+<code>&quot;old&quot;</code>, use the same HTML and CSS used in Shiny 0.13.2 and below
+(this is for backward-compatibility).</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>The Shiny session object, as provided by <code>shinyServer</code> to
+the server function. The default is to automatically find the session by
+using the current reactive domain.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which <code>expr</code> should be evaluated.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Whether <code>expr</code> is a quoted expression (this is not
+common).</td>
+  </tr>
+  <tr>
+    <th>amount</th>
+    <td>For <code>incProgress</code>, the amount to increment the status bar.
+Default is 0.1.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Reports progress to the user during long-running operations.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This package exposes two distinct programming APIs for working with progress.
+Using <code>withProgress</code> with <code>incProgress</code> or <code>setProgress</code>
+provide a simple function-based interface, while the <code><a href='Progress.html'>Progress</a></code>
+reference class provides an object-oriented API.</p>
+
+  <p>Use <code>withProgress</code> to wrap the scope of your work; doing so will cause a
+new progress panel to be created, and it will be displayed the first time
+<code>incProgress</code> or <code>setProgress</code> are called. When <code>withProgress</code>
+exits, the corresponding progress panel will be removed.</p>
+
+  <p>The <code>incProgress</code> function increments the status bar by a specified
+amount, whereas the <code>setProgress</code> function sets it to a specific value,
+and can also set the text displayed.</p>
+
+  <p>Generally, <code>withProgress</code>/<code>incProgress</code>/<code>setProgress</code> should
+be sufficient; the exception is if the work to be done is asynchronous (this
+is not common) or otherwise cannot be encapsulated by a single scope. In that
+case, you can use the <code>Progress</code> reference class.</p>
+
+  <p>As of version 0.14, the progress indicators use Shiny&#39;s new notification API.
+If you want to use the old styling (for example, you may have used customized
+CSS), you can use <code>style=&quot;old&quot;</code> each time you call
+<code>withProgress()</code>. If you don&#39;t want to set the style each time
+<code>withProgress</code> is called, you can instead call
+<code><a href='shinyOptions.html'>shinyOptions</a>(progress.style=&quot;old&quot;)</code> just once, inside the server
+function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>options</a></span><span class="keyword">(</span><span class="argument">device.ask.default</span> <span class="argument">=</span> <span class="number">FALSE</span><span class="keyword">)</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='withProgress.html'>withProgress</a></span><span class="keyword">(</span><span class="argument">message</span> <span class="argument">=</span> <span class="string">'Calculation in progress'</span><span class="keyword">,</span>
+                 <span class="argument">detail</span> <span class="argument">=</span> <span class="string">'This may take a while...'</span><span class="keyword">,</span> <span class="argument">value</span> <span class="argument">=</span> <span class="number">0</span><span class="keyword">,</span> <span class="keyword">{</span>
+      <span class="keyword">for</span> <span class="keyword">(</span><span class="symbol">i</span> <span class="keyword">in</span> <span class="number">1</span><span class="keyword">:</span><span class="number">15</span><span class="keyword">)</span> <span class="keyword">{</span>
+        <span class="functioncall"><a href='withProgress.html'>incProgress</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">/</span><span class="number">15</span><span class="keyword">)</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.sleep'>Sys.sleep</a></span><span class="keyword">(</span><span class="number">0.25</span><span class="keyword">)</span>
+      <span class="keyword">}</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">cars</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>incProgress</li><li>setProgress</li><li>withProgress</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='Progress.html'>Progress</a></code></p>
+</div>

@@ -1,0 +1,41 @@
+---
+title: "Create a Shiny UI handler — shinyUI"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>shinyUI</span>(<span class='no'>ui</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>ui</p></th>
+    <td><p>A user interace definition</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Historically this function was used in ui.R files to register a user
+interface with Shiny. It is no longer required as of Shiny 0.10; simply
+ensure that the last expression to be returned from ui.R is a user interface.
+This function is kept for backwards compatibility with older applications. It
+returns the value that is passed to it.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>The user interface definition, without modifications or side effects.</p>
+  
+  </div>
+
+</div>
+
+
+```

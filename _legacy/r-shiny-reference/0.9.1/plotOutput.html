@@ -1,0 +1,99 @@
+---
+layout: reference
+title: "plotOutput"
+categories: reference
+---
+<h1>Create an plot output element</h1>
+
+<pre class="code"><code class="r"><div>plotOutput(outputId, width&nbsp;=&nbsp;"100%", height&nbsp;=&nbsp;"400px", clickId&nbsp;=&nbsp;NULL, hoverId&nbsp;=&nbsp;NULL, hoverDelay&nbsp;=&nbsp;300, hoverDelayType&nbsp;=&nbsp;c("debounce", "throttle"))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>output variable to read the plot from</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>Plot width. Must be a valid CSS unit (like
+  <code>"100%"</code>, <code>"400px"</code>, <code>"auto"</code>) or a
+  number, which will be coerced to a string and have
+  <code>"px"</code> appended.</td>
+  </tr>
+  <tr>
+    <th>height</th>
+    <td>Plot height</td>
+  </tr>
+  <tr>
+    <th>clickId</th>
+    <td>If not <code>NULL</code>, the plot will send
+  coordinates to the server whenever it is clicked. This
+  information will be accessible on the <code>input</code> object
+  using <code>input$</code><em><code>clickId</code></em>. The value will
+  be a named list or vector with <code>x</code> and <code>y</code>
+  elements indicating the mouse position in user units.</td>
+  </tr>
+  <tr>
+    <th>hoverId</th>
+    <td>If not <code>NULL</code>, the plot will send
+  coordinates to the server whenever the mouse pauses on
+  the plot for more than the number of milliseconds
+  determined by <code>hoverTimeout</code>. This information will
+  be The value will be <code>NULL</code> if the user is not
+  hovering, and a named list or vector with <code>x</code> and
+  <code>y</code> elements indicating the mouse position in user
+  units.</td>
+  </tr>
+  <tr>
+    <th>hoverDelay</th>
+    <td>The delay for hovering, in
+  milliseconds.</td>
+  </tr>
+  <tr>
+    <th>hoverDelayType</th>
+    <td>The type of algorithm for limiting
+  the number of hover events. Use <code>"throttle"</code> to
+  limit the number of hover events to one every
+  <code>hoverDelay</code> milliseconds. Use <code>"debounce"</code> to
+  suspend events while the cursor is moving, and wait until
+  the cursor has been at rest for <code>hoverDelay</code>
+  milliseconds before sending an event.</td>
+  </tr>
+</table>
+
+<div data-section="Create an plot output element">
+  <h3 data-swiftype-index="false">Create an plot output element</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A plot output element that can be included in a panel</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Render a <a href='renderPlot.html'>renderPlot</a> within an application page.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Show a plot of the generated distribution
+mainPanel(
+  plotOutput(&quot;distPlot&quot;)
+)
+</div>
+<div class='output'>&lt;div class=&quot;span8&quot;&gt;
+  &lt;div id=&quot;distPlot&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>plotOutput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

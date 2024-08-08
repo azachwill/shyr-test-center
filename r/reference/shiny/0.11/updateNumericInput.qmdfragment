@@ -1,0 +1,94 @@
+---
+title: "updateNumericInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='updateNumericInput.html'>updateNumericInput</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="symbol">inputId</span><span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">value</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">min</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">max</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">step</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</td>
+  </tr>
+  <tr>
+    <th>inputId</th>
+    <td>The id of the input object.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>The label to set for the input object.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>The value to set for the input object.</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>Minimum value.</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>Maximum value.</td>
+  </tr>
+  <tr>
+    <th>step</th>
+    <td>Step size.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Change the value of a number input on the client</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+
+  <p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href='numericInput.html'>numericInput</a>()</code> and
+<code>updateNumericInput()</code> take a similar set of arguments.</p>
+
+  <p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># shinyServer(function(input, output, session) {</span>
+<span class="comment"># </span>
+<span class="comment">#   observe({</span>
+<span class="comment">#     # We'll use the input$controller variable multiple times, so save it as x</span>
+<span class="comment">#     # for convenience.</span>
+<span class="comment">#     x &lt;- input$controller</span>
+<span class="comment"># </span>
+<span class="comment">#     updateNumericInput(session, "inNumber", value = x)</span>
+<span class="comment"># </span>
+<span class="comment">#     updateNumericInput(session, "inNumber2",</span>
+<span class="comment">#       label = paste("Number label ", x),</span>
+<span class="comment">#       value = x, min = x-10, max = x+10, step = 5)</span>
+<span class="comment">#   })</span>
+<span class="comment"># })</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>updateNumericInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='numericInput.html'>numericInput</a></code></p>
+</div>
+```

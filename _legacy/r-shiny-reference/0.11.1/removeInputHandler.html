@@ -1,0 +1,45 @@
+---
+layout: reference
+title: "removeInputHandler"
+categories: reference
+---
+<h1>Deregister an Input Handler</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='removeInputHandler.html'>removeInputHandler</a></span><span class="keyword">(</span><span class="symbol">type</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>type</th>
+    <td>The type for which handlers should be removed.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+The handler previously associated with this <code>type</code>, if one
+  existed. Otherwise, <code>NULL</code>.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Removes an Input Handler. Rather than using the previously specified handler
+for data of this type, the default RJSONIO serialization will be used.</p>
+
+</div>
+<!-- <ul>
+  <li>removeInputHandler</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='registerInputHandler.html'>registerInputHandler</a></code></p>
+</div>

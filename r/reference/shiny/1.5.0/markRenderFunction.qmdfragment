@@ -1,0 +1,54 @@
+---
+title: "Mark a function as a render function — markRenderFunction"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>markRenderFunction</span>(<span class='no'>uiFunc</span>, <span class='no'>renderFunc</span>, <span class='kw'>outputArgs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>uiFunc</p></th>
+    <td><p>A function that renders Shiny UI. Must take a single argument:
+an output ID.</p></td>
+  </tr>
+  <tr>
+    <th><p>renderFunc</p></th>
+    <td><p>A function that is suitable for assigning to a Shiny output
+slot.</p></td>
+  </tr>
+  <tr>
+    <th><p>outputArgs</p></th>
+    <td><p>A list of arguments to pass to the <code>uiFunc</code>. Render
+functions should include <code>outputArgs = list()</code> in their own parameter
+list, and pass through the value to <code>markRenderFunction</code>, to allow
+app authors to customize outputs. (Currently, this is only supported for
+dynamically generated UIs, such as those created by Shiny code snippets
+embedded in R Markdown documents).</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Should be called by implementers of <code>renderXXX</code> functions in order to
+mark their return values as Shiny render functions, and to provide a hint to
+Shiny regarding what UI function is most commonly used with this type of
+render function. This can be used in R Markdown documents to create complete
+output widgets out of just the render function.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>The <code>renderFunc</code> function, with annotations.</p>
+  </div>
+
+</div>
+
+
+```

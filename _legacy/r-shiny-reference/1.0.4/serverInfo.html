@@ -1,0 +1,42 @@
+---
+layout: reference
+title: "serverInfo"
+categories: reference
+---
+<h1>Collect information about the Shiny Server environment</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='serverInfo.html'>serverInfo</a></span><span class="keyword">(</span><span class="keyword">)</span></code></pre>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A list of the Shiny Server information.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This function returns the information about the current Shiny Server, such as
+its version, and whether it is the open source edition or professional
+edition. If the app is not served through the Shiny Server, this function
+just returns <code>list(shinyServer = FALSE)</code>.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This function will only return meaningful data when using Shiny Server
+version 1.2.2 or later.</p>
+
+</div>
+<!-- <ul>
+  <li>serverInfo</li>
+</ul>
+<ul>
+  
+</ul> -->
+

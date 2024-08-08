@@ -1,0 +1,25 @@
+---
+layout:       app-showcase
+title:        "Shrooming -  Interactive mushroom edibility predictions with XGBoost"
+user_name:    Vladislav Fridkin
+user_url:     www.datastars.com.au
+date:         2019-05-31
+tags:         xgboost, machine learning, prediction
+app_url:      https://vfridkin.shinyapps.io/mushroom_app/
+source_url:   https://rstudio.cloud/project/258497
+rscloud_url:  https://rstudio.cloud/project/258497
+contest:      yes
+contest_year: 2019
+thumbnail:    shroom-edibility-prediction.png
+---
+
+Your task is to move the sliders under the model chart and view the effect on prediction accuracy.
+(Hint: it is really easy to achieve 100% accuracy, the purpose is to explore how changing
+the different model parameters affect training and validation.)
+
+The model uses XGBoost algorithm to predict if a mushroom is edible or poisonous.
+The baseline is based on the most frequent feature in the training set.
+Top 10 features are listed to the right of the chart.
+The data is sourced from the UCI Machine Learning repository.
+(If your chart appears compressed, try resizing the browser window to knock it back into shape!)
+  

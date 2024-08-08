@@ -1,0 +1,138 @@
+---
+layout: reference
+title: "Slow down a reactive expression with debounce/throttle — debounce"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Slow down a reactive expression with debounce/throttle</h1>
+  
+
+  <pre class="code"><span class='fu'>debounce</span>(<span class='no'>r</span>, <span class='no'>millis</span>, <span class='kw'>priority</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>domain</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())
+
+<span class='fu'>throttle</span>(<span class='no'>r</span>, <span class='no'>millis</span>, <span class='kw'>priority</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>domain</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>r</p></th>
+    <td><p>A reactive expression (that invalidates too often).</p></td>
+  </tr>
+  <tr>
+    <th><p>millis</p></th>
+    <td><p>The debounce/throttle time window. You may optionally pass a
+no-arg function or reactive expression instead, e.g. to let the end-user
+control the time window.</p></td>
+  </tr>
+  <tr>
+    <th><p>priority</p></th>
+    <td><p>Debounce/throttle is implemented under the hood using
+<a href='observe.html'>observers</a>. Use this parameter to set the priority of
+these observers. Generally, this should be higher than the priorities of
+downstream observers and outputs (which default to zero).</p></td>
+  </tr>
+  <tr>
+    <th><p>domain</p></th>
+    <td><p>See <a href='domains.html'>domains</a>.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Transforms a reactive expression by preventing its invalidation signals from
+being sent unnecessarily often. This lets you ignore a very "chatty" reactive
+expression until it becomes idle, which is useful when the intermediate
+values don't matter as much as the final value, and the downstream
+calculations that depend on the reactive expression take a long time.
+<code>debounce</code> and <code>throttle</code> use different algorithms for slowing down
+invalidation signals; see Details.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>This is not a true debounce/throttle in that it will not prevent <code>r</code>
+from being called many times (in fact it may be called more times than
+usual), but rather, the reactive invalidation signal that is produced by
+<code>r</code> is debounced/throttled instead. Therefore, these functions should be
+used when <code>r</code> is cheap but the things it will trigger (downstream
+outputs and reactives) are expensive.</p>
+<p>Debouncing means that every invalidation from <code>r</code> will be held for the
+specified time window. If <code>r</code> invalidates again within that time window,
+then the timer starts over again. This means that as long as invalidations
+continually arrive from <code>r</code> within the time window, the debounced
+reactive will not invalidate at all. Only after the invalidations stop (or
+slow down sufficiently) will the downstream invalidation be sent.</p>
+<p><code>ooo-oo-oo---- =&gt; -----------o-</code></p>
+<p>(In this graphical depiction, each character represents a unit of time, and
+the time window is 3 characters.)</p>
+<p>Throttling, on the other hand, delays invalidation if the <em>throttled</em>
+reactive recently (within the time window) invalidated. New <code>r</code>
+invalidations do not reset the time window. This means that if invalidations
+continually come from <code>r</code> within the time window, the throttled reactive
+will invalidate regularly, at a rate equal to or slower than than the time
+window.</p>
+<p><code>ooo-oo-oo---- =&gt; o--o--o--o---</code></p>
+  <h3 class="hasAnchor" id="limitations"><a class="anchor" href="#limitations"></a>Limitations</h3>
+
+  
+
+
+<p>Because R is single threaded, we can't come close to guaranteeing that the
+timing of debounce/throttle (or any other timing-related functions in
+Shiny) will be consistent or accurate; at the time we want to emit an
+invalidation signal, R may be performing a different task and we have no
+way to interrupt it (nor would we necessarily want to if we could).
+Therefore, it's best to think of the time windows you pass to these
+functions as minimums.</p>
+<p>You may also see undesirable behavior if the amount of time spent doing
+downstream processing for each change approaches or exceeds the time
+window: in this case, debounce/throttle may not have any effect, as the
+time each subsequent event is considered is already after the time window
+has expired.</p>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>device.ask.default</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>shiny</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"plot"</span>, <span class='kw'>click</span> <span class='kw'>=</span> <span class='fu'><a href='clickOpts.html'>clickOpts</a></span>(<span class='st'>"hover"</span>)),
+  <span class='fu'><a href='helpText.html'>helpText</a></span>(<span class='st'>"Quickly click on the plot above, while watching the result table below:"</span>),
+  <span class='fu'><a href='renderTable.html'>tableOutput</a></span>(<span class='st'>"result"</span>)
+)
+
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='no'>hover</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactive.html'>reactive</a></span>({
+    <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>input</span>$<span class='no'>hover</span>))
+      <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+    <span class='kw'>else</span>
+      <span class='no'>input</span>$<span class='no'>hover</span>
+  })
+  <span class='no'>hover_d</span> <span class='kw'>&lt;-</span> <span class='no'>hover</span> <span class='kw'>%&gt;%</span> <span class='fu'>debounce</span>(<span class='fl'>1000</span>)
+  <span class='no'>hover_t</span> <span class='kw'>&lt;-</span> <span class='no'>hover</span> <span class='kw'>%&gt;%</span> <span class='fu'>throttle</span>(<span class='fl'>1000</span>)
+
+  <span class='no'>output</span>$<span class='no'>plot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>({
+    <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>cars</span>)
+  })
+
+  <span class='no'>output</span>$<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderTable.html'>renderTable</a></span>({
+    <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+      <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"raw"</span>, <span class='st'>"throttle"</span>, <span class='st'>"debounce"</span>),
+      <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>hover</span>()$<span class='no'>x</span>, <span class='fu'>hover_t</span>()$<span class='no'>x</span>, <span class='fu'>hover_d</span>()$<span class='no'>x</span>),
+      <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>hover</span>()$<span class='no'>y</span>, <span class='fu'>hover_t</span>()$<span class='no'>y</span>, <span class='fu'>hover_d</span>()$<span class='no'>y</span>)
+    )
+  })
+}
+
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+

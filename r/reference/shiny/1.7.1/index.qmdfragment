@@ -1,0 +1,1047 @@
+---
+pagetitle: "Function reference — 1.7.1"
+---
+
+```{=html}
+<h1>Function reference <small>version 1.7.1</small></h1>
+
+<table class="index"><tbody data-section="UI Layout"><tr><td colspan="2">
+        <h3>UI Layout</h3>
+        <div class="section-desc"><p>Functions for laying out the user interface for your application.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="absolutePanel.html">absolutePanel()</a> <a href="absolutePanel.html">fixedPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Panel with absolute positioning</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bootstrapPage.html">bootstrapPage()</a> <a href="bootstrapPage.html">basicPage()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a Bootstrap page</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="column.html">column()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a column within a UI definition</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="conditionalPanel.html">conditionalPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Conditional Panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fillPage.html">fillPage()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a page that fills the window</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fillRow.html">fillRow()</a> <a href="fillRow.html">fillCol()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Flex Box-based row/column layouts</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fixedPage.html">fixedPage()</a> <a href="fixedPage.html">fixedRow()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a page with a fixed layout</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fluidPage.html">fluidPage()</a> <a href="fluidPage.html">fluidRow()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a page with fluid layout</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="helpText.html">helpText()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a help text element</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="icon.html">icon()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an icon</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="navbarPage.html">navbarPage()</a> <a href="navbarPage.html">navbarMenu()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a page with a top level navigation bar</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="navlistPanel.html">navlistPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a navigation list panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="sidebarLayout.html">sidebarLayout()</a> <a href="sidebarLayout.html">sidebarPanel()</a> <a href="sidebarLayout.html">mainPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Layout a sidebar and main area</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tabPanel.html">tabPanel()</a> <a href="tabPanel.html">tabPanelBody()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a tab panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tabsetPanel.html">tabsetPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a tabset panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="titlePanel.html">titlePanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a panel containing an application title.</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="inputPanel.html">inputPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Input panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="flowLayout.html">flowLayout()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Flow layout</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="splitLayout.html">splitLayout()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Split layout</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="verticalLayout.html">verticalLayout()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Lay out UI elements vertically</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="wellPanel.html">wellPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a well panel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="withMathJax.html">withMathJax()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Load the MathJax library and typeset math expressions</div>
+      </td>
+    </tr></tbody><tbody data-section="UI Inputs"><tr><td colspan="2">
+        <h3>UI Inputs</h3>
+        <div class="section-desc"><p>Functions for creating user interface elements that prompt the user for input values or interaction.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="actionButton.html">actionButton()</a> <a href="actionButton.html">actionLink()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Action button/link</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="checkboxGroupInput.html">checkboxGroupInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Checkbox Group Input Control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="checkboxInput.html">checkboxInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Checkbox Input Control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="dateInput.html">dateInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create date input</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="dateRangeInput.html">dateRangeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create date range input</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="fileInput.html">fileInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">File Upload Control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="numericInput.html">numericInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a numeric input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="radioButtons.html">radioButtons()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create radio buttons</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="selectInput.html">selectInput()</a> <a href="selectInput.html">selectizeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a select list input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="varSelectInput.html">varSelectInput()</a> <a href="varSelectInput.html">varSelectizeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Select variables from a data frame</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="sliderInput.html">sliderInput()</a> <a href="sliderInput.html">animationOptions()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Slider Input Widget</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="submitButton.html">submitButton()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a submit button</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="textInput.html">textInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a text input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="textAreaInput.html">textAreaInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a textarea input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="passwordInput.html">passwordInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a password input control</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateActionButton.html">updateActionButton()</a> <a href="updateActionButton.html">updateActionLink()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the label or icon of an action button on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateCheckboxGroupInput.html">updateCheckboxGroupInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a checkbox group input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateCheckboxInput.html">updateCheckboxInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a checkbox input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateDateInput.html">updateDateInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a date input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateDateRangeInput.html">updateDateRangeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the start and end values of a date range input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateNumericInput.html">updateNumericInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a number input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateRadioButtons.html">updateRadioButtons()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a radio input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateSelectInput.html">updateSelectInput()</a> <a href="updateSelectInput.html">updateSelectizeInput()</a> <a href="updateSelectInput.html">updateVarSelectInput()</a> <a href="updateSelectInput.html">updateVarSelectizeInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a select input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateSliderInput.html">updateSliderInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Update Slider Input Widget</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateTabsetPanel.html">updateTabsetPanel()</a> <a href="updateTabsetPanel.html">updateNavbarPage()</a> <a href="updateTabsetPanel.html">updateNavlistPanel()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the selected tab on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="insertTab.html">insertTab()</a> <a href="insertTab.html">prependTab()</a> <a href="insertTab.html">appendTab()</a> <a href="insertTab.html">removeTab()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Dynamically insert/remove a tabPanel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="showTab.html">showTab()</a> <a href="showTab.html">hideTab()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Dynamically hide/show a tabPanel</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateTextInput.html">updateTextInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a text input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateTextAreaInput.html">updateTextAreaInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Change the value of a textarea input on the client</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="updateQueryString.html">updateQueryString()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Update URL in browser's location bar</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="getQueryString.html">getQueryString()</a> <a href="getQueryString.html">getUrlHash()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Get the query string / hash component from the URL</div>
+      </td>
+    </tr></tbody><tbody data-section="UI Outputs"><tr><td colspan="2">
+        <h3>UI Outputs</h3>
+        <div class="section-desc"><p>Functions for creating user interface elements that, in conjunction with rendering functions, display different kinds of output from your application.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="htmlOutput.html">htmlOutput()</a> <a href="htmlOutput.html">uiOutput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an HTML output element</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="plotOutput.html">imageOutput()</a> <a href="plotOutput.html">plotOutput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an plot or image output element</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="outputOptions.html">outputOptions()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Set options for an output object.</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="textOutput.html">textOutput()</a> <a href="textOutput.html">verbatimTextOutput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a text output element</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="downloadButton.html">downloadButton()</a> <a href="downloadButton.html">downloadLink()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a download button or link</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="Progress.html">Progress</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reporting progress (object-oriented API)</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="withProgress.html">withProgress()</a> <a href="withProgress.html">setProgress()</a> <a href="withProgress.html">incProgress()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reporting progress (functional API)</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="modalDialog.html">modalDialog()</a> <a href="modalDialog.html">modalButton()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a modal dialog UI</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="urlModal.html">urlModal()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Generate a modal dialog that displays a URL</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="showModal.html">showModal()</a> <a href="showModal.html">removeModal()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Show or remove a modal dialog</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="showNotification.html">showNotification()</a> <a href="showNotification.html">removeNotification()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Show or remove a notification</div>
+      </td>
+    </tr></tbody><tbody data-section="Interface builder functions"><tr><td colspan="2">
+        <h3>Interface builder functions</h3>
+        <div class="section-desc"><p>A sub-library for writing HTML using R functions. These functions form the foundation on which the higher level user interface functions are built, and can also be used in your Shiny UI to provide custom HTML, CSS, and JavaScript.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="builder.html">tags</a> <a href="builder.html">p()</a> <a href="builder.html">h1()</a> <a href="builder.html">h2()</a> <a href="builder.html">h3()</a> <a href="builder.html">h4()</a> <a href="builder.html">h5()</a> <a href="builder.html">h6()</a> <a href="builder.html">a()</a> <a href="builder.html">br()</a> <a href="builder.html">div()</a> <a href="builder.html">span()</a> <a href="builder.html">pre()</a> <a href="builder.html">code()</a> <a href="builder.html">img()</a> <a href="builder.html">strong()</a> <a href="builder.html">em()</a> <a href="builder.html">hr()</a> <a href="builder.html">tag()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create HTML tags</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="HTML.html">HTML()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mark Characters as HTML</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="include.html">includeHTML()</a> <a href="include.html">includeText()</a> <a href="include.html">includeMarkdown()</a> <a href="include.html">includeCSS()</a> <a href="include.html">includeScript()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Include Content From a File</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="singleton.html">singleton()</a> <a href="singleton.html">is.singleton()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Include content only once</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tagList.html">tagList()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a list of tags</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tagAppendAttributes.html">tagAppendAttributes()</a> <a href="tagAppendAttributes.html">tagHasAttribute()</a> <a href="tagAppendAttributes.html">tagGetAttribute()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Append tag attributes</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="tagAppendChild.html">tagAppendChild()</a> <a href="tagAppendChild.html">tagAppendChildren()</a> <a href="tagAppendChild.html">tagSetChildren()</a> <a href="tagAppendChild.html">tagInsertChildren()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Modify tag contents</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="validateCssUnit.html">validateCssUnit()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Validate proper CSS formatting of a unit</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="withTags.html">withTags()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Evaluate an expression using <code>tags</code></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="htmlTemplate.html">htmlTemplate()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Process an HTML template</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bootstrapLib.html">bootstrapLib()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Bootstrap libraries</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="suppressDependencies.html">suppressDependencies()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Suppress web dependencies</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="insertUI.html">insertUI()</a> <a href="insertUI.html">removeUI()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Insert and remove UI objects</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="markdown.html">markdown()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Insert inline Markdown</div>
+      </td>
+    </tr></tbody><tbody data-section="Rendering functions"><tr><td colspan="2">
+        <h3>Rendering functions</h3>
+        <div class="section-desc"><p>Functions that you use in your application’s server side code, assigning them to outputs that appear in your user interface.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderPlot.html">renderPlot()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Plot Output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderCachedPlot.html">renderCachedPlot()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Plot output with cached images</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderPrint.html">renderPrint()</a> <a href="renderPrint.html">renderText()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Text Output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderDataTable.html">dataTableOutput()</a> <a href="renderDataTable.html">renderDataTable()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Table output with the JavaScript DataTables library</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderImage.html">renderImage()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Image file output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderTable.html">tableOutput()</a> <a href="renderTable.html">renderTable()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Table Output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="renderUI.html">renderUI()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">UI Output</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="downloadHandler.html">downloadHandler()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">File Downloads</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="createRenderFunction.html">createRenderFunction()</a> <a href="createRenderFunction.html">quoToFunction()</a> <a href="createRenderFunction.html">installExprFunction()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Implement custom render functions</div>
+      </td>
+    </tr></tbody><tbody data-section="Reactive programming"><tr><td colspan="2">
+        <h3>Reactive programming</h3>
+        <div class="section-desc"><p>A sub-library that provides reactive programming facilities for R.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactive.html">reactive()</a> <a href="reactive.html">is.reactive()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a reactive expression</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="observe.html">observe()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a reactive observer</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="observeEvent.html">observeEvent()</a> <a href="observeEvent.html">eventReactive()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Event handler</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveVal.html">reactiveVal()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a (single) reactive value</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveValues.html">reactiveValues()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an object for storing reactive values</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bindCache.html">bindCache()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add caching with reactivity to an object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bindEvent.html">bindEvent()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Make an object respond only to specified reactive events</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveValuesToList.html">reactiveValuesToList()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Convert a reactivevalues object to a list</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="is.reactivevalues.html">is.reactivevalues()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Checks whether an object is a reactivevalues object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="isolate.html">isolate()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a non-reactive scope for an expression</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="invalidateLater.html">invalidateLater()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Scheduled Invalidation</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="debounce.html">debounce()</a> <a href="debounce.html">throttle()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Slow down a reactive expression with debounce/throttle</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactlog.html">reactlog()</a> <a href="reactlog.html">reactlogShow()</a> <a href="reactlog.html">reactlogReset()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive Log Visualizer</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveFileReader.html">reactiveFileReader()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive file reader</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactivePoll.html">reactivePoll()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive polling</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="reactiveTimer.html">reactiveTimer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Timer</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="domains.html">getDefaultReactiveDomain()</a> <a href="domains.html">withReactiveDomain()</a> <a href="domains.html">onReactiveDomainEnded()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive domains</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="freezeReactiveValue.html">freezeReactiveVal()</a> <a href="freezeReactiveValue.html">freezeReactiveValue()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Freeze a reactive value</div>
+      </td>
+    </tr></tbody><tbody data-section="Running"><tr><td colspan="2">
+        <h3>Running</h3>
+        <div class="section-desc"><p>Functions that are used to run or stop Shiny applications.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runApp.html">runApp()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run Shiny Application</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runGadget.html">runGadget()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run a gadget</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runExample.html">runExample()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run Shiny Example Applications</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runUrl.html">runUrl()</a> <a href="runUrl.html">runGist()</a> <a href="runUrl.html">runGitHub()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run a Shiny application from a URL</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="stopApp.html">stopApp()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Stop the currently running Shiny app</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="viewer.html">paneViewer()</a> <a href="viewer.html">dialogViewer()</a> <a href="viewer.html">browserViewer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Viewer options</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="isRunning.html">isRunning()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Check whether a Shiny application is running</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="loadSupport.html">loadSupport()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Load an app's supporting R files</div>
+      </td>
+    </tr></tbody><tbody data-section="Bookmarking state"><tr><td colspan="2">
+        <h3>Bookmarking state</h3>
+        <div class="section-desc"><p>Functions that are used for bookmarking and restoring state.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="bookmarkButton.html">bookmarkButton()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a button for bookmarking/sharing</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="enableBookmarking.html">enableBookmarking()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Enable bookmarking for a Shiny application</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="setBookmarkExclude.html">setBookmarkExclude()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Exclude inputs from bookmarking</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="showBookmarkUrlModal.html">showBookmarkUrlModal()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Display a modal dialog for bookmarking</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="onBookmark.html">onBookmark()</a> <a href="onBookmark.html">onBookmarked()</a> <a href="onBookmark.html">onRestore()</a> <a href="onBookmark.html">onRestored()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add callbacks for Shiny session bookmarking events</div>
+      </td>
+    </tr></tbody><tbody data-section="Extending Shiny"><tr><td colspan="2">
+        <h3>Extending Shiny</h3>
+        <div class="section-desc"><p>Functions that are intended to be called by third-party packages that extend Shiny.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="createWebDependency.html">createWebDependency()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a web dependency</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="resourcePaths.html">addResourcePath()</a> <a href="resourcePaths.html">resourcePaths()</a> <a href="resourcePaths.html">removeResourcePath()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Resource Publishing</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="registerInputHandler.html">registerInputHandler()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Register an Input Handler</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="removeInputHandler.html">removeInputHandler()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Deregister an Input Handler</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="markRenderFunction.html">markRenderFunction()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mark a function as a render function</div>
+      </td>
+    </tr></tbody><tbody data-section="Utility functions"><tr><td colspan="2">
+        <h3>Utility functions</h3>
+        <div class="section-desc"><p>Miscellaneous utilities that may be useful to advanced users or when extending Shiny.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="devmode.html">devmode()</a> <a href="devmode.html">in_devmode()</a> <a href="devmode.html">with_devmode()</a> <a href="devmode.html">devmode_inform()</a> <a href="devmode.html">register_devmode_option()</a> <a href="devmode.html">get_devmode_option()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Shiny Developer Mode</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyAppTemplate.html">shinyAppTemplate()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Generate a Shiny application from a template</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="req.html">req()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Check for required values</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="isTruthy.html">isTruthy()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Truthy and falsy values</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="validate.html">validate()</a> <a href="validate.html">need()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Validate input values and other conditions</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="session.html">session</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Session object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyOptions.html">getShinyOption()</a> <a href="shinyOptions.html">shinyOptions()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Get or set Shiny options</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="safeError.html">safeError()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Declare an error safe for the user to see</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="onFlush.html">onFlush()</a> <a href="onFlush.html">onFlushed()</a> <a href="onFlush.html">onSessionEnded()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add callbacks for Shiny session events</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="restoreInput.html">restoreInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Restore an input value</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="applyInputHandlers.html">applyInputHandlers()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Apply input handlers to raw input values</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="parseQueryString.html">parseQueryString()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Parse a GET query string from a URL</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="getCurrentOutputInfo.html">getCurrentOutputInfo()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Get output information</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="plotPNG.html">plotPNG()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run a plotting function and save the output as a PNG</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="sizeGrowthRatio.html">sizeGrowthRatio()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a sizing function that grows at a given ratio</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="exportTestValues.html">exportTestValues()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Register expressions for export in test mode</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="setSerializer.html">setSerializer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add a function for serializing an input before bookmarking application state</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="snapshotExclude.html">snapshotExclude()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mark an output to be excluded from test snapshots</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="snapshotPreprocessInput.html">snapshotPreprocessInput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add a function for preprocessing an input before taking a test snapshot</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="snapshotPreprocessOutput.html">snapshotPreprocessOutput()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Add a function for preprocessing an output before taking a test snapshot</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="repeatable.html">repeatable()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Make a random number generator repeatable</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="serverInfo.html">serverInfo()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Collect information about the Shiny Server environment</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="onStop.html">onStop()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Run code after an application or session ends</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="httpResponse.html">httpResponse()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an HTTP response object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="key_missing.html">key_missing()</a> <a href="key_missing.html">is.key_missing()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">A missing key object</div>
+      </td>
+    </tr></tbody><tbody data-section="Plot interaction"><tr><td colspan="2">
+        <h3>Plot interaction</h3>
+        <div class="section-desc"><p>Functions related to interactive plots</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="brushedPoints.html">brushedPoints()</a> <a href="brushedPoints.html">nearPoints()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Find rows of data selected on an interactive plot.</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="brushOpts.html">brushOpts()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create an object representing brushing options</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="clickOpts.html">clickOpts()</a> <a href="clickOpts.html">dblclickOpts()</a> <a href="clickOpts.html">hoverOpts()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Control interactive plot point events</div>
+      </td>
+    </tr></tbody><tbody data-section="Modules"><tr><td colspan="2">
+        <h3>Modules</h3>
+        <div class="section-desc"><p>Functions for modularizing Shiny apps</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="NS.html">NS()</a> <a href="NS.html">ns.sep</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Namespaced IDs for inputs/outputs</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="moduleServer.html">moduleServer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Shiny modules</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="callModule.html">callModule()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Invoke a Shiny module</div>
+      </td>
+    </tr></tbody><tbody data-section="Embedding"><tr><td colspan="2">
+        <h3>Embedding</h3>
+        <div class="section-desc"><p>Functions that are intended for third-party packages that embed Shiny applications.</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyApp.html">shinyApp()</a> <a href="shinyApp.html">shinyAppDir()</a> <a href="shinyApp.html">shinyAppFile()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a Shiny app object</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="maskReactiveContext.html">maskReactiveContext()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Evaluate an expression without a reactive context</div>
+      </td>
+    </tr></tbody><tbody data-section="Testing"><tr><td colspan="2">
+        <h3>Testing</h3>
+        <div class="section-desc"><p>Functions intended for testing of Shiny components</p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="runTests.html">runTests()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Runs the tests associated with this Shiny app</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="testServer.html">testServer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Reactive testing for Shiny server functions and modules</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="MockShinySession.html">MockShinySession</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mock Shiny Session</div>
+      </td>
+    </tr></tbody><tbody data-section="Superseded"><tr><td colspan="2">
+        <h3>Superseded</h3>
+        <div class="section-desc"><p>Functions that have been <code>r lifecycle::badge("superseded")</code></p></div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="markRenderFunction.html">markRenderFunction()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Mark a function as a render function</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyUI.html">shinyUI()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Create a Shiny UI handler</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="shinyServer.html">shinyServer()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Define Server Functionality</div>
+      </td>
+    </tr><tr><td>
+        <h4 class="topic"><code><a href="exprToFunction.html">exprToFunction()</a> </code></h4>
+      </td>
+      <td>
+        <div class="desc">Convert an expression to a function</div>
+      </td>
+    </tr></tbody></table>
+```

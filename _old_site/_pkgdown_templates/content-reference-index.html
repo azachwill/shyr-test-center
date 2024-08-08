@@ -1,0 +1,27 @@
+<h1>Function reference <small>version {{#package}}{{{version}}}{{/package}}</small></h1>
+
+<table class="index">
+{{#rows}}
+    {{#title}}
+    <tbody data-section="{{{title}}}"><tr>
+      <td colspan="2">
+        <h3>{{{title}}}</h3>
+        <div class="section-desc">{{{desc}}}</div>
+      </td>
+    </tr>
+    {{/title}}
+    {{#topics}}
+    <tr>
+      <td>
+        <h4 class="topic"><code>{{#aliases}}<a href="{{{path}}}">{{{.}}}</a> {{/aliases}}</code></h4>
+      </td>
+      <td>
+        <div class="desc">{{{title}}}</div>
+      </td>
+    </tr>
+    {{/topics}}
+    {{^title}}
+    </tbody>
+    {{/title}}
+{{/rows}}
+</table>

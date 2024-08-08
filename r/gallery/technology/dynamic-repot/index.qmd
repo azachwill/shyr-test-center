@@ -1,0 +1,18 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: Advanced interactive charts with dynamic reports!
+title:        "Advanced D3 interactive charts with dynamic reports"
+author:    Jiena Gu McLellan
+authorurl:     https://www.jienamclellan.com/
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - d3
+appurl:      https://appforiarteam.shinyapps.io/Interactive_charts_reports/
+sourceurl:   https://github.com/jienagu/D3_folded_charts
+rscloudurl:  https://rstudio.cloud/project/233548
+---
+
+Advanced interactive charts with dynamic reports!
+  

@@ -1,0 +1,100 @@
+---
+layout: newframe-noband
+title: Articles
+categories: articles
+child_scope: /articles/
+---
+
+<script>
+
+$(document).ready(function() {
+
+  $('.subsection-title').on('click', function(event) {
+    if ($(this).hasClass('current')) {
+      $(this).removeClass('current');
+    }
+    else {
+      $('.subsection-title').removeClass('current');
+      $(this).addClass('current');
+
+      var linkRef = $(this).parent().attr('href');
+      console.log($(linkRef));
+
+      $('html, body').animate({
+        scrollTop: $(linkRef).offset().top
+      }, 500);
+
+    }
+  });
+
+  $('.top-link').on('click', function(event) {
+    $('html, body').animate({
+      scrollTop: 0
+    }, 250);
+  });
+
+});
+
+</script>
+<div class="mainContent pushFooter">
+
+  <div class="band">
+    <a name="top"></a>
+    <div class="bandContent">
+      <h1>Articles</h1>
+    </div>
+  </div>
+
+  <div class="band articlesBand">
+    <div class="bandContent">
+      <div class="articles-outline splitColumns withMobileMargins">
+
+        {% for section in site.data.articles %}
+          <div class="column25 {{section.cssclass}}">
+            <div class="section-title">{{ section.section }}</div>
+            {% for sectiongroup in section.subsection-groups %}
+              <div class="subsection-group">
+                <div class="subsection-group-title">{{ sectiongroup.title }}</div>
+                {% for subsection in sectiongroup.subsections %}
+                  <!-- pull in the sections, and iterate on the groups -->
+                  <a href="#{{ subsection.name }}"><div class="subsection-title">{{ subsection.title }}</div></a>
+                  {% cycle '', %}
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="bandContent">
+      {% for section in site.data.articles %}
+        {% for sectiongroup in section.subsection-groups %}
+          {% for subsection in sectiongroup.subsections %}
+            <a id="{{ subsection.name }}" name="{{ subsection.name }}" class="subsection-link"></a>
+            <div class="articles-subsection {{section.cssclass}}">
+              <div class="subsection-header">
+                <div class="subsection-title">{{ section.section }} <span class="titleText">{{ subsection.title }}</span></div>
+                <a class="top-link" href="#main"><span class="top-label">back to top</span></a>
+              </div>
+              <div class="subsection-description">{{ subsection.description}}</div>
+              <div class="articles">
+                {% for postname in subsection.children %}
+                  {% assign post = postname | find_post %}
+                  <div class="article">
+                    <div class="article-title"><a href="{{ post.url }}">{{ post.title }}</a></div>
+                    <div class="article-description">{{ post.description }} <a href="{{ post.url }}">Read more ...</a></div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+
+</div>

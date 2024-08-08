@@ -1,0 +1,219 @@
+---
+title: Build a user interface
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+---
+
+Now that you understand the structure of a Shiny app, it's time to build your first app from scratch.
+
+This lesson will show you how to build a user interface for your app. You will learn how to lay out the user interface and then add text, images, and other HTML elements to your Shiny app.
+
+We'll use the `App-1` app you made in [Lesson 1](../lesson1/). To get started, open its `app.R` file. Edit the script to match the one below:
+
+```r
+library(shiny)
+library(bslib)
+
+# Define UI ----
+ui <- page_sidebar(
+ 
+)
+
+# Define server logic ----
+server <- function(input, output) {
+
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
+
+This code is the bare minimum needed to create a Shiny app. The result is an empty app with a blank user interface, an appropriate starting point for this lesson.
+
+
+## Layout
+
+Use the `page_sidebar` function to create a page with a sidebar. You lay out the user interface of your app by placing elements in the `page_sidebar` function. The `ui` function below creates a user interface with a title, sidebar panel, and main panel.
+
+```r
+ui <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("sidebar"),
+  "main contents"
+)
+```
+
+:::{.border .my-5}
+![](images/sidebar-layout1.png){title="Sidebar on the left" fig-alt="Sidebar on the left of the Shiny app" .lightbox }
+:::
+
+You can add additional elements to the main panel of the page by supplying them to `page_sidebar`.
+
+By default, the sidebar panel will appear on the left side of your app. You can move it to the right side by giving `sidebar` the optional argument `position = "right"`.
+
+```r
+ui <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("Sidebar", position = "right"),
+  "Main contents"
+)
+```
+
+:::{.border .my-5}
+![](images/sidebar-layout2.png){title="Sidebar on the right" fig-alt="Sidebar on the right of the Shiny app" .lightbox }
+:::
+
+`page_sidebar` creates a sidebar layout that fills the page, and is a quick way to create a page with a sidebar. If you'd like to create a floating sidebar layout that can appear anywhere on the page, use `page_fluid` and `layout_sidebar`. 
+
+```r
+ui <- page_fluid(
+  layout_sidebar(
+    sidebar = sidebar("Sidebar"),
+    "Main contents"
+  )   
+)
+```
+
+
+You can also create more advanced layouts. For example, `page_navbar` creates a multi-page user interface that includes a navigation bar. Or you can use `layout_columns` or `layout_rows` to build your layout up from a grid system. If you'd like to learn more about these advanced options, read the [Shiny Application Layout Guide](/articles/layout-guide.html). We will stick with `layout_sidebar` in this tutorial.
+
+## Cards
+
+Cards are a common organizing unit for modern user interfaces. You can use the function `card()` to create a card in your Shiny app. 
+
+```r
+ui <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("Sidebar"),
+  card()
+)
+```
+
+`card()` creates a regular container with borders and padding.
+
+![](images/card.png){title="Example card" fig-alt="Example card" .lightbox .border .my-5}
+Use cards to grouped related information. Add content to a card by supplying arguments to `card()`.
+
+```r
+ui <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("Sidebar"),
+  card(
+    "Card content"
+  )
+)
+```
+
+You can also use functions like `card_header()`, `card_footer()`, and `card_image()` to add card elements to a card. For example, `card_header()` adds a header.
+
+```r
+ui <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("Sidebar"),
+  card(
+    card_header("Card header"),
+    "Card body"
+  )
+)
+```
+
+![](images/card-header.png){title="Card with header" fig-alt="Shiny app with a card that includes a card header." .lightbox .border .my-5}
+
+See the bslib [Cards article](https://rstudio.github.io/bslib/articles/cards/) to learn more about cards.
+
+## Value boxes
+
+Value boxes are another useful UI component. Use value boxes to highlight important values in your app.
+
+Create a value box with the function `value_box()`. Define the value box's title and value with the `title` and `value` arguments. 
+
+```
+ui <- page_sidebar(
+  ...
+  value_box(
+    title = "Value box",
+    value = 100
+  ),
+  ...
+)
+```
+
+Optionally, set the value box's `theme` and use the `showcase` argument to add UI elements like icons to the value box. Note: to use Bootstrap icons, use the function [`bsicons::bs_icon()`](https://rstudio.github.io/bsicons/reference/bs_icon.html).
+
+```r
+ui <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("Sidebar"),
+  value_box(
+    title = "Value box",
+    value = 100,
+    showcase = bsicons::bs_icon("bar-chart"),
+    theme = "teal"
+  ),
+  card("Card"),
+  card("Another card")
+)
+```
+
+![](images/value-box.png){title="Value box" fig-alt="Shiny app with a value box and two cards." .lightbox .border .my-5}
+To learn more about value boxes, including how to add multiple value boxes to your app, see the bslib [Value Boxes article](https://rstudio.github.io/bslib/articles/value-boxes/index.html). 
+
+## Your turn
+
+You can use Shiny's layout, card, and value box functions to create attractive and useful user interfaces. See how well you understand these functions by recreating the Shiny app pictured below. Use the examples in this tutorial to work on it and then test it out.
+
+Our `app.R` script is found under the Model Answer button, but don't just copy and paste it. Make sure you understand how the code works before moving on.
+
+![](images/my-shiny-app.png){title="Target app" fig-alt="Example Shiny app" .lightbox .border .my-5}
+
+### Model Answer
+
+::: {.callout-note collapse="true"}
+### View Answer
+
+```r
+library(shiny)
+library(bslib)
+
+# Define UI
+ui <- page_sidebar(
+  title = "My Shiny App",
+  sidebar = sidebar(
+    "Shiny is available on CRAN, so you can install it in the usual way from your R console:",
+    code('install.packages("shiny")'),
+  ),
+  card(
+    card_header("Introducing Shiny"),
+    "Shiny is a package from Posit that makes it incredibly easy to build interactive web applications with R.
+    For an introduction and live examples, visit the Shiny homepage (https://shiny.posit.co).",
+    card_image("www/shiny.svg", height = "300px"),
+    card_footer("Shiny is a product of Posit.")
+  )
+)
+
+# Define server logic ----
+server <- function(input, output) {
+
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
+
+:::
+
+
+## Recap
+
+With your new skills, you can:
+
+* create a user interface with a `page_*` function
+
+* create a card and add content to it
+
+* create a value box
+
+Now that you can place simple content in your user interface, let's look at how you would place more complicated content, like widgets. Widgets are interactive web elements that your user can use to control the app. They are also the subject of [Lesson 3](../lesson3/).

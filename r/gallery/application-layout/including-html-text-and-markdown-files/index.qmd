@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Including HTML, text, and Markdown files
+date: 2014-07-29 
+tags: 
+ - include
+appurl: https://gallery.shinyapps.io/048-including-html-text-and-markdown-files
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/048-including-html-text-and-markdown-files
+---

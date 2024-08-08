@@ -1,0 +1,67 @@
+---
+layout: reference
+title: "Create a tab panel — tabPanel"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a tab panel</h1>
+  
+
+  <pre class="code"><span class='fu'>tabPanel</span>(<span class='no'>title</span>, <span class='no'>...</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>title</span>, <span class='kw'>icon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>title</p></th>
+    <td><p>Display title for tab</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>UI elements to include within the tab</p></td>
+  </tr>
+  <tr>
+    <th><p>value</p></th>
+    <td><p>The value that should be sent when <code>tabsetPanel</code> reports
+that this tab is selected. If omitted and <code>tabsetPanel</code> has an
+<code>id</code>, then the title will be used..</p></td>
+  </tr>
+  <tr>
+    <th><p>icon</p></th>
+    <td><p>Optional icon to appear on the tab. This attribute is only
+valid when using a <code>tabPanel</code> within a <code><a href='navbarPage.html'>navbarPage()</a></code>.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Create a tab panel that can be included within a <code><a href='tabsetPanel.html'>tabsetPanel()</a></code> or
+a <code><a href='navbarPage.html'>navbarPage()</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A tab that can be passed to <code><a href='tabsetPanel.html'>tabsetPanel()</a></code></p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='tabsetPanel.html'>tabsetPanel()</a></code></p></div>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'># Show a tabset that includes a plot, summary, and</span>
+<span class='co'># table view of the generated distribution</span>
+<span class='fu'><a href='sidebarLayout.html'>mainPanel</a></span>(
+  <span class='fu'><a href='tabsetPanel.html'>tabsetPanel</a></span>(
+    <span class='fu'>tabPanel</span>(<span class='st'>"Plot"</span>, <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"plot"</span>)),
+    <span class='fu'>tabPanel</span>(<span class='st'>"Summary"</span>, <span class='fu'><a href='verbatimTextOutput.html'>verbatimTextOutput</a></span>(<span class='st'>"summary"</span>)),
+    <span class='fu'>tabPanel</span>(<span class='st'>"Table"</span>, <span class='fu'><a href='tableOutput.html'>tableOutput</a></span>(<span class='st'>"table"</span>))
+  )
+)</pre>
+</div>
+
+

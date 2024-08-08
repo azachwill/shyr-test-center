@@ -1,0 +1,63 @@
+---
+layout: reference
+title: "Include Content From a File — include"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Include Content From a File</h1>
+  
+
+  <pre class="code"><span class='fu'>includeHTML</span>(<span class='no'>path</span>)
+
+<span class='fu'>includeText</span>(<span class='no'>path</span>)
+
+<span class='fu'>includeMarkdown</span>(<span class='no'>path</span>)
+
+<span class='fu'>includeCSS</span>(<span class='no'>path</span>, <span class='no'>...</span>)
+
+<span class='fu'>includeScript</span>(<span class='no'>path</span>, <span class='no'>...</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>path</p></th>
+    <td><p>The path of the file to be included. It is highly recommended to
+use a relative path (the base path being the Shiny application directory),
+not an absolute path.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Any additional attributes to be applied to the generated tag.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Load HTML, text, or rendered Markdown from a file and turn into HTML.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>These functions provide a convenient way to include an extensive amount of
+HTML, textual, Markdown, CSS, or JavaScript content, rather than using a
+large literal R string.</p>
+    <h3 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h3>
+
+  <p><code>includeText</code> escapes its contents, but does no other processing.
+  This means that hard breaks and multiple spaces will be rendered as they
+  usually are in HTML: as a single space character. If you are looking for
+  preformatted text, wrap the call with <code><a href='builder.html'>pre</a></code>, or consider using
+  <code>includeMarkdown</code> instead.</p>
+<p>The <code>includeMarkdown</code> function requires the <code>markdown</code>
+  package.</p>
+  
+  </div>
+
+</div>
+
+

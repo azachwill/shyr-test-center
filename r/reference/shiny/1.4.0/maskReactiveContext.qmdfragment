@@ -1,0 +1,43 @@
+---
+title: "Evaluate an expression without a reactive context — maskReactiveContext"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>maskReactiveContext</span>(<span class='no'>expr</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>An expression to evaluate.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Temporarily blocks the current reactive context and evaluates the given
+expression. Any attempt to directly access reactive values or expressions in
+<code>expr</code> will give the same results as doing it at the top-level (by
+default, an error).</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>The value of <code>expr</code>.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='isolate.html'>isolate()</a></code></p></div>
+  
+  </div>
+
+</div>
+
+
+```

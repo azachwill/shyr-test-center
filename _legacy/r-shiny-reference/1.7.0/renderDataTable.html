@@ -1,0 +1,133 @@
+---
+layout: reference
+title: "Table output with the JavaScript DataTables library — dataTableOutput"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Table output with the JavaScript DataTables library</h1>
+  
+
+  <pre class="code"><span class='fu'>dataTableOutput</span>(<span class='no'>outputId</span>)
+
+<span class='fu'>renderDataTable</span>(
+  <span class='no'>expr</span>,
+  <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>searchDelay</span> <span class='kw'>=</span> <span class='fl'>500</span>,
+  <span class='kw'>callback</span> <span class='kw'>=</span> <span class='st'>"function(oTable) {}"</span>,
+  <span class='kw'>escape</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(),
+  <span class='kw'>quoted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>outputArgs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>outputId</p></th>
+    <td><p>output variable to read the table from</p></td>
+  </tr>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>An expression that returns a data frame or a matrix.</p></td>
+  </tr>
+  <tr>
+    <th><p>options</p></th>
+    <td><p>A list of initialization options to be passed to DataTables,
+or a function to return such a list.  You can find a complete list of
+options at <a href='https://datatables.net/reference/option/'>https://datatables.net/reference/option/</a>.</p>
+<p>Any top-level strings with class <code>"AsIs"</code> (as created by <code><a href='https://rdrr.io/r/base/AsIs.html'>I()</a></code>) will be
+evaluated in JavaScript. This is useful when the type of the option value
+is not supported in JSON, e.g., a JavaScript function, which can be
+obtained by  evaluating a character string. This only applies to the
+root-level elements of options list, and does not worked for lower-level
+elements in the list.</p></td>
+  </tr>
+  <tr>
+    <th><p>searchDelay</p></th>
+    <td><p>The delay for searching, in milliseconds (to avoid too
+frequent search requests).</p></td>
+  </tr>
+  <tr>
+    <th><p>callback</p></th>
+    <td><p>A JavaScript function to be applied to the DataTable object.
+This is useful for DataTables plug-ins, which often require the DataTable
+instance to be available.</p></td>
+  </tr>
+  <tr>
+    <th><p>escape</p></th>
+    <td><p>Whether to escape HTML entities in the table: <code>TRUE</code> means
+to escape the whole table, and <code>FALSE</code> means not to escape it.
+Alternatively, you can specify numeric column indices or column names to
+indicate which columns to escape, e.g. <code>1:5</code> (the first 5 columns),
+<code><a href='https://rdrr.io/r/base/c.html'>c(1, 3, 4)</a></code>, or <code><a href='https://rdrr.io/r/base/c.html'>c(-1, -3)</a></code> (all columns except the first and
+third), or <code><a href='https://rdrr.io/r/base/c.html'>c('Species', 'Sepal.Length')</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>env</p></th>
+    <td><p>The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression. If <code>expr</code> is a quosure and <code>quoted</code> is <code>TRUE</code>,
+then <code>env</code> is ignored.</p></td>
+  </tr>
+  <tr>
+    <th><p>quoted</p></th>
+    <td><p>If it is <code>TRUE</code>, then the <code><a href='https://rdrr.io/r/base/substitute.html'>quote()</a></code>ed value of <code>expr</code>
+will be used when <code>expr</code> is evaluated. If <code>expr</code> is a quosure and you
+would like to use its expression as a value for <code>expr</code>, then you must set
+<code>quoted</code> to <code>TRUE</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>outputArgs</p></th>
+    <td><p>A list of arguments to be passed through to the implicit
+call to <code>dataTableOutput()</code> when <code>renderDataTable()</code> is used
+in an interactive R Markdown document.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p><a href='https://lifecycle.r-lib.org/articles/stages.html#superseded'><img src='figures/lifecycle-superseded.svg' alt='[Superseded]' /></a> Please use
+<a href='https://rstudio.github.io/DT/shiny.html'><code><a href='https://rdrr.io/pkg/DT/man/dataTableOutput.html'>DT::renderDataTable()</a></code></a>.
+(Shiny 0.11.1)</p>
+<p>Makes a reactive version of the given function that returns a data frame (or
+matrix), which will be rendered with the <a href='https://datatables.net'>DataTables</a>
+library. Paging, searching, filtering, and sorting can be done on the R side
+using Shiny as the server infrastructure.</p>
+<p>This function only provides the server-side version of DataTables (using R
+to process the data object on the server side). There is a separate
+<a href='https://github.com/rstudio/DT'>DT</a> that allows you to create both
+server-side and client-side DataTables, and supports additional features.
+Learn more at <a href='https://rstudio.github.io/DT/shiny.html'>https://rstudio.github.io/DT/shiny.html</a>.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='co'># pass a callback function to DataTables using I()</span>
+  <span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+    <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+      <span class='fu'><a href='fluidPage.html'>fluidRow</a></span>(
+        <span class='fu'><a href='column.html'>column</a></span>(<span class='fl'>12</span>,
+          <span class='fu'>dataTableOutput</span>(<span class='st'>'table'</span>)
+        )
+      )
+    ),
+    <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+      <span class='no'>output</span>$<span class='no'>table</span> <span class='kw'>&lt;-</span> <span class='fu'>renderDataTable</span>(<span class='no'>iris</span>,
+        <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+          <span class='kw'>pageLength</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+          <span class='kw'>initComplete</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='st'>"function(settings, json) {alert('Done.');}"</span>)
+        )
+      )
+    }
+  )
+}</pre>
+</div>
+
+

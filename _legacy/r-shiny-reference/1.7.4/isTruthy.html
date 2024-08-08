@@ -1,0 +1,42 @@
+---
+layout: reference
+title: "Truthy and falsy values — isTruthy"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Truthy and falsy values</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>The terms "truthy" and "falsy" generally indicate whether a value, when
+coerced to a <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">base::logical()</a></code>, is <code>TRUE</code> or <code>FALSE</code>. We use
+the term a little loosely here; our usage tries to match the intuitive
+notions of "Is this value missing or available?", or "Has the user provided
+an answer?", or in the case of action buttons, "Has the button been
+clicked?".</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">isTruthy</span>(x)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>x</dt>
+<dd><p>An expression whose truthiness value we want to determine</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>For example, a <code>textInput</code> that has not been filled out by the user has
+a value of <code>""</code>, so that is considered a falsy value.</p>
+<p>To be precise, a value is truthy <em>unless</em> it is one of:</p><ul><li><p><code>FALSE</code></p></li>
+<li><p><code>NULL</code></p></li>
+<li><p><code>""</code></p></li>
+<li><p>An empty atomic vector</p></li>
+<li><p>An atomic vector that contains only missing values</p></li>
+<li><p>A logical vector that contains all <code>FALSE</code> or missing values</p></li>
+<li><p>An object of class <code>"try-error"</code></p></li>
+<li><p>A value that represents an unclicked <code><a href="actionButton.html">actionButton()</a></code></p></li>
+</ul><p>Note in particular that the value <code>0</code> is considered truthy, even though
+<code>as.logical(0)</code> is <code>FALSE</code>.</p>
+  </div>
+
+</div>

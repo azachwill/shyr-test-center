@@ -1,0 +1,99 @@
+---
+layout: reference
+title: "Reactive polling — reactivePoll"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Reactive polling</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/reactives.R" class="external-link"><code>R/reactives.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Used to create a reactive data source, which works by periodically polling a
+non-reactive data source.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reactivePoll</span>(intervalMillis, session, checkFunc, valueFunc)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>intervalMillis</dt>
+<dd><p>Approximate number of milliseconds to wait between
+calls to <code>checkFunc</code>. This can be either a numeric value, or a
+function that returns a numeric value.</p></dd>
+
+
+<dt>session</dt>
+<dd><p>The user session to associate this file reader with, or
+<code>NULL</code> if none. If non-null, the reader will automatically stop when
+the session ends.</p></dd>
+
+
+<dt>checkFunc</dt>
+<dd><p>A relatively cheap function whose values over time will be
+tested for equality; inequality indicates that the underlying value has
+changed and needs to be invalidated and re-read using <code>valueFunc</code>. See
+Details.</p></dd>
+
+
+<dt>valueFunc</dt>
+<dd><p>A function that calculates the underlying value. See
+Details.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A reactive expression that returns the result of <code>valueFunc</code>,
+and invalidates when <code>checkFunc</code> changes.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p><code>reactivePoll</code> works by pairing a relatively cheap "check" function with
+a more expensive value retrieval function. The check function will be
+executed periodically and should always return a consistent value until the
+data changes. When the check function returns a different value, then the
+value retrieval function will be used to re-populate the data.</p>
+<p>Note that the check function doesn't return <code>TRUE</code> or <code>FALSE</code> to
+indicate whether the underlying data has changed. Rather, the check function
+indicates change by returning a different value from the previous time it was
+called.</p>
+<p>For example, <code>reactivePoll</code> is used to implement
+<code>reactiveFileReader</code> by pairing a check function that simply returns the
+last modified timestamp of a file, and a value retrieval function that
+actually reads the contents of the file.</p>
+<p>As another example, one might read a relational database table reactively by
+using a check function that does <code>SELECT MAX(timestamp) FROM table</code> and
+a value retrieval function that does <code>SELECT * FROM table</code>.</p>
+<p>The <code>intervalMillis</code>, <code>checkFunc</code>, and <code>valueFunc</code> functions
+will be executed in a reactive context; therefore, they may read reactive
+values and reactive expressions.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="reactiveFileReader.html">reactiveFileReader()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">reactivePoll</span>(<span class="dv">1000</span>, session,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This function returns the time that log_file was last modified</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">checkFunc =</span> <span class="cf">function</span>() {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">file.exists</span>(log_file))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">file.info</span>(log_file)<span class="sc">$</span>mtime[<span class="dv">1</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="cf">else</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">""</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This function returns the content of log_file</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">valueFunc =</span> <span class="cf">function</span>() {</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read.csv</span>(log_file)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>dataTable <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data</span>()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>

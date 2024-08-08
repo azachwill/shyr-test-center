@@ -1,0 +1,62 @@
+---
+title: "Set options for an output object. — outputOptions"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>outputOptions</span>(<span class='no'>x</span>, <span class='no'>name</span>, <span class='no'>...</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>x</p></th>
+    <td><p>A shinyoutput object (typically <code>output</code>).</p></td>
+  </tr>
+  <tr>
+    <th><p>name</p></th>
+    <td><p>The name of an output observer in the shinyoutput object.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Options to set for the output observer.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>These are the available options for an output object:</p><ul>
+<li><p>suspendWhenHidden. When <code>TRUE</code> (the default), the output object
+will be suspended (not execute) when it is hidden on the web page. When
+<code>FALSE</code>, the output object will not suspend when hidden, and if it
+was already hidden and suspended, then it will resume immediately.</p></li>
+<li><p>priority. The priority level of the output object. Queued outputs
+with higher priority values will execute before those with lower values.</p></li>
+</ul>
+
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Get the list of options for all observers within output</span>
+<span class='fu'>outputOptions</span>(<span class='no'>output</span>)
+
+<span class='co'># Disable suspend for output$myplot</span>
+<span class='fu'>outputOptions</span>(<span class='no'>output</span>, <span class='st'>"myplot"</span>, <span class='kw'>suspendWhenHidden</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># Change priority for output$myplot</span>
+<span class='fu'>outputOptions</span>(<span class='no'>output</span>, <span class='st'>"myplot"</span>, <span class='kw'>priority</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+
+<span class='co'># Get the list of options for output$myplot</span>
+<span class='fu'>outputOptions</span>(<span class='no'>output</span>, <span class='st'>"myplot"</span>)
+}</pre>
+</div>
+
+
+```

@@ -1,0 +1,22 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: Visualise Twitter interactions in the form networks. Enter a search or a single keyword and explore how users conversed around the topic with the help of numerous filters and network views.
+title:        "Chirp"
+author:    John Coene
+authorurl:     null
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - twitter
+ - rtweet
+ - social media
+appurl:      https://johncoene.shinyapps.io/chirp_demo/
+sourceurl:   https://github.com/JohnCoene/chirp
+rscloudurl:  https://rstudio.cloud/project/231379
+---
+
+Visualise Twitter interactions in the form networks. Enter a search or a single keyword and explore how users conversed around the topic with the help of numerous filters and network views.
+
+You can also freely download the app and deploy on your premises.
+  

@@ -1,0 +1,124 @@
+---
+title: "insertUI"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='insertUI.html'>insertUI</a></span><span class="keyword">(</span><span class="symbol">selector</span><span class="keyword">,</span> <span class="argument">where</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"beforeBegin"</span><span class="keyword">,</span> <span class="string">"afterBegin"</span><span class="keyword">,</span> <span class="string">"beforeEnd"</span><span class="keyword">,</span>
+  <span class="string">"afterEnd"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="symbol">ui</span><span class="keyword">,</span> <span class="argument">multiple</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">immediate</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>selector</th>
+    <td>A string that is accepted by jQuery&#39;s selector (i.e. the
+string <code>s</code> to be placed in a <code>$(s)</code> jQuery call). This selector
+will determine the element(s) relative to which you want to insert your
+UI object.</td>
+  </tr>
+  <tr>
+    <th>where</th>
+    <td>Where your UI object should go relative to the selector:
+<dl>
+  <dt><code>beforeBegin</code></dt><dd>Before the selector element itself</dd>
+
+  <dt><code>afterBegin</code></dt><dd>Just inside the selector element, before its
+  first child</dd>
+
+  <dt><code>beforeEnd</code></dt><dd>Just inside the selector element, after its
+  last child (default)</dd>
+
+  <dt><code>afterEnd</code></dt><dd>After the selector element itself</dd>
+
+</dl>
+
+Adapted from
+<a href = 'https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML'>here</a>.</td>
+  </tr>
+  <tr>
+    <th>ui</th>
+    <td>The UI object you want to insert. This can be anything that
+you usually put inside your apps&#39;s <code>ui</code> function. If you&#39;re inserting
+multiple elements in one call, make sure to wrap them in either a
+<code>tagList()</code> or a <code>tags$div()</code> (the latter option has the
+advantage that you can give it an <code>id</code> to make it easier to
+reference or remove it later on). If you want to insert raw html, use
+<code>ui = HTML()</code>.</td>
+  </tr>
+  <tr>
+    <th>multiple</th>
+    <td>In case your selector matches more than one element,
+<code>multiple</code> determines whether Shiny should insert the UI object
+relative to all matched elements or just relative to the first
+matched element (default).</td>
+  </tr>
+  <tr>
+    <th>immediate</th>
+    <td>Whether the UI object should be immediately inserted into
+the app when you call <code>insertUI</code>, or whether Shiny should wait until
+all outputs have been updated and all observers have been run (default).</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>The shiny session within which to call <code>insertUI</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Insert a UI object into the app.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This function allows you to dynamically add an arbitrarily large UI
+object into your app, whenever you want, as many times as you want.
+Unlike <code><a href='renderUI.html'>renderUI</a></code>, the UI generated with <code>insertUI</code>
+is not updatable as a whole: once it&#39;s created, it stays there. Each
+new call to <code>insertUI</code> creates more UI objects, in addition to
+the ones already there (all independent from one another). To
+update a part of the UI (ex: an input object), you must use the
+appropriate <code>render</code> function or a customized <code>reactive</code>
+function. To remove any part of your UI, use <code><a href='removeUI.html'>removeUI</a></code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+<span class="comment"># Define UI</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"add"</span><span class="keyword">,</span> <span class="string">"Add UI"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="comment"># Server logic</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='observeEvent.html'>observeEvent</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">add</span><span class="keyword">,</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='insertUI.html'>insertUI</a></span><span class="keyword">(</span>
+      <span class="argument">selector</span> <span class="argument">=</span> <span class="string">"#add"</span><span class="keyword">,</span>
+      <span class="argument">where</span> <span class="argument">=</span> <span class="string">"afterEnd"</span><span class="keyword">,</span>
+      <span class="argument">ui</span> <span class="argument">=</span> <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">add</span><span class="keyword">)</span><span class="keyword">,</span>
+                     <span class="string">"Insert some text"</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="comment"># Complete app with UI and server components</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>insertUI</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='removeUI.html'>removeUI</a></code></p>
+</div>
+```

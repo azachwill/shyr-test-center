@@ -1,0 +1,21 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: An application to visualise the Freedom of Press Index.
+title:        "Freedom of Press Index"
+author:    John Coene
+authorurl:     https://john-coene.com
+no-app-padding: true
+date:         2021-07-10
+tags:         
+ - press
+ - media
+ - news
+appurl:      https://gallery.shinyapps.io/freedom-press-index/
+sourceurl:   https://github.com/rstudio/shiny-gallery/tree/master/freedom-press-index
+rscloudurl:  https://rstudio.cloud/project/2914820
+---
+
+An application to visualise the Freedom of Press Index.
+
+This app was recognized _as a runner up_ on the 2020 Shiny Contest.

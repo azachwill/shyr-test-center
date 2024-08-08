@@ -1,0 +1,59 @@
+---
+title: "renderTable"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='renderTable.html'>renderTable</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">func</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that returns an R object that can be used with
+<code><a href='http://www.rdocumentation.org/packages/xtable/topics/xtable'>xtable</a></code>.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Arguments to be passed through to <code><a href='http://www.rdocumentation.org/packages/xtable/topics/xtable'>xtable</a></code> and
+<code><a href='http://www.rdocumentation.org/packages/xtable/topics/print.xtable'>print.xtable</a></code>.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
+is useful if you want to save an expression in a variable.</td>
+  </tr>
+  <tr>
+    <th>func</th>
+    <td>A function that returns an R object that can be used with
+<code><a href='http://www.rdocumentation.org/packages/xtable/topics/xtable'>xtable</a></code> (deprecated; use <code>expr</code> instead).</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Creates a reactive table that is suitable for assigning to an <code>output</code>
+slot.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The corresponding HTML output tag should be <code>div</code> and have the CSS class
+name <code>shiny-html-output</code>.</p>
+
+</div>
+<!-- <ul>
+  <li>renderTable</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

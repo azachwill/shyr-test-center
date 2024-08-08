@@ -1,0 +1,148 @@
+---
+layout: post
+title: SQL injection prevention
+edited: 2017-06-14
+author: Bárbara Borges Ribeiro
+description: SQL injections are attacks to apps, in which the attacker exploits a security vulnerability to send whatever SQL statements they wish to the database. With the latest release of DBI, we have a new function whose purpose is to safely interpolate values into an SQL string, therefore protecting you from injection attacks.
+---
+
+**INSTALLATION NOTE:** You can get both `shiny` and `DBI` from CRAN:
+
+{% highlight r %}
+install.packages("shiny")
+install.packages("DBI")
+{% endhighlight %}
+
+## Motivation
+
+SQL injections are attacks to apps, in which the attacker exploits a security vulnerability to send whatever SQL statements they wish to the database. This concept was popularized in one funny [xkcd comic](https://xkcd.com/327/):
+
+![bobby-tables](/images/bobby-tables.png)
+
+In the Shiny app at the end of the [previous article](/articles/overview.html), there's a security vulnerability because we paste `input$nrows` right into a query:
+
+{% highlight r %}
+dbGetQuery(conn, paste0(
+  "SELECT * FROM City LIMIT ", input$nrows, ";"))
+{% endhighlight %}
+
+If a malicious user manages to modify the input to accept something other than a number (possibly a string containing more SQL commands), we'd have no way to catch that and prevent it. In this case, the solution is very simple: just coerce `input$nrows` into an integer and, to be extra safe, grab the first element only (in case the user passed in a vector with more than one element). The relevant command then becomes:
+
+{% highlight r %}
+dbGetQuery(conn, paste0(
+  "SELECT * FROM City LIMIT ", as.integer(input$nrows)[1], ";"))
+{% endhighlight %}
+
+## A more challenging example
+
+In general, however, the solution won't be so easy. As the comic above illustrates, most injection attacks are due to some clever manipulation of a string. To make this concrete, consider a slightly different app. Imagine that this contains highly sensitive information about each city. Each city knows its own ID (let's assume these are complicated and encrypted IDs, not a simple sequence), but none of the other IDs. If you were a malicious user trying to access other cities' information, you could try a brute-force attack. This would imply systematically checking all possible IDs until the correct ones are found. This would be hard enough (and take long enough) if you were just trying to access one of the cities. But what if you are really extra evil and want all the records? Take a look at the app:
+
+<!---
+<div markdown="0">
+<a data-toggle="collapse" data-target="#sql_injection_example">Toggle code example</a>
+</div>
+
+<div id="sql_injection_example" class="collapse">
+--->
+{% highlight r %}
+library(shiny)
+library(DBI)
+
+ui <- fluidPage(
+  textInput("ID", "Enter your ID:", "5"),
+  tableOutput("tbl")
+)
+
+server <- function(input, output, session) {
+  output$tbl <- renderTable({
+    conn <- dbConnect(
+      drv = RMySQL::MySQL(),
+      dbname = "shinydemo",
+      host = "shiny-demo.csa7qlmguqrf.us-east-1.rds.amazonaws.com",
+      username = "guest",
+      password = "guest")
+    on.exit(dbDisconnect(conn), add = TRUE)
+    query <- paste0("SELECT * FROM City WHERE ID = '", input$ID, "';")
+    dbGetQuery(conn, query)
+  })
+}
+
+shinyApp(ui, server)
+{% endhighlight %}
+<!---
+</div>
+
+<br>
+--->
+
+The expected use of this app is that you will provide your city's ID (ex: `5`). Then, the app forms the query using your input (ex: `SELECT * FROM City WHERE ID = '5';`). Finally, this query returns a single row of data corresponding to your city. But if you type `' OR 1 = 1 OR '` in the input box, the query that is formed is: `SELECT * FROM City WHERE ID = '' OR 1 = 1 OR '';`. This returns the entire table, all 3427 rows. Congratulations -- you've just performed a successful SQL injection! Let's examine exactly what this query asked the database for. It is requesting all rows from the `City` table, for which at least one of the following conditions apply:
+
+- the `ID` field is equal to the empty string;
+- 1 = 1;
+- the empty string.
+
+Obviously, 1 = 1 is always true, so that condition applies to all rows in the table and the query returns them all. The first and third condition will always be false (there's no city whose `ID` is the empty string, and the empty string by itself returns `NULL`), but that doesn't matter because you only need one of these to be true. Those other conditions are only there to make the query semantically valid. The purpose of the first condition is simply to close the single quote, so that `1 = 1` is evaluated as SQL code (rather than being inside of the string literal, which would be useless for us). The purpose of the third condition is the reverse: to open the single quote, so that the final quote that is hardcoded in the app is matched.
+
+Note that the trick we used the first time (coercing the input to the expected class) won't work here. In fact, this is a semantically correct string, and it *is* meant to be a string. What we really want to do is to prevent the user from adding single quotes at will. While we cannot actually prevent the user from entering whatever they wish, we can (and should!) always sanitize their inputs. In this case, this means making sure that any potential single quotes are double escaped (i.e. add another single quote immediately after it).
+
+### The solution: `sqlInterpolate()`
+
+With the latest release of `DBI`, we have a new function `sqlInterpolate()`, whose purpose is to safely interpolate values into an SQL string, therefore protecting you from injection attacks. If you substitute the `query` line in the app above by the following two lines, and enter the same input as before (`' OR 1 = 1 OR '`), you will get an empty table back (as you should):
+
+{% highlight r %}
+sql <- "SELECT * FROM City WHERE ID = ?id ;"
+query <- sqlInterpolate(conn, sql, id = input$ID)
+{% endhighlight %}
+
+This is because the query that is generated has changed from `SELECT * FROM City WHERE ID = '' OR 1 = 1 OR '';` to the SQL-injection safe `SELECT * FROM City WHERE ID = ''' OR 1 = 1 OR ''' ;`. If you just enter a valid ID, however, the query stays the same (since there's nothing to escape). Ex: In you enter `5`, the query is `SELECT * FROM City WHERE ID = '5' ;`.
+
+The `sqlInterpolate()` function takes two mandatory arguments (the connection and the SQL string *x* number of variables to interpolate) and *x* number of named values to interpolate into the query. In order for this to work, the SQL string must include placeholders for all the values that you want to interpolate: these are the variables, and each must start with a question mark (in the example above, our SQL string only contains one variable, `?id`). Then you must specify the value of each variable as a separate argument to `sqlInterpolate()` (in our example, `id = input$ID`). The function will sanitize all the values and then place them in the appropriate place in the original SQL string. The result of this operation becomes the actual SQL query used later on.
+
+Imagine that you want to let the user select three cities -- you just just add more variables (and the corresponding values) to interpolate:
+
+<!---
+<div markdown="0">
+<a data-toggle="collapse" data-target="#sql_interpolate_example">Toggle code example</a>
+</div>
+
+<div id="sql_interpolate_example" class="collapse">
+--->
+{% highlight r %}
+library(shiny)
+library(DBI)
+
+ui <- fluidPage(
+  p("Enter up to three IDs:"),
+  textInput("ID1", "First ID:", "5"),
+  textInput("ID2", "Second ID:", ""),
+  textInput("ID3", "Third ID:", ""),
+  tableOutput("tbl")
+)
+
+server <- function(input, output, session) {
+  output$tbl <- renderTable({
+    conn <- dbConnect(
+      drv = RMySQL::MySQL(),
+      dbname = "shinydemo",
+      host = "shiny-demo.csa7qlmguqrf.us-east-1.rds.amazonaws.com",
+      username = "guest",
+      password = "guest")
+    on.exit(dbDisconnect(conn), add = TRUE)
+    sql <- "SELECT * FROM City WHERE ID = ?id1 OR ID = ?id2 OR ID = ?id3;"
+    query <- sqlInterpolate(conn, sql, id1 = input$ID1,
+                            id2 = input$ID2, id3 = input$ID3)
+    dbGetQuery(conn, query)
+  })
+}
+
+shinyApp(ui, server)
+{% endhighlight %}
+<!---
+</div>
+
+<br>
+--->
+
+As is, this app produces the query `SELECT * FROM City WHERE ID = '5' OR ID = '' OR ID = '';`, which returns just the row corresponding to `ID = '5'`. If you add, a second valid `ID` (ex, `10`), then it will produce the query `SELECT * FROM City WHERE ID = '5' OR ID = '10' OR ID = '';`, and returns a table with those two rows.
+
+In summary, you should always sanitize your user-provided inputs. If they're numbers, coerce them to the integer or the numeric class. If they're strings that go into a SQL query, use `sqlInterpolate()`. If it's something more complicated, make sure you process it in a way such that a SQL injection is impossible.

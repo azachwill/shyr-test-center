@@ -1,0 +1,8 @@
+title-block-banner: "#ffffff"
+title-block-banner-color: "body"
+format:
+  html:
+    template-partials: ../../_partials/blog/title-block.html
+    page-layout: article
+    css: ../../_partials/blog/blog-article.css
+    sidebar: false

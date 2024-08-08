@@ -1,0 +1,23 @@
+---
+title: The R Markdown cheatsheet
+date: 2021-08-09
+author: Garrett Grolemund
+description: The R Markdown cheatsheet is a quick reference guide for writing reproducible reports with R Markdown.
+---
+
+:::{.text-center}
+[![](cheatsheet2.jpg){.mb-4}](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown.pdf){.no-icon .shadow fig-alt="R Markdown cheatsheet"}
+::: 
+
+The R Markdown cheatsheet is a quick reference guide for writing reproducible reports with R Markdown.
+
+
+
+:::{.grid .pt-4}
+:::{.g-col-12 .g-col-lg-6}
+[Download R Markdown Cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown.pdf){.btn .btn-primary .no-icon .w-100} 
+:::
+:::{.g-col-12 .g-col-lg-6}
+[See all cheatsheets](https://github.com/rstudio/cheatsheets){.btn .btn-link .no-icon .w-100}
+:::
+:::

@@ -1,0 +1,91 @@
+- title: Start simple
+  description: "If you're new to Shiny, these simple but complete applications are designed for you to learn from."
+  children:
+    - kmeans-example
+    - telephones-by-region
+    - faithful
+    - word-cloud
+    - single-file-shiny-app
+- title: Interactive visualizations
+  description: "Shiny is designed for fully interactive visualization, using JavaScript libraries like <a href=\"http://www.htmlwidgets.org/showcase_networkD3.html\">d3</a>, <a href=\"http://rstudio.github.io/leaflet/\">Leaflet</a>, and <a href=\"https://github.com/mages/googleVis/\">Google Charts</a>."
+  children:
+    - superzip-example
+    - bus-dashboard
+    - movie-explorer
+    - google-charts
+- title: Widgets
+  description: "Get to know many of the input and output widgets that are available in Shiny with these examples."
+  children:
+    - widget-gallery
+    - sliders
+    - widgets
+    - basic-datatable
+    - datatables-demo
+    - datatables-options
+    - date-and-date-range
+    - dynamic-clustering
+    - file-upload
+    - file-download
+    - selectize-examples
+    - selectize-vs-select
+    - option-groups-for-selectize-input
+    - custom-input-bindings
+    - custom-input-control
+    - mathjax
+- title: Application layout
+  description: "Each example in this category demonstrates one or more of the functions you can use to organize app UI."
+  children:
+    - tabsets
+    - plot-plus-three-columns
+    - navbar-example
+    - vertical-layout
+    - retirement-simulation
+    - navlistpanel-example
+    - absolutely-positioned-panels
+    - including-html-text-and-markdown-files
+    - inline-output
+    - shiny-theme-selector
+- title: Dynamic user interface
+  description: "These examples show how to create a user interface that changes dynamically."
+  children:
+    - conditionalpanel-demo
+    - dynamic-ui
+    - update-input-demo
+- title: Reactive programming
+  description: "These examples illustrate some useful features and idioms of Shiny's reactive programming framework."
+  children:
+    - reactivity
+    - actionbutton-demo
+    - submitbutton-demo
+    - isolate-demo
+    - observer-demo
+    - timer
+    - reactive-poll-and-file-reader
+- title: Advanced Shiny
+  description: "These examples show how to extend Shiny and use advanced features."
+  children:
+    - server-to-client-custom-messages
+    - client-data-and-query-string
+    - image-output
+    - generating-reports
+    - download-knitr-reports
+    - selectize-rendering-methods
+    - option-groups-for-server-side-selectize
+    - creating-a-ui-from-a-loop
+    - progress-bar-example
+    - bookmarking-url
+    - bookmarking-with-updatequerystring
+    - modal-dialogs
+- title: Interactive plots
+  description: "These examples show how to use Shiny's interactive plotting features"
+  children:
+    - plot-interaction-basic
+    - plot-interaction-advanced
+    - image-interaction-basic
+    - plot-interaction-selecting-points
+    - plot-interaction-exclude
+    - plot-interaction-zoom
+- title: Internationalization
+  description: "Include multi-byte characters in Shiny apps."
+  children:
+    - unicode-characters

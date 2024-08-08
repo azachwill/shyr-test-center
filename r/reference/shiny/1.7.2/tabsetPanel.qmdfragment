@@ -1,0 +1,122 @@
+---
+title: "Create a tabset panel — tabsetPanel"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Create a tabset that contains <code><a href="tabPanel.html">tabPanel()</a></code> elements. Tabsets are
+useful for dividing output into multiple independently viewable sections.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">tabsetPanel</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  ...,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">id =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">selected =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"tabs"</span>, <span class="st">"pills"</span>, <span class="st">"hidden"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">footer =</span> <span class="cn">NULL</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p><code><a href="tabPanel.html">tabPanel()</a></code> elements to include in the tabset</p></dd>
+
+
+<dt>id</dt>
+<dd><p>If provided, you can use <code>input$</code><em><code>id</code></em> in your
+server logic to determine which of the current tabs is active. The value
+will correspond to the <code>value</code> argument that is passed to
+<code><a href="tabPanel.html">tabPanel()</a></code>.</p></dd>
+
+
+<dt>selected</dt>
+<dd><p>The <code>value</code> (or, if none was supplied, the <code>title</code>)
+of the tab that should be selected by default. If <code>NULL</code>, the first
+tab will be selected.</p></dd>
+
+
+<dt>type</dt>
+<dd><dl><dt><code>"tabs"</code></dt>
+<dd><p>Standard tab look</p></dd>
+
+<dt><code>"pills"</code></dt>
+<dd><p>Selected tabs use the background fill color</p></dd>
+
+<dt><code>"hidden"</code></dt>
+<dd><p>Hides the selectable tabs. Use <code>type = "hidden"</code> in
+conjunction with <code><a href="tabPanel.html">tabPanelBody()</a></code> and <code><a href="updateTabsetPanel.html">updateTabsetPanel()</a></code> to control the
+active tab via other input controls. (See example below)</p></dd>
+
+
+</dl></dd>
+
+
+<dt>header</dt>
+<dd><p>Tag or list of tags to display as a common header above all
+tabPanels.</p></dd>
+
+
+<dt>footer</dt>
+<dd><p>Tag or list of tags to display as a common footer below all
+tabPanels</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A tabset that can be passed to <code><a href="sidebarLayout.html">mainPanel()</a></code></p>
+
+
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="tabPanel.html">tabPanel()</a></code>, <code><a href="updateTabsetPanel.html">updateTabsetPanel()</a></code>,
+<code><a href="insertTab.html">insertTab()</a></code>, <code><a href="showTab.html">showTab()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Show a tabset that includes a plot, summary, and</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># table view of the generated distribution</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">mainPanel</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Plot"</span>, <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary"</span>, <span class="fu">verbatimTextOutput</span>(<span class="st">"summary"</span>)),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Table"</span>, <span class="fu">tableOutput</span>(<span class="st">"table"</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  )</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>      <span class="fu">radioButtons</span>(<span class="st">"controller"</span>, <span class="st">"Controller"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    ),</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>      <span class="fu">tabsetPanel</span>(</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>        <span class="at">id =</span> <span class="st">"hidden_tabs"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>        <span class="co"># Hide the tab values.</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        <span class="co"># Can only switch tabs by using `updateTabsetPanel()`</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"hidden"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>        <span class="fu">tabPanelBody</span>(<span class="st">"panel1"</span>, <span class="st">"Panel 1 content"</span>),</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>        <span class="fu">tabPanelBody</span>(<span class="st">"panel2"</span>, <span class="st">"Panel 2 content"</span>),</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>        <span class="fu">tabPanelBody</span>(<span class="st">"panel3"</span>, <span class="st">"Panel 3 content"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>      )</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    )</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  )</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>)</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>controller, {</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>    <span class="fu">updateTabsetPanel</span>(session, <span class="st">"hidden_tabs"</span>, <span class="at">selected =</span> <span class="fu">paste0</span>(<span class="st">"panel"</span>, input<span class="sc">$</span>controller))</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>  })</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>}</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>  <span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

@@ -1,0 +1,146 @@
+---
+title: "Image file output — renderImage"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.1</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.1/R/shinywrappers.R" class="external-link"><code>R/shinywrappers.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Renders a reactive image that is suitable for assigning to an <code>output</code>
+slot.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">renderImage</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  expr,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">env =</span> <span class="fu">parent.frame</span>(),</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">quoted =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  deleteFile,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">outputArgs =</span> <span class="fu">list</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>expr</dt>
+<dd><p>An expression that returns a list.</p></dd>
+
+
+<dt>env</dt>
+<dd><p>The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression. If <code>expr</code> is a quosure and <code>quoted</code> is <code>TRUE</code>,
+then <code>env</code> is ignored.</p></dd>
+
+
+<dt>quoted</dt>
+<dd><p>If it is <code>TRUE</code>, then the <code><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote()</a></code>ed value of <code>expr</code>
+will be used when <code>expr</code> is evaluated. If <code>expr</code> is a quosure and you
+would like to use its expression as a value for <code>expr</code>, then you must set
+<code>quoted</code> to <code>TRUE</code>.</p></dd>
+
+
+<dt>deleteFile</dt>
+<dd><p>Should the file in <code>func()$src</code> be deleted after
+it is sent to the client browser? Generally speaking, if the image is a
+temp file generated within <code>func</code>, then this should be <code>TRUE</code>;
+if the image is not a temp file, this should be <code>FALSE</code>. (For backward
+compatibility reasons, if this argument is missing, a warning will be
+emitted, and if the file is in the temp directory it will be deleted. In
+the future, this warning will become an error.)</p></dd>
+
+
+<dt>outputArgs</dt>
+<dd><p>A list of arguments to be passed through to the implicit
+call to <code><a href="plotOutput.html">imageOutput()</a></code> when <code>renderImage</code> is used in an
+interactive R Markdown document.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The expression <code>expr</code> must return a list containing the attributes for
+the <code>img</code> object on the client web page. For the image to display,
+properly, the list must have at least one entry, <code>src</code>, which is the
+path to the image file. It may also useful to have a <code>contentType</code>
+entry specifying the MIME type of the image. If one is not provided,
+<code>renderImage</code> will try to autodetect the type, based on the file
+extension.</p>
+<p>Other elements such as <code>width</code>, <code>height</code>, <code>class</code>, and
+<code>alt</code>, can also be added to the list, and they will be used as
+attributes in the <code>img</code> object.</p>
+<p>The corresponding HTML output tag should be <code>div</code> or <code>img</code> and have
+the CSS class name <code>shiny-image-output</code>.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p>For more details on how the images are generated, and how to control
+the output, see <code><a href="plotPNG.html">plotPNG()</a></code>.</p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">device.ask.default =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">"n"</span>, <span class="st">"Number of observations"</span>, <span class="dv">2</span>, <span class="dv">1000</span>, <span class="dv">500</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot1"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot2"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot3"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="co"># A plot of fixed size</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderImage</span>({</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="co"># A temp file to save the output. It will be deleted after renderImage</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    <span class="co"># sends it, because deleteFile=TRUE.</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    outfile <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">'.png'</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    <span class="co"># Generate a png</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    <span class="fu">png</span>(outfile, <span class="at">width=</span><span class="dv">400</span>, <span class="at">height=</span><span class="dv">400</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    <span class="fu">hist</span>(<span class="fu">rnorm</span>(input<span class="sc">$</span>n))</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>    <span class="fu">dev.off</span>()</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>    <span class="co"># Return a list</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">src =</span> outfile,</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>         <span class="at">alt =</span> <span class="st">"This is alternate text"</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>  }, <span class="at">deleteFile =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>  <span class="co"># A dynamically-sized plot</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>  output<span class="sc">$</span>plot2 <span class="ot">&lt;-</span> <span class="fu">renderImage</span>({</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>    <span class="co"># Read plot2's width and height. These are reactive values, so this</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>    <span class="co"># expression will re-run whenever these values change.</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>    width  <span class="ot">&lt;-</span> session<span class="sc">$</span>clientData<span class="sc">$</span>output_plot2_width</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>    height <span class="ot">&lt;-</span> session<span class="sc">$</span>clientData<span class="sc">$</span>output_plot2_height</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>    <span class="co"># A temp file to save the output.</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>    outfile <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">'.png'</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>    <span class="fu">png</span>(outfile, <span class="at">width=</span>width, <span class="at">height=</span>height)</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>    <span class="fu">hist</span>(<span class="fu">rnorm</span>(input<span class="sc">$</span>n))</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>    <span class="fu">dev.off</span>()</span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a>    <span class="co"># Return a list containing the filename</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">src =</span> outfile,</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>         <span class="at">width =</span> width,</span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>         <span class="at">height =</span> height,</span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>         <span class="at">alt =</span> <span class="st">"This is alternate text"</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a>  }, <span class="at">deleteFile =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a>  <span class="co"># Send a pre-rendered image, and don't delete the image after sending it</span></span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a>  <span class="co"># </span><span class="al">NOTE</span><span class="co">: For this example to work, it would require files in a subdirectory</span></span>
+<span id="cb1-53"><a href="#cb1-53" tabindex="-1"></a>  <span class="co"># named images/</span></span>
+<span id="cb1-54"><a href="#cb1-54" tabindex="-1"></a>  output<span class="sc">$</span>plot3 <span class="ot">&lt;-</span> <span class="fu">renderImage</span>({</span>
+<span id="cb1-55"><a href="#cb1-55" tabindex="-1"></a>    <span class="co"># When input$n is 1, filename is ./images/image1.jpeg</span></span>
+<span id="cb1-56"><a href="#cb1-56" tabindex="-1"></a>    filename <span class="ot">&lt;-</span> <span class="fu">normalizePath</span>(<span class="fu">file.path</span>(<span class="st">'./images'</span>,</span>
+<span id="cb1-57"><a href="#cb1-57" tabindex="-1"></a>                              <span class="fu">paste</span>(<span class="st">'image'</span>, input<span class="sc">$</span>n, <span class="st">'.jpeg'</span>, <span class="at">sep=</span><span class="st">''</span>)))</span>
+<span id="cb1-58"><a href="#cb1-58" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" tabindex="-1"></a>    <span class="co"># Return a list containing the filename</span></span>
+<span id="cb1-60"><a href="#cb1-60" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">src =</span> filename)</span>
+<span id="cb1-61"><a href="#cb1-61" tabindex="-1"></a>  }, <span class="at">deleteFile =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-62"><a href="#cb1-62" tabindex="-1"></a>}</span>
+<span id="cb1-63"><a href="#cb1-63" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-65"><a href="#cb1-65" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

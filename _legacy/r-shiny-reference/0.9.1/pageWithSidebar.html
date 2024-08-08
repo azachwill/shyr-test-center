@@ -1,0 +1,84 @@
+---
+layout: reference
+title: "pageWithSidebar"
+categories: reference
+---
+<h1>Create a page with a sidebar</h1>
+
+<pre class="code"><code class="r"><div>pageWithSidebar(headerPanel, sidebarPanel, mainPanel)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>headerPanel</th>
+    <td>The <a href='headerPanel.html'>headerPanel</a> with the
+  application title</td>
+  </tr>
+  <tr>
+    <th>sidebarPanel</th>
+    <td>The <a href='sidebarPanel.html'>sidebarPanel</a> containing
+  input controls</td>
+  </tr>
+  <tr>
+    <th>mainPanel</th>
+    <td>The <a href='mainPanel.html'>mainPanel</a> containing outputs</td>
+  </tr>
+</table>
+
+<div data-section="Create a page with a sidebar">
+  <h3 data-swiftype-index="false">Create a page with a sidebar</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Create a Shiny UI that contains a header with the application title, a
+sidebar for input controls, and a main area for output.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+  
+  <p>This function is deprecated. You should use <code><a href='fluidPage.html'>fluidPage</a></code>
+along with <code><a href='sidebarLayout.html'>sidebarLayout</a></code> to implement a page with a sidebar.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Define UI
+shinyUI(pageWithSidebar(
+
+  # Application title
+  headerPanel(&quot;Hello Shiny!&quot;),
+
+  # Sidebar with a slider input
+  sidebarPanel(
+    sliderInput(&quot;obs&quot;,
+                &quot;Number of observations:&quot;,
+                min = 0,
+                max = 1000,
+                value = 500)
+  ),
+
+  # Show a plot of the generated distribution
+  mainPanel(
+    plotOutput(&quot;distPlot&quot;)
+  )
+))
+</div></pre>
+<!-- <ul>
+  <li>pageWithSidebar</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

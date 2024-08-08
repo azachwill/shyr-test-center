@@ -1,0 +1,35 @@
+---
+title: "restoreInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='restoreInput.html'>restoreInput</a></span><span class="keyword">(</span><span class="symbol">id</span><span class="keyword">,</span> <span class="symbol">default</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>id</th>
+    <td>Name of the input value to restore.</td>
+  </tr>
+  <tr>
+    <th>default</th>
+    <td>A default value to use, if there&#39;s no value to restore.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This restores an input value from the current restore context. It should be
+called early on inside of input functions (like <code><a href='textInput.html'>textInput</a></code>).</p>
+
+</div>
+<!-- <ul>
+  <li>restoreInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

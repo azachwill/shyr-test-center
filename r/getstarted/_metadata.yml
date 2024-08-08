@@ -1,0 +1,10 @@
+format: 
+  html:
+    css: 
+      - getstarted.css
+      - ../../r/secondary-menu.css
+    toc: false
+    grid:
+      body-width: 800px
+      gutter-width: 3.5rem
+

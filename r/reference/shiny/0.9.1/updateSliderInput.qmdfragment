@@ -1,0 +1,95 @@
+---
+title: "updateSliderInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>updateSliderInput(session, inputId, label&nbsp;=&nbsp;NULL, value&nbsp;=&nbsp;NULL)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The <code>session</code> object passed to
+  function given to <code>shinyServer</code>.</td>
+  </tr>
+  <tr>
+    <th>inputId</th>
+    <td>The id of the input object.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>The label to set for the input object.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>The value to set for the input object.</td>
+  </tr>
+</table>
+
+<div data-section="Change the value of a slider input on the client">
+  <h3 data-swiftype-index="false">Change the value of a slider input on the client</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Change the value of a slider input on the client</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+
+  <p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href='numericInput.html'>numericInput</a>()</code> and
+<code>updateNumericInput()</code> take a similar set of arguments.</p>
+
+  <p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# shinyServer(function(input, output, session) {
+# 
+#   observe({
+#     # We&#39;ll use the input$controller variable multiple times, so save it as x
+#     # for convenience.
+#     x &lt;- input$controller
+# 
+#     # Similar to number and text. only label and value can be set for slider
+#     updateSliderInput(session, &quot;inSlider&quot;,
+#       label = paste(&quot;Slider label&quot;, x),
+#       value = x)
+# 
+#     # For sliders that pick out a range, pass in a vector of 2 values.
+#     updateSliderInput(session, &quot;inSlider2&quot;, value = c(x-1, x+1))
+# 
+#     # An NA means to not change that value (the low or high one)
+#     updateSliderInput(session, &quot;inSlider3&quot;, value = c(NA, x+2))
+#   })
+# })
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>updateSliderInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='sliderInput.html'>sliderInput</a></code>
+
+</div>
+```

@@ -1,0 +1,115 @@
+---
+layout: reference
+title: "icon"
+categories: reference
+---
+<h1>Create an icon</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="symbol">name</span><span class="keyword">,</span> <span class="argument">class</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">lib</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"font-awesome"</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>name</th>
+    <td>Name of icon. Icons are drawn from the
+<a href = 'https://fontawesome.com/'>Font Awesome Free</a> (currently icons from
+the v5.3.1 set are supported with the v4 naming convention) and
+<a href = 'http://getbootstrap.com/components/#glyphicons'>Glyphicons</a>
+libraries. Note that the &quot;fa-&quot; and &quot;glyphicon-&quot; prefixes should not be used
+in icon names (i.e. the &quot;fa-calendar&quot; icon should be referred to as
+&quot;calendar&quot;)</td>
+  </tr>
+  <tr>
+    <th>class</th>
+    <td>Additional classes to customize the style of the icon (see the
+<a href = 'http://fontawesome.io/examples/'>usage examples</a> for details on
+supported styles).</td>
+  </tr>
+  <tr>
+    <th>lib</th>
+    <td>Icon library to use (&quot;font-awesome&quot; or &quot;glyphicon&quot;)</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+An icon element
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create an icon for use within a page. Icons can appear on their own, inside
+of a button, or as an icon for a <code><a href='tabPanel.html'>tabPanel</a></code> within a
+<code><a href='navbarPage.html'>navbarPage</a></code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># add an icon to a submit button</span>
+<span class="functioncall"><a href='submitButton.html'>submitButton</a></span><span class="keyword">(</span><span class="string">"Update View"</span><span class="keyword">,</span> <span class="argument">icon</span> <span class="argument">=</span> <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"refresh"</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;div&gt;
+  &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;
+    &lt;i class=&quot;fa fa-refresh&quot;&gt;&lt;/i&gt;
+    Update View
+  &lt;/button&gt;
+&lt;/div&gt;
+</div>
+<div class='input'>
+<span class="functioncall"><a href='navbarPage.html'>navbarPage</a></span><span class="keyword">(</span><span class="string">"App Title"</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Plot"</span><span class="keyword">,</span> <span class="argument">icon</span> <span class="argument">=</span> <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"bar-chart-o"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Summary"</span><span class="keyword">,</span> <span class="argument">icon</span> <span class="argument">=</span> <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"list-alt"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='tabPanel.html'>tabPanel</a></span><span class="keyword">(</span><span class="string">"Table"</span><span class="keyword">,</span> <span class="argument">icon</span> <span class="argument">=</span> <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"table"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;nav class=&quot;navbar navbar-default navbar-static-top&quot; role=&quot;navigation&quot;&gt;
+  &lt;div class=&quot;container-fluid&quot;&gt;
+    &lt;div class=&quot;navbar-header&quot;&gt;
+      &lt;span class=&quot;navbar-brand&quot;&gt;App Title&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;ul class=&quot;nav navbar-nav&quot; data-tabsetid=&quot;1286&quot;&gt;
+      &lt;li class=&quot;active&quot;&gt;
+        &lt;a href=&quot;#tab-1286-1&quot; data-toggle=&quot;tab&quot; data-value=&quot;Plot&quot;&gt;
+          &lt;i class=&quot; fa fa-bar-chart-o fa-fw&quot;&gt;&lt;/i&gt;
+          Plot
+        &lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#tab-1286-2&quot; data-toggle=&quot;tab&quot; data-value=&quot;Summary&quot;&gt;
+          &lt;i class=&quot; fa fa-list-alt fa-fw&quot;&gt;&lt;/i&gt;
+          Summary
+        &lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#tab-1286-3&quot; data-toggle=&quot;tab&quot; data-value=&quot;Table&quot;&gt;
+          &lt;i class=&quot; fa fa-table fa-fw&quot;&gt;&lt;/i&gt;
+          Table
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;div class=&quot;tab-content&quot; data-tabsetid=&quot;1286&quot;&gt;
+    &lt;div class=&quot;tab-pane active&quot; data-value=&quot;Plot&quot; data-icon-class=&quot;fa fa-bar-chart-o&quot; id=&quot;tab-1286-1&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;tab-pane&quot; data-value=&quot;Summary&quot; data-icon-class=&quot;fa fa-list-alt&quot; id=&quot;tab-1286-2&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;tab-pane&quot; data-value=&quot;Table&quot; data-icon-class=&quot;fa fa-table&quot; id=&quot;tab-1286-3&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>icon</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p>For lists of available icons, see
+  <a href = 'http://fontawesome.io/icons/'>http://fontawesome.io/icons/</a> and
+  <a href = 'http://getbootstrap.com/components/#glyphicons'>http://getbootstrap.com/components/#glyphicons</a>.</p>
+</div>

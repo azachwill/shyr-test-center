@@ -1,0 +1,75 @@
+---
+layout: reference
+title: "sidebarPanel"
+categories: reference
+---
+<h1>Create a sidebar panel</h1>
+
+<pre class="code"><code class="r"><div>sidebarPanel(..., width&nbsp;=&nbsp;4)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>UI elements to include on the sidebar</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the sidebar. For fluid layouts
+  this is out of 12 total units; for fixed layouts it is
+  out of whatever the width of the sidebar's parent column
+  is.</td>
+  </tr>
+</table>
+
+<div data-section="Create a sidebar panel">
+  <h3 data-swiftype-index="false">Create a sidebar panel</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A sidebar that can be passed to <code><a href='sidebarLayout.html'>sidebarLayout</a></code></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Create a sidebar panel containing input controls that can in turn be passed
+to <code><a href='sidebarLayout.html'>sidebarLayout</a></code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Sidebar with controls to select a dataset and specify
+# the number of observations to view
+sidebarPanel(
+  selectInput(&quot;dataset&quot;, &quot;Choose a dataset:&quot;,
+              choices = c(&quot;rock&quot;, &quot;pressure&quot;, &quot;cars&quot;)),
+
+  numericInput(&quot;obs&quot;, &quot;Observations:&quot;, 10)
+)
+</div>
+<div class='output'>&lt;div class=&quot;span4&quot;&gt;
+  &lt;form class=&quot;well&quot;&gt;
+    &lt;label class=&quot;control-label&quot; for=&quot;dataset&quot;&gt;Choose a dataset:&lt;/label&gt;
+    &lt;select id=&quot;dataset&quot;&gt;
+      &lt;option value=&quot;rock&quot; selected=&quot;selected&quot;&gt;rock&lt;/option&gt;
+      &lt;option value=&quot;pressure&quot;&gt;pressure&lt;/option&gt;
+      &lt;option value=&quot;cars&quot;&gt;cars&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;script type=&quot;application/json&quot; data-for=&quot;dataset&quot; data-nonempty=&quot;&quot;&gt;{}&lt;/script&gt;
+    &lt;label for=&quot;obs&quot;&gt;Observations:&lt;/label&gt;
+    &lt;input id=&quot;obs&quot; type=&quot;number&quot; value=&quot;10&quot;/&gt;
+  &lt;/form&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>sidebarPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

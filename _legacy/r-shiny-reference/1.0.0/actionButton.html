@@ -1,0 +1,88 @@
+---
+layout: reference
+title: "actionButton"
+categories: reference
+---
+<h1>Action button/link</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="argument">icon</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='actionButton.html'>actionLink</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="argument">icon</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>input</code> slot that will be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>The contents of the button or link--usually a text label, but
+you could also use any other HTML, like an image.</td>
+  </tr>
+  <tr>
+    <th>icon</th>
+    <td>An optional <code><a href='icon.html'>icon</a></code> to appear on the button.</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the input, e.g. <code>&#39;400px&#39;</code>, or <code>&#39;100%&#39;</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Named attributes to be applied to the button or link.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Creates an action button or link whose value is initially zero, and increments by one
+each time it is pressed.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"obs"</span><span class="keyword">,</span> <span class="string">"Number of observations"</span><span class="keyword">,</span> <span class="number">0</span><span class="keyword">,</span> <span class="number">1000</span><span class="keyword">,</span> <span class="number">500</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"goButton"</span><span class="keyword">,</span> <span class="string">"Go!"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"distPlot"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">distPlot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="comment"># Take a dependency on input$goButton. This will run once initially,</span>
+    <span class="comment"># because the value changes from NULL to 0.</span>
+    <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">goButton</span>
+
+    <span class="comment"># Use isolate() to avoid dependency on input$obs</span>
+    <span class="symbol">dist</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">obs</span><span class="keyword">)</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/hist'>hist</a></span><span class="keyword">(</span><span class="symbol">dist</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>actionButton</li><li>actionLink</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='observeEvent.html'>observeEvent</a></code> and <code><a href='observeEvent.html'>eventReactive</a></code></p>
+  <p>Other input.elements: <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>,
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='dateInput.html'>dateInput</a></code>,
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='fileInput.html'>fileInput</a></code>,
+  <code><a href='numericInput.html'>numericInput</a></code>, <code><a href='passwordInput.html'>passwordInput</a></code>,
+  <code><a href='radioButtons.html'>radioButtons</a></code>, <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='sliderInput.html'>sliderInput</a></code>, <code><a href='submitButton.html'>submitButton</a></code>,
+  <code><a href='textAreaInput.html'>textAreaInput</a></code>, <code><a href='textInput.html'>textInput</a></code></p>
+</div>

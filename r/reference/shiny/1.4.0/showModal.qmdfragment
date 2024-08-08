@@ -1,0 +1,45 @@
+---
+title: "Show or remove a modal dialog — showModal"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>showModal</span>(<span class='no'>ui</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())
+
+<span class='fu'>removeModal</span>(<span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>ui</p></th>
+    <td><p>UI content to show in the modal.</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>This causes a modal dialog to be displayed in the client browser, and is
+typically used with <code><a href='modalDialog.html'>modalDialog()</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='modalDialog.html'>modalDialog()</a></code> for examples.</p></div>
+  
+  </div>
+
+</div>
+
+
+```

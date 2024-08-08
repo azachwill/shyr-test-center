@@ -1,0 +1,27 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: iSEE (interactive SummarizedExperiment Explorer) is designed for interactive exploration of high-throughput biological data sets.
+title:        "iSEE"
+author:    Kevin Rue
+authorurl:     https://kevinrue.github.io
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - bioconductor
+ - visualization
+ - s4
+ - reproducible
+ - packages
+ - shinydashboard
+ - ggplot2
+ - shinyjs
+ - htmltools
+appurl:      https://kevinrue.shinyapps.io/isee-shiny-contest/
+sourceurl:   https://github.com/kevinrue/isee-shiny-contest
+rscloudurl:  https://rstudio.cloud/project/230765
+---
+
+iSEE (interactive SummarizedExperiment Explorer) is designed for interactive exploration of high-throughput biological data sets.
+  
+iSEE is winner of the Most Technically Impressive award of the 2019 Shiny Contest. The deeper we dove into this app, the more impressed we were at its feature set. The data-visual-selection controls in each panel were well presented, and the dynamic, directional crosslinking feature is something we haven't seen before. And it can even generate a reproducible R script!

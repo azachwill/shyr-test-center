@@ -1,0 +1,35 @@
+---
+title: "Collect information about the Shiny Server environment — serverInfo"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>serverInfo</span>()</pre>
+    <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>This function returns the information about the current Shiny Server, such as
+its version, and whether it is the open source edition or professional
+edition. If the app is not served through the Shiny Server, this function
+just returns <code><a href='https://rdrr.io/r/base/list.html'>list(shinyServer = FALSE)</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A list of the Shiny Server information.</p>
+    <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>This function will only return meaningful data when using Shiny Server
+version 1.2.2 or later.</p>
+  
+  </div>
+
+</div>
+
+
+```

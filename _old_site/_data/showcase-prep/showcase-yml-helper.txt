@@ -1,0 +1,56 @@
+category	slug
+Consulting	career-pathfinder
+Consulting	real-estate-investment
+Education	immune-response-modeling
+Education	ncaa-swim-team-finder
+Education	rd-business-game
+Education	teach-physiology
+Finance	stock-portfolio-monitor
+Healthcare	hospital-data-antimicrobial
+Healthcare	mri-images
+Healthcare	nutrition-calculator
+Miscellaneous	bus-company-simulation
+Miscellaneous	conference-tweet-dashboard
+Miscellaneous	dog-medical-history
+Miscellaneous	hex-memory
+Miscellaneous	lego-mosaic
+Miscellaneous	lego-world
+Miscellaneous	magnetic-fields
+Miscellaneous	pokemon-explorer
+Miscellaneous	pokemon-questions
+Miscellaneous	tidy-tuesday
+Public Sector	brazil-voter-profile
+Public Sector	crime-watch
+Public Sector	dairy-farms
+Public Sector	dublin-transport
+Public Sector	india-blood-banks
+Public Sector	nyc-metro
+Public Sector	nz-trade-dash
+Public Sector	scotpho-profiles
+Public Sector	soil-profiles
+Public Sector	viscover
+Research	ab-test-sample-size
+Research	animal-tracking
+Research	biodiversity-national-parks
+Research	explore-panel-data
+Research	isee
+Research	mote-effect-size
+Research	phylo-tree-view-subset
+Research	sdcapp-microdata
+Research	shinyab-sample-size
+Research	shroom-edibility-prediction
+Research	visual-abstracts
+Shiny	button-styler
+Shiny	drag-drop-map-maker
+Shiny	shiny-wysiwyg
+Sports	city-cycle
+Sports	fifa-births
+Sports	impact-replay-cfl
+Sports	masters
+Sports	nhl-play-by-play
+Sports	soccer-player-similarity
+Technology	chirp
+Technology	cran-explorer
+Technology	d3-dynamic-repot
+Technology	map-twitter-sentiment
+Technology	uber-rider

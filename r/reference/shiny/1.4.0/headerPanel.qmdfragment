@@ -1,0 +1,42 @@
+---
+title: "Create a header panel — headerPanel"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>headerPanel</span>(<span class='no'>title</span>, <span class='kw'>windowTitle</span> <span class='kw'>=</span> <span class='no'>title</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>title</p></th>
+    <td><p>An application title to display</p></td>
+  </tr>
+  <tr>
+    <th><p>windowTitle</p></th>
+    <td><p>The title that should be displayed by the browser window.
+Useful if <code>title</code> is not a string.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p><strong>DEPRECATED</strong>: use <code><a href='titlePanel.html'>titlePanel()</a></code> instead.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A headerPanel that can be passed to <a href='pageWithSidebar.html'>pageWithSidebar</a></p>
+  
+  </div>
+
+</div>
+
+
+```

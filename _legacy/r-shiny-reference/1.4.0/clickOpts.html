@@ -1,0 +1,44 @@
+---
+layout: reference
+title: "Create an object representing click options — clickOpts"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create an object representing click options</h1>
+  
+
+  <pre class="code"><span class='fu'>clickOpts</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>id</p></th>
+    <td><p>Input value name. For example, if the value is <code>"plot_click"</code>,
+then the click coordinates will be available as <code>input$plot_click</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>clip</p></th>
+    <td><p>Should the click area be clipped to the plotting area? If FALSE,
+then the server will receive click events even when the mouse is outside
+the plotting area, as long as it is still inside the image.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>This generates an object representing click options, to be passed as the
+<code>click</code> argument of <code><a href='plotOutput.html'>imageOutput()</a></code> or
+<code><a href='plotOutput.html'>plotOutput()</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+
+  </div>
+
+</div>
+
+

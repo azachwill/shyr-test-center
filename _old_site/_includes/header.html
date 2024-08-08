@@ -1,0 +1,31 @@
+      <!-- rstudio header -->
+      <div id="rStudioHeader">
+        {% if page.url == "/" %}
+        <div class="announcement">
+          Shiny for Python is available! <a href="{{ site.baseurl }}/py/">Learn more</a>
+        </div>
+        {% endif %}
+        <div class="band">
+          <div class="innards bandContent">
+            <div>
+              <a class="productName" href="{{ site.baseurl }}/"><img src="/images/shiny-solo.svg" height="35" width="80.56"></a>
+            </div>
+            <div id="menu">
+              <div id="menuToggler"></div>
+              <div id="menuItems" class="">
+                <a {% if page.categories contains "tutorial" %}     class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/tutorial/">Get Started</a>
+                <a {% if page.categories contains "gallery" %}      class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/gallery/">Gallery</a>
+                <a {% if page.categories contains "articles" %}     class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/articles/">Articles</a>
+                <a {% if page.categories contains "app-stories" %}  class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/app-stories/">App Stories</a>
+                <a {% if page.categories contains "reference" %}    class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/reference/shiny/">Reference</a>
+                <a {% if page.categories contains "deploy" %}       class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/deploy/">Deploy</a>
+                <a {% if page.categories contains "help" %}         class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/help/">Help</a>
+                <a {% if page.categories contains "blog" %}         class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/blog/">Blog</a>
+                <a {% if page.categories contains "contribute" %}   class="menuItem current" {% else %} class="menuItem" {% endif %} href="{{ site.baseurl }}/contribute/">Contribute</a>
+                <a class="menuItem gitHub" href="https://github.com/rstudio/shiny"></a>
+                <a class="menuItem gitHubText" href="https://github.com/rstudio/shiny">Source on GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

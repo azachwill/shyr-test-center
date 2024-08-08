@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Plot plus three columns
+date: 2014-07-29 
+tags:
+ - application layout
+ - ggplot2 
+appurl: https://gallery.shinyapps.io/057-plot-plus-three-columns
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/057-plot-plus-three-columns
+---

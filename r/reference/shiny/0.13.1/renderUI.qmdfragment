@@ -1,0 +1,67 @@
+---
+title: "renderUI"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='renderUI.html'>renderUI</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="argument">env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">func</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression that returns a Shiny tag object, <code><a href='HTML.html'>HTML</a></code>,
+or a list of such objects.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The environment in which to evaluate <code>expr</code>.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
+is useful if you want to save an expression in a variable.</td>
+  </tr>
+  <tr>
+    <th>func</th>
+    <td>A function that returns a Shiny tag object, <code><a href='HTML.html'>HTML</a></code>,
+or a list of such objects (deprecated; use <code>expr</code> instead).</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p><b>Experimental feature.</b> Makes a reactive version of a function that
+generates HTML using the Shiny UI library.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The corresponding HTML output tag should be <code>div</code> and have the CSS class
+name <code>shiny-html-output</code> (or use <code><a href='htmlOutput.html'>uiOutput</a></code>).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment">#   output$moreControls &lt;- renderUI({</span>
+<span class="comment">#     list(</span>
+<span class="comment"># </span>
+<span class="comment">#     )</span>
+<span class="comment">#   })</span>
+<span class="comment">## ---------------------------------------------</span></div></code></pre>
+<!-- <ul>
+  <li>renderUI</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p>conditionalPanel</p>
+</div>
+```

@@ -1,0 +1,28 @@
+---
+title: Getting help
+page-layout: article
+---
+
+:::{.lead}
+Many of your questions might be answered in our [getting started materials](/r/getstarted/shiny-basics/lesson1/) or [articles](/r/articles). If you don't find the answers you're looking for here, we have a number of other resources to recommend: 
+:::
+
+## Shiny
+
+The first place to look for help with Shiny is [Posit Community](https://community.rstudio.com/c/shiny), which is a warm and welcoming place to ask any questions you might have about Shiny (as well as tidyverse and all things Posit). The web site is running Discourse, which is an excellent community discussion platform. Our developers monitor Posit Community and answer questions periodically.
+
+You can also check the ["shiny" tag on Stack Overflow](http://stackoverflow.com/questions/tagged/shiny) for existing answers, or post your own question. Note that questions posted on Stack Overflow are not closely monitored by our developers.
+
+## shinyapps.io
+
+For questions about [shinyapps.io](http://shinyapps.io) or the [rsconnect package](https://github.com/rstudio/rsconnect), check the [shinyapps-users](https://groups.google.com/forum/#!forum/shinyapps-users) Google group.
+
+Customers with Starter, Basic, Standard or Pro subscriptions to [shinyapps.io](http://shinyapps.io) can open a case with our support engineers by sending an email to [shinyapps-support@posit.co](mailto:shinyapps-support@posit.co).
+
+## Posit Connect and Shiny Server Pro
+
+Customers with Posit Connect or Shiny Server Pro subscriptions can contact our dedicated support team for our commercial offerings at [support@rstudio.com](mailto:support@rstudio.com).
+
+## Sales
+
+For sales questions, please email [sales@rstudio.com](mailto:sales@rstudio.com).

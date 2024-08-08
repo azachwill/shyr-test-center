@@ -1,0 +1,19 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This graphical user interface of sdcMicro allows you to anonymize microdata even if you are not an expert in the R programming language. 
+title:        "sdcApp - microdata disclosure control"
+author:    Alexander
+authorurl:     https:/www.statistik.at
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - microdata
+ - anonimization
+appurl:      https://sdctools.shinyapps.io/sdcapp/
+sourceurl:   https://github.com/sdcTools/sdcMicro
+rscloudurl:  https://rstudio.cloud/project/167106
+---
+
+This graphical user interface of sdcMicro allows you to anonymize microdata even if you are not an expert in the R programming language. Detailed information on how to use this graphical user-interface (GUI) can be found in a tutorial that is included in the sdcMicro package as vignette.
+  

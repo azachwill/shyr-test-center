@@ -1,0 +1,17 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This visualisation is based on Circos, a way of visualising whole genomes. 
+title: Genome browser
+author: ICGC Data Portal
+authorurl: https://dcc.icgc.org/
+no-app-padding: true
+date: 2014-03-21 
+tags:
+ - user-showcase,
+ - genome
+appurl: https://gallery.shinyapps.io/genome_browser/
+sourceurl: https://github.com/rstudio/shiny-gallery/tree/master/genome-browser
+---
+
+This visualisation is based on Circos, a way of visualising whole genomes. Here we are using data taken from the ICGC, specifically pancreatic adenocarcinoma tumour samples from various donors. The Circos-style plot shows a number of layers, starting from the outer layer representing colour and size distinguished chromosomes, moving clockwise from chromosome 1 to 22, then X and Y. Inside the chromosomes ring, you can see a line representation of copy number mutations. When expanded (by clicking a chromosome), more details on the precise copy number at specific locations is revealed. Hover the bars for further details.

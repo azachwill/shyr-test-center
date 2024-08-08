@@ -1,0 +1,342 @@
+http://shiny.rstudio.com/* https://shiny.posit.co/:splat 301!
+https://shiny.rstudio.com/* https://shiny.posit.co/:splat 301!
+
+/py/* https://pyshiny.netlify.app/:splat 200!
+
+/articles/shinyapps-auth.html https://docs.posit.co/shinyapps.io/authentication-and-user-management.html#authentication-and-user-management 301
+
+# App Stories to the blog
+/app-stories/ /blog/posts/weather-lookup-about/ 301
+/app-stories/weather-lookup-about.html /blog/posts/weather-lookup-about/ 301
+/app-stories/weather-lookup-caching.html /blog/posts/weather-lookup-caching/ 301
+/app-stories/weather-lookup-bslib.html /blog/posts/weather-lookup-bslib/ 301
+ 
+# Put Start Articles in /start/
+
+/articles/basics.html /r/articles/start/basics 301
+/articles/build.html /r/articles/start/build 301
+/articles/cheatsheet.html /r/articles/start/cheatsheet 301
+/articles/help.html /r/articles/start/help 301
+/articles/running.html /r/articles/start/running 301
+
+
+# Put Build Articles in /build/
+
+/articles/action-buttons.html /r/articles/build/action-buttons 301
+/articles/app-formats.html /r/articles/build/app-formats 301
+/articles/building-inputs.html /r/articles/build/building-inputs 301
+/articles/building-outputs.html /r/articles/build/building-outputs 301
+/articles/client-data.html /r/articles/build/client-data 301
+/articles/communicating-with-js.html /r/articles/build/communicating-with-js 301
+/articles/css.html /r/articles/build/css 301
+/articles/dashboards.html /r/articles/build/dashboards 301
+/articles/datatables.html /r/articles/build/datatables 301
+/articles/display-modes.html /r/articles/build/display-modes 301
+/articles/download.html /r/articles/build/download 301
+/articles/dynamic-ui.html /r/articles/build/dynamic-ui 301
+/articles/execution-scheduling.html /r/articles/build/execution-scheduling 301
+/articles/gadget-ui.html /r/articles/build/gadget-ui 301
+/articles/gadgets.html /r/articles/build/gadgets 301
+/articles/generating-reports.html /r/articles/build/generating-reports 301
+/articles/google-analytics.html /r/articles/build/google-analytics 301
+/articles/html-tags.html /r/articles/build/html-tags 301
+/articles/html-ui.html /r/articles/build/html-ui 301
+/articles/htmlwidgets.html /r/articles/build/htmlwidgets 301
+/articles/images.html /r/articles/build/images 301
+/articles/interactive-docs.html /r/articles/build/interactive-docs 301
+/articles/isolation.html /r/articles/build/isolation 301
+/articles/js-build-widget.html /r/articles/build/js-build-widget 301
+/articles/js-custom-input.html /r/articles/build/js-custom-input 301
+/articles/js-dashboard.html /r/articles/build/js-dashboard 301
+/articles/js-events.html /r/articles/build/js-events 301
+/articles/js-introjs.html /r/articles/build/js-introjs 301
+/articles/js-send-message.html /r/articles/build/js-send-message 301
+/articles/js-widget-functionality.html /r/articles/build/js-widget-functionality 301
+/articles/layout-guide.html /r/articles/build/layout-guide 301
+/articles/modal-dialogs.html /r/articles/build/modal-dialogs 301
+/articles/notifications.html /r/articles/build/notifications 301
+/articles/output-args.html /r/articles/build/output-args 301
+/articles/overview.html /r/articles/build/overview 301
+/articles/packaging-javascript.html /r/articles/build/packaging-javascript 301
+/articles/persistent-data-storage.html /r/articles/build/persistent-data-storage 301
+/articles/plot-interaction.html /r/articles/build/plot-interaction 301
+/articles/plot-interaction-advanced.html.html /r/articles/build/plot-interaction-advanced 301
+/articles/pool-advanced.html /r/articles/build/pool-advanced 301
+/articles/pool-basics.html /r/articles/build/pool-basics 301
+/articles/pool-dplyr.html /r/articles/build/pool-dplyr 301
+/articles/progress.html /r/articles/build/progress 301
+/articles/reactivity-overview.html /r/articles/build/reactivity-overview 301
+/articles/render-table.html /r/articles/build/render-table 301
+/articles/rm-cheatsheet.html /r/articles/build/rm-cheatsheet 301
+/articles/rmarkdown.html /r/articles/build/rmarkdown 301
+/articles/rmd-integration.html /r/articles/build/rmd-integration 301
+/articles/selecting-rows-of-data.html /r/articles/build/selecting-rows-of-data 301
+/articles/selectize.html /r/articles/build/selectize 301
+/articles/shinyjs.html /r/articles/build/shinyjs 301
+/articles/sliders.html /r/articles/build/sliders 301
+/articles/sql-injections.html /r/articles/build/sql-injections 301
+/articles/tabsets.html /r/articles/build/tabsets 301
+/articles/tag-glossary.html /r/articles/build/tag-glossary 301
+/articles/templates.html /r/articles/build/templates 301
+/articles/themes.html /r/articles/build/themes 301
+/articles/two-file.html /r/articles/build/two-file 301
+/articles/understanding-reactivity.html /r/articles/build/understanding-reactivity 301
+/articles/upload.html /r/articles/build/upload 301
+
+# Put Improve Articles in /improve/
+
+/articles/async.html /r/articles/async 301
+/articles/caching.html /r/articles/improve/caching 301
+/articles/communicate-bet-modules.html /r/articles/improve/communicate-bet-modules 301
+/articles/debugging.html /r/articles/improve/debugging 301
+/articles/modules.html /r/articles/improve/modules 301
+/articles/performance.html /r/articles/improve/performance 301
+/articles/plot-caching.html /r/articles/improve/plot-caching 301
+/articles/profiling.html /r/articles/improve/profiling 301
+/articles/reconnecting.html /r/articles/improve/reconnecting 301
+/articles/req.html /r/articles/improve/req 301
+/articles/sanitize-errors.html /r/articles/improve/sanitize-errors 301
+/articles/scaling-and-tuning-ssp-rsc.html /r/articles/improve/scaling-and-tuning-ssp-rsc 301
+/articles/scaling-and-tuning.html /r/articles/improve/scaling-and-tuning 301
+/articles/scoping.html /r/articles/improve/scoping 301
+/articles/server-function-testing.html /r/articles/improve/server-function-testing 301
+/articles/shinytest.html /r/articles/improve/shinytest 301
+/articles/testing-overview.html /r/articles/improve/testing-overview 301
+/articles/unicode.html /r/articles/improve/unicode 301
+/articles/upgrade-R.html /r/articles/improve/upgrade-R 301
+/articles/usage-metrics.html /r/articles/improve/usage-metrics 301
+/articles/validation.html /r/articles/improve/validation 301
+
+# Put Share Articles in /share/
+
+/articles/admin-deployment.html /r/articles/share/admin-deployment 301
+/articles/advanced-bookmarking.html /r/articles/share/advanced-bookmarking 301
+/articles/bookmarking-modules.html /r/articles/share/bookmarking-modules 301
+/articles/bookmarking-state.html /r/articles/share/bookmarking-state 301
+/articles/custom-domains.html /r/articles/share/custom-domains 301
+/articles/deployment-local.html /r/articles/share/deployment-local 301
+/articles/deployment-web.html /r/articles/share/deployment-web 301
+/articles/function.html /r/articles/share/function 301
+/articles/libraries.html /r/articles/share/libraries 301
+/articles/migration.html /r/articles/share/migration 301
+/articles/permissions.html /r/articles/share/permissions 301
+/articles/share-data.html /r/articles/share/share-data 301
+/articles/shiny-server.html /r/articles/share/shiny-server 301
+/articles/shinyapps.html /r/articles/share/shinyapps 301
+
+# PUT GALLERY ITEMS IN CATEGORY FOLDERS
+
+# advanced-shiny
+/gallery/bookmarking-url.html /r/gallery/advanced-shiny/bookmarking-url 301
+/gallery/bookmarking-with-updatequerystring.html /r/gallery/advanced-shiny/bookmarking-with-updatequerystring 301
+/gallery/client-data-and-query-string.html /r/gallery/advanced-shiny/client-data-and-query-string 301
+/gallery/download-knitr-reports.html /r/gallery/advanced-shiny/download-knitr-reports 301
+/gallery/generating-reports.html /r/gallery/advanced-shiny/generating-reports 301
+/gallery/image-output.html /r/gallery/advanced-shiny/image-output 301
+/gallery/modal-dialogs.html /r/gallery/advanced-shiny/modal-dialogs 301
+/gallery/option-groups-for-server-side-selectize.html /r/gallery/advanced-shiny/option-groups-for-server-side-selectize 301
+/gallery/progress-bar-example.html /r/gallery/advanced-shiny/progress-bar-example 301
+/gallery/selectize-rendering-methods.html /r/gallery/advanced-shiny/selectize-rendering-methods 301
+/gallery/server-to-client-custom-messages.html /r/gallery/advanced-shiny/server-to-client-custom-messages 301
+
+# application-layout
+/gallery/absolutely-positioned-panels.html /r/gallery/application-layout/absolutely-positioned-panels 301
+/gallery/including-html-text-and-markdown-files.html /r/gallery/application-layout/including-html-text-and-markdown-files 301
+/gallery/inline-output.html /r/gallery/application-layout/inline-output 301
+/gallery/navbar-example.html /r/gallery/application-layout/navbar-example 301
+/gallery/navlistpanel-example.html /r/gallery/application-layout/navlistpanel-example 301
+/gallery/plot-plus-three-columns.html /r/gallery/application-layout/plot-plus-three-columns 301
+/gallery/retirement-simulation.html /r/gallery/application-layout/retirement-simulation 301
+/gallery/shiny-theme-selector.html /r/gallery/application-layout/shiny-theme-selector 301
+/gallery/tabsets.html /r/gallery/application-layout/tabsets 301
+/gallery/vertical-layout.html /r/gallery/application-layout/vertical-layout 301
+
+# dynamic-user-interface
+/gallery/conditionalpanel-demo.html /r/gallery/dynamic-user-interface/conditionalpanel-demo 301
+/gallery/dynamic-ui.html /r/gallery/dynamic-user-interface/dynamic-ui 301
+/gallery/update-input-demo.html /r/gallery/dynamic-user-interface/update-input-demo 301
+
+# education
+/gallery/didacting-modeling.html /r/gallery/education/didacting-modeling 301
+/gallery/ncaa-swim-team-finder.html /r/gallery/education/ncaa-swim-team-finder 301
+/gallery/radiant.html /r/gallery/education/radiant 301
+/gallery/rd-business-game.html /r/gallery/education/rd-business-game 301
+
+# extending-shiny
+/gallery/button-styler.html /r/gallery/extending-shiny/button-styler 301
+/gallery/drag-drop-map-maker.html /r/gallery/extending-shiny/drag-drop-map-maker 301
+/gallery/shiny-wysiwyg.html /r/gallery/extending-shiny/shiny-wysiwyg 301
+
+# finance-banking
+/gallery/career-pathfinder.html /r/gallery/finance-banking/career-pathfinder 301
+/gallery/real-estate-investment.html /r/gallery/finance-banking/real-estate-investment 301
+
+# government-public-sector
+/gallery/brazil-voter-profile.html /r/gallery/government-public-sector/brazil-voter-profile 301
+/gallery/city-cycle.html /r/gallery/government-public-sector/city-cycle 301
+/gallery/crime-watch.html /r/gallery/government-public-sector/crime-watch 301
+/gallery/dairy-farms.html /r/gallery/government-public-sector/dairy-farms 301
+/gallery/dublin-transport.html /r/gallery/government-public-sector/dublin-transport 301
+/gallery/freedom-press-index/.html /r/gallery/government-public-sector/freedom-press-index/ 301
+/gallery/india-blood-banks.html /r/gallery/government-public-sector/india-blood-banks 301
+/gallery/lake-profile-dashboard.html /r/gallery/government-public-sector/lake-profile-dashboard 301
+/gallery/nyc-metro.html /r/gallery/government-public-sector/nyc-metro 301
+/gallery/nz-trade-dash.html /r/gallery/government-public-sector/nz-trade-dash 301
+/gallery/scotpho-profiles.html /r/gallery/government-public-sector/scotpho-profiles 301
+/gallery/soil-profiles.html /r/gallery/government-public-sector/soil-profiles 301
+/gallery/viscover.html /r/gallery/government-public-sector/viscover 301
+
+# interactive-plots
+/gallery/image-interaction-basic.html /r/gallery/interactive-plots/image-interaction-basic 301
+/gallery/plot-interaction-advanced.html /r/gallery/interactive-plots/plot-interaction-advanced 301
+/gallery/plot-interaction-basic.html /r/gallery/interactive-plots/plot-interaction-basic 301
+/gallery/plot-interaction-selecting-points.html /r/gallery/interactive-plots/plot-interaction-selecting-points 301
+/gallery/plot-interaction-zoom.html /r/gallery/interactive-plots/plot-interaction-zoom 301
+
+# interactive-visualizations
+/gallery/bus-dashboard.html /r/gallery/interactive-visualizations/bus-dashboard 301
+/gallery/google-charts.html /r/gallery/interactive-visualizations/google-charts 301
+/gallery/movie-explorer.html /r/gallery/interactive-visualizations/movie-explorer 301
+/gallery/superzip-example.html /r/gallery/interactive-visualizations/superzip-example 301
+
+# internationalization
+/gallery/unicode-characters.html /r/gallery/internationalization/unicode-characters 301
+
+# life-sciences
+/gallery/ab-test-sample-size.html /r/gallery/life-sciences/ab-test-sample-size 301
+/gallery/animal-tracking.html /r/gallery/life-sciences/animal-tracking 301
+/gallery/biodiversity-national-parks.html /r/gallery/life-sciences/biodiversity-national-parks 301
+/gallery/covid19-tracker.html /r/gallery/life-sciences/covid19-tracker 301
+/gallery/explore-panel-data.html /r/gallery/life-sciences/explore-panel-data 301
+/gallery/genome-browser.html /r/gallery/life-sciences/genome-browser 301
+/gallery/hospital-data-antimicrobial.html /r/gallery/life-sciences/hospital-data-antimicrobial 301
+/gallery/isee.html /r/gallery/life-sciences/isee 301
+/gallery/mote-effect-size.html /r/gallery/life-sciences/mote-effect-size 301
+/gallery/mri-images.html /r/gallery/life-sciences/mri-images 301
+/gallery/nutrition-calculator.html /r/gallery/life-sciences/nutrition-calculator 301
+/gallery/phylo-tree-view-subset.html /r/gallery/life-sciences/phylo-tree-view-subset 301
+/gallery/sdcapp-microdata.html /r/gallery/life-sciences/sdcapp-microdata 301
+/gallery/shinyab-sample-size.html /r/gallery/life-sciences/shinyab-sample-size 301
+/gallery/shroom-edibility-prediction.html /r/gallery/life-sciences/shroom-edibility-prediction 301
+/gallery/visual-abstracts.html /r/gallery/life-sciences/visual-abstracts 301
+
+# miscellaneous
+/gallery/bus-company-simulation.html /r/gallery/miscellaneous/bus-company-simulation 301
+/gallery/conference-tweet-dashboard.html /r/gallery/miscellaneous/conference-tweet-dashboard 301
+/gallery/dog-medical-history.html /r/gallery/miscellaneous/dog-medical-history 301
+/gallery/hex-memory.html /r/gallery/miscellaneous/hex-memory 301
+/gallery/hotshot-dashboard.html /r/gallery/miscellaneous/hotshot-dashboard 301
+/gallery/lego-mosaic.html /r/gallery/miscellaneous/lego-mosaic 301
+/gallery/lego-world.html /r/gallery/miscellaneous/lego-world 301
+/gallery/magnetic-fields.html /r/gallery/miscellaneous/magnetic-fields 301
+/gallery/pokemon-explorer.html /r/gallery/miscellaneous/pokemon-explorer 301
+/gallery/pokemon-questions.html /r/gallery/miscellaneous/pokemon-questions 301
+/gallery/tidy-tuesday.html /r/gallery/miscellaneous/tidy-tuesday 301
+
+# reactive-programming
+/gallery/actionbutton-demo.html /r/gallery/reactive-programming/actionbutton-demo 301
+/gallery/isolate-demo.html /r/gallery/reactive-programming/isolate-demo 301
+/gallery/observer-demo.html /r/gallery/reactive-programming/observer-demo 301
+/gallery/reactive-poll-and-file-reader.html /r/gallery/reactive-programming/reactive-poll-and-file-reader 301
+/gallery/reactivity.html /r/gallery/reactive-programming/reactivity 301
+/gallery/submitbutton-demo.html /r/gallery/reactive-programming/submitbutton-demo 301
+/gallery/timer.html /r/gallery/reactive-programming/timer 301
+
+# sports
+/gallery/fifa-births.html /r/gallery/sports/fifa-births 301
+/gallery/impact-replay-cfl.html /r/gallery/sports/impact-replay-cfl 301
+/gallery/masters.html /r/gallery/sports/masters 301
+/gallery/nhl-play-by-play.html /r/gallery/sports/nhl-play-by-play 301
+/gallery/soccer-player-similarity.html /r/gallery/sports/soccer-player-similarity 301
+
+# start-simple
+/gallery/faithful.html /r/gallery/start-simple/faithful 301
+/gallery/kmeans-example.html /r/gallery/start-simple/kmeans-example 301
+/gallery/single-file-shiny-app.html /r/gallery/start-simple/single-file-shiny-app 301
+/gallery/telephones-by-region.html /r/gallery/start-simple/telephones-by-region 301
+/gallery/word-cloud.html /r/gallery/start-simple/word-cloud 301
+
+# technology
+/gallery/chirp.html /r/gallery/technology/chirp 301
+/gallery/cran-explorer.html /r/gallery/technology/cran-explorer 301
+/gallery/d3-dynamic-repot.html /r/gallery/technology/d3-dynamic-repot 301
+/gallery/uber-rider.html /r/gallery/technology/uber-rider 301
+
+# widgets
+/gallery/basic-datatable.html /r/gallery/widgets/basic-datatable 301
+/gallery/custom-input-bindings.html /r/gallery/widgets/custom-input-bindings 301
+/gallery/custom-input-control.html /r/gallery/widgets/custom-input-control 301
+/gallery/datatables-demo.html /r/gallery/widgets/datatables-demo 301
+/gallery/datatables-options.html /r/gallery/widgets/datatables-options 301
+/gallery/date-and-date-range.html /r/gallery/widgets/date-and-date-range 301
+/gallery/dynamic-clustering.html /r/gallery/widgets/dynamic-clustering 301
+/gallery/file-download.html /r/gallery/widgets/file-download 301
+/gallery/file-upload.html /r/gallery/widgets/file-upload 301
+/gallery/mathjax.html /r/gallery/widgets/mathjax 301
+/gallery/option-groups-for-selectize-input.html /r/gallery/widgets/option-groups-for-selectize-input 301
+/gallery/selectize-examples.html /r/gallery/widgets/selectize-examples 301
+/gallery/selectize-vs-select.html /r/gallery/widgets/selectize-vs-select 301
+/gallery/sliders.html /r/gallery/widgets/sliders 301
+/gallery/widget-gallery.html /r/gallery/widgets/widget-gallery 301
+/gallery/widgets.html /r/gallery/widgets/widgets 301
+
+# Old gallery pages no longer in use
+/gallery/action-button.html /r/gallery/ 301
+/gallery/checkbox-group.html /r/gallery/ 301
+/gallery/checkbox.html /r/gallery/ 301
+/gallery/creating-a-ui-from-a-loop.html /r/gallery/ 301
+/gallery/current-time.html /r/gallery/ 301
+/gallery/custom-html-ui.html /r/gallery/ 301
+/gallery/date-range-selector.html /r/gallery/ 301
+/gallery/date-selector.html /r/gallery/ 301
+/gallery/download-file.html /r/gallery/ 301
+/gallery/example-01-hello.html /r/gallery/ 301
+/gallery/example-02-text.html /r/gallery/ 301
+/gallery/example-03-reactivity.html /r/gallery/ 301
+/gallery/example-04-mpg.html /r/gallery/ 301
+/gallery/example-05-sliders.html /r/gallery/ 301
+/gallery/example-06-tabsets.html /r/gallery/ 301
+/gallery/example-07-widgets.html /r/gallery/ 301
+/gallery/file-upload-widget.html /r/gallery/ 301
+/gallery/hello-shiny.html /r/gallery/ 301
+/gallery/immune-response-modeling.html /r/gallery/ 301
+/gallery/index-old.html /r/gallery/ 301
+/gallery/knit-html.html /r/gallery/ 301
+/gallery/lego-set.html /r/gallery/ 301
+/gallery/map-twitter-sentiment.html /r/gallery/ 301
+/gallery/miles-per-gallon.html /r/gallery/ 301
+/gallery/module-example.html /r/gallery/ 301
+/gallery/mpg.html /r/gallery/ 301
+/gallery/navbar-layout.html /r/gallery/ 301
+/gallery/notifications.html /r/gallery/ 301
+/gallery/number-selector.html /r/gallery/ 301
+/gallery/nvd3-line-chart-output.html /r/gallery/ 301
+/gallery/onflush-example.html /r/gallery/ 301
+/gallery/papr.html /r/gallery/ 301
+/gallery/plot-interaction-exclude.html /r/gallery/ 301
+/gallery/plot-interaction-excluding-points.html /r/gallery/ 301
+/gallery/radio-buttons.html /r/gallery/ 301
+/gallery/see-more.html /r/gallery/ 301
+/gallery/select-box.html /r/gallery/ 301
+/gallery/shiny-text.html /r/gallery/ 301
+/gallery/sidebar-layout.html /r/gallery/ 301
+/gallery/slider-bar-and-slider-range.html /r/gallery/ 301
+/gallery/slider-range.html /r/gallery/ 301
+/gallery/stock-portfolio-monitor.html /r/gallery/ 301
+/gallery/submit-button.html /r/gallery/ 301
+/gallery/teach-physiology.html /r/gallery/ 301
+/gallery/text-input.html /r/gallery/ 301
+/gallery/upload-file.html /r/gallery/ 301
+
+
+# For those that don't specifically show up above...
+/gallery/ /r/gallery/
+/articles/ /r/articles/ 
+/reference/shiny/* /r/reference/shiny/:splat 301
+/help/ /r/help/ 301
+/deploy/ /r/deploy/ 301
+/contribute/ /r/contribute/ 301
+/tutorial/written-tutorial/* /r/getstarted/shiny-basics/:splat 301
+/tutorial/* /r/getstarted/:splat 301
+/blog/* /blog/posts/:splat 301
+/feed/blog.xml /blog/index.xml 301

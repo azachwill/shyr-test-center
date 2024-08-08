@@ -1,0 +1,103 @@
+---
+layout: reference
+title: "Run code after an application or session ends — onStop"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Run code after an application or session ends</h1>
+  
+
+  <pre class="code"><span class='fu'>onStop</span>(<span class='no'>fun</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>fun</p></th>
+    <td><p>A function that will be called after the app has finished running.</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>A scope for when the callback will run. If <code>onStop</code> is
+called from within the server function, this will default to the current
+session, and the callback will be invoked when the current session ends. If
+<code>onStop</code> is called outside a server function, then the callback will
+be invoked with the application exits. If <code>NULL</code>, it is the same as
+calling <code>onStop</code> outside of the server function, and the callback will
+be invoked when the application exits.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>This function registers callback functions that are invoked when the
+application exits (when <code><a href='runApp.html'>runApp()</a></code> exits), or after each user
+session ends (when a client disconnects).</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A function which, if invoked, will cancel the callback.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='onFlush.html'>onSessionEnded()</a></code> for the same functionality, but at
+the session level only.</p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='co'># Open this application in multiple browsers, then close the browsers.</span>
+  <span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+    <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='bootstrapPage.html'>basicPage</a></span>(<span class='st'>"onStop demo"</span>),
+
+    <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+      <span class='fu'>onStop</span>(<span class='kw'>function</span>() <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Session stopped\n"</span>))
+    },
+
+    <span class='kw'>onStart</span> <span class='kw'>=</span> <span class='kw'>function</span>() {
+      <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Doing application setup\n"</span>)
+
+      <span class='fu'>onStop</span>(<span class='kw'>function</span>() {
+        <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Doing application cleanup\n"</span>)
+      })
+    }
+  )
+}
+<span class='co'># In the example above, onStop() is called inside of onStart(). This is</span>
+<span class='co'># the pattern that should be used when creating a shinyApp() object from</span>
+<span class='co'># a function, or at the console. If instead you are writing an app.R which</span>
+<span class='co'># will be invoked with runApp(), you can do it that way, or put the onStop()</span>
+<span class='co'># before the shinyApp() call, as shown below.</span>
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># ==== app.R ====</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Doing application setup\n"</span>)
+<span class='fu'>onStop</span>(<span class='kw'>function</span>() {
+  <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Doing application cleanup\n"</span>)
+})
+
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+  <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='bootstrapPage.html'>basicPage</a></span>(<span class='st'>"onStop demo"</span>),
+
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+    <span class='fu'>onStop</span>(<span class='kw'>function</span>() <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Session stopped\n"</span>))
+  }
+)
+<span class='co'># ==== end app.R ====</span>
+
+
+<span class='co'># Similarly, if you have a global.R, you can call onStop() from there.</span>
+<span class='co'># ==== global.R ====</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Doing application setup\n"</span>)
+<span class='fu'>onStop</span>(<span class='kw'>function</span>() {
+  <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Doing application cleanup\n"</span>)
+})
+<span class='co'># ==== end global.R ====</span>
+}</pre>
+</div>
+
+

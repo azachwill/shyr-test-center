@@ -1,0 +1,46 @@
+---
+title: "shinyUI"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>shinyUI(ui)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>ui</th>
+    <td>A user interace definition</td>
+  </tr>
+</table>
+
+<div data-section="Create a Shiny UI handler">
+  <h3 data-swiftype-index="false">Create a Shiny UI handler</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>The user interface definition, without modifications or side effects.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Historically this function was used in ui.R files to register a user
+interface with Shiny. It is no longer required; simply ensure that the last
+expression to be returned from ui.R is a user interface. This function is
+kept for backwards compatibility with older applications. It returns the
+value that is passed to it.</p>
+
+</div>
+<!-- <ul>
+  <li>shinyUI</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

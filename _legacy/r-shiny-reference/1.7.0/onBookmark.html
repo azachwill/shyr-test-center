@@ -1,0 +1,222 @@
+---
+layout: reference
+title: "Add callbacks for Shiny session bookmarking events — onBookmark"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Add callbacks for Shiny session bookmarking events</h1>
+  
+
+  <pre class="code"><span class='fu'>onBookmark</span>(<span class='no'>fun</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())
+
+<span class='fu'>onBookmarked</span>(<span class='no'>fun</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())
+
+<span class='fu'>onRestore</span>(<span class='no'>fun</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())
+
+<span class='fu'>onRestored</span>(<span class='no'>fun</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>fun</p></th>
+    <td><p>A callback function which takes one argument.</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>A shiny session object.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>These functions are for registering callbacks on Shiny session events. They
+should be called within an application's server function.</p>
+<ul>
+<li><p><code>onBookmark</code> registers a function that will be called just
+before Shiny bookmarks state.</p></li>
+<li><p><code>onBookmarked</code> registers a function that will be called just
+after Shiny bookmarks state.</p></li>
+<li><p><code>onRestore</code> registers a function that will be called when a
+session is restored, after the server function executes, but before all
+other reactives, observers and render functions are run.</p></li>
+<li><p><code>onRestored</code> registers a function that will be called after a
+session is restored. This is similar to <code>onRestore</code>, but it will be
+called after all reactives, observers, and render functions run, and
+after results are sent to the client browser. <code>onRestored</code>
+callbacks can be useful for sending update messages to the client
+browser.</p></li>
+</ul>
+
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>All of these functions return a function which can be called with no
+arguments to cancel the registration.</p>
+<p>The callback function that is passed to these functions should take one
+argument, typically named "state" (for <code>onBookmark</code>, <code>onRestore</code>,
+and <code>onRestored</code>) or "url" (for <code>onBookmarked</code>).</p>
+<p>For <code>onBookmark</code>, the state object has three relevant fields. The
+<code>values</code> field is an environment which can be used to save arbitrary
+values (see examples). If the state is being saved to disk (as opposed to
+being encoded in a URL), the <code>dir</code> field contains the name of a
+directory which can be used to store extra files. Finally, the state object
+has an <code>input</code> field, which is simply the application's <code>input</code>
+object. It can be read, but not modified.</p>
+<p>For <code>onRestore</code> and <code>onRestored</code>, the state object is a list. This
+list contains <code>input</code>, which is a named list of input values to restore,
+<code>values</code>, which is an environment containing arbitrary values that were
+saved in <code>onBookmark</code>, and <code>dir</code>, the name of the directory that
+the state is being restored from, and which could have been used to save
+extra files.</p>
+<p>For <code>onBookmarked</code>, the callback function receives a string with the
+bookmark URL. This callback function should be used to display UI in the
+client browser with the bookmark URL. If no callback function is registered,
+then Shiny will by default display a modal dialog with the bookmark URL.</p>
+  <h3 class="hasAnchor" id="modules"><a class="anchor" href="#modules"></a>Modules</h3>
+
+  
+
+
+<p>These callbacks may also be used in Shiny modules. When used this way, the
+inputs and values will automatically be namespaced for the module, and the
+callback functions registered for the module will only be able to see the
+module's inputs and values.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p>enableBookmarking for general information on bookmarking.</p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run these examples in interactive sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='co'># Basic use of onBookmark and onRestore: This app saves the time in its</span>
+<span class='co'># arbitrary values, and restores that time when the app is restored.</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>req</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"txt"</span>, <span class='st'>"Input text"</span>),
+    <span class='fu'><a href='bookmarkButton.html'>bookmarkButton</a></span>()
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+  <span class='fu'>onBookmark</span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='no'>savedTime</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>())
+    <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Last saved at"</span>, <span class='no'>savedTime</span>, <span class='st'>"\n"</span>)
+    <span class='co'># state is a mutable reference object, and we can add arbitrary values to</span>
+    <span class='co'># it.</span>
+    <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>time</span> <span class='kw'>&lt;-</span> <span class='no'>savedTime</span>
+  })
+
+  <span class='fu'>onRestore</span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"Restoring from state bookmarked at"</span>, <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>time</span>, <span class='st'>"\n"</span>)
+  })
+}
+<span class='fu'><a href='enableBookmarking.html'>enableBookmarking</a></span>(<span class='st'>"url"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>req</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"txt"</span>, <span class='st'>"Input text"</span>),
+    <span class='fu'><a href='bookmarkButton.html'>bookmarkButton</a></span>()
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='no'>lastUpdateTime</span> <span class='kw'>&lt;-</span> <span class='kw'>NULL</span>
+
+  <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>txt</span>, {
+    <span class='fu'><a href='updateTextInput.html'>updateTextInput</a></span>(<span class='no'>session</span>, <span class='st'>"txt"</span>,
+      <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"Input text (Changed "</span>, <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()), <span class='st'>")"</span>)
+    )
+  })
+
+  <span class='fu'>onBookmark</span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='co'># Save content to a file</span>
+    <span class='no'>messageFile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>state</span>$<span class='no'>dir</span>, <span class='st'>"message.txt"</span>)
+    <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()), <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>messageFile</span>)
+  })
+
+  <span class='fu'>onRestored</span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='co'># Read the file</span>
+    <span class='no'>messageFile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>state</span>$<span class='no'>dir</span>, <span class='st'>"message.txt"</span>)
+    <span class='no'>timeText</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/readChar.html'>readChar</a></span>(<span class='no'>messageFile</span>, <span class='fl'>1000</span>)
+
+    <span class='co'># updateTextInput must be called in onRestored, as opposed to onRestore,</span>
+    <span class='co'># because onRestored happens after the client browser is ready.</span>
+    <span class='fu'><a href='updateTextInput.html'>updateTextInput</a></span>(<span class='no'>session</span>, <span class='st'>"txt"</span>,
+      <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"Input text (Changed "</span>, <span class='no'>timeText</span>, <span class='st'>")"</span>)
+    )
+  })
+}
+<span class='co'># "server" bookmarking is needed for writing to disk.</span>
+<span class='fu'><a href='enableBookmarking.html'>enableBookmarking</a></span>(<span class='st'>"server"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+
+<span class='co'># This app has a module, and both the module and the main app code have</span>
+<span class='co'># onBookmark and onRestore functions which write and read state$values$hash. The</span>
+<span class='co'># module's version of state$values$hash does not conflict with the app's version</span>
+<span class='co'># of state$values$hash.</span>
+<span class='co'>#</span>
+<span class='co'># A basic module that captializes text.</span>
+<span class='no'>capitalizerUI</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>id</span>) {
+  <span class='no'>ns</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='NS.html'>NS</a></span>(<span class='no'>id</span>)
+  <span class='fu'><a href='wellPanel.html'>wellPanel</a></span>(
+    <span class='fu'><a href='builder.html'>h4</a></span>(<span class='st'>"Text captializer module"</span>),
+    <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='fu'>ns</span>(<span class='st'>"text"</span>), <span class='st'>"Enter text:"</span>),
+    <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='fu'>ns</span>(<span class='st'>"out"</span>))
+  )
+}
+<span class='no'>capitalizerServer</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='no'>output</span>$<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPrint.html'>renderText</a></span>({
+    <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>toupper</a></span>(<span class='no'>input</span>$<span class='no'>text</span>)
+  })
+  <span class='fu'>onBookmark</span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>hash</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/hash.html'>hash</a></span>(<span class='no'>input</span>$<span class='no'>text</span>)
+  })
+  <span class='fu'>onRestore</span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/hash.html'>hash</a></span>(<span class='no'>input</span>$<span class='no'>text</span>), <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>hash</span>)) {
+      <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"Module's input text matches hash "</span>, <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>hash</span>)
+    } <span class='kw'>else</span> {
+      <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"Module's input text does not match hash "</span>, <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>hash</span>)
+    }
+  })
+}
+<span class='co'># Main app code</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>request</span>) {
+  <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+    <span class='fu'><a href='sidebarLayout.html'>sidebarLayout</a></span>(
+      <span class='fu'><a href='sidebarLayout.html'>sidebarPanel</a></span>(
+        <span class='fu'>capitalizerUI</span>(<span class='st'>"tc"</span>),
+        <span class='fu'><a href='textInput.html'>textInput</a></span>(<span class='st'>"text"</span>, <span class='st'>"Enter text (not in module):"</span>),
+        <span class='fu'><a href='bookmarkButton.html'>bookmarkButton</a></span>()
+      ),
+      <span class='fu'><a href='sidebarLayout.html'>mainPanel</a></span>()
+    )
+  )
+}
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'><a href='callModule.html'>callModule</a></span>(<span class='no'>capitalizerServer</span>, <span class='st'>"tc"</span>)
+  <span class='fu'>onBookmark</span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>hash</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/hash.html'>hash</a></span>(<span class='no'>input</span>$<span class='no'>text</span>)
+  })
+  <span class='fu'>onRestore</span>(<span class='kw'>function</span>(<span class='no'>state</span>) {
+    <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/hash.html'>hash</a></span>(<span class='no'>input</span>$<span class='no'>text</span>), <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>hash</span>)) {
+      <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"App's input text matches hash "</span>, <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>hash</span>)
+    } <span class='kw'>else</span> {
+      <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"App's input text does not match hash "</span>, <span class='no'>state</span>$<span class='no'>values</span>$<span class='no'>hash</span>)
+    }
+  })
+}
+<span class='fu'><a href='enableBookmarking.html'>enableBookmarking</a></span>(<span class='kw'>store</span> <span class='kw'>=</span> <span class='st'>"url"</span>)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+

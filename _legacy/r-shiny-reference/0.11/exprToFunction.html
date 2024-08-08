@@ -1,0 +1,92 @@
+---
+layout: reference
+title: "exprToFunction"
+categories: reference
+---
+<h1>Convert an expression to a function</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='exprToFunction.html'>exprToFunction</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="argument">env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="number">2</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">caller_offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>A quoted or unquoted expression, or a function.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The desired environment for the function. Defaults to the
+calling environment two steps back.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is the expression quoted?</td>
+  </tr>
+  <tr>
+    <th>caller_offset</th>
+    <td>If specified, the offset in the callstack of the
+  functiont to be treated as the caller.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This is to be called from another function, because it will attempt to get
+an unquoted expression from two calls back.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>If expr is a quoted expression, then this just converts it to a function.
+If expr is a function, then this simply returns expr (and prints a
+  deprecation message).
+If expr was a non-quoted expression from two calls back, then this will
+  quote the original expression and convert it to a function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># Example of a new renderer, similar to renderText</span>
+<span class="comment"># This is something that toolkit authors will do</span>
+<span class="symbol">renderTriple</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">expr</span><span class="keyword">,</span> <span class="formalargs">env</span><span class="eqformalargs">=</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="formalargs">quoted</span><span class="eqformalargs">=</span><span class="number">FALSE</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="comment"># Convert expr to a function</span>
+  <span class="symbol">func</span> <span class="assignement">&lt;-</span> <span class="package">shiny</span><span class="keyword">::</span><span class="functioncall"><a href='exprToFunction.html'>exprToFunction</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="symbol">env</span><span class="keyword">,</span> <span class="symbol">quoted</span><span class="keyword">)</span>
+
+  <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">value</span> <span class="assignement">&lt;-</span> <span class="functioncall">func</span><span class="keyword">(</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span><span class="keyword">(</span><span class="symbol">value</span><span class="keyword">,</span> <span class="number">3</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">collapse</span><span class="argument">=</span><span class="string">", "</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+<span class="keyword">}</span>
+
+
+<span class="comment"># Example of using the renderer.</span>
+<span class="comment"># This is something that app authors will do.</span>
+<span class="symbol">values</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveValues.html'>reactiveValues</a></span><span class="keyword">(</span><span class="argument">A</span><span class="argument">=</span><span class="string">"text"</span><span class="keyword">)</span>
+
+<span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># # Create an output object</span>
+<span class="comment"># output$tripleA &lt;- renderTriple({</span>
+<span class="comment">#   values$A</span>
+<span class="comment"># })</span>
+<span class="comment">## ---------------------------------------------</span>
+
+<span class="comment"># At the R console, you can experiment with the renderer using isolate()</span>
+<span class="symbol">tripleA</span> <span class="assignement">&lt;-</span> <span class="functioncall">renderTriple</span><span class="keyword">(</span><span class="keyword">{</span>
+  <span class="symbol">values</span><span class="keyword">$</span><span class="symbol">A</span>
+<span class="keyword">}</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="functioncall">tripleA</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>[1] &quot;text, text, text&quot;
+</div>
+<div class='input'><span class="comment"># "text, text, text"</span></div></code></pre>
+<!-- <ul>
+  <li>exprToFunction</li>
+</ul>
+<ul>
+  
+</ul> -->
+

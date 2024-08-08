@@ -1,0 +1,7 @@
+---
+title: Add Google Analytics
+date: 2020-03-14
+description: This article will show you how to add Google Analytics to a Shiny app.
+---
+
+{{< include /r/articles/build/google-analytics/index.qmd >}}

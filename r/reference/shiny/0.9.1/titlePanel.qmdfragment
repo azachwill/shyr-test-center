@@ -1,0 +1,55 @@
+---
+title: "titlePanel"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>titlePanel(title, windowTitle&nbsp;=&nbsp;title)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>title</th>
+    <td>An application title to display</td>
+  </tr>
+  <tr>
+    <th>windowTitle</th>
+    <td>The title that should be displayed by
+  the browser window.</td>
+  </tr>
+</table>
+
+<div data-section="Create a panel containing an application title.">
+  <h3 data-swiftype-index="false">Create a panel containing an application title.</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Create a panel containing an application title.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>Calling this function has the side effect of including a
+  <code>title</code> tag within the head. You can also specify a page title
+  explicitly using the `title` parameter of the top-level page function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>titlePanel(&quot;Hello Shiny!&quot;)
+</div>
+<div class='output'>&lt;h2 style=&quot;padding: 10px 0px;&quot;&gt;Hello Shiny!&lt;/h2&gt; 
+</div></pre>
+<!-- <ul>
+  <li>titlePanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

@@ -1,0 +1,52 @@
+---
+title: "Load an app's supporting R files — loadSupport"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.4</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/shinyapp.R" class="external-link"><code>R/shinyapp.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Loads all of the supporting R files of a Shiny application. Specifically,
+this function loads any top-level supporting <code>.R</code> files in the <code>R/</code> directory
+adjacent to the <code>app.R</code>/<code>server.R</code>/<code>ui.R</code> files.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">loadSupport</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="at">appDir =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">renv =</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">globalenv</span>()),</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">globalrenv =</span> <span class="fu">globalenv</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>appDir</dt>
+<dd><p>The application directory. If <code>appDir</code> is <code>NULL</code> or
+not supplied, the nearest enclosing directory that is a Shiny app, starting
+with the current directory, is used.</p></dd>
+
+
+<dt>renv</dt>
+<dd><p>The environment in which the files in the <code>R/</code> directory should
+be evaluated.</p></dd>
+
+
+<dt>globalrenv</dt>
+<dd><p>The environment in which <code>global.R</code> should be evaluated. If
+<code>NULL</code>, <code>global.R</code> will not be evaluated at all.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Since Shiny 1.5.0, this function is called by default when running an
+application. If it causes problems, there are two ways to opt out. You can
+either place a file named <code>_disable_autoload.R</code> in your R/ directory, or
+set <code>options(shiny.autoload.r=FALSE)</code>. If you set this option, it will
+affect any application that runs later in the same R session, potentially
+breaking it, so after running your application, you should unset option with
+<code>options(shiny.autoload.r=NULL)</code></p>
+<p>The files are sourced in alphabetical order (as determined by
+<a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a>). <code>global.R</code> is evaluated before the supporting R files in the
+<code>R/</code> directory.</p>
+  </div>
+
+</div>
+```

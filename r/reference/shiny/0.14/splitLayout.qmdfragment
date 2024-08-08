@@ -1,0 +1,82 @@
+---
+title: "splitLayout"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='splitLayout.html'>splitLayout</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">cellWidths</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">cellArgs</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Unnamed arguments will become child elements of the layout. Named
+arguments will become HTML attributes on the outermost tag.</td>
+  </tr>
+  <tr>
+    <th>cellWidths</th>
+    <td>Character or numeric vector indicating the widths of the
+individual cells. Recycling will be used if needed. Character values will
+be interpreted as CSS lengths (see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>), numeric
+values as pixels.</td>
+  </tr>
+  <tr>
+    <th>cellArgs</th>
+    <td>Any additional attributes that should be used for each cell
+of the layout.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Lays out elements horizontally, dividing the available horizontal space into
+equal parts (by default).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="comment"># Server code used for all examples</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot1</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">cars</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot2</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">pressure</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot3</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">AirPassengers</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="comment"># Equal sizing</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='splitLayout.html'>splitLayout</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot2"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+<span class="comment"># Custom widths</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='splitLayout.html'>splitLayout</a></span><span class="keyword">(</span><span class="argument">cellWidths</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"25%"</span><span class="keyword">,</span> <span class="string">"75%"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot2"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+<span class="comment"># All cells at 300 pixels wide, with cell padding</span>
+<span class="comment"># and a border around everything</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='splitLayout.html'>splitLayout</a></span><span class="keyword">(</span>
+  <span class="argument">style</span> <span class="argument">=</span> <span class="string">"border: 1px solid silver;"</span><span class="keyword">,</span>
+  <span class="argument">cellWidths</span> <span class="argument">=</span> <span class="number">300</span><span class="keyword">,</span>
+  <span class="argument">cellArgs</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">style</span> <span class="argument">=</span> <span class="string">"padding: 6px"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot1"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot2"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot3"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>splitLayout</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

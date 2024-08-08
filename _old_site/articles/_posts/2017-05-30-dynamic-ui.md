@@ -1,0 +1,176 @@
+---
+layout: post
+title: Build a dynamic UI that reacts to user input
+edited: 2019-10-15
+description: Shiny apps are often more than just a fixed set of controls that affect a fixed set of outputs. Inputs may need to be shown or hidden depending on the state of another input, or input controls may need to be created on-the-fly in response to user input.
+---
+
+## Dynamic UI
+
+Shiny apps are often more than just a fixed set of controls that affect a fixed set of outputs. Inputs may need to be shown or hidden depending on the state of another input, or input controls may need to be created on-the-fly in response to user input.
+
+Shiny currently has four different approaches you can use to make your interfaces more dynamic. From easiest to most difficult, they are:
+
+* **The `conditionalPanel` function**, which is used in `ui.R` and wraps a set of UI elements that need to be dynamically shown/hidden.
+* **The `renderUI` function**, which is used in `server.R` in conjunction with the `uiOutput` function in `ui.R`, lets you generate calls to UI functions and make the results appear in a predetermined place in the UI.
+* **The `insertUI`  and `removeUI` functions**, which are used in `server.R` and allow you to add and remove arbitrary chunks of UI code (all independent from one another), as many times as you want, whenever you want, wherever you want.
+* **Use JavaScript** to modify the webpage directly.
+
+Let's take a closer look at each approach.
+
+### Showing and Hiding Controls With `conditionalPanel`
+
+`conditionalPanel` creates a panel that shows and hides its contents depending on the value of a JavaScript expression. Even if you don't know any JavaScript, simple comparison or equality operations are extremely easy to do, as they look a lot like R (and many other programming languages).
+
+Here's an example for adding an optional smoother to a ggplot, and choosing its smoothing method:
+
+{% highlight r %}
+# Partial example
+checkboxInput("smooth", "Smooth"),
+conditionalPanel(
+  condition = "input.smooth == true",
+  selectInput("smoothMethod", "Method",
+              list("lm", "glm", "gam", "loess", "rlm"))
+)
+{% endhighlight %}
+
+In this example, the select control for `smoothMethod` will appear only when the `smooth` checkbox is checked. Its condition is `"input.smooth == true"`, which is a JavaScript expression that will be evaluated whenever any inputs/outputs change.
+
+The condition can also use `output` values; they work in the same way (`output.foo` gives you the value of the output `foo`). If you have a situation where you wish you could use an R expression as your `condition` argument, you can create a reactive expression in the server function and assign it to a new output, then refer to that output in your `condition` expression. If you do this, make sure to also set `outputOptions(output, [newOutputName], suspendWhenHidden = FALSE)`. (This is necessary because Shiny normally doesn't send values to the browser for outputs that are hidden or not present in the UI. In this case, however, the browser does need to know the most up-to-date output value in order to correctly evaluate the condition of the `contitionalPanel` function - `suspendWhenHidden = FALSE` ensures this will happen.) For example:
+
+{% highlight r %}
+ui <- fluidPage(
+  selectInput("dataset", "Dataset", c("diamonds", "rock", "pressure", "cars")),
+  conditionalPanel( condition = "output.nrows",
+                    checkboxInput("headonly", "Only use first 1000 rows"))
+)
+server <- function(input, output, session) {
+  datasetInput <- reactive({
+    switch(input$dataset,
+           "rock" = rock,
+           "pressure" = pressure,
+           "cars" = cars)
+  })
+  
+  output$nrows <- reactive({
+    nrow(datasetInput())
+  })
+  
+  outputOptions(output, "nrows", suspendWhenHidden = FALSE)  
+}
+
+shinyApp(ui, server)
+{% endhighlight %}
+
+However, since this technique requires server-side calculation (which could take a long time, depending on what other reactive expressions are executing) we recommend that you avoid using `output` in your conditions unless absolutely necessary.
+
+### Creating Controls On the Fly With `renderUI`
+
+Sometimes it's just not enough to show and hide a fixed set of controls. Imagine prompting the user for a latitude/longitude, then allowing the user to select from a checklist of cities within a certain radius. In this case, you can use the `renderUI` expression to dynamically create controls based on the user's input.
+
+#### ui.R
+
+{% highlight r %}
+# Partial example
+numericInput("lat", "Latitude"),
+numericInput("long", "Longitude"),
+uiOutput("cityControls")
+{% endhighlight %}
+
+#### server.R
+
+{% highlight r %}
+# Partial example
+output$cityControls <- renderUI({
+  cities <- getNearestCities(input$lat, input$long)
+  checkboxGroupInput("cities", "Choose Cities", cities)
+})
+{% endhighlight %}
+
+`renderUI` works just like `renderPlot`, `renderText`, and the other output rendering functions you've seen before, but it expects the expression it wraps to return an HTML tag (or a list of HTML tags, using `tagList`). These tags can include inputs and outputs.
+
+In `ui.R`, use a `uiOutput` to tell Shiny where these controls should be rendered.
+
+### Adding/removing UI with `insertUI` and `removeUI`
+
+Here's a pretty simple example (also available [here](https://gallery.shinyapps.io/111-insert-ui/)) of how one could use `insertUI` and `removeUI` to insert and remove text elements using a queue logic:
+
+<iframe src="https://gallery.shinyapps.io/111-insert-ui/" frameborder="no" class="scale80" height="620px" style="margin-bottom: -110px;"></iframe>
+
+You might also want to check out this [other app](https://gallery.shinyapps.io/insertUI/) that demos how to insert and remove a few common shiny input objects. Finally, [this app](https://gallery.shinyapps.io/insertUI-modules/) shows how to dynamically insert modules using `insertUI`.
+
+#### `insertUI`
+This function allows you to dynamically add an arbitrarily large UI object into your app, as many times as you want, whenever you want, wherever you want. Unlike `renderUI`, the UI generated with `insertUI` is not updatable as a whole: once it's created, it stays there. Each new call to `insertUI` creates more UI objects, in addition to the ones already there (all independent from one another). To update a part of the UI (ex: an input object), you must use the appropriate `render` function or a customized `reactive` function. 
+
+This function is particulaly useful when you want to build up an arbitrary list of stuff in the app's UI. For example: you may have some data, and based on some input from the user (clicking buttons, selecting checkboxes, etc), you want to create and display a new model each time. But you don't want to simply overwrite the previous model; you want to leave them there and continue adding new ones, so that your user can see the differences between them. If this is what you want, it's a lot easier to use `insertUI` instead of `renderUI`, because each call to `ìnsertUI` creates a new DOM element, rather than updating an existing one. Besides, you also get the flexibility of when and where to insert your UI.
+
+Here's a simple example:
+{% highlight r %}
+ui <- fluidPage(
+  actionButton("add", "Add UI")
+)
+
+server <- function(input, output, session) {
+  observeEvent(input$add, {
+    insertUI(
+      selector = "#add",
+      where = "afterEnd",
+      ui = textInput(paste0("txt", input$add),
+                     "Insert some text")
+    )
+  })
+}
+
+shinyApp(ui, server)
+{% endhighlight %}
+
+The `selector` argument determines the element relative to which your `ui` should be inserted (it must be a string `s` that is accepted by a jQuery `$(s)` call). Once that is determined, `where` refines the place to insert the `ui` by offering four options relative to the `selector`: "beforeBegin", "afterBegin", "beforeEnd" and "afterEnd". The `ui` itself can be anything that you usually put inside your apps's ui function. One other argument that may be good to know about, but is not demoed above, is `multiple`. In case your `selector` matches more than one element, `multiple` determines whether Shiny should insert the UI object relative to all matched elements or just relative to the first matched element (default).
+
+As you can see, no special piece of code is needed inside the ui function for `insertUI` to work. However, you will probably always need to pair your use of `insertUI` with an `observe`/`observeEvent` that checks for some input change. This is necessary because, unlike the typical `render` functions, `insertUI` has no idea when it should be called (it takes no reactive dependencies).
+
+Note that, if you are inserting multiple elements in one call, you must wrap them in either a `tagList()` or a `tags$div()` (the latter option has the advantage that you can give it an id to make it easier to reference or remove it later on). If you want to insert raw html, use `ui = HTML()`.
+
+#### `removeUI`
+
+This function allows you to remove any part of your UI. Once `removeUI` is executed on some element, it is gone forever. While it may be a particularly useful pattern to pair this with `insertUI` (to remove some UI you had previously inserted), there is no restriction on what you can use `removeUI` on. Any element that can be selected through a jQuery selector can be removed through this function.
+
+Here's a simple example:
+{% highlight r %}
+ui <- fluidPage(
+  actionButton("rmv", "Remove UI"),
+  textInput("txt", "This is no longer useful")
+)
+
+server <- function(input, output, session) {
+  observeEvent(input$rmv, {
+    removeUI(
+      selector = "div:has(> #txt)"
+    )
+  })
+}
+
+shinyApp(ui, server)
+{% endhighlight %}
+
+As with `insertUI`, you also have a `selector` argument. This time, however, the `selector` determines the element(s) themselves that you want to remove. If you want to remove a Shiny input or output, note that many of these are wrapped in `div`s, so you may need to use a somewhat complex selector (as is indeed the case in the example above). You can avoid this if you wrap the inputs/outputs that you want to be able to remove easily in a `div` with an id. 
+
+You also have a `multiple` argument (again, not demoed here): in case your `selector` matches more than one element, `multiple` determines whether Shiny should remove all the matched elements or just the first matched element (default).
+
+### Use JavaScript to Modify the Page
+
+You can use JavaScript/jQuery to modify the page directly. General instructions for doing so are outside the scope of this tutorial, except to mention an important additional requirement and provide a quick example. Each time you add new inputs/outputs to the DOM, or remove existing inputs/outputs from the DOM, you need to tell Shiny. Our current recommendation is:
+
+* Before making changes to the DOM that may include adding or removing Shiny inputs or outputs, call `Shiny.unbindAll()`.
+* After such changes, call `Shiny.bindAll()`.
+
+If you are adding or removing many inputs/outputs at once, it's fine to call `Shiny.unbindAll()` once at the beginning and `Shiny.bindAll()` at the end&nbsp;&ndash; it's not necessary to put these calls around each individual addition or removal of inputs/outputs. 
+
+Here's a short example of both non-reactive and reactive DOM manipulation:
+
+<iframe id="app" src="https://gallery.shinyapps.io/ui-mod-js/" frameborder="no" class="scale80" height="1100px" style="margin-bottom: -275px; border: none;"></iframe>
+
+## Learn more
+
+For more on this topic, see the following resources:
+
+[<i class="fas fa-play-circle fa-lg" aria-hidden="true"></i> Dynamic Shiny interfaces](https://resources.rstudio.com/wistia-rstudio-conf-2017/dynamic-shiny-interfaces-b%C3%A1rbara-borges-ribeiro)

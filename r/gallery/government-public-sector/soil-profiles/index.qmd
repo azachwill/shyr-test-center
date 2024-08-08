@@ -1,0 +1,21 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: A Shiny App to provides the graphical representation of soil horizons, in the simplest case the color. 
+title:        "Visualisation of soil profiles"
+authorname:    Gabrielname
+authorurl:     https://community.rstudio.com/u/Gabriel_Holz
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - soil
+ - visualisation
+ - sf
+ - ggplot2
+appurl:      https://nardus.shinyapps.io/soilprofile/
+sourceurl:   https://github.com/nardusstricta/soilprofile_app
+rscloudurl:  https://rstudio.cloud/project/248517
+---
+
+A Shiny App to provides the graphical representation of soil horizons, in the simplest case the color. The app offers a graphical user interface for the package soilprofile2. The focus is on morphological properties such as horizon transitions, texture, structure, root density, and rock content.  In addition, soil-forming processes such as hydromorphic soils characteristics can also be displayed.
+  

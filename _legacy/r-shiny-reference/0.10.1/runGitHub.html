@@ -1,0 +1,71 @@
+---
+layout: reference
+title: "runGitHub"
+categories: reference
+
+---
+<h1>Run a Shiny application from a GitHub repository</h1>
+
+<pre class="code"><code class="r"><div>runGitHub(repo, username&nbsp;=&nbsp;getOption("github.user"), ref&nbsp;=&nbsp;"master", subdir&nbsp;=&nbsp;NULL, port&nbsp;=&nbsp;NULL, launch.browser&nbsp;=&nbsp;getOption("shiny.launch.browser", interactive()))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>repo</th>
+    <td>Name of the repository</td>
+  </tr>
+  <tr>
+    <th>username</th>
+    <td>GitHub username</td>
+  </tr>
+  <tr>
+    <th>ref</th>
+    <td>Desired git reference. Could be a commit, tag, or branch
+name. Defaults to <code>"master"</code>.</td>
+  </tr>
+  <tr>
+    <th>subdir</th>
+    <td>A subdirectory in the repository that contains the app. By
+default, this function will run an app from the top level of the repo, but
+you can use a path such as `<code>"inst/shinyapp"</code>.</td>
+  </tr>
+  <tr>
+    <th>port</th>
+    <td>The TCP port that the application should listen on. Defaults to
+choosing a random port.</td>
+  </tr>
+  <tr>
+    <th>launch.browser</th>
+    <td>If true, the system's default web browser will be
+  launched automatically after the app is started. Defaults to true in
+  interactive sessions only.</td>
+  </tr>
+</table>
+
+<div data-section="Run a Shiny application from a GitHub repository">
+  <h3 data-swiftype-index="false">Run a Shiny application from a GitHub repository</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Download and launch a Shiny application that is hosted in a GitHub repository.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# runGitHub(&quot;shiny_example&quot;, &quot;rstudio&quot;)
+# 
+# # Can run an app from a subdirectory in the repo
+# runGitHub(&quot;shiny_example&quot;, &quot;rstudio&quot;, subdir = &quot;inst/shinyapp/&quot;)
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+</div></pre>
+<!-- <ul>
+  <li>runGitHub</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

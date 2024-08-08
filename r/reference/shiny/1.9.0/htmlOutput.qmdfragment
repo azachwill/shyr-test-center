@@ -1,0 +1,80 @@
+---
+title: "Create an HTML output element — htmlOutput"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.9.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.9.0/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Render a reactive output variable as HTML within an application page. The
+text will be included within an HTML <code>div</code> tag, and is presumed to contain
+HTML content which should not be escaped.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">htmlOutput</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  outputId,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">inline =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">container =</span> <span class="cf">if</span> (inline) span <span class="cf">else</span> div,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">fill =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  ...</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">uiOutput</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  outputId,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">inline =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">container =</span> <span class="cf">if</span> (inline) span <span class="cf">else</span> div,</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="at">fill =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  ...</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>outputId</dt>
+<dd><p>output variable to read the value from</p></dd>
+
+
+<dt>inline</dt>
+<dd><p>use an inline (<code><a href="builder.html">span()</a></code>) or block container (<code><a href="builder.html">div()</a></code>)
+for the output</p></dd>
+
+
+<dt>container</dt>
+<dd><p>a function to generate an HTML element to contain the text</p></dd>
+
+
+<dt>fill</dt>
+<dd><p>If <code>TRUE</code>, the result of <code>container</code> is treated as <em>both</em> a fill
+item and container (see <code><a href="https://rstudio.github.io/htmltools/reference/bindFillRole.html" class="external-link">htmltools::bindFillRole()</a></code>), which means both the
+<code>container</code> as well as its immediate children (i.e., the result of
+<code><a href="renderUI.html">renderUI()</a></code>) are allowed to grow/shrink to fit a fill container with an
+opinionated height. Set <code>fill = "item"</code> or <code>fill = "container"</code> to treat
+<code>container</code> as just a fill item or a fill container.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Other arguments to pass to the container tag function. This is
+useful for providing additional classes for the tag.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>An HTML output element that can be included in a panel</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p><code>uiOutput</code> is intended to be used with <code>renderUI</code> on the server side. It is
+currently just an alias for <code>htmlOutput</code>.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">htmlOutput</span>(<span class="st">"summary"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Using a custom container and class</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>tags<span class="sc">$</span><span class="fu">ul</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="fu">htmlOutput</span>(<span class="st">"summary"</span>, <span class="at">container =</span> tags<span class="sc">$</span>li, <span class="at">class =</span> <span class="st">"custom-li-output"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>)</span></code></pre></div>
+  </div>
+</div>
+```

@@ -1,0 +1,89 @@
+---
+title: "Timer — reactiveTimer"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.9.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.9.0/R/reactives.R" class="external-link"><code>R/reactives.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Creates a reactive timer with the given interval. A reactive timer is like a
+reactive value, except reactive values are triggered when they are set, while
+reactive timers are triggered simply by the passage of time.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">reactiveTimer</span>(<span class="at">intervalMs =</span> <span class="dv">1000</span>, <span class="at">session =</span> <span class="fu">getDefaultReactiveDomain</span>())</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>intervalMs</dt>
+<dd><p>How often to fire, in milliseconds</p></dd>
+
+
+<dt>session</dt>
+<dd><p>A session object. This is needed to cancel any scheduled
+invalidations after a user has ended the session. If <code>NULL</code>, then
+this invalidation will not be tied to any session, and so it will still
+occur.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A no-parameter function that can be called from a reactive context,
+in order to cause that context to be invalidated the next time the timer
+interval elapses. Calling the returned function also happens to yield the
+current time (as in <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">base::Sys.time()</a></code>).</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p><a href="reactive.html">Reactive expressions</a> and observers that want to be
+invalidated by the timer need to call the timer function that
+<code>reactiveTimer</code> returns, even if the current time value is not actually
+needed.</p>
+<p>See <code><a href="invalidateLater.html">invalidateLater()</a></code> as a safer and simpler alternative.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="invalidateLater.html">invalidateLater()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Only run examples in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">"n"</span>, <span class="st">"Number of observations"</span>, <span class="dv">2</span>, <span class="dv">1000</span>, <span class="dv">500</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="co"># Anything that calls autoInvalidate will automatically invalidate</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="co"># every 2 seconds.</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  autoInvalidate <span class="ot">&lt;-</span> <span class="fu">reactiveTimer</span>(<span class="dv">2000</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  <span class="fu">observe</span>({</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="co"># Invalidate and re-execute this reactive expression every time the</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    <span class="co"># timer fires.</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    <span class="fu">autoInvalidate</span>()</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    <span class="co"># Do something each time this is invalidated.</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    <span class="co"># The isolate() makes this observer _not_ get invalidated and re-executed</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    <span class="co"># when input$n changes.</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The value of input$n is"</span>, <span class="fu">isolate</span>(input<span class="sc">$</span>n)))</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>  })</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>  <span class="co"># Generate a new histogram each time the timer fires, but not when</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  <span class="co"># input$n changes.</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>    <span class="fu">autoInvalidate</span>()</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>    <span class="fu">hist</span>(<span class="fu">rnorm</span>(<span class="fu">isolate</span>(input<span class="sc">$</span>n)))</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>  })</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>}</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

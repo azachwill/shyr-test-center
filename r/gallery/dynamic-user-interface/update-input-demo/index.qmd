@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Update input demo
+date: 2014-07-29 
+tags: 
+ - updateinput
+appurl: https://gallery.shinyapps.io/065-update-input-demo
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/065-update-input-demo
+---

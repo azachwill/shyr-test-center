@@ -1,0 +1,98 @@
+---
+title: "Create a submit button — submitButton"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.5</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.5/R/input-submit.R" class="external-link"><code>R/input-submit.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Create a submit button for an app. Apps that include a submit
+button do not automatically update their outputs when inputs change,
+rather they wait until the user explicitly clicks the submit button.
+The use of <code>submitButton</code> is generally discouraged in favor of
+the more versatile <code><a href="actionButton.html">actionButton()</a></code> (see details below).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">submitButton</span>(<span class="at">text =</span> <span class="st">"Apply Changes"</span>, <span class="at">icon =</span> <span class="cn">NULL</span>, <span class="at">width =</span> <span class="cn">NULL</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>text</dt>
+<dd><p>Button caption</p></dd>
+
+
+<dt>icon</dt>
+<dd><p>Optional <code><a href="icon.html">icon()</a></code> to appear on the button</p></dd>
+
+
+<dt>width</dt>
+<dd><p>The width of the button, e.g. <code>'400px'</code>, or <code>'100%'</code>;
+see <code><a href="validateCssUnit.html">validateCssUnit()</a></code>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A submit button that can be added to a UI definition.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Submit buttons are unusual Shiny inputs, and we recommend using
+<code><a href="actionButton.html">actionButton()</a></code> instead of <code>submitButton</code> when you
+want to delay a reaction.
+See <a href="https://shiny.rstudio.com/articles/action-buttons.html" class="external-link">this article</a> for more information (including a demo of how to "translate"
+code using a <code>submitButton</code> to code using an <code>actionButton</code>).</p>
+<p>In essence, the presence of a submit button stops all inputs from
+sending their values automatically to the server. This means, for
+instance, that if there are <em>two</em> submit buttons in the same app,
+clicking either one will cause all inputs in the app to send their
+values to the server. This is probably not what you'd want, which is
+why submit button are unwieldy for all but the simplest apps. There
+are other problems with submit buttons: for example, dynamically
+created submit buttons (for example, with <code><a href="renderUI.html">renderUI()</a></code>
+or <code><a href="insertUI.html">insertUI()</a></code>) will not work.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p>Other input elements: 
+<code><a href="actionButton.html">actionButton</a>()</code>,
+<code><a href="checkboxGroupInput.html">checkboxGroupInput</a>()</code>,
+<code><a href="checkboxInput.html">checkboxInput</a>()</code>,
+<code><a href="dateInput.html">dateInput</a>()</code>,
+<code><a href="dateRangeInput.html">dateRangeInput</a>()</code>,
+<code><a href="fileInput.html">fileInput</a>()</code>,
+<code><a href="numericInput.html">numericInput</a>()</code>,
+<code><a href="passwordInput.html">passwordInput</a>()</code>,
+<code><a href="radioButtons.html">radioButtons</a>()</code>,
+<code><a href="selectInput.html">selectInput</a>()</code>,
+<code><a href="sliderInput.html">sliderInput</a>()</code>,
+<code><a href="textAreaInput.html">textAreaInput</a>()</code>,
+<code><a href="textInput.html">textInput</a>()</code>,
+<code><a href="varSelectInput.html">varSelectInput</a>()</code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">shinyApp</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">ui =</span> <span class="fu">basicPage</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="fu">numericInput</span>(<span class="st">"num"</span>, <span class="at">label =</span> <span class="st">"Make changes"</span>, <span class="at">value =</span> <span class="dv">1</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="fu">submitButton</span>(<span class="st">"Update View"</span>, <span class="fu">icon</span>(<span class="st">"refresh"</span>)),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="fu">helpText</span>(<span class="st">"When you click the button above, you should see"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>             <span class="st">"the output below update to reflect the value you"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>             <span class="st">"entered at the top:"</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    <span class="fu">verbatimTextOutput</span>(<span class="st">"value"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  ),</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">server =</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    <span class="co"># submit buttons do not have a value of their own,</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    <span class="co"># they control when the app accesses values of other widgets.</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="co"># input$num is the value of the number widget.</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    output<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({ input<span class="sc">$</span>num })</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  }</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>)</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

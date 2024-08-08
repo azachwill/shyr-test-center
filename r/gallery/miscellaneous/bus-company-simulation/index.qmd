@@ -1,0 +1,18 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: A bus company simulation game to help teach students about elasticties.
+title:        "A bus company simulation game"
+author:       Marcus Young
+authorurl:    https://www.marcusyoung.co.uk/
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - teaching
+appurl:      https://marcus.shinyapps.io/bus_simulator
+sourceurl:   https://github.com/marcusyoung/beat_the_trend
+rscloudurl:  https://rstudio.cloud/project/186915
+---
+
+A bus company simulation game to help teach students about elasticties. You must decide what management action to take at the beginning of each year, in order to continue running a good bus service.
+  

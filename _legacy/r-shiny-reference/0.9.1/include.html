@@ -1,0 +1,70 @@
+---
+layout: reference
+title: "include"
+categories: reference
+---
+<h1>Include Content From a File</h1>
+
+<pre class="code"><code class="r"><div>includeHTML(path)</div>
+<div>includeText(path)</div>
+<div>includeMarkdown(path)</div>
+<div>includeCSS(path, ...)</div>
+<div>includeScript(path, ...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>path</th>
+    <td>The path of the file to be included. It is
+  highly recommended to use a relative path (the base path
+  being the Shiny application directory), not an absolute
+  path.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Any additional attributes to be applied to the
+  generated tag.</td>
+  </tr>
+</table>
+
+<div data-section="Include Content From a File">
+  <h3 data-swiftype-index="false">Include Content From a File</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Include HTML, text, or rendered Markdown into a <a href='shinyUI.html'>Shiny UI</a>.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>These functions provide a convenient way to include an extensive amount of
+HTML, textual, Markdown, CSS, or JavaScript content, rather than using a
+large literal R string.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+  
+  <p><code>includeText</code> escapes its contents, but does no other processing.
+  This means that hard breaks and multiple spaces will be rendered as they
+  usually are in HTML: as a single space character. If you are looking for
+  preformatted text, wrap the call with <code><a href='builder.html'>pre</a></code>, or consider using
+  <code>includeMarkdown</code> instead.</p>
+
+  <p>The <code>includeMarkdown</code> function requires the <code>markdown</code>
+  package.</p>
+
+</div>
+<!-- <ul>
+  <li>include</li><li>includeCSS</li><li>includeHTML</li><li>includeMarkdown</li><li>includeScript</li><li>includeText</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

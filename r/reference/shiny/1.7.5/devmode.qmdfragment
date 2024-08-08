@@ -1,0 +1,255 @@
+---
+title: "Shiny Developer Mode — devmode"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.5</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.5/R/devmode.R" class="external-link"><code>R/devmode.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p>
+<p>Developer Mode enables a number of <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code> to make a developer's life
+easier, like enabling non-minified JS and printing messages about
+deprecated functions and options.</p>
+<p>Shiny Developer Mode can be enabled by calling <code>devmode(TRUE)</code> and disabled
+by calling <code>devmode(FALSE)</code>.</p>
+<p>Please see the function descriptions for more details.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">devmode</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="at">devmode =</span> <span class="fu">getOption</span>(<span class="st">"shiny.devmode"</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="fu">getOption</span>(<span class="st">"shiny.devmode.verbose"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">in_devmode</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">with_devmode</span>(devmode, code, <span class="at">verbose =</span> <span class="fu">getOption</span>(<span class="st">"shiny.devmode.verbose"</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">devmode_inform</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  message,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">.frequency =</span> <span class="st">"regularly"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="at">.frequency_id =</span> message,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="at">.file =</span> <span class="fu">stderr</span>(),</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  ...</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="fu">register_devmode_option</span>(name, <span class="at">devmode_message =</span> <span class="cn">NULL</span>, <span class="at">devmode_default =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="fu">get_devmode_option</span>(</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  name,</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  <span class="at">default =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  <span class="at">devmode_default =</span> <span class="fu">missing_arg</span>(),</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>  <span class="at">devmode_message =</span> <span class="fu">missing_arg</span>()</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>devmode</dt>
+<dd><p>Logical value which should be set to <code>TRUE</code> to enable Shiny
+Developer Mode</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>Logical value which should be set to <code>TRUE</code> display Shiny
+Developer messages</p></dd>
+
+
+<dt>code</dt>
+<dd><p>Code to execute with the temporary Dev Mode options set</p></dd>
+
+
+<dt>message</dt>
+<dd><p>Developer Mode message to be sent to <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::inform()</a></code></p></dd>
+
+
+<dt>.frequency</dt>
+<dd><p>Frequency of the Developer Mode message used with
+<code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::inform()</a></code>. Defaults to once every 8 hours.</p></dd>
+
+
+<dt>.frequency_id</dt>
+<dd><p><code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::inform()</a></code> message identifier. Defaults to
+<code>message</code>.</p></dd>
+
+
+<dt>.file</dt>
+<dd><p>Output connection for <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::inform()</a></code>. Defaults to <code><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stderr()</a></code></p></dd>
+
+
+<dt>...</dt>
+<dd><p>Parameters passed to <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::inform()</a></code></p></dd>
+
+
+<dt>name</dt>
+<dd><p>Name of option to look for in <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code></p></dd>
+
+
+<dt>devmode_message</dt>
+<dd><p>Message to display once every 8 hours when utilizing
+the <code>devmode_default</code> value.  If <code>devmode_message</code> is missing, the
+registered <code>devmode_message</code> value be used.</p></dd>
+
+
+<dt>devmode_default</dt>
+<dd><p>Default value to return if <code>in_devmode()</code> returns
+<code>TRUE</code> and the specified option is not set in <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code>. For
+<code>get_devmode_option()</code>, if <code>devmode_default</code> is missing, the
+registered <code>devmode_default</code> value will be used.</p></dd>
+
+
+<dt>default</dt>
+<dd><p>Default value to return if <code>in_devmode()</code> returns
+<code>TRUE</code> and the specified option is not set in <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code>.</p></dd>
+
+</dl></div>
+  <div data-section="functions">
+    <h3 id="functions">Functions</h3>
+    
+<ul><li><p><code>devmode()</code>: Function to set two options to enable/disable Shiny
+Developer Mode and Developer messages</p></li>
+<li><p><code>in_devmode()</code>: Determines if Shiny is in Developer Mode. If the
+<code>getOption("shiny.devmode")</code> is set to <code>TRUE</code> and not in testing inside
+<code>testthat</code>, then Shiny Developer Mode is enabled.</p></li>
+<li><p><code>with_devmode()</code>: Temporarily set Shiny Developer Mode and Developer
+message verbosity</p></li>
+<li><p><code>devmode_inform()</code>: If Shiny Developer Mode and verbosity are enabled,
+displays a message once every 8 hrs (by default)</p></li>
+<li><p><code>register_devmode_option()</code>: Registers a Shiny Developer Mode option with an updated
+value and Developer message. This registration method allows package
+authors to write one message in a single location.</p>
+<p>For example, the following Shiny Developer Mode options are registered:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># Reload the Shiny app when a sourced R file changes</span></span>
+<span><span class="fu"><a href="../reference/devmode.html">register_devmode_option</a></span><span class="op">(</span></span>
+<span>  <span class="st">"shiny.autoreload"</span>,</span>
+<span>  <span class="st">"Turning on shiny autoreload. To disable, call `options(shiny.autoreload = FALSE)`"</span>,</span>
+<span>  devmode_default <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Use the unminified Shiny JavaScript file, `shiny.js`</span></span>
+<span><span class="fu"><a href="../reference/devmode.html">register_devmode_option</a></span><span class="op">(</span></span>
+<span>  <span class="st">"shiny.minified"</span>,</span>
+<span>  <span class="st">"Using full shiny javascript file. To use the minified version, call `options(shiny.minified = TRUE)`"</span>,</span>
+<span>  devmode_default <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Display the full stack trace when errors occur during Shiny app execution</span></span>
+<span><span class="fu"><a href="../reference/devmode.html">register_devmode_option</a></span><span class="op">(</span></span>
+<span>  <span class="st">"shiny.fullstacktrace"</span>,</span>
+<span>  <span class="st">"Turning on full stack trace. To disable, call `options(shiny.fullstacktrace = FALSE)`"</span>,</span>
+<span>  devmode_default <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Other known, non-Shiny Developer Mode options:</p><ul><li><p>Sass:</p></li>
+</ul><p></p><div class="sourceCode r"><pre><code><span><span class="co"># Display the full stack trace when errors occur during Shiny app execution</span></span>
+<span><span class="fu"><a href="../reference/devmode.html">register_devmode_option</a></span><span class="op">(</span></span>
+<span>  <span class="st">"sass.cache"</span>,</span>
+<span>  <span class="st">"Turning off sass cache. To use default caching, call `options(sass.cache = TRUE)`"</span>,</span>
+<span>  devmode_default <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div></li>
+<li><p><code>get_devmode_option()</code>: Provides a consistent way to change the expected
+<code><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption()</a></code> behavior when Developer Mode is enabled. This method is very
+similar to <code><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption()</a></code> where the globally set option takes precedence.
+See section "Avoiding direct dependency on shiny" for
+<code>get_devmode_option()</code> implementation details.</p>
+<p><strong>Package developers:</strong> Register your Dev Mode option using
+<code>register_devmode_option()</code> to avoid supplying the same <code>devmode_default</code>
+and <code>devmode_message</code> values throughout your package. (This requires a
+<span class="pkg">shiny</span> dependency.)</p></li>
+</ul></div>
+  <div data-section="avoiding-direct-dependency-on-shiny">
+    <h3 id="avoiding-direct-dependency-on-shiny">Avoiding direct dependency on shiny</h3>
+    
+
+
+<p>The methods explained in this help file act independently from the rest of
+Shiny but are included to provide blue prints for your own packages. If
+your package already has (or is willing to take) a dependency on Shiny, we
+recommend using the exported Shiny methods for consistent behavior. Note
+that if you use exported Shiny methods, it will cause the Shiny package to
+load. This may be undesirable if your code will be used in (for example) R
+Markdown documents that do not have a Shiny runtime (<code>runtime: shiny</code>).</p>
+<p>If your package can <strong>not</strong> take a dependency on Shiny, we recommending
+re-implementing these two functions:</p>
+<ol><li><p><code>in_devmode()</code>:</p>
+<p>This function should return <code>TRUE</code> if <code>getOption("shiny.devmode")</code> is set.
+In addition, we strongly recommend that it also checks to make sure
+<code>testthat</code> is not testing.</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">in_devmode</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Logic.html" class="external-link">isTRUE</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"shiny.devmode"</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span>
+<span>    <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"TESTTHAT"</span><span class="op">)</span>, <span class="st">"true"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre><p></p></div></li>
+<li><p><code>get_devmode_option(name, default, devmode_default, devmode_message)</code>:</p>
+<p>This function is similar to <code>getOption(name, default)</code>, but when the option
+is not set, the default value changes depending on the Dev Mode.
+<code>get_devmode_option()</code> should be implemented as follows:</p><ul><li><p>If not in Dev Mode:</p><ul><li><p>Return <code>getOption(name, default)</code>.</p></li>
+</ul></li>
+<li><p>If in Dev Mode:</p><ul><li><p>Get the global option <code>getOption(name)</code> value.</p></li>
+<li><p>If the global option value is set:</p><ul><li><p>Return the value.</p></li>
+</ul></li>
+<li><p>If the global option value is not set:</p><ul><li><p>Notify the developer that the Dev Mode default value will be used.</p></li>
+<li><p>Return the Dev Mode default value.</p></li>
+</ul></li>
+</ul></li>
+</ul><p>When notifying the developer that the default value has changed, we strongly
+recommend displaying a message (<code>devmode_message</code>) to <code><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stderr()</a></code> once every 8
+hours using <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::inform()</a></code>. This will keep the author up to date as to
+which Dev Mode options are being altered. To allow developers a chance to
+disable Dev Mode messages, the message should be skipped if
+<code>getOption("shiny.devmode.verbose", TRUE)</code> is not <code>TRUE</code>.</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">get_devmode_option</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span>, <span class="va">default</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">devmode_default</span>, <span class="va">devmode_message</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="../reference/devmode.html">in_devmode</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># Dev Mode disabled, act like `getOption()`</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="va">name</span>, default <span class="op">=</span> <span class="va">default</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co"># Dev Mode enabled, update the default value for `getOption()`</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="va">name</span>, default <span class="op">=</span> <span class="op">{</span></span>
+<span>    <span class="co"># Notify developer</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span></span>
+<span>      <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/missing.html" class="external-link">missing</a></span><span class="op">(</span><span class="va">devmode_message</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span>
+<span>      <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">devmode_message</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"shiny.devmode.verbose"</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">inform</a></span><span class="op">(</span></span>
+<span>        message <span class="op">=</span> <span class="va">devmode_message</span>,</span>
+<span>        .frequency <span class="op">=</span> <span class="st">"regularly"</span>,</span>
+<span>        .frequency_id <span class="op">=</span> <span class="va">devmode_message</span>,</span>
+<span>        .file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stderr</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span></span>
+<span>    <span class="co"># Return Dev Mode default value `devmode_default`</span></span>
+<span>    <span class="va">devmode_default</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre><p></p></div></li>
+</ol><p>The remaining functions in this file are used for author convenience and are
+not recommended for all reimplementation situations.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Enable Shiny Developer mode</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">devmode</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">in_devmode</span>() <span class="co"># TRUE/FALSE?</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># Execute code in a temporary shiny dev mode</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">with_devmode</span>(<span class="cn">TRUE</span>, <span class="fu">in_devmode</span>()) <span class="co"># TRUE</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># Ex: Within shiny, we register the option "shiny.minified"</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#   to default to `FALSE` when in Dev Mode</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) <span class="fu">register_devmode_option</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="st">"shiny.minified"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="at">devmode_message =</span> <span class="fu">paste0</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    <span class="st">"Using full shiny javascript file. "</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    <span class="st">"To use the minified version, call `options(shiny.minified = TRUE)`"</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  ),</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="at">devmode_default =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="co"># Used within `shiny::runApp(launch.browser)`</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="fu">get_devmode_option</span>(<span class="st">"shiny.minified"</span>, <span class="cn">TRUE</span>) <span class="co"># TRUE if Dev mode is off</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>is_minified <span class="ot">&lt;-</span> <span class="fu">with_devmode</span>(<span class="cn">TRUE</span>, {</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  <span class="fu">get_devmode_option</span>(<span class="st">"shiny.minified"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>})</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>is_minified <span class="co"># FALSE</span></span></code></pre></div>
+  </div>
+</div>
+```

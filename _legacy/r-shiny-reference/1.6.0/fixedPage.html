@@ -1,0 +1,111 @@
+---
+layout: reference
+title: "Create a page with a fixed layout — fixedPage"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a page with a fixed layout</h1>
+  
+
+  <pre class="code"><span class='fu'>fixedPage</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>responsive</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span>(),
+  <span class='kw'>theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lang</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
+
+<span class='fu'>fixedRow</span>(<span class='no'>...</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Elements to include within the container</p></td>
+  </tr>
+  <tr>
+    <th><p>title</p></th>
+    <td><p>The browser window title (defaults to the host URL of the page)</p></td>
+  </tr>
+  <tr>
+    <th><p>responsive</p></th>
+    <td><p>This option is deprecated; it is no longer optional with
+Bootstrap 3.</p></td>
+  </tr>
+  <tr>
+    <th><p>theme</p></th>
+    <td><p>Alternative Bootstrap stylesheet (normally a css file within the
+www directory). For example, to use the theme located at
+<code>www/bootstrap.css</code> you would use <code>theme = "bootstrap.css"</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>lang</p></th>
+    <td><p>ISO 639-1 language code for the HTML page, such as "en" or "ko".
+This will be used as the lang in the <code>&lt;html&gt;</code> tag, as in <code>&lt;html lang="en"&gt;</code>.
+The default (NULL) results in an empty string.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Functions for creating fixed page layouts. A fixed page layout consists of
+rows which in turn include columns. Rows exist for the purpose of making sure
+their elements appear on the same line (if the browser has adequate width).
+Columns exist for the purpose of defining how much horizontal space within a
+12-unit wide grid it's elements should occupy. Fixed pages limit their width
+to 940 pixels on a typical display, and 724px or 1170px on smaller and larger
+displays respectively.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function.</p>
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>To create a fixed page use the <code>fixedPage</code> function and include
+instances of <code>fixedRow</code> and <code><a href='column.html'>column()</a></code> within it. Note that
+unlike <code><a href='fluidPage.html'>fluidPage()</a></code>, fixed pages cannot make use of higher-level
+layout functions like <code>sidebarLayout</code>, rather, all layout must be done
+with <code>fixedRow</code> and <code>column</code>.</p>
+  <h3 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h3>
+
+  <p>See the <a href='https://shiny.posit.co/articles/layout-guide.html'> Shiny Application Layout Guide</a> for additional details on laying out fixed
+pages.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='column.html'>column()</a></code></p>
+<p>Other layout functions: 
+<code><a href='fillPage.html'>fillPage</a>()</code>,
+<code><a href='flowLayout.html'>flowLayout</a>()</code>,
+<code><a href='fluidPage.html'>fluidPage</a>()</code>,
+<code><a href='navbarPage.html'>navbarPage</a>()</code>,
+<code><a href='sidebarLayout.html'>sidebarLayout</a>()</code>,
+<code><a href='splitLayout.html'>splitLayout</a>()</code>,
+<code><a href='verticalLayout.html'>verticalLayout</a>()</code></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'>fixedPage</span>(
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Hello, Shiny!"</span>,
+  <span class='fu'>fixedRow</span>(
+    <span class='fu'><a href='column.html'>column</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+      <span class='st'>"4"</span>
+    ),
+    <span class='fu'><a href='column.html'>column</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+      <span class='st'>"3 offset 2"</span>
+    )
+  )
+)
+
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) { })
+}</pre>
+</div>
+
+

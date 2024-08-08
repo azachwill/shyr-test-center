@@ -1,0 +1,23 @@
+---
+pagetitle: Shiny Blog
+description: News, tips, and commentary about all things Shiny
+sidebar: false
+listing:
+  sort: "date desc"
+  contents: "posts"
+  template: blog.ejs
+  categories: false
+  filter-ui: false
+  feed: true
+  image-align: left
+  page-size: 51
+image: /images/shiny-thumb.png
+format: 
+  html:
+    page-layout: full
+---
+```{=html}
+<h1 class="d-inline me-3">Shiny Blog</h1><span style="display: inline-block;"><a class="link-dark" href="/blog/index.xml" target="_blank"><i style="font-size:1.25em;" class="fas fa-rss dark-link"></i></a></span>
+
+<div class="h4 mt-2 pb-3">News, tips, and commentary about all things Shiny.</div>
+```

@@ -1,0 +1,18 @@
+---
+title: "Radiant - A Shiny app for statistics and machine learning"
+description: Radiant is an R package for statistics and machine learning with a Shiny user interface
+author: "Vincent Nijs"
+image: thumbnail.png
+imagealt: "a screenshot of the Radiant app showing a sidebar and table output"
+no-app-padding: true
+tags: 
+ - "statistics"
+ - "machine learning"
+ - "business intelligence"
+appurl: "https://vnijs.shinyapps.io/radiant"
+sourceurl: "https://github.com/radiant-rstats"
+rscloudurl: "https://rstudio.cloud/project/246357"
+authorurl: "https://radiant-rstats.github.io/docs/"
+---
+
+Radiant is an R package for statistics and machine learning with a Shiny user interface

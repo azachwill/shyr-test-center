@@ -1,0 +1,112 @@
+---
+title: "fixedPage"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>fixedPage(..., title&nbsp;=&nbsp;NULL, responsive&nbsp;=&nbsp;TRUE, theme&nbsp;=&nbsp;NULL)</div>
+<div>fixedRow(...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>Elements to include within the container</td>
+  </tr>
+  <tr>
+    <th>title</th>
+    <td>The browser window title (defaults to the host URL of the page)</td>
+  </tr>
+  <tr>
+    <th>responsive</th>
+    <td><code>TRUE</code> to use responsive layout (automatically adapt
+and resize page elements based on the size of the viewing device)</td>
+  </tr>
+  <tr>
+    <th>theme</th>
+    <td>Alternative Bootstrap stylesheet (normally a css file within the
+  www directory). For example, to use the theme located at
+  <code>www/bootstrap.css</code> you would use <code>theme = "bootstrap.css"</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Create a page with a fixed layout">
+  <h3 data-swiftype-index="false">Create a page with a fixed layout</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Functions for creating fixed page layouts. A fixed page layout consists of
+rows which in turn include columns. Rows exist for the purpose of making sure
+their elements appear on the same line (if the browser has adequate width).
+Columns exist for the purpose of defining how much horizontal space within a
+12-unit wide grid it's elements should occupy. Fixed pages limit their width
+to 940 pixels on a typical display, and 724px or 1170px on smaller and larger
+displays respectively.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>To create a fixed page use the <code>fixedPage</code> function and include
+  instances of <code>fixedRow</code> and <code><a href='column.html'>column</a></code> within it. Note that
+  unlike <code><a href='fluidPage.html'>fluidPage</a></code>, fixed pages cannot make use of higher-level
+  layout functions like <code>sidebarLayout</code>, rather, all layout must be done
+  with <code>fixedRow</code> and <code>column</code>.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+  
+  <p>See the
+  <a href = 'https://github.com/rstudio/shiny/wiki/Shiny-Application-Layout-Guide'>
+  Shiny Application Layout Guide</a> for additional details on laying out fixed
+  pages.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>shinyUI(fixedPage(
+  title = &quot;Hello, Shiny!&quot;,
+  fixedRow(
+    column(width = 4,
+      &quot;4&quot;
+    ),
+    column(width = 3, offset = 2,
+      &quot;3 offset 2&quot;
+    )
+  )
+))
+</div>
+<div class='output'>&lt;div class=&quot;container&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;span4&quot;&gt;4&lt;/div&gt;
+    &lt;div class=&quot;span3 offset2&quot;&gt;3 offset 2&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>fixedPage</li><li>fixedRow</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='column.html'>column</a></code>
+
+</div>
+```

@@ -1,0 +1,95 @@
+---
+layout: reference
+title: "sidebarLayout"
+categories: reference
+
+---
+<h1>Layout a sidebar and main area</h1>
+
+<pre class="code"><code class="r"><div>sidebarLayout(sidebarPanel, mainPanel, position&nbsp;=&nbsp;c("left", "right"), fluid&nbsp;=&nbsp;TRUE)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>sidebarPanel</th>
+    <td>The <a href='sidebarPanel.html'>sidebarPanel</a> containing input controls</td>
+  </tr>
+  <tr>
+    <th>mainPanel</th>
+    <td>The <a href='mainPanel.html'>mainPanel</a> containing outputs</td>
+  </tr>
+  <tr>
+    <th>position</th>
+    <td>The position of the sidebar relative to the main area ("left"
+or "right")</td>
+  </tr>
+  <tr>
+    <th>fluid</th>
+    <td><code>TRUE</code> to use fluid layout; <code>FALSE</code> to use fixed
+  layout.</td>
+  </tr>
+</table>
+
+<div data-section="Layout a sidebar and main area">
+  <h3 data-swiftype-index="false">Layout a sidebar and main area</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Create a layout with a sidebar and main area. The sidebar is displayed with a
+distinct background color and typically contains input controls. The main
+area occupies 2/3 of the horizontal width and typically contains outputs.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'># Define UI
+shinyUI(fluidPage(
+
+  # Application title
+  titlePanel(&quot;Hello Shiny!&quot;),
+
+  sidebarLayout(
+
+    # Sidebar with a slider input
+    sidebarPanel(
+      sliderInput(&quot;obs&quot;,
+                  &quot;Number of observations:&quot;,
+                  min = 0,
+                  max = 1000,
+                  value = 500)
+    ),
+
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput(&quot;distPlot&quot;)
+    )
+  )
+))
+</div>
+<div class='output'>&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;h2 style=&quot;padding: 10px 0px;&quot;&gt;Hello Shiny!&lt;/h2&gt;
+  &lt;div class=&quot;row-fluid&quot;&gt;
+    &lt;div class=&quot;span4&quot;&gt;
+      &lt;form class=&quot;well&quot;&gt;
+        &lt;div&gt;
+          &lt;label class=&quot;control-label&quot; for=&quot;obs&quot;&gt;Number of observations:&lt;/label&gt;
+          &lt;input id=&quot;obs&quot; type=&quot;slider&quot; name=&quot;obs&quot; value=&quot;500&quot; class=&quot;jslider&quot; data-from=&quot;0&quot; data-to=&quot;1000&quot; data-step=&quot;1&quot; data-skin=&quot;plastic&quot; data-round=&quot;FALSE&quot; data-locale=&quot;us&quot; data-format=&quot;#,##0.#####&quot; data-smooth=&quot;FALSE&quot;/&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;span8&quot;&gt;
+      &lt;div id=&quot;distPlot&quot; class=&quot;shiny-plot-output&quot; style=&quot;width: 100% ; height: 400px&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>sidebarLayout</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

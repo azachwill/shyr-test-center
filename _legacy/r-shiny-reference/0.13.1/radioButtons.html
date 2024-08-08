@@ -1,0 +1,123 @@
+---
+layout: reference
+title: "radioButtons"
+categories: reference
+---
+<h1>Create radio buttons</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='radioButtons.html'>radioButtons</a></span><span class="keyword">(</span><span class="symbol">inputId</span><span class="keyword">,</span> <span class="symbol">label</span><span class="keyword">,</span> <span class="symbol">choices</span><span class="keyword">,</span> <span class="argument">selected</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">inline</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">width</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>The <code>input</code> slot that will be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>Display label for the control, or <code>NULL</code> for no label.</td>
+  </tr>
+  <tr>
+    <th>choices</th>
+    <td>List of values to select from (if elements of the list are
+named then that name rather than the value is displayed to the user)</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The initially selected value (if not specified then
+defaults to the first value)</td>
+  </tr>
+  <tr>
+    <th>inline</th>
+    <td>If <code>TRUE</code>, render the choices inline (i.e. horizontally)</td>
+  </tr>
+  <tr>
+    <th>width</th>
+    <td>The width of the input, e.g. <code>&#39;400px&#39;</code>, or <code>&#39;100%&#39;</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit</a></code>.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A set of radio buttons that can be added to a UI definition.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a set of radio buttons used to select an item from a list.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>If you need to represent a &quot;None selected&quot; state, it&#39;s possible to default
+the radio buttons to have no options selected by using
+<code>selected = character(0)</code>. However, this is not recommended, as it gives
+the user no way to return to that state once they&#39;ve made a selection.
+Instead, consider having the first of your choices be <code>c(&quot;None selected&quot;
+= &quot;&quot;)</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='radioButtons.html'>radioButtons</a></span><span class="keyword">(</span><span class="string">"dist"</span><span class="keyword">,</span> <span class="string">"Distribution type:"</span><span class="keyword">,</span>
+             <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"Normal"</span> <span class="argument">=</span> <span class="string">"norm"</span><span class="keyword">,</span>
+               <span class="string">"Uniform"</span> <span class="argument">=</span> <span class="string">"unif"</span><span class="keyword">,</span>
+               <span class="string">"Log-normal"</span> <span class="argument">=</span> <span class="string">"lnorm"</span><span class="keyword">,</span>
+               <span class="string">"Exponential"</span> <span class="argument">=</span> <span class="string">"exp"</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;div id=&quot;dist&quot; class=&quot;form-group shiny-input-radiogroup shiny-input-container&quot;&gt;
+  &lt;label class=&quot;control-label&quot; for=&quot;dist&quot;&gt;Distribution type:&lt;/label&gt;
+  &lt;div class=&quot;shiny-options-group&quot;&gt;
+    &lt;div class=&quot;radio&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;dist&quot; value=&quot;norm&quot; checked=&quot;checked&quot;/&gt;
+        &lt;span&gt;Normal&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;radio&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;dist&quot; value=&quot;unif&quot;/&gt;
+        &lt;span&gt;Uniform&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;radio&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;dist&quot; value=&quot;lnorm&quot;/&gt;
+        &lt;span&gt;Log-normal&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;radio&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;dist&quot; value=&quot;exp&quot;/&gt;
+        &lt;span&gt;Exponential&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>radioButtons</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='updateRadioButtons.html'>updateRadioButtons</a></code></p>
+  <p>Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>,
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='dateInput.html'>dateInput</a></code>,
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='fileInput.html'>fileInput</a></code>,
+  <code><a href='numericInput.html'>numericInput</a></code>, <code><a href='passwordInput.html'>passwordInput</a></code>,
+  <code><a href='selectInput.html'>selectInput</a></code>, <code><a href='sliderInput.html'>sliderInput</a></code>,
+  <code><a href='submitButton.html'>submitButton</a></code>, <code><a href='textInput.html'>textInput</a></code></p>
+</div>

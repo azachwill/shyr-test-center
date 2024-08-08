@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Bookmarking with updateQueryString
+date: 2016-08-23 
+tags: 
+ - bookmarking
+appurl: https://gallery.shinyapps.io/115-bookmarking-updatequerystring
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/115-bookmarking-updatequerystring
+---

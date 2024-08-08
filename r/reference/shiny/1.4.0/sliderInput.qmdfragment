@@ -1,0 +1,194 @@
+---
+title: "Slider Input Widget — sliderInput"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>sliderInput</span>(<span class='no'>inputId</span>, <span class='no'>label</span>, <span class='no'>min</span>, <span class='no'>max</span>, <span class='no'>value</span>, <span class='kw'>step</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>locale</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ticks</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>animate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>","</span>, <span class='kw'>pre</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>post</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>timeFormat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>timezone</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dragRange</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>animationOptions</span>(<span class='kw'>interval</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>loop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>playButton</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>pauseButton</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>inputId</p></th>
+    <td><p>The <code>input</code> slot that will be used to access the value.</p></td>
+  </tr>
+  <tr>
+    <th><p>label</p></th>
+    <td><p>Display label for the control, or <code>NULL</code> for no label.</p></td>
+  </tr>
+  <tr>
+    <th><p>min</p></th>
+    <td><p>The minimum value (inclusive) that can be selected.</p></td>
+  </tr>
+  <tr>
+    <th><p>max</p></th>
+    <td><p>The maximum value (inclusive) that can be selected.</p></td>
+  </tr>
+  <tr>
+    <th><p>value</p></th>
+    <td><p>The initial value of the slider. A numeric vector of length one
+will create a regular slider; a numeric vector of length two will create a
+double-ended range slider. A warning will be issued if the value doesn't
+fit between <code>min</code> and <code>max</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>step</p></th>
+    <td><p>Specifies the interval between each selectable value on the
+slider (if <code>NULL</code>, a heuristic is used to determine the step size). If
+the values are dates, <code>step</code> is in days; if the values are times
+(POSIXt), <code>step</code> is in seconds.</p></td>
+  </tr>
+  <tr>
+    <th><p>round</p></th>
+    <td><p><code>TRUE</code> to round all values to the nearest integer;
+<code>FALSE</code> if no rounding is desired; or an integer to round to that
+number of digits (for example, 1 will round to the nearest 10, and -2 will
+round to the nearest .01). Any rounding will be applied after snapping to
+the nearest step.</p></td>
+  </tr>
+  <tr>
+    <th><p>format</p></th>
+    <td><p>Deprecated.</p></td>
+  </tr>
+  <tr>
+    <th><p>locale</p></th>
+    <td><p>Deprecated.</p></td>
+  </tr>
+  <tr>
+    <th><p>ticks</p></th>
+    <td><p><code>FALSE</code> to hide tick marks, <code>TRUE</code> to show them
+according to some simple heuristics.</p></td>
+  </tr>
+  <tr>
+    <th><p>animate</p></th>
+    <td><p><code>TRUE</code> to show simple animation controls with default
+settings; <code>FALSE</code> not to; or a custom settings list, such as those
+created using <code>animationOptions()</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>width</p></th>
+    <td><p>The width of the input, e.g. <code>'400px'</code>, or <code>'100%'</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>sep</p></th>
+    <td><p>Separator between thousands places in numbers.</p></td>
+  </tr>
+  <tr>
+    <th><p>pre</p></th>
+    <td><p>A prefix string to put in front of the value.</p></td>
+  </tr>
+  <tr>
+    <th><p>post</p></th>
+    <td><p>A suffix string to put after the value.</p></td>
+  </tr>
+  <tr>
+    <th><p>timeFormat</p></th>
+    <td><p>Only used if the values are Date or POSIXt objects. A time
+format string, to be passed to the Javascript strftime library. See
+<a href='https://github.com/samsonjs/strftime'>https://github.com/samsonjs/strftime</a> for more details. The allowed
+format specifications are very similar, but not identical, to those for R's
+<code><a href='https://rdrr.io/r/base/strptime.html'>base::strftime()</a></code> function. For Dates, the default is <code>"%F"</code>
+(like <code>"2015-07-01"</code>), and for POSIXt, the default is <code>"%F %T"</code>
+(like <code>"2015-07-01 15:32:10"</code>).</p></td>
+  </tr>
+  <tr>
+    <th><p>timezone</p></th>
+    <td><p>Only used if the values are POSIXt objects. A string
+specifying the time zone offset for the displayed times, in the format
+<code>"+HHMM"</code> or <code>"-HHMM"</code>. If <code>NULL</code> (the default), times will
+be displayed in the browser's time zone. The value <code>"+0000"</code> will
+result in UTC time.</p></td>
+  </tr>
+  <tr>
+    <th><p>dragRange</p></th>
+    <td><p>This option is used only if it is a range slider (with two
+values). If <code>TRUE</code> (the default), the range can be dragged. In other
+words, the min and max can be dragged together. If <code>FALSE</code>, the range
+cannot be dragged.</p></td>
+  </tr>
+  <tr>
+    <th><p>interval</p></th>
+    <td><p>The interval, in milliseconds, between each animation step.</p></td>
+  </tr>
+  <tr>
+    <th><p>loop</p></th>
+    <td><p><code>TRUE</code> to automatically restart the animation when it
+reaches the end.</p></td>
+  </tr>
+  <tr>
+    <th><p>playButton</p></th>
+    <td><p>Specifies the appearance of the play button. Valid values
+are a one-element character vector (for a simple text label), an HTML tag
+or list of tags (using <code><a href='tag.html'>tag()</a></code> and friends), or raw HTML (using
+<code><a href='HTML.html'>HTML()</a></code>).</p></td>
+  </tr>
+  <tr>
+    <th><p>pauseButton</p></th>
+    <td><p>Similar to <code>playButton</code>, but for the pause button.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Constructs a slider widget to select a numeric value from a range.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="server-value"><a class="anchor" href="#server-value"></a>Server value</h3>
+
+  
+
+<p>A number, or in the case of slider range, a vector of two numbers.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='updateSliderInput.html'>updateSliderInput()</a></code></p>
+<p>Other input elements: <code><a href='actionButton.html'>actionButton</a></code>,
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>,
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='dateInput.html'>dateInput</a></code>,
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='fileInput.html'>fileInput</a></code>,
+  <code><a href='numericInput.html'>numericInput</a></code>, <code><a href='passwordInput.html'>passwordInput</a></code>,
+  <code><a href='radioButtons.html'>radioButtons</a></code>, <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='submitButton.html'>submitButton</a></code>, <code><a href='textAreaInput.html'>textAreaInput</a></code>,
+  <code><a href='textInput.html'>textInput</a></code>, <code><a href='varSelectInput.html'>varSelectInput</a></code></p></div>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>device.ask.default</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'>sliderInput</span>(<span class='st'>"obs"</span>, <span class='st'>"Number of observations:"</span>,
+    <span class='kw'>min</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>500</span>
+  ),
+  <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"distPlot"</span>)
+)
+
+<span class='co'># Server logic</span>
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+  <span class='no'>output</span>$<span class='no'>distPlot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>({
+    <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>input</span>$<span class='no'>obs</span>))
+  })
+}
+
+<span class='co'># Complete app with UI and server components</span>
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+
+```

@@ -1,0 +1,75 @@
+---
+title: "installExprFunction"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>installExprFunction(expr, name, eval.env&nbsp;=&nbsp;parent.frame(2), quoted&nbsp;=&nbsp;FALSE, assign.env&nbsp;=&nbsp;parent.frame(1), label&nbsp;=&nbsp;as.character(sys.call(-1)[[1]]))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>A quoted or unquoted expression</td>
+  </tr>
+  <tr>
+    <th>name</th>
+    <td>The name the function should be given</td>
+  </tr>
+  <tr>
+    <th>eval.env</th>
+    <td>The desired environment for the function. Defaults to the
+calling environment two steps back.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is the expression quoted?</td>
+  </tr>
+  <tr>
+    <th>assign.env</th>
+    <td>The environment in which the function should be assigned.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>A label for the object to be shown in the debugger. Defaults to
+  the name of the calling function.</td>
+  </tr>
+</table>
+
+<div data-section="Install an expression as a function">
+  <h3 data-swiftype-index="false">Install an expression as a function</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Installs an expression in the given environment as a function, and registers
+debug hooks so that breakpoints may be set in the function.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>This function can replace <code>exprToFunction</code> as follows: we may use
+<code>func <- exprToFunction(expr)</code> if we do not want the debug hooks, or
+<code>installExprFunction(expr, "func")</code> if we do. Both approaches create a
+function named <code>func</code> in the current environment.</p>
+
+</div>
+<!-- <ul>
+  <li>installExprFunction</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+Wraps <code><a href='exprToFunction.html'>exprToFunction</a></code>; see that method's documentation
+  for more documentation and examples.
+
+</div>
+```

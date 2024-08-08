@@ -1,0 +1,34 @@
+---
+title: "Get information about the output that is currently being executed. — getCurrentOutputInfo"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>getCurrentOutputInfo</span>(<span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The current Shiny session.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Get information about the output that is currently being executed.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+
+  </div>
+
+</div>
+
+
+```

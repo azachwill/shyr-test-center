@@ -1,0 +1,205 @@
+---
+title: Upgrading to a new version of R
+date: 2017-05-16
+author: Winston Chang
+description: When you upgrade to a new version of R on your computer, it's possible that everything will continue to work without any trouble, but it's also possible that you'll run into problems. The purpose of this article is to explain these problems, and how to fix them.
+---
+
+When you upgrade to a new version of R on your computer, it's possible that everything will continue to work without any trouble, but it's also possible that you'll run into problems. In some cases, the new version of R won't find your existing R packages. In other cases, R will find the existing packages, but they might not work correctly. The article of this document is to explain these problems, and how to fix them.
+
+On most single-user systems (Mac, Windows, and Linux), when you upgrade to a new minor version of R (like 3.3.0 to 3.4.0), R will not find the packages, you will need to reinstall your R packages. This is an inconvenience, but the problem is obvious and it is easy to fix. If you are using a system like this, you can just reinstall your packages after upgrading R. You probably don't need to read the rest of this document unless you want to learn much more about package libraries.
+
+On servers running Linux, it is possible that after an R version upgrade, your R packages will load without trouble, but they might not work correctly, or they might even crash R when used. Because the cause of these problems will not be obvious, upgrading R on a server should be done with care.
+
+**In a production environment, we strongly suggest testing new versions of R and packages on a staging server before deploying to a production server.**
+
+R version numbers have the form `major.minor.subminor`. The current version as of the writing of this document, 3.4.0, has a major version 3, minor version 4, and subminor version 0. New minor versions are released about once per year. In general, there are no issues with subminor version upgrades, like going from 3.3.2 to 3.3.3, but there can be compatibility problems when there is a major or minor version upgrade.
+
+
+## User libraries and version incompatibilities
+
+There are two possible sources of problems with R version upgrades, both of which are related to package libraries. (A library is a directory where packages are stored.)
+
+One problem is that, after upgrading to a new version of R, packages are no longer found because there is a new library. When this happens, the problem is obvious: when R code calls `library()`, it throws an error and reports that the package is missing.
+
+The other problem that happens is more subtle. Sometimes packages installed with a previous version of R will not work correctly with the new version of R. Sometimes they can crash the R process. And even when there is a crash, it will not be obvious that this it is because the package was installed with an old version of R.
+
+In both cases, the solution is to reinstall packages with the new version of R.
+
+
+### Detecting which version of R a package was built with
+
+The following code will show which packages are installed, their version numbers, and which version of R they were built with. The user is running R 3.4.0 and most of the installed packages were built with R 3.4.0, but others were built with R 3.2.0.
+
+````r
+pkgs <- as.data.frame(installed.packages(), stringsAsFactors = FALSE, row.names = FALSE)
+pkgs[, c("Package", "Version", "Built")]
+#>       Package Version Built
+#> 1        base   3.4.0 3.4.0
+#> 2        boot  1.3-19 3.4.0
+#> 3       class  7.3-14 3.4.0
+#> 4     cluster   2.0.6 3.4.0
+#> 5       Cairo   1.5-6 3.2.0
+#> ...
+````
+
+In this particular case, the Cairo package was able to be loaded with `library(Cairo)`, but when functions from the package were called, it caused a segfault, crashing the R process. This is because it was built with an older version of R.
+
+This issue most frequently happens on Linux, when root has installed some packages, though it can happen in other cases as well, if a customized configuration is used.
+
+
+### Reinstalling packages with the new version of R
+
+After upgrading R, if you have any packages that were built with an older version of R, you should reinstall those packages to avoid compatibility issues. There are two methods described below: one upgrades all packages to the latest available version of that package, and the other reinstalls packages with the currently-installed version. For example, if you have Shiny version 1.0.1 installed, and the latest available version is 1.0.3, the first method will install Shiny 1.0.3, while the second method will reinstall 1.0.1 (built with the current version of R). 
+
+The following code should be run **as root** after upgrading R on Linux. It can also be run as a regular user, but in that case it will store the packages in the user's personal library, and won't help other users. If this code is run as root after an R version upgrade, then users should not need to run this code (unless they have their own copies of the same packages in their personal library).
+
+The first way is to use the base R function `update.packages()`, with `checkBuilt=TRUE`. Normally, the `update.package()` function will only reinstall packages for which a newer version available, but the `checkBuilt=TRUE` option tells it to also reinstall packages if they were built with an older version of R, even if the version of the package will remain the same.
+
+````r
+update.packages(ask = FALSE, checkBuilt = TRUE)
+````
+
+In many cases, it is useful to update all packages to the latest available version, but it's possible that some changes in the packages could cause your code to behave differently.
+
+The [pkgsnap](https://github.com/MangoTheCat/pkgsnap) package provides a way to reinstall packages without changing their version. pkgsnap is not yet on CRAN, but you can currently install it from GitHub.
+
+````r
+# Install the pkgsnap package from GitHub
+source("https://install-github.me/MangoTheCat/pkgsnap")
+
+snap()
+restore()
+file.remove("packages.csv") # Remove the package list created by save()
+````
+
+
+## Technical details
+
+The information above should be enough to help diagnose and solve the problem, but if you'd like a more comprehensive understanding of the problem, read on. Each platform (Mac, Windows, and various flavors of Linux) has a different default configuration, and therefore has different default behavior. This document will also explain the default settings for each platform, and what that means for dealing with R upgrade issues.
+
+
+### User and site libraries
+
+In all R installations, there is a **site** library: packages installed there are available to all users. (In some installations, there is more than one site library.) Some R installations are also configured to have a **user** library: packages installed in a user library are available only to that user.
+
+When a regular user starts R, it will recognize both the user library (if configured for it) and the site library. If present, the user library is where packages will be installed to. If there is no user library, then packages will be installed to the site library, assuming the user has the correct permissions to do so.
+
+When a system's superuser (root) starts R, it uses only the site library (or libraries), and that is where packages will be installed to. This is not how packages are usually installed, but it is sometimes done this way on servers.
+
+To find the libraries for your user, you can run `.libPaths()` from the R prompt. For example, this is what shows on Ubuntu Linux:
+
+````console
+> .libPaths()
+[1] "/home/username/R/x86_64-pc-linux-gnu-library/3.4"
+[2] "/usr/local/lib/R/site-library"              
+[3] "/usr/lib/R/site-library"                    
+[4] "/usr/lib/R/library"                         
+````
+
+Users can configure their library path by setting the `R_LIBS_USER` variable in a file called `.Renviron` in their home directory. At a system level, the library path(s) can be set with an `Renviron.site` file. See the [R startup documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html) page for more information.
+
+
+### Versioned and unversioned libraries
+
+In some installations (typically on Linux), R is configured to keep the same site library across R version upgrades. The problem here is that packages that built and installed with one version of R may be incompatible with a newer version of R, at least when the major or minor version changes. (Note that **Subminor** version upgrades of R generally do not introduce incompatibilities.)
+
+In other installations (typically on Mac and Windows), R is configured to use a new library when R has a major or minor version upgrade. The advantage of this is that you won't experience package incompatibilities. The drawback is that you **must** reinstall your packages after upgrading R.
+
+
+### Customized library paths
+
+The user and site library paths can be customized. At the user level, this is done with a file named `~/.Renviron`, and at the system level, this is usually done with a file named `/etc/R/Renviron.site`. See the [R startup documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html) for more information.
+
+
+## Platform-specific notes
+
+The default library configuration differs across platforms, and so the behavior after an R version upgrade also differs across platforms.
+
+### Windows
+
+On Windows, the default user library has the major.minor version in the path. The default site library has the major.minor.subminor version.
+
+````console
+> .libPaths()
+[1] "C:/Users/username/Documents/R/win-library/3.4"
+[2] "C:/Program Files/R/R-3.4.0/library"         
+````
+
+With this configuration, user-installed packages get installed in the user library. (The site library will just contain "base" R packages that are installed along with R itself.) Only R version upgrades that involve a **minor** version change will result in the user library changing. When this happens, you will need to reinstall all your packages.
+
+On Windows, upgrading R is something that is usually done by the user of the machine, so it shouldn't be much of a surprise when R cannot find old installed packages.
+
+Summary:
+
+* Upgrade is usually done explicitly by user.
+* User library is versioned to minor.
+* Site library is versioned to subminor.
+* Unlike on Mac and Linux, when R is run as an administrator on Windows, it will still install packages to the user's personal library by default, but it can also install to the site library if specified.
+
+### macOS
+
+On macOS, the default configuration does not have a user library. The site library has the major.minor version in the path.
+
+````console
+> .libPaths()
+[1] "/Library/Frameworks/R.framework/Versions/3.4/Resources/library"
+````
+
+With this configuration, user-installed packages get installed into the site library. (Users on macOS usually have permission to write to the site library.) R version upgrades that involve a **minor** version change will require the user to reinstall all packages.
+
+On a Mac, upgrading R is usually done by the user of the machine, so it shouldn't be a surprise when the new version of R cannot find old installed packages.
+
+Summary:
+
+* Upgrade is usually done explicitly by user.
+* Does not have user library, so packages install to site library.
+* Site library is versioned to subminor.
+
+
+### Linux
+
+On Linux, the default user library has the major.minor version in the path. The site library is not versioned. There can be multiple site libraries, though this should not cause any differences in most use cases.
+
+Debian / Ubuntu:
+
+````console
+> .libPaths()
+[1] "/home/username/R/x86_64-pc-linux-gnu-library/3.4"
+[2] "/usr/local/lib/R/site-library"              
+[3] "/usr/lib/R/site-library"                    
+[4] "/usr/lib/R/library"                         
+````
+
+Red Hat / Centos:
+
+````console
+> .libPaths()
+[1] "/home/username/R/x86_64-redhat-linux-gnu-library/3.3"
+[2] "/usr/lib64/R/library"                              
+[3] "/usr/share/R/library"                              
+````
+
+SUSE / openSUSE:
+
+````console
+> .libPaths()
+[1] "/home/username/R/x86_64-suse-linux-gnu-library/3.3"
+[2] "/usr/lib64/R/library"                            
+````
+
+The process of upgrading R on Linux is different from upgrading it Mac and Windows. On Mac and Windows, the user usually needs to go download the new version of R and install it, so it is obvious when R is upgraded. On Linux, R is usually upgraded in the process of a system software update, such as when you run `apt-get upgrade` on Debian or Ubuntu. Additionally, Linux systems often have different people administering them and using them. For these two reasons, the installed version of R can change without the user being aware of it.
+
+User-installed packages go into the user library. The site library by default will contain only "base" packages included with R itself. After R gets a minor version upgrade, the user will find that their user-installed packages are no longer available, and will need to reinstall all of them. This may come as a surprise to users, but the solution is straightforward.
+
+When Linux is being used on a server, there is another, more difficult scenario: the system administrator may install some packages as root, so that they're available for all users. When R is upgraded, those packages will continue to be available even after a major or minor version upgrade, but they potentially could be incompatible with the new version of R. If this happens, users will experience problems like the ones described previously.
+
+In these cases, a user or system administrator should check which version of R each package was built with, and reinstall those packages that were built with an old version of R, as described above. One risk of doing this is that this will not only reinstall those R packages, but also upgrade the versions of those packages, which could cause problems if the newer version of the package has different behavior.
+
+Because of these potential problems, administrators of Linux servers should be exercise caution when upgrading R. On most Linux distributions, it is possible to freeze system packages (like R) to a specific version, and only upgrade after testing.
+
+Summary:
+
+* Upgrade is usually something that happens with `apt-get upgrade` or `yum update`, and user might not be aware when it occurs.
+* User library is versioned to minor.
+* Site library is not versioned.

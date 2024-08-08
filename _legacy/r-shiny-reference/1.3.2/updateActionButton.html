@@ -1,0 +1,107 @@
+---
+layout: reference
+title: "updateActionButton"
+categories: reference
+---
+<h1>Change the label or icon of an action button on the client</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='updateActionButton.html'>updateActionButton</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="symbol">inputId</span><span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">icon</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</td>
+  </tr>
+  <tr>
+    <th>inputId</th>
+    <td>The id of the input object.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>The label to set for the input object.</td>
+  </tr>
+  <tr>
+    <th>icon</th>
+    <td>The icon to set for the input object. To remove the
+current icon, use <code>icon=character(0)</code>.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Change the label or icon of an action button on the client</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+
+  <p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href='numericInput.html'>numericInput</a>()</code> and
+<code>updateNumericInput()</code> take a similar set of arguments.</p>
+
+  <p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+
+  <p>For <code><a href='radioButtons.html'>radioButtons</a>()</code>, <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a>()</code> and
+<code><a href='selectInput.html'>selectInput</a>()</code>, the set of choices can be cleared by using
+<code>choices=character(0)</code>. Similarly, for these inputs, the selected item
+can be cleared by using <code>selected=character(0)</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"update"</span><span class="keyword">,</span> <span class="string">"Update other buttons"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='builder.html'>br</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"goButton"</span><span class="keyword">,</span> <span class="string">"Go"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='builder.html'>br</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"goButton2"</span><span class="keyword">,</span> <span class="string">"Go 2"</span><span class="keyword">,</span> <span class="argument">icon</span> <span class="argument">=</span> <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"area-chart"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='builder.html'>br</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='actionButton.html'>actionButton</a></span><span class="keyword">(</span><span class="string">"goButton3"</span><span class="keyword">,</span> <span class="string">"Go 3"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='req.html'>req</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">update</span><span class="keyword">)</span>
+
+    <span class="comment"># Updates goButton's label and icon</span>
+    <span class="functioncall"><a href='updateActionButton.html'>updateActionButton</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="string">"goButton"</span><span class="keyword">,</span>
+      <span class="argument">label</span> <span class="argument">=</span> <span class="string">"New label"</span><span class="keyword">,</span>
+      <span class="argument">icon</span> <span class="argument">=</span> <span class="functioncall"><a href='icon.html'>icon</a></span><span class="keyword">(</span><span class="string">"calendar"</span><span class="keyword">)</span><span class="keyword">)</span>
+
+    <span class="comment"># Leaves goButton2's label unchaged and</span>
+    <span class="comment"># removes its icon</span>
+    <span class="functioncall"><a href='updateActionButton.html'>updateActionButton</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="string">"goButton2"</span><span class="keyword">,</span>
+      <span class="argument">icon</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>character</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">)</span><span class="keyword">)</span>
+
+    <span class="comment"># Leaves goButton3's icon, if it exists,</span>
+    <span class="comment"># unchaged and changes its label</span>
+    <span class="functioncall"><a href='updateActionButton.html'>updateActionButton</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="string">"goButton3"</span><span class="keyword">,</span>
+      <span class="argument">label</span> <span class="argument">=</span> <span class="string">"New label 3"</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>updateActionButton</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='actionButton.html'>actionButton</a></code></p>
+</div>

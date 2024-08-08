@@ -1,0 +1,55 @@
+---
+layout: reference
+title: "Validate proper CSS formatting of a unit — validateCssUnit"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Validate proper CSS formatting of a unit</h1>
+  
+
+  <pre class="code"><span class='fu'>validateCssUnit</span>(<span class='no'>x</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>x</p></th>
+    <td><p>The unit to validate. Will be treated as a number of pixels if a
+unit is not specified.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Checks that the argument is valid for use as a CSS unit of length.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A properly formatted CSS unit of length, if possible. Otherwise, will
+  throw an error.</p>
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p><code>NULL</code> and <code>NA</code> are returned unchanged.</p>
+<p>Single element numeric vectors are returned as a character vector with the
+number plus a suffix of <code>"px"</code>.</p>
+<p>Single element character vectors must be <code>"auto"</code> or <code>"inherit"</code>,
+a number, or a length calculated by the <code>"calc"</code> CSS function.
+If the number has a suffix, it must be valid: <code>px</code>,
+<code>%</code>, <code>ch</code>, <code>em</code>, <code>rem</code>, <code>pt</code>, <code>in</code>, <code>cm</code>,
+<code>mm</code>, <code>ex</code>, <code>pc</code>, <code>vh</code>, <code>vw</code>, <code>vmin</code>, or
+<code>vmax</code>.
+If the number has no suffix, the suffix <code>"px"</code> is appended.</p>
+
+<p>Any other value will cause an error to be thrown.</p>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='fu'>validateCssUnit</span>(<span class='st'>"10%"</span>)
+<span class='fu'>validateCssUnit</span>(<span class='fl'>400</span>)  <span class='co'>#treated as '400px'</span></pre>
+</div>
+
+

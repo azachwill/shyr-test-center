@@ -1,0 +1,43 @@
+---
+layout: reference
+title: "shinyUI"
+categories: reference
+---
+<h1>Create a Shiny UI handler</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='shinyUI.html'>shinyUI</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>ui</th>
+    <td>A user interace definition</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+The user interface definition, without modifications or side effects.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Historically this function was used in ui.R files to register a user
+interface with Shiny. It is no longer required as of Shiny 0.10; simply
+ensure that the last expression to be returned from ui.R is a user interface.
+This function is kept for backwards compatibility with older applications. It
+returns the value that is passed to it.</p>
+
+</div>
+<!-- <ul>
+  <li>shinyUI</li>
+</ul>
+<ul>
+  
+</ul> -->
+

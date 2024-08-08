@@ -1,0 +1,25 @@
+---
+title: "Display a modal dialog for bookmarking — showBookmarkUrlModal"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/bookmark-state.R" class="external-link"><code>R/bookmark-state.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This is a wrapper function for <code><a href="urlModal.html">urlModal()</a></code> that is automatically
+called if an application is bookmarked but no other <code><a href="onBookmark.html">onBookmark()</a></code>
+callback was set. It displays a modal dialog with the bookmark URL, along
+with a subtitle that is appropriate for the type of bookmarking used ("url"
+or "server").</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">showBookmarkUrlModal</span>(url)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>url</dt>
+<dd><p>A URL to show in the modal dialog.</p></dd>
+
+</dl></div>
+
+</div>
+```

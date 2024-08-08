@@ -1,0 +1,65 @@
+---
+layout: reference
+title: "Namespaced IDs for inputs/outputs — NS"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Namespaced IDs for inputs/outputs</h1>
+  
+
+  <pre class="code"><span class='fu'>NS</span>(<span class='no'>namespace</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='no'>ns.sep</span></pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>namespace</p></th>
+    <td><p>The character vector to use for the namespace. This can have
+any length, though a single element is most common. Length 0 will cause the
+<code>id</code> to be returned without a namespace, and length 2 will be
+interpreted as multiple namespaces, in increasing order of specificity
+(i.e. starting with the top-level namespace).</p></td>
+  </tr>
+  <tr>
+    <th><p>id</p></th>
+    <td><p>The id string to be namespaced (optional).</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>The <code>NS</code> function creates namespaced IDs out of bare IDs, by joining
+them using <code>ns.sep</code> as the delimiter. It is intended for use in Shiny
+modules. See <a href='https://shiny.posit.co/articles/modules.html'>https://shiny.posit.co/articles/modules.html</a>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h3>
+
+  <p>An object of class <code>character</code> of length 1.</p>
+    <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>If <code>id</code> is missing, returns a function that expects an id string
+as its only argument and returns that id with the namespace prepended.</p>
+    <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>Shiny applications use IDs to identify inputs and outputs. These IDs must be
+unique within an application, as accidentally using the same input/output ID
+more than once will result in unexpected behavior. The traditional solution
+for preventing name collisions is <em>namespaces</em>; a namespace is to an ID
+as a directory is to a file. Use the <code>NS</code> function to turn a bare ID
+into a namespaced one, by combining them with <code>ns.sep</code> in between.</p>
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><a href='https://shiny.posit.co/articles/modules.html'>https://shiny.posit.co/articles/modules.html</a></p></div>
+  
+  </div>
+
+</div>
+
+

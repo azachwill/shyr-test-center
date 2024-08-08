@@ -1,0 +1,78 @@
+---
+layout: reference
+title: "Register an Input Handler — registerInputHandler"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Register an Input Handler</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/server-input-handlers.R" class="external-link"><code>R/server-input-handlers.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Adds an input handler for data of this type. When called, Shiny will use the
+function provided to refine the data passed back from the client (after being
+deserialized by jsonlite) before making it available in the <code>input</code> variable
+of the <code>server.R</code> file.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">registerInputHandler</span>(type, fun, <span class="at">force =</span> <span class="cn">FALSE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>type</dt>
+<dd><p>The type for which the handler should be added --- should be a
+single-element character vector.</p></dd>
+
+
+<dt>fun</dt>
+<dd><p>The handler function. This is the function that will be used to
+parse the data delivered from the client before it is available in the
+<code>input</code> variable. The function will be called with the following three
+parameters:</p><ol><li><p>The value of this input as provided by the
+client, deserialized using jsonlite.</p></li>
+<li><p>The <code>shinysession</code> in which the
+input exists.</p></li>
+<li><p>The name of the input.</p></li>
+</ol></dd>
+
+
+<dt>force</dt>
+<dd><p>If <code>TRUE</code>, will overwrite any existing handler without warning.
+If <code>FALSE</code>, will throw an error if this class already has a handler
+defined.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>This function will register the handler for the duration of the R process
+(unless Shiny is explicitly reloaded). For that reason, the <code>type</code> used
+should be very specific to this package to minimize the risk of colliding
+with another Shiny package which might use this data type name. We recommend
+the format of "packageName.widgetName". It should be called from the
+package's <code><a href="https://rdrr.io/r/base/ns-hooks.html" class="external-link">.onLoad()</a></code> function.</p>
+<p>Currently Shiny registers the following handlers: <code>shiny.matrix</code>,
+<code>shiny.number</code>, and <code>shiny.date</code>.</p>
+<p>The <code>type</code> of a custom Shiny Input widget will be deduced using the
+<code>getType()</code> JavaScript function on the registered Shiny inputBinding.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="removeInputHandler.html">removeInputHandler()</a></code> <code><a href="applyInputHandlers.html">applyInputHandlers()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Register an input handler which rounds a input number to the nearest integer</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># In a package, this should be called from the .onLoad function.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">registerInputHandler</span>(<span class="st">"mypackage.validint"</span>, <span class="cf">function</span>(x, shinysession, name) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(x)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(x)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">## On the Javascript side, the associated input binding must have a corresponding getType method:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># getType: function(el) {</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   return "mypackage.validint";</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>

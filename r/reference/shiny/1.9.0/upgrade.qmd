@@ -1,0 +1,37 @@
+---
+title: Upgrade notes for Shiny 1.9.0
+---
+
+## New busy indication feature
+
+Add the new [`useBusyIndicators()`](./useBusyIndicators.html) function to any UI definition to:
+
+1.  Add a spinner overlay on calculating/recalculating outputs.
+2.  Show a page-level pulsing banner when Shiny is busy calculating something (e.g., a download, side-effect, etc), but no calculating/recalculating outputs are visible.
+
+In a future version of Shiny, busy indication will be enabled by default, so we encourage you to try it out now, provide feedback, and report any issues.
+
+In addition, various properties of the spinners and pulse can be customized with [`busyIndicatorOptions()`](./busyIndicatorOptions.html). For more details, see [`?busyIndicatorOptions`](./busyIndicatorOptions.html). ([#4040](https://github.com/rstudio/shiny/issues/4040), [#4104](https://github.com/rstudio/shiny/issues/4104))
+
+## New features and improvements
+
+- The client-side TypeScript code for Shiny has been refactored so that the `Shiny` object is now an instance of class `ShinyClass`. ([#4063](https://github.com/rstudio/shiny/issues/4063))
+
+- In TypeScript, the `Shiny` object has a new property `initializedPromise`, which is a Promise-like object that can be `await`ed or chained with `.then()`. This Promise-like object corresponds to the `shiny:sessioninitialized` JavaScript event, but is easier to use because it can be used both before and after the events have occurred. ([#4063](https://github.com/rstudio/shiny/issues/4063))
+
+- Output bindings now include the `.recalculating` CSS class when they are first bound, up until the first render. This makes it possible/easier to show progress indication when the output is calculating for the first time. ([#4039](https://github.com/rstudio/shiny/issues/4039))
+
+- A new `shiny.client_devmode` option controls client-side devmode features, in particular the client-side error console introduced in shiny 1.8.1, independently of the R-side features of [`shiny::devmode()`](./devmode.html). This usage is primarily intended for automatic use in Shinylive. ([#4073](https://github.com/rstudio/shiny/issues/4073))
+
+- Added function [`reactlogAddMark()`](./reactlog.html) to programmatically add \_mark_ed locations in the reactlog log without the requirement of keyboard bindings during an idle reactive moment. ([#4103](https://github.com/rstudio/shiny/issues/4103))
+
+## Bug fixes
+
+- [`downloadButton()`](./downloadButton.html) and [`downloadLink()`](./downloadButton.html) are now disabled up until they are fully initialized. This prevents the user from clicking the button/link before the download is ready. ([#4041](https://github.com/rstudio/shiny/issues/4041))
+
+- Output bindings that are removed, invalidated, then inserted again (while invalidated) now correctly include the `.recalculating` CSS class. ([#4039](https://github.com/rstudio/shiny/issues/4039))
+
+- Fixed a recent issue with [`uiOutput()`](./htmlOutput.html) and [`conditionalPanel()`](./conditionalPanel.html) not properly lower opacity when recalculation (in a Bootstrap 5 context). ([#4027](https://github.com/rstudio/shiny/issues/4027))
+
+- Image outputs that were scaled by CSS had certain regions that were unresponsive to hover/click/brush handlers. ([#3234](https://github.com/rstudio/shiny/issues/3234))
+

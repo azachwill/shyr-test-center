@@ -1,0 +1,75 @@
+---
+title: "Run a gadget — runGadget"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/runapp.R" class="external-link"><code>R/runapp.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Similar to <code>runApp</code>, but handles <code>input$cancel</code> automatically, and
+if running in RStudio, defaults to viewing the app in the Viewer pane.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">runGadget</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  app,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">server =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">port =</span> <span class="fu">getOption</span>(<span class="st">"shiny.port"</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">viewer =</span> <span class="fu">paneViewer</span>(),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">stopOnCancel =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>app</dt>
+<dd><p>Either a Shiny app object as created by
+<code><a href="shiny-package.html">shinyApp()</a></code> et al, or, a UI object.</p></dd>
+
+
+<dt>server</dt>
+<dd><p>Ignored if <code>app</code> is a Shiny app object; otherwise, passed
+along to <code>shinyApp</code> (i.e. <code>shinyApp(ui = app, server = server)</code>).</p></dd>
+
+
+<dt>port</dt>
+<dd><p>See <code><a href="shiny-package.html">runApp()</a></code>.</p></dd>
+
+
+<dt>viewer</dt>
+<dd><p>Specify where the gadget should be displayed--viewer pane,
+dialog window, or external browser--by passing in a call to one of the
+<code><a href="viewer.html">viewer()</a></code> functions.</p></dd>
+
+
+<dt>stopOnCancel</dt>
+<dd><p>If <code>TRUE</code> (the default), then an <code>observeEvent</code>
+is automatically created that handles <code>input$cancel</code> by calling
+<code><a href="stopApp.html">stopApp()</a></code> with an error. Pass <code>FALSE</code> if you want to handle
+<code>input$cancel</code> yourself.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>The value returned by the gadget.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fillPage</span>(...)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  ...</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co"># Either pass ui/server as separate arguments...</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="fu">runGadget</span>(ui, server)</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co"># ...or as a single app object</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="fu">runGadget</span>(<span class="fu">shinyApp</span>(ui, server))</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

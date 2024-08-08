@@ -1,0 +1,26 @@
+---
+title: "Restore an input value — restoreInput"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.5</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.5/R/bookmark-state.R" class="external-link"><code>R/bookmark-state.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This restores an input value from the current restore context. It should be
+called early on inside of input functions (like <code><a href="textInput.html">textInput()</a></code>).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">restoreInput</span>(id, default)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>id</dt>
+<dd><p>Name of the input value to restore.</p></dd>
+
+
+<dt>default</dt>
+<dd><p>A default value to use, if there's no value to restore.</p></dd>
+
+</dl></div>
+
+</div>
+```

@@ -1,0 +1,119 @@
+---
+title: "Update Slider Input Widget — updateSliderInput"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>updateSliderInput</span>(
+  <span class='no'>session</span>,
+  <span class='no'>inputId</span>,
+  <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>min</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>step</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>timeFormat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>timezone</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>inputId</p></th>
+    <td><p>The id of the input object.</p></td>
+  </tr>
+  <tr>
+    <th><p>label</p></th>
+    <td><p>The label to set for the input object.</p></td>
+  </tr>
+  <tr>
+    <th><p>value</p></th>
+    <td><p>The value to set for the input object.</p></td>
+  </tr>
+  <tr>
+    <th><p>min</p></th>
+    <td><p>Minimum value.</p></td>
+  </tr>
+  <tr>
+    <th><p>max</p></th>
+    <td><p>Maximum value.</p></td>
+  </tr>
+  <tr>
+    <th><p>step</p></th>
+    <td><p>Step size.</p></td>
+  </tr>
+  <tr>
+    <th><p>timeFormat</p></th>
+    <td><p>Date and POSIXt formatting.</p></td>
+  </tr>
+  <tr>
+    <th><p>timezone</p></th>
+    <td><p>The timezone offset for POSIXt objects.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Change the value of a slider input on the client.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>The input updater functions send a message to the client, telling it to
+change the settings of an input object. The messages are collected and sent
+after all the observers (including outputs) have finished running.</p>
+<p>The syntax of these functions is similar to the functions that created the
+inputs in the first place. For example, <code><a href='numericInput.html'>numericInput</a>()</code> and
+<code><a href='updateNumericInput.html'>updateNumericInput()</a></code> take a similar set of arguments.</p>
+<p>Any arguments with NULL values will be ignored; they will not result in any
+changes to the input object on the client.</p>
+<p>For <code><a href='radioButtons.html'>radioButtons</a>()</code>, <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a>()</code> and
+<code><a href='selectInput.html'>selectInput</a>()</code>, the set of choices can be cleared by using
+<code>choices=character(0)</code>. Similarly, for these inputs, the selected item
+can be cleared by using <code>selected=character(0)</code>.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='sliderInput.html'>sliderInput()</a></code></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(
+    <span class='kw'>ui</span> <span class='kw'>=</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+      <span class='fu'><a href='sidebarLayout.html'>sidebarLayout</a></span>(
+        <span class='fu'><a href='sidebarLayout.html'>sidebarPanel</a></span>(
+          <span class='fu'><a href='builder.html'>p</a></span>(<span class='st'>"The first slider controls the second"</span>),
+          <span class='fu'><a href='sliderInput.html'>sliderInput</a></span>(<span class='st'>"control"</span>, <span class='st'>"Controller:"</span>, <span class='kw'>min</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>20</span>, <span class='kw'>value</span><span class='kw'>=</span><span class='fl'>10</span>,
+                       <span class='kw'>step</span><span class='kw'>=</span><span class='fl'>1</span>),
+          <span class='fu'><a href='sliderInput.html'>sliderInput</a></span>(<span class='st'>"receive"</span>, <span class='st'>"Receiver:"</span>, <span class='kw'>min</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>max</span><span class='kw'>=</span><span class='fl'>20</span>, <span class='kw'>value</span><span class='kw'>=</span><span class='fl'>10</span>,
+                       <span class='kw'>step</span><span class='kw'>=</span><span class='fl'>1</span>)
+        ),
+        <span class='fu'><a href='sidebarLayout.html'>mainPanel</a></span>()
+      )
+    ),
+    <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+      <span class='fu'><a href='observe.html'>observe</a></span>({
+        <span class='no'>val</span> <span class='kw'>&lt;-</span> <span class='no'>input</span>$<span class='no'>control</span>
+        <span class='co'># Control the value, min, max, and step.</span>
+        <span class='co'># Step size is 2 when input value is even; 1 when value is odd.</span>
+        <span class='fu'>updateSliderInput</span>(<span class='no'>session</span>, <span class='st'>"receive"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>val</span>,
+          <span class='kw'>min</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>floor</a></span>(<span class='no'>val</span>/<span class='fl'>2</span>), <span class='kw'>max</span> <span class='kw'>=</span> <span class='no'>val</span>+<span class='fl'>4</span>, <span class='kw'>step</span> <span class='kw'>=</span> (<span class='no'>val</span>+<span class='fl'>1</span>)<span class='kw'>%%</span><span class='fl'>2</span> + <span class='fl'>1</span>)
+      })
+    }
+  )
+}</pre>
+</div>
+
+
+```

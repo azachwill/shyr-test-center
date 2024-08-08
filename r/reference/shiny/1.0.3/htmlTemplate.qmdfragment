@@ -1,0 +1,54 @@
+---
+title: "htmlTemplate"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='htmlTemplate.html'>htmlTemplate</a></span><span class="keyword">(</span><span class="argument">filename</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">text_</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">document_</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"auto"</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>filename</th>
+    <td>Path to an HTML template file. Incompatible with
+<code>text_</code>.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Variable values to use when processing the template.</td>
+  </tr>
+  <tr>
+    <th>text_</th>
+    <td>A string to use as the template, instead of a file. Incompatible
+with <code>filename</code>.</td>
+  </tr>
+  <tr>
+    <th>document_</th>
+    <td>Is this template a complete HTML document (<code>TRUE</code>), or
+a fragment of HTML that is to be inserted into an HTML document
+(<code>FALSE</code>)? With <code>&quot;auto&quot;</code> (the default), auto-detect by searching
+for the string <code>&quot;&lt;HTML&gt;&quot;</code> within the template.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Process an HTML template and return a tagList object. If the template is a
+complete HTML document, then the returned object will also have class
+<code>html_document</code>, and can be passed to the function
+<code><a href='http://www.rdocumentation.org/packages/htmltools/topics/renderDocument'>renderDocument</a></code> to get the final HTML text.</p>
+
+</div>
+<!-- <ul>
+  <li>htmlTemplate</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='http://www.rdocumentation.org/packages/htmltools/topics/renderDocument'>renderDocument</a></code></p>
+</div>
+```

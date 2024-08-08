@@ -1,0 +1,51 @@
+---
+layout: reference
+title: "Create a panel containing an application title. — titlePanel"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a panel containing an application title.</h1>
+  
+
+  <pre class="code"><span class='fu'>titlePanel</span>(<span class='no'>title</span>, <span class='kw'>windowTitle</span> <span class='kw'>=</span> <span class='no'>title</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>title</p></th>
+    <td><p>An application title to display</p></td>
+  </tr>
+  <tr>
+    <th><p>windowTitle</p></th>
+    <td><p>The title that should be displayed by the browser window.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Create a panel containing an application title.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>Calling this function has the side effect of including a
+<code>title</code> tag within the head. You can also specify a page title
+explicitly using the <code>title</code> parameter of the top-level page function.</p>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'>titlePanel</span>(<span class='st'>"Hello Shiny!"</span>)
+)
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) { })
+}</pre>
+</div>
+
+

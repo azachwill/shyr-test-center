@@ -1,0 +1,39 @@
+---
+title: "clickOpts"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='clickOpts.html'>clickOpts</a></span><span class="keyword">(</span><span class="argument">id</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">clip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>id</th>
+    <td>Input value name. For example, if the value is <code>&quot;plot_click&quot;</code>,
+then the click coordinates will be available as <code>input$plot_click</code>.</td>
+  </tr>
+  <tr>
+    <th>clip</th>
+    <td>Should the click area be clipped to the plotting area? If FALSE,
+then the server will receive click events even when the mouse is outside
+the plotting area, as long as it is still inside the image.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>This generates an object representing click options, to be passed as the
+<code>click</code> argument of <code><a href='plotOutput.html'>imageOutput</a></code> or
+<code><a href='plotOutput.html'>plotOutput</a></code>.</p>
+
+</div>
+<!-- <ul>
+  <li>clickOpts</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

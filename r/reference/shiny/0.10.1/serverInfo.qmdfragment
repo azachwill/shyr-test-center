@@ -1,0 +1,37 @@
+---
+title: "serverInfo"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>serverInfo()</div></code></pre>
+
+<div data-section="Collect information about the Shiny Server environment">
+  <h3 data-swiftype-index="false">Collect information about the Shiny Server environment</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A list of the Shiny Server information.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>This function returns the information about the current Shiny Server, such as
+its version, and whether it is the open source edition or professional
+edition. If the app is not served through the Shiny Server, this function
+just returns <code>list(shinyServer = FALSE)</code>.</p>
+
+</div>
+<!-- <ul>
+  <li>serverInfo</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

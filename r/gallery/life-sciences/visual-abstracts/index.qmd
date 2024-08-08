@@ -1,0 +1,21 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: An R-Shiny application to create visual abstracts for original research studies.
+title:        "Visual Abstracts for Original Research"
+author:    Matthew Kumar
+authorurl:     null
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - rintrojs
+appurl:      https://matt-kumar.shinyapps.io/visabs
+sourceurl:   https://rstudio.cloud/project/168943
+rscloudurl:  https://rstudio.cloud/project/168943
+---
+
+An R-Shiny application to create visual abstracts for original research studies.
+
+
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

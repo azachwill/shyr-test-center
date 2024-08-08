@@ -1,0 +1,97 @@
+---
+title: "Reactives and Observers"
+page-layout: article
+sidebar: getstarted-r
+
+lightbox:
+  effect: fade
+always_allow_html: true
+---
+
+In this section we discuss implementations of the three different types of reactive objects.
+
+### Reactive flow
+
+As we go through the different implementations, I recommend that you think back to where they appear on the reactive flow chart.
+
+![](../images/reactive-flow.png){.lightbox fig-alt="Diagram of the flow in a Shiny app. Starts at 'input$x' where you create your own reactive values. This goes to 'run(this)' to triggger arbitrary code, 'expression()', and an 'Update' button. The 'Update' button has an arrow to 'expression()' with 'Delay reactions - eventReactive()'. 'expression()' has a loop back to itself with 'Schedule updates - invalidateLateR()' and an arrow to 'output$y' through 'Modularize reactions - reactive()' and 'Prevent reactions - isolate()'. 'output$y' renders reactive output."}
+
+### Reactive inputs
+
+An implementation of reactive inputs is `reactiveValues()`.
+
+One example is user inputs (`input$*`). The input object is a reactive value that looks like a list, and contains many individual reactive values that are set by input from the web browser.
+
+### Reactive expressions
+
+You can create reactive expressions with the `reactive()` function.
+
+An example is the reactive data frame subsets we created in the earlier sections and exercises.
+
+-   Reactive expressions can access reactive values or other reactive expressions, and they return a value.
+
+-   They are useful for caching the results of any procedure that happens in response to user input.
+
+### Implementation of reactive outputs
+
+And lastly, the implementation for reactive outputs is observers.
+
+For example, an `output$*` object is a reactive observer. Actually, under the hood a render function returns a reactive expression, and when you assign this reactive expression to an `output$*` value, Shiny automatically creates an observer that uses the reactive expression.
+
+-   Observers can access reactive inputs and reactive expressions, but they don't return a value.
+
+-   Instead they are used for their **side effects**, which typically involves sending data to the web browser.
+
+### Reactives vs. observers
+
+To help these concepts sink in a bit more, let's compare reactives vs. observers.
+
+#### Similarities
+
+Both store expressions that can be executed
+
+#### Differences
+
+-   Reactive expressions return values, but observers do not.
+-   Observers eagerly respond to reactives, but reactive expressions do not.
+-   Reactive expressions must not have side effects, while observers are only useful for their side effects.
+
+#### Most importantly
+
+-   We use the `reactive()` function when calculating values, without side effects.
+-   We use the `observe()` function when performing actions, with side effects.
+-   The moral of the story is to not use `observe()` when calculating a value, and to especially not use `reactive()` for performing actions with side effects.
+
+###
+
+Here is a summary table of the differences between reactives and observers.
+
+|              | `reactive()` | `observe()` |
+|--------------|--------------|-------------|
+| Purpose      | Calculations | Actions     |
+| Side effects | Forbidden    | Allowed     |
+
+: {tbl-colwidths="\[50,25,25\]"}
+
+A calculation is a block of code where you don't care about whether the code actually executes---you just want the answer. Safe for caching. We use `reactive()` for these.
+
+An action is where you care very much that the code executes, and there is no return value, there are only side effects. For these we use `observe()`.
+
+## Practice - Reactives vs. observers
+
+Next you get to assess your understanding of reactives vs. observers.
+
+You'll add a `reactiveValues()` element to the app. Define observers and their side effects, and how these compare to reactives.
+
+### Your turn
+
+1.  Using the code from the app you worked on in the last exercise, add another `reactiveValues()` and `reactiveVal()` element to the app.
+
+::: {.callout-note collapse="true"}
+## Use Posit Cloud
+
+*Complete the exercise by building off of the code you completed in the last Posit Cloud Project titled **3-2b Find inconsistencies in what the app is reporting** in your Posit Cloud Workspace*
+
+[<i class="fa fa-cloud"></i> Go to Posit Cloud Project](https://posit.cloud/spaces/81721/join?access_code=I4VJaNsKfTqR3Td9hLP7E1nz8%2FtMg6Xbw9Bgqumv){.btn .test-drive}
+:::
+

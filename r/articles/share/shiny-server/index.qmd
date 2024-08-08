@@ -1,0 +1,67 @@
+---
+title: Introduction to Shiny Server
+date: 2020-12-16
+author: Jeff Allen
+description: Shiny Server is a back end program that makes a big difference. It builds a web server specifically designed to host Shiny apps. With Shiny Server you can host your apps in a controlled environment, like inside your organization, so your Shiny app (and whatever data it needs) will never leave your control. 
+---
+
+[Shiny Server](https://rstudio.com/products/shiny/shiny-server/) is an open source back end program that makes a big difference. It builds a web server specifically designed to host Shiny apps. With Shiny Server you can host your apps in a controlled environment, like inside your organization, so your Shiny app (and whatever data it needs) will never leave your control. You can also use Shiny Server to make your apps available across the Internet when you choose. Shiny Server will host each app at its own web address and automatically start the app when a user visits the address. When the user leaves, Shiny Server will automatically stop the app. This article demonstrates some of the features of Shiny Server and introduce you to the deep literature that is waiting to help you download, install, and configure your own Shiny Server.
+
+### Options for hosting your Shiny apps
+
+You can use the free and open source Shiny Server to host your Shiny applications, or you can leverage Posit Connect to scale your applications to a broader audience, restrict access to particular applications, or control the resources consumed by your Shiny applications. With [Posit Connect](https://www.rstudio.com/products/connect/), you can share Shiny applications, R Markdown reports, dashboards and plots, as well as Python-based content, including Flask, Dash, Streamlit and Bokeh, in one convenient place with push-button publishing from the RStudio IDE. Features include scheduled execution of reports and flexible security policies to bring the power of data science to your entire enterprise. You can see a full breakdown of the differences between the two editions <a href="https://rstudio.com/products/shiny/shiny-server/" target="_blank">here</a>. 
+
+Previously, professional features of Shiny server were available in Shiny Server Pro only. Posit will continue to support Shiny Server Pro for existing customers, but we strongly recommend customers consider <a href="https://www.rstudio.com/products/connect/">Posit Connect</a> as the professional alternative to Shiny Server Open Source.
+
+Shiny Server runs on a variety on Linux distributions. If you're not comfortable with Linux or would prefer to have someone else manage the server on which your Shiny applications are hosted, check out [shinyapps.io](http://shinyapps.io) to learn about hosting your applications in an environment that is managed and maintained by Posit for you. shinyapps.io lets you use a pay-as-you-go model to tap into some of the features only available in Posit Connect, an arrangement that is more approachable for some organizations.
+
+We hope to highlight some features of Shiny Server in this article, but for a full discussion on how to manage and configure your server, please see the official [Admin Guide](https://docs.rstudio.com/shiny-server/). Specifically, we discuss hosting a directory of applications, letting users manage their own applications, and requiring user authentication on an application.
+
+### Host a directory of applications
+
+(See [this page](https://docs.rstudio.com/shiny-server/#host-a-directory-of-applications) for a complete step-by-step walkthrough of this example.)
+
+Shiny Server allows you to host a directory full of Shiny applications and other web assets (HTML files, CSS files, etc.) using the `site_dir` configuration. By default, Shiny Server will use a `site_dir` to make any applications and assets stored in `/srv/shiny-server/` available. You can begin placing Shiny applications inside this directory then referencing them on your server. For instance, a Shiny application stored in `/srv/shiny-server/myApp` would be available at `http://myserver.org:3838/myApp`, (where `myserver.org` is the name of your server) by default. You could also place HTML files in this directory to make them available on your server, as well.
+
+This feature is only available in Shiny Server and Shiny Server Pro. Posit Connect, on the other hand, offers [push-button deployment](https://docs.rstudio.com/connect/user/publishing/).
+
+### Let users manage their own applications
+
+(See [this page](https://docs.rstudio.com/shiny-server/#let-users-manage-their-own-applications) for a complete step-by-step walkthrough of this example.)
+
+In some cases, it may be desirable to allow users on a system to manage and update their own Shiny applications stored in their home directories; the `user_apps` configuration allows you to do just that. Shiny applications hosted inside users' `ShinyApps` directory will be available online. For instance, a user who stored a Shiny application in `/home/kim/ShinyApps/myApp` would be able to access it at `http://myserver.org:3838/kim/myApp` on a server configured to use `user_apps`.
+
+### Require user authentication on an application
+
+(See [this page](https://docs.rstudio.com/connect/admin/authentication/) for a complete step-by-step walkthrough of this example with Posit Connect and [this page](https://docs.rstudio.com/shiny-server/#require-user-authentication-on-an-application) for Shiny Server Pro.)
+
+Requiring user authentication is not available in open source Shiny Server, however both Posit Connect and Shiny Server Pro support various forms of user authentication which can be used to require your users to login before being able to access particular Shiny applications on your server.
+
+As of Shiny Server v1.1.0, you can even change the appearance of the login page using the [`template_dir`](https://docs.rstudio.com/shiny-server/#custom-templates) configuration to make your login page look something like this:
+
+![Blue Shiny Server Pro Login](blue-login.png){fig-alt="Blue Shiny Server Pro login"}
+
+(Inspired by <a href="http://thibaut.me" target="_blank">Thibaut Courouble</a> and <a href="http://www.premiumpixels.com/freebies/clean-simple-login-form-psd/" target="_blank">Orman Clark</a>.)
+
+Or this:
+
+![Badge Shiny Server Pro Login](badge-login.png){fig-alt="Login screen for Shiny Server pro"}
+
+(Inspired by <a href="http://dribbble.com/ionuss" target="_blank"> Ionut Zamfir</a>.)
+
+### Summary
+
+To recap, Shiny Server open source allows you to share your Shiny applications in a controlled environment. It lets you
+
+ - Automatically start and stop your applications as needed on a Linux server
+ - Provide a unique URL for each application
+
+As a professional alternative to Shiny Server open source, Posit Connect offers a variety of nice features that build on top of the open source Shiny Server including:
+
+ - A dashboard to help understand the activity on your server (as shown above)
+ - The ability to secure your Shiny applications using SSL (HTTPS)
+ - The ability to control which users are allowed to access which applications
+ - Priority support from Posit
+ - Controls to fine-tune resource consumption per Shiny application
+ 
+If you have any questions or would like more information, please visit [here](https://rstudio.com/products/shiny/shiny-server/) for Shiny Server or [here](https://rstudio.com/products/connect/) for Posit Connect or email us at [sales@rstudio.com](mailto:sales@rstudio.com).

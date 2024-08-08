@@ -1,0 +1,35 @@
+---
+layout: reference
+title: "Knitr S3 methods — knitr_methods"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Knitr S3 methods</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/knitr.R" class="external-link"><code>R/knitr.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>These S3 methods are necessary to help Shiny applications and UI chunks embed
+themselves in knitr/rmarkdown documents.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">knit_print.shiny.appobj</span>(x, ...)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">knit_print.shiny.render.function</span>(x, ..., <span class="at">inline =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">knit_print.reactive</span>(x, ..., <span class="at">inline =</span> <span class="cn">FALSE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>x</dt>
+<dd><p>Object to knit_print</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Additional knit_print arguments</p></dd>
+
+
+<dt>inline</dt>
+<dd><p>Whether the object is printed inline.</p></dd>
+
+</dl></div>
+
+</div>

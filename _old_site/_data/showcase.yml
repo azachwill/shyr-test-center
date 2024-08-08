@@ -1,0 +1,85 @@
+- title: Education
+  description: "Apps designed for teaching"
+  children:
+    - didacting-modeling
+    - immune-response-modeling
+    - ncaa-swim-team-finder
+    - radiant
+    - rd-business-game
+    - teach-physiology
+- title: Finance / Banking
+  description: ""
+  children:
+    - career-pathfinder
+    - real-estate-investment
+- title: Government / Public sector
+  description: "Mostly open data"
+  children:
+    - freedom-press-index
+    - brazil-voter-profile
+    - crime-watch
+    - dairy-farms
+    - dublin-transport
+    - india-blood-banks
+    - lake-profile-dashboard
+    - nyc-metro
+    - nz-trade-dash
+    - scotpho-profiles
+    - soil-profiles
+    - viscover
+    - city-cycle
+- title: Life sciences
+  description: ""
+  children:
+    - covid19-tracker
+    - hospital-data-antimicrobial
+    - mri-images
+    - nutrition-calculator
+    - ab-test-sample-size
+    - animal-tracking
+    - biodiversity-national-parks
+    - explore-panel-data
+    - isee
+    - mote-effect-size
+    - phylo-tree-view-subset
+    - sdcapp-microdata
+    - shinyab-sample-size
+    - shroom-edibility-prediction
+    - visual-abstracts
+    - genome-browser
+- title: Sports
+  description: ""
+  children:
+    - fifa-births
+    - impact-replay-cfl
+    - masters
+    - nhl-play-by-play
+    - soccer-player-similarity
+- title: Technology
+  description: ""
+  children:
+    - chirp
+    - cran-explorer
+    - d3-dynamic-repot
+    - map-twitter-sentiment
+    - uber-rider
+- title: Miscellaneous
+  description: ""
+  children:
+    - hotshot-dashboard
+    - bus-company-simulation
+    - conference-tweet-dashboard
+    - dog-medical-history
+    - hex-memory
+    - lego-mosaic
+    - lego-world
+    - magnetic-fields
+    - pokemon-explorer
+    - pokemon-questions
+    - tidy-tuesday
+- title: Extending Shiny
+  description: ""
+  children:
+    - button-styler
+    - drag-drop-map-maker
+    - shiny-wysiwyg

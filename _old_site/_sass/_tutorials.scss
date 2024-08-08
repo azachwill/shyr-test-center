@@ -1,0 +1,45 @@
+/**************************************************************************************************
+ * Tutorials Styles
+ * These are the shared styles for the tutorials pages
+**************************************************************************************************/
+
+.tutorial-lesson-number {
+  font-size: 20px;
+}
+
+.tutorial h1 {
+  margin-top: 0;
+}
+
+.tutorial h2 {
+  margin-top: 24px;
+}
+
+.tutorial h4 {
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+.tutorial table {
+  margin-bottom: 10px;
+}
+
+.answer-content {
+  display: none;
+}
+
+.embedded-video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+
+iframe.embedded-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 90%;
+}

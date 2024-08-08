@@ -1,0 +1,158 @@
+---
+title: "Customize busy indicator options — busyIndicatorOptions"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.9.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.9.0/R/busy-indicators.R" class="external-link"><code>R/busy-indicators.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Shiny automatically includes busy indicators, which more specifically means:</p><ol><li><p>Calculating/recalculating outputs have a spinner overlay.</p></li>
+<li><p>Outputs fade out/in when recalculating.</p></li>
+<li><p>When no outputs are calculating/recalculating, but Shiny is busy
+doing something else (e.g., a download, side-effect, etc), a page-level
+pulsing banner is shown.</p></li>
+</ol><p>This function allows you to customize the appearance of these busy indicators
+by including the result of this function inside the app's UI. Note that,
+unless <code>spinner_selector</code> (or <code>fade_selector</code>) is specified, the spinner/fade
+customization applies to the parent element. If the customization should
+instead apply to the entire page, set <code>spinner_selector = 'html'</code> and
+<code>fade_selector = 'html'</code>.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">busyIndicatorOptions</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  ...,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">spinner_type =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">spinner_color =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">spinner_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">spinner_delay =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">spinner_selector =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="at">fade_opacity =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="at">fade_selector =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">pulse_background =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">pulse_height =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">pulse_speed =</span> <span class="cn">NULL</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>Currently ignored.</p></dd>
+
+
+<dt>spinner_type</dt>
+<dd><p>The type of spinner. Pre-bundled types include:
+'ring', 'ring2', 'ring3', 'bars', 'bars2', 'bars3', 'pulse', 'pulse2', 'pulse3', 'dots', 'dots2', 'dots3'.</p>
+<p>A path to a local SVG file can also be provided. The SVG should adhere to
+the following rules:</p><ul><li><p>The SVG itself should contain the animation.</p></li>
+<li><p>It should avoid absolute sizes (the spinner's containing DOM element
+size is set in CSS by <code>spinner_size</code>, so it should fill that container).</p></li>
+<li><p>It should avoid setting absolute colors (the spinner's containing DOM element
+color is set in CSS by <code>spinner_color</code>, so it should inherit that color).</p></li>
+</ul></dd>
+
+
+<dt>spinner_color</dt>
+<dd><p>The color of the spinner. This can be any valid CSS
+color. Defaults to the app's "primary" color if Bootstrap is on the page.</p></dd>
+
+
+<dt>spinner_size</dt>
+<dd><p>The size of the spinner. This can be any valid CSS size.</p></dd>
+
+
+<dt>spinner_delay</dt>
+<dd><p>The amount of time to wait before showing the spinner.
+This can be any valid CSS time and can be useful for not showing the spinner
+if the computation finishes quickly.</p></dd>
+
+
+<dt>spinner_selector</dt>
+<dd><p>A character string containing a CSS selector for
+scoping the spinner customization. The default (<code>NULL</code>) will apply the
+spinner customization to the parent element of the spinner.</p></dd>
+
+
+<dt>fade_opacity</dt>
+<dd><p>The opacity (a number between 0 and 1) for recalculating
+output. Set to 1 to "disable" the fade.</p></dd>
+
+
+<dt>fade_selector</dt>
+<dd><p>A character string containing a CSS selector for
+scoping the spinner customization. The default (<code>NULL</code>) will apply the
+spinner customization to the parent element of the spinner.</p></dd>
+
+
+<dt>pulse_background</dt>
+<dd><p>A CSS background definition for the pulse. The
+default uses a
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient" class="external-link">linear-gradient</a>
+of the theme's indigo, purple, and pink colors.</p></dd>
+
+
+<dt>pulse_height</dt>
+<dd><p>The height of the pulsing banner. This can be any valid
+CSS size.</p></dd>
+
+
+<dt>pulse_speed</dt>
+<dd><p>The speed of the pulsing banner. This can be any valid CSS
+time.</p></dd>
+
+</dl></div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="useBusyIndicators.html">useBusyIndicators()</a></code> to disable/enable busy indicators.</p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) { <span class="co"># rlang::is_interactive()</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(bslib)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>card_ui <span class="ot">&lt;-</span> <span class="cf">function</span>(id, <span class="at">spinner_type =</span> id) {</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">card</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="fu">busyIndicatorOptions</span>(<span class="at">spinner_type =</span> spinner_type),</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="fu">card_header</span>(<span class="fu">paste</span>(<span class="st">"Spinner:"</span>, spinner_type)),</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    <span class="fu">plotOutput</span>(shiny<span class="sc">::</span><span class="fu">NS</span>(id, <span class="st">"plot"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  )</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>}</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>card_server <span class="ot">&lt;-</span> <span class="cf">function</span>(id, <span class="at">simulate =</span> <span class="fu">reactive</span>()) {</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="fu">moduleServer</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    <span class="at">id =</span> id,</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>      output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>        <span class="fu">simulate</span>()</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        <span class="fu">plot</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>), <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>      })</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    }</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  )</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>}</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">page_fillable</span>(</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  <span class="fu">useBusyIndicators</span>(),</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>  <span class="fu">input_task_button</span>(<span class="st">"simulate"</span>, <span class="st">"Simulate"</span>, <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">"refresh"</span>)),</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>  <span class="fu">layout_columns</span>(</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>    <span class="fu">card_ui</span>(<span class="st">"ring"</span>),</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>    <span class="fu">card_ui</span>(<span class="st">"bars"</span>),</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>    <span class="fu">card_ui</span>(<span class="st">"dots"</span>),</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>    <span class="fu">card_ui</span>(<span class="st">"pulse"</span>),</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>    <span class="at">col_widths =</span> <span class="dv">6</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>  )</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>)</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>  simulate <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>simulate)</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>  <span class="fu">card_server</span>(<span class="st">"ring"</span>, simulate)</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>  <span class="fu">card_server</span>(<span class="st">"bars"</span>, simulate)</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>  <span class="fu">card_server</span>(<span class="st">"dots"</span>, simulate)</span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a>  <span class="fu">card_server</span>(<span class="st">"pulse"</span>, simulate)</span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a>}</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>
+```

@@ -1,0 +1,84 @@
+- title: Consulting
+  description: ""
+  children:
+    - career-pathfinder
+    - real-estate-investment
+- title: Education
+  description: "Apps designed for teaching"
+  children:
+    - didacting-modeling
+    - immune-response-modeling
+    - ncaa-swim-team-finder
+    - radiant
+    - rd-business-game
+    - teach-physiology
+- title: Healthcare
+  description: ""
+  children:
+    - hospital-data-antimicrobial
+    - mri-images
+    - nutrition-calculator
+- title: Miscellaneous
+  description: ""
+  children:
+    - bus-company-simulation
+    - conference-tweet-dashboard
+    - dog-medical-history
+    - hex-memory
+    - lego-mosaic
+    - lego-world
+    - magnetic-fields
+    - pokemon-explorer
+    - pokemon-questions
+    - tidy-tuesday
+- title: Public Sector
+  description: "Mostly open data"
+  children:
+    - brazil-voter-profile
+    - crime-watch
+    - dairy-farms
+    - dublin-transport
+    - india-blood-banks
+    - lake-profile-dashboard
+    - nyc-metro
+    - nz-trade-dash
+    - scotpho-profiles
+    - soil-profiles
+    - viscover
+- title: Research
+  description: ""
+  children:
+    - ab-test-sample-size
+    - animal-tracking
+    - biodiversity-national-parks
+    - explore-panel-data
+    - isee
+    - mote-effect-size
+    - phylo-tree-view-subset
+    - sdcapp-microdata
+    - shinyab-sample-size
+    - shroom-edibility-prediction
+    - visual-abstracts
+- title: Shiny
+  description: "Extending Shiny"
+  children:
+    - button-styler
+    - drag-drop-map-maker
+    - shiny-wysiwyg
+- title: Sports
+  description: ""
+  children:
+    - city-cycle
+    - fifa-births
+    - impact-replay-cfl
+    - masters
+    - nhl-play-by-play
+    - soccer-player-similarity
+- title: Technology
+  description: ""
+  children:
+    - chirp
+    - cran-explorer
+    - d3-dynamic-repot
+    - map-twitter-sentiment
+    - uber-rider

@@ -1,0 +1,69 @@
+---
+title: "Create a tab panel — tabPanel"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.0/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Create a tab panel</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">tabPanel</span>(title, ..., <span class="at">value =</span> title, <span class="at">icon =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">tabPanelBody</span>(value, ..., <span class="at">icon =</span> <span class="cn">NULL</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>title</dt>
+<dd><p>Display title for tab</p></dd>
+
+
+<dt>...</dt>
+<dd><p>UI elements to include within the tab</p></dd>
+
+
+<dt>value</dt>
+<dd><p>The value that should be sent when <code>tabsetPanel</code> reports
+that this tab is selected. If omitted and <code>tabsetPanel</code> has an
+<code>id</code>, then the title will be used.</p></dd>
+
+
+<dt>icon</dt>
+<dd><p>Optional icon to appear on the tab. This attribute is only
+valid when using a <code>tabPanel</code> within a <code><a href="navbarPage.html">navbarPage()</a></code>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A tab that can be passed to <code><a href="tabsetPanel.html">tabsetPanel()</a></code></p>
+
+
+  </div>
+  <div data-section="functions">
+    <h3 id="functions">Functions</h3>
+    
+<ul><li><p><code>tabPanel</code>: Create a tab panel that can be included within a <code><a href="tabsetPanel.html">tabsetPanel()</a></code> or a <code><a href="navbarPage.html">navbarPage()</a></code>.</p></li>
+<li><p><code>tabPanelBody</code>: Create a tab panel that drops the title argument.
+This function should be used within <code>tabsetPanel(type = "hidden")</code>. See <code><a href="tabsetPanel.html">tabsetPanel()</a></code> for example usage.</p></li>
+</ul></div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="tabsetPanel.html">tabsetPanel()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Show a tabset that includes a plot, summary, and</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># table view of the generated distribution</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">mainPanel</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Plot"</span>, <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary"</span>, <span class="fu">verbatimTextOutput</span>(<span class="st">"summary"</span>)),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Table"</span>, <span class="fu">tableOutput</span>(<span class="st">"table"</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  )</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>)</span></code></pre></div>
+  </div>
+</div>
+```

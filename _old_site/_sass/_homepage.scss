@@ -1,0 +1,373 @@
+/**************************************************************************************************
+ * Homepage Styles
+ * These are the shared styles for the "main" content area on all pages
+**************************************************************************************************/
+
+#homeContent {
+  background-color: #fff;
+}
+
+#homeContent .band.leftText {
+  text-align: left;
+}
+
+#homeContent .band.rightText {
+  text-align: right;
+}
+
+#homeContent .band.rightText .vCenter {
+  align-items: flex-end;
+}
+
+#homeContent .band .blurb {
+  font-weight: 400;
+  display: inline-block;
+  text-align: left;
+  min-height: 160px;
+  font-size: 24px;
+  line-height: 37px;
+}
+
+#homeContent .band .blurb .tagline {
+  font-size: 33px;
+  margin-bottom: 16px;
+}
+
+#homeContent .band.standard {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+#homeContent .band.first {
+  padding-top: 260px;
+  min-height: 600px;
+  background-color: #007bc2;
+  color: #fff;
+}
+
+#homeContent .band.first .blurb {
+  max-width: 490px;
+}
+
+#homeContent .band.second {
+  padding-top: 120px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+// #homeContent .band.second .split {
+//   margin-top: 20px;
+//   display: flex;
+//   justify-content: space-between;
+//   display: -ms-flexbox;
+//   -ms-flex-pack: justify;
+//   display: -webkit-box;
+//   display: -webkit-flex;
+//   -webkit-justify-content: space-between;
+//   text-align: left;
+// }
+
+// #homeContent .band.second .split .half {
+//   padding: 20px;
+//   background-color: #fff;
+// }
+
+// #homeContent .band.second .split .half.appExample {
+//   width: 54.5%;
+// }
+
+// #homeContent .band.second .split .half.codeExample {
+//   width: 44.5%;
+// }
+
+// #homeContent .band.second .split .half.codeExample pre {
+//   font-size: 11px;
+//   background-color: #fff;
+//   box-shadow: none;
+// }
+
+#homeContent .band.third {
+  min-height: 480px;
+}
+
+#homeContent .band.third .blurb {
+  max-width: 500px;
+}
+
+#homeContent .band.fourth {
+  background-color: #fff;
+  border-top: 1px solid #a3c586;
+  border-bottom: 1px solid #007bc2;
+  min-height: 400px;
+}
+
+#homeContent .band.fourth .blurb {
+  max-width: 490px;
+  float: right;
+  margin-top: 90px;
+}
+
+#homeContent .band.fourth .slideshow-container {
+  max-width: 500px;
+}
+
+#homeContent .band.fifth {
+  background-image: linear-gradient(#128ed6, #007bc2);
+  color: #fff;
+}
+
+#homeContent .band .actions {
+  margin-top: 20px;
+  text-align: center;
+  line-height: 80px;
+}
+
+#homeContent .band .bigButton {
+  padding: 15px 50px;
+  font-size: 22px;
+  font-weight: 400;
+  border: none;
+  white-space: nowrap;
+  border-radius: 5px;
+  margin: 5px;
+  background-color: #a3c586;
+  color: #fff;
+  -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transition-property: background-color;
+  -moz-transition-property: background-color;
+  -o-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 0.25s;
+  -moz-transition-duration: 0.25s;
+  -o-transition-duration: 0.25s;
+  transition-duration: 0.25s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#homeContent .band .bigButton:hover {
+  background-color: #8cb06c;
+}
+
+#homeContent .band .bigButton:focus {
+  outline: 3px solid rgba(117, 170, 219, 0.2);
+}
+
+#homeContent .band .bigButton:hover {
+  text-decoration: none;
+}
+
+#homeContent .band .bigButton.blue {
+  background-color: #007bc2;
+}
+
+#homeContent .band .bigButton.blue:hover {
+  background-color: #5a9ddb;
+}
+
+
+#homeContent .band .bigButton.link {
+  background-color: transparent;
+  color: #007bc2;
+  -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+  -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+}
+
+#homeContent .band .bigButton.link:hover {
+  background-color: #f4f4f4;
+}
+
+#homeContent .band .bigButton.ghost {
+  background-color: transparent;
+  color: #007bc2;
+  -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+  -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+  border: 1px solid #007bc2;
+}
+
+#homeContent .band .bigButton.ghost:hover {
+  background-color: #f4f4f4;
+}
+
+#homeContent .band .bigButton.white {
+  background-color: #ffffff;
+  color: #333;
+  -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+  -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0);
+}
+
+#homeContent .band .bigButton.white:hover {
+  background-color: #f4f4f4;
+}
+
+#homeContent .band .imageOne {
+  position: absolute;
+  /*left: 50px;*/
+  bottom: -100px;
+  width: 630px;
+  height: 540px;
+  z-index: 5;
+  background-image: url(../images/shinySiteBandOne.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#homeContent .band .imageThree {
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  width: 550px;
+  height: 400px;
+  background-image: url(../images/shinySiteBandThree.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#homeContent #example1-container {
+  padding: 24px 0 0 12px;
+  background-color: #fff;
+  min-height: 530px;
+}
+
+#homeContent #example1-code-container {
+  background-color: #fff;
+  min-height: 530px;
+  padding-top: 20px;
+}
+
+#homeContent #example1-code {
+  padding-top: 16px;
+}
+
+#homeContent #example1-code pre,
+#homeContent #example1-code code {
+  text-align: left;
+  font-size: 11px;
+  line-height: 1.2;
+  overflow: auto;
+  white-space: pre;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+#homeContent .bx-wrapper .bx-controls-direction a {
+  text-indent: 100px;
+  overflow: hidden;
+}
+
+// #homeContent .deploy-options,
+// #homeContent .deploy-option {
+//   text-align: center;
+// }
+
+/* size & position adjustments */
+@media screen and (max-width: 1260px) {
+  #homeContent .band .imageOne {
+    left: 20px;
+  }
+
+  #homeContent .band .imageThree {
+    right: 20px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #homeContent .band .imageOne {
+    width: 490px;
+    height: 420px;
+    bottom: -30px;
+    left: 0px;
+  }
+
+  #homeContent .band .imageThree {
+    right: 5px;
+    width: 510px;
+    height: 340px;
+  }
+
+  #homeContent .band.third .blurb {
+    max-width: 450px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  #homeContent .band.fourth .blurb {
+    float: none;
+    text-align: center;
+    margin: 0 0 50px 0;
+    max-width: none;
+  }
+
+  #homeContent .band.fourth .slideshow-container {
+    margin: 0 auto;
+  }
+
+  #homeContent .band.fourth.rightText {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  #homeContent {
+    overflow-x: hidden;
+  }
+
+  #homeContent .band.first,
+  #homeContent .band.second,
+  #homeContent .band.third,
+  #homeContent .band.fourth,
+  #homeContent .band.fifth {
+    height: auto;
+  }
+
+  #homeContent .band.first,
+  #homeContent .band.third {
+    padding-bottom: 50px;
+  }
+
+  #homeContent .band.rightText,
+  #homeContent .band.leftText {
+    text-align: center;
+  }
+
+  #homeContent .band .blurb {
+    text-align: center;
+  }
+
+  #homeContent .band .imageOne,
+  #homeContent .band .imageThree {
+    position: relative;
+    max-width: 100%;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin: 10px auto 0 auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #homeContent .band.standard {
+    padding-top: 70px;
+    padding-bottm: 70px;
+  }
+
+  #homeContent .band.first {
+    padding-top: 220px;
+  }
+
+  #homeContent .band.second .split {
+    display: block;
+  }
+
+  #homeContent .band.second .split .half.appExample,
+  #homeContent .band.second .split .half.codeExample {
+    width: 100%;
+  }
+}

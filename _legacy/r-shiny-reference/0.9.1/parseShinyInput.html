@@ -1,0 +1,75 @@
+---
+layout: reference
+title: "parseShinyInput"
+categories: reference
+---
+<h1>Provide the new generic for parsing Shiny Input</h1>
+
+<h2>Usage</h2>
+<pre>parseShinyInput(x, shinysession, name)
+
+parseShinyInput.default(x, shinysession, name)
+
+parseShinyInput.shinyMatrix(x, shinysession, name)
+
+parseShinyInput.shinyDate(x, shinysession, name)</pre>
+
+<h2>Arguments</h2>
+<dl>
+  <dt>x</dt>
+  <dd>The value of this input as provided by the
+  client, deserialized using RJSONIO, then passed through a
+  call to <code><a href='http://www.inside-r.org/r-doc/base/structure'>structure</a></code> to set the class of the
+  object. Note that the call to <code>structure</code> does
+  convert <code>NULL</code> values to an empty
+  <code><a href='http://www.inside-r.org/r-doc/base/list'>list</a></code>.</dd>
+  <dt>shinysession</dt>
+  <dd>The <code>shinysession</code> in which the
+  input exists.</dd>
+  <dt>name</dt>
+  <dd>The name of the input</dd>
+</dl>
+
+<div class="Description">
+  <h2>Description</h2>
+  
+  <p>Provides an S3 generic to parse incoming Shiny JSON data.
+  When defined on a particular class, Shiny will use S3
+  dispatch to refine the data passed back from the client
+  before making it available in the <code>input</code> variable
+  of the <code>server.R</code> file.</p>
+
+  <p>Pass the data straight through if no class is provided.</p>
+
+  <p>Takes a list-of-lists and returns a matrix. The lists
+  must all be the same length. NULLs and empty lists are
+  replaced by NA.</p>
+
+</div>
+
+<div class="Details">
+  <h2>Details</h2>
+  
+  <p>The <code>type</code> of a custom Shiny Input widget will be
+  deduced using the <code>getType()</code> JavaScript function on
+  the registered Shiny inputBinding. This type will then be
+  set as the incoming object's class.</p>
+
+  <p>The provided function will be used to parse the data
+  delivered from the client before it is available in the
+  <code>input</code> variable.</p>
+
+</div>
+
+<h2 id="examples">Examples</h2>
+<pre class="examples"><div class='input'>parseShinyInput.myIntegerClass <- function(x, shinysession, name){
+  as.integer(x)
+}
+</div></pre>
+<!-- <ul>
+  <li>parseShinyInput</li><li>parseShinyInput.default</li><li>parseShinyInput.shinyDate</li><li>parseShinyInput.shinyMatrix</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

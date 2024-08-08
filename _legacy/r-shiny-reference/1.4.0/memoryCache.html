@@ -1,0 +1,203 @@
+---
+layout: reference
+title: "Create a memory cache object — memoryCache"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a memory cache object</h1>
+  
+
+  <pre class="code"><span class='fu'>memoryCache</span>(<span class='kw'>max_size</span> <span class='kw'>=</span> <span class='fl'>10</span> * <span class='fl'>1024</span>^<span class='fl'>2</span>, <span class='kw'>max_age</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>max_n</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>evict</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lru"</span>, <span class='st'>"fifo"</span>), <span class='kw'>missing</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/fastmap/man/key_missing.html'>key_missing</a></span>(),
+  <span class='kw'>exec_missing</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>logfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>max_size</p></th>
+    <td><p>Maximum size of the cache, in bytes. If the cache exceeds
+this size, cached objects will be removed according to the value of the
+<code>evict</code>. Use <code>Inf</code> for no size limit.</p></td>
+  </tr>
+  <tr>
+    <th><p>max_age</p></th>
+    <td><p>Maximum age of files in cache before they are evicted, in
+seconds. Use <code>Inf</code> for no age limit.</p></td>
+  </tr>
+  <tr>
+    <th><p>max_n</p></th>
+    <td><p>Maximum number of objects in the cache. If the number of objects
+exceeds this value, then cached objects will be removed according to the
+value of <code>evict</code>. Use <code>Inf</code> for no limit of number of items.</p></td>
+  </tr>
+  <tr>
+    <th><p>evict</p></th>
+    <td><p>The eviction policy to use to decide which objects are removed
+when a cache pruning occurs. Currently, <code>"lru"</code> and <code>"fifo"</code> are
+supported.</p></td>
+  </tr>
+  <tr>
+    <th><p>missing</p></th>
+    <td><p>A value to return or a function to execute when
+<code><a href='https://rdrr.io/r/base/get.html'>get(key)</a></code> is called but the key is not present in the cache. The
+default is a <code><a href='https://rdrr.io/pkg/fastmap/man/key_missing.html'>key_missing()</a></code> object. If it is a function to
+execute, the function must take one argument (the key), and you must also
+use <code>exec_missing = TRUE</code>. If it is a function, it is useful in most
+cases for it to throw an error, although another option is to return a
+value. If a value is returned, that value will in turn be returned by
+<code><a href='https://rdrr.io/r/base/get.html'>get()</a></code>. See section Missing keys for more information.</p></td>
+  </tr>
+  <tr>
+    <th><p>exec_missing</p></th>
+    <td><p>If <code>FALSE</code> (the default), then treat <code>missing</code>
+as a value to return when <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> results in a cache miss. If
+<code>TRUE</code>, treat <code>missing</code> as a function to execute when
+<code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> results in a cache miss.</p></td>
+  </tr>
+  <tr>
+    <th><p>logfile</p></th>
+    <td><p>An optional filename or connection object to where logging
+information will be written. To log to the console, use <code><a href='https://rdrr.io/r/base/showConnections.html'>stdout()</a></code>.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>A memory cache object is a key-value store that saves the values in an
+environment. Objects can be stored and retrieved using the <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> and
+<code>set()</code> methods. Objects are automatically pruned from the cache
+according to the parameters <code>max_size</code>, <code>max_age</code>, <code>max_n</code>,
+and <code>evict</code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>In a <code>MemoryCache</code>, R objects are stored directly in the cache; they are
+not <em>not</em> serialized before being stored in the cache. This contrasts
+with other cache types, like <code><a href='diskCache.html'>diskCache()</a></code>, where objects are
+serialized, and the serialized object is cached. This can result in some
+differences of behavior. For example, as long as an object is stored in a
+MemoryCache, it will not be garbage collected.</p>
+    <h3 class="hasAnchor" id="missing-keys"><a class="anchor" href="#missing-keys"></a>Missing keys</h3>
+
+  
+
+<p>The <code>missing</code> and <code>exec_missing</code> parameters controls what happens
+when <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> is called with a key that is not in the cache (a cache
+miss). The default behavior is to return a <code><a href='https://rdrr.io/pkg/fastmap/man/key_missing.html'>key_missing()</a></code>
+object. This is a <em>sentinel value</em> that indicates that the key was not
+present in the cache. You can test if the returned value represents a
+missing key by using the <code><a href='https://rdrr.io/pkg/fastmap/man/key_missing.html'>is.key_missing()</a></code> function. You can
+also have <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> return a different sentinel value, like <code>NULL</code>.
+If you want to throw an error on a cache miss, you can do so by providing a
+function for <code>missing</code> that takes one argument, the key, and also use
+<code>exec_missing=TRUE</code>.</p>
+<p>When the cache is created, you can supply a value for <code>missing</code>, which
+sets the default value to be returned for missing values. It can also be
+overridden when <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> is called, by supplying a <code>missing</code>
+argument. For example, if you use <code>cache$get("mykey", missing = NULL)</code>, it will return <code>NULL</code> if the key is not in the cache.</p>
+<p>If your cache is configured so that <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> returns a sentinel value
+to represent a cache miss, then <code>set</code> will also not allow you to store
+the sentinel value in the cache. It will throw an error if you attempt to
+do so.</p>
+<p>Instead of returning the same sentinel value each time there is cache miss,
+the cache can execute a function each time <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> encounters missing
+key. If the function returns a value, then <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> will in turn return
+that value. However, a more common use is for the function to throw an
+error. If an error is thrown, then <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> will not return a value.</p>
+<p>To do this, pass a one-argument function to <code>missing</code>, and use
+<code>exec_missing=TRUE</code>. For example, if you want to throw an error that
+prints the missing key, you could do this:</p>
+<pre>
+  diskCache(
+    missing = function(key) {
+      stop("Attempted to get missing key: ", key)
+    },
+    exec_missing = TRUE
+  )
+  </pre>
+
+<p>If you use this, the code that calls <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> should be wrapped with
+<code><a href='https://rdrr.io/r/base/conditions.html'>tryCatch()</a></code> to gracefully handle missing keys.</p>
+    <h3 class="hasAnchor" id="cache-pruning"><a class="anchor" href="#cache-pruning"></a>Cache pruning</h3>
+
+  
+
+
+<p>Cache pruning occurs when <code>set()</code> is called, or it can be invoked
+manually by calling <code>prune()</code>.</p>
+<p>When a pruning occurs, if there are any objects that are older than
+<code>max_age</code>, they will be removed.</p>
+<p>The <code>max_size</code> and <code>max_n</code> parameters are applied to the cache as
+a whole, in contrast to <code>max_age</code>, which is applied to each object
+individually.</p>
+<p>If the number of objects in the cache exceeds <code>max_n</code>, then objects
+will be removed from the cache according to the eviction policy, which is
+set with the <code>evict</code> parameter. Objects will be removed so that the
+number of items is <code>max_n</code>.</p>
+<p>If the size of the objects in the cache exceeds <code>max_size</code>, then
+objects will be removed from the cache. Objects will be removed from the
+cache so that the total size remains under <code>max_size</code>. Note that the
+size is calculated using the size of the files, not the size of disk space
+used by the files --- these two values can differ because of files are
+stored in blocks on disk. For example, if the block size is 4096 bytes,
+then a file that is one byte in size will take 4096 bytes on disk.</p>
+<p>Another time that objects can be removed from the cache is when
+<code><a href='https://rdrr.io/r/base/get.html'>get()</a></code> is called. If the target object is older than <code>max_age</code>,
+it will be removed and the cache will report it as a missing value.</p>
+    <h3 class="hasAnchor" id="eviction-policies"><a class="anchor" href="#eviction-policies"></a>Eviction policies</h3>
+
+  
+
+
+<p>If <code>max_n</code> or <code>max_size</code> are used, then objects will be removed
+from the cache according to an eviction policy. The available eviction
+policies are:</p>
+<dl class='dl-horizontal'>
+<dt><code>"lru"</code></dt><dd><p>Least Recently Used. The least recently used objects will be removed.
+This uses the filesystem's atime property. Some filesystems do not
+support atime, or have a very low atime resolution. The DiskCache will
+check for atime support, and if the filesystem does not support atime,
+a warning will be issued and the "fifo" policy will be used instead.</p></dd>
+<dt><code>"fifo"</code></dt><dd><p>First-in-first-out. The oldest objects will be removed.</p></dd>
+
+</dl>
+
+    <h3 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h3>
+
+  
+
+
+<p>A disk cache object has the following methods:</p>
+<dl class='dl-horizontal'>
+<dt><code><a href='https://rdrr.io/r/base/get.html'>get(key, missing, exec_missing)</a></code></dt><dd><p>Returns the value associated with <code>key</code>. If the key is not in the
+cache, then it returns the value specified by <code>missing</code> or,
+<code>missing</code> is a function and <code>exec_missing=TRUE</code>, then
+executes <code>missing</code>. The function can throw an error or return the
+value. If either of these parameters are specified here, then they
+will override the defaults that were set when the DiskCache object was
+created. See section Missing Keys for more information.</p></dd>
+<dt><code>set(key, value)</code></dt><dd><p>Stores the <code>key</code>-<code>value</code> pair in the cache.</p></dd>
+<dt><code><a href='https://rdrr.io/r/base/exists.html'>exists(key)</a></code></dt><dd><p>Returns <code>TRUE</code> if the cache contains the key, otherwise
+<code>FALSE</code>.</p></dd>
+<dt><code>size()</code></dt><dd><p>Returns the number of items currently in the cache.</p></dd>
+<dt><code>keys()</code></dt><dd><p>Returns a character vector of all keys currently in the cache.</p></dd>
+<dt><code>reset()</code></dt><dd><p>Clears all objects from the cache.</p></dd>
+<dt><code>destroy()</code></dt><dd><p>Clears all objects in the cache, and removes the cache directory from
+disk.</p></dd>
+<dt><code>prune()</code></dt><dd><p>Prunes the cache, using the parameters specified by <code>max_size</code>,
+<code>max_age</code>, <code>max_n</code>, and <code>evict</code>.</p></dd>
+
+</dl>
+
+  
+  </div>
+
+</div>
+
+

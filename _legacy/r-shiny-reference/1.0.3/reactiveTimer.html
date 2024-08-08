@@ -1,0 +1,104 @@
+---
+layout: reference
+title: "reactiveTimer"
+categories: reference
+---
+<h1>Timer</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='reactiveTimer.html'>reactiveTimer</a></span><span class="keyword">(</span><span class="argument">intervalMs</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1000</span><span class="keyword">,</span> <span class="argument">session</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>intervalMs</th>
+    <td>How often to fire, in milliseconds</td>
+  </tr>
+  <tr>
+    <th>session</th>
+    <td>A session object. This is needed to cancel any scheduled
+invalidations after a user has ended the session. If <code>NULL</code>, then
+this invalidation will not be tied to any session, and so it will still
+occur.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A no-parameter function that can be called from a reactive context,
+  in order to cause that context to be invalidated the next time the timer
+  interval elapses. Calling the returned function also happens to yield the
+  current time (as in <code><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.time</a></code>).
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Creates a reactive timer with the given interval. A reactive timer is like a
+reactive value, except reactive values are triggered when they are set, while
+reactive timers are triggered simply by the passage of time.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p><a href='reactive.html'>Reactive expressions</a> and observers that want to be
+invalidated by the timer need to call the timer function that
+<code>reactiveTimer</code> returns, even if the current time value is not actually
+needed.</p>
+
+  <p>See <code><a href='invalidateLater.html'>invalidateLater</a></code> as a safer and simpler alternative.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"n"</span><span class="keyword">,</span> <span class="string">"Number of observations"</span><span class="keyword">,</span> <span class="number">2</span><span class="keyword">,</span> <span class="number">1000</span><span class="keyword">,</span> <span class="number">500</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+  <span class="comment"># Anything that calls autoInvalidate will automatically invalidate</span>
+  <span class="comment"># every 2 seconds.</span>
+  <span class="symbol">autoInvalidate</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveTimer.html'>reactiveTimer</a></span><span class="keyword">(</span><span class="number">2000</span><span class="keyword">)</span>
+
+  <span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="comment"># Invalidate and re-execute this reactive expression every time the</span>
+    <span class="comment"># timer fires.</span>
+    <span class="functioncall">autoInvalidate</span><span class="keyword">(</span><span class="keyword">)</span>
+
+    <span class="comment"># Do something each time this is invalidated.</span>
+    <span class="comment"># The isolate() makes this observer _not_ get invalidated and re-executed</span>
+    <span class="comment"># when input$n changes.</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/print'>print</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"The value of input$n is"</span><span class="keyword">,</span> <span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">n</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+
+  <span class="comment"># Generate a new histogram each time the timer fires, but not when</span>
+  <span class="comment"># input$n changes.</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall">autoInvalidate</span><span class="keyword">(</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">n</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>reactiveTimer</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='invalidateLater.html'>invalidateLater</a></code></p>
+</div>

@@ -1,0 +1,62 @@
+---
+layout: reference
+title: "Viewer options — viewer"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Viewer options</h1>
+  
+
+  <pre class="code"><span class='fu'>paneViewer</span>(<span class='kw'>minHeight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>dialogViewer</span>(<span class='no'>dialogName</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>600</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>600</span>)
+
+<span class='fu'>browserViewer</span>(<span class='kw'>browser</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"browser"</span>))</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>minHeight</p></th>
+    <td><p>The minimum height (in pixels) desired to show the gadget in
+the viewer pane. If a positive number, resize the pane if necessary to show
+at least that many pixels. If <code>NULL</code>, use the existing viewer pane
+size. If <code>"maximize"</code>, use the maximum available vertical space.</p></td>
+  </tr>
+  <tr>
+    <th><p>dialogName</p></th>
+    <td><p>The window title to display for the dialog.</p></td>
+  </tr>
+  <tr>
+    <th><p>width, height</p></th>
+    <td><p>The desired dialog width/height, in pixels.</p></td>
+  </tr>
+  <tr>
+    <th><p>browser</p></th>
+    <td><p>See <code><a href='https://rdrr.io/r/utils/browseURL.html'>utils::browseURL()</a></code>.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Use these functions to control where the gadget is displayed in RStudio (or
+other R environments that emulate RStudio's viewer pane/dialog APIs). If
+viewer APIs are not available in the current R environment, then the gadget
+will be displayed in the system's default web browser (see
+<code><a href='https://rdrr.io/r/utils/browseURL.html'>utils::browseURL()</a></code>).</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A function that takes a single <code>url</code> parameter, suitable for
+passing as the <code>viewer</code> argument of <code><a href='runGadget.html'>runGadget()</a></code>.</p>
+  
+  </div>
+
+</div>
+
+

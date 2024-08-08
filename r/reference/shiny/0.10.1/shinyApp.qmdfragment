@@ -1,0 +1,109 @@
+---
+title: "shinyApp"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>shinyApp(ui, server, onStart&nbsp;=&nbsp;NULL, options&nbsp;=&nbsp;list(), uiPattern&nbsp;=&nbsp;"/")</div>
+<div>shinyAppDir(appDir, options&nbsp;=&nbsp;list())</div>
+<div>as.shiny.appobj(x)</div>
+<div>"as.shiny.appobj"(x)</div>
+<div>"as.shiny.appobj"(x)</div>
+<div>"as.shiny.appobj"(x)</div>
+<div>"print"(x, ...)</div>
+<div>"as.tags"(x, ...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>ui</th>
+    <td>The UI definition of the app (for example, a call to
+<code>fluidPage()</code> with nested controls)</td>
+  </tr>
+  <tr>
+    <th>server</th>
+    <td>A server function</td>
+  </tr>
+  <tr>
+    <th>onStart</th>
+    <td>A function that will be called before the app is actually run.
+This is only needed for <code>shinyAppObj</code>, since in the <code>shinyAppDir</code>
+case, a <code>global.R</code> file can be used for this purpose.</td>
+  </tr>
+  <tr>
+    <th>options</th>
+    <td>Named options that should be passed to the `runApp` call. You
+can also specify <code>width</code> and <code>height</code> parameters which provide a
+hint to the embedding environment about the ideal height/width for the app.</td>
+  </tr>
+  <tr>
+    <th>uiPattern</th>
+    <td>A regular expression that will be applied to each <code>GET</code>
+request to determine whether the <code>ui</code> should be used to handle the
+request. Note that the entire request path must match the regular
+expression in order for the match to be considered successful.</td>
+  </tr>
+  <tr>
+    <th>appDir</th>
+    <td>Path to directory that contains a Shiny app (i.e. a server.R
+file and either ui.R or www/index.html)</td>
+  </tr>
+  <tr>
+    <th>x</th>
+    <td>Object to convert to a Shiny app.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Additional parameters to be passed to print.</td>
+  </tr>
+</table>
+
+<div data-section="Create a Shiny app object">
+  <h3 data-swiftype-index="false">Create a Shiny app object</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>An object that represents the app. Printing the object will run the
+  app.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>These functions create Shiny app objects from either an explicit UI/server
+pair (<code>shinyApp</code>), or by passing the path of a directory that
+contains a Shiny app (<code>shinyAppDir</code>). You generally shouldn't need to
+use these functions to create/run applications; they are intended for
+interoperability purposes, such as embedding Shiny apps inside a <span class = "pkg">knitr</span>
+document.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# shinyApp(
+#   ui = fluidPage(
+#     numericInput(&quot;n&quot;, &quot;n&quot;, 1),
+#     plotOutput(&quot;plot&quot;)
+#   ),
+#   server = function(input, output) {
+#     output$plot &lt;- renderPlot( plot(head(cars, input$n)) )
+#   },
+#   options=list(launch.browser = rstudio::viewer)
+# )
+# 
+# shinyAppDir(system.file(&quot;examples/01_hello&quot;, package=&quot;shiny&quot;))
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+</div></pre>
+<!-- <ul>
+  <li>as.shiny.appobj</li><li>as.shiny.appobj.character</li><li>as.shiny.appobj.list</li><li>as.shiny.appobj.shiny.appobj</li><li>as.tags.shiny.appobj</li><li>print.shiny.appobj</li><li>shinyApp</li><li>shinyAppDir</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

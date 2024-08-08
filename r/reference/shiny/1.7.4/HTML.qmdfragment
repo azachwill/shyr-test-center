@@ -1,0 +1,45 @@
+---
+title: "Mark Characters as HTML — HTML"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.4</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/tags.R" class="external-link"><code>R/tags.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Marks the given text as HTML, which means the <a href="builder.html">tag</a> functions will know
+not to perform HTML escaping on it.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">HTML</span>(text, ..., <span class="at">.noWS =</span> <span class="cn">NULL</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>text</dt>
+<dd><p>The text value to mark with HTML</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Any additional values to be converted to character and
+concatenated together</p></dd>
+
+
+<dt>.noWS</dt>
+<dd><p>Character vector used to omit some of the whitespace that would
+normally be written around this HTML. Valid options include <code>before</code>,
+<code>after</code>, and <code>outside</code> (equivalent to <code>before</code> and
+<code>end</code>).</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>The input <code>text</code>, but marked as HTML.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>el <span class="ot">&lt;-</span> <span class="fu">div</span>(<span class="fu">HTML</span>(<span class="st">"I like &lt;u&gt;turtles&lt;/u&gt;"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">as.character</span>(el))</span></code></pre></div>
+  </div>
+</div>
+```

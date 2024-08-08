@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Reactive poll and file reader
+date: 2014-07-29 
+tags:
+ - reactive poll
+ - reactive file reader
+appurl: https://gallery.shinyapps.io/059-reactive-poll-and-file-reader
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/059-reactive-poll-and-file-reader
+---

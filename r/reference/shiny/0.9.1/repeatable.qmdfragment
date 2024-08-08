@@ -1,0 +1,79 @@
+---
+title: "repeatable"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>repeatable(rngfunc, seed&nbsp;=&nbsp;runif(1, 0, .Machine$integer.max))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>rngfunc</th>
+    <td>The function that is affected by the R
+  session's seed.</td>
+  </tr>
+  <tr>
+    <th>seed</th>
+    <td>The seed to set every time the resulting
+  function is called.</td>
+  </tr>
+</table>
+
+<div data-section="Make a random number generator repeatable">
+  <h3 data-swiftype-index="false">Make a random number generator repeatable</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>A repeatable version of the function that was passed in.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Given a function that generates random data, returns a wrapped version of
+that function that always uses the same seed when called. The seed to use can
+be passed in explicitly if desired; otherwise, a random number is used.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+  
+  <p>When called, the returned function attempts to preserve the R session's
+  current seed by snapshotting and restoring
+  <code><a href='http://www.inside-r.org/r-doc/base/Random'>.Random.seed</a></code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>rnormA &lt;- repeatable(rnorm)
+rnormB &lt;- repeatable(rnorm)
+rnormA(3)  # [1]  1.8285879 -0.7468041 -0.4639111
+</div>
+<div class='output'>[1] -0.8741222  1.2961640  0.2874364
+</div>
+<div class='input'>rnormA(3)  # [1]  1.8285879 -0.7468041 -0.4639111
+</div>
+<div class='output'>[1] -0.8741222  1.2961640  0.2874364
+</div>
+<div class='input'>rnormA(5)  # [1]  1.8285879 -0.7468041 -0.4639111 -1.6510126 -1.4686924
+</div>
+<div class='output'>[1] -0.8741222  1.2961640  0.2874364  0.6916903 -1.1186962
+</div>
+<div class='input'>rnormB(5)  # [1] -0.7946034  0.2568374 -0.6567597  1.2451387 -0.8375699
+</div>
+<div class='output'>[1] -0.5132492  0.5085536 -1.7886134  0.8040884 -0.1612562
+</div></pre>
+<!-- <ul>
+  <li>repeatable</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

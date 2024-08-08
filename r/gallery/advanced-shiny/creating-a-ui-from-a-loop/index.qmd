@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Creating a UI from a loop
+date: 2014-07-29 
+tags: 
+ - dynamic ui
+appurl: https://gallery.shinyapps.io/025-loop-ui
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/025-loop-ui
+---

@@ -1,0 +1,73 @@
+---
+layout: reference
+title: "downloadButton"
+categories: reference
+---
+<h1>Create a download button or link</h1>
+
+<pre class="code"><code class="r"><div>downloadButton(outputId, label&nbsp;=&nbsp;"Download", class&nbsp;=&nbsp;NULL)</div>
+<div>downloadLink(outputId, label&nbsp;=&nbsp;"Download", class&nbsp;=&nbsp;NULL)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>outputId</th>
+    <td>The name of the output slot that the
+  <code>downloadHandler</code> is assigned to.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>The label that should appear on the button.</td>
+  </tr>
+  <tr>
+    <th>class</th>
+    <td>Additional CSS classes to apply to the tag,
+  if any.</td>
+  </tr>
+</table>
+
+<div data-section="Create a download button or link">
+  <h3 data-swiftype-index="false">Create a download button or link</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Use these functions to create a download button or link; when clicked, it
+will initiate a browser download. The filename and contents are specified by
+the corresponding <code><a href='downloadHandler.html'>downloadHandler</a></code> defined in the server
+function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # In server.R:
+# output$downloadData &lt;- downloadHandler(
+#   filename = function() {
+#     paste(&#39;data-&#39;, Sys.Date(), &#39;.csv&#39;, sep=&#39;&#39;)
+#   },
+#   content = function(con) {
+#     write.csv(data, con)
+#   }
+# )
+# 
+# # In ui.R:
+# downloadLink(&#39;downloadData&#39;, &#39;Download&#39;)
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>downloadButton</li><li>downloadLink</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+downloadHandler
+
+</div>

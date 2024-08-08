@@ -1,0 +1,92 @@
+---
+layout: reference
+title: "Reactive file reader — reactiveFileReader"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Reactive file reader</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/reactives.R" class="external-link"><code>R/reactives.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Given a file path and read function, returns a reactive data source for the
+contents of the file.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reactiveFileReader</span>(intervalMillis, session, filePath, readFunc, ...)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>intervalMillis</dt>
+<dd><p>Approximate number of milliseconds to wait between
+checks of the file's last modified time. This can be a numeric value, or a
+function that returns a numeric value.</p></dd>
+
+
+<dt>session</dt>
+<dd><p>The user session to associate this file reader with, or
+<code>NULL</code> if none. If non-null, the reader will automatically stop when
+the session ends.</p></dd>
+
+
+<dt>filePath</dt>
+<dd><p>The file path to poll against and to pass to <code>readFunc</code>.
+This can either be a single-element character vector, or a function that
+returns one.</p></dd>
+
+
+<dt>readFunc</dt>
+<dd><p>The function to use to read the file; must expect the first
+argument to be the file path to read. The return value of this function is
+used as the value of the reactive file reader.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Any additional arguments to pass to <code>readFunc</code> whenever it is
+invoked.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>A reactive expression that returns the contents of the file, and
+automatically invalidates when the file changes on disk (as determined by
+last modified time).</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p><code>reactiveFileReader</code> works by periodically checking the file's last
+modified time; if it has changed, then the file is re-read and any reactive
+dependents are invalidated.</p>
+<p>The <code>intervalMillis</code>, <code>filePath</code>, and <code>readFunc</code> functions
+will each be executed in a reactive context; therefore, they may read
+reactive values and reactive expressions.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="reactivePoll.html">reactivePoll()</a></code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">FALSE</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Per-session reactive file reader</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  fileData <span class="ot">&lt;-</span> <span class="fu">reactiveFileReader</span>(<span class="dv">1000</span>, session, <span class="st">'data.csv'</span>, read.csv)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>data <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fileData</span>()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-session reactive file reader. In this example, all sessions share</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the same reader, so read.csv only gets executed once no matter how many</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># user sessions are connected.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>fileData <span class="ot">&lt;-</span> <span class="fu">reactiveFileReader</span>(<span class="dv">1000</span>, <span class="cn">NULL</span>, <span class="st">'data.csv'</span>, read.csv)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>data <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fileData</span>()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>

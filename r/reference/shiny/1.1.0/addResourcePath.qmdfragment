@@ -1,0 +1,57 @@
+---
+title: "addResourcePath"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='addResourcePath.html'>addResourcePath</a></span><span class="keyword">(</span><span class="symbol">prefix</span><span class="keyword">,</span> <span class="symbol">directoryPath</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>prefix</th>
+    <td>The URL prefix (without slashes). Valid characters are a-z,
+A-Z, 0-9, hyphen, period, and underscore.
+For example, a value of &#39;foo&#39; means that any request paths that begin with
+&#39;/foo&#39; will be mapped to the given directory.</td>
+  </tr>
+  <tr>
+    <th>directoryPath</th>
+    <td>The directory that contains the static resources to be
+served.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Adds a directory of static resources to Shiny&#39;s web server, with the given
+path prefix. Primarily intended for package authors to make supporting
+JavaScript/CSS files available to their components.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>You can call <code>addResourcePath</code> multiple times for a given
+  <code>prefix</code>; only the most recent value will be retained. If the
+  normalized <code>directoryPath</code> is different than the directory that&#39;s
+  currently mapped to the <code>prefix</code>, a warning will be issued.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='addResourcePath.html'>addResourcePath</a></span><span class="keyword">(</span><span class="string">'datasets'</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/devtools/topics/system.file'>system.file</a></span><span class="keyword">(</span><span class="string">'data'</span><span class="keyword">,</span> <span class="argument">package</span><span class="argument">=</span><span class="string">'datasets'</span><span class="keyword">)</span><span class="keyword">)</span></div></code></pre>
+<!-- <ul>
+  <li>addResourcePath</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='singleton.html'>singleton</a></code></p>
+</div>
+```

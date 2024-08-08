@@ -1,0 +1,78 @@
+---
+layout: default
+title: Shiny Blog
+description: News, tips, and commentary about all things Shiny
+categories: blog
+child_scope: /blog/
+---
+
+<!--  Styling located in _scss/_blog.scss, 
+      also some styles from _scss/_app-stories.scss -->
+
+<script>
+
+  $(function () {
+    document.querySelectorAll(".blog-post")
+      .forEach(function (post_div) {
+        var link_to_post = post_div.querySelector(".main-link");
+
+        post_div.addEventListener("click", function (event) {
+          // Send click event if user hasn't selected any text
+          if (!window.getSelection().toString()) {
+            link_to_post.click();
+          }
+        });
+
+        // Make sure other links dont trigger a double click
+        post_div.querySelectorAll("a")
+          .forEach(function (link_el) {
+            link_el
+              .addEventListener("click", function (e) { e.stopPropagation() });
+          });
+      });
+  });
+
+</script>
+
+<div class="row">
+  <div class="col-md-9 col-centered">
+    <h1 style="display: inline-block;padding-right:14px">Shiny Blog</h1><span style="display: inline-block;"><a href="/feed/blog.xml" target="_blank"><i style="font-size:1.25em;" class="fas fa-rss dark-link"></i></a></span>
+    <div class="blog-lead">News, tips, and commentary about all things Shiny</div>
+
+  
+    <!-- This displays the blog post tile on the list page  -->
+    <div class="row">
+      <div class="col-sm-12">
+        {% for post in site.categories.blog %}
+        <div class="blog-tile">
+          <a href="{{ post.url }}" class="main-link">
+            <div class="row">
+              <div class="col-sm-5">  
+                <div class="blog-list-thumbnail" style="
+                  {% if post.thumbnail %}
+                  background-image:url(images/{{ post.thumbnail }})
+                  {%- else -%}
+                  background-image:url(images/thumbnails/shiny-thumb.png)
+                  {%- endif %}
+                  ">
+                </div>
+              </div>
+              <div class="col-sm-7 dark-link"> 
+                <h3>{{ post.title }}</h3>
+                <div class="blog-post-meta">
+                  <span class="visible-inline p-85">{{ post.date | date: '%B %d, %Y' }}</span><span class="visible-inline p-85" style="padding: 0 4px;"> | </span>
+                  <span class="visible-inline p-85">{{ post.author }}</span>
+                </div>
+                <p class="blog-post-description">{{ post.description }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+      {% endfor %}
+
+      </div>
+    </div>
+
+  </div>
+</div>

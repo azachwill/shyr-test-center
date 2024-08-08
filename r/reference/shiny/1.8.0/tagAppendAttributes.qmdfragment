@@ -1,0 +1,62 @@
+---
+title: "Append tag attributes — tagAppendAttributes"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.8.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.8.0/R/tags.R" class="external-link"><code>R/tags.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Append (<code>tagAppendAttributes()</code>), check existence (<code>tagHasAttribute()</code>),
+and obtain the value (<code>tagGetAttribute()</code>) of HTML attribute(s).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">tagAppendAttributes</span>(tag, ..., <span class="at">.cssSelector =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">tagHasAttribute</span>(tag, attr)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">tagGetAttribute</span>(tag, attr)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>tag</dt>
+<dd><p>a <a href="builder.html">tag</a> object.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>a collection of attributes.</p></dd>
+
+
+<dt>.cssSelector</dt>
+<dd><p>A character string containing a <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors" class="external-link">CSS selector</a>
+for targeting particular (inner) tags of interest. At the moment, only a
+combination of
+<a href="https://www.w3.org/TR/CSS22/selector.html#type-selectors" class="external-link">type</a> (e.g,
+<code>div</code>), <a href="https://www.w3.org/TR/CSS22/selector.html#class-html" class="external-link">class</a>
+(e.g., <code>.my-class</code>),
+<a href="https://www.w3.org/TR/CSS22/selector.html#id-selectors" class="external-link">id</a> (e.g.,
+<code>#myID</code>), and
+<a href="https://www.w3.org/TR/CSS22/selector.html#universal-selector" class="external-link">universal</a>
+(<code>*</code>) selectors within a given <a href="https://www.w3.org/TR/CSS22/selector.html#selector-syntax" class="external-link">simple selector</a> is
+supported. Note, if <code>.cssSelector</code> is used, the returned tags will have
+their <code>$children</code> fields flattened to a single <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> via <code>tagQuery()</code>.</p></dd>
+
+
+<dt>attr</dt>
+<dd><p>The name of an attribute.</p></dd>
+
+</dl></div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="tagAppendChild.html">tagAppendChildren()</a></code>, <code>tagQuery()</code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>html <span class="ot">&lt;-</span> <span class="fu">div</span>(<span class="fu">a</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">tagAppendAttributes</span>(html, <span class="at">class =</span> <span class="st">"foo"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">tagAppendAttributes</span>(html, <span class="at">.cssSelector =</span> <span class="st">"a"</span>, <span class="at">class =</span> <span class="st">"bar"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">tagHasAttribute</span>(<span class="fu">div</span>(<span class="at">foo =</span> <span class="st">"bar"</span>), <span class="st">"foo"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">tagGetAttribute</span>(<span class="fu">div</span>(<span class="at">foo =</span> <span class="st">"bar"</span>), <span class="st">"foo"</span>)</span></code></pre></div>
+  </div>
+</div>
+```

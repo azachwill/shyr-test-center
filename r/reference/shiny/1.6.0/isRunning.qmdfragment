@@ -1,0 +1,28 @@
+---
+title: "Check whether a Shiny application is running — isRunning"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>isRunning</span>()</pre>
+
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>This function tests whether a Shiny application is currently running.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p><code>TRUE</code> if a Shiny application is currently running. Otherwise,
+<code>FALSE</code>.</p>
+  </div>
+
+</div>
+
+
+```

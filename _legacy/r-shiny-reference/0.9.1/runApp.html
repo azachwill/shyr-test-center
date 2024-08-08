@@ -1,0 +1,114 @@
+---
+layout: reference
+title: "runApp"
+categories: reference
+---
+<h1>Run Shiny Application</h1>
+
+<pre class="code"><code class="r"><div>runApp(appDir&nbsp;=&nbsp;getwd(), port&nbsp;=&nbsp;NULL, launch.browser&nbsp;=&nbsp;getOption("shiny.launch.browser", interactive()), host&nbsp;=&nbsp;getOption("shiny.host", "127.0.0.1"), workerId&nbsp;=&nbsp;"", quiet&nbsp;=&nbsp;FALSE, display.mode&nbsp;=&nbsp;c("auto", "normal", "showcase"))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>appDir</th>
+    <td>The directory of the application. Should
+  contain <code>server.R</code>, plus, either <code>ui.R</code> or a
+  <code>www</code> directory that contains the file
+  <code>index.html</code>. Defaults to the working directory.</td>
+  </tr>
+  <tr>
+    <th>port</th>
+    <td>The TCP port that the application should
+  listen on. Defaults to choosing a random port.</td>
+  </tr>
+  <tr>
+    <th>launch.browser</th>
+    <td>If true, the system's default web
+  browser will be launched automatically after the app is
+  started. Defaults to true in interactive sessions only.
+  This value of this parameter can also be a function to
+  call with the application's URL.</td>
+  </tr>
+  <tr>
+    <th>host</th>
+    <td>The IPv4 address that the application should
+  listen on. Defaults to the <code>shiny.host</code> option, if
+  set, or <code>"127.0.0.1"</code> if not. See Details.</td>
+  </tr>
+  <tr>
+    <th>workerId</th>
+    <td>Can generally be ignored. Exists to help
+  some editions of Shiny Server Pro route requests to the
+  correct process.</td>
+  </tr>
+  <tr>
+    <th>quiet</th>
+    <td>Should Shiny status messages be shown?
+  Defaults to FALSE.</td>
+  </tr>
+  <tr>
+    <th>display.mode</th>
+    <td>The mode in which to display the
+  application. If set to the value <code>"showcase"</code>, shows
+  application code and metadata from a <code>DESCRIPTION</code>
+  file in the application directory alongside the
+  application. If set to <code>"normal"</code>, displays the
+  application normally.  Defaults to <code>"auto"</code>, which
+  displays the application in the mode given in its
+  <code>DESCRIPTION</code> file, if any.</td>
+  </tr>
+</table>
+
+<div data-section="Run Shiny Application">
+  <h3 data-swiftype-index="false">Run Shiny Application</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Runs a Shiny application. This function normally does not return; interrupt
+R to stop the application (usually by pressing Ctrl+C or Esc).</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>The host parameter was introduced in Shiny 0.9.0. Its default value of
+<code>"127.0.0.1"</code> means that, contrary to previous versions of Shiny, only
+the current machine can access locally hosted Shiny apps. To allow other
+clients to connect, use the value <code>"0.0.0.0"</code> instead (which was the
+value that was hard-coded into Shiny in 0.8.0 and earlier).</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # Start app in the current working directory
+# runApp()
+# 
+# # Start app in a subdirectory called myapp
+# runApp(&quot;myapp&quot;)
+# 
+# 
+# # Apps can be run without a server.r and ui.r file
+# runApp(list(
+#   ui = bootstrapPage(
+#     numericInput(&#39;n&#39;, &#39;Number of obs&#39;, 100),
+#     plotOutput(&#39;plot&#39;)
+#   ),
+#   server = function(input, output) {
+#     output$plot &lt;- renderPlot({ hist(runif(input$n)) })
+#   }
+# ))
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>runApp</li>
+</ul>
+<ul>
+  
+</ul> -->
+  

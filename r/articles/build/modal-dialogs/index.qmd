@@ -1,0 +1,54 @@
+---
+title: Modal dialogs
+date: 2016-08-17
+author: Winston Chang
+description: As of version 0.14, Shiny has built-in support for displaying modal dialogs.
+---
+
+As of version 0.14, Shiny has built-in support for displaying modal dialogs like the one below:
+
+![Modal dialog screenshot](modal-dialog.png){fig-alt="Pop up of a box that says Important message. This is an important message! and has a Dismiss button."}
+
+You can see the app in action [here](https://gallery.shinyapps.io/114-modal-dialog/).
+
+For the majority of use cases, there are three parts for displaying a modal dialog:
+
+* The HTML for the modal dialog.
+* A call to `showModal()`, which sends the HTML to the client to be displayed.
+* An observer that performs the two steps above in response to some event.
+
+This simple app illustrates how these things fit together:
+
+````r
+shinyApp(
+  ui = basicPage(
+    actionButton("show", "Show modal dialog")
+  ),
+  server = function(input, output) {
+    observeEvent(input$show, {
+      showModal(modalDialog(
+        title = "Important message",
+        "This is an important message!",
+        easyClose = TRUE
+      ))
+    })
+  }
+)
+````
+
+
+The call to `modalDialog()` generates the HTML. If you simply run `modalDialog()` at the R console, it will print out the HTML for a modal dialog.
+
+The call to `showModal()` sends the HTML to the client browser to be displayed.
+
+Finally, there is `observeEvent()`. When `input$show` changes (in other words, when the button is pressed), it runs the `showModal(modalDialog())` code.
+
+
+## Options
+
+There are a few options that control the appearance an behavior of `modalDialog()`:
+
+* `title`: An optional title for the modal dialog.
+* `size`: Controls the width of the modal dialog. Can be `"s"` for small, `"m"` for medium (the default), or `"l"` for large.
+* `footer`: Content to display in an optional footer for the modal dialog. The default is to display a button that dismisses the modal dialog.
+* `easyClose`: If `TRUE`, then clicking outside the modal dialog or pressing Esc will close the dialog. If `FALSE` (the default), then the user will have to click on the Dismiss button to close it.

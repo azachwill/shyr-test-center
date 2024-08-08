@@ -1,0 +1,9 @@
+title-block-banner: "#ffffff"
+title-block-banner-color: "body"
+format: 
+  html:
+    template: ../../_partials/gallery/gallery-article.template
+    page-layout: article
+    css: 
+      - gallery.css
+      - ../../r/secondary-menu.css

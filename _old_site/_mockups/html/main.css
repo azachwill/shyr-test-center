@@ -1,0 +1,80 @@
+/* General font styling */
+body {
+  font-family: "Open Sans";
+  font-size: 14px;
+  color: #333;
+  padding: 0;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Open Sans";
+}
+h1:first-child {
+  margin-top: 0;
+}
+h1 {
+  font-size: 44px;
+}
+code {
+  font-family: "Consolas";
+}
+
+/* Utility classes */
+.fullwidth {
+  width: 100%;
+}
+.punchup {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Global layout */
+.header {
+  background-color: #428bca;
+  color: white;
+  margin-bottom: 48px;
+}
+.brand {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  font-size: 30px;
+}
+.content {
+  max-width: 1000px;
+}
+.footer {
+  height: 200px;
+  background-color: #DDD;
+  margin-top: 64px;
+}
+.footer-inner {
+  max-width: 970px;
+  margin: 0 auto;
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+/* Nav layout */
+.nav {
+  margin-top: 24px;
+  font-size: 14px;
+  color: #848484;
+}
+.nav li {
+  margin-bottom: 18px;
+}
+
+/* Shared styles */
+.metadata {
+  color: #848484;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin-bottom: 24px;
+}
+.metadata span {
+  margin-right: 24px;
+  white-space: nowrap;
+}

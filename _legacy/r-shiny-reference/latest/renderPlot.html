@@ -1,0 +1,121 @@
+---
+layout: reference
+title: "Plot Output — renderPlot"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Plot Output</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/render-plot.R" class="external-link"><code>R/render-plot.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Renders a reactive plot that is suitable for assigning to an <code>output</code>
+slot.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">renderPlot</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  expr,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="st">"auto"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="st">"auto"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">res =</span> <span class="dv">72</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  ...,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alt =</span> <span class="cn">NA</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">env =</span> <span class="fu">parent.frame</span>(),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">quoted =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">execOnResize =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">outputArgs =</span> <span class="fu">list</span>()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>expr</dt>
+<dd><p>An expression that generates a plot.</p></dd>
+
+
+<dt>width, height</dt>
+<dd><p>Height and width can be specified in three ways:</p><ul><li><p><code>"auto"</code>, the default, uses the size specified by <code><a href="plotOutput.html">plotOutput()</a></code>
+(i.e. the <code>offsetWidth</code>/`offsetHeight`` of the HTML element bound to
+this plot.)</p></li>
+<li><p>An integer, defining the width/height in pixels.</p></li>
+<li><p>A function that returns the width/height in pixels (or <code>"auto"</code>).
+The function is executed in a reactive context so that you can refer to
+reactive values and expression to make the width/height reactive.</p></li>
+</ul><p>When rendering an inline plot, you must provide numeric values (in pixels)
+to both <code>width</code> and <code>height</code>.</p></dd>
+
+
+<dt>res</dt>
+<dd><p>Resolution of resulting plot, in pixels per inch. This value is
+passed to <code><a href="plotPNG.html">plotPNG()</a></code>. Note that this affects the resolution of PNG
+rendering in R; it won't change the actual ppi of the browser.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Arguments to be passed through to <code><a href="plotPNG.html">plotPNG()</a></code>.
+These can be used to set the width, height, background color, etc.</p></dd>
+
+
+<dt>alt</dt>
+<dd><p>Alternate text for the HTML <code>&lt;img&gt;</code> tag if it cannot be displayed
+or viewed (i.e., the user uses a screen reader). In addition to a character
+string, the value may be a reactive expression (or a function referencing
+reactive values) that returns a character string. If the value is <code>NA</code> (the
+default), then <code><a href="https://ggplot2.tidyverse.org/reference/get_alt_text.html" class="external-link">ggplot2::get_alt_text()</a></code> is used to extract alt text from
+ggplot objects; for other plots, <code>NA</code> results in alt text of "Plot object".
+<code>NULL</code> or <code>""</code> is not recommended because those should be limited to
+decorative images.</p></dd>
+
+
+<dt>env</dt>
+<dd><p>The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression. If <code>expr</code> is a quosure and <code>quoted</code> is <code>TRUE</code>,
+then <code>env</code> is ignored.</p></dd>
+
+
+<dt>quoted</dt>
+<dd><p>If it is <code>TRUE</code>, then the <code><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote()</a></code>ed value of <code>expr</code>
+will be used when <code>expr</code> is evaluated. If <code>expr</code> is a quosure and you
+would like to use its expression as a value for <code>expr</code>, then you must set
+<code>quoted</code> to <code>TRUE</code>.</p></dd>
+
+
+<dt>execOnResize</dt>
+<dd><p>If <code>FALSE</code> (the default), then when a plot is
+resized, Shiny will <em>replay</em> the plot drawing commands with
+<code><a href="https://rdrr.io/r/grDevices/recordplot.html" class="external-link">grDevices::replayPlot()</a></code> instead of re-executing <code>expr</code>.
+This can result in faster plot redrawing, but there may be rare cases where
+it is undesirable. If you encounter problems when resizing a plot, you can
+have Shiny re-execute the code on resize by setting this to <code>TRUE</code>.</p></dd>
+
+
+<dt>outputArgs</dt>
+<dd><p>A list of arguments to be passed through to the implicit
+call to <code><a href="plotOutput.html">plotOutput()</a></code> when <code>renderPlot</code> is used in an
+interactive R Markdown document.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The corresponding HTML output tag should be <code>div</code> or <code>img</code> and have
+the CSS class name <code>shiny-plot-output</code>.</p>
+  </div>
+  <div data-section="interactive-plots">
+    <h3 id="interactive-plots">Interactive plots</h3>
+    
+
+
+<p>With ggplot2 graphics, the code in <code>renderPlot</code> should return a ggplot
+object; if instead the code prints the ggplot2 object with something like
+<code>print(p)</code>, then the coordinates for interactive graphics will not be
+properly scaled to the data space.</p>
+<p>See <code><a href="plotOutput.html">plotOutput()</a></code> for more information about interactive plots.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p>For the corresponding client-side output function, and example
+usage, see <code><a href="plotOutput.html">plotOutput()</a></code>. For more details on how the plots are
+generated, and how to control the output, see <code><a href="plotPNG.html">plotPNG()</a></code>.
+<code><a href="renderCachedPlot.html">renderCachedPlot()</a></code> offers a way to cache generated plots to
+expedite the rendering of identical plots.</p></div>
+  </div>
+
+</div>

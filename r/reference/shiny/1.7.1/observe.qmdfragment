@@ -1,0 +1,157 @@
+---
+title: "Create a reactive observer — observe"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.1</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.1/R/reactives.R" class="external-link"><code>R/reactives.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Creates an observer from the given expression.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">observe</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  x,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">env =</span> <span class="fu">parent.frame</span>(),</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">quoted =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  ...,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">label =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">suspended =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="at">priority =</span> <span class="dv">0</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="at">domain =</span> <span class="fu">getDefaultReactiveDomain</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">autoDestroy =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">..stacktraceon =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>x</dt>
+<dd><p>An expression (quoted or unquoted). Any return value will be
+ignored.</p></dd>
+
+
+<dt>env</dt>
+<dd><p>The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression. If <code>x</code> is a quosure and <code>quoted</code> is <code>TRUE</code>,
+then <code>env</code> is ignored.</p></dd>
+
+
+<dt>quoted</dt>
+<dd><p>If it is <code>TRUE</code>, then the <code><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote()</a></code>ed value of <code>x</code>
+will be used when <code>x</code> is evaluated. If <code>x</code> is a quosure and you
+would like to use its expression as a value for <code>x</code>, then you must set
+<code>quoted</code> to <code>TRUE</code>.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Not used.</p></dd>
+
+
+<dt>label</dt>
+<dd><p>A label for the observer, useful for debugging.</p></dd>
+
+
+<dt>suspended</dt>
+<dd><p>If <code>TRUE</code>, start the observer in a suspended state. If
+<code>FALSE</code> (the default), start in a non-suspended state.</p></dd>
+
+
+<dt>priority</dt>
+<dd><p>An integer or numeric that controls the priority with which
+this observer should be executed. A higher value means higher priority: an
+observer with a higher priority value will execute before all observers
+with lower priority values. Positive, negative, and zero values are
+allowed.</p></dd>
+
+
+<dt>domain</dt>
+<dd><p>See <a href="domains.html">domains</a>.</p></dd>
+
+
+<dt>autoDestroy</dt>
+<dd><p>If <code>TRUE</code> (the default), the observer will be
+automatically destroyed when its domain (if any) ends.</p></dd>
+
+
+<dt>..stacktraceon</dt>
+<dd><p>Advanced use only. For stack manipulation purposes; see
+<code><a href="stacktrace.html">stacktrace()</a></code>.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>An observer reference class object. This object has the following
+methods:</p><dl><dt><code>suspend()</code></dt>
+<dd><p>Causes this observer to stop scheduling flushes (re-executions) in
+response to invalidations. If the observer was invalidated prior to
+this call but it has not re-executed yet then that re-execution will
+still occur, because the flush is already scheduled.</p></dd>
+
+<dt><code>resume()</code></dt>
+<dd><p>Causes this observer to start re-executing in response to
+invalidations. If the observer was invalidated while suspended, then it
+will schedule itself for re-execution.</p></dd>
+
+<dt><code>destroy()</code></dt>
+<dd><p>Stops the observer from executing ever again, even if it is currently
+scheduled for re-execution.</p></dd>
+
+<dt><code>setPriority(priority = 0)</code></dt>
+<dd><p>Change this observer's priority. Note that if the observer is currently
+invalidated, then the change in priority will not take effect until the
+next invalidation--unless the observer is also currently suspended, in
+which case the priority change will be effective upon resume.</p></dd>
+
+<dt><code>setAutoDestroy(autoDestroy)</code></dt>
+<dd><p>Sets whether this observer should be automatically destroyed when its
+domain (if any) ends. If autoDestroy is TRUE and the domain already
+ended, then destroy() is called immediately."</p></dd>
+
+<dt><code>onInvalidate(callback)</code></dt>
+<dd><p>Register a callback function to run when this observer is invalidated.
+No arguments will be provided to the callback function when it is
+invoked.</p></dd>
+
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>An observer is like a reactive expression in that it can read reactive values
+and call reactive expressions, and will automatically re-execute when those
+dependencies change. But unlike reactive expressions, it doesn't yield a
+result and can't be used as an input to other reactive expressions. Thus,
+observers are only useful for their side effects (for example, performing
+I/O).</p>
+<p>Another contrast between reactive expressions and observers is their
+execution strategy. Reactive expressions use lazy evaluation; that is, when
+their dependencies change, they don't re-execute right away but rather wait
+until they are called by someone else. Indeed, if they are not called then
+they will never re-execute. In contrast, observers use eager evaluation; as
+soon as their dependencies change, they schedule themselves to re-execute.</p>
+<p>Starting with Shiny 0.10.0, observers are automatically destroyed by default
+when the <a href="domains.html">domain</a> that owns them ends (e.g. when a Shiny
+session ends).</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">reactiveValues</span>(<span class="at">A=</span><span class="dv">1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>obsB <span class="ot">&lt;-</span> <span class="fu">observe</span>({</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="fu">print</span>(values<span class="sc">$</span>A <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>})</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># To store expressions for later conversion to observe, use rlang::quo()</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>myquo <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">quo</span>({ <span class="fu">print</span>(values<span class="sc">$</span>A <span class="sc">+</span> <span class="dv">3</span>) })</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>obsC <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">inject</span>(<span class="fu">observe</span>(<span class="sc">!!</span>myquo))</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># (Legacy) Can use quoted expressions</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>obsD <span class="ot">&lt;-</span> <span class="fu">observe</span>(<span class="fu">quote</span>({ <span class="fu">print</span>(values<span class="sc">$</span>A <span class="sc">+</span> <span class="dv">2</span>) }), <span class="at">quoted =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co"># In a normal Shiny app, the web client will trigger flush events. If you</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co"># are at the console, you can force a flush with flushReact()</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>shiny<span class="sc">:::</span><span class="fu">flushReact</span>()</span></code></pre></div>
+  </div>
+</div>
+```

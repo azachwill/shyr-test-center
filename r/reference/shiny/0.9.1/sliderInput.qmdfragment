@@ -1,0 +1,205 @@
+---
+title: "sliderInput"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>sliderInput(inputId, label, min, max, value, step&nbsp;=&nbsp;NULL, round&nbsp;=&nbsp;FALSE, format&nbsp;=&nbsp;"#,##0.#####", locale&nbsp;=&nbsp;"us", ticks&nbsp;=&nbsp;TRUE, animate&nbsp;=&nbsp;FALSE)</div>
+<div>animationOptions(interval&nbsp;=&nbsp;1000, loop&nbsp;=&nbsp;FALSE, playButton&nbsp;=&nbsp;NULL, pauseButton&nbsp;=&nbsp;NULL)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>inputId</th>
+    <td>Specifies the <code>input</code> slot that will
+  be used to access the value.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>A descriptive label to be displayed with the
+  widget.</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>The minimum value (inclusive) that can be
+  selected.</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>The maximum value (inclusive) that can be
+  selected.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>The initial value of the slider. A numeric
+  vector of length one will create a regular slider; a
+  numeric vector of length two will create a double-ended
+  range slider. A warning will be issued if the value
+  doesn't fit between <code>min</code> and <code>max</code>.</td>
+  </tr>
+  <tr>
+    <th>step</th>
+    <td>Specifies the interval between each
+  selectable value on the slider (<code>NULL</code> means no
+  restriction).</td>
+  </tr>
+  <tr>
+    <th>round</th>
+    <td><code>TRUE</code> to round all values to the
+  nearest integer; <code>FALSE</code> if no rounding is desired;
+  or an integer to round to that number of digits (for
+  example, 1 will round to the nearest 10, and -2 will
+  round to the nearest .01). Any rounding will be applied
+  after snapping to the nearest step.</td>
+  </tr>
+  <tr>
+    <th>format</th>
+    <td>Customize format values in slider labels.
+  See
+  <a href = 'https://code.google.com/p/jquery-numberformatter/'>https://code.google.com/p/jquery-numberformatter/</a>
+  for syntax details.</td>
+  </tr>
+  <tr>
+    <th>locale</th>
+    <td>The locale to be used when applying
+  <code>format</code>. See details.</td>
+  </tr>
+  <tr>
+    <th>ticks</th>
+    <td><code>FALSE</code> to hide tick marks, <code>TRUE</code>
+  to show them according to some simple heuristics.</td>
+  </tr>
+  <tr>
+    <th>animate</th>
+    <td><code>TRUE</code> to show simple animation
+  controls with default settings; <code>FALSE</code> not to; or a
+  custom settings list, such as those created using
+  <code>animationOptions</code>.</td>
+  </tr>
+  <tr>
+    <th>interval</th>
+    <td>The interval, in milliseconds, between
+  each animation step.</td>
+  </tr>
+  <tr>
+    <th>loop</th>
+    <td><code>TRUE</code> to automatically restart the
+  animation when it reaches the end.</td>
+  </tr>
+  <tr>
+    <th>playButton</th>
+    <td>Specifies the appearance of the play
+  button. Valid values are a one-element character vector
+  (for a simple text label), an HTML tag or list of tags
+  (using <code><a href='tag.html'>tag</a></code> and friends), or raw HTML (using
+  <code><a href='HTML.html'>HTML</a></code>).</td>
+  </tr>
+  <tr>
+    <th>pauseButton</th>
+    <td>Similar to <code>playButton</code>, but for
+  the pause button.</td>
+  </tr>
+</table>
+
+<div data-section="Slider Input Widget">
+  <h3 data-swiftype-index="false">Slider Input Widget</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Constructs a slider widget to select a numeric value from a range.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>Valid values for <code>locale</code> are: <table><tr><td> Arab Emirates </td>
+<td> "ae" </td>
+</tr><tr><td>
+Australia </td>
+<td> "au" </td>
+</tr><tr><td> Austria </td>
+<td> "at" </td>
+</tr><tr><td> Brazil </td>
+<td> "br" </td>
+</tr><tr><td> Canada
+</td>
+<td> "ca" </td>
+</tr><tr><td> China </td>
+<td> "cn" </td>
+</tr><tr><td> Czech </td>
+<td> "cz" </td>
+</tr><tr><td> Denmark </td>
+<td> "dk" </td>
+</tr><tr><td>
+Egypt </td>
+<td> "eg" </td>
+</tr><tr><td> Finland </td>
+<td> "fi" </td>
+</tr><tr><td> France  </td>
+<td> "fr" </td>
+</tr><tr><td> Germany </td>
+<td>
+"de" </td>
+</tr><tr><td> Greece </td>
+<td> "gr" </td>
+</tr><tr><td> Great Britain </td>
+<td> "gb" </td>
+</tr><tr><td> Hong Kong </td>
+<td> "hk"
+</td>
+</tr><tr><td> India </td>
+<td> "in" </td>
+</tr><tr><td> Israel </td>
+<td> "il" </td>
+</tr><tr><td> Japan </td>
+<td> "jp" </td>
+</tr><tr><td> Russia </td>
+<td>
+"ru" </td>
+</tr><tr><td> South Korea </td>
+<td> "kr" </td>
+</tr><tr><td> Spain </td>
+<td> "es" </td>
+</tr><tr><td> Sweden </td>
+<td> "se" </td>
+</tr><tr><td>
+Switzerland </td>
+<td> "ch" </td>
+</tr><tr><td> Taiwan </td>
+<td> "tw" </td>
+</tr><tr><td> Thailand </td>
+<td> "th" </td>
+</tr><tr><td> United
+States </td>
+<td> "us" </td>
+</tr><tr><td> Vietnam </td>
+<td> "vn" </td>
+</tr></table></p>
+
+</div>
+<!-- <ul>
+  <li>animationOptions</li><li>sliderInput</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='updateSliderInput.html'>updateSliderInput</a></code>
+
+Other input.elements: <code><a href='actionButton.html'>actionButton</a></code>;
+  <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>;
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>; <code><a href='dateInput.html'>dateInput</a></code>;
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>; <code><a href='fileInput.html'>fileInput</a></code>;
+  <code><a href='numericInput.html'>numericInput</a></code>; <code><a href='radioButtons.html'>radioButtons</a></code>;
+  <code><a href='selectInput.html'>selectInput</a></code>, <code><a href='selectInput.html'>selectizeInput</a></code>;
+  <code><a href='submitButton.html'>submitButton</a></code>; <code><a href='textInput.html'>textInput</a></code>
+
+</div>
+```

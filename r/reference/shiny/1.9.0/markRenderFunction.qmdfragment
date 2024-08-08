@@ -1,0 +1,95 @@
+---
+title: "Mark a function as a render function — markRenderFunction"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.9.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.9.0/R/shinywrappers.R" class="external-link"><code>R/shinywrappers.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p><a href="https://lifecycle.r-lib.org/articles/stages.html#superseded" class="external-link"><img src="figures/lifecycle-superseded.svg" alt="[Superseded]"></a> Please use <code><a href="createRenderFunction.html">createRenderFunction()</a></code> to
+support async execution. (Shiny 1.1.0)</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">markRenderFunction</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  uiFunc,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  renderFunc,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">outputArgs =</span> <span class="fu">list</span>(),</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">cacheHint =</span> <span class="st">"auto"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">cacheWriteHook =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">cacheReadHook =</span> <span class="cn">NULL</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>uiFunc</dt>
+<dd><p>A function that renders Shiny UI. Must take a single argument:
+an output ID.</p></dd>
+
+
+<dt>renderFunc</dt>
+<dd><p>A function that is suitable for assigning to a Shiny output
+slot.</p></dd>
+
+
+<dt>outputArgs</dt>
+<dd><p>A list of arguments to pass to the <code>uiFunc</code>. Render
+functions should include <code>outputArgs = list()</code> in their own parameter list,
+and pass through the value to <code>markRenderFunction</code>, to allow app authors to
+customize outputs. (Currently, this is only supported for dynamically
+generated UIs, such as those created by Shiny code snippets embedded in R
+Markdown documents).</p></dd>
+
+
+<dt>cacheHint</dt>
+<dd><p>One of <code>"auto"</code>, <code>FALSE</code>, or some other information to
+identify this instance for caching using <code><a href="bindCache.html">bindCache()</a></code>. If <code>"auto"</code>, it
+will try to automatically infer caching information. If <code>FALSE</code>, do not
+allow caching for the object. Some render functions (such as <a href="renderPlot.html">renderPlot</a>)
+contain internal state that makes them unsuitable for caching.</p></dd>
+
+
+<dt>cacheWriteHook</dt>
+<dd><p>Used if the render function is passed to <code><a href="bindCache.html">bindCache()</a></code>.
+This is an optional callback function to invoke before saving the value
+from the render function to the cache. This function must accept one
+argument, the value returned from <code>renderFunc</code>, and should return the value
+to store in the cache.</p></dd>
+
+
+<dt>cacheReadHook</dt>
+<dd><p>Used if the render function is passed to <code><a href="bindCache.html">bindCache()</a></code>.
+This is an optional callback function to invoke after reading a value from
+the cache (if there is a cache hit). The function will be passed one
+argument, the value retrieved from the cache. This can be useful when some
+side effect needs to occur for a render function to behave correctly. For
+example, some render functions call <code><a href="createWebDependency.html">createWebDependency()</a></code> so that Shiny
+is able to serve JS and CSS resources.</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>The <code>renderFunc</code> function, with annotations.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Should be called by implementers of <code>renderXXX</code> functions in order to mark
+their return values as Shiny render functions, and to provide a hint to Shiny
+regarding what UI function is most commonly used with this type of render
+function. This can be used in R Markdown documents to create complete output
+widgets out of just the render function.</p>
+<p>Note that it is generally preferable to use <code><a href="createRenderFunction.html">createRenderFunction()</a></code> instead
+of <code>markRenderFunction()</code>. It essentially wraps up the user-provided
+expression in the <code>transform</code> function passed to it, then passes the resulting
+function to <code>markRenderFunction()</code>. It also provides a simpler calling
+interface. There may be cases where <code>markRenderFunction()</code> must be used instead of
+<code><a href="createRenderFunction.html">createRenderFunction()</a></code> -- for example, when the <code>transform</code> parameter of
+<code><a href="createRenderFunction.html">createRenderFunction()</a></code> is not flexible enough for your needs.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="createRenderFunction.html">createRenderFunction()</a></code></p></div>
+  </div>
+
+</div>
+```

@@ -1,0 +1,18 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: This app is an interactive tool that allows any user to choose a soccer player from the game and find the ten players most similar whith him.
+title:        "The ten most similar players - Pro Evolution Soccer 2019"
+author:    Thiago
+authorurl:     https://github.com/ThiagoValentimMarques
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - soccer
+appurl:      https://thiago-valentim.shinyapps.io/project/
+sourceurl:   https://github.com/ThiagoValentimMarques/The-ten-most-similar-players-Pro-Evolution-Soccer-2019
+rscloudurl:  https://rstudio.cloud/project/258570
+---
+
+This app is an interactive tool that allows any user to choose a soccer player from the game and find the ten players most similar whith him.
+  

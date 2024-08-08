@@ -1,0 +1,41 @@
+---
+title: "Add a function for preprocessing an input before taking a test snapshot — snapshotPreprocessInput"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>snapshotPreprocessInput</span>(<span class='no'>inputId</span>, <span class='no'>fun</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>inputId</p></th>
+    <td><p>Name of the input value.</p></td>
+  </tr>
+  <tr>
+    <th><p>fun</p></th>
+    <td><p>A function that takes the input value and returns a modified
+value. The returned value will be used for the test snapshot.</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>A Shiny session object.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Add a function for preprocessing an input before taking a test snapshot</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+</div>
+
+
+```

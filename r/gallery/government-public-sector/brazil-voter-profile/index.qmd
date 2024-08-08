@@ -1,0 +1,22 @@
+---
+image: thumbnail.png
+imagealt: ""
+title:        "Voronoys - Understanding voters' profile in Brazilian elections"
+description: This tool provides access to usual charts, maps and an innovative way to investigate voters' profile in Brazilian elections.
+author:    Douglas Mesquita
+authorurl:     https://require-r.com
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - visualization
+ - spatial
+ - leaflet
+ - plotly
+appurl:      https://voronoys.shinyapps.io/voronoys/
+sourceurl:   https://github.com/voronoys/voronoys_sc
+rscloudurl:  https://rstudio.cloud/project/255741
+---
+
+This tool provides access to usual charts, maps and an innovative way to investigate voters' profile in Brazilian elections.
+  
+This app was recognized with an honorable mention on the 2019 Shiny Contest.

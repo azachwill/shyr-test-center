@@ -1,0 +1,265 @@
+---
+pagetitle: "Shiny"
+page-layout: article
+sidebar: false
+section-divs: false
+toc: false
+description: Shiny is package that makes it easy to build interactive web apps straight from R & Python.
+image: /images/shiny-thumb.png
+---
+
+::: {.text-center .column-screen-inset style="z-index:999;max-width: 1220px;margin: auto;"}
+
+<div class="gradient-text display-4 fw-bolder pb-4">Easy web apps for data science without the compromises</div>
+
+
+##### No web development skills required
+
+:::
+
+::: {.d-grid .d-md-block .pt-5 .text-center style="z-index:999;"}
+
+<a href="r/getstarted" class="btn btn-dark m-2 px-5">Get started in R</a><a href="https://shiny.posit.co/py/" class="btn btn-dark m-2 px-5">Get started in Python</a>
+
+:::
+
+
+:::{.column-screen .hero-image}
+<p class="mb-0">
+![](images/hero-plot-blue.svg){.mb-0}
+</p>
+:::
+
+::: {.column-screen .bg-gray .mb-0 .px-3 .px-md-5 }
+
+::: {.pt-5 .pb-5 .mx-auto style="max-width:1100px;"}
+
+# Here is a Shiny app
+
+#### Shiny apps are easy to write. Let users interact with your data and your analysis, all with R or Python:
+
+<ul class="nav nav-tabs mt-5" id="hello-shiny-tab" role="tablist">
+
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active px-5" id="r-tab" data-bs-toggle="tab" data-bs-target="#r" type="button" role="tab" aria-controls="r" aria-selected="true">R</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link px-4" id="python-tab" data-bs-toggle="tab" data-bs-target="#python" type="button" role="tab" aria-controls="python" aria-selected="false">Python</button>
+  </li>
+
+</ul>
+
+
+<div class="tab-content bg-white p-0" id="hello-shiny-tabcontent">
+
+<div class="tab-pane fade show active" id="r" role="tabpanel" aria-labelledby="r-tab">
+
+::: {.grid .bg-white .pt-4 .px-0}
+::: {.g-col-12 .mx-3}
+
+
+```r { .panel-tabset filename="app.R" style="max-height:410px;overflow:scroll;margin-bottom: 0.5rem;"}
+library(shiny)
+library(bslib)
+library(dplyr)
+library(ggplot2)
+library(ggExtra)
+
+penguins_csv <- "https://raw.githubusercontent.com/jcheng5/simplepenguins.R/main/penguins.csv"
+
+df <- readr::read_csv(penguins_csv)
+# Find subset of columns that are suitable for scatter plot
+df_num <- df |> select(where(is.numeric), -Year)
+
+ui <- page_sidebar(
+  sidebar = sidebar(
+    varSelectInput("xvar", "X variable", df_num, selected = "Bill Length (mm)"),
+    varSelectInput("yvar", "Y variable", df_num, selected = "Bill Depth (mm)"),
+    checkboxGroupInput(
+      "species", "Filter by species",
+      choices = unique(df$Species), 
+      selected = unique(df$Species)
+    ),
+    hr(), # Add a horizontal rule
+    checkboxInput("by_species", "Show species", TRUE),
+    checkboxInput("show_margins", "Show marginal plots", TRUE),
+    checkboxInput("smooth", "Add smoother"),
+  ),
+  plotOutput("scatter")
+)
+
+server <- function(input, output, session) {
+  subsetted <- reactive({
+    req(input$species)
+    df |> filter(Species %in% input$species)
+  })
+
+  output$scatter <- renderPlot({
+    p <- ggplot(subsetted(), aes(!!input$xvar, !!input$yvar)) + list(
+      theme(legend.position = "bottom"),
+      if (input$by_species) aes(color = Species),
+      geom_point(),
+      if (input$smooth) geom_smooth()
+    )
+
+    if (input$show_margins) {
+      margin_type <- if (input$by_species) "density" else "histogram"
+      p <- ggExtra::ggMarginal(p, type = margin_type, margins = "both",
+        size = 8, groupColour = input$by_species, groupFill = input$by_species)
+    }
+
+    p
+  }, res = 100)
+}
+
+shinyApp(ui, server)
+```
+:::
+
+::: {.hello-output .g-col-12}
+<iframe
+  src="https://gallery.shinyapps.io/simplepenguins/"
+  frameborder="0"
+  width="100%"
+  height="600"
+  class="mb-0"
+></iframe>
+:::
+:::
+
+</div>
+
+<div class="tab-pane fade" id="python" role="tabpanel" aria-labelledby="python-tab">
+
+::: {.grid .bg-white .pt-4}
+::: {.g-col-12 .px-3}
+```python {filename="app.py" style="max-height:410px;overflow:scroll;margin-bottom: 0.5rem;"}
+from pathlib import Path
+
+import pandas as pd
+import seaborn as sns
+
+from shiny import App, Inputs, Outputs, Session, reactive, render, req, ui
+
+sns.set_theme()
+
+# https://raw.githubusercontent.com/jcheng5/simplepenguins.R/main/penguins.csv
+
+df = pd.read_csv(Path(__file__).parent / "penguins.csv", na_values="NA")
+numeric_cols = df.select_dtypes(include=["float64"]).columns.tolist()
+species = df["Species"].unique().tolist()
+species.sort()
+
+app_ui = ui.page_sidebar(
+    ui.sidebar(
+        ui.input_selectize(
+            "xvar", "X variable", numeric_cols, selected="Bill Length (mm)"
+        ),
+        ui.input_selectize(
+            "yvar", "Y variable", numeric_cols, selected="Bill Depth (mm)"
+        ),
+        ui.input_checkbox_group(
+            "species", "Filter by species", species, selected=species
+        ),
+        ui.hr(),
+        ui.input_switch("by_species", "Show species", value=True),
+        ui.input_switch("show_margins", "Show marginal plots", value=True),
+    ),
+    ui.card(
+        ui.output_plot("scatter"),
+    ),
+)
+
+
+def server(input: Inputs, output: Outputs, session: Session):
+    @reactive.Calc
+    def filtered_df() -> pd.DataFrame:
+        """Returns a Pandas data frame that includes only the desired rows"""
+
+        # This calculation "req"uires that at least one species is selected
+        req(len(input.species()) > 0)
+
+        # Filter the rows so we only include the desired species
+        return df[df["Species"].isin(input.species())]
+
+    @output
+    @render.plot
+    def scatter():
+        """Generates a plot for Shiny to display to the user"""
+
+        # The plotting function to use depends on whether margins are desired
+        plotfunc = sns.jointplot if input.show_margins() else sns.scatterplot
+
+        plotfunc(
+            data=filtered_df(),
+            x=input.xvar(),
+            y=input.yvar(),
+            hue="Species" if input.by_species() else None,
+            hue_order=species,
+            legend=False,
+        )
+
+
+app = App(app_ui, server)
+```
+:::
+
+::: {.hello-output .g-col-12}
+<iframe
+  src="https://gallery.shinyapps.io/simplepenguinspy/"
+  frameborder="0"
+  width="100%"
+  height="600"
+  class="mb-0"
+></iframe>
+
+:::
+:::
+
+
+</div>
+</div>
+
+:::
+
+::: {.d-grid .d-md-block .pb-5 .text-center}
+
+<a href="r/getstarted" class="btn btn-dark m-2 px-5">Get started in R</a><a href="https://shiny.posit.co/py/" class="btn btn-dark m-2 px-5">Get started in Python</a>
+
+:::
+:::
+
+:::: {.column-screen .text-center .bg-dark-blue .py-5}
+
+## Hosting and Deployment {.text-white}
+
+#### Put your Shiny app on the web by using your own servers or Posit's hosting service.{.mt-0}
+
+::: {.pt-4 .pb-2 .mt-2}
+<a href="r/deploy" class="btn btn-link text-white m-2 text-decoration-none">Deploy for R <i class="bi bi-chevron-right"></i></a><a href="https://shiny.posit.co/py/docs/deploy.html" target="_blank" class="btn btn-link text-white m-2 text-decoration-none">Deploy for Python <i class="bi bi-chevron-right"></i></a>
+:::
+
+::::
+
+
+:::: {.column-screen-inset .pt-5 }
+
+## Organizations that use Shiny: {.text-center}
+
+::: {.grid .text-center .mx-auto .pt-4 .mt-2 style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));justify-content:center;align-items: center;max-width: 1300px;"}
+
+![](images/pfizer.png){.px-2 .px-md-3}
+
+![](images/oxford.svg){.px-3 .px-md-4}
+
+![](images/janssen.svg){.px-1 .px-md-2}
+
+![](images/stack-overflow.svg)
+
+![](images/jnj.png){.px-1 .px-md-2}
+
+![](images/harvard-medical.svg){.px-1 .px-md-2}
+
+![](images/astra.png)
+:::
+::::

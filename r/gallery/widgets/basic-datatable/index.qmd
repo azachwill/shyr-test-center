@@ -1,0 +1,12 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Basic DataTable
+date: 2014-07-29 
+tags:
+ - mtcars
+ - selectinput
+ - datatables
+appurl: https://gallery.shinyapps.io/030-basic-datatable
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/030-basic-datatable
+---

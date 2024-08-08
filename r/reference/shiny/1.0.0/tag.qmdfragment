@@ -1,0 +1,100 @@
+---
+title: "tag"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='tag.html'>tagList</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='tag.html'>tagAppendAttributes</a></span><span class="keyword">(</span><span class="symbol">tag</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='tag.html'>tagAppendChild</a></span><span class="keyword">(</span><span class="symbol">tag</span><span class="keyword">,</span> <span class="symbol">child</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='tag.html'>tagAppendChildren</a></span><span class="keyword">(</span><span class="symbol">tag</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">list</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='tag.html'>tagSetChildren</a></span><span class="keyword">(</span><span class="symbol">tag</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">list</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='tag.html'>tag</a></span><span class="keyword">(</span><span class="symbol">`_tag_name`</span><span class="keyword">,</span> <span class="symbol">varArgs</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>_tag_name</th>
+    <td>HTML tag name</td>
+  </tr>
+  <tr>
+    <th>varArgs</th>
+    <td>List of attributes and children of the element. Named list
+items become attributes, and unnamed list items become children. Valid
+children are tags, single-character character vectors (which become text
+nodes), and raw HTML (see <code><a href='HTML.html'>HTML</a></code>). You can also pass lists that
+contain tags, text nodes, and HTML.</td>
+  </tr>
+  <tr>
+    <th>tag</th>
+    <td>A tag to append child elements to.</td>
+  </tr>
+  <tr>
+    <th>child</th>
+    <td>A child element to append to a parent tag.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Unnamed items that comprise this list of tags.</td>
+  </tr>
+  <tr>
+    <th>list</th>
+    <td>An optional list of elements. Can be used with or instead of the
+<code>...</code> items.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+An HTML tag object that can be rendered as HTML using
+  <code><a href='http://www.rdocumentation.org/packages/base/topics/character'>as.character</a>()</code>.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p><code>tag()</code> creates an HTML tag definition. Note that all of the valid HTML5
+tags are already defined in the <code><a href='builder.html'>tags</a></code> environment so these
+functions should only be used to generate additional tags.
+<code>tagAppendChild()</code> and <code>tagList()</code> are for supporting package
+authors who wish to create their own sets of tags; see the contents of
+bootstrap.R for examples.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='tag.html'>tagList</a></span><span class="keyword">(</span><span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='builder.html'>h1</a></span><span class="keyword">(</span><span class="string">"Title"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='builder.html'>h2</a></span><span class="keyword">(</span><span class="string">"Header text"</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='builder.html'>p</a></span><span class="keyword">(</span><span class="string">"Text here"</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>&lt;h1&gt;Title&lt;/h1&gt;
+&lt;h2&gt;Header text&lt;/h2&gt;
+&lt;p&gt;Text here&lt;/p&gt;
+</div>
+<div class='input'>
+<span class="comment"># Can also convert a regular list to a tagList (internal data structure isn't</span>
+<span class="comment"># exactly the same, but when rendered to HTML, the output is the same).</span>
+<span class="symbol">x</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='builder.html'>h1</a></span><span class="keyword">(</span><span class="string">"Title"</span><span class="keyword">)</span><span class="keyword">,</span>
+          <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='builder.html'>h2</a></span><span class="keyword">(</span><span class="string">"Header text"</span><span class="keyword">)</span><span class="keyword">,</span>
+          <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='builder.html'>p</a></span><span class="keyword">(</span><span class="string">"Text here"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="functioncall"><a href='tag.html'>tagList</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span></div>
+<div class='output'>&lt;h1&gt;Title&lt;/h1&gt;
+&lt;h2&gt;Header text&lt;/h2&gt;
+&lt;p&gt;Text here&lt;/p&gt;
+</div></code></pre>
+<!-- <ul>
+  <li>tag</li><li>tagAppendAttributes</li><li>tagAppendChild</li><li>tagAppendChildren</li><li>tagList</li><li>tagSetChildren</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

@@ -1,0 +1,119 @@
+---
+title: "Run a Shiny application from a URL — runUrl"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>runUrl</span>(<span class='no'>url</span>, <span class='kw'>filetype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>destdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='fu'>runGist</span>(<span class='no'>gist</span>, <span class='kw'>destdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='fu'>runGitHub</span>(
+  <span class='no'>repo</span>,
+  <span class='kw'>username</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"github.user"</span>),
+  <span class='kw'>ref</span> <span class='kw'>=</span> <span class='st'>"master"</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>destdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>url</p></th>
+    <td><p>URL of the application.</p></td>
+  </tr>
+  <tr>
+    <th><p>filetype</p></th>
+    <td><p>The file type (<code>".zip"</code>, <code>".tar"</code>, or
+<code>".tar.gz"</code>. Defaults to the file extension taken from the url.</p></td>
+  </tr>
+  <tr>
+    <th><p>subdir</p></th>
+    <td><p>A subdirectory in the repository that contains the app. By
+default, this function will run an app from the top level of the repo, but
+you can use a path such as <code>"inst/shinyapp"</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>destdir</p></th>
+    <td><p>Directory to store the downloaded application files. If <code>NULL</code>
+(the default), the application files will be stored in a temporary directory
+and removed when the app exits</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Other arguments to be passed to <code><a href='runApp.html'>runApp()</a></code>, such as
+<code>port</code> and <code>launch.browser</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>gist</p></th>
+    <td><p>The identifier of the gist. For example, if the gist is
+https://gist.github.com/jcheng5/3239667, then <code>3239667</code>,
+<code>'3239667'</code>, and <code>'https://gist.github.com/jcheng5/3239667'</code> are
+all valid values.</p></td>
+  </tr>
+  <tr>
+    <th><p>repo</p></th>
+    <td><p>Name of the repository.</p></td>
+  </tr>
+  <tr>
+    <th><p>username</p></th>
+    <td><p>GitHub username. If <code>repo</code> is of the form
+<code>"username/repo"</code>, <code>username</code> will be taken from <code>repo</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>ref</p></th>
+    <td><p>Desired git reference. Could be a commit, tag, or branch name.
+Defaults to <code>"master"</code>.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p><code>runUrl()</code> downloads and launches a Shiny application that is hosted at
+a downloadable URL. The Shiny application must be saved in a .zip, .tar, or
+.tar.gz file. The Shiny application files must be contained in the root
+directory or a subdirectory in the archive. For example, the files might be
+<code>myapp/server.r</code> and <code>myapp/ui.r</code>. The functions <code>runGitHub()</code>
+and <code>runGist()</code> are based on <code>runUrl()</code>, using URL's from GitHub
+(<a href='https://github.com'>https://github.com</a>) and GitHub gists (<a href='https://gist.github.com'>https://gist.github.com</a>),
+respectively.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'>runUrl</span>(<span class='st'>'https://github.com/rstudio/shiny_example/archive/master.tar.gz'</span>)
+
+  <span class='co'># Can run an app from a subdirectory in the archive</span>
+  <span class='fu'>runUrl</span>(<span class='st'>"https://github.com/rstudio/shiny_example/archive/master.zip"</span>,
+    <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='st'>"inst/shinyapp/"</span>)
+}
+<span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'>runGist</span>(<span class='fl'>3239667</span>)
+  <span class='fu'>runGist</span>(<span class='st'>"https://gist.github.com/jcheng5/3239667"</span>)
+
+  <span class='co'># Old URL format without username</span>
+  <span class='fu'>runGist</span>(<span class='st'>"https://gist.github.com/3239667"</span>)
+}
+
+<span class='co'>## Only run this example in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'>runGitHub</span>(<span class='st'>"shiny_example"</span>, <span class='st'>"rstudio"</span>)
+  <span class='co'># or runGitHub("rstudio/shiny_example")</span>
+
+  <span class='co'># Can run an app from a subdirectory in the repo</span>
+  <span class='fu'>runGitHub</span>(<span class='st'>"shiny_example"</span>, <span class='st'>"rstudio"</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='st'>"inst/shinyapp/"</span>)
+}</pre>
+</div>
+
+
+```

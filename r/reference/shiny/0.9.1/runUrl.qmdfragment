@@ -1,0 +1,74 @@
+---
+title: "runUrl"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>runUrl(url, filetype&nbsp;=&nbsp;NULL, subdir&nbsp;=&nbsp;NULL, port&nbsp;=&nbsp;NULL, launch.browser&nbsp;=&nbsp;getOption("shiny.launch.browser", interactive()))</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>url</th>
+    <td>URL of the application.</td>
+  </tr>
+  <tr>
+    <th>filetype</th>
+    <td>The file type (<code>".zip"</code>,
+  <code>".tar"</code>, or <code>".tar.gz"</code>. Defaults to the file
+  extension taken from the url.</td>
+  </tr>
+  <tr>
+    <th>subdir</th>
+    <td>A subdirectory in the repository that
+  contains the app. By default, this function will run an
+  app from the top level of the repo, but you can use a
+  path such as `<code>"inst/shinyapp"</code>.</td>
+  </tr>
+  <tr>
+    <th>port</th>
+    <td>The TCP port that the application should
+  listen on. Defaults to choosing a random port.</td>
+  </tr>
+  <tr>
+    <th>launch.browser</th>
+    <td>If true, the system's default web
+  browser will be launched automatically after the app is
+  started. Defaults to true in interactive sessions only.</td>
+  </tr>
+</table>
+
+<div data-section="Run a Shiny application from a URL">
+  <h3 data-swiftype-index="false">Run a Shiny application from a URL</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Download and launch a Shiny application that is hosted at a downloadable
+URL. The Shiny application must be saved in a .zip, .tar, or .tar.gz file.
+The Shiny application files must be contained in a subdirectory in the
+archive. For example, the files might be <code>myapp/server.r</code> and
+<code>myapp/ui.r</code>.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# runUrl(&#39;https://github.com/rstudio/shiny_example/archive/master.tar.gz&#39;)
+# 
+# # Can run an app from a subdirectory in the archive
+# runUrl(&quot;https://github.com/rstudio/shiny_example/archive/master.zip&quot;,
+#  subdir = &quot;inst/shinyapp/&quot;)
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+
+</div></pre>
+<!-- <ul>
+  <li>runUrl</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

@@ -1,0 +1,27 @@
+---
+title: "Web Application Framework for R — shiny-package"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.2</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/shiny.R" class="external-link"><code>R/shiny.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Shiny makes it incredibly easy to build interactive web applications with R.
+Automatic "reactive" binding between inputs and outputs and extensive
+prebuilt widgets make it possible to build beautiful, responsive, and
+powerful applications with minimal effort.</p></div>
+
+
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The Shiny tutorial at <a href="https://shiny.posit.co/tutorial/" class="external-link">https://shiny.posit.co/tutorial/</a> explains
+the framework in depth, walks you through building a simple application, and
+includes extensive annotated examples.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><a href="shinyOptions.html">shiny-options</a> for documentation about global options.</p></div>
+  </div>
+
+</div>
+```

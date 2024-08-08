@@ -1,0 +1,39 @@
+---
+title: "knit_print.html"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='knitr_methods_htmltools.html'>knit_print.shiny.tag</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='knitr_methods_htmltools.html'>knit_print.html</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='knitr_methods_htmltools.html'>knit_print.shiny.tag.list</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>Object to knit_print</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Additional knit_print arguments</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>These S3 methods are necessary to allow HTML tags to print themselves in
+knitr/rmarkdown documents.</p>
+
+</div>
+<!-- <ul>
+  <li>knit_print.html</li><li>knit_print.shiny.tag</li><li>knit_print.shiny.tag.list</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

@@ -1,0 +1,23 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: A Shiny app to explore CRAN packages and their interdependencies using a custom HTML template and custom widgets.
+title:        "CRAN Explorer"
+author:    Stefan Schliebs
+authorurl:     https://www.linkedin.com/in/sschliebs/
+no-app-padding: true
+date:         2019-05-31
+tags:       
+ - cran
+ - package
+ - html
+ - template
+ - widgets
+appurl:      https://gallery.shinyapps.io/cran-explorer
+sourceurl:   https://github.com/nz-stefan/cran-explorer
+rscloudurl:  https://rstudio.cloud/project/258634
+---
+
+A Shiny app to explore CRAN packages and their interdependencies using a custom HTML template and custom widgets.
+  
+This app is one of the runers up of the 2019 Shiny Contest. There are plenty of Shiny apps for exploring CRAN metadata, but none of them look as striking as this one by nz-stefan! This is a really nice example of HTML Template usage; the separation between the R UI and the raw HTML UI is extremely clean.

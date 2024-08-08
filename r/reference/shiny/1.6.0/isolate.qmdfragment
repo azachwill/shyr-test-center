@@ -1,0 +1,94 @@
+---
+title: "Create a non-reactive scope for an expression — isolate"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>isolate</span>(<span class='no'>expr</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>expr</p></th>
+    <td><p>An expression that can access reactive values or expressions.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Executes the given expression in a scope where reactive values or expression
+can be read, but they cannot cause the reactive scope of the caller to be
+re-evaluated when they change.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>Ordinarily, the simple act of reading a reactive value causes a relationship
+to be established between the caller and the reactive value, where a change
+to the reactive value will cause the caller to re-execute. (The same applies
+for the act of getting a reactive expression's value.) The <code>isolate</code>
+function lets you read a reactive value or expression without establishing this
+relationship.</p>
+<p>The expression given to <code>isolate()</code> is evaluated in the calling
+environment. This means that if you assign a variable inside the
+<code>isolate()</code>, its value will be visible outside of the <code>isolate()</code>.
+If you want to avoid this, you can use <code><a href='https://rdrr.io/r/base/eval.html'>base::local()</a></code> inside the
+<code>isolate()</code>.</p>
+<p>This function can also be useful for calling reactive expression at the
+console, which can be useful for debugging. To do so, simply wrap the
+calls to the reactive expression with <code>isolate()</code>.</p>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='observe.html'>observe</a></span>({
+  <span class='no'>input</span>$<span class='no'>saveButton</span>  <span class='co'># Do take a dependency on input$saveButton</span>
+
+  <span class='co'># isolate a simple expression</span>
+  <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='fu'>isolate</span>(<span class='no'>input</span>$<span class='no'>dataset</span>))  <span class='co'># No dependency on input$dataset</span>
+  <span class='fu'>writeToDatabase</span>(<span class='no'>data</span>)
+})
+
+<span class='fu'><a href='observe.html'>observe</a></span>({
+  <span class='no'>input</span>$<span class='no'>saveButton</span>  <span class='co'># Do take a dependency on input$saveButton</span>
+
+  <span class='co'># isolate a whole block</span>
+  <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>isolate</span>({
+    <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='no'>input</span>$<span class='no'>valueA</span>   <span class='co'># No dependency on input$valueA or input$valueB</span>
+    <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>input</span>$<span class='no'>valueB</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>a</span><span class='kw'>=</span><span class='no'>a</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span>)
+  })
+  <span class='fu'>writeToDatabase</span>(<span class='no'>data</span>)
+})
+
+<span class='fu'><a href='observe.html'>observe</a></span>({
+  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
+  <span class='co'># x outside of isolate() is affected</span>
+  <span class='fu'>isolate</span>(<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>) <span class='co'># 2</span>
+
+  <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
+  <span class='co'># Use local() to avoid affecting calling environment</span>
+  <span class='fu'>isolate</span>(<span class='fu'><a href='https://rdrr.io/r/base/eval.html'>local</a></span>(<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>))
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>y</span>) <span class='co'># 1</span>
+})
+
+}
+
+<span class='co'># Can also use isolate to call reactive expressions from the R console</span>
+<span class='no'>values</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactiveValues.html'>reactiveValues</a></span>(<span class='kw'>A</span><span class='kw'>=</span><span class='fl'>1</span>)
+<span class='no'>fun</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactive.html'>reactive</a></span>({ <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>values</span>$<span class='no'>A</span>) })
+<span class='fu'>isolate</span>(<span class='fu'>fun</span>())
+<span class='co'># "1"</span>
+
+<span class='co'># isolate also works if the reactive expression accesses values from the</span>
+<span class='co'># input object, like input$x</span></pre>
+</div>
+
+
+```

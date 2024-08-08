@@ -1,0 +1,125 @@
+---
+title: "Create a page that fills the window — fillPage"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.9.0</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.9.0/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p><code>fillPage</code> creates a page whose height and width always fill the
+available area of the browser window.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">fillPage</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  ...,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">padding =</span> <span class="dv">0</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">title =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">bootstrap =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">theme =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">lang =</span> <span class="cn">NULL</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>...</dt>
+<dd><p>Elements to include within the page.</p></dd>
+
+
+<dt>padding</dt>
+<dd><p>Padding to use for the body. This can be a numeric vector
+(which will be interpreted as pixels) or a character vector with valid CSS
+lengths. The length can be between one and four. If one, then that value
+will be used for all four sides. If two, then the first value will be used
+for the top and bottom, while the second value will be used for left and
+right. If three, then the first will be used for top, the second will be
+left and right, and the third will be bottom. If four, then the values will
+be interpreted as top, right, bottom, and left respectively.</p></dd>
+
+
+<dt>title</dt>
+<dd><p>The title to use for the browser window/tab (it will not be
+shown in the document).</p></dd>
+
+
+<dt>bootstrap</dt>
+<dd><p>If <code>TRUE</code>, load the Bootstrap CSS library.</p></dd>
+
+
+<dt>theme</dt>
+<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (the default), which implies a "stock" build of Bootstrap 3.</p></li>
+<li><p>A <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html" class="external-link">bslib::bs_theme()</a></code> object. This can be used to replace a stock
+build of Bootstrap 3 with a customized version of Bootstrap 3 or higher.</p></li>
+<li><p>A character string pointing to an alternative Bootstrap stylesheet
+(normally a css file within the www directory, e.g. <code>www/bootstrap.css</code>).</p></li>
+</ul></dd>
+
+
+<dt>lang</dt>
+<dd><p>ISO 639-1 language code for the HTML page, such as "en" or "ko".
+This will be used as the lang in the <code>&lt;html&gt;</code> tag, as in <code>&lt;html lang="en"&gt;</code>.
+The default (NULL) results in an empty string.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>The <code><a href="fluidPage.html">fluidPage()</a></code> and <code><a href="fixedPage.html">fixedPage()</a></code> functions are used
+for creating web pages that are laid out from the top down, leaving
+whitespace at the bottom if the page content's height is smaller than the
+browser window, and scrolling if the content is larger than the window.</p>
+<p><code>fillPage</code> is designed to latch the document body's size to the size of
+the window. This makes it possible to fill it with content that also scales
+to the size of the window.</p>
+<p>For example, <code>fluidPage(plotOutput("plot", height = "100%"))</code> will not
+work as expected; the plot element's effective height will be <code>0</code>,
+because the plot's containing elements (<code>&lt;div&gt;</code> and <code>&lt;body&gt;</code>) have
+<em>automatic</em> height; that is, they determine their own height based on
+the height of their contained elements. However,
+<code>fillPage(plotOutput("plot", height = "100%"))</code> will work because
+<code>fillPage</code> fixes the <code>&lt;body&gt;</code> height at 100% of the window height.</p>
+<p>Note that <code>fillPage(plotOutput("plot"))</code> will not cause the plot to fill
+the page. Like most Shiny output widgets, <code>plotOutput</code>'s default height
+is a fixed number of pixels. You must explicitly set <code>height = "100%"</code>
+if you want a plot (or htmlwidget, say) to fill its container.</p>
+<p>One must be careful what layouts/panels/elements come between the
+<code>fillPage</code> and the plots/widgets. Any container that has an automatic
+height will cause children with <code>height = "100%"</code> to misbehave. Stick
+to functions that are designed for fill layouts, such as the ones in this
+package.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p>Other layout functions: 
+<code><a href="fixedPage.html">fixedPage</a>()</code>,
+<code><a href="flowLayout.html">flowLayout</a>()</code>,
+<code><a href="fluidPage.html">fluidPage</a>()</code>,
+<code><a href="navbarPage.html">navbarPage</a>()</code>,
+<code><a href="sidebarLayout.html">sidebarLayout</a>()</code>,
+<code><a href="splitLayout.html">splitLayout</a>()</code>,
+<code><a href="verticalLayout.html">verticalLayout</a>()</code></p></div>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">fillPage</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">style</span>(<span class="at">type =</span> <span class="st">"text/css"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="st">".half-fill { width: 50%; height: 100%; }"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="st">"#one { float: left; background-color: #ddddff; }"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="st">"#two { float: right; background-color: #ccffcc; }"</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  ),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="fu">div</span>(<span class="at">id =</span> <span class="st">"one"</span>, <span class="at">class =</span> <span class="st">"half-fill"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="st">"Left half"</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  ),</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="fu">div</span>(<span class="at">id =</span> <span class="st">"two"</span>, <span class="at">class =</span> <span class="st">"half-fill"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="st">"Right half"</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  ),</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="at">padding =</span> <span class="dv">10</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="fu">fillPage</span>(</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="fu">fillRow</span>(</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    <span class="fu">div</span>(<span class="at">style =</span> <span class="st">"background-color: red; width: 100%; height: 100%;"</span>),</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    <span class="fu">div</span>(<span class="at">style =</span> <span class="st">"background-color: blue; width: 100%; height: 100%;"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  )</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>)</span></code></pre></div>
+  </div>
+</div>
+```

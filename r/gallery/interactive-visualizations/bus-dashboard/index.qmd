@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Bus dashboard
+date: 2015-02-02 
+no-app-padding: true
+tags: 
+ - dashboard
+appurl: https://gallery.shinyapps.io/086-bus-dashboard
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/086-bus-dashboard
+---

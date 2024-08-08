@@ -1,0 +1,73 @@
+---
+layout: reference
+title: "updateTabsetPanel"
+categories: reference
+
+---
+<h1>Change the selected tab on the client</h1>
+
+<pre class="code"><code class="r"><div>updateTabsetPanel(session, inputId, selected&nbsp;=&nbsp;NULL)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The <code>session</code> object passed to function given to
+<code>shinyServer</code>.</td>
+  </tr>
+  <tr>
+    <th>inputId</th>
+    <td>The id of the <code>tabsetPanel</code>, <code>navlistPanel</code>,
+or <code>navbarPage</code> object.</td>
+  </tr>
+  <tr>
+    <th>selected</th>
+    <td>The name of the tab to make active.</td>
+  </tr>
+</table>
+
+<div data-section="Change the selected tab on the client">
+  <h3 data-swiftype-index="false">Change the selected tab on the client</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Change the selected tab on the client</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# shinyServer(function(input, output, session) {
+# 
+#   observe({
+#     # TRUE if input$controller is even, FALSE otherwise.
+#     x_even &lt;- input$controller %% 2 == 0
+# 
+#     # Change the selected tab.
+#     # Note that the tabset container must have been created with an &#39;id&#39; argument
+#     if (x_even) {
+#       updateTabsetPanel(session, &quot;inTabset&quot;, selected = &quot;panel2&quot;)
+#     } else {
+#       updateTabsetPanel(session, &quot;inTabset&quot;, selected = &quot;panel1&quot;)
+#     }
+#   })
+# })
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+</div></pre>
+<!-- <ul>
+  <li>updateTabsetPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='tabsetPanel.html'>tabsetPanel</a></code>, <code><a href='navlistPanel.html'>navlistPanel</a></code>,
+<code><a href='navbarPage.html'>navbarPage</a></code>
+
+</div>

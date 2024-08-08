@@ -1,0 +1,94 @@
+/**************************************************************************************************
+ * RStudio Footer Styles
+ * These are the styles for the footer section that appears on every page.
+**************************************************************************************************/
+
+.pushFooter {
+  position: relative;
+  z-index: 11;
+  min-height: 100%;
+  margin-bottom: -92px;
+}
+
+.pushFooter:after {
+  content: "";
+  height: 92px;
+  display: block;
+}
+
+#rStudioFooter {
+  position: relative;
+  z-index: 12;
+  box-sizing: border-box;
+  height: 92px;
+}
+
+#rStudioFooter.band {
+  background-color: #007bc2;
+  color: #fff;
+  padding: 30px 5%;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 25px;
+}
+
+#rStudioFooter .bandContent {
+  display: flex;
+  justify-content: space-between;
+  display: -ms-flexbox;
+  -ms-flex-pack: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  line-height: 20px;
+}
+
+#rStudioFooter .bandContent #copyright {
+  flex-shrink: 5;
+  color: #e3eef8;
+}
+
+#rStudioFooter .bandContent #copyright a {
+  color: #fff;
+}
+
+#rStudioFooter .bandContent #logos {
+  flex-shrink: 1;
+}
+
+#rStudioFooter .bandContent #logos .footerLogo {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center center;
+  margin: 0 8px;
+}
+
+#rStudioFooter .bandContent #logos .footerLogo:last-child {
+  margin-right: 0px;
+}
+
+#rStudioFooter .bandContent #logos .footerLogo.twitter {
+  background-image: url(../images/twitterLogo.svg);
+}
+
+#rStudioFooter .bandContent #logos .footerLogo.gitHub {
+  background-image: url(../images/gitHubLogo.svg);
+}
+
+#rStudioFooter .bandContent #logos .footerLogo.linkedIn {
+  background-image: url(../images/linkedInLogo.svg);
+}
+
+#rStudioFooter .bandContent #logos .footerLogo.facebook {
+  background-image: url(../images/facebookLogo.svg);
+}
+
+@media screen and (max-width: 350px) {
+  #rStudioFooter .bandContent #logos .footerLogo {
+    margin: 0 2px;
+  }
+}

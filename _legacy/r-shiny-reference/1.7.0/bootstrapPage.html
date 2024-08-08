@@ -1,0 +1,73 @@
+---
+layout: reference
+title: "Create a Bootstrap page — bootstrapPage"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a Bootstrap page</h1>
+  
+
+  <pre class="code"><span class='fu'>bootstrapPage</span>(<span class='no'>...</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lang</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>basicPage</span>(<span class='no'>...</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>The contents of the document body.</p></td>
+  </tr>
+  <tr>
+    <th><p>title</p></th>
+    <td><p>The browser window title (defaults to the host URL of the page)</p></td>
+  </tr>
+  <tr>
+    <th><p>theme</p></th>
+    <td><p>One of the following:</p><ul>
+<li><p><code>NULL</code> (the default), which implies a "stock" build of Bootstrap 3.</p></li>
+<li><p>A <code><a href='https://rstudio.github.io/bslib/reference/bs_theme.html'>bslib::bs_theme()</a></code> object. This can be used to replace a stock
+build of Bootstrap 3 with a customized version of Bootstrap 3 or higher.</p></li>
+<li><p>A character string pointing to an alternative Bootstrap stylesheet
+(normally a css file within the www directory, e.g. <code>www/bootstrap.css</code>).</p></li>
+</ul></td>
+  </tr>
+  <tr>
+    <th><p>lang</p></th>
+    <td><p>ISO 639-1 language code for the HTML page, such as "en" or "ko".
+This will be used as the lang in the <code>&lt;html&gt;</code> tag, as in <code>&lt;html lang="en"&gt;</code>.
+The default (NULL) results in an empty string.</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Create a Shiny UI page that loads the CSS and JavaScript for
+<a href='https://getbootstrap.com/'>Bootstrap</a>, and has no content in the page
+body (other than what you provide).</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function.</p>
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>This function is primarily intended for users who are proficient in HTML/CSS,
+and know how to lay out pages in Bootstrap. Most applications should use
+<code><a href='fluidPage.html'>fluidPage()</a></code> along with layout functions like
+<code><a href='fluidPage.html'>fluidRow()</a></code> and <code><a href='sidebarLayout.html'>sidebarLayout()</a></code>.</p>
+  <h3 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h3>
+
+  <p>The <code>basicPage</code> function is deprecated, you should use the
+<code><a href='fluidPage.html'>fluidPage()</a></code> function instead.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='fluidPage.html'>fluidPage()</a></code>, <code><a href='fixedPage.html'>fixedPage()</a></code></p></div>
+  </div>
+
+</div>
+
+

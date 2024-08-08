@@ -1,0 +1,11 @@
+---
+pagetitle: "Page Not Found"
+---
+
+
+<h1 style="color:black;font-size:300%;">Page Not Found</h1>
+
+<h4 style="line-height:1.8rem;">It may have been moved or renamed... You may want to try searching to find the page’s new location!</h4> 
+
+
+<a class="mt-5 btn btn-primary" href="/">Go to Shiny home</a>

@@ -1,0 +1,69 @@
+---
+title: "runExample"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='runExample.html'>runExample</a></span><span class="keyword">(</span><span class="argument">example</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">NA</span><span class="keyword">,</span> <span class="argument">port</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">launch.browser</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.launch.browser"</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">host</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.host"</span><span class="keyword">,</span> <span class="string">"127.0.0.1"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">display.mode</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"auto"</span><span class="keyword">,</span>
+  <span class="string">"normal"</span><span class="keyword">,</span> <span class="string">"showcase"</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>example</th>
+    <td>The name of the example to run, or <code>NA</code> (the default) to
+list the available examples.</td>
+  </tr>
+  <tr>
+    <th>port</th>
+    <td>The TCP port that the application should listen on. Defaults to
+choosing a random port.</td>
+  </tr>
+  <tr>
+    <th>launch.browser</th>
+    <td>If true, the system&#39;s default web browser will be
+launched automatically after the app is started. Defaults to true in
+interactive sessions only.</td>
+  </tr>
+  <tr>
+    <th>host</th>
+    <td>The IPv4 address that the application should listen on. Defaults
+to the <code>shiny.host</code> option, if set, or <code>&quot;127.0.0.1&quot;</code> if not.</td>
+  </tr>
+  <tr>
+    <th>display.mode</th>
+    <td>The mode in which to display the example. Defaults to
+<code>showcase</code>, but may be set to <code>normal</code> to see the example without
+code or commentary.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Launch Shiny example applications, and optionally, your system&#39;s web browser.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="comment"># List all available examples</span>
+  <span class="functioncall"><a href='runExample.html'>runExample</a></span><span class="keyword">(</span><span class="keyword">)</span>
+
+  <span class="comment"># Run one of the examples</span>
+  <span class="functioncall"><a href='runExample.html'>runExample</a></span><span class="keyword">(</span><span class="string">"01_hello"</span><span class="keyword">)</span>
+
+  <span class="comment"># Print the directory containing the code for all examples</span>
+  <span class="functioncall"><a href='http://www.rdocumentation.org/packages/devtools/topics/system.file'>system.file</a></span><span class="keyword">(</span><span class="string">"examples"</span><span class="keyword">,</span> <span class="argument">package</span><span class="argument">=</span><span class="string">"shiny"</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>runExample</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

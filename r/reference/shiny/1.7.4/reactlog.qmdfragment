@@ -1,0 +1,61 @@
+---
+title: "Reactive Log Visualizer — reactlog"
+---
+
+```{=html}
+<div class="reference">
+  <small class="dont-index pkg-version">v1.7.4</small><small class="dont-index pipe">|</small><small class="dont-index github-source">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/graph.R" class="external-link"><code>R/graph.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Provides an interactive browser-based tool for visualizing reactive
+dependencies and execution in your application.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">reactlog</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">reactlogShow</span>(<span class="at">time =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">reactlogReset</span>()</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>time</dt>
+<dd><p>A boolean that specifies whether or not to display the
+time that each reactive takes to calculate a result.</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>To use the reactive log visualizer, start with a fresh R session and
+run the command <code>options(shiny.reactlog=TRUE)</code>; then launch your
+application in the usual way (e.g. using <code><a href="runApp.html">runApp()</a></code>). At
+any time you can hit Ctrl+F3 (or for Mac users, Command+F3) in your
+web browser to launch the reactive log visualization.</p>
+<p>The reactive log visualization only includes reactive activity up
+until the time the report was loaded. If you want to see more recent
+activity, refresh the browser.</p>
+<p>Note that Shiny does not distinguish between reactive dependencies
+that "belong" to one Shiny user session versus another, so the
+visualization will include all reactive activity that has taken place
+in the process, not just for a particular application or session.</p>
+<p>As an alternative to pressing Ctrl/Command+F3--for example, if you
+are using reactives outside of the context of a Shiny
+application--you can run the <code>reactlogShow</code> function, which will
+generate the reactive log visualization as a static HTML file and
+launch it in your default browser. In this case, refreshing your
+browser will not load new activity into the report; you will need to
+call <code>reactlogShow()</code> explicitly.</p>
+<p>For security and performance reasons, do not enable
+<code>shiny.reactlog</code> in production environments. When the option is
+enabled, it's possible for any user of your app to see at least some
+of the source code of your reactive expressions and observers.</p>
+  </div>
+  <div data-section="functions">
+    <h3 id="functions">Functions</h3>
+    
+<ul><li><p><code>reactlog()</code>: Return a list of reactive information.  Can be used in conjunction with
+reactlog::reactlog_show to later display the reactlog graph.</p></li>
+<li><p><code>reactlogShow()</code>: Display a full reactlog graph for all sessions.</p></li>
+<li><p><code>reactlogReset()</code>: Resets the entire reactlog stack.  Useful for debugging and removing all prior reactive history.</p></li>
+</ul></div>
+
+</div>
+```

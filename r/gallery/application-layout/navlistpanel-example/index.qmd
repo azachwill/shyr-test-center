@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: navlistPanel example
+date: 2014-07-29 
+tags: 
+ - navlistpanel
+appurl: https://gallery.shinyapps.io/053-navlistpanel-example
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/053-navlistpanel-example
+---

@@ -1,0 +1,58 @@
+---
+layout: reference
+title: "Process an HTML template — htmlTemplate"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Process an HTML template</h1>
+  
+
+  <pre class="code"><span class='fu'>htmlTemplate</span>(<span class='kw'>filename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>text_</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>document_</span> <span class='kw'>=</span> <span class='st'>"auto"</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>filename</p></th>
+    <td><p>Path to an HTML template file. Incompatible with
+<code>text_</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Variable values to use when processing the template.</p></td>
+  </tr>
+  <tr>
+    <th><p>text_</p></th>
+    <td><p>A string to use as the template, instead of a file. Incompatible
+with <code>filename</code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>document_</p></th>
+    <td><p>Is this template a complete HTML document (<code>TRUE</code>), or
+a fragment of HTML that is to be inserted into an HTML document
+(<code>FALSE</code>)? With <code>"auto"</code> (the default), auto-detect by searching
+for the string <code>"&lt;HTML&gt;"</code> within the template.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Process an HTML template and return a tagList object. If the template is a
+complete HTML document, then the returned object will also have class
+<code>html_document</code>, and can be passed to the function
+<code>renderDocument</code> to get the final HTML text.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code>renderDocument</code></p></div>
+  
+  </div>
+
+</div>
+
+

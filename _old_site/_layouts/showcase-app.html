@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<main class="showcase-app">
+  <div class="showcase-app-img-container">
+    <img class="showcase-app-img" src="https://www.fillmurray.com/1024/768"
+      alt="this is a placeholder image that should be replaced. Bill Murray, as an older man, dressed as a Ghostbuster." />
+  </div>
+  <div class="showcase-app-desc-container">
+    <h1 class="showcase-app-title">{{page.title}}</h1>
+    <h2 class="showcase-app-author">by <a href="{{page.user_url}}">{{page.user_name}}</a></h2>
+    <div class="showcase-app-description">{{content}}</div>
+    <dl class="showcase-app-meta">
+      <dt><i class="fas fa-lg fa-cloud"></i></dt>
+      <dd><a href="{{page.rscloud_url}}">RStudio Cloud</a></dd>
+      <dt><i class="fas fa-lg fa-desktop"></i></dt>
+      <dd><a href="{{page.app_url}}">App</a></dd>
+      <dt><i class="fab fa-lg fa-github"></i></dt>
+      <dd><a href="{{page.source_url}}">Source</a></dd>
+    </dl>
+    <ul class="showcase-app-taglist">
+      {% for tag in page.tags %}
+      <li class="showcase-app-tag">
+        {{tag}}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</main>

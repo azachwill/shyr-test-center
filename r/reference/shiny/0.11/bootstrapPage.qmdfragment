@@ -1,0 +1,79 @@
+---
+title: "bootstrapPage"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='bootstrapPage.html'>bootstrapPage</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">,</span> <span class="argument">title</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">responsive</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">theme</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='bootstrapPage.html'>basicPage</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>The contents of the document body.</td>
+  </tr>
+  <tr>
+    <th>title</th>
+    <td>The browser window title (defaults to the host URL of the page)</td>
+  </tr>
+  <tr>
+    <th>responsive</th>
+    <td>This option is deprecated; it is no longer optional with
+Bootstrap 3.</td>
+  </tr>
+  <tr>
+    <th>theme</th>
+    <td>Alternative Bootstrap stylesheet (normally a css file within the
+  www directory, e.g. <code>www/bootstrap.css</code>)</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+A UI defintion that can be passed to the <a href='shinyUI.html'>shinyUI</a> function.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Create a Shiny UI page that loads the CSS and JavaScript for
+<a href = 'http://getbootstrap.com/3.3.1/'>Bootstrap</a>, and has no content in the
+page body (other than what you provide).</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This function is primarily intended for users who are proficient in
+HTML/CSS, and know how to lay out pages in Bootstrap. Most applications
+should use <code><a href='fluidPage.html'>fluidPage</a></code> along with layout functions like
+<code><a href='fluidPage.html'>fluidRow</a></code> and <code><a href='sidebarLayout.html'>sidebarLayout</a></code>.</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+
+  <p>The <code>basicPage</code> function is deprecated, you should use the
+  <code><a href='fluidPage.html'>fluidPage</a></code> function instead.</p>
+
+</div>
+<!-- <ul>
+  <li>basicPage</li><li>bootstrapPage</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='fluidPage.html'>fluidPage</a></code>, <code><a href='fixedPage.html'>fixedPage</a></code></p>
+</div>
+```

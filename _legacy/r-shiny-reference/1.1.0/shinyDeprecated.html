@@ -1,0 +1,43 @@
+---
+layout: reference
+title: "shinyDeprecated"
+categories: reference
+---
+<h1>Print message for deprecated functions in Shiny</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='shinyDeprecated.html'>shinyDeprecated</a></span><span class="keyword">(</span><span class="argument">new</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">msg</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">old</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/character'>as.character</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.call</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>sys.parent</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">[</span><span class="number">1L</span><span class="keyword">]</span><span class="keyword">,</span> <span class="argument">version</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>new</th>
+    <td>Name of replacement function.</td>
+  </tr>
+  <tr>
+    <th>msg</th>
+    <td>Message to print. If used, this will override the default message.</td>
+  </tr>
+  <tr>
+    <th>old</th>
+    <td>Name of deprecated function.</td>
+  </tr>
+  <tr>
+    <th>version</th>
+    <td>The last version of Shiny before the item was deprecated.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>To disable these messages, use <code>options(shiny.deprecation.messages=FALSE)</code>.</p>
+
+</div>
+<!-- <ul>
+  <li>shinyDeprecated</li>
+</ul>
+<ul>
+  <li>internal</li>
+</ul> -->
+

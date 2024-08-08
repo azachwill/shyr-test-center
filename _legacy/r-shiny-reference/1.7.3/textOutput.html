@@ -1,0 +1,69 @@
+---
+layout: reference
+title: "Create a text output element — textOutput"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create a text output element</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.3/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Render a reactive output variable as text within an application page.
+<code>textOutput()</code> is usually paired with <code><a href="renderPrint.html">renderText()</a></code> and puts regular text
+in <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>; <code>verbatimTextOutput()</code> is usually paired with
+<code><a href="renderPrint.html">renderPrint()</a></code> and provides fixed-width text in a <code>&lt;pre&gt;</code>.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textOutput</span>(outputId, <span class="at">container =</span> <span class="cf">if</span> (inline) span <span class="cf">else</span> div, <span class="at">inline =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">verbatimTextOutput</span>(outputId, <span class="at">placeholder =</span> <span class="cn">FALSE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>outputId</dt>
+<dd><p>output variable to read the value from</p></dd>
+
+
+<dt>container</dt>
+<dd><p>a function to generate an HTML element to contain the text</p></dd>
+
+
+<dt>inline</dt>
+<dd><p>use an inline (<code><a href="builder.html">span()</a></code>) or block container (<code><a href="builder.html">div()</a></code>)
+for the output</p></dd>
+
+
+<dt>placeholder</dt>
+<dd><p>if the output is empty or <code>NULL</code>, should an empty
+rectangle be displayed to serve as a placeholder? (does not affect
+behavior when the output is nonempty)</p></dd>
+
+</dl></div>
+  <div data-section="value">
+    <h3 id="value">Value</h3>
+    
+
+<p>An output element for use in UI.</p>
+  </div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>In both functions, text is HTML-escaped prior to rendering.</p>
+  </div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Only run this example in interactive R sessions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyApp</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ui =</span> <span class="fu">basicPage</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">textInput</span>(<span class="st">"txt"</span>, <span class="st">"Enter the text to display below:"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">textOutput</span>(<span class="st">"text"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">verbatimTextOutput</span>(<span class="st">"verb"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">server =</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">renderText</span>({ input<span class="sc">$</span>txt })</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>verb <span class="ot">&lt;-</span> <span class="fu">renderText</span>({ input<span class="sc">$</span>txt })</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+  </div>
+</div>

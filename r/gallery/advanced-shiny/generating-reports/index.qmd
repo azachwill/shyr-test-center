@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Generating reports
+date: 2016-07-05 
+tags: 
+ - reports
+appurl: https://gallery.shinyapps.io/112-generate-report
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/112-generate-report
+---

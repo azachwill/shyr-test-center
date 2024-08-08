@@ -1,0 +1,67 @@
+---
+layout: reference
+title: "Implement render functions — createRenderFunction"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Implement render functions</h1>
+  
+
+  <pre class="code"><span class='fu'>createRenderFunction</span>(
+  <span class='no'>func</span>,
+  <span class='kw'>transform</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>value</span>, <span class='no'>session</span>, <span class='no'>name</span>, <span class='no'>...</span>) <span class='no'>value</span>,
+  <span class='kw'>outputFunc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>outputArgs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>func</p></th>
+    <td><p>A function without parameters, that returns user data. If the
+returned value is a promise, then the render function will proceed in async
+mode.</p></td>
+  </tr>
+  <tr>
+    <th><p>transform</p></th>
+    <td><p>A function that takes four arguments: <code>value</code>,
+<code>session</code>, <code>name</code>, and <code>...</code> (for future-proofing). This
+function will be invoked each time a value is returned from <code>func</code>,
+and is responsible for changing the value into a JSON-ready value to be
+JSON-encoded and sent to the browser.</p></td>
+  </tr>
+  <tr>
+    <th><p>outputFunc</p></th>
+    <td><p>The UI function that is used (or most commonly used) with
+this render function. This can be used in R Markdown documents to create
+complete output widgets out of just the render function.</p></td>
+  </tr>
+  <tr>
+    <th><p>outputArgs</p></th>
+    <td><p>A list of arguments to pass to the <code>outputFunc</code>.
+Render functions should include <code>outputArgs = list()</code> in their own
+parameter list, and pass through the value as this argument, to allow app
+authors to customize outputs. (Currently, this is only supported for
+dynamically generated UIs, such as those created by Shiny code snippets
+embedded in R Markdown documents).</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Implement render functions</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>An annotated render function, ready to be assigned to an
+<code>output</code> slot.</p>
+  </div>
+
+</div>
+
+

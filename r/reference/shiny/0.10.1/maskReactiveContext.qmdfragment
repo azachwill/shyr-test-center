@@ -1,0 +1,51 @@
+---
+title: "maskReactiveContext"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>maskReactiveContext(expr)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>An expression to evaluate.</td>
+  </tr>
+</table>
+
+<div data-section="Evaluate an expression without a reactive context">
+  <h3 data-swiftype-index="false">Evaluate an expression without a reactive context</h3>
+  
+</div>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+  
+  <p>The value of <code>expr</code>.</p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Temporarily blocks the current reactive context and evaluates the given
+expression. Any attempt to directly access reactive values or expressions in
+<code>expr</code> will give the same results as doing it at the top-level (by
+default, an error).</p>
+
+</div>
+<!-- <ul>
+  <li>maskReactiveContext</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+<div data-swiftype-index="false">
+<h3>See also</h3>
+
+<code><a href='isolate.html'>isolate</a></code>
+
+</div>
+```

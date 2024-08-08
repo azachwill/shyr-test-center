@@ -1,0 +1,127 @@
+---
+title: "Shiny modules — moduleServer"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>moduleServer</span>(<span class='no'>id</span>, <span class='no'>module</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='fu'><a href='domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>id</p></th>
+    <td><p>An ID string that corresponds with the ID used to call the module's
+UI function.</p></td>
+  </tr>
+  <tr>
+    <th><p>module</p></th>
+    <td><p>A Shiny module server function.</p></td>
+  </tr>
+  <tr>
+    <th><p>session</p></th>
+    <td><p>Session from which to make a child scope (the default should
+almost always be used).</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>Shiny's module feature lets you break complicated UI and server logic into
+smaller, self-contained pieces. Compared to large monolithic Shiny apps,
+modules are easier to reuse and easier to reason about. See the article at
+<a href='https://shiny.posit.co/articles/modules.html'>https://shiny.posit.co/articles/modules.html</a> to learn more.</p>
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h3>
+
+  <p>The return value, if any, from executing the module server function</p>
+  <h3 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h3>
+
+  <p>Starting in Shiny 1.5.0, we recommend using <code>moduleServer</code> instead of
+<code><a href='callModule.html'>callModule()</a></code>, because the syntax is a little easier
+to understand, and modules created with <code>moduleServer</code> can be tested with
+<code><a href='testServer.html'>testServer()</a></code>.</p>
+  <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><a href='https://shiny.posit.co/articles/modules.html'>https://shiny.posit.co/articles/modules.html</a></p></div>
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'># Define the UI for a module</span>
+<span class='no'>counterUI</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>id</span>, <span class='no'>label</span> <span class='kw'>=</span> <span class='st'>"Counter"</span>) {
+  <span class='no'>ns</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='NS.html'>NS</a></span>(<span class='no'>id</span>)
+  <span class='fu'><a href='tag.html'>tagList</a></span>(
+    <span class='fu'><a href='actionButton.html'>actionButton</a></span>(<span class='fu'>ns</span>(<span class='st'>"button"</span>), <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>label</span>),
+    <span class='fu'><a href='textOutput.html'>verbatimTextOutput</a></span>(<span class='fu'>ns</span>(<span class='st'>"out"</span>))
+  )
+}
+
+<span class='co'># Define the server logic for a module</span>
+<span class='no'>counterServer</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>id</span>) {
+  <span class='fu'>moduleServer</span>(
+    <span class='no'>id</span>,
+    <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+      <span class='no'>count</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactiveVal.html'>reactiveVal</a></span>(<span class='fl'>0</span>)
+      <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>button</span>, {
+        <span class='fu'>count</span>(<span class='fu'>count</span>() + <span class='fl'>1</span>)
+      })
+      <span class='no'>output</span>$<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderText.html'>renderText</a></span>({
+        <span class='fu'>count</span>()
+      })
+      <span class='no'>count</span>
+    }
+  )
+}
+
+<span class='co'># Use the module in an app</span>
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'>counterUI</span>(<span class='st'>"counter1"</span>, <span class='st'>"Counter #1"</span>),
+  <span class='fu'>counterUI</span>(<span class='st'>"counter2"</span>, <span class='st'>"Counter #2"</span>)
+)
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'>counterServer</span>(<span class='st'>"counter1"</span>)
+  <span class='fu'>counterServer</span>(<span class='st'>"counter2"</span>)
+}
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}
+
+
+
+<span class='co'># If you want to pass extra parameters to the module's server logic, you can</span>
+<span class='co'># add them to your function. In this case `prefix` is text that will be</span>
+<span class='co'># printed before the count.</span>
+<span class='no'>counterServer2</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>id</span>, <span class='no'>prefix</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) {
+  <span class='fu'>moduleServer</span>(
+    <span class='no'>id</span>,
+    <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+      <span class='no'>count</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactiveVal.html'>reactiveVal</a></span>(<span class='fl'>0</span>)
+      <span class='fu'><a href='observeEvent.html'>observeEvent</a></span>(<span class='no'>input</span>$<span class='no'>button</span>, {
+        <span class='fu'>count</span>(<span class='fu'>count</span>() + <span class='fl'>1</span>)
+      })
+      <span class='no'>output</span>$<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderText.html'>renderText</a></span>({
+        <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>prefix</span>, <span class='fu'>count</span>())
+      })
+      <span class='no'>count</span>
+    }
+  )
+}
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'>counterUI</span>(<span class='st'>"counter"</span>, <span class='st'>"Counter"</span>),
+)
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+  <span class='fu'>counterServer2</span>(<span class='st'>"counter"</span>, <span class='st'>"The current count is: "</span>)
+}
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</pre>
+</div>
+
+
+```

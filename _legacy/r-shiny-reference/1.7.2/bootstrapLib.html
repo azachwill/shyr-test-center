@@ -1,0 +1,34 @@
+---
+layout: reference
+title: "Bootstrap libraries — bootstrapLib"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Bootstrap libraries</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.2/R/bootstrap.R" class="external-link"><code>R/bootstrap.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>This function defines a set of web dependencies necessary for using Bootstrap
+components in a web page.</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bootstrapLib</span>(<span class="at">theme =</span> <span class="cn">NULL</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>theme</dt>
+<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (the default), which implies a "stock" build of Bootstrap 3.</p></li>
+<li><p>A <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html" class="external-link">bslib::bs_theme()</a></code> object. This can be used to replace a stock
+build of Bootstrap 3 with a customized version of Bootstrap 3 or higher.</p></li>
+<li><p>A character string pointing to an alternative Bootstrap stylesheet
+(normally a css file within the www directory, e.g. <code>www/bootstrap.css</code>).</p></li>
+</ul></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>It isn't necessary to call this function if you use <code><a href="bootstrapPage.html">bootstrapPage()</a></code> or
+others which use <code>bootstrapPage</code>, such <code><a href="fluidPage.html">fluidPage()</a></code>, <code><a href="navbarPage.html">navbarPage()</a></code>,
+<code><a href="fillPage.html">fillPage()</a></code>, etc, because they already include the Bootstrap web dependencies.</p>
+  </div>
+
+</div>

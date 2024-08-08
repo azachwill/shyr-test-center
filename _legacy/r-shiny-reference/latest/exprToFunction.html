@@ -1,0 +1,41 @@
+---
+layout: reference
+title: "Convert an expression to a function — exprToFunction"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Convert an expression to a function</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.4/R/utils-lang.R" class="external-link"><code>R/utils-lang.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p><a href="https://lifecycle.r-lib.org/articles/stages.html#superseded" class="external-link"><img src="figures/lifecycle-superseded.svg" alt="[Superseded]"></a> Please use <code><a href="createRenderFunction.html">installExprFunction()</a></code> for a better
+debugging experience (Shiny 0.8.0). If the <code>expr</code> and <code>quoted</code> parameters are not needed, please see
+<code><a href="createRenderFunction.html">quoToFunction()</a></code> (Shiny 1.6.0).</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exprToFunction</span>(expr, <span class="at">env =</span> <span class="fu">parent.frame</span>(), <span class="at">quoted =</span> <span class="cn">FALSE</span>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>expr</dt>
+<dd><p>A quoted or unquoted expression, or a quosure.</p></dd>
+
+
+<dt>env</dt>
+<dd><p>The desired environment for the function. Defaults to the
+calling environment two steps back.</p></dd>
+
+
+<dt>quoted</dt>
+<dd><p>Is the expression quoted?</p></dd>
+
+</dl></div>
+  <div data-section="details">
+    <h3 id="details">Details</h3>
+    <p>Similar to <code><a href="createRenderFunction.html">installExprFunction()</a></code> but doesn't register debug hooks.</p>
+  </div>
+  <div data-section="see-also">
+    <h3 id="see-also">See also</h3>
+    <div class="dont-index"><p><code><a href="createRenderFunction.html">installExprFunction()</a></code> for the modern approach to converting an expression to a function</p></div>
+  </div>
+
+</div>

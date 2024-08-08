@@ -1,0 +1,11 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Date and date range
+date: 2014-07-29 
+tags: 
+ - date
+ - daterange
+appurl: https://gallery.shinyapps.io/037-date-and-date-range
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/037-date-and-date-range
+---

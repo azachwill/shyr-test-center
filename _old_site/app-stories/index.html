@@ -1,0 +1,58 @@
+---
+layout: default
+title: App Stories
+categories: app-stories
+child_scope: /app-stories/
+featured_tags:
+  - getting-started
+  - datatables
+  - application-layout
+  - reactivity
+---
+
+<!-- Styling located in _scss/_app-stories.scss -->
+
+<script>
+
+  $(function () {
+    document.querySelectorAll(".app-story-post")
+      .forEach(function (post_div) {
+        var link_to_post = post_div.querySelector(".main-link");
+
+        post_div.addEventListener("click", function (event) {
+          // Send click event if user hasn't selected any text
+          if (!window.getSelection().toString()) {
+            link_to_post.click();
+          }
+        });
+
+        // Make sure other links dont trigger a double click
+        post_div.querySelectorAll("a")
+          .forEach(function (link_el) {
+            link_el
+              .addEventListener("click", function (e) { e.stopPropagation() });
+          });
+      });
+  });
+
+</script>
+
+<h1>App Stories</h1>
+
+<div class="app-stories-intro">
+  Welcome to the Shiny App Stories! The goal of these posts is to demonstrate new and advanced features in the context
+  of real-world applications. Each application is accompanied by one or more posts detailing the functionality and
+  design decisions used in its construction. These posts serve to tell the little stories of developing nice looking and
+  performant Shiny applications. The techniques here tend to be advanced, so if you're brand-new to Shiny, we recommend
+  starting with the <a href="{{ site.baseurl }}/articles/">articles section.</a>
+</div>
+
+<div class="row">
+  {% for group in site.data.app-stories %}
+    {% include app-story-section.html group=group %}
+    {% cycle '', '<div class="clearfix"></div>' %}
+  {% endfor %}
+</div>
+
+
+<br><br>

@@ -1,0 +1,20 @@
+---
+image: thumbnail.png
+imagealt: ""
+description: The main motivation behind this simple shiny application is to make it easier to locate blood banks in India. This app provides additional details on pincodes, addresses, contact person name and number.
+title:        "Locating Blood Banks in India"
+author:    Atmajitsinh
+authorurl:     https://atmajitgohil.com/
+no-app-padding: true
+date:         2019-05-31
+tags:         
+ - open data
+ - geolocation
+ - map
+appurl:      https://opndt.shinyapps.io/bloodbank_india/
+sourceurl:   https://github.com/atmajitg/bloodbanks
+rscloudurl:  null
+---
+
+The main motivation behind this simple shiny application is to make it easier to locate blood banks in India. The app provides additional details on pincodes, addresses, contact person name and number.
+  

@@ -1,0 +1,253 @@
+---
+title: "enableBookmarking"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="argument">store</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"url"</span><span class="keyword">,</span> <span class="string">"server"</span><span class="keyword">,</span> <span class="string">"disable"</span><span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>store</th>
+    <td>Either <code>&quot;url&quot;</code>, which encodes all of the relevant values in
+a URL, <code>&quot;server&quot;</code>, which saves to disk on the server, or
+<code>&quot;disable&quot;</code>, which disables any previously-enabled bookmarking.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>There are two types of bookmarking: saving an application&#39;s state to disk on
+the server, and encoding the application&#39;s state in a URL. For state that has
+been saved to disk, the state can be restored with the corresponding state
+ID. For URL-encoded state, the state of the application is encoded in the
+URL, and no server-side storage is needed.</p>
+
+  <p>URL-encoded bookmarking is appropriate for applications where there not many
+input values that need to be recorded. Some browsers have a length limit for
+URLs of about 2000 characters, and if there are many inputs, the length of
+the URL can exceed that limit.</p>
+
+  <p>Saved-on-server bookmarking is appropriate when there are many inputs, or
+when the bookmarked state requires storing files.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>For restoring state to work properly, the UI must be a function that takes
+one argument, <code>request</code>. In most Shiny applications, the UI is not a
+function; it might have the form <code>fluidPage(....)</code>. Converting it to a
+function is as simple as wrapping it in a function, as in
+<code>function(request) { fluidPage(....) }</code>.</p>
+
+  <p>By default, all input values will be bookmarked, except for the values of
+passwordInputs. fileInputs will be saved if the state is saved on a server,
+but not if the state is encoded in a URL.</p>
+
+  <p>When bookmarking state, arbitrary values can be stored, by passing a function
+as the <code>onBookmark</code> argument. That function will be passed a
+<code>ShinySaveState</code> object. The <code>values</code> field of the object is a list
+which can be manipulated to save extra information. Additionally, if the
+state is being saved on the server, and the <code>dir</code> field of that object
+can be used to save extra information to files in that directory.</p>
+
+  <p>For saved-to-server state, this is how the state directory is chosen:
+<ul>
+<li> If running in a hosting environment such as Shiny Server or
+    Connect, the hosting environment will choose the directory.
+  </li>
+<li> If running an app in a directory with <code><a href='runApp.html'>runApp</a>()</code>, the
+    saved states will be saved in a subdirectory of the app called
+   shiny_bookmarks.
+  </li>
+<li> If running a Shiny app object that is generated from code (not run
+    from a directory), the saved states will be saved in a subdirectory of
+    the current working directory called shiny_bookmarks.
+</li>
+</ul></p>
+
+  <p>When used with <code><a href='shinyApp.html'>shinyApp</a>()</code>, this function must be called before
+<code>shinyApp()</code>, or in the <code>shinyApp()</code>&#39;s <code>onStart</code> function. An
+alternative to calling the <code>enableBookmarking()</code> function is to use the
+<code>enableBookmarking</code> <em>argument</em> for <code>shinyApp()</code>. See examples
+below.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run these examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="comment"># Basic example with state encoded in URL</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">request</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Text"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"chk"</span><span class="keyword">,</span> <span class="string">"Checkbox"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span> <span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"url"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+<span class="comment"># An alternative to calling enableBookmarking(): use shinyApp's</span>
+<span class="comment"># enableBookmarking argument</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">,</span> <span class="argument">enableBookmarking</span> <span class="argument">=</span> <span class="string">"url"</span><span class="keyword">)</span>
+
+
+<span class="comment"># Same basic example with state saved to disk</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+<span class="comment"># Save/restore arbitrary values</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">req</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Text"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"chk"</span><span class="keyword">,</span> <span class="string">"Checkbox"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='builder.html'>br</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='textOutput.html'>textOutput</a></span><span class="keyword">(</span><span class="string">"lastSaved"</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">vals</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveValues.html'>reactiveValues</a></span><span class="keyword">(</span><span class="argument">savedTime</span> <span class="argument">=</span> NULL<span class="keyword">)</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">lastSaved</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderText.html'>renderText</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="keyword">if</span> <span class="keyword">(</span><span class="keyword">!</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/NULL'>is.null</a></span><span class="keyword">(</span><span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">savedTime</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span><span class="keyword">(</span><span class="string">"Last saved at"</span><span class="keyword">,</span> <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">savedTime</span><span class="keyword">)</span>
+    <span class="keyword">else</span>
+      <span class="string">""</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+
+  <span class="functioncall"><a href='onBookmark.html'>onBookmark</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">savedTime</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.time</a></span><span class="keyword">(</span><span class="keyword">)</span>
+    <span class="comment"># state is a mutable reference object, and we can add arbitrary values</span>
+    <span class="comment"># to it.</span>
+    <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">time</span> <span class="assignement">&lt;-</span> <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">savedTime</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='onBookmark.html'>onRestore</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">state</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">vals</span><span class="keyword">$</span><span class="symbol">savedTime</span> <span class="assignement">&lt;-</span> <span class="symbol">state</span><span class="keyword">$</span><span class="symbol">values</span><span class="keyword">$</span><span class="symbol">time</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="argument">store</span> <span class="argument">=</span> <span class="string">"url"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+<span class="comment"># Usable with dynamic UI (set the slider, then change the text input,</span>
+<span class="comment"># click the bookmark button)</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">request</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"slider"</span><span class="keyword">,</span> <span class="string">"Slider"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">,</span> <span class="number">100</span><span class="keyword">,</span> <span class="number">50</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='htmlOutput.html'>uiOutput</a></span><span class="keyword">(</span><span class="string">"ui"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderUI.html'>renderUI</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Text"</span><span class="keyword">,</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">slider</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"url"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+<span class="comment"># Exclude specific inputs (The only input that will be saved in this</span>
+<span class="comment"># example is chk)</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">request</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='passwordInput.html'>passwordInput</a></span><span class="keyword">(</span><span class="string">"pw"</span><span class="keyword">,</span> <span class="string">"Password"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="comment"># Passwords are never saved</span>
+    <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"slider"</span><span class="keyword">,</span> <span class="string">"Slider"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">,</span> <span class="number">100</span><span class="keyword">,</span> <span class="number">50</span><span class="keyword">)</span><span class="keyword">,</span> <span class="comment"># Manually excluded below</span>
+    <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"chk"</span><span class="keyword">,</span> <span class="string">"Checkbox"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='setBookmarkExclude.html'>setBookmarkExclude</a></span><span class="keyword">(</span><span class="string">"slider"</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"url"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+<span class="comment"># Update the browser's location bar every time an input changes. This should</span>
+<span class="comment"># not be used with enableBookmarking("server"), because that would create a</span>
+<span class="comment"># new saved state on disk every time the user changes an input.</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">req</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='textInput.html'>textInput</a></span><span class="keyword">(</span><span class="string">"txt"</span><span class="keyword">,</span> <span class="string">"Text"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"chk"</span><span class="keyword">,</span> <span class="string">"Checkbox"</span><span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='observe.html'>observe</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="comment"># Trigger this observer every time an input changes</span>
+    <span class="functioncall"><a href='reactiveValuesToList.html'>reactiveValuesToList</a></span><span class="keyword">(</span><span class="symbol">input</span><span class="keyword">)</span>
+    <span class="symbol">session</span><span class="keyword">$</span><span class="functioncall">doBookmark</span><span class="keyword">(</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="functioncall"><a href='onBookmark.html'>onBookmarked</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">url</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="functioncall"><a href='updateQueryString.html'>updateQueryString</a></span><span class="keyword">(</span><span class="symbol">url</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"url"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+
+<span class="comment"># Save/restore uploaded files</span>
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">request</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='sidebarLayout.html'>sidebarLayout</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+        <span class="functioncall"><a href='fileInput.html'>fileInput</a></span><span class="keyword">(</span><span class="string">"file1"</span><span class="keyword">,</span> <span class="string">"Choose CSV File"</span><span class="keyword">,</span> <span class="argument">multiple</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">,</span>
+          <span class="argument">accept</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span>
+            <span class="string">"text/csv"</span><span class="keyword">,</span>
+            <span class="string">"text/comma-separated-values,text/plain"</span><span class="keyword">,</span>
+            <span class="string">".csv"</span>
+          <span class="keyword">)</span>
+        <span class="keyword">)</span><span class="keyword">,</span>
+        <span class="symbol">tags</span><span class="keyword">$</span><span class="functioncall"><a href='builder.html'>hr</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='checkboxInput.html'>checkboxInput</a></span><span class="keyword">(</span><span class="string">"header"</span><span class="keyword">,</span> <span class="string">"Header"</span><span class="keyword">,</span> <span class="number">TRUE</span><span class="keyword">)</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='bookmarkButton.html'>bookmarkButton</a></span><span class="keyword">(</span><span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+        <span class="functioncall"><a href='tableOutput.html'>tableOutput</a></span><span class="keyword">(</span><span class="string">"contents"</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">contents</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderTable.html'>renderTable</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="symbol">inFile</span> <span class="assignement">&lt;-</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">file1</span>
+    <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/NULL'>is.null</a></span><span class="keyword">(</span><span class="symbol">inFile</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/function'>return</a></span><span class="keyword">(</span>NULL<span class="keyword">)</span>
+
+    <span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span><span class="keyword">(</span><span class="symbol">inFile</span><span class="keyword">)</span> == <span class="number">1</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/read.table'>read.csv</a></span><span class="keyword">(</span><span class="symbol">inFile</span><span class="keyword">$</span><span class="symbol">datapath</span><span class="keyword">,</span> <span class="argument">header</span> <span class="argument">=</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">header</span><span class="keyword">)</span>
+    <span class="keyword">}</span> <span class="keyword">else</span> <span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span><span class="keyword">(</span><span class="argument">x</span> <span class="argument">=</span> <span class="string">"multiple files"</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+<span class="functioncall"><a href='enableBookmarking.html'>enableBookmarking</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>enableBookmarking</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='onBookmark.html'>onBookmark</a></code>, <code><a href='onBookmark.html'>onBookmarked</a></code>,
+  <code><a href='onBookmark.html'>onRestore</a></code>, and <code><a href='onBookmark.html'>onRestored</a></code> for registering
+  callback functions that are invoked when the state is bookmarked or
+  restored.</p>
+  <p>Also see <code><a href='updateQueryString.html'>updateQueryString</a></code>.</p>
+</div>
+```

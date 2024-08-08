@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Bookmarking - URL
+date: 2016-08-12 
+tags: 
+ - bookmarking
+appurl: "https://gallery.shinyapps.io/113-bookmarking-url"
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/113-bookmarking-url
+---

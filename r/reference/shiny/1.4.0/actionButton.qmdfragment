@@ -1,0 +1,102 @@
+---
+title: "Action button/link — actionButton"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>actionButton</span>(<span class='no'>inputId</span>, <span class='no'>label</span>, <span class='kw'>icon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='fu'>actionLink</span>(<span class='no'>inputId</span>, <span class='no'>label</span>, <span class='kw'>icon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>inputId</p></th>
+    <td><p>The <code>input</code> slot that will be used to access the value.</p></td>
+  </tr>
+  <tr>
+    <th><p>label</p></th>
+    <td><p>The contents of the button or link--usually a text label, but
+you could also use any other HTML, like an image.</p></td>
+  </tr>
+  <tr>
+    <th><p>icon</p></th>
+    <td><p>An optional <code><a href='icon.html'>icon()</a></code> to appear on the button.</p></td>
+  </tr>
+  <tr>
+    <th><p>width</p></th>
+    <td><p>The width of the input, e.g. <code>'400px'</code>, or <code>'100%'</code>;
+see <code><a href='validateCssUnit.html'>validateCssUnit()</a></code>.</p></td>
+  </tr>
+  <tr>
+    <th><p>...</p></th>
+    <td><p>Named attributes to be applied to the button or link.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>Creates an action button or link whose value is initially zero, and increments by one
+each time it is pressed.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+  <h3 class="hasAnchor" id="server-value"><a class="anchor" href="#server-value"></a>Server value</h3>
+
+  
+
+<p>An integer of class <code>"shinyActionButtonValue"</code>. This class differs from
+ordinary integers in that a value of 0 is considered "falsy".
+This implies two things:</p><ul>
+<li><p>Event handlers (e.g., <code><a href='observeEvent.html'>observeEvent()</a></code>, <code><a href='observeEvent.html'>eventReactive()</a></code>) won't execute on initial load.</p></li>
+<li><p>Input validation (e.g., <code><a href='req.html'>req()</a></code>, <code><a href='validate.html'>need()</a></code>) will fail on initial load.</p></li>
+</ul>
+
+    <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
+
+  <div class='dont-index'><p><code><a href='observeEvent.html'>observeEvent()</a></code> and <code><a href='observeEvent.html'>eventReactive()</a></code></p>
+<p>Other input elements: <code><a href='checkboxGroupInput.html'>checkboxGroupInput</a></code>,
+  <code><a href='checkboxInput.html'>checkboxInput</a></code>, <code><a href='dateInput.html'>dateInput</a></code>,
+  <code><a href='dateRangeInput.html'>dateRangeInput</a></code>, <code><a href='fileInput.html'>fileInput</a></code>,
+  <code><a href='numericInput.html'>numericInput</a></code>, <code><a href='passwordInput.html'>passwordInput</a></code>,
+  <code><a href='radioButtons.html'>radioButtons</a></code>, <code><a href='selectInput.html'>selectInput</a></code>,
+  <code><a href='sliderInput.html'>sliderInput</a></code>, <code><a href='submitButton.html'>submitButton</a></code>,
+  <code><a href='textAreaInput.html'>textAreaInput</a></code>, <code><a href='textInput.html'>textInput</a></code>,
+  <code><a href='varSelectInput.html'>varSelectInput</a></code></p></div>
+  
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='co'>## Only run examples in interactive R sessions</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fluidPage.html'>fluidPage</a></span>(
+  <span class='fu'><a href='sliderInput.html'>sliderInput</a></span>(<span class='st'>"obs"</span>, <span class='st'>"Number of observations"</span>, <span class='fl'>0</span>, <span class='fl'>1000</span>, <span class='fl'>500</span>),
+  <span class='fu'>actionButton</span>(<span class='st'>"goButton"</span>, <span class='st'>"Go!"</span>),
+  <span class='fu'><a href='plotOutput.html'>plotOutput</a></span>(<span class='st'>"distPlot"</span>)
+)
+
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>) {
+  <span class='no'>output</span>$<span class='no'>distPlot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='renderPlot.html'>renderPlot</a></span>({
+    <span class='co'># Take a dependency on input$goButton. This will run once initially,</span>
+    <span class='co'># because the value changes from NULL to 0.</span>
+    <span class='no'>input</span>$<span class='no'>goButton</span>
+
+    <span class='co'># Use isolate() to avoid dependency on input$obs</span>
+    <span class='no'>dist</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='isolate.html'>isolate</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>input</span>$<span class='no'>obs</span>))
+    <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>dist</span>)
+  })
+}
+
+<span class='fu'><a href='shinyApp.html'>shinyApp</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+
+}</pre>
+</div>
+
+
+```

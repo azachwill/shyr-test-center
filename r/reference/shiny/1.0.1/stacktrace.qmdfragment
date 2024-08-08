@@ -1,0 +1,255 @@
+---
+title: "stacktrace"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='stacktrace.html'>captureStackTraces</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='stacktrace.html'>withLogErrors</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">,</span> <span class="argument">full</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.fullstacktrace"</span><span class="keyword">,</span> <span class="number">FALSE</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.stacktraceoffset"</span><span class="keyword">,</span> <span class="number">TRUE</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='stacktrace.html'>printError</a></span><span class="keyword">(</span><span class="symbol">cond</span><span class="keyword">,</span> <span class="argument">full</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.fullstacktrace"</span><span class="keyword">,</span> <span class="number">FALSE</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.stacktraceoffset"</span><span class="keyword">,</span> <span class="number">TRUE</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='stacktrace.html'>printStackTrace</a></span><span class="keyword">(</span><span class="symbol">cond</span><span class="keyword">,</span> <span class="argument">full</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.fullstacktrace"</span><span class="keyword">,</span> <span class="number">FALSE</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.stacktraceoffset"</span><span class="keyword">,</span> <span class="number">TRUE</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='stacktrace.html'>extractStackTrace</a></span><span class="keyword">(</span><span class="symbol">calls</span><span class="keyword">,</span> <span class="argument">full</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.fullstacktrace"</span><span class="keyword">,</span> <span class="number">FALSE</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.stacktraceoffset"</span><span class="keyword">,</span> <span class="number">TRUE</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='stacktrace.html'>formatStackTrace</a></span><span class="keyword">(</span><span class="symbol">calls</span><span class="keyword">,</span> <span class="argument">indent</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"    "</span><span class="keyword">,</span>
+  <span class="argument">full</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.fullstacktrace"</span><span class="keyword">,</span> <span class="number">FALSE</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span><span class="keyword">(</span><span class="string">"shiny.stacktraceoffset"</span><span class="keyword">,</span> <span class="number">TRUE</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='stacktrace.html'>conditionStackTrace</a></span><span class="keyword">(</span><span class="symbol">cond</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='stacktrace.html'>conditionStackTrace</a></span><span class="keyword">(</span><span class="symbol">cond</span><span class="keyword">)</span> <span class="assignement">&lt;-</span> <span class="symbol">value</span>
+
+<span class="functioncall"><a href='stacktrace.html'>..stacktraceon..</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='stacktrace.html'>..stacktraceoff..</a></span><span class="keyword">(</span><span class="symbol">expr</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>expr</th>
+    <td>The expression to wrap.</td>
+  </tr>
+  <tr>
+    <th>full</th>
+    <td>If <code>TRUE</code>, then every element of <code>sys.calls()</code> will be
+included in the stack trace. By default (<code>FALSE</code>), calls that Shiny
+deems uninteresting will be hidden.</td>
+  </tr>
+  <tr>
+    <th>offset</th>
+    <td>If <code>TRUE</code> (the default), srcrefs will be reassigned from
+the calls they originated from, to the destinations of those calls. If
+you&#39;re used to stack traces from other languages, this feels more
+intuitive, as the definition of the function indicated in the call and the
+location specified by the srcref match up. If <code>FALSE</code>, srcrefs will be
+left alone (traditional R treatment where the srcref is of the callsite).</td>
+  </tr>
+  <tr>
+    <th>cond</th>
+    <td>An condition object (generally, an error).</td>
+  </tr>
+  <tr>
+    <th>indent</th>
+    <td>A string to prefix every line of the stack trace.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>The stack trace value to assign to the condition.</td>
+  </tr>
+  <tr>
+    <th>cond</th>
+    <td>A condition that may have previously been annotated by
+<code>captureStackTraces</code> (or <code>withLogErrors</code>).</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+<code>printError</code> and <code>printStackTrace</code> return
+  <code>invisible()</code>. The other functions pass through the results of
+  <code>expr</code>.
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Advanced (borderline internal) functions for capturing, printing, and
+manipulating stack traces.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p><code>captureStackTraces</code> runs the given <code>expr</code> and if any
+  <em>uncaught</em> errors occur, annotates them with stack trace info for use
+  by <code>printError</code> and <code>printStackTrace</code>. It is not necessary to use
+  <code>captureStackTraces</code> around the same expression as
+  <code>withLogErrors</code>, as the latter includes a call to the former. Note
+  that if <code>expr</code> contains calls (either directly or indirectly) to
+  <code>try</code>, or <code>tryCatch</code> with an error handler, stack traces therein
+  cannot be captured unless another <code>captureStackTraces</code> call is
+  inserted in the interior of the <code>try</code> or <code>tryCatch</code>. This is
+  because these calls catch the error and prevent it from traveling up to the
+  condition handler installed by <code>captureStackTraces</code>.</p>
+
+  <p><code>withLogErrors</code> captures stack traces and logs errors that
+  occur in <code>expr</code>, but does allow errors to propagate beyond this point
+  (i.e. it doesn&#39;t catch the error). The same caveats that apply to
+  <code>captureStackTraces</code> with regard to <code>try</code>/<code>tryCatch</code> apply
+  to <code>withLogErrors</code>.</p>
+
+  <p><code>printError</code> prints the error and stack trace (if any) using
+  <code>warning(immediate.=TRUE)</code>. <code>printStackTrace</code> prints the stack
+  trace only.</p>
+
+  <p><code>extractStackTrace</code> takes a list of calls (e.g. as returned
+  from <code>conditionStackTrace(cond)</code>) and returns a data frame with one
+  row for each stack frame and the columns <code>num</code> (stack frame number),
+  <code>call</code> (a function name or similar), and <code>loc</code> (source file path
+  and line number, if available).</p>
+
+  <p><code>formatStackTrace</code> is similar to <code>extractStackTrace</code>, but
+  it returns a preformatted character vector instead of a data frame.</p>
+
+  <p><code>conditionStackTrace</code> and <code>conditionStackTrace&lt;-</code> are
+  accessor functions for getting/setting stack traces on conditions.</p>
+
+  <p>The two functions <code>..stacktraceon..</code> and
+  <code>..stacktraceoff..</code> have no runtime behavior during normal execution;
+  they exist only to create artifacts on the stack trace (sys.call()) that
+  instruct the stack trace pretty printer what parts of the stack trace are
+  interesting or not. The initial state is 1 and we walk from the outermost
+  call inwards. Each ..stacktraceoff.. decrements the state by one, and each
+  ..stacktraceon.. increments the state by one. Any stack trace frame whose
+  value is less than 1 is hidden, and finally, the ..stacktraceon.. and
+  ..stacktraceoff.. calls themselves are hidden too.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment"># Keeps tryCatch and withVisible related calls off the</span>
+<span class="comment"># pretty-printed stack trace</span>
+
+<span class="symbol">visibleFunction1</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/stop'>stop</a></span><span class="keyword">(</span><span class="string">"Kaboom!"</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="symbol">visibleFunction2</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall">visibleFunction1</span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="symbol">hiddenFunction</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">expr</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">expr</span>
+<span class="keyword">}</span>
+
+<span class="comment"># An example without ..stacktraceon/off.. manipulation.</span>
+<span class="comment"># The outer "try" is just to prevent example() from stopping.</span>
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/try'>try</a></span><span class="keyword">(</span><span class="keyword">{</span>
+  <span class="comment"># The withLogErrors call ensures that stack traces are captured</span>
+  <span class="comment"># and that errors that bubble up are logged using warning().</span>
+  <span class="functioncall"><a href='stacktrace.html'>withLogErrors</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="comment"># tryCatch and withVisible are just here to add some noise to</span>
+    <span class="comment"># the stack trace.</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/conditions'>tryCatch</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/withVisible'>withVisible</a></span><span class="keyword">(</span><span class="keyword">{</span>
+        <span class="functioncall">hiddenFunction</span><span class="keyword">(</span><span class="functioncall">visibleFunction2</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+      <span class="keyword">}</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span><span class="keyword">)</span></div>
+<strong class='warning'>Warning message:
+Error in visibleFunction1: Kaboom!</strong>
+<strong class='message'>Stack trace (innermost first):
+    33: visibleFunction1 [&lt;text&gt;#5]
+    32: visibleFunction2 [&lt;text&gt;#9]
+    31: hiddenFunction [&lt;text&gt;#13]
+    30: withVisible [&lt;text&gt;#26]
+    29: tryCatchList
+    28: tryCatch
+    27: withCallingHandlers [&lt;text&gt;#24]
+    26: captureStackTraces [/Users/barbaraborges/shiny/R/conditions.R#108]
+    25: withCallingHandlers
+    24: withLogErrors [/Users/barbaraborges/shiny/R/conditions.R#130]
+    23: doTryCatch [&lt;text&gt;#21]
+    22: tryCatchOne
+    21: tryCatchList
+    20: tryCatch
+    19: try
+    18: eval
+    17: eval
+    16: withVisible
+    15: withCallingHandlers
+    14: doTryCatch
+    13: tryCatchOne
+    12: tryCatchList
+    11: tryCatch
+    10: try
+     9: handle
+     8: timing_fn
+     7: evaluate_call
+     6: evaluate
+     5: to_html.examples
+     4: to_html
+     3: to_html.Rd_doc
+     2: build_topics
+     1: build_site</strong>
+<div class='input'>
+<span class="comment"># Now the same example, but with ..stacktraceon/off.. to hide some</span>
+<span class="comment"># of the less-interesting bits (tryCatch and withVisible).</span>
+<span class="functioncall"><a href='stacktrace.html'>..stacktraceoff..</a></span><span class="keyword">(</span><span class="keyword">{</span>
+  <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/try'>try</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="functioncall"><a href='stacktrace.html'>withLogErrors</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/conditions'>tryCatch</a></span><span class="keyword">(</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/withVisible'>withVisible</a></span><span class="keyword">(</span>
+          <span class="functioncall">hiddenFunction</span><span class="keyword">(</span>
+            <span class="functioncall"><a href='stacktrace.html'>..stacktraceon..</a></span><span class="keyword">(</span><span class="functioncall">visibleFunction2</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+          <span class="keyword">)</span>
+        <span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span><span class="keyword">)</span></div>
+<strong class='warning'>Warning message:
+Error in visibleFunction1: Kaboom!</strong>
+<strong class='message'>Stack trace (innermost first):
+    35: visibleFunction1 [&lt;text&gt;#5]
+    34: visibleFunction2 [&lt;text&gt;#9]
+    18: eval
+    17: eval
+    16: withVisible
+    15: withCallingHandlers
+    14: doTryCatch
+    13: tryCatchOne
+    12: tryCatchList
+    11: tryCatch
+    10: try
+     9: handle
+     8: timing_fn
+     7: evaluate_call
+     6: evaluate
+     5: to_html.examples
+     4: to_html
+     3: to_html.Rd_doc
+     2: build_topics
+     1: build_site</strong>
+<div class='input'></div></code></pre>
+<!-- <ul>
+  <li>stacktrace</li><li>captureStackTraces</li><li>withLogErrors</li><li>printError</li><li>printStackTrace</li><li>extractStackTrace</li><li>formatStackTrace</li><li>conditionStackTrace</li><li>conditionStackTrace&amp;lt;-</li><li>..stacktraceon..</li><li>..stacktraceoff..</li>
+</ul>
+<ul>
+  <li>internal</li>
+</ul> -->
+
+```

@@ -1,0 +1,283 @@
+---
+layout: post
+title: Bookmarking state
+edited: 2019-10-15
+author: Winston Chang
+description: As of version 0.14, users can save the state of an application and get a URL which will restore the application with that state. There are two types of bookmarking -- encoding the state in a URL, and saving the state to the server.
+---
+
+As of version 0.14, Shiny supports bookmarkable state: users can save the state of an application and get a URL which will restore the application with that state.
+
+There are two types of bookmarking: *encoding* the state in a URL, and *saving* the state to the server. With an encoded state, the entire state of the application is contained in the URL's query string. You can see this in action with this app: [https://gallery.shinyapps.io/113-bookmarking-url/](https://gallery.shinyapps.io/113-bookmarking-url/). An example of a bookmark URL for this app is [https://gallery.shinyapps.io/113-bookmarking-url/?\_inputs\_&n=200](https://gallery.shinyapps.io/113-bookmarking-url/?_inputs_&n=200).
+
+When the state is saved to the server, the URL might look like: `https://gallery.shinyapps.io/bookmark-saved/?_state_id_=d80625dc681e913a`.
+
+The main differences between an encoded state and a saved-to-server state are:
+
+* With an encoded state, the values are visible in the URL, but with a saved state, they are not.
+* With a saved state, extra files can be saved to the server, but they can't be for encoded states.
+* With an encoded state, the URL could become very long if there are many values. Some browsers have a limit of about 2,000 characters for the length of a URL, so if the bookmark URL is longer than that, it will not work properly in those browsers.
+
+For saving state to the server, the hosting environment must support bookmarkable state. As of version 1.4.7, Shiny Server Open Source and Shiny Server Pro support saving state to disk. RStudio Connect added support in version 1.4.6. URL-encoded bookmarking currently works in all of these hosting environments.
+
+## Using bookmarkable state
+
+For most Shiny apps, there are two changes that must be made to enable bookmarking:
+
+* The UI portion of an application must be a function that takes one argument.
+* There must be a call to `enableBookmarking()`. Or, if you're calling `shinyApp()`, use the `enableBookmarking` argument.
+
+The next few examples here show how to enable URL-encoded bookmarking with different file configurations.
+
+### Single-file applications
+
+Here is an example single-file app (with just app.R) with URL-encoded bookmarking enabled. You can also run this code from the console, if you want to test out bookmarking on your local development machine:
+
+{% highlight r %}
+ui <- function(request) {
+  fluidPage(
+    textInput("txt", "Enter text"),
+    checkboxInput("caps", "Capitalize"),
+    verbatimTextOutput("out"),
+    bookmarkButton()
+  )
+}
+server <- function(input, output, session) {
+  output$out <- renderText({
+    if (input$caps)
+      toupper(input$txt)
+    else
+      input$txt
+  })
+}
+
+shinyApp(ui, server, enableBookmarking = "url")
+{% endhighlight %}
+
+Notice that the UI portion of app is *not* the `fluidPage(...)` content, but instead *a function that returns* the `fluidPage(...)` content. All of the input-generating functions (like `textInput()`) must be *invoked* from this function, either directly or indirectly (the UI function can call a function which calls `textInput()`). The input components cannot be saved in variables and then used inside the UI function -- if this is done, then they will not restore properly.
+
+This application has some inputs, an output, and a bookmark button:
+
+![Bookmark app screenshot](/images/bookmark-modal-pre.png)
+
+When the user clicks on the bookmark button, a modal dialog with the link will be displayed:
+
+![Bookmark modal screenshot](/images/bookmark-modal.png)
+
+The user can then copy the URL and save it for later, or share it with others so they can visit the application in the bookmarked state.
+
+**Note:** An alternative is to call `enableBookmarking()` right before `shinyApp()`. This tells Shiny to enable bookmarking for the next Shiny app that is created.
+
+{% highlight r %}
+enableBookmarking(store = "url")
+shinyApp(ui, server)
+{% endhighlight %}
+
+
+
+### ui.R/server.R
+
+For applications that use ui.R and server.R, there should also be a global.R with a call to `enableBookmarking()`. For example:
+
+{% highlight r %}
+## global.R ##
+enableBookmarking(store = "url")
+{% endhighlight %}
+
+
+{% highlight r %}
+## ui.R ##
+function(request) {
+  fluidPage(
+    textInput("txt", "Enter text"),
+    checkboxInput("caps", "Capitalize"),
+    verbatimTextOutput("out"),
+    bookmarkButton()
+  )
+}
+{% endhighlight %}
+
+{% highlight r %}
+## server.R ##
+function(input, output, session) {
+  output$out <- renderText({
+    if (input$caps)
+      toupper(input$txt)
+    else
+      input$txt
+  })
+}
+{% endhighlight %}
+
+
+
+### Applications generated by functions
+
+If your Shiny application is generated by a function, enabling bookmarking is done just the same as for a single file app. For example, this function returns a Shiny app:
+
+{% highlight r %}
+myApp <- function() {
+  ui <- function(request) {
+    fluidPage(
+      textInput("txt", "Enter text"),
+      checkboxInput("caps", "Capitalize"),
+      verbatimTextOutput("out"),
+      bookmarkButton()
+    )
+  }
+  server <- function(input, output, session) {
+    output$out <- renderText({
+      if (input$caps)
+        toupper(input$txt)
+      else
+        input$txt
+    })
+  }
+
+  shinyApp(ui, server, enableBookmarking = "url")
+}
+{% endhighlight %}
+
+As with single-file apps, another alternative is to call `enableBookmarking()` just before `shinyApp()`. So, for example, the `myApp()` function would call this:
+
+{% highlight r %}
+enableBookmarking(store = "url")
+shinyApp(ui, server)
+{% endhighlight %}
+
+
+### Saved-to-server bookmarking
+
+To saved the bookmarked state to disk on the server, the only change is to use `enableBookmarking = "server"`. Here is a basic single-file app with saved-to-server bookmarking enabled:
+
+{% highlight r %}
+ui <- function(request) {
+  fluidPage(
+    textInput("txt", "Enter text"),
+    checkboxInput("caps", "Capitalize"),
+    verbatimTextOutput("out"),
+    bookmarkButton()
+  )
+}
+server <- function(input, output, session) {
+  output$out <- renderText({
+    if (input$caps)
+      toupper(input$txt)
+    else
+      input$txt
+  })
+}
+
+shinyApp(ui, server, enableBookmarking = "server")
+{% endhighlight %}
+
+
+## Saving to server
+
+For saving state to the server, the hosting environment must support bookmarkable state. Currently, Shiny Server Open Source, Shiny Server Pro, and RStudio Connect support saved-to-server bookmarkable state.
+
+When running a Shiny application in a hosting environment like Shiny Server, the hosting environment determines which directory is used for for storing bookmarked states. For Shiny Server, they will be stored in a subdirectory under `/var/lib/shiny-server/bookmarks`. For RStudio Connect, the bookmarked states are stored in a subdirectory of the RStudio Connect data directory, by default `/var/lib/rstudio-connect/bookmarks`.
+
+When running a Shiny application from R without a hosting environment (directly from the R console), the saved states will be stored in a subdirectory of the application directory named `shiny_bookmarks/`. This happens when the user calls `runApp()` and passes it a directory or file to run.
+
+It is possible to start a Shiny application without a directory -- for example, by calling `shinyApp()` at the console, or by calling a function that returns a Shiny app object, or if was invoked with `runApp(list(ui, server))`. In these cases, the saved state will be stored in `shiny_bookmarks/` under the current working directory.
+
+
+## How it works
+
+A bookmarked state automatically saves the values of all inputs (with some exceptions which are discussed below). When the application is restored using that state, the inputs are seeded with the saved values. If the application's reactive graph structure has a straightforward flow, where the data flow goes from inputs to (optional) reactives to outputs, then the application will restore cleanly.
+
+If, however, the application uses constructs that don't have a straightforward reactive flow, then the application may not restore cleanly. In other words, if the state of the inputs at time *t* does not fully determine the state of the outputs at time *t*, then the application may not save and restore correctly unless you add additional logic. This is discussed in more detail in the [advanced bookmarking article](advanced-bookmarking.html).
+
+If the application uses randomly generated numbers somewhere between the inputs and outputs, then the restored state of the app may not exactly match the bookmarked state. However, it is possible to use the `set.seed()` or `repeatable()` functions to make the bookmarked state and restored state consistent.
+
+### Excluding values
+
+All input values in a Shiny application are automatically saved, except for passwordInputs. fileInputs are saved only when the state saved to server, not when it is encoded in a URL.
+
+To exclude other inputs from being bookmarked, call `setBookmarkExclude()` in the server function, and pass in a vector containing the names of the inputs:
+
+{% highlight r %}
+# Server function
+function(input, output, session) {
+  setBookmarkExclude(c("x", "y"))
+}
+{% endhighlight %}
+
+
+### Bookmarking and restoring tabs
+
+It is possible for an app to bookmark which tab it is on. For this to work, you will need to provide an `id` for `tabsetPanel()`, `navbarPage()`, or `navlistPanel()`. See the example in the next section.
+
+
+### Using multiple bookmark buttons
+
+If you want to have more than one bookmark button, you'll need to provide a unique ID for each one.
+
+In the example below, there are two tabs, so the `tabsetPanel()` has an `id`, and there is a `bookmarkButton` in each one.
+
+{% highlight r %}
+ui <- function(request) {
+  fluidPage(
+    tabsetPanel(id = "tabs",
+      tabPanel("One",
+        checkboxInput("chk1", "Checkbox 1"),
+        bookmarkButton(id = "bookmark1")
+      ),
+      tabPanel("Two",
+        checkboxInput("chk2", "Checkbox 2"),
+        bookmarkButton(id = "bookmark2")
+      )
+    )
+  )
+}
+server <- function(input, output, session) {
+  # Need to exclude the buttons from themselves being bookmarked
+  setBookmarkExclude(c("bookmark1", "bookmark2"))
+
+  # Trigger bookmarking with either button
+  observeEvent(input$bookmark1, {
+    session$doBookmark()
+  })
+  observeEvent(input$bookmark2, {
+    session$doBookmark()
+  })
+}
+shinyApp(ui, server, enableBookmarking = "url")
+{% endhighlight %}
+
+In order to trigger bookmarking from each button, there is an `observeEvent()` for each button that calls `session$doBookmark()`. Also, the bookmark buttons themselves are excluded from bookmarking with `setBookmarkExclude()`; if we don't do this, then as soon as a user restores the application, it will immediately trigger bookmarking again.
+
+
+### Updating location bar with each input change
+
+The default way that the bookmark URL is be presented to the user is with a modal dialog that appears on top of the app, but it's not the only way to do it. Another way is to update the browser's location bar. The example below updates the location bar every time the user changes an input. See it in action [here](https://gallery.shinyapps.io/115-bookmarking-updatequerystring/).
+
+{% highlight r %}
+ui <- function(req) {
+  fluidPage(
+    textInput("txt", "Text"),
+    checkboxInput("chk", "Checkbox")
+  )
+}
+server <- function(input, output, session) {
+  observe({
+    # Trigger this observer every time an input changes
+    reactiveValuesToList(input)
+    session$doBookmark()
+  })
+  onBookmarked(function(url) {
+    updateQueryString(url)
+  })
+}
+
+shinyApp(ui, server, enableBookmarking = "url")
+{% endhighlight %}
+
+## Learn more
+
+For more on this topic, see the following resources:
+
+[<i class="fas fa-play-circle fa-lg" aria-hidden="true"></i> Introducing bookmarkable state for shiny](https://resources.rstudio.com/webinars/introducing-bookmarks)
+
+[<i class="fas fa-play-circle fa-lg" aria-hidden="true"></i> Bookmarking Shiny State](https://resources.rstudio.com/wistia-rstudio-conf-2017/bookmarking-shiny-state-finally-winston-chang)

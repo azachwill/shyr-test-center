@@ -1,0 +1,51 @@
+---
+title: "withMathJax"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>withMathJax(...)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>...</th>
+    <td>any HTML elements to apply MathJax to</td>
+  </tr>
+</table>
+
+<div data-section="Load the MathJax library and typeset math expressions">
+  <h3 data-swiftype-index="false">Load the MathJax library and typeset math expressions</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>This function adds MathJax to the page and typeset the math expressions (if
+found) in the content <code>...</code>. It only needs to be called once in an app
+unless the content is rendered <em>after</em> the page is loaded, e.g. via
+<code><a href='renderUI.html'>renderUI</a></code>, in which case we have to call it explicitly every
+time we write math expressions to the output.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>withMathJax(helpText(&quot;Some math here $$\\alpha+\\beta$$&quot;))
+</div>
+<div class='output'>&lt;span class=&quot;help-block&quot;&gt;Some math here $$\alpha+\beta$$&lt;/span&gt;
+&lt;script&gt;MathJax.Hub.Queue([&quot;Typeset&quot;, MathJax.Hub]);&lt;/script&gt; 
+</div>
+<div class='input'># now we can just write &quot;static&quot; content without withMathJax()
+div(&quot;more math here $$\\sqrt{2}$$&quot;)
+</div>
+<div class='output'>&lt;div&gt;more math here $$\sqrt{2}$$&lt;/div&gt; 
+</div></pre>
+<!-- <ul>
+  <li>withMathJax</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

@@ -1,0 +1,87 @@
+---
+title: "Create an object representing brushing options — brushOpts"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>brushOpts</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"#9cf"</span>, <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='st'>"#036"</span>,
+  <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>0.25</span>, <span class='kw'>delay</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>delayType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"debounce"</span>, <span class='st'>"throttle"</span>),
+  <span class='kw'>clip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xy"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>), <span class='kw'>resetOnNew</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>id</p></th>
+    <td><p>Input value name. For example, if the value is <code>"plot_brush"</code>,
+then the coordinates will be available as <code>input$plot_brush</code>. Multiple
+<code>imageOutput</code>/<code>plotOutput</code> calls may share the same <code>id</code>
+value; brushing one image or plot will cause any other brushes with the
+same <code>id</code> to disappear.</p></td>
+  </tr>
+  <tr>
+    <th><p>fill</p></th>
+    <td><p>Fill color of the brush.</p></td>
+  </tr>
+  <tr>
+    <th><p>stroke</p></th>
+    <td><p>Outline color of the brush.</p></td>
+  </tr>
+  <tr>
+    <th><p>opacity</p></th>
+    <td><p>Opacity of the brush</p></td>
+  </tr>
+  <tr>
+    <th><p>delay</p></th>
+    <td><p>How long to delay (in milliseconds) when debouncing or
+throttling, before sending the brush data to the server.</p></td>
+  </tr>
+  <tr>
+    <th><p>delayType</p></th>
+    <td><p>The type of algorithm for limiting the number of brush
+events. Use <code>"throttle"</code> to limit the number of brush events to one
+every <code>delay</code> milliseconds. Use <code>"debounce"</code> to suspend events
+while the cursor is moving, and wait until the cursor has been at rest for
+<code>delay</code> milliseconds before sending an event.</p></td>
+  </tr>
+  <tr>
+    <th><p>clip</p></th>
+    <td><p>Should the brush area be clipped to the plotting area? If FALSE,
+then the user will be able to brush outside the plotting area, as long as
+it is still inside the image.</p></td>
+  </tr>
+  <tr>
+    <th><p>direction</p></th>
+    <td><p>The direction for brushing. If <code>"xy"</code>, the brush can be
+drawn and moved in both x and y directions. If <code>"x"</code>, or <code>"y"</code>,
+the brush wil work horizontally or vertically.</p></td>
+  </tr>
+  <tr>
+    <th><p>resetOnNew</p></th>
+    <td><p>When a new image is sent to the browser (via
+<code><a href='renderImage.html'>renderImage()</a></code>), should the brush be reset? The default,
+<code>FALSE</code>, is useful if you want to update the plot while keeping the
+brush. Using <code>TRUE</code> is useful if you want to clear the brush whenever
+the plot is updated.</p></td>
+  </tr>
+  </table>
+  <div data-section="description">
+  <h3>Description</h3>
+  
+  <p>This generates an object representing brushing options, to be passed as the
+<code>brush</code> argument of <code><a href='plotOutput.html'>imageOutput()</a></code> or
+<code><a href='plotOutput.html'>plotOutput()</a></code>.</p>
+  
+  </div>
+
+
+  <div data-section="details">
+
+  </div>
+
+</div>
+
+
+```

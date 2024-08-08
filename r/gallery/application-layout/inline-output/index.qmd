@@ -1,0 +1,10 @@
+---
+image: thumbnail.png
+imagealt: ""
+title: Inline Output
+date: 2014-07-29 
+tags: 
+ - inline
+appurl: https://gallery.shinyapps.io/026-shiny-inline
+sourceurl: https://github.com/rstudio/shiny-examples/tree/master/026-shiny-inline
+---

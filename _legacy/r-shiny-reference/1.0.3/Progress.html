@@ -1,0 +1,156 @@
+---
+layout: reference
+title: "Progress"
+categories: reference
+---
+<h1>Reporting progress (object-oriented API)</h1>
+
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>session</th>
+    <td>The Shiny session object, as provided by
+<code>shinyServer</code> to the server function.</td>
+  </tr>
+  <tr>
+    <th>min</th>
+    <td>The value that represents the starting point of the
+progress bar. Must be less tham <code>max</code>.</td>
+  </tr>
+  <tr>
+    <th>max</th>
+    <td>The value that represents the end of the progress bar.
+Must be greater than <code>min</code>.</td>
+  </tr>
+  <tr>
+    <th>message</th>
+    <td>A single-element character vector; the message to be
+displayed to the user, or <code>NULL</code> to hide the current message
+(if any).</td>
+  </tr>
+  <tr>
+    <th>detail</th>
+    <td>A single-element character vector; the detail message
+to be displayed to the user, or <code>NULL</code> to hide the current
+detail message (if any). The detail message will be shown with a
+de-emphasized appearance relative to <code>message</code>.</td>
+  </tr>
+  <tr>
+    <th>value</th>
+    <td>A numeric value at which to set
+the progress bar, relative to <code>min</code> and <code>max</code>.</td>
+  </tr>
+  <tr>
+    <th>style</th>
+    <td>Progress display style. If <code>&quot;notification&quot;</code> (the default),
+the progress indicator will show using Shiny&#39;s notification API. If
+<code>&quot;old&quot;</code>, use the same HTML and CSS used in Shiny 0.13.2 and below
+(this is for backward-compatibility).</td>
+  </tr>
+  <tr>
+    <th>amount</th>
+    <td>Single-element numeric vector; the value at which to set
+the progress bar, relative to <code>min</code> and <code>max</code>.
+<code>NULL</code> hides the progress bar, if it is currently visible.</td>
+  </tr>
+  <tr>
+    <th>amount</th>
+    <td>For the <code>inc()</code> method, a numeric value to increment the
+progress bar.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Reports progress to the user during long-running operations.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>This package exposes two distinct programming APIs for working with
+progress. <code><a href='withProgress.html'>withProgress</a></code> and <code><a href='withProgress.html'>setProgress</a></code>
+together provide a simple function-based interface, while the
+<code>Progress</code> reference class provides an object-oriented API.</p>
+
+  <p>Instantiating a <code>Progress</code> object causes a progress panel to be
+created, and it will be displayed the first time the <code>set</code>
+method is called. Calling <code>close</code> will cause the progress panel
+to be removed.</p>
+
+  <p>As of version 0.14, the progress indicators use Shiny&#39;s new notification API.
+If you want to use the old styling (for example, you may have used customized
+CSS), you can use <code>style=&quot;old&quot;</code> each time you call
+<code>Progress$new()</code>. If you don&#39;t want to set the style each time
+<code>Progress$new</code> is called, you can instead call
+<code><a href='shinyOptions.html'>shinyOptions</a>(progress.style=&quot;old&quot;)</code> just once, inside the server
+function.</p>
+
+  <p><strong>Methods</strong>
+  <dl>
+    <dt><code>initialize(session, min = 0, max = 1)</code></dt><dd>
+      Creates a new progress panel (but does not display it).
+    </dd></p>
+
+  <p><dt><code>set(value = NULL, message = NULL, detail = NULL)</code></dt><dd>
+      Updates the progress panel. When called the first time, the
+      progress panel is displayed.
+    </dd></p>
+
+  <p><dt><code>inc(amount = 0.1, message = NULL, detail = NULL)</code></dt><dd>
+      Like <code>set</code>, this updates the progress panel. The difference is
+      that <code>inc</code> increases the progress bar by <code>amount</code>, instead
+      of setting it to a specific value.
+    </dd></p>
+
+  <p><dt><code>close()</code></dt><dd>
+      Removes the progress panel. Future calls to <code>set</code> and
+      <code>close</code> will be ignored.
+    </dd></p>
+
+  <p></dl></p>
+
+  <p></p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run examples in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+
+<span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+  <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">,</span> <span class="formalargs">session</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+    <span class="symbol">progress</span> <span class="assignement">&lt;-</span> <span class="symbol">Progress</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/methods/topics/new'>new</a></span><span class="keyword">(</span><span class="symbol">session</span><span class="keyword">,</span> <span class="argument">min</span><span class="argument">=</span><span class="number">1</span><span class="keyword">,</span> <span class="argument">max</span><span class="argument">=</span><span class="number">15</span><span class="keyword">)</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/on.exit'>on.exit</a></span><span class="keyword">(</span><span class="symbol">progress</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/connections'>close</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+    <span class="symbol">progress</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/dendextend/topics/set'>set</a></span><span class="keyword">(</span><span class="argument">message</span> <span class="argument">=</span> <span class="string">'Calculation in progress'</span><span class="keyword">,</span>
+                 <span class="argument">detail</span> <span class="argument">=</span> <span class="string">'This may take a while...'</span><span class="keyword">)</span>
+
+    <span class="keyword">for</span> <span class="keyword">(</span><span class="symbol">i</span> <span class="keyword">in</span> <span class="number">1</span><span class="keyword">:</span><span class="number">15</span><span class="keyword">)</span> <span class="keyword">{</span>
+      <span class="symbol">progress</span><span class="keyword">$</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/dendextend/topics/set'>set</a></span><span class="keyword">(</span><span class="argument">value</span> <span class="argument">=</span> <span class="symbol">i</span><span class="keyword">)</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.sleep'>Sys.sleep</a></span><span class="keyword">(</span><span class="number">0.5</span><span class="keyword">)</span>
+    <span class="keyword">}</span>
+    <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">cars</span><span class="keyword">)</span>
+  <span class="keyword">}</span><span class="keyword">)</span>
+<span class="keyword">}</span>
+
+<span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>Progress</li>
+</ul>
+<ul>
+  <li>datasets</li>
+</ul> -->
+
+<div data-swiftype-index="false">
+<h3>See also</h3>
+  <p><code><a href='withProgress.html'>withProgress</a></code></p>
+</div>

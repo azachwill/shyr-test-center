@@ -1,0 +1,30 @@
+---
+title: Sanitizing error messages
+date: 2016-04-07
+author: Bárbara Borges
+description: With the release of Shiny 0.14, you now have the option to sanitize error messages. This can be important if there is information in the original error message that you don't want the user to see (usually because it may be sensitive information).
+---
+
+### Basic Usage
+
+With the release of Shiny 0.14, you now have the option to sanitize error messages. This can be important if there is information in the original error message that you don't want the user to see (usually because it may be sensitive information). To sanitize errors everywhere in your app, just add `options(shiny.sanitize.errors = TRUE)` somewhere in your app. Then, all error messages will be replaced with the following generic error message (the only exception are errors wrapped in the new `safeError()` function -- see details in the next section):
+
+<p style="color:#f00; font-family: serif; padding: 12px">
+<strong>Error:</strong> An error has occurred. Check your logs or contact the app author for clarification.
+</p>
+
+By default, this option is `FALSE`, which means that errors won't be sanitized and the user will see the original message. If you're not worried about security, this has the advantage of potentially making debugging a lot easier for your users.
+
+The next section goes over `safeError()` and how to exert finer control over your error messages. It may be easier, however, to check out **[this demo app](https://gallery.shinyapps.io/110-error-sanitization/)**, which covers the same material in an interactive way.
+
+### A finer level of control
+
+Error sanitization applies to all errors generated within your app: both the ones you yourself produce using `stop()`, and the ones produced by code you rely on (although, ultimately, some code somewhere will have had to use a `stop()` or a similar function for an error to occur). In the latter case, error sanitization may prove to be particularly useful because errors are sanitized even in instances for which you did not foresee any problems. If something weird happens (like your user entering a strange input or some bug from an update), you can rest assured that no sensitive information will ever be leaked through error messages.
+
+But this raises the question: what if there are some errors that you don't want to sanitize? In general, you might want to suppress error messages because of security concerns, but for a couple of cases, you might not be worried about that and might actually want to let the user know what went wrong. In that situation, still have `options(shiny.sanitize.errors = TRUE)`, and, in the few cases when you want the user to see the error message use `stop(safeError(e))` instead of `stop(e)`. In here, `e` can either be an object with the "error" class or a string (in which case it will become the resulting error's message). The `safeError()` function basically lets Shiny know that this is a safe error for the user to see and that it doesn't need to be sanitized.
+
+You can also use `safeError()` to show an error that does not originate in your own code, but in code you rely on. However, unlike the reverse situation (in which you want to sanitize these types of errors), you do need to have an idea of where an error might occur. This has to be so because you'll first need to catch the error using `tryCatch()` (or something to the same effect). Inside this function, you can then wrap the error in `safeError()` and rethrow it.
+
+### Other errors
+
+This error suppression mechanism also applies to less common errors. For example, if you have a syntax error in your `ui.R`; or if your `downloadHandler()` function has a bug. Because these errors do not go through the websockets set up by Shiny, they are handled differently (they open up a new window that just displays the error message). Still, for our purposes, you can sanitize them in the exact same way as before. You can also use `safeError()`. 

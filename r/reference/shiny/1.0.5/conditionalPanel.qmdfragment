@@ -1,0 +1,112 @@
+---
+title: "conditionalPanel"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='conditionalPanel.html'>conditionalPanel</a></span><span class="keyword">(</span><span class="symbol">condition</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">,</span> <span class="argument">ns</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='NS.html'>NS</a></span><span class="keyword">(</span>NULL<span class="keyword">)</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>condition</th>
+    <td>A JavaScript expression that will be evaluated repeatedly to
+determine whether the panel should be displayed.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Elements to include in the panel.</td>
+  </tr>
+  <tr>
+    <th>ns</th>
+    <td>The <code><a href='NS.html'>namespace</a></code> object of the current module, if
+any.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Creates a panel that is visible or not, depending on the value of a
+JavaScript expression. The JS expression is evaluated once at startup and
+whenever Shiny detects a relevant change in input/output.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>In the JS expression, you can refer to <code>input</code> and <code>output</code>
+JavaScript objects that contain the current values of input and output. For
+example, if you have an input with an id of <code>foo</code>, then you can use
+<code>input.foo</code> to read its value. (Be sure not to modify the input/output
+objects, as this may cause unpredictable behavior.)</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+
+  <p>You are not recommended to use special JavaScript characters such as a
+  period <code>.</code> in the input id&#39;s, but if you do use them anyway, for
+  example, <code>inputId = &quot;foo.bar&quot;</code>, you will have to use
+  <code>input[&quot;foo.bar&quot;]</code> instead of <code>input.foo.bar</code> to read the input
+  value.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="comment">## Only run this example in interactive R sessions</span>
+<span class="keyword">if</span> <span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="symbol">ui</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='fluidPage.html'>fluidPage</a></span><span class="keyword">(</span>
+    <span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='selectInput.html'>selectInput</a></span><span class="keyword">(</span><span class="string">"plotType"</span><span class="keyword">,</span> <span class="string">"Plot Type"</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="argument">Scatter</span> <span class="argument">=</span> <span class="string">"scatter"</span><span class="keyword">,</span> <span class="argument">Histogram</span> <span class="argument">=</span> <span class="string">"hist"</span><span class="keyword">)</span>
+      <span class="keyword">)</span><span class="keyword">,</span>
+      <span class="comment"># Only show this panel if the plot type is a histogram</span>
+      <span class="functioncall"><a href='conditionalPanel.html'>conditionalPanel</a></span><span class="keyword">(</span>
+        <span class="argument">condition</span> <span class="argument">=</span> <span class="string">"input.plotType == 'hist'"</span><span class="keyword">,</span>
+        <span class="functioncall"><a href='selectInput.html'>selectInput</a></span><span class="keyword">(</span>
+          <span class="string">"breaks"</span><span class="keyword">,</span> <span class="string">"Breaks"</span><span class="keyword">,</span>
+          <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"Sturges"</span><span class="keyword">,</span> <span class="string">"Scott"</span><span class="keyword">,</span> <span class="string">"Freedman-Diaconis"</span><span class="keyword">,</span> <span class="string">"[Custom]"</span> <span class="argument">=</span> <span class="string">"custom"</span><span class="keyword">)</span>
+        <span class="keyword">)</span><span class="keyword">,</span>
+        <span class="comment"># Only show this panel if Custom is selected</span>
+        <span class="functioncall"><a href='conditionalPanel.html'>conditionalPanel</a></span><span class="keyword">(</span>
+          <span class="argument">condition</span> <span class="argument">=</span> <span class="string">"input.breaks == 'custom'"</span><span class="keyword">,</span>
+          <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"breakCount"</span><span class="keyword">,</span> <span class="string">"Break Count"</span><span class="keyword">,</span> <span class="argument">min</span> <span class="argument">=</span> <span class="number">1</span><span class="keyword">,</span> <span class="argument">max</span> <span class="argument">=</span> <span class="number">50</span><span class="keyword">,</span> <span class="argument">value</span> <span class="argument">=</span> <span class="number">10</span><span class="keyword">)</span>
+        <span class="keyword">)</span>
+      <span class="keyword">)</span>
+    <span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='mainPanel.html'>mainPanel</a></span><span class="keyword">(</span>
+      <span class="functioncall"><a href='plotOutput.html'>plotOutput</a></span><span class="keyword">(</span><span class="string">"plot"</span><span class="keyword">)</span>
+    <span class="keyword">)</span>
+  <span class="keyword">)</span>
+
+  <span class="symbol">server</span> <span class="assignement">&lt;-</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">input</span><span class="keyword">,</span> <span class="formalargs">output</span><span class="keyword">)</span> <span class="keyword">{</span>
+    <span class="symbol">x</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">100</span><span class="keyword">)</span>
+    <span class="symbol">y</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">100</span><span class="keyword">)</span>
+
+    <span class="symbol">output</span><span class="keyword">$</span><span class="symbol">plot</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='renderPlot.html'>renderPlot</a></span><span class="keyword">(</span><span class="keyword">{</span>
+      <span class="keyword">if</span> <span class="keyword">(</span><span class="symbol">input</span><span class="keyword">$</span><span class="symbol">plotType</span> == <span class="string">"scatter"</span><span class="keyword">)</span> <span class="keyword">{</span>
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">y</span><span class="keyword">)</span>
+      <span class="keyword">}</span> <span class="keyword">else</span> <span class="keyword">{</span>
+        <span class="symbol">breaks</span> <span class="assignement">&lt;-</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">breaks</span>
+        <span class="keyword">if</span> <span class="keyword">(</span><span class="symbol">breaks</span> == <span class="string">"custom"</span><span class="keyword">)</span> <span class="keyword">{</span>
+          <span class="symbol">breaks</span> <span class="assignement">&lt;-</span> <span class="symbol">input</span><span class="keyword">$</span><span class="symbol">breakCount</span>
+        <span class="keyword">}</span>
+
+        <span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/hist'>hist</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="argument">breaks</span> <span class="argument">=</span> <span class="symbol">breaks</span><span class="keyword">)</span>
+      <span class="keyword">}</span>
+    <span class="keyword">}</span><span class="keyword">)</span>
+  <span class="keyword">}</span>
+
+  <span class="functioncall"><a href='shinyApp.html'>shinyApp</a></span><span class="keyword">(</span><span class="symbol">ui</span><span class="keyword">,</span> <span class="symbol">server</span><span class="keyword">)</span>
+<span class="keyword">}</span></div></code></pre>
+<!-- <ul>
+  <li>conditionalPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+
+```

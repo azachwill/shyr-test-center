@@ -1,0 +1,345 @@
+---
+title: Customize your UI with HTML
+date: 2017-08-09
+author: 
+ - Garrett Grolemund
+ - Joe Cheng
+ - Mine Cetinkaya-Rundel
+description: In this article, you will learn how to supplement the functions in your UI with raw HTML to create highly customized Shiny apps. You do not need to know HTML to use Shiny, but if you do, you can use the methods in this article to enhance your app. 
+---
+
+In this article, you will learn how to supplement the functions in your UI with raw HTML to create highly customized Shiny apps. You do not need to know HTML to use Shiny, but if you do, you can use the methods in this article to enhance your app. 
+
+The user-interface (UI) of a Shiny app is web document. Shiny developers can provide this document as an [index.html file](../html-ui) or assemble it from R code in their `ui` object.
+
+The UI calls R functions that output HTML code. Shiny turns this code into a web app.
+
+I will use the `01_hello` app throughout this article as an example. You can access this app by running:
+
+````r
+library(shiny)
+runExample("01_hello")
+````
+
+## shinyUI
+
+Many Shiny apps come with a `ui` object that determines the layout of the app. The `ui` object for `01_example` looks like the following code:
+
+````r
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+
+  # App title ----
+  titlePanel("Hello Shiny!"),
+
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Slider for the number of bins ----
+      sliderInput(inputId = "bins",
+                  label = "Number of bins:",
+                  min = 1,
+                  max = 50,
+                  value = 30)
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Histogram ----
+      plotOutput(outputId = "distPlot")
+
+    )
+  )
+)
+````
+
+The code creates this app:
+
+![Hello Shiny Screenshot](01_hello.png){fig-alt="Hello Shiny! Shiny app with slider of Number of bins on the left and histogram of waiting times on the right."}
+
+Each `ui` object calls R functions that return HTML. In other words, Shiny lets you generate HTML with R. This is why you do not need to know HTML to use Shiny.
+
+You can see that the functions in the `ui` object definition return HTML if you run them. `fluidPage` returns a chunk of HTML as does every function inside of `fluidPage`. For example, the following code returns the HTML output in the comments below.
+
+````r
+fluidPage(
+
+  # App title ----
+  titlePanel("Hello Shiny!"),
+
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Slider for the number of bins ----
+      sliderInput(inputId = "bins",
+                  label = "Number of bins:",
+                  min = 1,
+                  max = 50,
+                  value = 30)
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Histogram ----
+      plotOutput(outputId = "distPlot")
+
+    )
+  )
+)
+
+## <div class="container-fluid">
+##   <h2>Hello Shiny!</h2>
+##   <div class="row">
+##     <div class="col-sm-4">
+##       <form class="well">
+##         <div class="form-group shiny-input-container">
+##           <label class="control-label" for="bins">Number of bins:</label>
+##           <input class="js-range-slider" id="bins" data-min="1" data-max="50" data-from="30" ## data-step="1" data-grid="true" data-grid-num="9.8" data-grid-snap="false" ## data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" ## data-keyboard-step="2.04081632653061" data-data-type="number"/>
+##         </div>
+##       </form>
+##     </div>
+##     <div class="col-sm-8">
+##       <div id="distPlot" class="shiny-plot-output" style="width: 100% ; height: 400px"></div>
+##     </div>
+##   </div>
+## </div> 
+````
+
+````r
+titlePanel("Hello Shiny!")
+## <h2>Hello Shiny!</h2>
+````
+
+In R terminology, the output is a list of character strings with a special class that tells Shiny the contents contain HTML.
+
+````r
+class(titlePanel("Hello Shiny!"))
+## [1] "shiny.tag.list" "list" 
+````
+
+Shiny's UI functions are sufficient for creating most Shiny apps. In a large majority of your Shiny apps, you will probably never think of using anything more complicated. However in some apps, you may want to add custom HTML that is not provided by the usual Shiny functions. You can do this by passing HTML tags with the `tags` object. 
+
+## `tags`
+
+`shiny::tags` is a list of 110 functions. Each function builds a specific HTML tag. If you are familiar with HTML, you will recognize these tags by their names. You can learn what the most common tags do in the [Shiny HTML tags glossary](../tag-glossary).
+
+````r
+names(tags)
+##   [1] "a"           "abbr"        "address"     "area"        "article"
+##   [6] "aside"       "audio"       "b"           "base"        "bdi"
+##  [11] "bdo"         "blockquote"  "body"        "br"          "button"
+##  [16] "canvas"      "caption"     "cite"        "code"        "col"
+##  [21] "colgroup"    "command"     "data"        "datalist"    "dd"
+##  [26] "del"         "details"     "dfn"         "div"         "dl"
+##  [31] "dt"          "em"          "embed"       "eventsource" "fieldset"
+##  [36] "figcaption"  "figure"      "footer"      "form"        "h1"
+##  [41] "h2"          "h3"          "h4"          "h5"          "h6"
+##  [46] "head"        "header"      "hgroup"      "hr"          "html"
+##  [51] "i"           "iframe"      "img"         "input"       "ins"
+##  [56] "kbd"         "keygen"      "label"       "legend"      "li"
+##  [61] "link"        "mark"        "map"         "menu"        "meta"
+##  [66] "meter"       "nav"         "noscript"    "object"      "ol"
+##  [71] "optgroup"    "option"      "output"      "p"           "param"
+##  [76] "pre"         "progress"    "q"           "ruby"        "rp"
+##  [81] "rt"          "s"           "samp"        "script"      "section"
+##  [86] "select"      "small"       "source"      "span"        "strong"
+##  [91] "style"       "sub"         "summary"     "sup"         "table"
+##  [96] "tbody"       "td"          "textarea"    "tfoot"       "th"
+## [101] "thead"       "time"        "title"       "tr"          "track"
+## [106] "u"           "ul"          "var"         "video"       "wbr"
+````
+
+To create a tag, run an element of `tags` as a function. To create a div tag, you can run:
+
+````r
+tags$div()
+## <div></div> 
+````
+
+You can call some of the most popular tags with helper functions (that wrap the appropriate `tags` functions). For example, the helper function `code` calls the tags$code and creates text formatted as computer code. The helper functions that can call their equivalent tags without using the tag syntex (tags$) are: `a`, `br`, `code`, `div`, `em`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`, `img`, `p`, `pre`, `span`, and `strong`. 
+
+The names of other tags functions conflict with the names of native R functions, so you will need to call them with the `tags$` syntax. For example, to embed a plug-in or third party application call it with `tags$embed.`
+
+Every tag function will treat its arguments in a special way: it will treat named arguments as HTML _attributes_ and unnamed arguments as HTML _children_. 
+
+### Attributes
+
+A tag function will use each named argument to add an HTML _attribute_ to the tag. The argument name becomes the attribute name, and the argument value becomes the attribute value. So for example, if you want to create a div with a class attribute, use:
+
+````r
+tags$div(class = "header")
+## <div class="header"></div>
+````
+
+To add an attribute without a value, set the attribute to NA:
+
+````r
+tags$div(class = "header", checked = NA)
+## <div class="header" checked></div>
+````
+
+### Children
+
+Each tag function will add unnamed arguments to your tag as HTML _children_. This addition lets you nest tags inside of each other (just as in HTML).
+
+````r
+tags$div(class = "header", checked = NA,
+  tags$p("Ready to take the Shiny tutorial? If so"),
+  tags$a(href = "shiny.posit.co/tutorial", "Click Here!")
+)
+## <div class="header" checked>
+##   <p>Ready to take the Shiny tutorial? If so</p>
+##   <a href="shiny.posit.co/tutorial">Click Here!</a>
+## </div> 
+````
+
+#### withTags
+
+You can save typing by wrapping your HTML objects with `withTags`. `withTags` is similar to R's regular `with` function. R will lookup each tag function mentioned inside `withTags` in the `tags` object, even if you do not specify `tags$`. 
+
+````r
+withTags({
+  div(class="header", checked=NA,
+    p("Ready to take the Shiny tutorial? If so"),
+    a(href="shiny.posit.co/tutorial", "Click Here!")
+  )
+})
+## <div class="header" checked>
+##   <p>Ready to take the Shiny tutorial? If so</p>
+##   <a href="shiny.posit.co/tutorial">Click Here!</a>
+## </div> 
+````
+
+Once you have a complete tag, you can add it directly to your app's UI object. For example, you could add the tag above to the `ui` object of `01-hello`:
+
+````r
+library(shiny)
+
+# Define UI for application that draws a histogram
+fluidPage(
+
+  # App title ----
+  titlePanel("Hello Shiny!"),
+
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Slider for the number of bins ----
+      sliderInput(inputId = "bins",
+                  label = "Number of bins:",
+                  min = 1,
+                  max = 50,
+                  value = 30),
+
+      # adding the new div tag to the sidebar            
+      tags$div(class="header", checked=NA,
+               tags$p("Ready to take the Shiny tutorial? If so"),
+               tags$a(href="shiny.posit.co/tutorial", "Click Here!")
+      )
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Histogram ----
+      plotOutput(outputId = "distPlot")
+
+    )
+  )
+)
+````
+
+Your updated app will contain the new HTML element.
+
+![01_hello](01_hello_with_tag.png){fig-alt="Hello Shiny! Shiny app. Ready to take the Shiny tutorial text is added to the Number of bins slider window."}
+
+### Conditional attributes and children
+
+If you set an argument of a tag function to NULL, the argument will not appear in the HTML output. NULL gives you a way to build attributes and children that will appear only under certain conditions.
+
+````r
+tags$div(class = "header", id = NULL,
+	NULL,
+	"line 2"
+)
+## <div class="header">line 2</div> 
+
+
+tags$div(class = "header", id = if (FALSE) 100,
+	if (FALSE) "line 1",
+	"line 2"
+)
+## <div class="header">line 2</div> 
+````
+
+### Lists
+
+You can pass a list of children to a tag with R's list function. The tag function will add each element of the list as a child of the tag.
+
+````r
+tags$div(class="header", checked=NA,
+  list(
+    tags$p("Ready to take the Shiny tutorial? If so"),
+    tags$a(href="shiny.posit.co/tutorial", "Click Here!"),
+    "Thank you"
+  )
+)
+## <div class="header" checked>
+##   <p>Ready to take the Shiny tutorial? If so</p>
+##   <a href="shiny.posit.co/tutorial">Click Here!</a>
+##   Thank you
+## </div> 
+````
+
+## Raw HTML
+
+You cannot put raw HTML directly into a tag or UI object. Shiny will treat raw HTML as a character string, adding HTML as text to your UI document.
+
+````r
+tags$div(
+  "<strong>Raw HTML!</strong>"
+)
+## <div>&lt;strong&gt;Raw HTML!&lt;/strong&gt;</div> 
+````
+
+To add raw HTML, use the `HTML` function. `HTML` takes a character string and returns it as HTML (a special class of object in Shiny).
+
+````r
+tags$div(
+  HTML("<strong>Raw HTML!</strong>")
+)
+## <div><strong>Raw HTML!</strong></div> 
+````
+
+Shiny will assume that the code you pass to `HTML` is correctly written HTML. Be sure to double check it.
+
+### Warning
+
+It is a bad idea to pass an input object to `HTML`:
+
+````r
+tags$div(
+  HTML(input$text)
+)
+````
+
+This allows the user to add their own HTML to your app, which creates a security vulnerability. What you user enters could be added to the web document or seen by other users, which might break the app. In the worse case scenario, a user may try to deploy malicious [Cross Site Scripting (XSS)](http://en.wikipedia.org/wiki/Cross-site_scripting), an undesirable security vulnerability.
+
+### Recap
+
+You can use HTML to customize your Shiny apps. Every Shiny app is built on an HTML document that creates the apps' user interface. Usually, Shiny developers create this document by building the `ui` object with R functions that build HTML output. However, you can supply HTML output directly with Shiny's `tags` object.

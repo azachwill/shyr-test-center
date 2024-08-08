@@ -1,0 +1,46 @@
+---
+layout: newframe-bare
+---
+
+<script>
+
+$(document).ready(function() {
+
+  $('#menuToggler').on('click', function(event) {
+    if ($('#menuItems').hasClass('showMenu')) {
+      $('#menuItems').removeClass("showMenu");
+    }
+    else {
+      $('#menuItems').addClass("showMenu");
+    }
+  });
+
+});
+
+</script>
+
+
+<div id="app" class="shrinkHeader alwaysShrinkHeader">
+  <div id="main">
+    {% include header.html %}
+
+    {{ content }}
+
+
+    <!-- rstudio footer -->
+    <div id="rStudioFooter" class="band">
+      <div class="bandContent">
+        <div id="copyright">
+          <div>Proudly supported by <a href="https://www.posit.co/"><img src="/images/posit-logo-white-tm.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></div>
+        </div>
+        <div id="logos">
+          <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+          <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+          <a href="https://www.linkedin.com/company/rstudio-pbc/" class="footerLogo linkedIn"></a>
+          <a href="https://www.facebook.com/rstudiopbc/" class="footerLogo facebook"></a>
+        </div>
+      </div>
+    </div>
+
+  </div>  <!-- main -->
+</div>  <!-- app -->

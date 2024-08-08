@@ -1,0 +1,8 @@
+- title: Weather Lookup
+  app-loc: https://connect.rstudioservices.com/explore_your_weather/
+  app-code: https://github.com/rstudio/shiny_app_stories/blob/master/weather_lookup
+  description: "Lookup average temperature and precipitiation for US cities by querying NOAA temperature normals API."
+  children:
+    - weather-lookup-about
+    - weather-lookup-caching
+    - weather-lookup-bslib

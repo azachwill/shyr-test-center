@@ -1,0 +1,116 @@
+---
+layout: reference
+title: "conditionalPanel"
+categories: reference
+---
+<h1>Conditional Panel</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='conditionalPanel.html'>conditionalPanel</a></span><span class="keyword">(</span><span class="symbol">condition</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>condition</th>
+    <td>A JavaScript expression that will be evaluated repeatedly to
+determine whether the panel should be displayed.</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <td>Elements to include in the panel.</td>
+  </tr>
+</table>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Creates a panel that is visible or not, depending on the value of a
+JavaScript expression. The JS expression is evaluated once at startup and
+whenever Shiny detects a relevant change in input/output.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>In the JS expression, you can refer to <code>input</code> and <code>output</code>
+JavaScript objects that contain the current values of input and output. For
+example, if you have an input with an id of <code>foo</code>, then you can use
+<code>input.foo</code> to read its value. (Be sure not to modify the input/output
+objects, as this may cause unpredictable behavior.)</p>
+
+</div>
+
+<div data-section="Note">
+  <h3 data-swiftype-index="false">Note</h3>
+
+  <p>You are not recommended to use special JavaScript characters such as a
+  period <code>.</code> in the input id&#39;s, but if you do use them anyway, for
+  example, <code>inputId = &quot;foo.bar&quot;</code>, you will have to use
+  <code>input[&quot;foo.bar&quot;]</code> instead of <code>input.foo.bar</code> to read the input
+  value.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="functioncall"><a href='sidebarPanel.html'>sidebarPanel</a></span><span class="keyword">(</span>
+   <span class="functioncall"><a href='selectInput.html'>selectInput</a></span><span class="keyword">(</span>
+      <span class="string">"plotType"</span><span class="keyword">,</span> <span class="string">"Plot Type"</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="argument">Scatter</span> <span class="argument">=</span> <span class="string">"scatter"</span><span class="keyword">,</span>
+        <span class="argument">Histogram</span> <span class="argument">=</span> <span class="string">"hist"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+
+   <span class="comment"># Only show this panel if the plot type is a histogram</span>
+   <span class="functioncall"><a href='conditionalPanel.html'>conditionalPanel</a></span><span class="keyword">(</span>
+      <span class="argument">condition</span> <span class="argument">=</span> <span class="string">"input.plotType == 'hist'"</span><span class="keyword">,</span>
+      <span class="functioncall"><a href='selectInput.html'>selectInput</a></span><span class="keyword">(</span>
+         <span class="string">"breaks"</span><span class="keyword">,</span> <span class="string">"Breaks"</span><span class="keyword">,</span>
+         <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"Sturges"</span><span class="keyword">,</span>
+           <span class="string">"Scott"</span><span class="keyword">,</span>
+           <span class="string">"Freedman-Diaconis"</span><span class="keyword">,</span>
+           <span class="string">"[Custom]"</span> <span class="argument">=</span> <span class="string">"custom"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+
+      <span class="comment"># Only show this panel if Custom is selected</span>
+      <span class="functioncall"><a href='conditionalPanel.html'>conditionalPanel</a></span><span class="keyword">(</span>
+         <span class="argument">condition</span> <span class="argument">=</span> <span class="string">"input.breaks == 'custom'"</span><span class="keyword">,</span>
+         <span class="functioncall"><a href='sliderInput.html'>sliderInput</a></span><span class="keyword">(</span><span class="string">"breakCount"</span><span class="keyword">,</span> <span class="string">"Break Count"</span><span class="keyword">,</span> <span class="argument">min</span><span class="argument">=</span><span class="number">1</span><span class="keyword">,</span> <span class="argument">max</span><span class="argument">=</span><span class="number">1000</span><span class="keyword">,</span> <span class="argument">value</span><span class="argument">=</span><span class="number">10</span><span class="keyword">)</span>
+      <span class="keyword">)</span>
+   <span class="keyword">)</span>
+<span class="keyword">)</span></div>
+<div class='output'>&lt;div class=&quot;col-sm-4&quot;&gt;
+  &lt;form class=&quot;well&quot;&gt;
+    &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;plotType&quot;&gt;Plot Type&lt;/label&gt;
+      &lt;div&gt;
+        &lt;select id=&quot;plotType&quot;&gt;&lt;option value=&quot;scatter&quot; selected&gt;Scatter&lt;/option&gt;
+&lt;option value=&quot;hist&quot;&gt;Histogram&lt;/option&gt;&lt;/select&gt;
+        &lt;script type=&quot;application/json&quot; data-for=&quot;plotType&quot; data-nonempty=&quot;&quot;&gt;{}&lt;/script&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div data-display-if=&quot;input.plotType == &amp;#39;hist&amp;#39;&quot;&gt;
+      &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+        &lt;label class=&quot;control-label&quot; for=&quot;breaks&quot;&gt;Breaks&lt;/label&gt;
+        &lt;div&gt;
+          &lt;select id=&quot;breaks&quot;&gt;&lt;option value=&quot;Sturges&quot; selected&gt;Sturges&lt;/option&gt;
+&lt;option value=&quot;Scott&quot;&gt;Scott&lt;/option&gt;
+&lt;option value=&quot;Freedman-Diaconis&quot;&gt;Freedman-Diaconis&lt;/option&gt;
+&lt;option value=&quot;custom&quot;&gt;[Custom]&lt;/option&gt;&lt;/select&gt;
+          &lt;script type=&quot;application/json&quot; data-for=&quot;breaks&quot; data-nonempty=&quot;&quot;&gt;{}&lt;/script&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div data-display-if=&quot;input.breaks == &amp;#39;custom&amp;#39;&quot;&gt;
+        &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+          &lt;label class=&quot;control-label&quot; for=&quot;breakCount&quot;&gt;Break Count&lt;/label&gt;
+          &lt;input class=&quot;js-range-slider&quot; id=&quot;breakCount&quot; data-min=&quot;1&quot; data-max=&quot;1000&quot; data-from=&quot;10&quot; data-step=&quot;1&quot; data-grid=&quot;true&quot; data-grid-num=&quot;9.99&quot; data-grid-snap=&quot;false&quot; data-prettify-separator=&quot;,&quot; data-keyboard=&quot;true&quot; data-keyboard-step=&quot;0.1001001001001&quot; data-drag-interval=&quot;true&quot; data-data-type=&quot;number&quot;/&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</div>
+<div class='input'></div></code></pre>
+<!-- <ul>
+  <li>conditionalPanel</li>
+</ul>
+<ul>
+  
+</ul> -->
+

@@ -1,0 +1,51 @@
+---
+layout: reference
+title: "Print message for deprecated functions in Shiny — shinyDeprecated"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Print message for deprecated functions in Shiny</h1>
+  
+
+  <pre class="code"><span class='fu'>shinyDeprecated</span>(
+  <span class='no'>version</span>,
+  <span class='no'>what</span>,
+  <span class='kw'>with</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deprecated"</span>, <span class='st'>"superseded"</span>)
+)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>version</p></th>
+    <td><p>Shiny version when the function was deprecated</p></td>
+  </tr>
+  <tr>
+    <th><p>what</p></th>
+    <td><p>Function with possible arguments</p></td>
+  </tr>
+  <tr>
+    <th><p>with</p></th>
+    <td><p>Possible function with arguments that should be used instead</p></td>
+  </tr>
+  <tr>
+    <th><p>details</p></th>
+    <td><p>Additional information to be added after a new line to the displayed message</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>To disable these messages, use <code><a href='https://rdrr.io/r/base/options.html'>options(shiny.deprecation.messages=FALSE)</a></code>.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+</div>
+
+

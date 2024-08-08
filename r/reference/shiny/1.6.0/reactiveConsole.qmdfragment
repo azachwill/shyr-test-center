@@ -1,0 +1,42 @@
+---
+title: "Activate reactivity in the console — reactiveConsole"
+---
+
+```{=html}
+<div class="reference">
+  
+
+  <pre class="code"><span class='fu'>reactiveConsole</span>(<span class='no'>enabled</span>)</pre>
+
+  <h3 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+  <table class="arguments">
+  <colgroup><col class="name" /><col class="desc" /></colgroup>
+  <tr>
+    <th><p>enabled</p></th>
+    <td><p>Turn console reactivity on or off?</p></td>
+  </tr>
+  </table>
+
+  <div data-section="description">
+  <h3>Description</h3>
+  <p>This is an experimental feature that allows you to enable reactivity
+at the console, for the purposes of experimentation and learning.</p>
+  </div>
+
+
+  <div data-section="details">
+  </div>
+
+  <h3 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h3>
+  <pre class="examples"><span class='fu'>reactiveConsole</span>(<span class='fl'>TRUE</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='reactiveVal.html'>reactiveVal</a></span>(<span class='fl'>10</span>)
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='observe.html'>observe</a></span>({
+  <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"The value of x is "</span>, <span class='fu'>x</span>())
+})
+<span class='fu'>x</span>(<span class='fl'>20</span>)
+<span class='fu'>x</span>(<span class='fl'>30</span>)
+<span class='fu'>reactiveConsole</span>(<span class='fl'>FALSE</span>)</pre>
+</div>
+
+
+```

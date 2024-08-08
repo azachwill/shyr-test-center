@@ -1,0 +1,50 @@
+---
+layout: reference
+title: "Create an HTTP response object — httpResponse"
+categories: reference
+
+---
+<div class="reference">
+  <h1>Create an HTTP response object</h1>
+  <small class="dont-index">Source: <a href="https://github.com/rstudio/shiny/blob/v1.7.1/R/middleware.R" class="external-link"><code>R/middleware.R</code></a></small>
+
+  <div data-section="description"><h3>Description</h3><p>Create an HTTP response object</p></div>
+
+  <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">httpResponse</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">status =</span> 200L,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">content_type =</span> <span class="st">"text/html; charset=UTF-8"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">content =</span> <span class="st">""</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">headers =</span> <span class="fu">list</span>()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div></div>
+
+  <div data-section="arguments">
+    <h3 id="arguments">Arguments</h3>
+    <dl><dt>status</dt>
+<dd><p>HTTP status code for the response.</p></dd>
+
+
+<dt>content_type</dt>
+<dd><p>The value for the <code>Content-Type</code> header.</p></dd>
+
+
+<dt>content</dt>
+<dd><p>The body of the response, given as a single-element character
+vector (will be encoded as UTF-8) or a raw vector.</p></dd>
+
+
+<dt>headers</dt>
+<dd><p>A named list of additional headers to include. Do not include
+<code>Content-Length</code> (as it is automatically calculated) or <code>Content-Type</code> (the
+<code>content_type</code> argument is used instead).</p></dd>
+
+</dl></div>
+
+  <div data-section="examples">
+    <h3 id="examples">Examples</h3>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">httpResponse</span>(<span class="at">status =</span> 405L,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">content_type =</span> <span class="st">"text/plain"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">content =</span> <span class="st">"The requested method was not allowed"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+  </div>
+</div>

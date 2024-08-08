@@ -1,0 +1,67 @@
+---
+title: "shinyServer"
+---
+
+```{=html}
+
+<pre class="code"><code class="r"><div>shinyServer(func)</div></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>func</th>
+    <td>The server function for this application. See the details section
+  for more information.</td>
+  </tr>
+</table>
+
+<div data-section="Define Server Functionality">
+  <h3 data-swiftype-index="false">Define Server Functionality</h3>
+  
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+  
+  <p>Defines the server-side logic of the Shiny application. This generally
+involves creating functions that map user inputs to various kinds of output.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+  
+  <p>Call <code>shinyServer</code> from your application's <code>server.R</code> file, passing
+in a "server function" that provides the server-side logic of your
+application.</p>
+
+  <p>The server function will be called when each client (web browser) first loads
+the Shiny application's page. It must take an <code>input</code> and an
+<code>output</code> parameter. Any return value will be ignored. It also takes an
+optional <code>session</code> parameter, which is used when greater control is
+needed.</p>
+
+  <p>See the <a href = 'http://rstudio.github.com/shiny/tutorial/'>tutorial</a> for more
+on how to write a server function.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><div class='input'>## &lt;strong&gt;Not run&lt;/strong&gt;: 
+# # A very simple Shiny app that takes a message from the user
+# # and outputs an uppercase version of it.
+# shinyServer(function(input, output, session) {
+#   output$uppercase &lt;- renderText({
+#     toupper(input$message)
+#   })
+# })
+# ## &lt;strong&gt;End(Not run)&lt;/strong&gt;
+</div></pre>
+<!-- <ul>
+  <li>shinyServer</li>
+</ul>
+<ul>
+  
+</ul> -->
+  
+```

@@ -1,0 +1,105 @@
+---
+layout: reference
+title: "reactive"
+categories: reference
+---
+<h1>Create a reactive expression</h1>
+
+<pre class="code"><code class="r"><span class="functioncall"><a href='reactive.html'>reactive</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="argument">env</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">label</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">domain</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='domains.html'>getDefaultReactiveDomain</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='reactive.html'>is.reactive</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">)</span></code></pre>
+
+<h3 data-swiftype-index="false">Arguments</h3>
+<table class="arguments">
+  <tr>
+    <th>x</th>
+    <td>For <code>reactive</code>, an expression (quoted or unquoted). For
+<code>is.reactive</code>, an object to test.</td>
+  </tr>
+  <tr>
+    <th>env</th>
+    <td>The parent environment for the reactive expression. By default, this
+is the calling environment, the same as when defining an ordinary
+non-reactive expression.</td>
+  </tr>
+  <tr>
+    <th>quoted</th>
+    <td>Is the expression quoted? By default, this is <code>FALSE</code>.
+This is useful when you want to use an expression that is stored in a
+variable; to do so, it must be quoted with `quote()`.</td>
+  </tr>
+  <tr>
+    <th>label</th>
+    <td>A label for the reactive expression, useful for debugging.</td>
+  </tr>
+  <tr>
+    <th>domain</th>
+    <td>See <a href='domains.html'>domains</a>.</td>
+  </tr>
+</table>
+
+<div data-section="Value">
+  <h3 data-swiftype-index="false">Value</h3>
+
+  <p><dl>
+a function, wrapped in a S3 class &quot;reactive&quot;
+</dl></p>
+
+</div>
+
+<div data-section="Description">
+  <h3 data-swiftype-index="false">Description</h3>
+
+  <p>Wraps a normal expression to create a reactive expression. Conceptually, a
+reactive expression is a expression whose result will change over time.</p>
+
+</div>
+
+<div data-section="Details">
+  <h3 data-swiftype-index="false">Details</h3>
+
+  <p>Reactive expressions are expressions that can read reactive values and call other
+reactive expressions. Whenever a reactive value changes, any reactive expressions
+that depended on it are marked as &quot;invalidated&quot; and will automatically
+re-execute if necessary. If a reactive expression is marked as invalidated, any
+other reactive expressions that recently called it are also marked as
+invalidated. In this way, invalidations ripple through the expressions that
+depend on each other.</p>
+
+  <p>See the <a href = 'http://rstudio.github.com/shiny/tutorial/'>Shiny tutorial</a> for
+more information about reactive expressions.</p>
+
+</div>
+
+<h3 id="examples" data-swiftype-index="false">Examples</h3>
+<pre class="examples"><code class="r"><div class='input'><span class="symbol">values</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactiveValues.html'>reactiveValues</a></span><span class="keyword">(</span><span class="argument">A</span><span class="argument">=</span><span class="number">1</span><span class="keyword">)</span>
+
+<span class="symbol">reactiveB</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactive.html'>reactive</a></span><span class="keyword">(</span><span class="keyword">{</span>
+  <span class="symbol">values</span><span class="keyword">$</span><span class="symbol">A</span> <span class="keyword">+</span> <span class="number">1</span>
+<span class="keyword">}</span><span class="keyword">)</span>
+
+<span class="comment"># Can use quoted expressions</span>
+<span class="symbol">reactiveC</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactive.html'>reactive</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/substitute'>quote</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="symbol">values</span><span class="keyword">$</span><span class="symbol">A</span> <span class="keyword">+</span> <span class="number">2</span> <span class="keyword">}</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">quoted</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># To store expressions for later conversion to reactive, use quote()</span>
+<span class="symbol">expr_q</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/substitute'>quote</a></span><span class="keyword">(</span><span class="keyword">{</span> <span class="symbol">values</span><span class="keyword">$</span><span class="symbol">A</span> <span class="keyword">+</span> <span class="number">3</span> <span class="keyword">}</span><span class="keyword">)</span>
+<span class="symbol">reactiveD</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='reactive.html'>reactive</a></span><span class="keyword">(</span><span class="symbol">expr_q</span><span class="keyword">,</span> <span class="argument">quoted</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># View the values from the R console with isolate()</span>
+<span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="functioncall">reactiveB</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>[1] 2
+</div>
+<div class='input'><span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="functioncall">reactiveC</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>[1] 3
+</div>
+<div class='input'><span class="functioncall"><a href='isolate.html'>isolate</a></span><span class="keyword">(</span><span class="functioncall">reactiveD</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>[1] 4
+</div></code></pre>
+<!-- <ul>
+  <li>is.reactive</li><li>reactive</li>
+</ul>
+<ul>
+  
+</ul> -->
+
