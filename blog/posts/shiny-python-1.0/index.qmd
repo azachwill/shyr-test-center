@@ -47,7 +47,7 @@ Sitting here in July 2024, it feels like a great time to acknowledge Shiny for P
 The API feels appropriately stable now, and most of the new features of the last few releases have been about building on top of Shiny's existing API design vocabulary, rather than extending or changing it (although one notable brand-new primitive is Modules for Shiny Express, which you can read about below).
 
 So please join us in raising a proverbial glass to Shiny for Python 1.0!
-And if you've been waiting on the sidelines, now is a great time to [get in the game](https://shiny.posit.co/py/docs/overview.html)!
+And if you've been waiting on the sidelines, now is a great time to [get in the game](https://shypy-test-center.netlify.app/py/docs/overview.html)!
 
 
 And now, let's take a look at all the cool features that are part of this release!
@@ -62,7 +62,7 @@ And now, let's take a look at all the cool features that are part of this releas
 ## New `Chat()` component
 
 The new `Chat()` component makes it easy to implement generative AI chatbots, powered by any LLM of your choosing.
-For a comprehensive overview, see the new [component page](https://shiny.posit.co/py/components/display-messages/chat/).
+For a comprehensive overview, see the new [component page](https://shypy-test-center.netlify.app/py/components/display-messages/chat/).
 
 The main steps of any generative AI chatbot are:
 
@@ -89,7 +89,7 @@ async def _():
 ```
 :::
 
-The generative AI [quickstart](https://shiny.posit.co/py/components/display-messages/chat/#ai-quick-start) has a variety of `ai_model` implementations, but we do recommend starting with [LangChain](https://www.langchain.com/), as it helps standardize response generation across different LLMs.
+The generative AI [quickstart](https://shypy-test-center.netlify.app/py/components/display-messages/chat/#ai-quick-start) has a variety of `ai_model` implementations, but we do recommend starting with [LangChain](https://www.langchain.com/), as it helps standardize response generation across different LLMs.
 Use the terminal command below to get the LangChain (with OpenAI) template:
 
 ```bash
@@ -97,14 +97,14 @@ shiny create -g https://github.com/posit-dev/py-shiny/tree/main/examples/chat/he
 ```
 
 Then, follow the instructions at the top of `app.py` to set up your OpenAI API key before running the app.
-Once you have your credentials set up and [run the app](https://shiny.posit.co/py/docs/install-create-run.html) and start chatting!
+Once you have your credentials set up and [run the app](https://shypy-test-center.netlify.app/py/docs/install-create-run.html) and start chatting!
 
 :::{.py-3}
 ![](chat2.mp4){.border .rounded}
 :::
 
 The template above is a great starting point for building your own generative AI chatbot.
-To learn how to do more advanced things with `Chat` (e.g., system messages, RAG, etc), check out the [component page](https://shiny.posit.co/py/components/display-messages/chat/).
+To learn how to do more advanced things with `Chat` (e.g., system messages, RAG, etc), check out the [component page](https://shypy-test-center.netlify.app/py/components/display-messages/chat/).
 
 For now, `ui.Chat()` is limited to textual input and output.
 We hope to expand this in the future to include more complex inputs and outputs, such as images, videos, and audio (for now, you can checkout [shinymedia](#multimedia-components) for video in / audio out).
@@ -123,13 +123,13 @@ End-to-end tests are a great way to maintain code quality by ensuring that apps 
 Our approach builds on the fabulous [Playwright](https://playwright.dev/) framework, which provides a fast, powerful, and resilient foundation for browser-based testing.
 
 The video below demonstrates the experience of writing an end-to-end test for a Shiny app.
-Note that the new `shiny.playwright` module is where you can find dozens of "controllers" that make it easy to mimic user interactions with Shiny [components](https://shiny.posit.co/py/components/) and assert their expected state.
+Note that the new `shiny.playwright` module is where you can find dozens of "controllers" that make it easy to mimic user interactions with Shiny [components](https://shypy-test-center.netlify.app/py/components/) and assert their expected state.
 
 :::{.py-3}
 ![](leverage_controllers.mp4){.border .rounded}
 :::
 
-For a comprehensive overview of end-to-end testing, see the new article on [End-to-end testing in Shiny](https://shiny.posit.co/py/docs/end-to-end-testing.html).
+For a comprehensive overview of end-to-end testing, see the new article on [End-to-end testing in Shiny](https://shypy-test-center.netlify.app/py/docs/end-to-end-testing.html).
 
 :::{.pt-2 .pb-1}
 
@@ -139,7 +139,7 @@ For a comprehensive overview of end-to-end testing, see the new article on [End-
 
 ## Data frame improvements
 
-Shiny provides two components for rendering data frames: [`DataGrid()`](https://shiny.posit.co/py/components/outputs/data-grid/) and [`DataTable()`](https://shiny.posit.co/py/components/outputs/data-table/).
+Shiny provides two components for rendering data frames: [`DataGrid()`](https://shypy-test-center.netlify.app/py/components/outputs/data-grid/) and [`DataTable()`](https://shypy-test-center.netlify.app/py/components/outputs/data-table/).
 The former is a more interactive and feature-rich table, while the latter is a simpler, more lightweight table.
 All of the improvements described below are available to both components.
 
@@ -244,7 +244,7 @@ ui.input_action_button("sort", "Sort on column 0↑")
 
 ### Learn more
 
-For a comprehensive overview of new and old data frame features, see the updated articles on [DataGrid](https://shiny.posit.co/py/components/outputs/data-grid/) and [DataTable](https://shiny.posit.co/py/components/outputs/data-table/).
+For a comprehensive overview of new and old data frame features, see the updated articles on [DataGrid](https://shypy-test-center.netlify.app/py/components/outputs/data-grid/) and [DataTable](https://shypy-test-center.netlify.app/py/components/outputs/data-table/).
 
 
 :::{.pt-2 .pb-1}
@@ -288,7 +288,7 @@ If you're at all interested in building AI apps with Shiny, [be sure to check ou
 
 When it comes to building more complicated Shiny applications, some of the most useful tools at your disposal are Shiny modules. You can use Shiny modules to build components that abstract away complexity and can be reused in your applications.
 
-Shiny Express now has support for using Shiny modules, and you can even create Shiny modules using Express syntax. To learn more, see our documentation on [Shiny modules](https://shiny.posit.co/py/docs/modules.html){target="_blank"}.
+Shiny Express now has support for using Shiny modules, and you can even create Shiny modules using Express syntax. To learn more, see our documentation on [Shiny modules](https://shypy-test-center.netlify.app/py/docs/modules.html){target="_blank"}.
 
 :::{.pt-2 .pb-1}
 

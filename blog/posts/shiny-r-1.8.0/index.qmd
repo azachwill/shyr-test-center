@@ -217,7 +217,7 @@ The rest of this section will explore a few highlights of the new default look, 
 
 Dashboards are coming to Quarto!
 
-The new [Quarto dashboard](https://quarto.org/docs/dashboards/) format, as well as newer [PyShiny](https://shiny.posit.co/py/) components, are built on the same foundation as `bslib`.
+The new [Quarto dashboard](https://quarto.org/docs/dashboards/) format, as well as newer [PyShiny](https://shypy-test-center.netlify.app/py/) components, are built on the same foundation as `bslib`.
 Thus, the concepts you'll learn while building dashboards with `bslib` should also largely apply there as well.
 :::
 

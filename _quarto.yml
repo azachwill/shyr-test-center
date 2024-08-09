@@ -76,7 +76,7 @@ website:
             href: "https://github.com/rstudio/shiny"
             target: _blank
       - text: Shiny for Python
-        href: https://shiny.posit.co/py/
+        href: https://shypy-test-center.netlify.app/py/
         target: _blank
       - text: Blog
         href: blog/index.qmd

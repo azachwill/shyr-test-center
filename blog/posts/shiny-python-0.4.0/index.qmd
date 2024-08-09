@@ -56,7 +56,7 @@ And in your server function, use `@render.data_frame` and give it a function tha
 To get the more traditional table-like styling, return a `render.DataTable()` instead.
 
 - [Try it out with Shinylive](https://shinylive.io/py/examples/#data-frame-grid)
-- [API documentation](https://shiny.posit.co/py/api/render.data_frame.html)
+- [API documentation](https://shypy-test-center.netlify.app/py/api/render.data_frame.html)
 
 
 

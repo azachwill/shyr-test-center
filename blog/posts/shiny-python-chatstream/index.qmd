@@ -28,7 +28,7 @@ Here's a very basic chat app that uses the OpenAI API:
 :::
 :::
 
-It makes use of a [Shiny module](https://shiny.posit.co/py/docs/workflow-modules.html) in a Python package called [chatstream](https://github.com/wch/chatstream). All you need is one call to `chatstream.chat_ui()` and one call to `chatstream.chat_server()`, and to give them the same ID. Here's the code for [that app](https://github.com/wch/chatstream/tree/main/examples/basic):
+It makes use of a [Shiny module](https://shypy-test-center.netlify.app/py/docs/workflow-modules.html) in a Python package called [chatstream](https://github.com/wch/chatstream). All you need is one call to `chatstream.chat_ui()` and one call to `chatstream.chat_server()`, and to give them the same ID. Here's the code for [that app](https://github.com/wch/chatstream/tree/main/examples/basic):
 
 ```python
 from shiny import App, Inputs, Outputs, Session, ui

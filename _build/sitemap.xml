@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-r-1.8.0/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.128Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-r-1.8.1/index.html</loc>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-vscode-1.0.0/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.160Z</lastmod>
+    <lastmod>2024-08-09T14:46:37.935Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/r/articles/improve/nonblocking/index.html</loc>
@@ -30,15 +30,15 @@
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shinyswatch-0.7.0/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.328Z</lastmod>
+    <lastmod>2024-08-09T14:46:50.917Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-express/index.html</loc>
-    <lastmod>2024-08-06T19:22:38.923Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.355Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-python-0.5.0/index.html</loc>
-    <lastmod>2024-08-06T19:22:38.940Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.362Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/r/reference/shiny/index.html</loc>
@@ -618,19 +618,19 @@
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-python-chatstream/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.117Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-python-0.6.1/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.047Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-python-0.4.0/index.html</loc>
-    <lastmod>2024-08-06T19:22:38.935Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/introducing-shiny-templates/index.html</loc>
-    <lastmod>2024-08-06T19:22:38.921Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/conf-2023-recap-andrew-holz/index.html</loc>
@@ -650,27 +650,27 @@
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/introducing-component-layouts/index.html</loc>
-    <lastmod>2024-08-06T19:22:38.919Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.355Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-on-hugging-face/index.html</loc>
-    <lastmod>2024-08-06T19:22:38.928Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-python-0.6.0/index.html</loc>
-    <lastmod>2024-08-06T19:22:38.943Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-python-1.0/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.082Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.355Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-python-general-availability/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.121Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.357Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/the-past-and-future-of-shiny-joe-cheng/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.359Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/weather-lookup-bslib/index.html</loc>
@@ -678,7 +678,7 @@
   </url>
   <url>
     <loc>https://shiny.posit.co/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.410Z</lastmod>
+    <lastmod>2024-08-09T14:44:57.772Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/r/articles/build/app-formats/index.html</loc>
@@ -1250,7 +1250,7 @@
   </url>
   <url>
     <loc>https://shiny.posit.co/blog/posts/shiny-python-0.9.0/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.057Z</lastmod>
+    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
   </url>
   <url>
     <loc>https://shiny.posit.co/getstarted.html</loc>

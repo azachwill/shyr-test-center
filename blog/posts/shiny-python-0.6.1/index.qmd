@@ -18,7 +18,7 @@ Shiny for Python 0.6.1 is out! You can read the full [changelog](https://github.
 ## Component gallery
 
 As the number of Shiny components grows, it becomes harder to find the component you want. 
-We've created a [Shiny Component gallery](https://shiny.posit.co/py/components/) which gives you an interactive example of each component, as well as additional documentation about when and how to use it. 
+We've created a [Shiny Component gallery](https://shypy-test-center.netlify.app/py/components/) which gives you an interactive example of each component, as well as additional documentation about when and how to use it. 
 
 ![](component-gallery.gif)
 
@@ -37,12 +37,12 @@ You can access them through the CLI menu, or by passing their name to the `--tem
 We've included our current zero-dependency basic app, but have added a Dashboard and Multi-page template.
 
 The Dashboard template shows you how to build a nice-looking single-page dashboard. 
-It includes some [cards](https://shiny.posit.co/py/api/ExCard.html#see-also) and [value boxes](https://shiny.posit.co/py/api/ui.value_box.html#see-also) which are populated using a [reactive calculation](https://shiny.posit.co/py/docs/reactive-calculations.html). 
+It includes some [cards](https://shypy-test-center.netlify.app/py/api/ExCard.html#see-also) and [value boxes](https://shypy-test-center.netlify.app/py/api/ui.value_box.html#see-also) which are populated using a [reactive calculation](https://shypy-test-center.netlify.app/py/docs/reactive-calculations.html). 
 This is a good template to start with if you want to make use of some of the new components which were released in Shiny 0.6.0.
 
 The multi-page app gives you a starting point for a large, production application. 
 This app uses `page_navbar` to display several tabs, but the content of those tabs is stored in individual modules.
-[Shiny modules](https://shiny.posit.co/py/docs/workflow-modules.html) are a great way to organize large applications because they allow you to break your application apart into simple building blocks which are easier to maintain. 
+[Shiny modules](https://shypy-test-center.netlify.app/py/docs/workflow-modules.html) are a great way to organize large applications because they allow you to break your application apart into simple building blocks which are easier to maintain. 
 The application also uses [type annotations](https://blog.logrocket.com/understanding-type-annotation-python/) which improve the development experience, and includes an external CSS file to customize the look and feel of the app. 
 
 

@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://shiny.posit.co/py/" target="_blank"> 
+    <a class="nav-link" href="https://shypy-test-center.netlify.app/py/" target="_blank"> 
 <span class="menu-text">Shiny for Python</span></a>
   </li>  
   <li class="nav-item">
@@ -265,9 +265,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
 <!-- main -->
 <main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
-<!-- Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+End Google Tag Manager (noscript) -->
 
 <style type="text/css">
   #quarto-content>* {
@@ -286,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="editable-data-tables-and-data-grids" class="level2">
 <h2 data-anchor-id="editable-data-tables-and-data-grids">Editable Data Tables and Data Grids</h2>
 <p><img src="edit-your-data.gif" class="img-fluid"></p>
-<p>One of the most exciting new features in this release is the ability to make your <a href="https://shiny.posit.co/py/api/core/render.DataTable.html"><code>DataTable</code></a> and <a href="https://shiny.posit.co/py/api/core/render.DataGrid.html"><code>DataGrid</code></a> components editable. By setting <code>editable=True</code> within <code>DataGrid</code> or <code>DataTable</code>, you can allow users to directly edit the cells in your tables. This opens up a whole new range of possibilities for interactive data applications!</p>
+<p>One of the most exciting new features in this release is the ability to make your <a href="https://shypy-test-center.netlify.app/py/api/core/render.DataTable.html"><code>DataTable</code></a> and <a href="https://shypy-test-center.netlify.app/py/api/core/render.DataGrid.html"><code>DataGrid</code></a> components editable. By setting <code>editable=True</code> within <code>DataGrid</code> or <code>DataTable</code>, you can allow users to directly edit the cells in your tables. This opens up a whole new range of possibilities for interactive data applications!</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shiny.express <span class="im">import</span> render</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">@render.data_frame</span></span>
@@ -309,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>.update_cell_selection(selection)</code> - Method to update the selected cells of the data frame. The <code>selection</code> argument should be a dictionary that contains <code>type</code> and possibly <code>rows</code> and <code>columns</code> that contain the selected row and column indices, respectively. <!-- * `.cell_patches()` - Reactive value of the list of all applied edits to the data frame cells made by the user. --></li>
 <li><code>.set_patch_fn(fn)</code> - Decorator to set a function that will be called when the user makes an edit to the data frame. The function should accept a single patch dictionary as an argument and return an upgraded value. <!-- * `.set_patches_fn(fn)` - Decorator to set a function that will be called when the user makes edits to the data frame. The function should accept a list of patch dictionaries as an argument and return a (possibly) upgraded list of patch dictionaries. --></li>
 </ul>
-<p>(<a href="https://shiny.posit.co/py/api/core/render.data_frame.html#methods">Link</a> to data frame renderer helper methods and attributes.)</p>
+<p>(<a href="https://shypy-test-center.netlify.app/py/api/core/render.data_frame.html#methods">Link</a> to data frame renderer helper methods and attributes.)</p>
 <p>By adding the helper methods, we gain documentation, typing support, and an explicit way to access the data frame’s accessory information.</p>
 <p>We’re excited about this approach and are looking at ways we can bring it to other outputs. Please let us know what you think!</p>
 </section>
@@ -384,7 +384,7 @@ Quarto code
 </section>
 <section id="other-improvements" class="level2">
 <h2 data-anchor-id="other-improvements">Other Improvements</h2>
-<p>The <code>shiny create</code> CLI command now includes additional templates and an option to open the new <a href="https://shiny.posit.co/py/templates/">Shiny Templates website</a> where you can find templates to quickly jump start your app. This makes it easier than ever to get started with Shiny for Python! 🏎️💨</p>
+<p>The <code>shiny create</code> CLI command now includes additional templates and an option to open the new <a href="https://shypy-test-center.netlify.app/py/templates/">Shiny Templates website</a> where you can find templates to quickly jump start your app. This makes it easier than ever to get started with Shiny for Python! 🏎️💨</p>
 <p><img src="shiny-template.png" class="img-fluid"></p>
 <p>Layout components have received several improvements in this release. The <code>col_widths</code> argument of <code>ui.layout_columns()</code> now sets the <code>sm</code> breakpoint by default, providing better responsiveness on smaller screens. <code>ui.card()</code> and <code>ui.value_box()</code> now have an <code>id</code> argument that allows you to track the full-screen state of these components. You can also now set <code>min_height</code> and <code>max_height</code> on <code>ui.value_box()</code>, <code>ui.layout_columns()</code>, and <code>ui.layout_column_wrap()</code> to ensure that your layouts always stay within a certain size range.</p>
 <hr>

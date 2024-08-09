@@ -34469,7 +34469,7 @@ function HeaderBar({
     );
   }
   const mainUrl = {
-    python: "https://shiny.posit.co/py/",
+    python: "https://shypy-test-center.netlify.app/py/",
     r: "https://shiny.posit.co/"
   };
   const shinyLogo = engineSwitch(appEngine, shiny_logo_default, shiny_for_python_default);

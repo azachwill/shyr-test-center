@@ -20,8 +20,8 @@ filters:
   - quarto
   - line-highlight
 ---
-Reference documents are great if you know what you're looking for, but they make it hard to discover new components. For that reason, we've created Shiny for Python's [components gallery](https://shiny.posit.co/py/components/)
-and [layouts gallery](https://shiny.posit.co/py/layouts/).
+Reference documents are great if you know what you're looking for, but they make it hard to discover new components. For that reason, we've created Shiny for Python's [components gallery](https://shypy-test-center.netlify.app/py/components/)
+and [layouts gallery](https://shypy-test-center.netlify.app/py/layouts/).
 
 The goal of these galleries is to provide:
 
@@ -35,7 +35,7 @@ The goal of these galleries is to provide:
 
 ## Shiny Components {.mt-2}
 
-The [<span style="border-bottom: 1px solid; padding-bottom:2px;">Shiny Components gallery<span>](https://shiny.posit.co/py/components/) features a list of 33 Shiny Components ready for your apps.  Many of them are live examples (buttons, checkboxes, sliders, etc.) to get the feel for how they work. Once you've chosen from this list of inputs, outputs, and display components, you'll arive at a detailed page with:
+The [<span style="border-bottom: 1px solid; padding-bottom:2px;">Shiny Components gallery<span>](https://shypy-test-center.netlify.app/py/components/) features a list of 33 Shiny Components ready for your apps.  Many of them are live examples (buttons, checkboxes, sliders, etc.) to get the feel for how they work. Once you've chosen from this list of inputs, outputs, and display components, you'll arive at a detailed page with:
 
  - A Shinylive preview
  - Copy/Paste-able code 
@@ -226,7 +226,7 @@ app = App(app_ui, server=None)
 
 ## Shiny Layouts
 
-The [<span style="border-bottom: 1px solid; padding-bottom:2px;">Shiny Layouts gallery<span>](https://shiny.posit.co/py/components/) follows the same display pattern as the components gallery to showcase the different ways you can approach your app's user interface (UI) layout.
+The [<span style="border-bottom: 1px solid; padding-bottom:2px;">Shiny Layouts gallery<span>](https://shypy-test-center.netlify.app/py/components/) follows the same display pattern as the components gallery to showcase the different ways you can approach your app's user interface (UI) layout.
 The main page lists out a variety of layouts (navbars, sidebars, tabs, etc.)
 to give you a quick overview of different ways to arrange your app.
 We hope it sparks some inspiration to create a very intuitive experience for your users. 
@@ -316,5 +316,5 @@ or jump into [Shinylive](https://shinylive.io/py) to modify the code as needed a
 
 We've made these pages for both brand new users and long-time app builders. We hope they are helpful for everyone!
 
-<a href="https://shiny.posit.co/py/components/" class="btn btn-primary me-4 my-4">Shiny Components</a>
-<a href="https://shiny.posit.co/py/layouts/" class="btn btn-primary me-4">Shiny Layouts</a>
+<a href="https://shypy-test-center.netlify.app/py/components/" class="btn btn-primary me-4 my-4">Shiny Components</a>
+<a href="https://shypy-test-center.netlify.app/py/layouts/" class="btn btn-primary me-4">Shiny Layouts</a>

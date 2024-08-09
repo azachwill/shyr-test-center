@@ -157,7 +157,7 @@ If you find it helpful, please rate the extension on [the marketplace][Shiny ext
     Notable among these options is setting `options(shiny.autoreload = TRUE)` to automatically reload the app whenever its source files change.
     An extension setting can be used to disable devmode.
 
-  [Shiny for Python]: https://shiny.posit.co/py
+  [Shiny for Python]: https://shypy-test-center.netlify.app/py
   [Shiny for R]: ../../../getstarted.qmd
   [Shiny extension]: https://marketplace.visualstudio.com/items?itemName=Posit.shiny
   [1]: shiny-marketplace-header.png {fig-alt="The shiny extension page on vscode marketplace" fig-align="center" width="100%"}
