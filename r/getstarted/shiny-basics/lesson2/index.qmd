@@ -188,7 +188,7 @@ ui <- page_sidebar(
   card(
     card_header("Introducing Shiny"),
     "Shiny is a package from Posit that makes it incredibly easy to build interactive web applications with R.
-    For an introduction and live examples, visit the Shiny homepage (https://shiny.posit.co).",
+    For an introduction and live examples, visit the Shiny homepage (https://shyr-test-center.netlify.app).",
     card_image("www/shiny.svg", height = "300px"),
     card_footer("Shiny is a product of Posit.")
   )

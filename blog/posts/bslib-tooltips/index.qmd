@@ -200,7 +200,7 @@ Here are a few things currently towards the top of our roadmap:
     -   We have refreshed style updates in the works for `card()`s, `sidebar()`, and much more.
     -   And we'd love to get your feedback on the new theme!
 -   More UI components, such as [offcanvas](https://getbootstrap.com/docs/5.3/components/offcanvas/), [button groups](https://getbootstrap.com/docs/5.3/components/button-group/), etc.
--   More incorporation of `bslib` as part of the [Getting Started experience](https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson1/index.html) on [shiny.posit.co](https://shyr-test-center.netlify.app/).
+-   More incorporation of `bslib` as part of the [Getting Started experience](https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson1/index.html) on [shyr-test-center.netlify.app](https://shyr-test-center.netlify.app/).
 -   More `bslib`-focused example galleries, starter templates, and articles.
 
 ::: {.callout-note icon="false"}

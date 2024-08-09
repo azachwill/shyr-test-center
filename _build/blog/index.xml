@@ -4774,7 +4774,7 @@ document.getElementById("switch").addEventListener("click", (ev) => {
 </ul>
 </li>
 <li>More UI components, such as <a href="https://getbootstrap.com/docs/5.3/components/offcanvas/">offcanvas</a>, <a href="https://getbootstrap.com/docs/5.3/components/button-group/">button groups</a>, etc.</li>
-<li>More incorporation of <code>bslib</code> as part of the <a href="https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson1/index.html">Getting Started experience</a> on <a href="https://shyr-test-center.netlify.app/">shiny.posit.co</a>.</li>
+<li>More incorporation of <code>bslib</code> as part of the <a href="https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson1/index.html">Getting Started experience</a> on <a href="https://shyr-test-center.netlify.app/">shyr-test-center.netlify.app</a>.</li>
 <li>More <code>bslib</code>-focused example galleries, starter templates, and articles.</li>
 </ul>
 <div class="callout callout-style-default callout-note no-icon callout-titled">

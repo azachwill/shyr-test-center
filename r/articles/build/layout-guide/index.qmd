@@ -115,7 +115,7 @@ ui <- page_navbar(
     title = "Links",
     align = "right",
     nav_item(tags$a("Posit", href = "https://posit.co")),
-    nav_item(tags$a("Shiny", href = "https://shiny.posit.co"))
+    nav_item(tags$a("Shiny", href = "https://shyr-test-center.netlify.app"))
   )
 )
 ````

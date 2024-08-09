@@ -141,7 +141,7 @@ Congratulations. You’ve worked through the entire Shiny development process. Y
 
 The next step is to practice, and then explore the advanced features of Shiny.
 
-The [Shiny Dev Center](https://shiny.posit.co) can help you along the way. It hosts a [gallery](/gallery/) of inspiring apps, along with the code that makes the apps.
+The [Shiny Dev Center](https://shyr-test-center.netlify.app) can help you along the way. It hosts a [gallery](/gallery/) of inspiring apps, along with the code that makes the apps.
 
 The Shiny Dev Center also includes an [articles](/articles/) section for continuing education. Each article examines an intermediate to advanced Shiny topic in depth.
 

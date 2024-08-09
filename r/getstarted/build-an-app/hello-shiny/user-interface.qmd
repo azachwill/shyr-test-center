@@ -44,7 +44,7 @@ The `page_sidebar()` function creates a screen-filling page with a sidebar. Call
 
 As always, for more information on arguments to any of these function, you can view the R function help by typing `?<function_name>` (e.g., `?page_sidebar`) in your R console or visiting the function reference page on the package website [here](https://rstudio.github.io/bslib/reference/index.html).
 
-To learn more about various layouts, I recommend reviewing the [Application Layout Guide article](https://shyr-test-center.netlify.app/articles/layout-guide.html) at [shiny.posit.co](shiny.posit.co). 
+To learn more about various layouts, I recommend reviewing the [Application Layout Guide article](https://shyr-test-center.netlify.app/articles/layout-guide.html) at [shyr-test-center.netlify.app](shyr-test-center.netlify.app). 
 
 ### Input controls
 

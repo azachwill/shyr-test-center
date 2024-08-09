@@ -34,7 +34,7 @@ If you prefer to build your own server you can use Shiny Server, which is free a
 
 ### Pro options
 
-Posit also offers a professional option for deploying your apps: Posit Connect. You can find out more about all of these options at https://shiny.posit.com/deploy.
+Posit also offers a professional option for deploying your apps: Posit Connect. You can find out more about all of these options at https://shyr-test-center.netlify.appm/deploy.
 
 ### Congratulations!
 
