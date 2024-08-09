@@ -3081,7 +3081,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>In our <a href="../../../blog/posts/bslib-tooltips/#towards-a-new-shiny-theme">last post</a>, we previewed a new look for <code>bslib</code>-powered UIs, which is designed with dashboards in mind. This release of <code>bslib</code> adds more polish to this new “preset” theme and makes it the default for <code>bslib</code> powered UIs.</p>
 <p>To use the new layouts, simply create an app using any <code>page_*()</code> function in bslib for the UI. Here’s a very simple template you can use to get started. Notice that we’ve used <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> to make this example interactive – the entire app is running in your browser, no server required! You can even edit the app right here in this post and see the changes live when you press the <i class="bi bi-play-fill"></i> play button. We’ll talk more about shinylive later in this post.</p>
 <div class="column-page mb-3">
-<pre class="shinylive-r" data-engine="r"><code><a href="https://shyr-test-center.netlify.app/">#| standalone: true
+<pre class="shinylive-r" data-engine="r"><code><a href="https://shiny.posit.co/">#| standalone: true
 #| components: [editor, viewer]
 #| viewerHeight: 400
 #| layout: vertical
@@ -3217,7 +3217,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -3283,7 +3283,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -3355,7 +3355,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -3432,7 +3432,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -4092,7 +4092,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -4578,10 +4578,9 @@ Now if you delete an element with server bindings, the editor will ask if you wa
   <dc:creator>Carson Sievert</dc:creator>
   <dc:creator>Garrick Aden-Buie</dc:creator>
   <link>https://shyr-test-center.netlify.app/blog/posts/bslib-tooltips/</link>
-  <description><![CDATA[ <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<style type="text/css">
+  <description><![CDATA[ <!-- Google Tag Manager (noscript) 
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+End Google Tag Manager (noscript) --><style type="text/css">
   #quarto-content>* {
   padding-top: 0px;
   }
@@ -4637,7 +4636,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;

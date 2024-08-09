@@ -245,10 +245,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<style type="text/css">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><!-- Google Tag Manager (noscript) 
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+End Google Tag Manager (noscript) --><style type="text/css">
   #quarto-content>* {
   padding-top: 0px;
   }
@@ -297,7 +296,7 @@ Learn more in the new
 </div>
 </section><section id="towards-a-new-shiny-theme" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="towards-a-new-shiny-theme">Towards a new Shiny theme</h3>
 <p>This release of <code>bslib</code> introduces a new theme that we intend on making the default experience for <code>bslib</code>-powered apps. Since this theme is still a work-in-progress, you must currently must be opt-in to use it by providing <code>bs_theme(preset = "shiny")</code> to the <code>theme</code> argument of the relevant page function, for example:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page_sidebar.html">page_sidebar</a></span><span class="op">(</span></span>

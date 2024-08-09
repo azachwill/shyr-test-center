@@ -955,8 +955,8 @@
     "objectID": "r/getstarted/shiny-basics/lesson1/index.html#installation",
     "href": "r/getstarted/shiny-basics/lesson1/index.html#installation",
     "title": "Welcome to Shiny",
-    "section": "Installation",
-    "text": "Installation\nShiny is an R package that makes it easy to build interactive web applications (apps) straight from R. This lesson will get you started building Shiny apps right away.\nIf you still haven’t installed the Shiny package, open an R session, connect to the internet, and run\ninstall.packages(\"shiny\")\nShiny comes with another package, bslib, which we’ll also use to build great looking user interfaces.",
+    "section": "",
+    "text": "Shiny is an R package that makes it easy to build interactive web applications (apps) straight from R. This lesson will get you started building Shiny apps right away.\nIf you still haven’t installed the Shiny package, open an R session, connect to the internet, and run\ninstall.packages(\"shiny\")\nShiny comes with another package, bslib, which we’ll also use to build great looking user interfaces.",
     "crumbs": [
       "Home",
       "![](/images/1-square-fill.svg){.sidebar-icon} Shiny Basics",
@@ -2191,8 +2191,8 @@
     "objectID": "r/articles/index.html#mastering-shiny",
     "href": "r/articles/index.html#mastering-shiny",
     "title": "Articles",
-    "section": "Mastering Shiny",
-    "text": "Mastering Shiny\n\nBy Hadley Wickham\n\n\n\nA free, online book designed to take you from basic Shiny to creating your own customized apps.\nRead Now"
+    "section": "",
+    "text": "A free, online book designed to take you from basic Shiny to creating your own customized apps.\nRead Now"
   },
   {
     "objectID": "r/articles/index.html#build",
@@ -8034,5 +8034,24 @@
     "title": "Gallery",
     "section": "",
     "text": "Welcome to the Shiny Gallery! Below you can find a myriad of Shiny apps to be inspired by and to learn from. We have organized the apps in two main categories:"
+  },
+  {
+    "objectID": "r/articles/index.html",
+    "href": "r/articles/index.html",
+    "title": "Articles",
+    "section": "",
+    "text": "A comprehensive guide to using Shiny. If you are just starting out, you may want to explore the Get Started Tutorials to learn the basics. Otherwise, choose your own path with the articles below!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA free, online book designed to take you from basic Shiny to creating your own customized apps.\nRead Now"
+  },
+  {
+    "objectID": "r/getstarted/shiny-basics/lesson1/index.html",
+    "href": "r/getstarted/shiny-basics/lesson1/index.html",
+    "title": "Welcome to Shiny",
+    "section": "",
+    "text": "Shiny is an R package that makes it easy to build interactive web applications (apps) straight from R. This lesson will get you started building Shiny apps right away.\nIf you still haven’t installed the Shiny package, open an R session, connect to the internet, and run\ninstall.packages(\"shiny\")\nShiny comes with another package, bslib, which we’ll also use to build great looking user interfaces.",
+    "crumbs": [
+      "Home",
+      "![](/images/1-square-fill.svg){.sidebar-icon} Shiny Basics",
+      "Welcome to Shiny"
+    ]
   }
 ]

@@ -19,3 +19,6 @@ rsconnect/
 venv/
 .venv/
 /.luarc.json
+
+# Local Netlify folder
+.netlify

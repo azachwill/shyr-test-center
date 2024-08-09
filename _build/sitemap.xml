@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.659Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/index.html</loc>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-vscode-1.0.0/index.html</loc>
-    <lastmod>2024-08-09T14:46:37.935Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/nonblocking/index.html</loc>
@@ -30,15 +30,15 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shinyswatch-0.7.0/index.html</loc>
-    <lastmod>2024-08-09T14:46:50.917Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-express/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.355Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.362Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/index.html</loc>
@@ -114,7 +114,7 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson7/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.828Z</lastmod>
+    <lastmod>2024-08-09T20:02:53.103Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson5/index.html</loc>
@@ -150,7 +150,7 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/hello-shiny/user-interface.html</loc>
-    <lastmod>2024-08-06T19:22:39.683Z</lastmod>
+    <lastmod>2024-08-09T20:02:53.106Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/hello-shiny/recap.html</loc>
@@ -166,7 +166,7 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/customizing-ui/congratulations.html</loc>
-    <lastmod>2024-08-06T19:22:39.680Z</lastmod>
+    <lastmod>2024-08-09T20:02:53.104Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/widget-gallery/index.html</loc>
@@ -550,7 +550,7 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/layout-guide/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.485Z</lastmod>
+    <lastmod>2024-08-09T20:02:53.114Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/js-events/index.html</loc>
@@ -618,19 +618,19 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-chatstream/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.664Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/introducing-shiny-templates/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/conf-2023-recap-andrew-holz/index.html</loc>
@@ -650,27 +650,27 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/introducing-component-layouts/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.355Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-on-hugging-face/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.0/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.355Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.357Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/the-past-and-future-of-shiny-joe-cheng/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/weather-lookup-bslib/index.html</loc>
@@ -678,7 +678,7 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/index.html</loc>
-    <lastmod>2024-08-09T14:44:57.772Z</lastmod>
+    <lastmod>2024-08-09T18:22:57.021Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/app-formats/index.html</loc>
@@ -1158,7 +1158,7 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson2/index.html</loc>
-    <lastmod>2024-08-06T19:22:39.801Z</lastmod>
+    <lastmod>2024-08-09T20:02:53.103Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson4/index.html</loc>
@@ -1250,7 +1250,7 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/index.html</loc>
-    <lastmod>2024-08-09T14:45:04.358Z</lastmod>
+    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/getstarted.html</loc>
@@ -1278,6 +1278,6 @@
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/bslib-tooltips/index.html</loc>
-    <lastmod>2024-08-06T19:22:38.824Z</lastmod>
+    <lastmod>2024-08-09T20:02:53.110Z</lastmod>
   </url>
 </urlset>
