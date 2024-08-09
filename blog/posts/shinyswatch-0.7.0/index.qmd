@@ -34,7 +34,7 @@ body:not(.modal-open) div.sourceCode:hover pre code.has-line-highlights > span:n
 ```
 
 We're happy to announce the release of [shinyswatch](https://posit-dev.github.io/py-shinyswatch) v0.7.0.
-shinyswatch brings [Bootstwatch themes](https://bootswatch.com) to [Shiny for Python](https://shypy-test-center.netlify.app/py), allowing you to easily customize the appearance of your Shiny apps with a variety of themes.
+shinyswatch brings [Bootstwatch themes](https://bootswatch.com) to [Shiny for Python](https://shyr-test-center.netlify.app/py), allowing you to easily customize the appearance of your Shiny apps with a variety of themes.
 
 You can install the latest version of shinyswatch from PyPI with:
 

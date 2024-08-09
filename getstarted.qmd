@@ -27,7 +27,7 @@ layout: article
     </a>
   </div>
   <div class="g-col-sm-6 g-col-12 text-center option mb-3">
-    <a href="https://shypy-test-center.netlify.app/py/docs/overview.html" class="text-decoration-none" target>
+    <a href="https://shyr-test-center.netlify.app/py/docs/overview.html" class="text-decoration-none" target>
       <div class="block h-100 pt-4 pb-1">
         <div class="icon-box">
          <img src="images/python-logo.svg" class="w-100 pb-3">

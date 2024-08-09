@@ -19,7 +19,7 @@ image: /images/shiny-thumb.png
 
 ::: {.d-grid .d-md-block .pt-5 .text-center style="z-index:999;"}
 
-<a href="r/getstarted" class="btn btn-dark m-2 px-5">Get started in R</a><a href="https://shypy-test-center.netlify.app/py/" class="btn btn-dark m-2 px-5">Get started in Python</a>
+<a href="r/getstarted" class="btn btn-dark m-2 px-5">Get started in R</a><a href="https://shyr-test-center.netlify.app/py/" class="btn btn-dark m-2 px-5">Get started in Python</a>
 
 :::
 
@@ -224,7 +224,7 @@ app = App(app_ui, server)
 
 ::: {.d-grid .d-md-block .pb-5 .text-center}
 
-<a href="r/getstarted" class="btn btn-dark m-2 px-5">Get started in R</a><a href="https://shypy-test-center.netlify.app/py/" class="btn btn-dark m-2 px-5">Get started in Python</a>
+<a href="r/getstarted" class="btn btn-dark m-2 px-5">Get started in R</a><a href="https://shyr-test-center.netlify.app/py/" class="btn btn-dark m-2 px-5">Get started in Python</a>
 
 :::
 :::
@@ -236,7 +236,7 @@ app = App(app_ui, server)
 #### Put your Shiny app on the web by using your own servers or Posit's hosting service.{.mt-0}
 
 ::: {.pt-4 .pb-2 .mt-2}
-<a href="r/deploy" class="btn btn-link text-white m-2 text-decoration-none">Deploy for R <i class="bi bi-chevron-right"></i></a><a href="https://shypy-test-center.netlify.app/py/docs/deploy.html" target="_blank" class="btn btn-link text-white m-2 text-decoration-none">Deploy for Python <i class="bi bi-chevron-right"></i></a>
+<a href="r/deploy" class="btn btn-link text-white m-2 text-decoration-none">Deploy for R <i class="bi bi-chevron-right"></i></a><a href="https://shyr-test-center.netlify.app/py/docs/deploy.html" target="_blank" class="btn btn-link text-white m-2 text-decoration-none">Deploy for Python <i class="bi bi-chevron-right"></i></a>
 :::
 
 ::::

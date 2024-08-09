@@ -61,7 +61,7 @@ End Google Tag Manager (noscript) -->
 <p>In April 2023, we <a href="https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/">removed the alpha tag from Shiny for Python</a>, signaling our team’s belief that its level of quality and runtime stability made it appropriate for production use. And that belief has borne out: the feedback we’ve received from real-world users of the framework has been overwhelmingly positive.</p>
 <p>At that time, we chose not to use a 1.0 moniker, preferring to stick to 0.x until after we had shipped essential features like <a href="../shiny-python-0.4.0/">interactive data tables</a> (June 2023) and <a href="../shiny-python-0.6.0/">dashboard UI components</a> (Nov 2023). And soon after that, we came up with <a href="https://shyr-test-center.netlify.app/blog/posts/shiny-express/">Shiny Express</a>, a completely new syntax for writing Shiny apps, which meant another period of heavy feedback and potential revisions of the API.</p>
 <p>Sitting here in July 2024, it feels like a great time to acknowledge Shiny for Python’s maturity by bestowing it with the big 1-point-0. The API feels appropriately stable now, and most of the new features of the last few releases have been about building on top of Shiny’s existing API design vocabulary, rather than extending or changing it (although one notable brand-new primitive is Modules for Shiny Express, which you can read about below).</p>
-<p>So please join us in raising a proverbial glass to Shiny for Python 1.0! And if you’ve been waiting on the sidelines, now is a great time to <a href="https://shypy-test-center.netlify.app/py/docs/overview.html">get in the game</a>!</p>
+<p>So please join us in raising a proverbial glass to Shiny for Python 1.0! And if you’ve been waiting on the sidelines, now is a great time to <a href="https://shyr-test-center.netlify.app/py/docs/overview.html">get in the game</a>!</p>
 <p>And now, let’s take a look at all the cool features that are part of this release!</p>
 <div class="pt-2 pb-1">
 <hr>
@@ -69,7 +69,7 @@ End Google Tag Manager (noscript) -->
 </section>
 <section id="new-chat-component" class="level2">
 <h2 data-anchor-id="new-chat-component">New <code>Chat()</code> component</h2>
-<p>The new <code>Chat()</code> component makes it easy to implement generative AI chatbots, powered by any LLM of your choosing. For a comprehensive overview, see the new <a href="https://shypy-test-center.netlify.app/py/components/display-messages/chat/">component page</a>.</p>
+<p>The new <code>Chat()</code> component makes it easy to implement generative AI chatbots, powered by any LLM of your choosing. For a comprehensive overview, see the new <a href="https://shyr-test-center.netlify.app/py/components/display-messages/chat/">component page</a>.</p>
 <p>The main steps of any generative AI chatbot are:</p>
 <ol type="1">
 <li>Create a <code>Chat</code> instance.</li>
@@ -137,17 +137,17 @@ font-weight: bold;
 font-style: inherit;">await</span> chat.append_message_stream(response)</span></code></pre></div>
 </div>
 </div>
-<p>The generative AI <a href="https://shypy-test-center.netlify.app/py/components/display-messages/chat/#ai-quick-start">quickstart</a> has a variety of <code>ai_model</code> implementations, but we do recommend starting with <a href="https://www.langchain.com/">LangChain</a>, as it helps standardize response generation across different LLMs. Use the terminal command below to get the LangChain (with OpenAI) template:</p>
+<p>The generative AI <a href="https://shyr-test-center.netlify.app/py/components/display-messages/chat/#ai-quick-start">quickstart</a> has a variety of <code>ai_model</code> implementations, but we do recommend starting with <a href="https://www.langchain.com/">LangChain</a>, as it helps standardize response generation across different LLMs. Use the terminal command below to get the LangChain (with OpenAI) template:</p>
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">shiny</span> create <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-g</span> https://github.com/posit-dev/py-shiny/tree/main/examples/chat/hello-providers/langchain</span></code></pre></div>
-<p>Then, follow the instructions at the top of <code>app.py</code> to set up your OpenAI API key before running the app. Once you have your credentials set up and <a href="https://shypy-test-center.netlify.app/py/docs/install-create-run.html">run the app</a> and start chatting!</p>
+<p>Then, follow the instructions at the top of <code>app.py</code> to set up your OpenAI API key before running the app. Once you have your credentials set up and <a href="https://shyr-test-center.netlify.app/py/docs/install-create-run.html">run the app</a> and start chatting!</p>
 <div class="py-3">
 <p><video src="chat2.mp4" class="border rounded img-fluid" controls=""><a href="chat2.mp4">Video</a></video></p>
 </div>
-<p>The template above is a great starting point for building your own generative AI chatbot. To learn how to do more advanced things with <code>Chat</code> (e.g., system messages, RAG, etc), check out the <a href="https://shypy-test-center.netlify.app/py/components/display-messages/chat/">component page</a>.</p>
+<p>The template above is a great starting point for building your own generative AI chatbot. To learn how to do more advanced things with <code>Chat</code> (e.g., system messages, RAG, etc), check out the <a href="https://shyr-test-center.netlify.app/py/components/display-messages/chat/">component page</a>.</p>
 <p>For now, <code>ui.Chat()</code> is limited to textual input and output. We hope to expand this in the future to include more complex inputs and outputs, such as images, videos, and audio (for now, you can checkout shinymedia for video in / audio out). We also hope to get <a href="https://discord.com/invite/yMGCamUMnS">your feedback</a> on what you’d like to see in future versions of <code>Chat</code>!</p>
 <div class="pt-2 pb-1">
 <hr>
@@ -156,18 +156,18 @@ font-style: inherit;">-g</span> https://github.com/posit-dev/py-shiny/tree/main/
 <section id="end-to-end-testing" class="level2">
 <h2 data-anchor-id="end-to-end-testing">End-to-end testing</h2>
 <p>After more than a year of development and internal testing, we’re now exporting an end-to-end testing framework for Shiny apps. End-to-end tests are a great way to maintain code quality by ensuring that apps behave as expected in response to (simulated) user interactions in a real browser. Our approach builds on the fabulous <a href="https://playwright.dev/">Playwright</a> framework, which provides a fast, powerful, and resilient foundation for browser-based testing.</p>
-<p>The video below demonstrates the experience of writing an end-to-end test for a Shiny app. Note that the new <code>shiny.playwright</code> module is where you can find dozens of “controllers” that make it easy to mimic user interactions with Shiny <a href="https://shypy-test-center.netlify.app/py/components/">components</a> and assert their expected state.</p>
+<p>The video below demonstrates the experience of writing an end-to-end test for a Shiny app. Note that the new <code>shiny.playwright</code> module is where you can find dozens of “controllers” that make it easy to mimic user interactions with Shiny <a href="https://shyr-test-center.netlify.app/py/components/">components</a> and assert their expected state.</p>
 <div class="py-3">
 <p><video src="leverage_controllers.mp4" class="border rounded img-fluid" controls=""><a href="leverage_controllers.mp4">Video</a></video></p>
 </div>
-<p>For a comprehensive overview of end-to-end testing, see the new article on <a href="https://shypy-test-center.netlify.app/py/docs/end-to-end-testing.html">End-to-end testing in Shiny</a>.</p>
+<p>For a comprehensive overview of end-to-end testing, see the new article on <a href="https://shyr-test-center.netlify.app/py/docs/end-to-end-testing.html">End-to-end testing in Shiny</a>.</p>
 <div class="pt-2 pb-1">
 <hr>
 </div>
 </section>
 <section id="data-frame-improvements" class="level2">
 <h2 data-anchor-id="data-frame-improvements">Data frame improvements</h2>
-<p>Shiny provides two components for rendering data frames: <a href="https://shypy-test-center.netlify.app/py/components/outputs/data-grid/"><code>DataGrid()</code></a> and <a href="https://shypy-test-center.netlify.app/py/components/outputs/data-table/"><code>DataTable()</code></a>. The former is a more interactive and feature-rich table, while the latter is a simpler, more lightweight table. All of the improvements described below are available to both components.</p>
+<p>Shiny provides two components for rendering data frames: <a href="https://shyr-test-center.netlify.app/py/components/outputs/data-grid/"><code>DataGrid()</code></a> and <a href="https://shyr-test-center.netlify.app/py/components/outputs/data-table/"><code>DataTable()</code></a>. The former is a more interactive and feature-rich table, while the latter is a simpler, more lightweight table. All of the improvements described below are available to both components.</p>
 <section id="styling" class="level3">
 <h3 data-anchor-id="styling">Styling</h3>
 <p><code>DataGrid()</code> and <code>DataTable()</code> gain a <code>styles</code> argument for styling the displayed result. <code>styles</code> can take a list of dictionaries where each dictionary represents a style to be applied to the table (and thus should have at least a <code>style</code> (or <code>class</code>) key to apply CSS styles or classes to the relevant cells). To scope the styling to particular cells, use the <code>rows</code> and <code>cols</code> keys (with 0-based indexing). Note that if both <code>rows</code> and <code>cols</code> are specified, the style will be applied only to the intersection of the specified rows and columns.</p>
@@ -398,7 +398,7 @@ font-style: inherit;">"Sort on column 0↑"</span>)</span></code></pre></div>
 </section>
 <section id="learn-more" class="level3">
 <h3 data-anchor-id="learn-more">Learn more</h3>
-<p>For a comprehensive overview of new and old data frame features, see the updated articles on <a href="https://shypy-test-center.netlify.app/py/components/outputs/data-grid/">DataGrid</a> and <a href="https://shypy-test-center.netlify.app/py/components/outputs/data-table/">DataTable</a>.</p>
+<p>For a comprehensive overview of new and old data frame features, see the updated articles on <a href="https://shyr-test-center.netlify.app/py/components/outputs/data-grid/">DataGrid</a> and <a href="https://shyr-test-center.netlify.app/py/components/outputs/data-table/">DataTable</a>.</p>
 <div class="pt-2 pb-1">
 <hr>
 </div>
@@ -425,7 +425,7 @@ font-style: inherit;">"Sort on column 0↑"</span>)</span></code></pre></div>
 <section id="modules-for-express" class="level2">
 <h2 data-anchor-id="modules-for-express">Modules for Express</h2>
 <p>When it comes to building more complicated Shiny applications, some of the most useful tools at your disposal are Shiny modules. You can use Shiny modules to build components that abstract away complexity and can be reused in your applications.</p>
-<p>Shiny Express now has support for using Shiny modules, and you can even create Shiny modules using Express syntax. To learn more, see our documentation on <a href="https://shypy-test-center.netlify.app/py/docs/modules.html" target="_blank">Shiny modules</a>.</p>
+<p>Shiny Express now has support for using Shiny modules, and you can even create Shiny modules using Express syntax. To learn more, see our documentation on <a href="https://shyr-test-center.netlify.app/py/docs/modules.html" target="_blank">Shiny modules</a>.</p>
 <div class="pt-2 pb-1">
 <hr>
 </div>
@@ -482,7 +482,7 @@ body:not(.modal-open) div.sourceCode:hover pre code.has-line-highlights > span:n
   opacity: 0.8;
 }
 </style>
-<p>We’re happy to announce the release of <a href="https://posit-dev.github.io/py-shinyswatch">shinyswatch</a> v0.7.0. shinyswatch brings <a href="https://bootswatch.com">Bootstwatch themes</a> to <a href="https://shypy-test-center.netlify.app/py">Shiny for Python</a>, allowing you to easily customize the appearance of your Shiny apps with a variety of themes.</p>
+<p>We’re happy to announce the release of <a href="https://posit-dev.github.io/py-shinyswatch">shinyswatch</a> v0.7.0. shinyswatch brings <a href="https://bootswatch.com">Bootstwatch themes</a> to <a href="https://shyr-test-center.netlify.app/py">Shiny for Python</a>, allowing you to easily customize the appearance of your Shiny apps with a variety of themes.</p>
 <p>You can install the latest version of shinyswatch from PyPI with:</p>
 <div class="sourceCode" id="cb1" data-code-line-numbers="" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
 background-color: null;
@@ -1056,7 +1056,7 @@ End Google Tag Manager (noscript) -->
   }
 </style>
 <div class="lead">
-<p><strong>We’re excited to announce the new <a href="https://marketplace.visualstudio.com/items?itemName=Posit.shiny">Shiny extension</a> for VS Code!</strong> Along with a new name, the Shiny extension now supports running both <a href="../../../getstarted.html">Shiny for R</a> and <a href="https://shypy-test-center.netlify.app/py">Shiny for Python</a> apps!</p>
+<p><strong>We’re excited to announce the new <a href="https://marketplace.visualstudio.com/items?itemName=Posit.shiny">Shiny extension</a> for VS Code!</strong> Along with a new name, the Shiny extension now supports running both <a href="../../../getstarted.html">Shiny for R</a> and <a href="https://shyr-test-center.netlify.app/py">Shiny for Python</a> apps!</p>
 </div>
 <p>When we introduced the Shiny for Python VS Code extension, its name made a lot of sense: the extension helped Shiny for Python developers run their apps in VS Code. But with the latest v1.0.0 release, we’ve expanded the extension to support running Shiny for R apps – as well as a few new features for moving between local files and ShinyLive links – and we wanted a name that reflected that. In this post, we’ll talk through the new features and show you how to use them.</p>
 <section id="installing-the-shiny-extension" class="level2">
@@ -1170,7 +1170,7 @@ End Google Tag Manager (noscript) -->
 <section id="editable-data-tables-and-data-grids" class="level2">
 <h2 data-anchor-id="editable-data-tables-and-data-grids">Editable Data Tables and Data Grids</h2>
 <p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/edit-your-data.gif" class="img-fluid"></p>
-<p>One of the most exciting new features in this release is the ability to make your <a href="https://shypy-test-center.netlify.app/py/api/core/render.DataTable.html"><code>DataTable</code></a> and <a href="https://shypy-test-center.netlify.app/py/api/core/render.DataGrid.html"><code>DataGrid</code></a> components editable. By setting <code>editable=True</code> within <code>DataGrid</code> or <code>DataTable</code>, you can allow users to directly edit the cells in your tables. This opens up a whole new range of possibilities for interactive data applications!</p>
+<p>One of the most exciting new features in this release is the ability to make your <a href="https://shyr-test-center.netlify.app/py/api/core/render.DataTable.html"><code>DataTable</code></a> and <a href="https://shyr-test-center.netlify.app/py/api/core/render.DataGrid.html"><code>DataGrid</code></a> components editable. By setting <code>editable=True</code> within <code>DataGrid</code> or <code>DataTable</code>, you can allow users to directly edit the cells in your tables. This opens up a whole new range of possibilities for interactive data applications!</p>
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> shiny.express <span class="im" style="color: #00769E;
@@ -1217,7 +1217,7 @@ font-style: inherit;">return</span> dt.data_view()</span></code></pre></div>
 <li><code>.update_cell_selection(selection)</code> - Method to update the selected cells of the data frame. The <code>selection</code> argument should be a dictionary that contains <code>type</code> and possibly <code>rows</code> and <code>columns</code> that contain the selected row and column indices, respectively. <!-- * `.cell_patches()` - Reactive value of the list of all applied edits to the data frame cells made by the user. --></li>
 <li><code>.set_patch_fn(fn)</code> - Decorator to set a function that will be called when the user makes an edit to the data frame. The function should accept a single patch dictionary as an argument and return an upgraded value. <!-- * `.set_patches_fn(fn)` - Decorator to set a function that will be called when the user makes edits to the data frame. The function should accept a list of patch dictionaries as an argument and return a (possibly) upgraded list of patch dictionaries. --></li>
 </ul>
-<p>(<a href="https://shypy-test-center.netlify.app/py/api/core/render.data_frame.html#methods">Link</a> to data frame renderer helper methods and attributes.)</p>
+<p>(<a href="https://shyr-test-center.netlify.app/py/api/core/render.data_frame.html#methods">Link</a> to data frame renderer helper methods and attributes.)</p>
 <p>By adding the helper methods, we gain documentation, typing support, and an explicit way to access the data frame’s accessory information.</p>
 <p>We’re excited about this approach and are looking at ways we can bring it to other outputs. Please let us know what you think!</p>
 </section>
@@ -1383,7 +1383,7 @@ font-style: inherit;">```</span></span></code></pre></div>
 </section>
 <section id="other-improvements" class="level2">
 <h2 data-anchor-id="other-improvements">Other Improvements</h2>
-<p>The <code>shiny create</code> CLI command now includes additional templates and an option to open the new <a href="https://shypy-test-center.netlify.app/py/templates/">Shiny Templates website</a> where you can find templates to quickly jump start your app. This makes it easier than ever to get started with Shiny for Python! 🏎️💨</p>
+<p>The <code>shiny create</code> CLI command now includes additional templates and an option to open the new <a href="https://shyr-test-center.netlify.app/py/templates/">Shiny Templates website</a> where you can find templates to quickly jump start your app. This makes it easier than ever to get started with Shiny for Python! 🏎️💨</p>
 <p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/shiny-template.png" class="img-fluid"></p>
 <p>Layout components have received several improvements in this release. The <code>col_widths</code> argument of <code>ui.layout_columns()</code> now sets the <code>sm</code> breakpoint by default, providing better responsiveness on smaller screens. <code>ui.card()</code> and <code>ui.value_box()</code> now have an <code>id</code> argument that allows you to track the full-screen state of these components. You can also now set <code>min_height</code> and <code>max_height</code> on <code>ui.value_box()</code>, <code>ui.layout_columns()</code>, and <code>ui.layout_column_wrap()</code> to ensure that your layouts always stay within a certain size range.</p>
 <hr>
@@ -1419,12 +1419,12 @@ End Google Tag Manager (noscript) -->
     
 
 
-<p>Last month we introduced the Shiny for Python <a href="https://shypy-test-center.netlify.app/py/components/">Components</a> and <a href="https://shypy-test-center.netlify.app/py/layouts/">Layouts</a> galleries, which are a simple, visual overview of what Shiny can do mixed with cheatsheet-like information. They are for new and seasoned users alike.</p>
-<p>We’re excited to announce a third section which brings those two things together into opinionated boilerplate code: <a href="https://shypy-test-center.netlify.app/py/templates/">Shiny Templates</a>.</p>
-<p>These will allow you to hit the ground running, whether you need a <a href="https://shypy-test-center.netlify.app/py/templates/basic-app-plot/">quick simple app</a> or a <a href="https://shypy-test-center.netlify.app/py/templates/stock-app/">quick complicated one</a> 🙂.</p>
+<p>Last month we introduced the Shiny for Python <a href="https://shyr-test-center.netlify.app/py/components/">Components</a> and <a href="https://shyr-test-center.netlify.app/py/layouts/">Layouts</a> galleries, which are a simple, visual overview of what Shiny can do mixed with cheatsheet-like information. They are for new and seasoned users alike.</p>
+<p>We’re excited to announce a third section which brings those two things together into opinionated boilerplate code: <a href="https://shyr-test-center.netlify.app/py/templates/">Shiny Templates</a>.</p>
+<p>These will allow you to hit the ground running, whether you need a <a href="https://shyr-test-center.netlify.app/py/templates/basic-app-plot/">quick simple app</a> or a <a href="https://shyr-test-center.netlify.app/py/templates/stock-app/">quick complicated one</a> 🙂.</p>
 <p>When making Shiny apps, we’ve noticed we sometimes don’t know what the app’s UX will eventually become. As an app’s functionality grows and grows, the usability of the app can decrease. Our goal here is to set Shiny developers up for success (in the short AND long term.) We hope you feel the same! (If you have any feedback, never hesitate <a href="https://github.com/posit-dev/py-shiny-templates/issues">to let us know</a>.)</p>
 <p>Simply put: Shiny Templates will dramatically improve your start time, and save you from UX headaches down the road. This is just a start… We expect this gallery to grow as time goes on.</p>
-<p><a href="https://shypy-test-center.netlify.app/py/templates/" class="btn btn-primary px-5 my-4">See Shiny Templates</a></p>
+<p><a href="https://shyr-test-center.netlify.app/py/templates/" class="btn btn-primary px-5 my-4">See Shiny Templates</a></p>
 <section id="demos" class="level2">
 <h2 data-anchor-id="demos">Demos</h2>
 <p>We asked Carson Sievert to quickly get an app running locally, and show how he’d begin to make it his own:</p>
@@ -2121,7 +2121,7 @@ End Google Tag Manager (noscript) -->
     
 
 
-<p>Reference documents are great if you know what you’re looking for, but they make it hard to discover new components. For that reason, we’ve created Shiny for Python’s <a href="https://shypy-test-center.netlify.app/py/components/">components gallery</a> and <a href="https://shypy-test-center.netlify.app/py/layouts/">layouts gallery</a>.</p>
+<p>Reference documents are great if you know what you’re looking for, but they make it hard to discover new components. For that reason, we’ve created Shiny for Python’s <a href="https://shyr-test-center.netlify.app/py/components/">components gallery</a> and <a href="https://shyr-test-center.netlify.app/py/layouts/">layouts gallery</a>.</p>
 <p>The goal of these galleries is to provide:</p>
 <ol type="1">
 <li>An overview of Shiny options for new users, and</li>
@@ -2134,7 +2134,7 @@ End Google Tag Manager (noscript) -->
 </div>
 <section id="shiny-components" class="level2 mt-2 page-columns page-full">
 <h2 class="mt-2" data-anchor-id="shiny-components">Shiny Components</h2>
-<p>The <a href="https://shypy-test-center.netlify.app/py/components/"><span style="border-bottom: 1px solid; padding-bottom:2px;">Shiny Components gallery<span></span></span></a> features a list of 33 Shiny Components ready for your apps. Many of them are live examples (buttons, checkboxes, sliders, etc.) to get the feel for how they work. Once you’ve chosen from this list of inputs, outputs, and display components, you’ll arive at a detailed page with:</p>
+<p>The <a href="https://shyr-test-center.netlify.app/py/components/"><span style="border-bottom: 1px solid; padding-bottom:2px;">Shiny Components gallery<span></span></span></a> features a list of 33 Shiny Components ready for your apps. Many of them are live examples (buttons, checkboxes, sliders, etc.) to get the feel for how they work. Once you’ve chosen from this list of inputs, outputs, and display components, you’ll arive at a detailed page with:</p>
 <ul>
 <li>A Shinylive preview</li>
 <li>Copy/Paste-able code</li>
@@ -2496,7 +2496,7 @@ font-style: inherit;">None</span>)</span></code></pre></div>
 </section>
 <section id="shiny-layouts" class="level2 page-columns page-full">
 <h2 data-anchor-id="shiny-layouts">Shiny Layouts</h2>
-<p>The <a href="https://shypy-test-center.netlify.app/py/components/"><span style="border-bottom: 1px solid; padding-bottom:2px;">Shiny Layouts gallery<span></span></span></a> follows the same display pattern as the components gallery to showcase the different ways you can approach your app’s user interface (UI) layout. The main page lists out a variety of layouts (navbars, sidebars, tabs, etc.) to give you a quick overview of different ways to arrange your app. We hope it sparks some inspiration to create a very intuitive experience for your users.</p>
+<p>The <a href="https://shyr-test-center.netlify.app/py/components/"><span style="border-bottom: 1px solid; padding-bottom:2px;">Shiny Layouts gallery<span></span></span></a> follows the same display pattern as the components gallery to showcase the different ways you can approach your app’s user interface (UI) layout. The main page lists out a variety of layouts (navbars, sidebars, tabs, etc.) to give you a quick overview of different ways to arrange your app. We hope it sparks some inspiration to create a very intuitive experience for your users.</p>
 <div class="pt-4 pb-3 page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -2636,7 +2636,7 @@ font-style: inherit;">=</span> App(app_ui, server)</span></code></pre></div>
 <section id="check-it-out" class="level2">
 <h2 data-anchor-id="check-it-out">Check It Out!</h2>
 <p>We’ve made these pages for both brand new users and long-time app builders. We hope they are helpful for everyone!</p>
-<p><a href="https://shypy-test-center.netlify.app/py/components/" class="btn btn-primary me-4 my-4">Shiny Components</a> <a href="https://shypy-test-center.netlify.app/py/layouts/" class="btn btn-primary me-4">Shiny Layouts</a></p>
+<p><a href="https://shyr-test-center.netlify.app/py/components/" class="btn btn-primary me-4 my-4">Shiny Components</a> <a href="https://shyr-test-center.netlify.app/py/layouts/" class="btn btn-primary me-4">Shiny Layouts</a></p>
 
 
 </section>
@@ -2850,15 +2850,15 @@ font-style: inherit;">return</span> p</span></code></pre></div>
 </div>
 <section id="simple-yet-powerful" class="level2 page-columns page-full">
 <h2 data-anchor-id="simple-yet-powerful">Simple, yet powerful</h2>
-<p>While Shiny Express is easy to pick up, it’s powered by Shiny’s proven <a href="https://shypy-test-center.netlify.app/py/docs/overview.html#reactivity">reactive programming framework</a>, extensive (and growing) suite of <a href="https://shypy-test-center.netlify.app/py/components/">components</a>, and deeply customizable <a href="https://shypy-test-center.netlify.app/py/docs/ui-html.html">approach to UI</a>—just in a more approachable syntax that minimizes the fuss. It’s suitable for writing everything from throwaway prototypes, to realtime dashboards, to cutting edge model demos, to production-quality business workflow apps.</p>
+<p>While Shiny Express is easy to pick up, it’s powered by Shiny’s proven <a href="https://shyr-test-center.netlify.app/py/docs/overview.html#reactivity">reactive programming framework</a>, extensive (and growing) suite of <a href="https://shyr-test-center.netlify.app/py/components/">components</a>, and deeply customizable <a href="https://shyr-test-center.netlify.app/py/docs/ui-html.html">approach to UI</a>—just in a more approachable syntax that minimizes the fuss. It’s suitable for writing everything from throwaway prototypes, to realtime dashboards, to cutting edge model demos, to production-quality business workflow apps.</p>
 <!--
-It can be deployed in the same ways as before: [cloud hosted](https://shypy-test-center.netlify.app/py/docs/deploy-cloud.html), [self hosted](https://shypy-test-center.netlify.app/py/docs/deploy-on-prem.html), [WASM](https://shypy-test-center.netlify.app/py/docs/shinylive.html).
+It can be deployed in the same ways as before: [cloud hosted](https://shyr-test-center.netlify.app/py/docs/deploy-cloud.html), [self hosted](https://shyr-test-center.netlify.app/py/docs/deploy-on-prem.html), [WASM](https://shyr-test-center.netlify.app/py/docs/shinylive.html).
 -->
 <div class="py-3 page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p class="page-columns page-full"><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-express/tipping-dashboard.png" class="border img-fluid figure-img column-page" alt="A screenshot of a full-featured dashboard"></p>
-<figcaption><a href="https://shypy-test-center.netlify.app/py/docs/user-interfaces.html"><i class="bi bi-file-earmark-code-fill"></i> Build this app in our <em>User Interfaces</em> tutorial.</a><br><a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMASxlWICcyACAMyhpIgGcWo+HADoQ6DZi1QAbYmSnYMcAB6pGcHnwGSlIto2IwWPABY0I2AO40AJgHM4ZPmKas1Ea3EYB9abPkjdfUMTM2wWZwk1KEIyGgA3ODwWNw9GJLUAR0CDI1NzRRU1DXD6F3CIVABXMiTKmgCIAGIWABliKGsWaygyKH53FhJ6argjXtjCFjioKUr1EVjUPgBebQxu3oxFngAKAEoRACMaKSkvRghbFlWdmDMd7a3ZGa9j072kmCglB5olp96ZzeUj2BwgImaAEFrJ1UFB7CxYnJRlABjwbHBDlBGCI6lh4XAvMRUI5fsjlkIwAAldS9SqMVGsRaoMy2SlJNgnKRQQ5SODLAAqjDmYKsZGMLDx6I8WMYO2JlApYA8PAA1mRiZS9ogRCw9ZKaBgzFUyF4eFIMXLKRrAa8ueyWJSAEJc-gwYiVcgOu4QZbA86XYAABgAup9vn6uQHbMAAIxhqYzOaR07RpKqfmUgAkWt1+rxxuqXkIxjghFVh2ISi8tn0lVQO2tdDgDspADFiMROjxPHEuC38CxgJSWp6S62wAARMwQTyUhM9vkxODWZbDsCjiDjweU6cQWc4sAJswW2eC4VwMH6g1GipF6KxUivaoaiCNsBFBwTmk91icqQUIeYIQiw0KdF8ZiDKQFBehAACSADCADyAByADK1wsCAeZ6pSlQ9oeiDsFARrcGacS2O++FzjuH5wLYlTckBeA4Y6YAWDMfJkJSREcKRT48BR74cacX5gB8rGUoQ9JuIQ2AALTWMQpzYjxxH8RA5GUZSSkqYw8norY4LiSxEDXpS9iqUg6lcAJQkWXAVlggAvg0YoSni3LYB6pokLMMC8Ds-5SMsbYzD22oNNe7k3tMsyEpWPwmMQFiEAI-KIahaHrtRh4hpFZnXvqlICs8UiIn8qCeDwlKsdeAACKSeAUGYaHV+oeGwiJlV4zLVfsOqFUVRXbF4GxQPsGAmGgcDBiGUX6jFeJxXMrxVjsyWpelyyZeh64iVx84FcNuFgJCCQMgiiy1UNRWNZQqQtUUNW3denX8BdBK9X8A3tcNnSrKN437H9RU0F11hTcYM1zSwAB8LBBoNJ0o5IniTKskOLCwAD0XQAi8wKgyjbCUiAVWMIQGDwKiA0YLGACkrlgAtepLYaK0Jetm1pT2O3IXtUkyZQcmKcpTFHcjJ2UudngEiwRMs69+r3e4zXKK1L0o+9UCffYdqnL9yv-ZhQM9BNV6o3q4P49NVWwwjSPEydwKYVjPXAtTjlvpbVvXqTYBZiAwKIBgABMbDMw0IjsxgXk+cWymVAFux+V4VjWOKPBrgAbEkecsLGYf5YNrGx2ljDWEFjFnDwhBqIqQoilLw14hX1heKWHSeO+Ap-Hw425sbLCq4941eHosAtsP729LycBG37yQOPSZlNYwGCTubADijA2L8Sxjeb+zAbd5fYlXbA12a9dwI3F7HSd5+V53jmpDshDchoXhKtY8lsHyJQLAABW+FYhsAUtwGCZB5KHAcBYO+ZkZg0CMvJGgFAYA8HkoQSggEtQt1RiVMqCtXRxD4NdJWS9Y4MAYBdMkfIlRgX4FBGQjBEx7x5HyB00hohwHgOQJUGpUD4OdsNXa2UHJWXmsPFGBY7ymgZNYGgxBnxkFfLsURhCwB1x6IBROrCHQoVIIkTRKN1wQGMROHsOhaI8HdKqGiSQdJQGwBOWI8B5ymSXijE8Zh+RN2nt4-Up8Uaj08D4GQchXEzzgF1HRajPC+DIIvP2fkmCYULGQKaaUEneDSXKX2qM1BkFXmseJgFGwyJOmbXo+wvFBJYEoQRHt7T4FMfqbAgi-jsnaXqfJywjGznCF1fJ1xViUgsbOSkLA4BSB7Cwpg9SglkBSKeTMYAZAILapQv2ITFroI8oadu1dUx1wbr6AJj9hrPw7l3d+n8BA8B-jpf+gCQFgPBpA6CuDYHwMQfwC0qD0F8KwTg8gNErlaL7qgNGlNcEEhqjsq21DiTEDoUiBhMsYTMNGdMDh88RFVLEQLCRYBLJ5V6TeTJ5wOjKNUeoypDSipNlQD4dGXhXG0TQtIdBCtsA6jaUS1G65rFWPsY4ti3ROVOLAO4gcYZKXXkXGWCgq5nHSsVfqXxZ4AmUr2cNMJ3gkn+BiV1RYbLKYpKtnoHIe87BwCSSUcQrgbD2CSZojYpt+5H1qYU7WPR1wUzBdxI8bsehbD+LjLo4abSE3tEK7AeKMnyIjayoNHKQZCsqHFFY0ayDAETdiEMGBPQ0AyHMTNmieCwGkOoTCw4hXXmAHmrA6NcHAA2AWvFIYxmJikD26RTK2DpLiuUSUObNHSM0dIVgqw7VusiYyhp1b6B8mziu2tPAkjcjgXM5Y2bwpJCxO4DO4plhBgwEGWMSzvH5J0ZisAfY7U0ERUkfJ7oPBKn0BYNBasbGaP1ajGdJbUAbEJPHaoS6gl8nsO4ZYSiYjyj3vCx8vpKTGAdNgVEJYmBKkrGogwmHlixkvWHJIShsPGFw1JXBEqmkXoAKx+pOoBlGxTSkzujk0Fg8leN8f4wJwTQnhMidE-JECNIHzxFGGlKQ0luSoc0AMWJbAVUvWaGJzTWntOCYaPdKTCQMCycICIWe3rgaQtdqsTJBMgRckzdeGwShYxev+LGuzpwMBwLIAgygOxgRzSPVyOM+VWJObDq5ngEb4BGnRG+GzcqT6sXYxcCqSxgBOZcwAMnCNYJQxc9NRBiNJxQbBVMxBEPp4rhm4AJHIDsGzn4yBgnel4K1N56xgbNBad+1oWmnAdJzFMZwLi2EKXiTrPRCQljLBWKsNY6wNibB4wcyrlyrnXJubcMq9wHiOiIMAzk8DgGgPAagmQ6hqH4Y4LYSgyD4CIN8qgyB50OsiYdkMQA"><i class="bi bi-caret-right-square-fill"></i> View app on shinylive.io.</a></figcaption>
+<figcaption><a href="https://shyr-test-center.netlify.app/py/docs/user-interfaces.html"><i class="bi bi-file-earmark-code-fill"></i> Build this app in our <em>User Interfaces</em> tutorial.</a><br><a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMASxlWICcyACAMyhpIgGcWo+HADoQ6DZi1QAbYmSnYMcAB6pGcHnwGSlIto2IwWPABY0I2AO40AJgHM4ZPmKas1Ea3EYB9abPkjdfUMTM2wWZwk1KEIyGgA3ODwWNw9GJLUAR0CDI1NzRRU1DXD6F3CIVABXMiTKmgCIAGIWABliKGsWaygyKH53FhJ6argjXtjCFjioKUr1EVjUPgBebQxu3oxFngAKAEoRACMaKSkvRghbFlWdmDMd7a3ZGa9j072kmCglB5olp96ZzeUj2BwgImaAEFrJ1UFB7CxYnJRlABjwbHBDlBGCI6lh4XAvMRUI5fsjlkIwAAldS9SqMVGsRaoMy2SlJNgnKRQQ5SODLAAqjDmYKsZGMLDx6I8WMYO2JlApYA8PAA1mRiZS9ogRCw9ZKaBgzFUyF4eFIMXLKRrAa8ueyWJSAEJc-gwYiVcgOu4QZbA86XYAABgAup9vn6uQHbMAAIxhqYzOaR07RpKqfmUgAkWt1+rxxuqXkIxjghFVh2ISi8tn0lVQO2tdDgDspADFiMROjxPHEuC38CxgJSWp6S62wAARMwQTyUhM9vkxODWZbDsCjiDjweU6cQWc4sAJswW2eC4VwMH6g1GipF6KxUivaoaiCNsBFBwTmk91icqQUIeYIQiw0KdF8ZiDKQFBehAACSADCADyAByADK1wsCAeZ6pSlQ9oeiDsFARrcGacS2O++FzjuH5wLYlTckBeA4Y6YAWDMfJkJSREcKRT48BR74cacX5gB8rGUoQ9JuIQ2AALTWMQpzYjxxH8RA5GUZSSkqYw8norY4LiSxEDXpS9iqUg6lcAJQkWXAVlggAvg0YoSni3LYB6pokLMMC8Ds-5SMsbYzD22oNNe7k3tMsyEpWPwmMQFiEAI-KIahaHrtRh4hpFZnXvqlICs8UiIn8qCeDwlKsdeAACKSeAUGYaHV+oeGwiJlV4zLVfsOqFUVRXbF4GxQPsGAmGgcDBiGUX6jFeJxXMrxVjsyWpelyyZeh64iVx84FcNuFgJCCQMgiiy1UNRWNZQqQtUUNW3denX8BdBK9X8A3tcNnSrKN437H9RU0F11hTcYM1zSwAB8LBBoNJ0o5IniTKskOLCwAD0XQAi8wKgyjbCUiAVWMIQGDwKiA0YLGACkrlgAtepLYaK0Jetm1pT2O3IXtUkyZQcmKcpTFHcjJ2UudngEiwRMs69+r3e4zXKK1L0o+9UCffYdqnL9yv-ZhQM9BNV6o3q4P49NVWwwjSPEydwKYVjPXAtTjlvpbVvXqTYBZiAwKIBgABMbDMw0IjsxgXk+cWymVAFux+V4VjWOKPBrgAbEkecsLGYf5YNrGx2ljDWEFjFnDwhBqIqQoilLw14hX1heKWHSeO+Ap-Hw425sbLCq4941eHosAtsP729LycBG37yQOPSZlNYwGCTubADijA2L8Sxjeb+zAbd5fYlXbA12a9dwI3F7HSd5+V53jmpDshDchoXhKtY8lsHyJQLAABW+FYhsAUtwGCZB5KHAcBYO+ZkZg0CMvJGgFAYA8HkoQSggEtQt1RiVMqCtXRxD4NdJWS9Y4MAYBdMkfIlRgX4FBGQjBEx7x5HyB00hohwHgOQJUGpUD4OdsNXa2UHJWXmsPFGBY7ymgZNYGgxBnxkFfLsURhCwB1x6IBROrCHQoVIIkTRKN1wQGMROHsOhaI8HdKqGiSQdJQGwBOWI8B5ymSXijE8Zh+RN2nt4-Up8Uaj08D4GQchXEzzgF1HRajPC+DIIvP2fkmCYULGQKaaUEneDSXKX2qM1BkFXmseJgFGwyJOmbXo+wvFBJYEoQRHt7T4FMfqbAgi-jsnaXqfJywjGznCF1fJ1xViUgsbOSkLA4BSB7Cwpg9SglkBSKeTMYAZAILapQv2ITFroI8oadu1dUx1wbr6AJj9hrPw7l3d+n8BA8B-jpf+gCQFgPBpA6CuDYHwMQfwC0qD0F8KwTg8gNErlaL7qgNGlNcEEhqjsq21DiTEDoUiBhMsYTMNGdMDh88RFVLEQLCRYBLJ5V6TeTJ5wOjKNUeoypDSipNlQD4dGXhXG0TQtIdBCtsA6jaUS1G65rFWPsY4ti3ROVOLAO4gcYZKXXkXGWCgq5nHSsVfqXxZ4AmUr2cNMJ3gkn+BiV1RYbLKYpKtnoHIe87BwCSSUcQrgbD2CSZojYpt+5H1qYU7WPR1wUzBdxI8bsehbD+LjLo4abSE3tEK7AeKMnyIjayoNHKQZCsqHFFY0ayDAETdiEMGBPQ0AyHMTNmieCwGkOoTCw4hXXmAHmrA6NcHAA2AWvFIYxmJikD26RTK2DpLiuUSUObNHSM0dIVgqw7VusiYyhp1b6B8mziu2tPAkjcjgXM5Y2bwpJCxO4DO4plhBgwEGWMSzvH5J0ZisAfY7U0ERUkfJ7oPBKn0BYNBasbGaP1ajGdJbUAbEJPHaoS6gl8nsO4ZYSiYjyj3vCx8vpKTGAdNgVEJYmBKkrGogwmHlixkvWHJIShsPGFw1JXBEqmkXoAKx+pOoBlGxTSkzujk0Fg8leN8f4wJwTQnhMidE-JECNIHzxFGGlKQ0luSoc0AMWJbAVUvWaGJzTWntOCYaPdKTCQMCycICIWe3rgaQtdqsTJBMgRckzdeGwShYxev+LGuzpwMBwLIAgygOxgRzSPVyOM+VWJObDq5ngEb4BGnRG+GzcqT6sXYxcCqSxgBOZcwAMnCNYJQxc9NRBiNJxQbBVMxBEPp4rhm4AJHIDsGzn4yBgnel4K1N56xgbNBad+1oWmnAdJzFMZwLi2EKXiTrPRCQljLBWKsNY6wNibB4wcyrlyrnXJubcMq9wHiOiIMAzk8DgGgPAagmQ6hqH4Y4LYSgyD4CIN8qgyB50OsiYdkMQA"><i class="bi bi-caret-right-square-fill"></i> View app on shinylive.io.</a></figcaption>
 </figure>
 </div>
 </div>
@@ -2924,12 +2924,12 @@ font-style: inherit;">!"</span></span>
 background-color: null;
 font-style: inherit;">=</span> App(app_ui, server)</span></code></pre></div>
 <p>Although there’s more to learn and more to type, the enforced discipline of separating UI and server logic can be a benefit for larger apps.</p>
-<p>That being said, we think most new Shiny users will be more successful starting their learning journey with Shiny Express, so we’ve overhauled our <a href="https://shypy-test-center.netlify.app/py/docs/overview.html">main tutorial</a> to encourage people to start there. The more advanced topics are written for both Express and Core, as are our <a href="https://shypy-test-center.netlify.app/py/components/">Component</a> and <a href="https://shypy-test-center.netlify.app/py/layouts/">Layout</a> galleries.</p>
+<p>That being said, we think most new Shiny users will be more successful starting their learning journey with Shiny Express, so we’ve overhauled our <a href="https://shyr-test-center.netlify.app/py/docs/overview.html">main tutorial</a> to encourage people to start there. The more advanced topics are written for both Express and Core, as are our <a href="https://shyr-test-center.netlify.app/py/components/">Component</a> and <a href="https://shyr-test-center.netlify.app/py/layouts/">Layout</a> galleries.</p>
 </section>
 <section id="learn-more" class="level2">
 <h2 data-anchor-id="learn-more">Learn more</h2>
-<p>You can get started with Shiny today by jumping into the <a href="https://shypy-test-center.netlify.app/py/docs/overview.html">tutorial</a>. Thanks to Shiny Express, it’s never been easier!</p>
-<p>Or if you’re already experienced with Shiny, you find out more about the <a href="https://shypy-test-center.netlify.app/py/docs/express-vs-core.html">differences between Express and Core</a>.</p>
+<p>You can get started with Shiny today by jumping into the <a href="https://shyr-test-center.netlify.app/py/docs/overview.html">tutorial</a>. Thanks to Shiny Express, it’s never been easier!</p>
+<p>Or if you’re already experienced with Shiny, you find out more about the <a href="https://shyr-test-center.netlify.app/py/docs/express-vs-core.html">differences between Express and Core</a>.</p>
 <p>Questions? Comments? We’d love to hear from you! Please <a href="https://discord.gg/yMGCamUMnS">join us on Discord</a>.</p>
 </section>
 <section id="questions" class="level2">
@@ -2976,7 +2976,7 @@ End Google Tag Manager (noscript) -->
 <p>Shiny for Python 0.6.1 is out! You can read the full <a href="https://github.com/posit-dev/py-shiny/blob/main/CHANGELOG.md">changelog</a> for a complete list of new features.</p>
 <section id="component-gallery" class="level2">
 <h2 data-anchor-id="component-gallery">Component gallery</h2>
-<p>As the number of Shiny components grows, it becomes harder to find the component you want. We’ve created a <a href="https://shypy-test-center.netlify.app/py/components/">Shiny Component gallery</a> which gives you an interactive example of each component, as well as additional documentation about when and how to use it.</p>
+<p>As the number of Shiny components grows, it becomes harder to find the component you want. We’ve created a <a href="https://shyr-test-center.netlify.app/py/components/">Shiny Component gallery</a> which gives you an interactive example of each component, as well as additional documentation about when and how to use it.</p>
 <p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/component-gallery.gif" class="img-fluid"></p>
 <p>Currently, this gallery contains mostly inputs and outputs. In the near future, we’ll add layouts, navigation, and other types of visual components.</p>
 </section>
@@ -2984,8 +2984,8 @@ End Google Tag Manager (noscript) -->
 <h2 data-anchor-id="templates">Templates</h2>
 <p>Previously, when you called <code>shiny create</code>, you would get a basic app without much functionality. This is helpful for hello-world examples, but doesn’t provide much guidance on how to build a more complicated Shiny application. We’re now including app templates which you can access through the new <code>shiny create</code> command line interface. This interface will ask you which template you want to build, and allow you to specify its location.</p>
 <p>We are going to release many more of these, but for the time being, we have covered three of our most common use cases. You can access them through the CLI menu, or by passing their name to the <code>--template</code> flag. We’ve included our current zero-dependency basic app, but have added a Dashboard and Multi-page template.</p>
-<p>The Dashboard template shows you how to build a nice-looking single-page dashboard. It includes some <a href="https://shypy-test-center.netlify.app/py/api/ExCard.html#see-also">cards</a> and <a href="https://shypy-test-center.netlify.app/py/api/ui.value_box.html#see-also">value boxes</a> which are populated using a <a href="https://shypy-test-center.netlify.app/py/docs/reactive-calculations.html">reactive calculation</a>. This is a good template to start with if you want to make use of some of the new components which were released in Shiny 0.6.0.</p>
-<p>The multi-page app gives you a starting point for a large, production application. This app uses <code>page_navbar</code> to display several tabs, but the content of those tabs is stored in individual modules. <a href="https://shypy-test-center.netlify.app/py/docs/workflow-modules.html">Shiny modules</a> are a great way to organize large applications because they allow you to break your application apart into simple building blocks which are easier to maintain. The application also uses <a href="https://blog.logrocket.com/understanding-type-annotation-python/">type annotations</a> which improve the development experience, and includes an external CSS file to customize the look and feel of the app.</p>
+<p>The Dashboard template shows you how to build a nice-looking single-page dashboard. It includes some <a href="https://shyr-test-center.netlify.app/py/api/ExCard.html#see-also">cards</a> and <a href="https://shyr-test-center.netlify.app/py/api/ui.value_box.html#see-also">value boxes</a> which are populated using a <a href="https://shyr-test-center.netlify.app/py/docs/reactive-calculations.html">reactive calculation</a>. This is a good template to start with if you want to make use of some of the new components which were released in Shiny 0.6.0.</p>
+<p>The multi-page app gives you a starting point for a large, production application. This app uses <code>page_navbar</code> to display several tabs, but the content of those tabs is stored in individual modules. <a href="https://shyr-test-center.netlify.app/py/docs/workflow-modules.html">Shiny modules</a> are a great way to organize large applications because they allow you to break your application apart into simple building blocks which are easier to maintain. The application also uses <a href="https://blog.logrocket.com/understanding-type-annotation-python/">type annotations</a> which improve the development experience, and includes an external CSS file to customize the look and feel of the app.</p>
 </section>
 <section id="debugging-shiny-apps" class="level2">
 <h2 data-anchor-id="debugging-shiny-apps">Debugging Shiny Apps</h2>
@@ -3169,7 +3169,7 @@ Quarto and PyShiny dashboards
 </div>
 <div class="callout-body-container callout-body">
 <p>Dashboards are coming to Quarto!</p>
-<p>The new <a href="https://quarto.org/docs/dashboards/">Quarto dashboard</a> format, as well as newer <a href="https://shypy-test-center.netlify.app/py/">PyShiny</a> components, are built on the same foundation as <code>bslib</code>. Thus, the concepts you’ll learn while building dashboards with <code>bslib</code> should also largely apply there as well.</p>
+<p>The new <a href="https://quarto.org/docs/dashboards/">Quarto dashboard</a> format, as well as newer <a href="https://shyr-test-center.netlify.app/py/">PyShiny</a> components, are built on the same foundation as <code>bslib</code>. Thus, the concepts you’ll learn while building dashboards with <code>bslib</code> should also largely apply there as well.</p>
 </div>
 </div>
 <section id="page-styling" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="page-styling">Page-level styling</h3>
@@ -4453,7 +4453,7 @@ font-style: inherit;">3</span>,</span>
 </section>
 <section id="many-other-components" class="level2">
 <h2 data-anchor-id="many-other-components">Many other components</h2>
-<p>There are too many new components in <a href="https://github.com/posit-dev/py-shiny/blob/v0.6.0/CHANGELOG.md#060---2023-08-08">this release</a> to blog about, so please check out <a href="https://shypy-test-center.netlify.app/py/api/">the documentation</a> to see how they work together.</p>
+<p>There are too many new components in <a href="https://github.com/posit-dev/py-shiny/blob/v0.6.0/CHANGELOG.md#060---2023-08-08">this release</a> to blog about, so please check out <a href="https://shyr-test-center.netlify.app/py/api/">the documentation</a> to see how they work together.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4905,7 +4905,7 @@ End Google Tag Manager (noscript) -->
 <div id="after-caption" class="sshot-caption">
 (new theme)
 </div>
-<p>We’ve found that tick marks are usually not that helpful on slider inputs, since you get instant feedback above the handle as you drag. If you want them back, you can pass <code>ticks=True</code> to <a href="https://shypy-test-center.netlify.app/py/api/ui.input_slider.html"><code>input_slider()</code></a>.</p>
+<p>We’ve found that tick marks are usually not that helpful on slider inputs, since you get instant feedback above the handle as you drag. If you want them back, you can pass <code>ticks=True</code> to <a href="https://shyr-test-center.netlify.app/py/api/ui.input_slider.html"><code>input_slider()</code></a>.</p>
 <p>These theme changes will be available to Shiny for R as well, via a new <a href="https://rstudio.github.io/bslib/">bslib</a> CRAN release that should drop this week.</p>
 </section>
 <section id="data-table-filtering" class="level2">
@@ -4933,7 +4933,7 @@ background-color: null;
 font-style: inherit;">True</span>)</span></code></pre></div>
 <ul>
 <li><a href="https://shinylive.io/py/examples/#data-frame-grid">Try it out with Shinylive</a></li>
-<li><a href="https://shypy-test-center.netlify.app/py/api/render.DataGrid.html">API documentation</a></li>
+<li><a href="https://shyr-test-center.netlify.app/py/api/render.DataGrid.html">API documentation</a></li>
 </ul>
 </section>
 <section id="tooltips" class="level2">
@@ -4969,7 +4969,7 @@ font-style: inherit;">"A value to be doubled"</span></span>
 <p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/tooltip.png" class="img-fluid" alt="A mouse moving over a slider input, causing a tooltip to appear" width="540"></p>
 <ul>
 <li><a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbJjmVYnTJMAgujxM6lACZw6EgK4cAOhD4ChrTtwxwAHqjl9KZKABsmUFkz2rVaVAH0lTALxMlWKAHM4jmmZK0gAUqkzhNhieZMTEZmQcqKEQEakeHBhcqApkjixmHLJ0oZDK+ExlAHJlEgAMEgCMtfVMAEy1AJR4YWnhZSJMAG7mCnBMMUwARmPSxAqTZnDSNT3hXavpGHNk2bkUermDcpNQCTAlZAdl6xAddhCqsjSsckfFWTkS27sSLHAsLA4pA6iA2AAFvjlwVIIEUMPsyBsnuMDsEQRtUlIyAo6CkaGUIAAqVq8awgD5kDAQNFMQltAC+ZXu9nQblE6GCDmcHF+rzkdwgYHpAF0gA">Try it out with Shinylive</a></li>
-<li><a href="https://shypy-test-center.netlify.app/py/api/ExTooltip.html">API documentation</a></li>
+<li><a href="https://shyr-test-center.netlify.app/py/api/ExTooltip.html">API documentation</a></li>
 </ul>
 <p>Tooltips can be combined with help icons, which are available in the <a href="https://pypi.org/project/faicons/"><code>faicons</code></a> package. You can add tooltip help icons in input labels by passing a list to the <code>label</code> argument of <code>input_*()</code> functions:</p>
 <div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
@@ -5081,7 +5081,7 @@ font-style: inherit;">return</span> render.DataGrid(my_df)</span></code></pre></
 <p>To get the more traditional table-like styling, return a <code>render.DataTable()</code> instead.</p>
 <ul>
 <li><a href="https://shinylive.io/py/examples/#data-frame-grid">Try it out with Shinylive</a></li>
-<li><a href="https://shypy-test-center.netlify.app/py/api/render.data_frame.html">API documentation</a></li>
+<li><a href="https://shyr-test-center.netlify.app/py/api/render.data_frame.html">API documentation</a></li>
 </ul>
 </section>
 <section id="better-looking-sidebars" class="level2">
@@ -5241,7 +5241,7 @@ End Google Tag Manager (noscript) -->
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="A basic AI chat app"><source src="basic.mp4"></video></div>
 </div>
 </div>
-<p>It makes use of a <a href="https://shypy-test-center.netlify.app/py/docs/workflow-modules.html">Shiny module</a> in a Python package called <a href="https://github.com/wch/chatstream">chatstream</a>. All you need is one call to <code>chatstream.chat_ui()</code> and one call to <code>chatstream.chat_server()</code>, and to give them the same ID. Here’s the code for <a href="https://github.com/wch/chatstream/tree/main/examples/basic">that app</a>:</p>
+<p>It makes use of a <a href="https://shyr-test-center.netlify.app/py/docs/workflow-modules.html">Shiny module</a> in a Python package called <a href="https://github.com/wch/chatstream">chatstream</a>. All you need is one call to <code>chatstream.chat_ui()</code> and one call to <code>chatstream.chat_server()</code>, and to give them the same ID. Here’s the code for <a href="https://github.com/wch/chatstream/tree/main/examples/basic">that app</a>:</p>
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> shiny <span class="im" style="color: #00769E;
@@ -5354,8 +5354,8 @@ End Google Tag Manager (noscript) -->
 </section>
 <section id="what-does-shiny-add" class="level2">
 <h2 data-anchor-id="what-does-shiny-add">What does Shiny add?</h2>
-<p>We think that Shiny is a great front-end for Hugging Face models because it is an efficient and developer-friendly GUI framework. Our reactive execution model allows Shiny to infer the relationships between inputs and outputs and minimally re-render application components. This means that you can quickly build intuitive and beautiful model demos without writing callback functions or caching data, and is particularly useful when calling expensive inference endpoints. Shiny is easy to learn, and there are great educational resources in both <a href="../../../r/getstarted/">R</a> and <a href="https://shypy-test-center.netlify.app/py/docs/overview.html">Python</a>.</p>
-<p>Shiny is great for simple demos, but it also has all of the tools you need to build complex, mission-critical applications. You can design <a href="https://shypy-test-center.netlify.app/py/docs/ui-page-layouts.html">delightful layouts</a> and user interfaces, control <a href="https://shypy-test-center.netlify.app/py/docs/workflow-server.html">application routing</a>, and encapsulate and share components using <a href="https://shypy-test-center.netlify.app/py/docs/workflow-modules.html">modules</a>.</p>
+<p>We think that Shiny is a great front-end for Hugging Face models because it is an efficient and developer-friendly GUI framework. Our reactive execution model allows Shiny to infer the relationships between inputs and outputs and minimally re-render application components. This means that you can quickly build intuitive and beautiful model demos without writing callback functions or caching data, and is particularly useful when calling expensive inference endpoints. Shiny is easy to learn, and there are great educational resources in both <a href="../../../r/getstarted/">R</a> and <a href="https://shyr-test-center.netlify.app/py/docs/overview.html">Python</a>.</p>
+<p>Shiny is great for simple demos, but it also has all of the tools you need to build complex, mission-critical applications. You can design <a href="https://shyr-test-center.netlify.app/py/docs/ui-page-layouts.html">delightful layouts</a> and user interfaces, control <a href="https://shyr-test-center.netlify.app/py/docs/workflow-server.html">application routing</a>, and encapsulate and share components using <a href="https://shyr-test-center.netlify.app/py/docs/workflow-modules.html">modules</a>.</p>
 </section>
 <section id="which-space-should-i-use" class="level2">
 <h2 data-anchor-id="which-space-should-i-use">Which Space should I use?</h2>
@@ -5397,7 +5397,7 @@ End Google Tag Manager (noscript) -->
     
 
 
-<p>We are thrilled to announce that <a href="https://shypy-test-center.netlify.app/py/">Shiny for Python</a> has moved from the alpha stage to general availability. With Shiny for Python, data scientists can build interactive web applications with the expressiveness and power of reactive programming, and combine that with the extensive array of data analysis tools and visualization libraries in Python.</p>
+<p>We are thrilled to announce that <a href="https://shyr-test-center.netlify.app/py/">Shiny for Python</a> has moved from the alpha stage to general availability. With Shiny for Python, data scientists can build interactive web applications with the expressiveness and power of reactive programming, and combine that with the extensive array of data analysis tools and visualization libraries in Python.</p>
 <p>We believe that Shiny for Python strikes the perfect balance between simplicity and power. Unlike Streamlit, Shiny is not constrained by the top-to-bottom computing model, and there’s no limit to how sophisticated your applications can be. Compared to Dash, Shiny is more developer-friendly and boasts a more efficient reactive programming model.</p>
 <section id="what-does-it-mean-to-be-out-of-alpha" class="level2">
 <h2 data-anchor-id="what-does-it-mean-to-be-out-of-alpha">What does it mean to be out of Alpha?</h2>
@@ -5406,15 +5406,15 @@ End Google Tag Manager (noscript) -->
 <ul>
 <li>We’ve added a <a href="../../../py/docs/r-quickstart.html">quickstart guide</a> for R users.</li>
 <li>You can now interact with plots created using matplotlib, seaborn, and plotnine. (<a href="https://shinylive.io/py/examples/#selecting-data">Example</a>)</li>
-<li>We’ve improved the <a href="https://shypy-test-center.netlify.app/py/api/">API documentation</a>.</li>
+<li>We’ve improved the <a href="https://shyr-test-center.netlify.app/py/api/">API documentation</a>.</li>
 <li>We’ve created a new package, <a href="https://github.com/posit-dev/py-shinyswatch">shinyswatch</a>, which lets you modify an app’s visual style with a single line of code. (<a href="https://shinylive.io/py/examples/#shinyswatch">Example</a>)</li>
 <li>We released <a href="https://github.com/posit-dev/py-shinywidgets">shinywidgets</a>, which makes it possible to use Jupyter widgets in a Shiny app, including <a href="https://shinylive.io/py/examples/#plotly">Plotly</a> and maps with <a href="https://shinylive.io/py/examples/#map">Leaflet</a>.</li>
 </ul>
 </section>
 <section id="get-started" class="level2">
 <h2 data-anchor-id="get-started">Get started</h2>
-<p>If you want to learn more Shiny for Python check out <a href="https://shypy-test-center.netlify.app/py/">the web site</a> and <a href="https://shinylive.io/py/examples/">live examples</a>.</p>
-<p>If you’re a Shiny for R user who’s curious about learning Shiny for Python, read our <a href="https://shypy-test-center.netlify.app/py/docs/r-quickstart.html">Quickstart guide</a>!</p>
+<p>If you want to learn more Shiny for Python check out <a href="https://shyr-test-center.netlify.app/py/">the web site</a> and <a href="https://shinylive.io/py/examples/">live examples</a>.</p>
+<p>If you’re a Shiny for R user who’s curious about learning Shiny for Python, read our <a href="https://shyr-test-center.netlify.app/py/docs/r-quickstart.html">Quickstart guide</a>!</p>
 
 
 </section>

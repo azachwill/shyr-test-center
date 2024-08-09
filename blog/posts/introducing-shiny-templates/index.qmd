@@ -17,17 +17,17 @@ filters:
   - quarto
   - line-highlight
 ---
-Last month we introduced the Shiny for Python [Components](https://shypy-test-center.netlify.app/py/components/) and [Layouts](https://shypy-test-center.netlify.app/py/layouts/) galleries, which are a simple, visual overview of what Shiny can do mixed with cheatsheet-like information. They are for new and seasoned users alike. 
+Last month we introduced the Shiny for Python [Components](https://shyr-test-center.netlify.app/py/components/) and [Layouts](https://shyr-test-center.netlify.app/py/layouts/) galleries, which are a simple, visual overview of what Shiny can do mixed with cheatsheet-like information. They are for new and seasoned users alike. 
 
-We’re excited to announce a third section which brings those two things together into opinionated boilerplate code: [Shiny Templates](https://shypy-test-center.netlify.app/py/templates/). 
+We’re excited to announce a third section which brings those two things together into opinionated boilerplate code: [Shiny Templates](https://shyr-test-center.netlify.app/py/templates/). 
 
-These will allow you to hit the ground running, whether you need a [quick simple app](https://shypy-test-center.netlify.app/py/templates/basic-app-plot/) or a [quick complicated one](https://shypy-test-center.netlify.app/py/templates/stock-app/) 🙂.  
+These will allow you to hit the ground running, whether you need a [quick simple app](https://shyr-test-center.netlify.app/py/templates/basic-app-plot/) or a [quick complicated one](https://shyr-test-center.netlify.app/py/templates/stock-app/) 🙂.  
 
 When making Shiny apps, we’ve noticed we sometimes don’t know what the app's UX will eventually become. As an app’s functionality grows and grows, the usability of the app can decrease. Our goal here is to set Shiny developers up for success (in the short AND long term.) We hope you feel the same! (If you have any feedback, never hesitate [to let us know](https://github.com/posit-dev/py-shiny-templates/issues).)
 
 Simply put: Shiny Templates will dramatically improve your start time, and save you from UX headaches down the road. This is just a start… We expect this gallery to grow as time goes on.
 
-<a href="https://shypy-test-center.netlify.app/py/templates/" class="btn btn-primary px-5 my-4">See Shiny Templates</a>
+<a href="https://shyr-test-center.netlify.app/py/templates/" class="btn btn-primary px-5 my-4">See Shiny Templates</a>
 
 
 ## Demos

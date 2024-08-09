@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://shypy-test-center.netlify.app/py/" target="_blank"> 
+    <a class="nav-link" href="https://shyr-test-center.netlify.app/py/" target="_blank"> 
 <span class="menu-text">Shiny for Python</span></a>
   </li>  
   <li class="nav-item">
@@ -301,7 +301,7 @@ End Google Tag Manager (noscript) -->
 <p>In April 2023, we <a href="https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/">removed the alpha tag from Shiny for Python</a>, signaling our team’s belief that its level of quality and runtime stability made it appropriate for production use. And that belief has borne out: the feedback we’ve received from real-world users of the framework has been overwhelmingly positive.</p>
 <p>At that time, we chose not to use a 1.0 moniker, preferring to stick to 0.x until after we had shipped essential features like <a href="../shiny-python-0.4.0/">interactive data tables</a> (June 2023) and <a href="../shiny-python-0.6.0/">dashboard UI components</a> (Nov 2023). And soon after that, we came up with <a href="https://shyr-test-center.netlify.app/blog/posts/shiny-express/">Shiny Express</a>, a completely new syntax for writing Shiny apps, which meant another period of heavy feedback and potential revisions of the API.</p>
 <p>Sitting here in July 2024, it feels like a great time to acknowledge Shiny for Python’s maturity by bestowing it with the big 1-point-0. The API feels appropriately stable now, and most of the new features of the last few releases have been about building on top of Shiny’s existing API design vocabulary, rather than extending or changing it (although one notable brand-new primitive is Modules for Shiny Express, which you can read about below).</p>
-<p>So please join us in raising a proverbial glass to Shiny for Python 1.0! And if you’ve been waiting on the sidelines, now is a great time to <a href="https://shypy-test-center.netlify.app/py/docs/overview.html">get in the game</a>!</p>
+<p>So please join us in raising a proverbial glass to Shiny for Python 1.0! And if you’ve been waiting on the sidelines, now is a great time to <a href="https://shyr-test-center.netlify.app/py/docs/overview.html">get in the game</a>!</p>
 <p>And now, let’s take a look at all the cool features that are part of this release!</p>
 <div class="pt-2 pb-1">
 <hr>
@@ -309,7 +309,7 @@ End Google Tag Manager (noscript) -->
 </section>
 <section id="new-chat-component" class="level2">
 <h2 data-anchor-id="new-chat-component">New <code>Chat()</code> component</h2>
-<p>The new <code>Chat()</code> component makes it easy to implement generative AI chatbots, powered by any LLM of your choosing. For a comprehensive overview, see the new <a href="https://shypy-test-center.netlify.app/py/components/display-messages/chat/">component page</a>.</p>
+<p>The new <code>Chat()</code> component makes it easy to implement generative AI chatbots, powered by any LLM of your choosing. For a comprehensive overview, see the new <a href="https://shyr-test-center.netlify.app/py/components/display-messages/chat/">component page</a>.</p>
 <p>The main steps of any generative AI chatbot are:</p>
 <ol type="1">
 <li>Create a <code>Chat</code> instance.</li>
@@ -339,13 +339,13 @@ End Google Tag Manager (noscript) -->
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> chat.append_message_stream(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>The generative AI <a href="https://shypy-test-center.netlify.app/py/components/display-messages/chat/#ai-quick-start">quickstart</a> has a variety of <code>ai_model</code> implementations, but we do recommend starting with <a href="https://www.langchain.com/">LangChain</a>, as it helps standardize response generation across different LLMs. Use the terminal command below to get the LangChain (with OpenAI) template:</p>
+<p>The generative AI <a href="https://shyr-test-center.netlify.app/py/components/display-messages/chat/#ai-quick-start">quickstart</a> has a variety of <code>ai_model</code> implementations, but we do recommend starting with <a href="https://www.langchain.com/">LangChain</a>, as it helps standardize response generation across different LLMs. Use the terminal command below to get the LangChain (with OpenAI) template:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shiny</span> create <span class="at">-g</span> https://github.com/posit-dev/py-shiny/tree/main/examples/chat/hello-providers/langchain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then, follow the instructions at the top of <code>app.py</code> to set up your OpenAI API key before running the app. Once you have your credentials set up and <a href="https://shypy-test-center.netlify.app/py/docs/install-create-run.html">run the app</a> and start chatting!</p>
+<p>Then, follow the instructions at the top of <code>app.py</code> to set up your OpenAI API key before running the app. Once you have your credentials set up and <a href="https://shyr-test-center.netlify.app/py/docs/install-create-run.html">run the app</a> and start chatting!</p>
 <div class="py-3">
 <p><video src="chat2.mp4" class="border rounded img-fluid" controls=""><a href="chat2.mp4">Video</a></video></p>
 </div>
-<p>The template above is a great starting point for building your own generative AI chatbot. To learn how to do more advanced things with <code>Chat</code> (e.g., system messages, RAG, etc), check out the <a href="https://shypy-test-center.netlify.app/py/components/display-messages/chat/">component page</a>.</p>
+<p>The template above is a great starting point for building your own generative AI chatbot. To learn how to do more advanced things with <code>Chat</code> (e.g., system messages, RAG, etc), check out the <a href="https://shyr-test-center.netlify.app/py/components/display-messages/chat/">component page</a>.</p>
 <p>For now, <code>ui.Chat()</code> is limited to textual input and output. We hope to expand this in the future to include more complex inputs and outputs, such as images, videos, and audio (for now, you can checkout <a href="#multimedia-components">shinymedia</a> for video in / audio out). We also hope to get <a href="https://discord.com/invite/yMGCamUMnS">your feedback</a> on what you’d like to see in future versions of <code>Chat</code>!</p>
 <div class="pt-2 pb-1">
 <hr>
@@ -354,18 +354,18 @@ End Google Tag Manager (noscript) -->
 <section id="end-to-end-testing" class="level2">
 <h2 data-anchor-id="end-to-end-testing">End-to-end testing</h2>
 <p>After more than a year of development and internal testing, we’re now exporting an end-to-end testing framework for Shiny apps. End-to-end tests are a great way to maintain code quality by ensuring that apps behave as expected in response to (simulated) user interactions in a real browser. Our approach builds on the fabulous <a href="https://playwright.dev/">Playwright</a> framework, which provides a fast, powerful, and resilient foundation for browser-based testing.</p>
-<p>The video below demonstrates the experience of writing an end-to-end test for a Shiny app. Note that the new <code>shiny.playwright</code> module is where you can find dozens of “controllers” that make it easy to mimic user interactions with Shiny <a href="https://shypy-test-center.netlify.app/py/components/">components</a> and assert their expected state.</p>
+<p>The video below demonstrates the experience of writing an end-to-end test for a Shiny app. Note that the new <code>shiny.playwright</code> module is where you can find dozens of “controllers” that make it easy to mimic user interactions with Shiny <a href="https://shyr-test-center.netlify.app/py/components/">components</a> and assert their expected state.</p>
 <div class="py-3">
 <p><video src="leverage_controllers.mp4" class="border rounded img-fluid" controls=""><a href="leverage_controllers.mp4">Video</a></video></p>
 </div>
-<p>For a comprehensive overview of end-to-end testing, see the new article on <a href="https://shypy-test-center.netlify.app/py/docs/end-to-end-testing.html">End-to-end testing in Shiny</a>.</p>
+<p>For a comprehensive overview of end-to-end testing, see the new article on <a href="https://shyr-test-center.netlify.app/py/docs/end-to-end-testing.html">End-to-end testing in Shiny</a>.</p>
 <div class="pt-2 pb-1">
 <hr>
 </div>
 </section>
 <section id="data-frame-improvements" class="level2">
 <h2 data-anchor-id="data-frame-improvements">Data frame improvements</h2>
-<p>Shiny provides two components for rendering data frames: <a href="https://shypy-test-center.netlify.app/py/components/outputs/data-grid/"><code>DataGrid()</code></a> and <a href="https://shypy-test-center.netlify.app/py/components/outputs/data-table/"><code>DataTable()</code></a>. The former is a more interactive and feature-rich table, while the latter is a simpler, more lightweight table. All of the improvements described below are available to both components.</p>
+<p>Shiny provides two components for rendering data frames: <a href="https://shyr-test-center.netlify.app/py/components/outputs/data-grid/"><code>DataGrid()</code></a> and <a href="https://shyr-test-center.netlify.app/py/components/outputs/data-table/"><code>DataTable()</code></a>. The former is a more interactive and feature-rich table, while the latter is a simpler, more lightweight table. All of the improvements described below are available to both components.</p>
 <section id="styling" class="level3">
 <h3 data-anchor-id="styling">Styling</h3>
 <p><code>DataGrid()</code> and <code>DataTable()</code> gain a <code>styles</code> argument for styling the displayed result. <code>styles</code> can take a list of dictionaries where each dictionary represents a style to be applied to the table (and thus should have at least a <code>style</code> (or <code>class</code>) key to apply CSS styles or classes to the relevant cells). To scope the styling to particular cells, use the <code>rows</code> and <code>cols</code> keys (with 0-based indexing). Note that if both <code>rows</code> and <code>cols</code> are specified, the style will be applied only to the intersection of the specified rows and columns.</p>
@@ -449,7 +449,7 @@ End Google Tag Manager (noscript) -->
 </section>
 <section id="learn-more" class="level3">
 <h3 data-anchor-id="learn-more">Learn more</h3>
-<p>For a comprehensive overview of new and old data frame features, see the updated articles on <a href="https://shypy-test-center.netlify.app/py/components/outputs/data-grid/">DataGrid</a> and <a href="https://shypy-test-center.netlify.app/py/components/outputs/data-table/">DataTable</a>.</p>
+<p>For a comprehensive overview of new and old data frame features, see the updated articles on <a href="https://shyr-test-center.netlify.app/py/components/outputs/data-grid/">DataGrid</a> and <a href="https://shyr-test-center.netlify.app/py/components/outputs/data-table/">DataTable</a>.</p>
 <div class="pt-2 pb-1">
 <hr>
 </div>
@@ -476,7 +476,7 @@ End Google Tag Manager (noscript) -->
 <section id="modules-for-express" class="level2">
 <h2 data-anchor-id="modules-for-express">Modules for Express</h2>
 <p>When it comes to building more complicated Shiny applications, some of the most useful tools at your disposal are Shiny modules. You can use Shiny modules to build components that abstract away complexity and can be reused in your applications.</p>
-<p>Shiny Express now has support for using Shiny modules, and you can even create Shiny modules using Express syntax. To learn more, see our documentation on <a href="https://shypy-test-center.netlify.app/py/docs/modules.html" target="_blank">Shiny modules</a>.</p>
+<p>Shiny Express now has support for using Shiny modules, and you can even create Shiny modules using Express syntax. To learn more, see our documentation on <a href="https://shyr-test-center.netlify.app/py/docs/modules.html" target="_blank">Shiny modules</a>.</p>
 <div class="pt-2 pb-1">
 <hr>
 </div>

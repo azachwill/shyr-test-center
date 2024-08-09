@@ -69,7 +69,7 @@ We've tweaked the default Shiny CSS theme to make your apps look cleaner and mor
 
 <div id="after-caption" class="sshot-caption">(new theme)</div>
 
-We've found that tick marks are usually not that helpful on slider inputs, since you get instant feedback above the handle as you drag. If you want them back, you can pass `ticks=True` to [`input_slider()`](https://shypy-test-center.netlify.app/py/api/ui.input_slider.html).
+We've found that tick marks are usually not that helpful on slider inputs, since you get instant feedback above the handle as you drag. If you want them back, you can pass `ticks=True` to [`input_slider()`](https://shyr-test-center.netlify.app/py/api/ui.input_slider.html).
 
 These theme changes will be available to Shiny for R as well, via a new [bslib](https://rstudio.github.io/bslib/) CRAN release that should drop this week.
 
@@ -91,7 +91,7 @@ Currently, the filter feature must be enabled by passing `filters=True` when cre
 ```
 
 - [Try it out with Shinylive](https://shinylive.io/py/examples/#data-frame-grid)
-- [API documentation](https://shypy-test-center.netlify.app/py/api/render.DataGrid.html)
+- [API documentation](https://shyr-test-center.netlify.app/py/api/render.DataGrid.html)
 
 ## Tooltips
 
@@ -110,7 +110,7 @@ x.ui.tooltip(
 ![](tooltip.png){fig-alt="A mouse moving over a slider input, causing a tooltip to appear" width="540px"}
 
 - [Try it out with Shinylive](https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbJjmVYnTJMAgujxM6lACZw6EgK4cAOhD4ChrTtwxwAHqjl9KZKABsmUFkz2rVaVAH0lTALxMlWKAHM4jmmZK0gAUqkzhNhieZMTEZmQcqKEQEakeHBhcqApkjixmHLJ0oZDK+ExlAHJlEgAMEgCMtfVMAEy1AJR4YWnhZSJMAG7mCnBMMUwARmPSxAqTZnDSNT3hXavpGHNk2bkUermDcpNQCTAlZAdl6xAddhCqsjSsckfFWTkS27sSLHAsLA4pA6iA2AAFvjlwVIIEUMPsyBsnuMDsEQRtUlIyAo6CkaGUIAAqVq8awgD5kDAQNFMQltAC+ZXu9nQblE6GCDmcHF+rzkdwgYHpAF0gA)
-- [API documentation](https://shypy-test-center.netlify.app/py/api/ExTooltip.html)
+- [API documentation](https://shyr-test-center.netlify.app/py/api/ExTooltip.html)
 
 Tooltips can be combined with help icons, which are available in the [`faicons`](https://pypi.org/project/faicons/) package. You can add tooltip help icons in input labels by passing a list to the `label` argument of `input_*()` functions:
 
