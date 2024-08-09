@@ -79,7 +79,7 @@ In addition to brushing, users can also interact with plots via hovering over th
 
 1.   Change the `brush` argument to `hover` in the `plotOutput()`.
 
-2.  Read the article on [Selecting rows of data](https://shiny.posit.co/articles/selecting-rows-of-data.html) to determine what change needs to be made in the `renderDataTable()` function to list the data points that the user hovers on.
+2.  Read the article on [Selecting rows of data](https://shyr-test-center.netlify.app/articles/selecting-rows-of-data.html) to determine what change needs to be made in the `renderDataTable()` function to list the data points that the user hovers on.
 
 3.   Implement this change.
 

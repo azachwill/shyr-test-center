@@ -24,7 +24,7 @@ There are three headlining features in this release of Shiny. It is now possible
 
 * For `conditionalPanel`s, Shiny now gives more informative messages if there are errors evaluating or parsing the JavaScript conditional expression. ([#1727](https://github.com/rstudio/shiny/pull/1727))
 
-* Addressed [#1586](https://github.com/rstudio/shiny/issues/1586): The `conditionalPanel` function now accepts an `ns` argument. The `ns` argument can be used in a [module](https://shiny.posit.co/articles/modules.html) UI function to scope the `condition` expression to the module's own input and output IDs. ([#1735](https://github.com/rstudio/shiny/pull/1735))
+* Addressed [#1586](https://github.com/rstudio/shiny/issues/1586): The `conditionalPanel` function now accepts an `ns` argument. The `ns` argument can be used in a [module](https://shyr-test-center.netlify.app/articles/modules.html) UI function to scope the `condition` expression to the module's own input and output IDs. ([#1735](https://github.com/rstudio/shiny/pull/1735))
 
 * With `options(shiny.testmode=TRUE)`, the Shiny process will send a message to the client in response to a changed input, even if no outputs have changed. This helps to streamline testing using the shinytest package. ([#1747](https://github.com/rstudio/shiny/pull/1747))
 

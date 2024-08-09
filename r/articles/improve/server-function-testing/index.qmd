@@ -129,7 +129,7 @@ Notice that, even though the `numericInput()` sets a starting value for `input$x
 
 At this point you may be wondering how to use `testServer()` in a real application. In most cases, an `app.R` simply returns `shinyApp()`. How do we pass that object to `testServer()`? Where should the tests go?
 
-The `shinyAppTemplate()` takes care of the details about how the files are laid out. (For more information, see [this section](https://shiny.posit.co/articles/testing-overview.html#creating-an-example) from the Testing Overview article.) In most cases, you can `shiny::runTests()` function to run all tests for an application.
+The `shinyAppTemplate()` takes care of the details about how the files are laid out. (For more information, see [this section](https://shyr-test-center.netlify.app/articles/testing-overview.html#creating-an-example) from the Testing Overview article.) In most cases, you can `shiny::runTests()` function to run all tests for an application.
 
 To create an example application in a directory called `myapp`:
 

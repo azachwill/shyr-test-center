@@ -162,7 +162,7 @@ If you find it helpful, please rate the extension on [the marketplace][Shiny ext
   [Shiny extension]: https://marketplace.visualstudio.com/items?itemName=Posit.shiny
   [1]: shiny-marketplace-header.png {fig-alt="The shiny extension page on vscode marketplace" fig-align="center" width="100%"}
   [Open VSX Registry]: https://open-vsx.org/extension/posit/shiny
-  [Shiny's developer mode]: https://shiny.posit.co/r/reference/shiny/latest/devmode.html
+  [Shiny's developer mode]: https://shyr-test-center.netlify.app/r/reference/shiny/latest/devmode.html
   [shinylive.io/py]: https://shinylive.io/py
   [shinylive.io/r]: shinylive.io/r
   [R]: https://shinylive.io/r/editor

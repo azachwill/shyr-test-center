@@ -130,12 +130,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../../r/secondary-menu.css">
 <meta property="og:title" content="Server function testing – Shiny">
 <meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta property="og:site_name" content="Shiny">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="Shiny">
 <meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -1273,7 +1273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="test-file-layout" class="level2">
 <h2 data-anchor-id="test-file-layout">Test file layout</h2>
 <p>At this point you may be wondering how to use <code>testServer()</code> in a real application. In most cases, an <code>app.R</code> simply returns <code>shinyApp()</code>. How do we pass that object to <code>testServer()</code>? Where should the tests go?</p>
-<p>The <code>shinyAppTemplate()</code> takes care of the details about how the files are laid out. (For more information, see <a href="https://shiny.posit.co/articles/testing-overview.html#creating-an-example">this section</a> from the Testing Overview article.) In most cases, you can <code>shiny::runTests()</code> function to run all tests for an application.</p>
+<p>The <code>shinyAppTemplate()</code> takes care of the details about how the files are laid out. (For more information, see <a href="https://shyr-test-center.netlify.app/articles/testing-overview.html#creating-an-example">this section</a> from the Testing Overview article.) In most cases, you can <code>shiny::runTests()</code> function to run all tests for an application.</p>
 <p>To create an example application in a directory called <code>myapp</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyAppTemplate</span>(<span class="st">"myapp"</span>, <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It will create the following files:</p>

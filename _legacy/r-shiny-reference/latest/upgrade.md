@@ -10,7 +10,7 @@ title: Upgrade notes for Shiny 1.7.4
 
 ### Breaking changes
 
-- Closed [#3719](https://github.com/rstudio/shiny/issues/3719): Output container sizes, which are available via [`session$clientData` and `getCurrentOutputInfo()`](https://shiny.posit.co/articles/client-data.html), no longer round to the nearest pixel (i.e., they are now more exact, possibly fractional values). ([#3720](https://github.com/rstudio/shiny/issues/3720))
+- Closed [#3719](https://github.com/rstudio/shiny/issues/3719): Output container sizes, which are available via [`session$clientData` and `getCurrentOutputInfo()`](https://shyr-test-center.netlify.app/articles/client-data.html), no longer round to the nearest pixel (i.e., they are now more exact, possibly fractional values). ([#3720](https://github.com/rstudio/shiny/issues/3720))
 
 - Closed [#3704](https://github.com/rstudio/shiny/issues/3704), [#3735](https://github.com/rstudio/shiny/issues/3735), and [#3740](https://github.com/rstudio/shiny/issues/3740): [`renderPlot()`](./renderPlot.html) no longer generates an error (or segfault) when it executes before the output is visible. Instead, it'll now use the graphics device's default size for it's initial size. Relatedly, [`plotPNG()`](./plotPNG.html) now ignores `NULL` values for `width`/`height` (and uses the device's default `width`/`height` instead). ([#3739](https://github.com/rstudio/shiny/issues/3739))
 

@@ -88,12 +88,12 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../../secondary-menu.css">
 <meta property="og:title" content="Upgrade notes for Shiny 1.2.0 – Shiny">
 <meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta property="og:site_name" content="Shiny">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="Shiny">
 <meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -208,13 +208,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This release features plot caching, an important new tool for improving performance and scalability. Using <code>renderCachedPlot</code> in place of <code>renderPlot</code> can greatly improve responsiveness for apps that show the same plot many times (for example, a dashboard or report where all users view the same data). Shiny gives you a fair amount of control in where the cache is stored and how cached plots are invalidated, so be sure to read <a href="https://shiny.posit.co/articles/plot-caching.html">this article</a> to get the most out of this feature.</p>
+<p>This release features plot caching, an important new tool for improving performance and scalability. Using <code>renderCachedPlot</code> in place of <code>renderPlot</code> can greatly improve responsiveness for apps that show the same plot many times (for example, a dashboard or report where all users view the same data). Shiny gives you a fair amount of control in where the cache is stored and how cached plots are invalidated, so be sure to read <a href="https://shyr-test-center.netlify.app/articles/plot-caching.html">this article</a> to get the most out of this feature.</p>
 <section id="full-changelog" class="level2">
 <h2 data-anchor-id="full-changelog">Full changelog</h2>
 <section id="breaking-changes" class="level3">
 <h3 data-anchor-id="breaking-changes">Breaking changes</h3>
 <ul>
-<li>The URL paths for FontAwesome CSS/JS/font assets have changed, due to our upgrade from FontAwesome 4 to 5. This shouldn’t affect you unless you’re using <code>www/index.html</code> to provide your UI and have hardcoded the old FontAwesome paths into your HTML. If that’s you, consider switching to <a href="https://shiny.posit.co/articles/templates.html">HTML templates</a>, which give you the syntax of raw HTML while still taking advantage of Shiny’s automatic management of web dependencies.</li>
+<li>The URL paths for FontAwesome CSS/JS/font assets have changed, due to our upgrade from FontAwesome 4 to 5. This shouldn’t affect you unless you’re using <code>www/index.html</code> to provide your UI and have hardcoded the old FontAwesome paths into your HTML. If that’s you, consider switching to <a href="https://shyr-test-center.netlify.app/articles/templates.html">HTML templates</a>, which give you the syntax of raw HTML while still taking advantage of Shiny’s automatic management of web dependencies.</li>
 </ul>
 </section>
 <section id="new-features" class="level3">

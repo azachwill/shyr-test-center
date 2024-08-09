@@ -129,12 +129,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../../r/secondary-menu.css">
 <meta property="og:title" content="UI Inputs – Shiny">
 <meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta property="og:site_name" content="Shiny">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="Shiny">
 <meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -771,7 +771,7 @@ Show solution - see the code for the solution to the exercise above
 </ul>
 <p>You will encounter an error: <code>Error: size is not a numeric or integer vector</code>.</p>
 <p>In order to avoid such errors, which users of your app could very easily encounter, we need to hold back the output from being calculated if the input is missing.</p>
-<p>The <code>req()</code> function is the simplest and best way to do this, it ensures that values are available (“<a href="https://shiny.posit.co/reference/shiny/latest/req.html">truthy</a>”) before proceeding with a calculation or action. If any of the given values is not truthy, the operation is stopped by raising a “silent” exception (not logged by Shiny, nor displayed in the Shiny app’s UI).</p>
+<p>The <code>req()</code> function is the simplest and best way to do this, it ensures that values are available (“<a href="https://shyr-test-center.netlify.app/reference/shiny/latest/req.html">truthy</a>”) before proceeding with a calculation or action. If any of the given values is not truthy, the operation is stopped by raising a “silent” exception (not logged by Shiny, nor displayed in the Shiny app’s UI).</p>
 <section id="your-turn-1" class="level3">
 <h3 data-anchor-id="your-turn-1">Your turn</h3>
 <ol type="1">

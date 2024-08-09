@@ -14,7 +14,7 @@ powerful applications with minimal effort.</p></div>
 
   <div data-section="details">
     <h3 id="details">Details</h3>
-    <p>The Shiny tutorial at <a href="https://shiny.posit.co/tutorial/" class="external-link">https://shiny.posit.co/tutorial/</a> explains
+    <p>The Shiny tutorial at <a href="https://shyr-test-center.netlify.app/tutorial/" class="external-link">https://shyr-test-center.netlify.app/tutorial/</a> explains
 the framework in depth, walks you through building a simple application, and
 includes extensive annotated examples.</p>
   </div>

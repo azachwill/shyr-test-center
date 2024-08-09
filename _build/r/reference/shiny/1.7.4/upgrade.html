@@ -88,12 +88,12 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../../secondary-menu.css">
 <meta property="og:title" content="Upgrade notes for Shiny 1.7.4 – Shiny">
 <meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta property="og:site_name" content="Shiny">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="Shiny">
 <meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -213,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="breaking-changes" class="level3">
 <h3 data-anchor-id="breaking-changes">Breaking changes</h3>
 <ul>
-<li><p>Closed <a href="https://github.com/rstudio/shiny/issues/3719">#3719</a>: Output container sizes, which are available via <a href="https://shiny.posit.co/articles/client-data.html"><code>session$clientData</code> and <code>getCurrentOutputInfo()</code></a>, no longer round to the nearest pixel (i.e., they are now more exact, possibly fractional values). (<a href="https://github.com/rstudio/shiny/issues/3720">#3720</a>)</p></li>
+<li><p>Closed <a href="https://github.com/rstudio/shiny/issues/3719">#3719</a>: Output container sizes, which are available via <a href="https://shyr-test-center.netlify.app/articles/client-data.html"><code>session$clientData</code> and <code>getCurrentOutputInfo()</code></a>, no longer round to the nearest pixel (i.e., they are now more exact, possibly fractional values). (<a href="https://github.com/rstudio/shiny/issues/3720">#3720</a>)</p></li>
 <li><p>Closed <a href="https://github.com/rstudio/shiny/issues/3704">#3704</a>, <a href="https://github.com/rstudio/shiny/issues/3735">#3735</a>, and <a href="https://github.com/rstudio/shiny/issues/3740">#3740</a>: <a href="./renderPlot.html"><code>renderPlot()</code></a> no longer generates an error (or segfault) when it executes before the output is visible. Instead, it’ll now use the graphics device’s default size for it’s initial size. Relatedly, <a href="./plotPNG.html"><code>plotPNG()</code></a> now ignores <code>NULL</code> values for <code>width</code>/<code>height</code> (and uses the device’s default <code>width</code>/<code>height</code> instead). (<a href="https://github.com/rstudio/shiny/issues/3739">#3739</a>)</p></li>
 </ul>
 </section>

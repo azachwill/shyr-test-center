@@ -6,20 +6,20 @@
       version="2.0">
 <channel>
 <title>Shiny</title>
-<link>https://shiny.posit.co/blog/</link>
-<atom:link href="https://shiny.posit.co/blog/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://shyr-test-center.netlify.app/blog/</link>
+<atom:link href="https://shyr-test-center.netlify.app/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>News, tips, and commentary about all things Shiny</description>
 <image>
-<url>https://shiny.posit.co/images/shiny-thumb.png</url>
+<url>https://shyr-test-center.netlify.app/images/shiny-thumb.png</url>
 <title>Shiny</title>
-<link>https://shiny.posit.co/blog/</link>
+<link>https://shyr-test-center.netlify.app/blog/</link>
 </image>
 <generator>quarto-1.5.55</generator>
 <lastBuildDate>Mon, 22 Jul 2024 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Announcing Shiny for Python 1.0</title>
   <dc:creator>Shiny Team</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-python-1.0/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -58,8 +58,8 @@ End Google Tag Manager (noscript) -->
 <section id="what-does-it-mean-to-hit-v1.0" class="level2">
 <h2 data-anchor-id="what-does-it-mean-to-hit-v1.0">What does it mean to hit v1.0?</h2>
 <p>For the Shiny team, bestowing the “v1.0” label on a piece of software is a declaration of a certain level of quality, feature completeness, and API stability.</p>
-<p>In April 2023, we <a href="https://shiny.posit.co/blog/posts/shiny-python-general-availability/">removed the alpha tag from Shiny for Python</a>, signaling our team’s belief that its level of quality and runtime stability made it appropriate for production use. And that belief has borne out: the feedback we’ve received from real-world users of the framework has been overwhelmingly positive.</p>
-<p>At that time, we chose not to use a 1.0 moniker, preferring to stick to 0.x until after we had shipped essential features like <a href="../shiny-python-0.4.0/">interactive data tables</a> (June 2023) and <a href="../shiny-python-0.6.0/">dashboard UI components</a> (Nov 2023). And soon after that, we came up with <a href="https://shiny.posit.co/blog/posts/shiny-express/">Shiny Express</a>, a completely new syntax for writing Shiny apps, which meant another period of heavy feedback and potential revisions of the API.</p>
+<p>In April 2023, we <a href="https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/">removed the alpha tag from Shiny for Python</a>, signaling our team’s belief that its level of quality and runtime stability made it appropriate for production use. And that belief has borne out: the feedback we’ve received from real-world users of the framework has been overwhelmingly positive.</p>
+<p>At that time, we chose not to use a 1.0 moniker, preferring to stick to 0.x until after we had shipped essential features like <a href="../shiny-python-0.4.0/">interactive data tables</a> (June 2023) and <a href="../shiny-python-0.6.0/">dashboard UI components</a> (Nov 2023). And soon after that, we came up with <a href="https://shyr-test-center.netlify.app/blog/posts/shiny-express/">Shiny Express</a>, a completely new syntax for writing Shiny apps, which meant another period of heavy feedback and potential revisions of the API.</p>
 <p>Sitting here in July 2024, it feels like a great time to acknowledge Shiny for Python’s maturity by bestowing it with the big 1-point-0. The API feels appropriately stable now, and most of the new features of the last few releases have been about building on top of Shiny’s existing API design vocabulary, rather than extending or changing it (although one notable brand-new primitive is Modules for Shiny Express, which you can read about below).</p>
 <p>So please join us in raising a proverbial glass to Shiny for Python 1.0! And if you’ve been waiting on the sidelines, now is a great time to <a href="https://shypy-test-center.netlify.app/py/docs/overview.html">get in the game</a>!</p>
 <p>And now, let’s take a look at all the cool features that are part of this release!</p>
@@ -250,7 +250,7 @@ font-style: inherit;">"white"</span>},</span>
 <span id="cb3-19">    ],</span>
 <span id="cb3-20">)</span></code></pre></div>
 <div class="border rounded p-2 pb-0 mb-5">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-1.0/data-frame-styles.png" class="w-100 img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/data-frame-styles.png" class="w-100 img-fluid"></p>
 </div>
 </section>
 <section id="selection-editing" class="level3">
@@ -292,7 +292,7 @@ font-style: inherit;">True</span>,</span>
 <h3 data-anchor-id="polars-typing-support">Polars &amp; typing support</h3>
 <p>Both <code>DataGrid()</code> and <code>DataTable()</code> now support <a href="https://pola.rs/">Polars</a> DataFrames in addition to <a href="https://pandas.pydata.org/">pandas</a> DataFrames. Also, accessor methods like <code>.data()</code> and <code>.data_view()</code> now return the same type as the rendered data. This even works with type hints, meaning your IDE will know the correct return type of the accessor. See the screenshot below for an example, and note the <code>polars</code> type hint in the tooltip.</p>
 <div class="py-3">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-1.0/data-frame-polars.png" class="border rounded img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/data-frame-polars.png" class="border rounded img-fluid"></p>
 </div>
 </section>
 <section id="more-control-over-sorting-and-filtering" class="level3">
@@ -414,7 +414,7 @@ font-style: inherit;">"Sort on column 0↑"</span>)</span></code></pre></div>
 <li><code>audio_spinner()</code>: An audio player than spins and pulses in sync with the audio signal.</li>
 </ul>
 <div class="border rounded p-2 pb-0 mb-4 mx-auto" style="max-width: min(400px, 100%);">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-1.0/shinymedia.jpg" class="img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/shinymedia.jpg" class="img-fluid"></p>
 </div>
 <p>These components are now available in a standalone package called <a href="https://posit-dev.github.io/shinymedia/">shinymedia</a>. They’re designed to be super easy to drop into your Shiny for Python app, no different than any input/output component that comes with Shiny.</p>
 <p>As for the livestream, we had a lot of fun and the feedback was great from everyone in the audience. It’s astonishing how easy this app was to build, once we had the right widgets. If you’re at all interested in building AI apps with Shiny, <a href="https://www.youtube.com/watch?v=OLTgI6DAQ_A">be sure to check out the recording</a>!</p>
@@ -433,7 +433,7 @@ font-style: inherit;">"Sort on column 0↑"</span>)</span></code></pre></div>
 <section id="use-bootswatch-themes-with-shinyswatch" class="level2">
 <h2 data-anchor-id="use-bootswatch-themes-with-shinyswatch">Use Bootswatch themes with shinyswatch</h2>
 <div class="py-3">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-1.0/shinyswatch.jpg" class="border rounded img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/shinyswatch.jpg" class="border rounded img-fluid"></p>
 </div>
 <p>We’re also happy to announce <a href="../../../blog/posts/shinyswatch-0.7.0/index.html">the release of shinyswatch v0.7.0</a>. shinyswatch brings Bootswatch themes to Shiny for Python, allowing you to customize the appearance of your Shiny apps with a variety of themes.</p>
 <div class="pt-2 pb-1">
@@ -445,14 +445,14 @@ font-style: inherit;">"Sort on column 0↑"</span>)</span></code></pre></div>
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-python-1.0/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/</guid>
   <pubDate>Mon, 22 Jul 2024 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-python-1.0/shinyforpython-1.0.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/shinyforpython-1.0.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>shinyswatch v0.7.0</title>
   <dc:creator>Garrick Aden-Buie</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shinyswatch-0.7.0/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shinyswatch-0.7.0/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -466,7 +466,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shinyswatch-0.7.0/feature.jpg" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shinyswatch-0.7.0/feature.jpg" style="width: 100%; height: auto;">
     </div>
     
 
@@ -1023,14 +1023,14 @@ font-style: inherit;">    """</span></span>
 <li id="fn1"><p>Local storage is a browser feature that allows web applications to store data locally within the user’s browser. This data persists even after the user closes the browser, but is scoped in two important ways. First, the data is only accessible to Shiny apps on the same domain, i.e.&nbsp;all apps on <code>myusername.shinyapps.io</code> using the theme picker will share the same local storage. Second, the data is only accessible in the browser that stored it, i.e.&nbsp;the user’s theme choice will not be remembered if they open the app in a different browser or on a different device.↩︎</p></li>
 </ol>
 </section></div> ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shinyswatch-0.7.0/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shinyswatch-0.7.0/</guid>
   <pubDate>Fri, 19 Jul 2024 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shinyswatch-0.7.0/feature.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shinyswatch-0.7.0/feature.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Reintroducing the Shiny Extension for VS Code</title>
   <dc:creator>Garrick Aden-Buie</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-vscode-1.0.0/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-vscode-1.0.0/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1044,7 +1044,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-vscode-1.0.0/feature.png" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-vscode-1.0.0/feature.png" style="width: 100%; height: auto;">
     </div>
     
 
@@ -1063,7 +1063,7 @@ End Google Tag Manager (noscript) -->
 <h2 class="anchored" data-anchor-id="installing-the-shiny-extension">Installing the Shiny extension</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-vscode-1.0.0/shiny-marketplace-header.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="The shiny extension page on vscode marketplace"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-vscode-1.0.0/shiny-marketplace-header.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="The shiny extension page on vscode marketplace"></p>
 </figure>
 </div>
 <p><strong>If you’re a new Shiny + VS Code user</strong>, you can install the extension from the <a href="https://marketplace.visualstudio.com/items?itemName=Posit.shiny">VS Code Marketplace</a> or the <a href="https://open-vsx.org/extension/posit/shiny">Open VSX Registry</a>, or by searching for “Shiny” in the Extensions view in VS Code. Be sure to avoid the extension named “Shiny (deprecated)” 😉</p>
@@ -1071,7 +1071,7 @@ End Google Tag Manager (noscript) -->
 </section>
 <section id="shiny-for-r-support" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="shiny-for-r-support">Shiny for R Support</h2>
-<p>With the Shiny extension installed, whenever you open an <code>app.R</code> file — or another appropriately named Shiny for R app file<sup>1</sup> — the editor’s play button (<i class="bi bi-play" aria-label="play button"></i>) becomes a “Run Shiny App” button. Clicking the <i class="bi bi-play" aria-label="play button"></i> starts your app in a new terminal session and even enables <a href="https://shiny.posit.co/r/reference/shiny/latest/devmode.html">Shiny’s developer mode</a> for a better local development experience, including automatically restarting your app when you update and save the app’s source files<sup>2</sup>.</p>
+<p>With the Shiny extension installed, whenever you open an <code>app.R</code> file — or another appropriately named Shiny for R app file<sup>1</sup> — the editor’s play button (<i class="bi bi-play" aria-label="play button"></i>) becomes a “Run Shiny App” button. Clicking the <i class="bi bi-play" aria-label="play button"></i> starts your app in a new terminal session and even enables <a href="https://shyr-test-center.netlify.app/r/reference/shiny/latest/devmode.html">Shiny’s developer mode</a> for a better local development experience, including automatically restarting your app when you update and save the app’s source files<sup>2</sup>.</p>
 <div class="column-page">
 <video controls="">
   <source src="videos/run-shiny-r-app.webm" type="video/webm">
@@ -1140,14 +1140,14 @@ End Google Tag Manager (noscript) -->
 <li id="fn2"><p>Developer mode enables a few Shiny options that improve the local development experience and can be turned on at the R console by calling <code>shiny::devmode()</code>. Notable among these options is setting <code>options(shiny.autoreload = TRUE)</code> to automatically reload the app whenever its source files change. An extension setting can be used to disable devmode.↩︎</p></li>
 </ol>
 </section></div> ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-vscode-1.0.0/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-vscode-1.0.0/</guid>
   <pubDate>Wed, 22 May 2024 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-vscode-1.0.0/feature.png" medium="image" type="image/png" height="76" width="144"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-vscode-1.0.0/feature.png" medium="image" type="image/png" height="76" width="144"/>
 </item>
 <item>
   <title>Editable data tables in Shiny for Python 0.9.0</title>
   <dc:creator>Shiny Team</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-python-0.9.0/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1161,7 +1161,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-python-0.9.0/shiny-090.png" alt="Shiny for Python 0.9.0" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/shiny-090.png" alt="Shiny for Python 0.9.0" style="width: 100%; height: auto;">
     </div>
     
 
@@ -1169,7 +1169,7 @@ End Google Tag Manager (noscript) -->
 <p>Shiny for Python 0.9.0 is out! This version brings some exciting new features and improvements to the Shiny ecosystem. You can read the full <a href="https://github.com/posit-dev/py-shiny/blob/main/CHANGELOG.md#090---2024-04-16">changelog</a> for a complete list of changes.</p>
 <section id="editable-data-tables-and-data-grids" class="level2">
 <h2 data-anchor-id="editable-data-tables-and-data-grids">Editable Data Tables and Data Grids</h2>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.9.0/edit-your-data.gif" class="img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/edit-your-data.gif" class="img-fluid"></p>
 <p>One of the most exciting new features in this release is the ability to make your <a href="https://shypy-test-center.netlify.app/py/api/core/render.DataTable.html"><code>DataTable</code></a> and <a href="https://shypy-test-center.netlify.app/py/api/core/render.DataGrid.html"><code>DataGrid</code></a> components editable. By setting <code>editable=True</code> within <code>DataGrid</code> or <code>DataTable</code>, you can allow users to directly edit the cells in your tables. This opens up a whole new range of possibilities for interactive data applications!</p>
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
@@ -1267,7 +1267,7 @@ font-style: inherit;">"rows"</span>]</span></code></pre></div>
 <section id="error-console" class="level2">
 <h2 data-anchor-id="error-console">Error Console</h2>
 <p>Shiny for Python 0.9.0 includes an error console that surfaces client-side errors directly in the browser’s UI when running applications locally. The error console also catches common issues, such as duplicated input or output IDs, that can only be caught when the app is running.</p>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.9.0/error-console.png" class="img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/error-console.png" class="img-fluid"></p>
 <p>The error console is enabled by default when you launch your app with <code>shiny run</code> or via the <a href="https://marketplace.visualstudio.com/items?itemName=Posit.shiny-python">Shiny VS Code extension</a>. The error console is automatically disabled when your app is deployed to a server, but can also be manually disabled with <code>shiny run --no-dev-mode</code>.</p>
 </section>
 <section id="shiny-express-in-quarto-dashboards" class="level2">
@@ -1379,12 +1379,12 @@ font-style: inherit;">    )</span></span>
 background-color: null;
 font-style: inherit;">```</span></span></code></pre></div>
 </details>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.9.0/quarto-and-shiny-express.png" class="img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/quarto-and-shiny-express.png" class="img-fluid"></p>
 </section>
 <section id="other-improvements" class="level2">
 <h2 data-anchor-id="other-improvements">Other Improvements</h2>
 <p>The <code>shiny create</code> CLI command now includes additional templates and an option to open the new <a href="https://shypy-test-center.netlify.app/py/templates/">Shiny Templates website</a> where you can find templates to quickly jump start your app. This makes it easier than ever to get started with Shiny for Python! 🏎️💨</p>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.9.0/shiny-template.png" class="img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/shiny-template.png" class="img-fluid"></p>
 <p>Layout components have received several improvements in this release. The <code>col_widths</code> argument of <code>ui.layout_columns()</code> now sets the <code>sm</code> breakpoint by default, providing better responsiveness on smaller screens. <code>ui.card()</code> and <code>ui.value_box()</code> now have an <code>id</code> argument that allows you to track the full-screen state of these components. You can also now set <code>min_height</code> and <code>max_height</code> on <code>ui.value_box()</code>, <code>ui.layout_columns()</code>, and <code>ui.layout_column_wrap()</code> to ensure that your layouts always stay within a certain size range.</p>
 <hr>
 <p>We’re thrilled to bring you these new features and improvements in Shiny for Python 0.9.0. As always, if you have any questions or feedback, please <a href="https://discord.gg/yMGCamUMnS">join us on Discord</a> or <a href="https://github.com/posit-dev/py-shiny/issues/new">open an issue on GitHub</a>. Happy Shiny-ing!</p>
@@ -1393,14 +1393,14 @@ font-style: inherit;">```</span></span></code></pre></div>
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-python-0.9.0/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/</guid>
   <pubDate>Thu, 09 May 2024 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-python-0.9.0/edit-your-data.gif" medium="image" type="image/gif"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/edit-your-data.gif" medium="image" type="image/gif"/>
 </item>
 <item>
   <title>Introducing Shiny for Python Templates</title>
   <dc:creator>Shiny Team</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/introducing-shiny-templates/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/introducing-shiny-templates/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1414,7 +1414,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/introducing-shiny-templates/templates2.jpg" alt="An illustration of a Shiny Template" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/introducing-shiny-templates/templates2.jpg" alt="An illustration of a Shiny Template" style="width: 100%; height: auto;">
     </div>
     
 
@@ -1447,14 +1447,14 @@ Using your dataset in Shiny Templates
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/introducing-shiny-templates/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/introducing-shiny-templates/</guid>
   <pubDate>Fri, 05 Apr 2024 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/introducing-shiny-templates/templates2.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/introducing-shiny-templates/templates2.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Shiny for R updates: Extended tasks, JavaScript errors, and many bslib improvements</title>
   <dc:creator>Carson Sievert</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-r-1.8.1/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/</link>
   <description><![CDATA[ <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
@@ -1464,7 +1464,7 @@ Using your dataset in Shiny Templates
   }
 </style>
 <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/feature.png" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/feature.png" style="width: 100%; height: auto;">
 </div>
     
 
@@ -1473,7 +1473,7 @@ Using your dataset in Shiny Templates
 img { border-radius: 8px; }
 </style>
 <p>The Shiny team is delighted to announce another round of updates for 9 different R packages. In this post, we’ll introduce three notable things: non-blocking operations, a JavaScript error dialog and many bslib improvements. For a detailed list of changes, be sure to check out the release notes section of this post.</p>
-<p>Although 9 packages received updates, the focus of this post is on <a href="https://shiny.posit.co/">shiny</a> and <a href="https://rstudio.github.io/bslib/">bslib</a>, which you can install with the following command:</p>
+<p>Although 9 packages received updates, the focus of this post is on <a href="https://shyr-test-center.netlify.app/">shiny</a> and <a href="https://rstudio.github.io/bslib/">bslib</a>, which you can install with the following command:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1501,7 +1501,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </section><section id="introducing-extendedtask" class="level3"><h3 class="anchored" data-anchor-id="introducing-extendedtask">Introducing ExtendedTask</h3>
 <p>We’re introducing <code>ExtendedTask</code> as a new way to manage long-running operations that won’t block within or across sessions, meaning that a user can launch an <code>ExtendedTask</code> and still interact with the app while it’s running.</p>
 <p>Additionally, we’ve found that <code>ExtendedTask</code> provides an elegant way to manage async operations. Within the task, you’ll use <a href="https://rstudio.github.io/promises/">promises</a> to create the async operation, but in the rest of your app you can use <code>ExtendedTask</code> methods to start the task or react to results when they arrive.</p>
-<p>As a result, <code>ExtendedTask</code> is now our recommended starting point for non-blocking tasks in Shiny. We’d love to show you a full example right now, but for the sake of space in this blog post we’ll urge you to visit the <a href="https://shiny.posit.co/r/articles/improve/nonblocking">Non-blocking operations article</a>, also on this blog, for a complete introduction.</p>
+<p>As a result, <code>ExtendedTask</code> is now our recommended starting point for non-blocking tasks in Shiny. We’d love to show you a full example right now, but for the sake of space in this blog post we’ll urge you to visit the <a href="https://shyr-test-center.netlify.app/r/articles/improve/nonblocking">Non-blocking operations article</a>, also on this blog, for a complete introduction.</p>
 </section><section id="a-new-task-button" class="level3"><h3 class="anchored" data-anchor-id="a-new-task-button">A new task button</h3>
 <p>As a companion to <code>ExtendedTask</code>, we’ve created <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">bslib::input_task_button()</a></code>, a special button that displays visual feedback when a task is in progress. As it turns out, <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">input_task_button()</a></code> provides a nice experience for any long-running task, not just <code>ExtendedTask</code>. Think of it like an <code><a href="https://rdrr.io/pkg/shiny/man/actionButton.html">actionButton()</a></code> that, when clicked, shows a busy indicator (and prevents further clicks) up until the next time the server is idle. Here’s an example of it in action in a basic Shiny app:</p>
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
@@ -1511,7 +1511,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -1656,7 +1656,7 @@ font-style: inherit;">server</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/task-button.gif" class="shadow img-fluid figure-img"></p>
+<figure class="figure"><p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/task-button.gif" class="shadow img-fluid figure-img"></p>
 <figcaption>The task button showing a busy indication while the result is still processing</figcaption></figure>
 </div>
 <p><br class="mb-4"></p>
@@ -1670,7 +1670,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -1739,13 +1739,13 @@ font-style: inherit;">}</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/error-dialog.png" class="img-fluid figure-img"></p>
+<figure class="figure"><p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/error-dialog.png" class="img-fluid figure-img"></p>
 <figcaption>The error dialog displaying the duplicate IDs error</figcaption></figure>
 </div>
 <aside id="footnotes" class="footnotes footnotes-end-of-section"><hr>
 <ol>
 <li id="fn1">
-<p>Read more about <a href="https://shiny.posit.co/r/reference/shiny/latest/devmode.html">shiny devmode in our docs</a>. If you’d like to turn on dev mode for all of your local interactive session, you can add the following snippet your <code>.Rprofile</code> either in your home directory or your project directory (use <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code> to open either):</p>
+<p>Read more about <a href="https://shyr-test-center.netlify.app/r/reference/shiny/latest/devmode.html">shiny devmode in our docs</a>. If you’d like to turn on dev mode for all of your local interactive session, you can add the following snippet your <code>.Rprofile</code> either in your home directory or your project directory (use <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code> to open either):</p>
 <pre><code>if (interactive() &amp;&amp; requireNamespace("shiny", quietly = TRUE)) {
   shiny::devmode()
 }</code></pre>
@@ -1755,7 +1755,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>In addition to the new <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">input_task_button()</a></code>, <code>bslib</code> received many <a href="https://rstudio.github.io/bslib/news/index.html#bslib-070">improvements and fixes in this release</a>. Most of these improvements are focused on <code><a href="https://rstudio.github.io/bslib/reference/sidebar.html">sidebar()</a></code>s, <code>cards()</code>s, <code><a href="https://rstudio.github.io/bslib/reference/layout_columns.html">layout_columns()</a></code>s, and the default <code><a href="https://rstudio.github.io/bslib/reference/bs_theme.html">bs_theme()</a></code>.</p>
 <p>To highlight a new feature, <code><a href="https://rstudio.github.io/bslib/reference/card.html">card()</a></code> now reports its <code>full_screen</code> state to the server, which can be useful for various things like providing more context in a full-screen view. Just give the card an <code>id</code> and read <code>input${id}_full_screen</code> in the server, replacing <code>{id}</code> with the actual <code>id</code> value of your card.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/full-screen.gif" class="shadow img-fluid figure-img"></p>
+<figure class="figure"><p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/full-screen.gif" class="shadow img-fluid figure-img"></p>
 <figcaption>An expandable card that shows some additional text when it goes full screen.</figcaption></figure>
 </div>
 <div class="cell">
@@ -1766,7 +1766,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -2084,7 +2084,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </section><section id="sass-v0.4.9" class="level4"><h4 class="anchored" data-anchor-id="sass-v0.4.9">sass <a href="https://rstudio.github.io/sass/news/index.html">v0.4.9</a>
 </h4>
 <p><a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/jeroen">@jeroen</a>, and <a href="https://github.com/yulric">@yulric</a>.</p>
-</section><section id="shiny-v1.8.1" class="level4"><h4 class="anchored" data-anchor-id="shiny-v1.8.1">shiny <a href="https://shiny.posit.co/r/reference/shiny/1.8.1/upgrade.html">v1.8.1</a>
+</section><section id="shiny-v1.8.1" class="level4"><h4 class="anchored" data-anchor-id="shiny-v1.8.1">shiny <a href="https://shyr-test-center.netlify.app/r/reference/shiny/1.8.1/upgrade.html">v1.8.1</a>
 </h4>
 <p><a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/Arthfael">@Arthfael</a>, <a href="https://github.com/avoidaway">@avoidaway</a>, <a href="https://github.com/bioinformzhang">@bioinformzhang</a>, <a href="https://github.com/chendaniely">@chendaniely</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/Daishoulu">@Daishoulu</a>, <a href="https://github.com/davidmacro">@davidmacro</a>, <a href="https://github.com/etbrand">@etbrand</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/gunawebs">@gunawebs</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/HugoGit39">@HugoGit39</a>, <a href="https://github.com/ismirsehregal">@ismirsehregal</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/JohnCoene">@JohnCoene</a>, <a href="https://github.com/jsendak">@jsendak</a>, <a href="https://github.com/laresbernardo">@laresbernardo</a>, <a href="https://github.com/MartinBaumga">@MartinBaumga</a>, <a href="https://github.com/nstrayer">@nstrayer</a>, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/Roleren">@Roleren</a>, <a href="https://github.com/RSchwinn">@RSchwinn</a>, <a href="https://github.com/saleforecast1">@saleforecast1</a>, <a href="https://github.com/sharitian">@sharitian</a>, <a href="https://github.com/skaltman">@skaltman</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/trafficonese">@trafficonese</a>, <a href="https://github.com/TymekDev">@TymekDev</a>, <a href="https://github.com/ugurdar">@ugurdar</a>, and <a href="https://github.com/wch">@wch</a>.</p>
 </section><section id="thematic-v0.1.5" class="level4"><h4 class="anchored" data-anchor-id="thematic-v0.1.5">thematic <a href="https://rstudio.github.io/thematic/news/index.html#thematic-015">v0.1.5</a>
@@ -2093,16 +2093,16 @@ font-style: inherit;">)</span></span></code></pre></div>
 
 
 </section></section> ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-r-1.8.1/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/</guid>
   <pubDate>Wed, 27 Mar 2024 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/feature.png" medium="image" type="image/png" height="80" width="144"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/feature.png" medium="image" type="image/png" height="80" width="144"/>
 </item>
 <item>
   <title>Introducing Component and Layout Galleries for Shiny for Python</title>
   <dc:creator>Daniel Chen</dc:creator>
   <dc:creator>Sara Altman</dc:creator>
   <dc:creator>Garrett Grolemund</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/introducing-component-layouts/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/introducing-component-layouts/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -2116,7 +2116,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/introducing-component-layouts/layouts-thumb.jpg" alt="An illustration of Shiny layouts and components" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/introducing-component-layouts/layouts-thumb.jpg" alt="An illustration of Shiny layouts and components" style="width: 100%; height: auto;">
     </div>
     
 
@@ -2500,7 +2500,7 @@ font-style: inherit;">None</span>)</span></code></pre></div>
 <div class="pt-4 pb-3 page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="https://shiny.posit.co/blog/posts/introducing-component-layouts/sidebar-layouts.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img column-page" alt="screenshot of the sidebar section on the main layout page"></p>
+<p class="page-columns page-full"><img src="https://shyr-test-center.netlify.app/blog/posts/introducing-component-layouts/sidebar-layouts.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img column-page" alt="screenshot of the sidebar section on the main layout page"></p>
 </figure>
 </div>
 </div>
@@ -2642,14 +2642,14 @@ font-style: inherit;">=</span> App(app_ui, server)</span></code></pre></div>
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/introducing-component-layouts/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/introducing-component-layouts/</guid>
   <pubDate>Mon, 26 Feb 2024 05:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/introducing-component-layouts/layouts-thumb.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/introducing-component-layouts/layouts-thumb.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Introducing: Shiny Express</title>
   <dc:creator>Shiny Team</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-express/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-express/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -2663,7 +2663,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-express/shiny-express-v2.jpg" alt="Shiny Express logo" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-express/shiny-express-v2.jpg" alt="Shiny Express logo" style="width: 100%; height: auto;">
     </div>
     
 
@@ -2720,7 +2720,7 @@ background-color: null;
 font-style: inherit;">!"</span></span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-express/hello-world.png" class="border img-fluid figure-img" alt="A screenshot of a simple app that prompts for the user's name, and displays a greeting"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-express/hello-world.png" class="border img-fluid figure-img" alt="A screenshot of a simple app that prompts for the user's name, and displays a greeting"></p>
 <figcaption><a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbDOAD1R04LFkw4xUxOmTERUAVzJ4mQiABM4dZfI4AdCPp0YuCsgH0KfMgApdkWHDvK7AdTZQyAclHZi8ukzQ8AD8TkwAblAANvJwALyuUlFqdgCU+voAAqoadBiWZPoaNEwA5kJwZFyl1qmI+kyNKpX+EEw0dgAScFFRxMogJooYQXC1AL4AhHb6YOMAukA"><i class="bi bi-caret-right-square-fill"></i> View app on shinylive.io.</a></figcaption>
 </figure>
 </div>
@@ -2730,7 +2730,7 @@ font-style: inherit;">!"</span></span></code></pre></div>
 <div class="pt-3 page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="https://shiny.posit.co/blog/posts/shiny-express/plot.png" class="border img-fluid figure-img column-page" alt="A screenshot of an app with a sidebar and a plot"></p>
+<p class="page-columns page-full"><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-express/plot.png" class="border img-fluid figure-img column-page" alt="A screenshot of an app with a sidebar and a plot"></p>
 <figcaption><a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbJjmVYnTJM6cKITIcAbnAA6Eeo1aduGOAA9Uoli179BwrqgCuZPCMoATOHXPGO8xc3ZdsAdw6WA5nDK6+AkIWENZ0APqoADbEZJHY8vL2WFA+YcSofgAUkrFwALyyYAAKlF72ELqWUOwARsRQdJaF5jQckZFQNZH5ACp0xnAAlAkQHmRsTEksnnA1DZmDiPJMK5McGEamYSxw3RIcAF5wmcurZ4VSDc1MhQDKu3ASTJd0HJ3dzadnK8CFNW2RMLdCBecZhGAwa5-AFhawZNjgyH4G60SIcdA2IGlMEQqFgOqWbDg6osMJePHYMR0QoAXS+TGGEDOSU2ZDCEGM8FehBO+K4LDxADlOTUbExiDQmP8KtcAMwABkZ8gAAqJxJIZBhCFBIoR5NZJZYaAslkzVk4mKgdVzUKVyv59EFolBLBE7fz6aIyMY6Ezna7bSD7QtgKyMC8FnSIPIxhMktrGpkaMZ2ttCKJKHk+gNFvTVVZMVEYnF6QamJwWGQTfSzgEDJborFsGpNNpdNVLeoa6tUEw8p2MBWyMQvHRYJkjQtzBBpSw8mHZwtGd8exgOthiKYMMZUFUKJl2MQ3N0fCE8gAxHU7Zcrize32WsAAXxpQA"><i class="bi bi-caret-right-square-fill"></i> View app on shinylive.io.</a></figcaption>
 </figure>
 </div>
@@ -2857,7 +2857,7 @@ It can be deployed in the same ways as before: [cloud hosted](https://shypy-test
 <div class="py-3 page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="https://shiny.posit.co/blog/posts/shiny-express/tipping-dashboard.png" class="border img-fluid figure-img column-page" alt="A screenshot of a full-featured dashboard"></p>
+<p class="page-columns page-full"><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-express/tipping-dashboard.png" class="border img-fluid figure-img column-page" alt="A screenshot of a full-featured dashboard"></p>
 <figcaption><a href="https://shypy-test-center.netlify.app/py/docs/user-interfaces.html"><i class="bi bi-file-earmark-code-fill"></i> Build this app in our <em>User Interfaces</em> tutorial.</a><br><a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMASxlWICcyACAMyhpIgGcWo+HADoQ6DZi1QAbYmSnYMcAB6pGcHnwGSlIto2IwWPABY0I2AO40AJgHM4ZPmKas1Ea3EYB9abPkjdfUMTM2wWZwk1KEIyGgA3ODwWNw9GJLUAR0CDI1NzRRU1DXD6F3CIVABXMiTKmgCIAGIWABliKGsWaygyKH53FhJ6argjXtjCFjioKUr1EVjUPgBebQxu3oxFngAKAEoRACMaKSkvRghbFlWdmDMd7a3ZGa9j072kmCglB5olp96ZzeUj2BwgImaAEFrJ1UFB7CxYnJRlABjwbHBDlBGCI6lh4XAvMRUI5fsjlkIwAAldS9SqMVGsRaoMy2SlJNgnKRQQ5SODLAAqjDmYKsZGMLDx6I8WMYO2JlApYA8PAA1mRiZS9ogRCw9ZKaBgzFUyF4eFIMXLKRrAa8ueyWJSAEJc-gwYiVcgOu4QZbA86XYAABgAup9vn6uQHbMAAIxhqYzOaR07RpKqfmUgAkWt1+rxxuqXkIxjghFVh2ISi8tn0lVQO2tdDgDspADFiMROjxPHEuC38CxgJSWp6S62wAARMwQTyUhM9vkxODWZbDsCjiDjweU6cQWc4sAJswW2eC4VwMH6g1GipF6KxUivaoaiCNsBFBwTmk91icqQUIeYIQiw0KdF8ZiDKQFBehAACSADCADyAByADK1wsCAeZ6pSlQ9oeiDsFARrcGacS2O++FzjuH5wLYlTckBeA4Y6YAWDMfJkJSREcKRT48BR74cacX5gB8rGUoQ9JuIQ2AALTWMQpzYjxxH8RA5GUZSSkqYw8norY4LiSxEDXpS9iqUg6lcAJQkWXAVlggAvg0YoSni3LYB6pokLMMC8Ds-5SMsbYzD22oNNe7k3tMsyEpWPwmMQFiEAI-KIahaHrtRh4hpFZnXvqlICs8UiIn8qCeDwlKsdeAACKSeAUGYaHV+oeGwiJlV4zLVfsOqFUVRXbF4GxQPsGAmGgcDBiGUX6jFeJxXMrxVjsyWpelyyZeh64iVx84FcNuFgJCCQMgiiy1UNRWNZQqQtUUNW3denX8BdBK9X8A3tcNnSrKN437H9RU0F11hTcYM1zSwAB8LBBoNJ0o5IniTKskOLCwAD0XQAi8wKgyjbCUiAVWMIQGDwKiA0YLGACkrlgAtepLYaK0Jetm1pT2O3IXtUkyZQcmKcpTFHcjJ2UudngEiwRMs69+r3e4zXKK1L0o+9UCffYdqnL9yv-ZhQM9BNV6o3q4P49NVWwwjSPEydwKYVjPXAtTjlvpbVvXqTYBZiAwKIBgABMbDMw0IjsxgXk+cWymVAFux+V4VjWOKPBrgAbEkecsLGYf5YNrGx2ljDWEFjFnDwhBqIqQoilLw14hX1heKWHSeO+Ap-Hw425sbLCq4941eHosAtsP729LycBG37yQOPSZlNYwGCTubADijA2L8Sxjeb+zAbd5fYlXbA12a9dwI3F7HSd5+V53jmpDshDchoXhKtY8lsHyJQLAABW+FYhsAUtwGCZB5KHAcBYO+ZkZg0CMvJGgFAYA8HkoQSggEtQt1RiVMqCtXRxD4NdJWS9Y4MAYBdMkfIlRgX4FBGQjBEx7x5HyB00hohwHgOQJUGpUD4OdsNXa2UHJWXmsPFGBY7ymgZNYGgxBnxkFfLsURhCwB1x6IBROrCHQoVIIkTRKN1wQGMROHsOhaI8HdKqGiSQdJQGwBOWI8B5ymSXijE8Zh+RN2nt4-Up8Uaj08D4GQchXEzzgF1HRajPC+DIIvP2fkmCYULGQKaaUEneDSXKX2qM1BkFXmseJgFGwyJOmbXo+wvFBJYEoQRHt7T4FMfqbAgi-jsnaXqfJywjGznCF1fJ1xViUgsbOSkLA4BSB7Cwpg9SglkBSKeTMYAZAILapQv2ITFroI8oadu1dUx1wbr6AJj9hrPw7l3d+n8BA8B-jpf+gCQFgPBpA6CuDYHwMQfwC0qD0F8KwTg8gNErlaL7qgNGlNcEEhqjsq21DiTEDoUiBhMsYTMNGdMDh88RFVLEQLCRYBLJ5V6TeTJ5wOjKNUeoypDSipNlQD4dGXhXG0TQtIdBCtsA6jaUS1G65rFWPsY4ti3ROVOLAO4gcYZKXXkXGWCgq5nHSsVfqXxZ4AmUr2cNMJ3gkn+BiV1RYbLKYpKtnoHIe87BwCSSUcQrgbD2CSZojYpt+5H1qYU7WPR1wUzBdxI8bsehbD+LjLo4abSE3tEK7AeKMnyIjayoNHKQZCsqHFFY0ayDAETdiEMGBPQ0AyHMTNmieCwGkOoTCw4hXXmAHmrA6NcHAA2AWvFIYxmJikD26RTK2DpLiuUSUObNHSM0dIVgqw7VusiYyhp1b6B8mziu2tPAkjcjgXM5Y2bwpJCxO4DO4plhBgwEGWMSzvH5J0ZisAfY7U0ERUkfJ7oPBKn0BYNBasbGaP1ajGdJbUAbEJPHaoS6gl8nsO4ZYSiYjyj3vCx8vpKTGAdNgVEJYmBKkrGogwmHlixkvWHJIShsPGFw1JXBEqmkXoAKx+pOoBlGxTSkzujk0Fg8leN8f4wJwTQnhMidE-JECNIHzxFGGlKQ0luSoc0AMWJbAVUvWaGJzTWntOCYaPdKTCQMCycICIWe3rgaQtdqsTJBMgRckzdeGwShYxev+LGuzpwMBwLIAgygOxgRzSPVyOM+VWJObDq5ngEb4BGnRG+GzcqT6sXYxcCqSxgBOZcwAMnCNYJQxc9NRBiNJxQbBVMxBEPp4rhm4AJHIDsGzn4yBgnel4K1N56xgbNBad+1oWmnAdJzFMZwLi2EKXiTrPRCQljLBWKsNY6wNibB4wcyrlyrnXJubcMq9wHiOiIMAzk8DgGgPAagmQ6hqH4Y4LYSgyD4CIN8qgyB50OsiYdkMQA"><i class="bi bi-caret-right-square-fill"></i> View app on shinylive.io.</a></figcaption>
 </figure>
 </div>
@@ -2947,14 +2947,14 @@ We don’t have immediate plans to bring Shiny Express to R. Given the size and 
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-express/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-express/</guid>
   <pubDate>Mon, 29 Jan 2024 05:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-express/shiny-express-v2.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-express/shiny-express-v2.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Shiny for Python 0.6.1</title>
   <dc:creator>Shiny Team</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-python-0.6.1/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -2968,7 +2968,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-python-0.6.1/shiny-061.png" alt="Shiny for Python 0.6.1" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/shiny-061.png" alt="Shiny for Python 0.6.1" style="width: 100%; height: auto;">
     </div>
     
 
@@ -2977,7 +2977,7 @@ End Google Tag Manager (noscript) -->
 <section id="component-gallery" class="level2">
 <h2 data-anchor-id="component-gallery">Component gallery</h2>
 <p>As the number of Shiny components grows, it becomes harder to find the component you want. We’ve created a <a href="https://shypy-test-center.netlify.app/py/components/">Shiny Component gallery</a> which gives you an interactive example of each component, as well as additional documentation about when and how to use it.</p>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.6.1/component-gallery.gif" class="img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/component-gallery.gif" class="img-fluid"></p>
 <p>Currently, this gallery contains mostly inputs and outputs. In the near future, we’ll add layouts, navigation, and other types of visual components.</p>
 </section>
 <section id="templates" class="level2">
@@ -2990,7 +2990,7 @@ End Google Tag Manager (noscript) -->
 <section id="debugging-shiny-apps" class="level2">
 <h2 data-anchor-id="debugging-shiny-apps">Debugging Shiny Apps</h2>
 <p>The <a href="https://marketplace.visualstudio.com/items?itemName=Posit.shiny-python">Shiny extension for VS Code</a> now lets you run your Shiny apps using the VS Code debugger. This lets you set breakpoints, debug on error, and step through your application code using VS code. To activate it, click the dropdown menu next to the Play button and select “Debug Shiny App”. To learn more about how to use the VS Code debugger, check out the VS Code <a href="https://code.visualstudio.com/docs/editor/debugging">documentation</a>.</p>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.6.1/debugger.png" class="img-fluid"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/debugger.png" class="img-fluid"></p>
 </section>
 <section id="shiny-express-sneak-peek" class="level2">
 <h2 data-anchor-id="shiny-express-sneak-peek">Shiny Express sneak peek</h2>
@@ -3002,15 +3002,15 @@ End Google Tag Manager (noscript) -->
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-python-0.6.1/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/</guid>
   <pubDate>Fri, 22 Dec 2023 05:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-python-0.6.1/shiny-061.png" medium="image" type="image/png" height="76" width="144"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/shiny-061.png" medium="image" type="image/png" height="76" width="144"/>
 </item>
 <item>
   <title>Shiny for R updates: new default look, dark mode, shinylive updates, and more</title>
   <dc:creator>Carson Sievert</dc:creator>
   <dc:creator>Garrick Aden-Buie</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-r-1.8.0/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/</link>
   <description><![CDATA[ <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 End Google Tag Manager (noscript) --><style type="text/css">
@@ -3019,7 +3019,7 @@ End Google Tag Manager (noscript) --><style type="text/css">
   }
 </style>
 <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/feature.jpg" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/feature.jpg" style="width: 100%; height: auto;">
 </div>
     
 
@@ -3081,7 +3081,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>In our <a href="../../../blog/posts/bslib-tooltips/#towards-a-new-shiny-theme">last post</a>, we previewed a new look for <code>bslib</code>-powered UIs, which is designed with dashboards in mind. This release of <code>bslib</code> adds more polish to this new “preset” theme and makes it the default for <code>bslib</code> powered UIs.</p>
 <p>To use the new layouts, simply create an app using any <code>page_*()</code> function in bslib for the UI. Here’s a very simple template you can use to get started. Notice that we’ve used <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> to make this example interactive – the entire app is running in your browser, no server required! You can even edit the app right here in this post and see the changes live when you press the <i class="bi bi-play-fill"></i> play button. We’ll talk more about shinylive later in this post.</p>
 <div class="column-page mb-3">
-<pre class="shinylive-r" data-engine="r"><code><a href="https://shiny.posit.co/">#| standalone: true
+<pre class="shinylive-r" data-engine="r"><code><a href="https://shyr-test-center.netlify.app/">#| standalone: true
 #| components: [editor, viewer]
 #| viewerHeight: 400
 #| layout: vertical
@@ -3140,10 +3140,10 @@ font-style: inherit;">)</span></span></code></pre></div>
   </ul>
 <div class="tab-content p-3 border-0">
     <div class="tab-pane fade show active" id="flights-new">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/flights-new.png" class="img-fluid shadow" alt="Flights dashboard with the new styles, featuring a white navbar and white sidebar framing the dashboard area. Cards are also entirely white on a light gray background, with subtle depth created by drop shadows under the cards. Blue accents are found throughout the dashboard in plots and icons.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/flights-new.png" class="img-fluid shadow" alt="Flights dashboard with the new styles, featuring a white navbar and white sidebar framing the dashboard area. Cards are also entirely white on a light gray background, with subtle depth created by drop shadows under the cards. Blue accents are found throughout the dashboard in plots and icons.">
 </div>
     <div class="tab-pane" id="flights-old">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/flights-old.png" class="img-fluid shadow" alt="Flights dashboard with the old styles, features solid blue navbar and solid blue value boxes. The sidebar and card headers and footers all have a light gray background.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/flights-old.png" class="img-fluid shadow" alt="Flights dashboard with the old styles, features solid blue navbar and solid blue value boxes. The sidebar and card headers and footers all have a light gray background.">
 </div>
   </div>
   </div>
@@ -3187,10 +3187,10 @@ Quarto and PyShiny dashboards
   </ul>
 <div class="tab-content p-3 border-0">
     <div class="tab-pane fade show active" id="simple-new">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/simple-new.png" class="img-fluid shadow" alt="New page_sidebar() styling featuring a light, minimal look with a white title bar, white sidebar and white cards and value boxes. The cards and value boxes have subtle shadows on a light gray background. Value boxes icons are blue with a subtle gradient">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/simple-new.png" class="img-fluid shadow" alt="New page_sidebar() styling featuring a light, minimal look with a white title bar, white sidebar and white cards and value boxes. The cards and value boxes have subtle shadows on a light gray background. Value boxes icons are blue with a subtle gradient">
 </div>
     <div class="tab-pane" id="simple-old">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/simple-old.png" class="img-fluid shadow" alt="Old page_sidebar() styling with a dark title bar. Sidebars and card headers and footers have a light gray background. Cards and value boxes do not have shadows and value box icons are solid dark gray.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/simple-old.png" class="img-fluid shadow" alt="Old page_sidebar() styling with a dark title bar. Sidebars and card headers and footers have a light gray background. Cards and value boxes do not have shadows and value box icons are solid dark gray.">
 </div>
   </div>
   </div>
@@ -3217,7 +3217,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -3283,7 +3283,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -3355,7 +3355,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -3414,10 +3414,10 @@ font-style: inherit;">)</span></span></code></pre></div>
   </ul>
 <div class="tab-content p-3 border-0">
     <div class="tab-pane fade show active" id="flights-dark">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/flights-dark.png" class="img-fluid shadow" alt="Flights dashboard in dark mode. All white areas are now a deep dark gray. The blue accents remain.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/flights-dark.png" class="img-fluid shadow" alt="Flights dashboard in dark mode. All white areas are now a deep dark gray. The blue accents remain.">
 </div>
     <div class="tab-pane" id="flights-light">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/flights-light.png" class="img-fluid shadow" alt="Flights dashboard in light mode as previously described.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/flights-light.png" class="img-fluid shadow" alt="Flights dashboard in light mode as previously described.">
 </div>
   </div>
   </div>
@@ -3432,7 +3432,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -3606,7 +3606,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div id="tabset-1-1" class="tab-pane active page-columns page-full" aria-labelledby="tabset-1-1-tab">
 <div class="column-page-inset overflow-auto mb-3">
   <div class="d-flex align-items-center" style="height: 200px; min-width: 800px">
-    <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/value-box-text.png" alt="Three value boxes, with made up statistics in purple, green and blue text. The value boxes feature unadorned plots that fill the bottom half of the box, each a sparkline in the same color as the card." class="img-fluid">
+    <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/value-box-text.png" alt="Three value boxes, with made up statistics in purple, green and blue text. The value boxes feature unadorned plots that fill the bottom half of the box, each a sparkline in the same color as the card." class="img-fluid">
 </div>
 </div>
 <section id="showcase-bottom-with-text-color-theme" class="level5"><h5 class="anchored" data-anchor-id="showcase-bottom-with-text-color-theme">Showcase Bottom with Text-Color Theme</h5>
@@ -3759,7 +3759,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div id="tabset-1-2" class="tab-pane page-columns page-full" aria-labelledby="tabset-1-2-tab">
 <div class="column-page-inset overflow-auto mb-3">
   <div class="d-flex align-items-center" style="height: 200px; min-width: 800px">
-    <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/value-box-icons.png" alt="Three value boxes with made up statistics, each with an icon to the left of the box. The cards are not tall and fit neatly into small row. The icons are blue with a subtle gradient toward the bottom right corner, blending from blue into purple." class="img-fluid">
+    <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/value-box-icons.png" alt="Three value boxes with made up statistics, each with an icon to the left of the box. The cards are not tall and fit neatly into small row. The icons are blue with a subtle gradient toward the bottom right corner, blending from blue into purple." class="img-fluid">
 </div>
 </div>
 <section id="showcase-left-center-with-gradient-icons" class="level5"><h5 class="anchored" data-anchor-id="showcase-left-center-with-gradient-icons">Showcase Left Center with Gradient Icons</h5>
@@ -3878,7 +3878,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div id="tabset-1-3" class="tab-pane page-columns page-full" aria-labelledby="tabset-1-3-tab">
 <div class="column-page-inset overflow-auto mb-3">
   <div class="d-flex align-items-center" style="height: 200px; min-width: 800px">
-    <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/value-box-gradient.png" alt="Three value boxes of made up statistics, with vibrant gradient backgrounds: purple-cyan, orange-indigo, and teal-purple. Each card has an icon in the upper right corner and the title and value in the lower left corner." class="img-fluid">
+    <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/value-box-gradient.png" alt="Three value boxes of made up statistics, with vibrant gradient backgrounds: purple-cyan, orange-indigo, and teal-purple. Each card has an icon in the upper right corner and the title and value in the lower left corner." class="img-fluid">
 </div>
 </div>
 <section id="showcase-top-right-with-gradient-backgrounds" class="level5"><h5 class="anchored" data-anchor-id="showcase-top-right-with-gradient-backgrounds">Showcase Top Right with Gradient Backgrounds</h5>
@@ -4054,16 +4054,16 @@ document.addEventListener("DOMContentLoaded", function() {
   </ul>
 <div class="g-col-md-9 g-col-12 tab-content p-3 border-0">
     <div class="tab-pane fade show active" id="preset-inputs">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/shiny-preset-inputs.gif" class="img-fluid" alt="New inputs styles, in particular a minimal slider input.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/shiny-preset-inputs.gif" class="img-fluid" alt="New inputs styles, in particular a minimal slider input.">
 </div>
     <div class="tab-pane fade" id="preset-notifications">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/shiny-preset-notifications.gif" class="img-fluid" alt="New notification styles for default, message, warning and error notifications. Notifications have shadows and have a large amount of padding around the edges compared with Shiny's default design.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/shiny-preset-notifications.gif" class="img-fluid" alt="New notification styles for default, message, warning and error notifications. Notifications have shadows and have a large amount of padding around the edges compared with Shiny's default design.">
 </div>
     <div class="tab-pane fade" id="preset-progress-bar">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/shiny-preset-progress-bar.gif" class="img-fluid" alt="New progress bar notification styles, which are similar to notifications.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/shiny-preset-progress-bar.gif" class="img-fluid" alt="New progress bar notification styles, which are similar to notifications.">
 </div>
     <div class="tab-pane fade" id="preset-modals">
-      <img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/shiny-preset-modal.png" class="img-fluid" alt="An example modal with the new shiny preset style. The modal is minimal with additional padding and the backdrop has a soft blur effect.">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/shiny-preset-modal.png" class="img-fluid" alt="An example modal with the new shiny preset style. The modal is minimal with additional padding and the backdrop has a soft blur effect.">
 </div>
   </div>
 </div>
@@ -4082,7 +4082,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <p>This upgrade resolved <a href="https://github.com/rstudio/shiny/issues?q=is:issue+is:closed+selectize+sort:updated-desc+">a number of outstanding bugs and issues</a> with <code><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectizeInput()</a></code> (as well as introducing some new ones that we had to squash before release). Most users won’t notice a difference in the select inputs – now they’ll just work <em>better</em> – but if you do notice a change in behavior, please let use know by <a href="https://github.com/rstudio/shiny/issues">filing an issue</a>.</p>
 <p>Power users will find even more selectize.js <a href="https://selectize.dev/docs/usage">options</a> now available, including more <a href="https://selectize.dev/docs/demos/plugins">plugins</a>. We highly recommend trying both the <a href="https://selectize.dev/docs/plugins/clear-button"><code>clear_button</code></a> and <a href="https://selectize.dev/docs/plugins/remove-button"><code>remove_button</code></a> plugins to give users a clear visual cue for removing options:</p>
 <div class="text-center">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/selectize.gif" class="img-fluid" alt="A demo with two select inputs. The first allows a single value and uses the clear_button plugin. An X on the select input allows the user to clear the selection. The second input allows multiple values and uses the remove_button plugin. Each selected value has an X that allows the user to remove the value."></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/selectize.gif" class="img-fluid" alt="A demo with two select inputs. The first allows a single value and uses the clear_button plugin. An X on the select input allows the user to clear the selection. The second input allows multiple values and uses the remove_button plugin. Each selected value has an X that allows the user to remove the value."></p>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb8" data-shinylive="https://shinylive.io/r/editor/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IdJiw71OY4RBEBXWgAIAPAFolqKAHM4AfQBmtAB5wAJuxFLrSznGpwCpWgC84ASQip5pSxBsBSkJgnHzaDsG4QWAAymEOtvaOpJG2pFDkGNDwuFaB1kSoziScSgC8SnScvqjU8tp8pRXBBA4sevQ+pCTBsgECuf42dg5Orh5ePn751sEw8tTOtXCpwQCyC0sJI8mp1RlwWbBwgzNK84u0y+VKACpYAKoAoqczhcUQTZW01ey19Y0bsFGHAYEQAG76TqkbpyMB9GyyWQiOyMSGMVQaAzyCBjEjsPjeUhRIg+IlROycUIkARKEB5WYQAC+IhRvH4AEF0OxFBS4Gj+QIwEyALpAA" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
@@ -4092,7 +4092,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -4254,7 +4254,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </section><section id="plotly-v4.10.3" class="level4"><h4 class="anchored" data-anchor-id="plotly-v4.10.3">plotly <a href="https://cran.r-project.org/web/packages/plotly/news/news.html">v4.10.3</a>
 </h4>
 <p><a href="https://github.com/AdroMine">@AdroMine</a>, <a href="https://github.com/AlexisDerumigny">@AlexisDerumigny</a>, <a href="https://github.com/Apompetti-Cori">@Apompetti-Cori</a>, <a href="https://github.com/cashfields">@cashfields</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/CristianRiccio">@CristianRiccio</a>, <a href="https://github.com/davidhodge931">@davidhodge931</a>, <a href="https://github.com/DrMattG">@DrMattG</a>, <a href="https://github.com/geejaytee">@geejaytee</a>, <a href="https://github.com/jacole3">@jacole3</a>, <a href="https://github.com/jrbarber37">@jrbarber37</a>, <a href="https://github.com/lennartraman">@lennartraman</a>, <a href="https://github.com/LouisLeNezet">@LouisLeNezet</a>, <a href="https://github.com/MichalLauer">@MichalLauer</a>, <a href="https://github.com/mjdzr">@mjdzr</a>, <a href="https://github.com/mumbarkar">@mumbarkar</a>, <a href="https://github.com/Obsidian-user">@Obsidian-user</a>, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/OverLordGoldDragon">@OverLordGoldDragon</a>, <a href="https://github.com/rsbivand">@rsbivand</a>, <a href="https://github.com/stephanmg">@stephanmg</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/TheAnalyticalEdge">@TheAnalyticalEdge</a>, <a href="https://github.com/ThierryO">@ThierryO</a>, <a href="https://github.com/tomasnobrega">@tomasnobrega</a>, <a href="https://github.com/tvedebrink">@tvedebrink</a>, <a href="https://github.com/uriahf">@uriahf</a>, <a href="https://github.com/whitejf">@whitejf</a>, <a href="https://github.com/wholmes105">@wholmes105</a>, <a href="https://github.com/wmay">@wmay</a>, <a href="https://github.com/yogat3ch">@yogat3ch</a>, and <a href="https://github.com/zeehio">@zeehio</a>.</p>
-</section><section id="shiny-v1.8.0" class="level4"><h4 class="anchored" data-anchor-id="shiny-v1.8.0">shiny <a href="https://shiny.posit.co/r/reference/shiny/1.8.0/upgrade.html">v1.8.0</a>
+</section><section id="shiny-v1.8.0" class="level4"><h4 class="anchored" data-anchor-id="shiny-v1.8.0">shiny <a href="https://shyr-test-center.netlify.app/r/reference/shiny/1.8.0/upgrade.html">v1.8.0</a>
 </h4>
 <p><a href="https://github.com/avsdev-cw">@avsdev-cw</a>, <a href="https://github.com/bathyscapher">@bathyscapher</a>, <a href="https://github.com/chlebowa">@chlebowa</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/deining">@deining</a>, <a href="https://github.com/flachboard">@flachboard</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/karangattu">@karangattu</a>, <a href="https://github.com/nstrayer">@nstrayer</a>, <a href="https://github.com/wbakerrobinson">@wbakerrobinson</a>, and <a href="https://github.com/wch">@wch</a>.</p>
 </section><section id="shinyvalidate-v0.1.3" class="level4"><h4 class="anchored" data-anchor-id="shinyvalidate-v0.1.3">shinyvalidate <a href="https://rstudio.github.io/shinyvalidate/news/index.html#shinyvalidate-013">v0.1.3</a>
@@ -4269,14 +4269,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-r-1.8.0/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/</guid>
   <pubDate>Thu, 30 Nov 2023 05:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-r-1.8.0/feature.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/feature.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Shiny for Python 0.6.0</title>
   <dc:creator>Shiny Team</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-python-0.6.0/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.0/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -4290,7 +4290,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-python-0.6.0/shiny-060.png" alt="Shiny for Python 0.6.0" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.0/shiny-060.png" alt="Shiny for Python 0.6.0" style="width: 100%; height: auto;">
     </div>
     
 
@@ -4426,7 +4426,7 @@ font-style: inherit;">"plot"</span>),</span>
 <p>There are a lot of new components in this release, but the two most important ones are <code>ui.card()</code> and <code>ui.value_box()</code>. Cards allow you to visually dilineate parts of your application, and group inputs and outputs together. For example, you might have a card which included a plot and some inputs which filter the data for that particular plot. Cards also provide sensible spacing which makes your app look less cluttered and easier to read.</p>
 <p>Value boxes are for highlighting single numbers or pieces of text. They are useful for calling out important numbers or pieces of text, and can include showcase icons. To top it off, value boxes are enhanced with advanced Bootstrap theming capabilities, allowing you to change the color of the box, the icon, and the text.</p>
 <div class="column-page-inset">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.6.0/model_monitoring.png" class="border shadow-lg mb-3 img-fluid" alt="Page sidebar with a card and value boxes"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.0/model_monitoring.png" class="border shadow-lg mb-3 img-fluid" alt="Page sidebar with a card and value boxes"></p>
 </div>
 <p>Both value boxes and cards can be positioned using <code>ui.layout_column_wrap</code>. This function provides a convenient way to display elements in equally spaced columns. The values boxes in the above example are presented using <code>ui.layout_column_wrap</code>.</p>
 <p>While you can arrange content with <code>ui.row()</code> and <code>ui.column()</code>, <code>ui.layout_column_wrap()</code> removes a lot of additional boilerplate. For example if you had three cards which you wanted to lay out on a row, you would do it like this:</p>
@@ -4474,14 +4474,14 @@ font-style: inherit;">3</span>,</span>
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-python-0.6.0/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.0/</guid>
   <pubDate>Wed, 15 Nov 2023 05:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-python-0.6.0/shiny-060.png" medium="image" type="image/png" height="76" width="144"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.0/shiny-060.png" medium="image" type="image/png" height="76" width="144"/>
 </item>
 <item>
   <title>ShinyUiEditor: Out of Alpha</title>
   <dc:creator>Nick Strayer</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shinyuieditor-out-of-alpha/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shinyuieditor-out-of-alpha/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) -->
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -4495,7 +4495,7 @@ font-style: inherit;">3</span>,</span>
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shinyuieditor-out-of-alpha/out-of-alpha-main.jpeg" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shinyuieditor-out-of-alpha/out-of-alpha-main.jpeg" style="width: 100%; height: auto;">
     </div>
     
 
@@ -4569,15 +4569,15 @@ Now if you delete an element with server bindings, the editor will ask if you wa
 
 </section>
 </section></section> ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shinyuieditor-out-of-alpha/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shinyuieditor-out-of-alpha/</guid>
   <pubDate>Mon, 30 Oct 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shinyuieditor-out-of-alpha/out-of-alpha-main.jpeg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shinyuieditor-out-of-alpha/out-of-alpha-main.jpeg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Shiny for R updates: tooltips, popovers, a new theme, and more</title>
   <dc:creator>Carson Sievert</dc:creator>
   <dc:creator>Garrick Aden-Buie</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/bslib-tooltips/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/bslib-tooltips/</link>
   <description><![CDATA[ <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
@@ -4587,7 +4587,7 @@ Now if you delete an element with server bindings, the editor will ask if you wa
   }
 </style>
 <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/bslib-tooltips/feature.png" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/bslib-tooltips/feature.png" style="width: 100%; height: auto;">
 </div>
     
 
@@ -4602,7 +4602,7 @@ Now if you delete an element with server bindings, the editor will ask if you wa
 </style>
 <p>The Shiny team is delighted to share that we’ve just released updates for 12 different R packages that contribute to the Shiny experience. These updates include many improvements and bug fixes that aren’t explicitly covered here, but the release notes section of this post provides links to the full list of changes for each package. That said, there are a few new features in <code>bslib</code> that we’re particularly excited to highlight for you!</p>
 <section id="bslib" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="bslib">bslib</h2>
-<p>In <a href="https://shiny.posit.co/blog/posts/bslib-dashboards/">the last release of <code>bslib</code> (0.5.0)</a>, we made significant strides towards <code>bslib</code> being our recommended way to <a href="https://rstudio.github.io/bslib/articles/dashboards/index.html">build modern Shiny dashboards</a>. In this release, we’ve added more features to help you make even better dashboards.</p>
+<p>In <a href="https://shyr-test-center.netlify.app/blog/posts/bslib-dashboards/">the last release of <code>bslib</code> (0.5.0)</a>, we made significant strides towards <code>bslib</code> being our recommended way to <a href="https://rstudio.github.io/bslib/articles/dashboards/index.html">build modern Shiny dashboards</a>. In this release, we’ve added more features to help you make even better dashboards.</p>
 <section id="tooltips-and-popovers" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="tooltips-and-popovers">Tooltips and popovers</h3>
 <p>One essential quality of any great website is that it provides the user with the right amount of information at the right time. In technically-oriented apps, you might want to provide a definition for a term, a description of a model parameter, or an input that updates a specific plot, but you don’t want these details to overwhelm the user when they’re not needed.</p>
 <p>In this release, we’ve added <code><a href="https://rstudio.github.io/bslib/reference/tooltip.html">bslib::tooltip()</a></code> and <code><a href="https://rstudio.github.io/bslib/reference/popover.html">bslib::popover()</a></code> to help you do just that. By putting this additional information in a tooltip or these additional controls in a popover, you can provide the detail your users need on demand, right where they need it.</p>
@@ -4637,7 +4637,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;"><a href="https://shiny.posit.co/">shiny</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="kw" style="color: #003B4F;
@@ -4774,7 +4774,7 @@ document.getElementById("switch").addEventListener("click", (ev) => {
 </ul>
 </li>
 <li>More UI components, such as <a href="https://getbootstrap.com/docs/5.3/components/offcanvas/">offcanvas</a>, <a href="https://getbootstrap.com/docs/5.3/components/button-group/">button groups</a>, etc.</li>
-<li>More incorporation of <code>bslib</code> as part of the <a href="https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html">Getting Started experience</a> on <a href="https://shiny.posit.co/">shiny.posit.co</a>.</li>
+<li>More incorporation of <code>bslib</code> as part of the <a href="https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson1/index.html">Getting Started experience</a> on <a href="https://shyr-test-center.netlify.app/">shiny.posit.co</a>.</li>
 <li>More <code>bslib</code>-focused example galleries, starter templates, and articles.</li>
 </ul>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -4796,7 +4796,7 @@ Join us at posit::conf(2023)!
 <section id="bslib-v0.5.1" class="level3"><h3 class="anchored" data-anchor-id="bslib-v0.5.1">bslib <a href="https://rstudio.github.io/bslib/news/index.html#bslib-051">v0.5.1</a>
 </h3>
 <p><a href="https://github.com/ariebh">@ariebh</a>, <a href="https://github.com/asadow">@asadow</a>, <a href="https://github.com/chrisbrownlie">@chrisbrownlie</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/ctrlxctrlc">@ctrlxctrlc</a>, <a href="https://github.com/daattali">@daattali</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/ideusoes">@ideusoes</a>, <a href="https://github.com/Liripo">@Liripo</a>, <a href="https://github.com/michael-dewar">@michael-dewar</a>, <a href="https://github.com/nteetor">@nteetor</a>, <a href="https://github.com/PaulC91">@PaulC91</a>, <a href="https://github.com/philiph99">@philiph99</a>, <a href="https://github.com/riskcede">@riskcede</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/Teebusch">@Teebusch</a>, <a href="https://github.com/tillea">@tillea</a>, and <a href="https://github.com/wch">@wch</a>.</p>
-</section><section id="shiny-v1.7.5" class="level3"><h3 class="anchored" data-anchor-id="shiny-v1.7.5">shiny <a href="https://shiny.posit.co/r/reference/shiny/1.7.5/upgrade.html">v1.7.5</a>
+</section><section id="shiny-v1.7.5" class="level3"><h3 class="anchored" data-anchor-id="shiny-v1.7.5">shiny <a href="https://shyr-test-center.netlify.app/r/reference/shiny/1.7.5/upgrade.html">v1.7.5</a>
 </h3>
 <p><a href="https://github.com/AlexWaterboyBezzina">@AlexWaterboyBezzina</a>, <a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/aronatkins">@aronatkins</a>, <a href="https://github.com/asadow">@asadow</a>, <a href="https://github.com/BajczA475">@BajczA475</a>, <a href="https://github.com/barracuda156">@barracuda156</a>, <a href="https://github.com/brooksambrose">@brooksambrose</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/daattali">@daattali</a>, <a href="https://github.com/dipterix">@dipterix</a>, <a href="https://github.com/dkori">@dkori</a>, <a href="https://github.com/drag05">@drag05</a>, <a href="https://github.com/dvg-p4">@dvg-p4</a>, <a href="https://github.com/emillykkejensen">@emillykkejensen</a>, <a href="https://github.com/EricKrantz">@EricKrantz</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/galachad">@galachad</a>, <a href="https://github.com/Gathuh">@Gathuh</a>, <a href="https://github.com/GShotwell">@GShotwell</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/hcsun1">@hcsun1</a>, <a href="https://github.com/ifoxfoot">@ifoxfoot</a>, <a href="https://github.com/ismirsehregal">@ismirsehregal</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/jessekps">@jessekps</a>, <a href="https://github.com/johnkarlen">@johnkarlen</a>, <a href="https://github.com/juwitt">@juwitt</a>, <a href="https://github.com/kathi-resan">@kathi-resan</a>, <a href="https://github.com/kennedymwavu">@kennedymwavu</a>, <a href="https://github.com/kevinushey">@kevinushey</a>, <a href="https://github.com/king-of-poppk">@king-of-poppk</a>, <a href="https://github.com/KRRLP-PL">@KRRLP-PL</a>, <a href="https://github.com/Liripo">@Liripo</a>, <a href="https://github.com/magarick">@magarick</a>, <a href="https://github.com/MalteSteinCytel">@MalteSteinCytel</a>, <a href="https://github.com/matt4815162342">@matt4815162342</a>, <a href="https://github.com/maxheld83">@maxheld83</a>, <a href="https://github.com/Mkranj">@Mkranj</a>, <a href="https://github.com/nolanjj">@nolanjj</a>, <a href="https://github.com/norahAlbarrak">@norahAlbarrak</a>, <a href="https://github.com/pawelru">@pawelru</a>, <a href="https://github.com/pbosetti">@pbosetti</a>, <a href="https://github.com/RaviSekha">@RaviSekha</a>, <a href="https://github.com/RosalynLP">@RosalynLP</a>, <a href="https://github.com/sanjmeh">@sanjmeh</a>, <a href="https://github.com/SarenT">@SarenT</a>, <a href="https://github.com/schloerke">@schloerke</a>, <a href="https://github.com/shahronak47">@shahronak47</a>, <a href="https://github.com/stefanedwards">@stefanedwards</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/stuvet">@stuvet</a>, <a href="https://github.com/timbrock">@timbrock</a>, <a href="https://github.com/tomjemmett">@tomjemmett</a>, <a href="https://github.com/vivigirardin">@vivigirardin</a>, <a href="https://github.com/vnijs">@vnijs</a>, <a href="https://github.com/wch">@wch</a>, and <a href="https://github.com/Zhenglei-BCS">@Zhenglei-BCS</a>.</p>
 </section><section id="htmltools-v0.5.6" class="level3"><h3 class="anchored" data-anchor-id="htmltools-v0.5.6">htmltools <a href="https://rstudio.github.io/htmltools/news/index.html#htmltools-056">v0.5.6</a>
@@ -4835,14 +4835,14 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 </script>
 
 </section></section> ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/bslib-tooltips/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/bslib-tooltips/</guid>
   <pubDate>Wed, 16 Aug 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/bslib-tooltips/feature.png" medium="image" type="image/png" height="81" width="144"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/bslib-tooltips/feature.png" medium="image" type="image/png" height="81" width="144"/>
 </item>
 <item>
   <title>Shiny for Python 0.5.0</title>
   <dc:creator>Joe Cheng</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-python-0.5.0/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -4856,7 +4856,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-python-0.5.0/shiny-050.png" alt="Shiny for Python 0.5.0" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/shiny-050.png" alt="Shiny for Python 0.5.0" style="width: 100%; height: auto;">
     </div>
     
 
@@ -4900,7 +4900,7 @@ End Google Tag Manager (noscript) -->
 (old theme)
 </div>
 <div id="theme-comparison" class="column-page">
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.5.0/theme-before.png" id="theme-before" class="border shadow-lg img-fluid" alt="App with old sidebar"> <img src="https://shiny.posit.co/blog/posts/shiny-python-0.5.0/theme-after.png" id="theme-after" class="border shadow-lg img-fluid" alt="App with old sidebar"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/theme-before.png" id="theme-before" class="border shadow-lg img-fluid" alt="App with old sidebar"> <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/theme-after.png" id="theme-after" class="border shadow-lg img-fluid" alt="App with old sidebar"></p>
 </div>
 <div id="after-caption" class="sshot-caption">
 (new theme)
@@ -4966,7 +4966,7 @@ font-style: inherit;">20</span>),</span>
 background-color: null;
 font-style: inherit;">"A value to be doubled"</span></span>
 <span id="cb2-7">)</span></code></pre></div>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.5.0/tooltip.png" class="img-fluid" alt="A mouse moving over a slider input, causing a tooltip to appear" width="540"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/tooltip.png" class="img-fluid" alt="A mouse moving over a slider input, causing a tooltip to appear" width="540"></p>
 <ul>
 <li><a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbJjmVYnTJMAgujxM6lACZw6EgK4cAOhD4ChrTtwxwAHqjl9KZKABsmUFkz2rVaVAH0lTALxMlWKAHM4jmmZK0gAUqkzhNhieZMTEZmQcqKEQEakeHBhcqApkjixmHLJ0oZDK+ExlAHJlEgAMEgCMtfVMAEy1AJR4YWnhZSJMAG7mCnBMMUwARmPSxAqTZnDSNT3hXavpGHNk2bkUermDcpNQCTAlZAdl6xAddhCqsjSsckfFWTkS27sSLHAsLA4pA6iA2AAFvjlwVIIEUMPsyBsnuMDsEQRtUlIyAo6CkaGUIAAqVq8awgD5kDAQNFMQltAC+ZXu9nQblE6GCDmcHF+rzkdwgYHpAF0gA">Try it out with Shinylive</a></li>
 <li><a href="https://shypy-test-center.netlify.app/py/api/ExTooltip.html">API documentation</a></li>
@@ -5007,7 +5007,7 @@ font-style: inherit;">"Your full name"</span></span>
 <span id="cb3-11">        )</span>
 <span id="cb3-12">    ],</span>
 <span id="cb3-13">)</span></code></pre></div>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.5.0/tooltip-help.png" class="img-fluid" alt="A mouse moving over a help icon in an input label, causing a tooltip to appear" width="306">]</p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/tooltip-help.png" class="img-fluid" alt="A mouse moving over a help icon in an input label, causing a tooltip to appear" width="306">]</p>
 <ul>
 <li><a href="https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbJjmVYnTJMAgujxMArhwA6EPgKGtO3DHAAeqOHT6UyUADZMoLJurn1GTGlA4kIphYOF3SAfRYA3AOZy5aVDdpJgBeKQ4sKG84NxoDaQATAAo5JjTwjC5USTI3CnUyFIh0kqYZSFg4crxU0rSDKAAjOAMQ4Fq6kvKAOUqy-A7OtPUMaQwyYmIDMg5UJNcIDx8Uog46QgM4AFouGmJq6w4DAzdiVChCDjJsEIAGDABWAEoJcoBNYkk6a0ljpmh4OUXoMSgBdGrFdJPOTQiD+dChUToJIBIIcCTdUhwJ5gAC+oKAA">Try it out with Shinylive</a></li>
 </ul>
@@ -5023,14 +5023,14 @@ font-style: inherit;">"Your full name"</span></span>
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-python-0.5.0/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/</guid>
   <pubDate>Wed, 09 Aug 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-python-0.5.0/shiny-050.png" medium="image" type="image/png" height="76" width="144"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/shiny-050.png" medium="image" type="image/png" height="76" width="144"/>
 </item>
 <item>
   <title>Shiny for Python 0.4.0</title>
   <dc:creator>Winston Chang</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-python-0.4.0/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -5044,7 +5044,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-python-0.4.0/shiny-040.png" alt="Shiny for Python 0.4.0" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/shiny-040.png" alt="Shiny for Python 0.4.0" style="width: 100%; height: auto;">
     </div>
     
 
@@ -5056,7 +5056,7 @@ End Google Tag Manager (noscript) -->
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="Data table"><source src="data-grid.mp4"></video></div>
 <p>It can easily handle tables with tens of thousands of rows, and supports sorting by columns – just click on the column header to sort.</p>
 <p>In addition to the grid-style appearance, the data can be displayed with a more traditional table-like appearance.</p>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.4.0/data-table.png" class="img-fluid" alt="Data table with more traditional appearance"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/data-table.png" class="img-fluid" alt="Data table with more traditional appearance"></p>
 <p>These tables aren’t just for displaying data – they can also allow you to select rows, use that selection as an input, as shown here:</p>
 <div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="Selecting rows in a data table"><source src="data-grid-select.mp4"></video></div>
 <p>To use the new tables, put this in your application’s UI:</p>
@@ -5087,9 +5087,9 @@ font-style: inherit;">return</span> render.DataGrid(my_df)</span></code></pre></
 <section id="better-looking-sidebars" class="level2">
 <h2 data-anchor-id="better-looking-sidebars">Better-looking sidebars</h2>
 <p>In addition to the new tables, we’ve also improved the look of the basic sidebar. Here’s what they used to look like:</p>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.4.0/sidebar-old.png" class="img-fluid" alt="App with old sidebar"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/sidebar-old.png" class="img-fluid" alt="App with old sidebar"></p>
 <p>Previously, the sidebar was only as tall as the content in the sidebar, but now they span the full height of the application. Here’s what they look like now:</p>
-<p><img src="https://shiny.posit.co/blog/posts/shiny-python-0.4.0/sidebar-new.png" class="img-fluid" alt="App with new sidebar"></p>
+<p><img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/sidebar-new.png" class="img-fluid" alt="App with new sidebar"></p>
 <p>You won’t have to change any code to get the new look – your existing code will just work!</p>
 <p><a href="https://shinylive.io/py/examples/#cpu-info">Check out a live example here.</a></p>
 <p>Enjoy!</p>
@@ -5098,14 +5098,14 @@ font-style: inherit;">return</span> render.DataGrid(my_df)</span></code></pre></
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-python-0.4.0/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/</guid>
   <pubDate>Wed, 28 Jun 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-python-0.4.0/shiny-040.png" medium="image" type="image/png" height="76" width="144"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/shiny-040.png" medium="image" type="image/png" height="76" width="144"/>
 </item>
 <item>
   <title>Towards easy, delightful, and customizable dashboards in Shiny for R with {bslib}</title>
   <dc:creator>Carson Sievert</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/bslib-dashboards/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/bslib-dashboards/</link>
   <description><![CDATA[ <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
@@ -5115,7 +5115,7 @@ font-style: inherit;">return</span> render.DataGrid(my_df)</span></code></pre></
   }
 </style>
 <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/bslib-dashboards/feature.png" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/bslib-dashboards/feature.png" style="width: 100%; height: auto;">
 </div>
     
 
@@ -5138,7 +5138,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>This release includes a major overhaul of our documentation, including new and updated articles and better organization of content. The <a href="https://rstudio.github.io/bslib/">bslib site</a> nows groups these articles by whether you’re just get started, or want to dive deeper into theming, UI components, or layouts. If you’re primarily interested in making dashboards, make sure to visit the <a href="https://rstudio.github.io/bslib/articles/dashboards.html">Getting Started with dashboards</a> article.</p>
 <p>In this blog post, I’ll discuss some of the new features that contribute to the dashboarding experience, as well as why we’ve chosen <a href="https://rstudio.github.io/bslib/">bslib</a> as the home for this work. You can run the examples in this post yourself (without having to install anything!) in <a href="https://posit.cloud/content/6073069">this Posit Cloud project</a>.</p>
 <section id="hello-dashboards" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="hello-dashboards">Hello dashboards</h3>
-<p><a href="https://rstudio.github.io/bslib/">bslib</a>’s <a href="https://shiny.posit.co/blog/posts/announcing-new-r-shiny-ui-components/">last release</a> first introduced some important dashboard components (e.g., cards, value boxes, etc), but this release adds other essential pieces such as sidebar layouts, filling layouts, new column-wise layouts, accordions, and more. <a href="https://rstudio.github.io/bslib/">bslib</a>’s new <a href="https://rstudio.github.io/bslib/articles/dashboards.html">Getting Started with dashboards</a> article introduces all these pieces by first starting with a basic app and working towards some non-trivial dashboards, like the one below:</p>
+<p><a href="https://rstudio.github.io/bslib/">bslib</a>’s <a href="https://shyr-test-center.netlify.app/blog/posts/announcing-new-r-shiny-ui-components/">last release</a> first introduced some important dashboard components (e.g., cards, value boxes, etc), but this release adds other essential pieces such as sidebar layouts, filling layouts, new column-wise layouts, accordions, and more. <a href="https://rstudio.github.io/bslib/">bslib</a>’s new <a href="https://rstudio.github.io/bslib/articles/dashboards.html">Getting Started with dashboards</a> article introduces all these pieces by first starting with a basic app and working towards some non-trivial dashboards, like the one below:</p>
 <div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
 <div class="column-body-outset">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="A Shiny dashboard for exploring the palmerpenguins dataset built using bslib"><source src="dashboard.mp4"></video></div>
@@ -5208,14 +5208,14 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 <ol>
 <li id="fn1"><p>Joe Cheng’s presentation demoed new theming features in the <code>{bootstraplib}</code> package, which evolved into the package known as <a href="https://rstudio.github.io/bslib/">bslib</a> and was released to CRAN in 2021.↩︎</p></li>
 </ol></section></div> ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/bslib-dashboards/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/bslib-dashboards/</guid>
   <pubDate>Wed, 07 Jun 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/bslib-dashboards/feature.png" medium="image" type="image/png" height="75" width="144"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/bslib-dashboards/feature.png" medium="image" type="image/png" height="75" width="144"/>
 </item>
 <item>
   <title>AI chat apps with Shiny for Python</title>
   <dc:creator>Winston Chang</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-python-chatstream/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-python-chatstream/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -5229,7 +5229,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-python-chatstream/shiny-ai-chatbot.jpg" alt="an image with lines representing ai computing lie behind a chatbox icon" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-chatstream/shiny-ai-chatbot.jpg" alt="an image with lines representing ai computing lie behind a chatbox icon" style="width: 100%; height: auto;">
     </div>
     
 
@@ -5321,14 +5321,14 @@ font-style: inherit;">=</span> App(app_ui, server)</span></code></pre></div>
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-python-chatstream/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-python-chatstream/</guid>
   <pubDate>Fri, 12 May 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-python-chatstream/shiny-ai-chatbot.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-python-chatstream/shiny-ai-chatbot.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Shiny on Hugging Face</title>
   <dc:creator>Gordon Shotwell</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-on-hugging-face/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-on-hugging-face/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -5342,7 +5342,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-on-hugging-face/shiny-on-hf-thumb.jpg" alt="The Shiny hex next to the Hugging Face emoji logo" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-on-hugging-face/shiny-on-hf-thumb.jpg" alt="The Shiny hex next to the Hugging Face emoji logo" style="width: 100%; height: auto;">
     </div>
     
 
@@ -5371,14 +5371,14 @@ End Google Tag Manager (noscript) -->
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-on-hugging-face/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-on-hugging-face/</guid>
   <pubDate>Mon, 08 May 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-on-hugging-face/shiny-on-hf-thumb.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-on-hugging-face/shiny-on-hf-thumb.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Shiny for Python out of alpha</title>
   <dc:creator>Winston Chang</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/shiny-python-general-availability/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -5392,7 +5392,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/shiny-python-general-availability/shiny-for-python.jpg" alt="The Shiny hex sticker next to the Python language logo, saying Shiny for Python" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/shiny-for-python.jpg" alt="The Shiny hex sticker next to the Python language logo, saying Shiny for Python" style="width: 100%; height: auto;">
     </div>
     
 
@@ -5420,14 +5420,14 @@ End Google Tag Manager (noscript) -->
 </section>
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/shiny-python-general-availability/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/</guid>
   <pubDate>Tue, 18 Apr 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/shiny-python-general-availability/shiny-for-python.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/shiny-for-python.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Shiny Conf 2023 Recap</title>
   <dc:creator>Andrew Holz</dc:creator>
-  <link>https://shiny.posit.co/blog/posts/conf-2023-recap-andrew-holz/</link>
+  <link>https://shyr-test-center.netlify.app/blog/posts/conf-2023-recap-andrew-holz/</link>
   <description><![CDATA[ 
 <!-- Google Tag Manager (noscript) -->
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -5441,7 +5441,7 @@ End Google Tag Manager (noscript) -->
 
 
         <div class="column-body-outset blog-image-container pb-5">
-      <img src="https://shiny.posit.co/blog/posts/conf-2023-recap-andrew-holz/shinyconflogo.jpg" alt="The Shiny Conf Logo on a dark blue background" style="width: 100%; height: auto;">
+      <img src="https://shyr-test-center.netlify.app/blog/posts/conf-2023-recap-andrew-holz/shinyconflogo.jpg" alt="The Shiny Conf Logo on a dark blue background" style="width: 100%; height: auto;">
     </div>
     
 
@@ -5459,9 +5459,9 @@ End Google Tag Manager (noscript) -->
 
 
  ]]></description>
-  <guid>https://shiny.posit.co/blog/posts/conf-2023-recap-andrew-holz/</guid>
+  <guid>https://shyr-test-center.netlify.app/blog/posts/conf-2023-recap-andrew-holz/</guid>
   <pubDate>Tue, 28 Mar 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://shiny.posit.co/blog/posts/conf-2023-recap-andrew-holz/shinyconflogo.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://shyr-test-center.netlify.app/blog/posts/conf-2023-recap-andrew-holz/shinyconflogo.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

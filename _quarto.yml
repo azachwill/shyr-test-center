@@ -19,7 +19,7 @@ project:
 
 website:
   title: "Shiny"
-  site-url: https://shiny.posit.co/
+  site-url: https://shyr-test-center.netlify.app/
   page-navigation: true
   favicon: "favicon.png"
   page-footer:
@@ -37,11 +37,11 @@ website:
   open-graph:
     site-name: Shiny
     locale: en_US
-    image: https://shiny.posit.co/images/shiny-thumb.png
+    image: https://shyr-test-center.netlify.app/images/shiny-thumb.png
     description: Shiny is a package that makes it easy to create interactive web apps using R and Python.
   twitter-card:
     title: Shiny
-    image: https://shiny.posit.co/images/shiny-thumb.png
+    image: https://shyr-test-center.netlify.app/images/shiny-thumb.png
     description: Shiny is a package that makes it easy to create interactive web apps using R and Python.
     card-style: summary_large_image
   navbar:

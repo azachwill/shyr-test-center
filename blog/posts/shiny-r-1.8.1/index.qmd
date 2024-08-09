@@ -75,7 +75,7 @@ Additionally, we've found that `ExtendedTask` provides an elegant way to manage 
 Within the task, you'll use `{promises}` to create the async operation, but in the rest of your app you can use `ExtendedTask` methods to start the task or react to results when they arrive.
 
 As a result, `ExtendedTask` is now our recommended starting point for non-blocking tasks in Shiny.
-We'd love to show you a full example right now, but for the sake of space in this blog post we'll urge you to visit the [Non-blocking operations article](https://shiny.posit.co/r/articles/improve/nonblocking), also on this blog, for a complete introduction.
+We'd love to show you a full example right now, but for the sake of space in this blog post we'll urge you to visit the [Non-blocking operations article](https://shyr-test-center.netlify.app/r/articles/improve/nonblocking), also on this blog, for a complete introduction.
 
 ### A new task button
 
@@ -119,7 +119,7 @@ shinyApp(ui, server)
 Another exciting new feature is Shiny's JavaScript error dialog, which makes critical client-side errors more discoverable.
 To use the error dialog, turn on Shiny's developer features by calling `shiny::devmode()` before running your app locally[^devmode].
 
-[^devmode]: Read more about [shiny devmode in our docs](https://shiny.posit.co/r/reference/shiny/latest/devmode.html). If you'd like to turn on dev mode for all of your local interactive session, you can add the following snippet your `.Rprofile` either in your home directory or your project directory (use `usethis::edit_r_profile()` to open either):
+[^devmode]: Read more about [shiny devmode in our docs](https://shyr-test-center.netlify.app/r/reference/shiny/latest/devmode.html). If you'd like to turn on dev mode for all of your local interactive session, you can add the following snippet your `.Rprofile` either in your home directory or your project directory (use `usethis::edit_r_profile()` to open either):
 
     ```
     if (interactive() && requireNamespace("shiny", quietly = TRUE)) {
@@ -245,7 +245,7 @@ usethis::use_tidy_thanks("rstudio/bslib", from = "v0.6.1")
 
 [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;jeroen](https://github.com/jeroen), and [&#x0040;yulric](https://github.com/yulric).
 
-#### shiny [v1.8.1](https://shiny.posit.co/r/reference/shiny/1.8.1/upgrade.html)
+#### shiny [v1.8.1](https://shyr-test-center.netlify.app/r/reference/shiny/1.8.1/upgrade.html)
 
 [&#x0040;apalacio9502](https://github.com/apalacio9502), [&#x0040;Arthfael](https://github.com/Arthfael), [&#x0040;avoidaway](https://github.com/avoidaway), [&#x0040;bioinformzhang](https://github.com/bioinformzhang), [&#x0040;chendaniely](https://github.com/chendaniely), [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;Daishoulu](https://github.com/Daishoulu), [&#x0040;davidmacro](https://github.com/davidmacro), [&#x0040;etbrand](https://github.com/etbrand), [&#x0040;gadenbuie](https://github.com/gadenbuie), [&#x0040;gunawebs](https://github.com/gunawebs), [&#x0040;hadley](https://github.com/hadley), [&#x0040;HugoGit39](https://github.com/HugoGit39), [&#x0040;ismirsehregal](https://github.com/ismirsehregal), [&#x0040;jcheng5](https://github.com/jcheng5), [&#x0040;JohnCoene](https://github.com/JohnCoene), [&#x0040;jsendak](https://github.com/jsendak), [&#x0040;laresbernardo](https://github.com/laresbernardo), [&#x0040;MartinBaumga](https://github.com/MartinBaumga), [&#x0040;nstrayer](https://github.com/nstrayer), [&#x0040;olivroy](https://github.com/olivroy), [&#x0040;Roleren](https://github.com/Roleren), [&#x0040;RSchwinn](https://github.com/RSchwinn), [&#x0040;saleforecast1](https://github.com/saleforecast1), [&#x0040;sharitian](https://github.com/sharitian), [&#x0040;skaltman](https://github.com/skaltman), [&#x0040;stla](https://github.com/stla), [&#x0040;trafficonese](https://github.com/trafficonese), [&#x0040;TymekDev](https://github.com/TymekDev), [&#x0040;ugurdar](https://github.com/ugurdar), and [&#x0040;wch](https://github.com/wch).
 

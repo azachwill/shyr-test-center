@@ -1,1 +1,1 @@
-Sitemap: https://shiny.posit.co/sitemap.xml
+Sitemap: https://shyr-test-center.netlify.app/sitemap.xml

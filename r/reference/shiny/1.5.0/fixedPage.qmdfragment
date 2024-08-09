@@ -59,7 +59,7 @@ layout functions like <code>sidebarLayout</code>, rather, all layout must be don
 with <code>fixedRow</code> and <code>column</code>.</p>
   <h3 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h3>
 
-  <p>See the <a href='https://shiny.posit.co/articles/layout-guide.html'> Shiny Application Layout Guide</a> for additional details on laying out fixed
+  <p>See the <a href='https://shyr-test-center.netlify.app/articles/layout-guide.html'> Shiny Application Layout Guide</a> for additional details on laying out fixed
 pages.</p>
   <h3 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h3>
 

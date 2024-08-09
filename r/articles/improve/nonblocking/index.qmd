@@ -17,9 +17,9 @@ In this article, you'll learn how you can keep your Shiny apps responsive in the
 ::: {.callout-note}
 ## What about async reactive programming?
 
-In versions of Shiny before 1.8.1, we recommended using [promises](https://rstudio.github.io/promises/) and [async programming](https://shiny.posit.co/r/articles/improve/async/) directly in your app's reactive expressions, observers, and outputs to handle long-running operations. Compared to the advice in this article, that approach is much harder to learn, and doesn't result in a more responsive app for a single user (only multiple concurrent users).
+In versions of Shiny before 1.8.1, we recommended using [promises](https://rstudio.github.io/promises/) and [async programming](https://shyr-test-center.netlify.app/r/articles/improve/async/) directly in your app's reactive expressions, observers, and outputs to handle long-running operations. Compared to the advice in this article, that approach is much harder to learn, and doesn't result in a more responsive app for a single user (only multiple concurrent users).
 
-Still, there may be cases where you need to use async programming directly in your reactive code, and in those cases, you can refer to the [async programming article](https://shiny.posit.co/r/articles/improve/async/).
+Still, there may be cases where you need to use async programming directly in your reactive code, and in those cases, you can refer to the [async programming article](https://shyr-test-center.netlify.app/r/articles/improve/async/).
 :::
 
 ## A blocking app example

@@ -34,7 +34,7 @@ This option allows users to continue to use a local file in their code assuming 
 1. retrieve the most updated file when the application starts, and 
 2. write the updates to the file back to their object storage system before the application closes and the changes are lost.
 
-You can do this every time the data changes, or every time a session exits ([`session$onEnded`](https://shiny.posit.co/reference/shiny/latest/session.html)).
+You can do this every time the data changes, or every time a session exits ([`session$onEnded`](https://shyr-test-center.netlify.app/reference/shiny/latest/session.html)).
 
 We'll update our comment example from above using the [RAmazonS3](http://www.omegahat.net/RAmazonS3/) package which can be installed using the following command:
 

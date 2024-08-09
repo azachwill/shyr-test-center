@@ -132,7 +132,7 @@ ui <- fluidPage(
 
 In addition to page loads, it can be valuable to track the events that occur on a specific page. An event is an action that a user can take. For example, changing a select input would be an event. Most tracking tools provide a Javascript function for tracking events. Tracking events can provide insight into the actions a user is taking in an application: which inputs are changed, how frequently they change, and the order in which they change.
 
-The following template adds basic tracking for an application's inputs. The template relies on [Shiny's Javascript events](https://shiny.posit.co/articles/js-events.html).
+The following template adds basic tracking for an application's inputs. The template relies on [Shiny's Javascript events](https://shyr-test-center.netlify.app/articles/js-events.html).
 
 ### Template
 
@@ -151,7 +151,7 @@ ui <- fluidPage(
 
 This template has a number of parts:
 
-1. `shiny:inputchanged` acts as a trigger. The subsequent function is called anytime the app's inputs change. (To conceptually understand, think of this process as being similar to Shiny's `observeEvent(input, {function})` pattern).  Sometimes `shiny:inputchanged` will be triggered without the inputs changing, see [this article](https://shiny.posit.co/articles/js-events.html) for details.
+1. `shiny:inputchanged` acts as a trigger. The subsequent function is called anytime the app's inputs change. (To conceptually understand, think of this process as being similar to Shiny's `observeEvent(input, {function})` pattern).  Sometimes `shiny:inputchanged` will be triggered without the inputs changing, see [this article](https://shyr-test-center.netlify.app/articles/js-events.html) for details.
 
 2. `event` When the input changes, the Javascript function will have access to the `event` object. The `event` object includes the name of the input that was changed, `event.name`, and the new value of the input, `event.value`.
 

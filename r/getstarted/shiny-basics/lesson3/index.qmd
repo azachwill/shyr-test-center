@@ -228,9 +228,9 @@ It is easy to add fully functional widgets to your Shiny app.
 
 ## Go Further
 
-The [Shiny Widgets Gallery](https://shiny.posit.co/gallery/widget-gallery.html) provides templates that you can use to quickly add widgets to your Shiny apps.
+The [Shiny Widgets Gallery](https://shyr-test-center.netlify.app/gallery/widget-gallery.html) provides templates that you can use to quickly add widgets to your Shiny apps.
 
-To use a template, visit the [gallery](https://shiny.posit.co/gallery/widget-gallery.html). The gallery displays each of Shiny's widgets, and demonstrates how the widgets' values change in response to your input.
+To use a template, visit the [gallery](https://shyr-test-center.netlify.app/gallery/widget-gallery.html). The gallery displays each of Shiny's widgets, and demonstrates how the widgets' values change in response to your input.
 
 ::: {.border .my-5}
 ![](images/widgets-gallery.png){title="Shiny Widgets Gallery" fig-alt="Shiny widgets gallery"  .lightbox}

@@ -131,12 +131,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../_partials/blog/blog-article.css">
 <meta property="og:title" content="Weather App Story Pt. 2: Caching – Shiny">
 <meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta property="og:image" content="https://shiny.posit.co/blog/posts/weather-lookup-caching/caching.jpg">
+<meta property="og:image" content="https://shyr-test-center.netlify.app/blog/posts/weather-lookup-caching/caching.jpg">
 <meta property="og:site_name" content="Shiny">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="Shiny">
 <meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta name="twitter:image" content="https://shiny.posit.co/blog/posts/weather-lookup-caching/caching.jpg">
+<meta name="twitter:image" content="https://shyr-test-center.netlify.app/blog/posts/weather-lookup-caching/caching.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Here we demonstrate the use of the new <a href="../../../r/reference/shiny/latest/bindCache.html"><code>bindCache()</code></a> function in Shiny to greatly speed up a Shiny app that parses NOAA weather station data for 12,636 locations around the United States. We will demonstrate the addition of <code>bindCache()</code> to existing reactive expressions, explaining where and why it should be used along with some potential gotchas of doing so.</p>
-<p>To learn more about using caching in Shiny, see the <a href="https://shiny.posit.co/articles/caching.html">caching article</a> and the reference documentation for <a href="https://shiny.posit.co/r/reference/shiny/latest/bindCache.html"><code>bindCache()</code></a>.</p>
+<p>To learn more about using caching in Shiny, see the <a href="https://shyr-test-center.netlify.app/articles/caching.html">caching article</a> and the reference documentation for <a href="https://shyr-test-center.netlify.app/r/reference/shiny/latest/bindCache.html"><code>bindCache()</code></a>.</p>
 <section id="weather-app" class="level2 page-columns page-full">
 <h2 data-anchor-id="weather-app">Weather App</h2>
 <p>The code and results in this post come from the <a href="https://connect.rstudioservices.com/explore_your_weather/">weather lookup app.</a> Here we will just briefly cover the relevant parts of the app, for a more complete intro check out the <a href="../../../blog/posts/weather-lookup-about/">accompanying post</a> introducing it.</p>
@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This gives each app usage “session” its own cache, so there’s no danger of information leaking between users.</p>
 <section id="diving-deeper" class="level4">
 <h4 data-anchor-id="diving-deeper">Diving deeper</h4>
-<p>For a more through explanation of options for scoping and other setting such as size of cache see the <a href="https://shiny.posit.co/articles/caching.html#cache-scoping">Cache scoping section</a> of the documentation.</p>
+<p>For a more through explanation of options for scoping and other setting such as size of cache see the <a href="https://shyr-test-center.netlify.app/articles/caching.html#cache-scoping">Cache scoping section</a> of the documentation.</p>
 </section>
 </section>
 </section>
@@ -432,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This reactive just builds a few divs that show info about the stations within the current city. The runtime here is almost zero so caching will add no benefit.</p>
 <hr>
-<p>To learn more about using caching in Shiny, see the <a href="https://shiny.posit.co/articles/caching.html">caching article</a> and the reference documentation for <a href="https://shiny.posit.co/r/reference/shiny/latest/bindCache.html"><code>bindCache()</code></a>.</p>
+<p>To learn more about using caching in Shiny, see the <a href="https://shyr-test-center.netlify.app/articles/caching.html">caching article</a> and the reference documentation for <a href="https://shyr-test-center.netlify.app/r/reference/shiny/latest/bindCache.html"><code>bindCache()</code></a>.</p>
 
 
 </section>

@@ -22,7 +22,7 @@ the Shiny application's page. It must take an <code>input</code> and an
 <code>output</code> parameter. Any return value will be ignored. It also takes an
 optional <code>session</code> parameter, which is used when greater control is
 needed.</p>
-<p>See the <a href="https://shiny.posit.co/tutorial/" class="external-link">tutorial</a> for more
+<p>See the <a href="https://shyr-test-center.netlify.app/tutorial/" class="external-link">tutorial</a> for more
 on how to write a server function.</p></div>
 
   <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">shinyServer</span>(func)</span></code></pre></div></div>

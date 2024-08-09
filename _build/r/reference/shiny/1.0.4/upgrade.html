@@ -88,12 +88,12 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../../secondary-menu.css">
 <meta property="og:title" content="Upgrade notes for Shiny 1.0.4 – Shiny">
 <meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta property="og:site_name" content="Shiny">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="Shiny">
 <meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -226,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Addressed <a href="https://github.com/rstudio/shiny/issues/1508">#1508</a>: <code>fileInput</code> now permits the same file to be uploaded multiple times. (<a href="https://github.com/rstudio/shiny/pull/1719">#1719</a>)</p></li>
 <li><p>Addressed <a href="https://github.com/rstudio/shiny/issues/1501">#1501</a>: The <code>fileInput</code> control now retains uploaded file extensions on the server. This fixes <a href="https://github.com/tidyverse/readxl">readxl</a>’s <code>readxl::read_excel</code> and other functions that must recognize a file’s extension in order to work. (<a href="https://github.com/rstudio/shiny/pull/1706">#1706</a>)</p></li>
 <li><p>For <code>conditionalPanel</code>s, Shiny now gives more informative messages if there are errors evaluating or parsing the JavaScript conditional expression. (<a href="https://github.com/rstudio/shiny/pull/1727">#1727</a>)</p></li>
-<li><p>Addressed <a href="https://github.com/rstudio/shiny/issues/1586">#1586</a>: The <code>conditionalPanel</code> function now accepts an <code>ns</code> argument. The <code>ns</code> argument can be used in a <a href="https://shiny.posit.co/articles/modules.html">module</a> UI function to scope the <code>condition</code> expression to the module’s own input and output IDs. (<a href="https://github.com/rstudio/shiny/pull/1735">#1735</a>)</p></li>
+<li><p>Addressed <a href="https://github.com/rstudio/shiny/issues/1586">#1586</a>: The <code>conditionalPanel</code> function now accepts an <code>ns</code> argument. The <code>ns</code> argument can be used in a <a href="https://shyr-test-center.netlify.app/articles/modules.html">module</a> UI function to scope the <code>condition</code> expression to the module’s own input and output IDs. (<a href="https://github.com/rstudio/shiny/pull/1735">#1735</a>)</p></li>
 <li><p>With <code>options(shiny.testmode=TRUE)</code>, the Shiny process will send a message to the client in response to a changed input, even if no outputs have changed. This helps to streamline testing using the shinytest package. (<a href="https://github.com/rstudio/shiny/pull/1747">#1747</a>)</p></li>
 <li><p>Addressed <a href="https://github.com/rstudio/shiny/issues/1738">#1738</a>: The <code>updateTextInput</code> and <code>updateTextAreaInput</code> functions can now update the placeholder. (<a href="https://github.com/rstudio/shiny/pull/1742">#1742</a>)</p></li>
 <li><p>Converted examples to single file apps, and made updates and enhancements to comments in the example app scripts. (<a href="https://github.com/rstudio/shiny/pull/1685">#1685</a>)</p></li>

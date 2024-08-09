@@ -59,7 +59,7 @@ code or commentary.</p></dd>
 in its own subdirectory and should be runnable when <code><a href="runApp.html">runApp()</a></code> is called
 on the subdirectory. Example apps can include a <code>DESCRIPTION</code> file and a
 <code>README.md</code> file to provide metadata and commentary about the example. See
-the article on <a href="https://shiny.posit.co/r/articles/build/display-modes/" class="external-link">Display Modes</a>
+the article on <a href="https://shyr-test-center.netlify.app/r/articles/build/display-modes/" class="external-link">Display Modes</a>
 on the Shiny website for more information.</p></dd>
 
 </dl></div>

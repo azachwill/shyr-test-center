@@ -16,7 +16,7 @@ lightbox:
 ---
 
 
-I'm thrilled to share that the latest release of the [`{bslib}` R package](https://rstudio.github.io/bslib) introduces new a [Card](#cards) API, [Value boxes](#value-boxes), and a [responsive grid-like layout](#layout). These new UI components work in Shiny, R Markdown, Quarto (or really any R-based HTML project) and work best alongside the new [`{bsicons}` package](https://github.com/rstudio/bsicons) (an R interface to [Bootstrap icons](https://icons.getbootstrap.com/)) as well as the latest versions of [`{htmlwidgets}`](http://www.htmlwidgets.org/) and [`{shiny}`](https://shiny.posit.co/):
+I'm thrilled to share that the latest release of the [`{bslib}` R package](https://rstudio.github.io/bslib) introduces new a [Card](#cards) API, [Value boxes](#value-boxes), and a [responsive grid-like layout](#layout). These new UI components work in Shiny, R Markdown, Quarto (or really any R-based HTML project) and work best alongside the new [`{bsicons}` package](https://github.com/rstudio/bsicons) (an R interface to [Bootstrap icons](https://icons.getbootstrap.com/)) as well as the latest versions of [`{htmlwidgets}`](http://www.htmlwidgets.org/) and [`{shiny}`](https://shyr-test-center.netlify.app/):
 
 ```r
 install.packages("bslib")

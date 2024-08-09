@@ -59,7 +59,7 @@ imagealt: "A plot showing how much faster an app will load with caching"
 Articles are very similar to the blog posts above, though they are split into 4 sections: Start, Build, Improve, Share.
 
 * Create a sub-folder inside one of those category folders. For example, the `debugging` folder is in ‘r/articles/improve/’
-* Just like blog posts, this folder name will become the slug of your article… So the above example has the URL `https://shiny.posit.co/r/articles/improve/debugging/`
+* Just like blog posts, this folder name will become the slug of your article… So the above example has the URL `https://shyr-test-center.netlify.app/r/articles/improve/debugging/`
 * Add an `index.qmd` all of your article’s resources (images, etc.) to that folder.
 * Your article should have this yaml at the top:
 ```
@@ -148,8 +148,8 @@ Background color: #FFFFFF or #F8F8F8
 </td>
 
 <td>
-  <img src="https://shiny.posit.co/images/shiny-solo.png" alt="Shiny logo." width="120"><br />
-<a href="https://shiny.posit.co/images/shiny-solo.png">shiny-solo.png</a><br />
+  <img src="https://shyr-test-center.netlify.app/images/shiny-solo.png" alt="Shiny logo." width="120"><br />
+<a href="https://shyr-test-center.netlify.app/images/shiny-solo.png">shiny-solo.png</a><br />
 <a href="https://github.com/rstudio/shiny-dev-center/blob/main/images/shiny-solo.svg">shiny-solo.svg</a>
 </td>
 </tr>

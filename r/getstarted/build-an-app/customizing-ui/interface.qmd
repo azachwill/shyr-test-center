@@ -163,7 +163,7 @@ library(bslib)
 ui <- page_fluid(
   tags$h1("Awesome title"),
   tags$br(), # line break
-  tags$a("This app is built with Shiny.", href = "https://shiny.posit.co/")
+  tags$a("This app is built with Shiny.", href = "https://shyr-test-center.netlify.app/")
 )
 
 # Define server fn that does nothing :)
@@ -177,7 +177,7 @@ shinyApp(ui = ui, server = server)
 
 Awesome title
 
-[This app is built with Shiny.](https://shiny.posit.co/)
+[This app is built with Shiny.](https://shyr-test-center.netlify.app/)
 
 ---
 

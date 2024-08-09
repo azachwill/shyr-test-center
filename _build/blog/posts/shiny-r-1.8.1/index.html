@@ -116,14 +116,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../_partials/blog/blog-article.css">
 <meta property="og:title" content="Shiny for R updates: Extended tasks, JavaScript errors, and many bslib improvements – Shiny">
 <meta property="og:description" content="An overview of recent Shiny for R updates, including extended tasks, JavaScript errors, and many bslib improvements.">
-<meta property="og:image" content="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/feature.png">
+<meta property="og:image" content="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/feature.png">
 <meta property="og:site_name" content="Shiny">
 <meta property="og:locale" content="en_US">
 <meta property="og:image:height" content="1012">
 <meta property="og:image:width" content="1818">
 <meta name="twitter:title" content="Shiny">
 <meta name="twitter:description" content="An overview of recent Shiny for R updates, including extended tasks, JavaScript errors, and many bslib improvements.">
-<meta name="twitter:image" content="https://shiny.posit.co/blog/posts/shiny-r-1.8.1/feature.png">
+<meta name="twitter:image" content="https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/feature.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image-height" content="1012">
 <meta name="twitter:image-width" content="1818">
@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 img { border-radius: 8px; }
 </style>
 <p>The Shiny team is delighted to announce another round of updates for 9 different R packages. In this post, we’ll introduce three notable things: <a href="#nonblocking">non-blocking operations</a>, a <a href="#js-errors">JavaScript error dialog</a> and many <a href="#bslib">bslib improvements</a>. For a detailed list of changes, be sure to check out the <a href="#release-notes">release notes</a> section of this post.</p>
-<p>Although 9 packages received updates, the focus of this post is on <a href="https://shiny.posit.co/">shiny</a> and <a href="https://rstudio.github.io/bslib/">bslib</a>, which you can install with the following command:</p>
+<p>Although 9 packages received updates, the focus of this post is on <a href="https://shyr-test-center.netlify.app/">shiny</a> and <a href="https://rstudio.github.io/bslib/">bslib</a>, which you can install with the following command:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"shiny"</span>, <span class="st">"bslib"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -271,10 +271,10 @@ img { border-radius: 8px; }
 </section><section id="introducing-extendedtask" class="level3"><h3 class="anchored" data-anchor-id="introducing-extendedtask">Introducing ExtendedTask</h3>
 <p>We’re introducing <code>ExtendedTask</code> as a new way to manage long-running operations that won’t block within or across sessions, meaning that a user can launch an <code>ExtendedTask</code> and still interact with the app while it’s running.</p>
 <p>Additionally, we’ve found that <code>ExtendedTask</code> provides an elegant way to manage async operations. Within the task, you’ll use <a href="https://rstudio.github.io/promises/">promises</a> to create the async operation, but in the rest of your app you can use <code>ExtendedTask</code> methods to start the task or react to results when they arrive.</p>
-<p>As a result, <code>ExtendedTask</code> is now our recommended starting point for non-blocking tasks in Shiny. We’d love to show you a full example right now, but for the sake of space in this blog post we’ll urge you to visit the <a href="https://shiny.posit.co/r/articles/improve/nonblocking">Non-blocking operations article</a>, also on this blog, for a complete introduction.</p>
+<p>As a result, <code>ExtendedTask</code> is now our recommended starting point for non-blocking tasks in Shiny. We’d love to show you a full example right now, but for the sake of space in this blog post we’ll urge you to visit the <a href="https://shyr-test-center.netlify.app/r/articles/improve/nonblocking">Non-blocking operations article</a>, also on this blog, for a complete introduction.</p>
 </section><section id="a-new-task-button" class="level3"><h3 class="anchored" data-anchor-id="a-new-task-button">A new task button</h3>
 <p>As a companion to <code>ExtendedTask</code>, we’ve created <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">bslib::input_task_button()</a></code>, a special button that displays visual feedback when a task is in progress. As it turns out, <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">input_task_button()</a></code> provides a nice experience for any long-running task, not just <code>ExtendedTask</code>. Think of it like an <code><a href="https://rdrr.io/pkg/shiny/man/actionButton.html">actionButton()</a></code> that, when clicked, shows a busy indicator (and prevents further clicks) up until the next time the server is idle. Here’s an example of it in action in a basic Shiny app:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page.html">page_fixed</a></span><span class="op">(</span></span>
@@ -302,7 +302,7 @@ img { border-radius: 8px; }
 </section></section><section id="js-errors" class="level2"><h2 class="anchored" data-anchor-id="js-errors">JS error dialog</h2>
 <p>Another exciting new feature is Shiny’s JavaScript error dialog, which makes critical client-side errors more discoverable. To use the error dialog, turn on Shiny’s developer features by calling <code><a href="https://rdrr.io/pkg/shiny/man/devmode.html">shiny::devmode()</a></code> before running your app locally<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>In addition to the dialog, we’ve also started throwing more errors in situations where behavior is undefined, such as when two inputs (or outputs) have the same ID. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page.html">page_fixed</a></span><span class="op">(</span></span>
@@ -318,7 +318,7 @@ img { border-radius: 8px; }
 <aside id="footnotes" class="footnotes footnotes-end-of-section" role="doc-footnote"><hr>
 <ol>
 <li id="fn1">
-<p>Read more about <a href="https://shiny.posit.co/r/reference/shiny/latest/devmode.html">shiny devmode in our docs</a>. If you’d like to turn on dev mode for all of your local interactive session, you can add the following snippet your <code>.Rprofile</code> either in your home directory or your project directory (use <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code> to open either):</p>
+<p>Read more about <a href="https://shyr-test-center.netlify.app/r/reference/shiny/latest/devmode.html">shiny devmode in our docs</a>. If you’d like to turn on dev mode for all of your local interactive session, you can add the following snippet your <code>.Rprofile</code> either in your home directory or your project directory (use <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code> to open either):</p>
 <pre><code>if (interactive() &amp;&amp; requireNamespace("shiny", quietly = TRUE)) {
   shiny::devmode()
 }</code></pre>
@@ -332,7 +332,7 @@ img { border-radius: 8px; }
 <figcaption>An expandable card that shows some additional text when it goes full screen.</figcaption></figure>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
@@ -399,7 +399,7 @@ img { border-radius: 8px; }
 </section><section id="sass-v0.4.9" class="level4"><h4 class="anchored" data-anchor-id="sass-v0.4.9">sass <a href="https://rstudio.github.io/sass/news/index.html">v0.4.9</a>
 </h4>
 <p><a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/jeroen">@jeroen</a>, and <a href="https://github.com/yulric">@yulric</a>.</p>
-</section><section id="shiny-v1.8.1" class="level4"><h4 class="anchored" data-anchor-id="shiny-v1.8.1">shiny <a href="https://shiny.posit.co/r/reference/shiny/1.8.1/upgrade.html">v1.8.1</a>
+</section><section id="shiny-v1.8.1" class="level4"><h4 class="anchored" data-anchor-id="shiny-v1.8.1">shiny <a href="https://shyr-test-center.netlify.app/r/reference/shiny/1.8.1/upgrade.html">v1.8.1</a>
 </h4>
 <p><a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/Arthfael">@Arthfael</a>, <a href="https://github.com/avoidaway">@avoidaway</a>, <a href="https://github.com/bioinformzhang">@bioinformzhang</a>, <a href="https://github.com/chendaniely">@chendaniely</a>, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/Daishoulu">@Daishoulu</a>, <a href="https://github.com/davidmacro">@davidmacro</a>, <a href="https://github.com/etbrand">@etbrand</a>, <a href="https://github.com/gadenbuie">@gadenbuie</a>, <a href="https://github.com/gunawebs">@gunawebs</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/HugoGit39">@HugoGit39</a>, <a href="https://github.com/ismirsehregal">@ismirsehregal</a>, <a href="https://github.com/jcheng5">@jcheng5</a>, <a href="https://github.com/JohnCoene">@JohnCoene</a>, <a href="https://github.com/jsendak">@jsendak</a>, <a href="https://github.com/laresbernardo">@laresbernardo</a>, <a href="https://github.com/MartinBaumga">@MartinBaumga</a>, <a href="https://github.com/nstrayer">@nstrayer</a>, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/Roleren">@Roleren</a>, <a href="https://github.com/RSchwinn">@RSchwinn</a>, <a href="https://github.com/saleforecast1">@saleforecast1</a>, <a href="https://github.com/sharitian">@sharitian</a>, <a href="https://github.com/skaltman">@skaltman</a>, <a href="https://github.com/stla">@stla</a>, <a href="https://github.com/trafficonese">@trafficonese</a>, <a href="https://github.com/TymekDev">@TymekDev</a>, <a href="https://github.com/ugurdar">@ugurdar</a>, and <a href="https://github.com/wch">@wch</a>.</p>
 </section><section id="thematic-v0.1.5" class="level4"><h4 class="anchored" data-anchor-id="thematic-v0.1.5">thematic <a href="https://rstudio.github.io/thematic/news/index.html#thematic-015">v0.1.5</a>

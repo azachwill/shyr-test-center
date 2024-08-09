@@ -3,13 +3,13 @@ layout: upgrade-note
 title: Upgrade notes for Shiny 1.2.0
 ---
 
-This release features plot caching, an important new tool for improving performance and scalability. Using `renderCachedPlot` in place of `renderPlot` can greatly improve responsiveness for apps that show the same plot many times (for example, a dashboard or report where all users view the same data). Shiny gives you a fair amount of control in where the cache is stored and how cached plots are invalidated, so be sure to read [this article](https://shiny.posit.co/articles/plot-caching.html) to get the most out of this feature.
+This release features plot caching, an important new tool for improving performance and scalability. Using `renderCachedPlot` in place of `renderPlot` can greatly improve responsiveness for apps that show the same plot many times (for example, a dashboard or report where all users view the same data). Shiny gives you a fair amount of control in where the cache is stored and how cached plots are invalidated, so be sure to read [this article](https://shyr-test-center.netlify.app/articles/plot-caching.html) to get the most out of this feature.
 
 ## Full changelog
 
 ### Breaking changes
 
-* The URL paths for FontAwesome CSS/JS/font assets have changed, due to our upgrade from FontAwesome 4 to 5. This shouldn't affect you unless you're using `www/index.html` to provide your UI and have hardcoded the old FontAwesome paths into your HTML. If that's you, consider switching to [HTML templates](https://shiny.posit.co/articles/templates.html), which give you the syntax of raw HTML while still taking advantage of Shiny's automatic management of web dependencies.
+* The URL paths for FontAwesome CSS/JS/font assets have changed, due to our upgrade from FontAwesome 4 to 5. This shouldn't affect you unless you're using `www/index.html` to provide your UI and have hardcoded the old FontAwesome paths into your HTML. If that's you, consider switching to [HTML templates](https://shyr-test-center.netlify.app/articles/templates.html), which give you the syntax of raw HTML while still taking advantage of Shiny's automatic management of web dependencies.
 
 ### New features
 

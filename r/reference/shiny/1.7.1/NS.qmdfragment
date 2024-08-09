@@ -8,7 +8,7 @@ title: "Namespaced IDs for inputs/outputs — NS"
 
   <div data-section="description"><h3>Description</h3><p>The <code>NS</code> function creates namespaced IDs out of bare IDs, by joining
 them using <code>ns.sep</code> as the delimiter. It is intended for use in Shiny
-modules. See <a href="https://shiny.posit.co/articles/modules.html" class="external-link">https://shiny.posit.co/articles/modules.html</a>.</p></div>
+modules. See <a href="https://shyr-test-center.netlify.app/articles/modules.html" class="external-link">https://shyr-test-center.netlify.app/articles/modules.html</a>.</p></div>
 
   <div data-section="usage"><div class="sourceCode"><pre class="sourceCode r"><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">NS</span>(namespace, <span class="at">id =</span> <span class="cn">NULL</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
@@ -50,7 +50,7 @@ into a namespaced one, by combining them with <code>ns.sep</code> in between.</p
   </div>
   <div data-section="see-also">
     <h3 id="see-also">See also</h3>
-    <div class="dont-index"><p><a href="https://shiny.posit.co/articles/modules.html" class="external-link">https://shiny.posit.co/articles/modules.html</a></p></div>
+    <div class="dont-index"><p><a href="https://shyr-test-center.netlify.app/articles/modules.html" class="external-link">https://shyr-test-center.netlify.app/articles/modules.html</a></p></div>
   </div>
 
 </div>

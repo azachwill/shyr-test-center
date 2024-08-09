@@ -197,11 +197,11 @@ Each tag function will add unnamed arguments to your tag as HTML _children_. Thi
 ````r
 tags$div(class = "header", checked = NA,
   tags$p("Ready to take the Shiny tutorial? If so"),
-  tags$a(href = "shiny.posit.co/tutorial", "Click Here!")
+  tags$a(href = "shyr-test-center.netlify.app/tutorial", "Click Here!")
 )
 ## <div class="header" checked>
 ##   <p>Ready to take the Shiny tutorial? If so</p>
-##   <a href="shiny.posit.co/tutorial">Click Here!</a>
+##   <a href="shyr-test-center.netlify.app/tutorial">Click Here!</a>
 ## </div> 
 ````
 
@@ -213,12 +213,12 @@ You can save typing by wrapping your HTML objects with `withTags`. `withTags` is
 withTags({
   div(class="header", checked=NA,
     p("Ready to take the Shiny tutorial? If so"),
-    a(href="shiny.posit.co/tutorial", "Click Here!")
+    a(href="shyr-test-center.netlify.app/tutorial", "Click Here!")
   )
 })
 ## <div class="header" checked>
 ##   <p>Ready to take the Shiny tutorial? If so</p>
-##   <a href="shiny.posit.co/tutorial">Click Here!</a>
+##   <a href="shyr-test-center.netlify.app/tutorial">Click Here!</a>
 ## </div> 
 ````
 
@@ -249,7 +249,7 @@ fluidPage(
       # adding the new div tag to the sidebar            
       tags$div(class="header", checked=NA,
                tags$p("Ready to take the Shiny tutorial? If so"),
-               tags$a(href="shiny.posit.co/tutorial", "Click Here!")
+               tags$a(href="shyr-test-center.netlify.app/tutorial", "Click Here!")
       )
     ),
 
@@ -295,13 +295,13 @@ You can pass a list of children to a tag with R's list function. The tag functio
 tags$div(class="header", checked=NA,
   list(
     tags$p("Ready to take the Shiny tutorial? If so"),
-    tags$a(href="shiny.posit.co/tutorial", "Click Here!"),
+    tags$a(href="shyr-test-center.netlify.app/tutorial", "Click Here!"),
     "Thank you"
   )
 )
 ## <div class="header" checked>
 ##   <p>Ready to take the Shiny tutorial? If so</p>
-##   <a href="shiny.posit.co/tutorial">Click Here!</a>
+##   <a href="shyr-test-center.netlify.app/tutorial">Click Here!</a>
 ##   Thank you
 ## </div> 
 ````

@@ -56,7 +56,7 @@ This release focuses on improvements in three main areas:
 
 * When UI is specified as a function (e.g. `ui <- function(req) { ... }`), the response can now be an HTTP response as returned from the (newly exported) `httpResponse()` function. (#2970)
 
-* `selectInput` and `selectizeInput` now warn about performance implications when thousands of choices are used, and recommend [server-side selectize](https://shiny.posit.co/articles/selectize.html) be used instead. (#2959)
+* `selectInput` and `selectizeInput` now warn about performance implications when thousands of choices are used, and recommend [server-side selectize](https://shyr-test-center.netlify.app/articles/selectize.html) be used instead. (#2959)
 
 * Closed #2980: `addResourcePath()` now allows paths with a leading `.` (thanks to @ColinFay). (#2981)
 

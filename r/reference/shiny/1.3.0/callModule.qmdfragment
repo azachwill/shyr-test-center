@@ -43,7 +43,7 @@ The return value, if any, from executing the module server function
   <p>Shiny&#39;s module feature lets you break complicated UI and server logic into
 smaller, self-contained pieces. Compared to large monolithic Shiny apps,
 modules are easier to reuse and easier to reason about. See the article at
-<a href = 'https://shiny.posit.co/articles/modules.html'>https://shiny.posit.co/articles/modules.html</a> to learn more.</p>
+<a href = 'https://shyr-test-center.netlify.app/articles/modules.html'>https://shyr-test-center.netlify.app/articles/modules.html</a> to learn more.</p>
 
 </div>
 <!-- <ul>
@@ -55,6 +55,6 @@ modules are easier to reuse and easier to reason about. See the article at
 
 <div data-swiftype-index="false">
 <h3>See also</h3>
-  <p><a href = 'https://shiny.posit.co/articles/modules.html'>https://shiny.posit.co/articles/modules.html</a></p>
+  <p><a href = 'https://shyr-test-center.netlify.app/articles/modules.html'>https://shyr-test-center.netlify.app/articles/modules.html</a></p>
 </div>
 ```

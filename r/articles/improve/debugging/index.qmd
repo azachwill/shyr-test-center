@@ -65,7 +65,7 @@ In many cases it's difficult to diagnose a problem by halting execution, and ins
 
 ### Showcase Mode
 
-If you've ever visited the [Shiny Gallery](https://shiny.posit.co/gallery/), you've probably seen Showcase Mode. In Showcase Mode, your code is shown alongside your application, and your application's server code flashes yellow when it executes. Here, for example, you can see the plot output chunk re-executing when the inputs change.
+If you've ever visited the [Shiny Gallery](https://shyr-test-center.netlify.app/gallery/), you've probably seen Showcase Mode. In Showcase Mode, your code is shown alongside your application, and your application's server code flashes yellow when it executes. Here, for example, you can see the plot output chunk re-executing when the inputs change.
 
 ![Showcase Mode](kmeans-showcase.gif){fig-alt="Shiny app of Iris k-means clustering in showcase mode"}
 

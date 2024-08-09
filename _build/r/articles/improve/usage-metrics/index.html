@@ -129,12 +129,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../../r/secondary-menu.css">
 <meta property="og:title" content="Shiny App Usage Tracking – Shiny">
 <meta property="og:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta property="og:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta property="og:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta property="og:site_name" content="Shiny">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="Shiny">
 <meta name="twitter:description" content="Shiny is a package that makes it easy to create interactive web apps using R and Python.">
-<meta name="twitter:image" content="https://shiny.posit.co/images/shiny-thumb.png">
+<meta name="twitter:image" content="https://shyr-test-center.netlify.app/images/shiny-thumb.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -1308,7 +1308,7 @@ Note
 <section id="step-2-event-tracking" class="level2">
 <h2 data-anchor-id="step-2-event-tracking">Step 2: Event Tracking</h2>
 <p>In addition to page loads, it can be valuable to track the events that occur on a specific page. An event is an action that a user can take. For example, changing a select input would be an event. Most tracking tools provide a Javascript function for tracking events. Tracking events can provide insight into the actions a user is taking in an application: which inputs are changed, how frequently they change, and the order in which they change.</p>
-<p>The following template adds basic tracking for an application’s inputs. The template relies on <a href="https://shiny.posit.co/articles/js-events.html">Shiny’s Javascript events</a>.</p>
+<p>The following template adds basic tracking for an application’s inputs. The template relies on <a href="https://shyr-test-center.netlify.app/articles/js-events.html">Shiny’s Javascript events</a>.</p>
 <section id="template-1" class="level3">
 <h3 data-anchor-id="template-1">Template</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -1325,7 +1325,7 @@ Note
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This template has a number of parts:</p>
 <ol type="1">
-<li><p><code>shiny:inputchanged</code> acts as a trigger. The subsequent function is called anytime the app’s inputs change. (To conceptually understand, think of this process as being similar to Shiny’s <code>observeEvent(input, {function})</code> pattern). Sometimes <code>shiny:inputchanged</code> will be triggered without the inputs changing, see <a href="https://shiny.posit.co/articles/js-events.html">this article</a> for details.</p></li>
+<li><p><code>shiny:inputchanged</code> acts as a trigger. The subsequent function is called anytime the app’s inputs change. (To conceptually understand, think of this process as being similar to Shiny’s <code>observeEvent(input, {function})</code> pattern). Sometimes <code>shiny:inputchanged</code> will be triggered without the inputs changing, see <a href="https://shyr-test-center.netlify.app/articles/js-events.html">this article</a> for details.</p></li>
 <li><p><code>event</code> When the input changes, the Javascript function will have access to the <code>event</code> object. The <code>event</code> object includes the name of the input that was changed, <code>event.name</code>, and the new value of the input, <code>event.value</code>.</p></li>
 <li><p><code>trackingFunction</code> This is a made up function! This function will be implemented by the 3rd party metrics provider. See the specific examples below for Matomo and Google Analytics. Usually this function looks like: <code>trackingFunction('trackEvent',Category, Action, Label, Value)</code>. The function is responsible for recording the event. Category, Action, Label, and Value provide more information about the event that can be helpful when analyzing user’s history. In this template I set Label equal to <code>event.name</code> and Value to <code>event.value</code>. I’ve hardcoded Category to <code>input</code> and Action to <code>updates</code>. The <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/events">Google Analytics help page</a> provides more information.</p></li>
 </ol>
