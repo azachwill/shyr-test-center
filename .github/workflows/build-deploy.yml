@@ -97,15 +97,13 @@ jobs:
           ALIAS: ${{ steps.deployment.outputs.env }}
         run: |
           echo "${ALIAS}"
-          echo ${{ steps.deployment.outputs.env }} 
+          echo "${{ steps.deployment.outputs.env }}" 
           set -x
           npm install -g netlify-cli
-          # push main branch to production, others to preview --
-          if [ "${REF_NAME}" = "dev" ]; then
+          # push main branch to production
+          
             netlify deploy --dir=_build/ --prod
-          else
-            netlify deploy --dir=_build/ --alias="${ALIAS}"
-          fi
+          
       - name: Update Github "view deployment" button in PR
         uses: bobheadxi/deployments@v1
         if: ${{ always() && github.event_name == 'pull_request'}}
