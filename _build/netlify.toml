@@ -12,7 +12,7 @@ origin = "ui"
   [plugins.inputs]
 
 [build]
-publish = "_build"
+publish = "/home/runner/work/shiny-dev-center/shiny-dev-center/_build"
 publishOrigin = "ui"
 
   [build.environment]
@@ -3434,5 +3434,4 @@ force = false
   [redirects.conditions]
 
   [redirects.headers]
-
   
