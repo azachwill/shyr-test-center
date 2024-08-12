@@ -806,7 +806,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shy(r|py)-test-center\.netlify\.app)");
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shyr-test-center\.netlify)");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1184,7 +1184,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"fade","selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"fade"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"fade","loop":false,"closeEffect":"fade"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
