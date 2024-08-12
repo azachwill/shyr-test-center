@@ -309,7 +309,7 @@ format:
     sidebar: false
     theme: theme.scss
     link-external-newwindow: true
-    link-external-filter: ^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shyr-test-center\.netlify\.app)
+    link-external-filter: ^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shyr-test-center\.netlify)
     anchor-sections: false
     enable-grid-classes: true
     include-in-header: "_partials/head.html"
