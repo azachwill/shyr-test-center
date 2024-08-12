@@ -2,9 +2,9 @@ name: Build and deploy website
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
   pull_request:
-    branches: [dev]
+    branches: [main]
 
 jobs:
   build:
@@ -97,13 +97,16 @@ jobs:
           ALIAS: ${{ steps.deployment.outputs.env }}
         run: |
           echo "${ALIAS}"
-          echo "${{ steps.deployment.outputs.env }}" 
+          echo ${{ steps.deployment.outputs.env }} 
+          echo "${REF_NAME}"
           set -x
           npm install -g netlify-cli
-          # push main branch to production
-          
+          # push main branch to production, others to preview --
+          if [ "${REF_NAME}" = "main" ]; then
             netlify deploy --dir=_build/ --prod
-          
+          else
+            netlify deploy --dir=_build/ --alias="${ALIAS}"
+          fi
       - name: Update Github "view deployment" button in PR
         uses: bobheadxi/deployments@v1
         if: ${{ always() && github.event_name == 'pull_request'}}
@@ -115,3 +118,5 @@ jobs:
           env: ${{ steps.deployment.outputs.env }}
           env_url: "https://${{ steps.deployment.outputs.env }}--shyr-test-center.netlify.app"
           logs: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          
