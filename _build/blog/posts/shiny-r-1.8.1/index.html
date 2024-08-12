@@ -241,10 +241,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<style type="text/css">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><!-- Google Tag Manager (noscript) 
+ <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+End Google Tag Manager (noscript) --><style type="text/css">
   #quarto-content>* {
   padding-top: 0px;
   }
@@ -259,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 img { border-radius: 8px; }
 </style>
 <p>The Shiny team is delighted to announce another round of updates for 9 different R packages. In this post, we’ll introduce three notable things: <a href="#nonblocking">non-blocking operations</a>, a <a href="#js-errors">JavaScript error dialog</a> and many <a href="#bslib">bslib improvements</a>. For a detailed list of changes, be sure to check out the <a href="#release-notes">release notes</a> section of this post.</p>
-<p>Although 9 packages received updates, the focus of this post is on <a href="https://shyr-test-center.netlify.app/">shiny</a> and <a href="https://rstudio.github.io/bslib/">bslib</a>, which you can install with the following command:</p>
+<p>Although 9 packages received updates, the focus of this post is on <a href="https://shiny.posit.co/">shiny</a> and <a href="https://rstudio.github.io/bslib/">bslib</a>, which you can install with the following command:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"shiny"</span>, <span class="st">"bslib"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -274,7 +273,7 @@ img { border-radius: 8px; }
 <p>As a result, <code>ExtendedTask</code> is now our recommended starting point for non-blocking tasks in Shiny. We’d love to show you a full example right now, but for the sake of space in this blog post we’ll urge you to visit the <a href="https://shyr-test-center.netlify.app/r/articles/improve/nonblocking">Non-blocking operations article</a>, also on this blog, for a complete introduction.</p>
 </section><section id="a-new-task-button" class="level3"><h3 class="anchored" data-anchor-id="a-new-task-button">A new task button</h3>
 <p>As a companion to <code>ExtendedTask</code>, we’ve created <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">bslib::input_task_button()</a></code>, a special button that displays visual feedback when a task is in progress. As it turns out, <code><a href="https://rstudio.github.io/bslib/reference/input_task_button.html">input_task_button()</a></code> provides a nice experience for any long-running task, not just <code>ExtendedTask</code>. Think of it like an <code><a href="https://rdrr.io/pkg/shiny/man/actionButton.html">actionButton()</a></code> that, when clicked, shows a busy indicator (and prevents further clicks) up until the next time the server is idle. Here’s an example of it in action in a basic Shiny app:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page.html">page_fixed</a></span><span class="op">(</span></span>
@@ -302,7 +301,7 @@ img { border-radius: 8px; }
 </section></section><section id="js-errors" class="level2"><h2 class="anchored" data-anchor-id="js-errors">JS error dialog</h2>
 <p>Another exciting new feature is Shiny’s JavaScript error dialog, which makes critical client-side errors more discoverable. To use the error dialog, turn on Shiny’s developer features by calling <code><a href="https://rdrr.io/pkg/shiny/man/devmode.html">shiny::devmode()</a></code> before running your app locally<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>In addition to the dialog, we’ve also started throwing more errors in situations where behavior is undefined, such as when two inputs (or outputs) have the same ID. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/page.html">page_fixed</a></span><span class="op">(</span></span>
@@ -332,7 +331,7 @@ img { border-radius: 8px; }
 <figcaption>An expandable card that shows some additional text when it goes full screen.</figcaption></figure>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shyr-test-center.netlify.app/">shiny</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/">bslib</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
@@ -499,7 +498,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shy(r|py)-test-center\.netlify\.app)");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

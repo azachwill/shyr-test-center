@@ -1143,9 +1143,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<!-- Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+End Google Tag Manager (noscript) -->
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Build</li><li class="breadcrumb-item">Structure</li><li class="breadcrumb-item"><a href="../../../../r/articles/build/rmarkdown/index.html">Interactive documents</a></li><li class="breadcrumb-item"><a href="../../../../r/articles/build/interactive-docs/index.html">Introduction to interactive documents</a></li></ol></nav>
 <div class="quarto-title">
@@ -1424,7 +1424,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shy(r|py)-test-center\.netlify\.app)");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

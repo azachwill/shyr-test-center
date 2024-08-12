@@ -471,9 +471,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<!-- Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+End Google Tag Manager (noscript) -->
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><img src="../../../../images/2-square-fill.svg" class="sidebar-icon img-fluid"> Build an App</li><li class="breadcrumb-item"><a href="../../../../r/getstarted/build-an-app/reactive-flow/reactive-flow.html">Reactive Flow</a></li><li class="breadcrumb-item"><a href="../../../../r/getstarted/build-an-app/reactive-flow/ui-outputs.html">UI Outputs</a></li></ol></nav>
 <div class="quarto-title">
@@ -1368,7 +1368,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shy(r|py)-test-center\.netlify\.app)");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1746,7 +1746,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"openEffect":"fade","selector":".lightbox","closeEffect":"fade"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"fade","openEffect":"fade","descPosition":"bottom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

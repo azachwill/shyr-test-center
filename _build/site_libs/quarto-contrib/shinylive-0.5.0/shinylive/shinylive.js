@@ -34469,8 +34469,8 @@ function HeaderBar({
     );
   }
   const mainUrl = {
-    python: "https://shyr-test-center.netlify.app/py/",
-    r: "https://shyr-test-center.netlify.app/"
+    python: "https://shiny.posit.co/py/",
+    r: "https://shiny.posit.co/"
   };
   const shinyLogo = engineSwitch(appEngine, shiny_logo_default, shiny_for_python_default);
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "HeaderBar", children: [

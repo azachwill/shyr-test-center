@@ -471,9 +471,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<!-- Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) 
  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+End Google Tag Manager (noscript) -->
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../r/getstarted/shiny-basics/lesson1/index.html"><img src="../../../../images/1-square-fill.svg" class="sidebar-icon img-fluid"> Shiny Basics</a></li><li class="breadcrumb-item"><a href="../../../../r/getstarted/shiny-basics/lesson4/index.html">Display reactive output</a></li></ol></nav>
 <div class="quarto-title">
@@ -497,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Time to give your Shiny app a “live” quality! This lesson will teach you how to build reactive output to displays in your Shiny app. Reactive output automatically responds when your user toggles a widget.</p>
 <p>By the end of this lesson, you’ll know how to make a simple Shiny app with two reactive lines of text. Each line will display the values of a widget based on your user’s input.</p>
 <div class="border my-5">
-<p><a href="images/censusviz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title=""><img src="images/censusviz.png" class="img-fluid" alt="censusVis Shiny app that creates demographic maps with information from the 2010 US Census"></a></p>
+<p><a href="images/censusviz.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-1"><img src="images/censusviz.png" class="img-fluid" alt="censusVis Shiny app that creates demographic maps with information from the 2010 US Census"></a></p>
 </div>
 <p>This new Shiny app will need its own, new directory. Create a folder in your working directory named <code>census-app</code>. This is where we’ll save the <code>app.R</code> file that you make in this lesson.</p>
 <section id="two-steps" class="level2">
@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>When you are ready, update your <code>server</code> and <code>ui</code> functions to match those above. Then launch your Shiny app by running <code>runApp("census-app", display.mode = "showcase")</code> at the command line. Your app should look like the app below, and your statement should update instantly as you change the select box widget.</p>
 <p>Watch the <code>server</code> portion of the script. When Shiny rebuilds an output, it highlights the code it is running. This temporary highlighting can help you see how Shiny generates reactive output.</p>
 <div class="border my-5">
-<p><a href="images/censusviz-showcase.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title=""><img src="images/censusviz-showcase.png" class="img-fluid" alt="censusVis Shiny app in showcase mode"></a></p>
+<p><a href="images/censusviz-showcase.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-2"><img src="images/censusviz-showcase.png" class="img-fluid" alt="censusVis Shiny app in showcase mode"></a></p>
 </div>
 </section>
 <section id="your-turn" class="level2">
@@ -836,7 +836,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shiny-dev-center\.netlify)");
+      var filterRegex = new RegExp("^https?:\/\/((shiny\.(posit|rstudio)\.com?)|.+shy(r|py)-test-center\.netlify\.app)");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1214,7 +1214,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"fade","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"fade"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"fade","loop":false,"closeEffect":"fade","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
