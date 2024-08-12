@@ -333,7 +333,7 @@ move_docs <- function(..., shiny_copy, dest_folder) {
 }
 
 generate_pkgdown_reference <- function() {
-  stopifnot(grepl("^shiny-dev-center", basename(getwd())))
+  stopifnot(grepl("^shyr-test-center", basename(getwd())))
 
   shiny_copy <- copy_pkg_and_templates()
 
