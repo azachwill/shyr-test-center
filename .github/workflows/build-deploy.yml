@@ -2,9 +2,9 @@ name: Build and deploy website
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
   pull_request:
-    branches: [dev]
+    branches: [main]
 
 jobs:
   build:
@@ -118,3 +118,5 @@ jobs:
           env: ${{ steps.deployment.outputs.env }}
           env_url: "https://${{ steps.deployment.outputs.env }}--shyr-test-center.netlify.app"
           logs: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          
