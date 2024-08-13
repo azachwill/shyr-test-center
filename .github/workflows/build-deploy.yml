@@ -93,9 +93,10 @@ jobs:
           ALIAS: ${{ steps.deployment.outputs.env }}
         run: |
           set -x
+          echo "${REF_NAME}"
           npm install -g netlify-cli
           # push main branch to production, others to preview --
-          if [ "${REF_NAME}" = "master" ] || [ "${REF_NAME}" = "main" ]; then
+          if [ "${REF_NAME}" = "main" ]; then
             netlify deploy --dir=_build/ --prod
           else
             netlify deploy --dir=_build/ --alias="${ALIAS}"
