@@ -5,24 +5,6 @@ headers = []
 
   [functions."*"]
 
-[build]
-publish = "/home/runner/work/shyr-test-center/shyr-test-center/_build"
-publishOrigin = "ui"
-
-  [build.environment]
-
-  [build.processing]
-
-    [build.processing.css]
-
-    [build.processing.html]
-
-    [build.processing.images]
-
-    [build.processing.js]
-
-  [build.services]
-
 [[redirects]]
 from = "http://shiny.rstudio.com/*"
 to = "https://shyr-test-center.netlify.app/:splat"
