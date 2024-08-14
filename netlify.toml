@@ -12,7 +12,7 @@ origin = "ui"
   [plugins.inputs]
 
 [build]
-publish = "/home/runner/work/shiny-dev-center/shiny-dev-center/_build"
+publish = "_build"
 publishOrigin = "ui"
 
   [build.environment]
