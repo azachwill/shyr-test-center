@@ -11,6 +11,7 @@ project:
     - "*.mp4"
     - /r/api
     - _redirects
+    - /netlify/functions-internal
   output-dir: _build
   render:
     - "*.qmd"

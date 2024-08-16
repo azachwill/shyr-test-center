@@ -3,6 +3,8 @@ https://shiny.rstudio.com/* https://shyr-test-center.netlify.app/:splat 301!
 
 /py/* https://shyr-test-center.netlify.app/:splat 200!
 
+/*/index.html /:splat/ 301!
+
 /articles/shinyapps-auth.html https://docs.posit.co/shinyapps.io/authentication-and-user-management.html#authentication-and-user-management 301
 
 # App Stories to the blog
