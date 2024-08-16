@@ -1,4 +1,5 @@
 export default async (request, context) => {
+  if ( window.location.href ) {
   const getURL = window.location.href;
   let articleUrl = getURL.indexOf(".html");
   let indexUrl = getURL.indexOf("index.html");
@@ -8,4 +9,5 @@ export default async (request, context) => {
     const url = new URL(redirectURL, request.url); // Replace  with  target URL
   return Response.redirect(url, 301); 
   }
+}
 };
