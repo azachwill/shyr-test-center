@@ -12,8 +12,8 @@ headers = []
   [functions."*"]
 
 [[edge_functions]]
-function = "hello"
-path = "/hello"
+function = "redirect_article"
+path = "/py/docs"
 
 [[redirects]]
 from = "http://shiny.rstudio.com/*"
