@@ -3,7 +3,11 @@ https://shiny.rstudio.com/* https://shyr-test-center.netlify.app/:splat 301!
 
 /py/* https://shyr-test-center.netlify.app/:splat 200!
 
+#Redirect index pages to URL without index.html
 /*/index.html /:splat/ 301!
+
+#Redirect article pages to URL without *.html
+/*.html /:splat/ 301!
 
 /articles/shinyapps-auth.html https://docs.posit.co/shinyapps.io/authentication-and-user-management.html#authentication-and-user-management 301
 
