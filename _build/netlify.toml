@@ -76,6 +76,18 @@ force = true
   [redirects.headers]
 
 [[redirects]]
+from = "/*:splat.html"
+to = "/:splat/"
+status = 301
+force = true
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
 from = "/articles/shinyapps-auth.html"
 to = "https://docs.posit.co/shinyapps.io/authentication-and-user-management.html#authentication-and-user-management"
 status = 301
