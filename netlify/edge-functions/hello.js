@@ -6,7 +6,18 @@ export default async (request, context) => {
       // Remove the trailing slash and add .html extension
       const newPathname = url.pathname.slice(0, -1) + '.html';
       const newUrl = `${url.origin}${newPathname}${url.search}`;
-  
+    }
+    else if ( url.pathname.endsWith('/index.html'))
+        {
+             // Remove the trailing slash and add .html extension
+      const newPathname = url.pathname.slice(0, -1) + 'index.html';
+      const newUrl = `${url.origin}${newPathname}`;
+        }
+     
+      else {
+        const newUrl = url.pathname ;
+      }
+      {
       // Perform a 301 redirect
       return new Response(null, {
         status: 301,
@@ -21,6 +32,6 @@ export default async (request, context) => {
   };
   
   export const config = {
-    path: '/py/docs/*',
+    path: '/*',
   };
   
