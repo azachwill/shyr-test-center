@@ -40,6 +40,18 @@ force = true
   [redirects.headers]
 
 [[redirects]]
+from = "/py/*"
+to = "https://shypy-test-center.netlify.app/:splat"
+status = 200
+force = true
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
 from = "/*/index.html"
 to = "/:splat"
 status = 301
@@ -52,9 +64,9 @@ force = true
   [redirects.headers]
 
 [[redirects]]
-from = "/py/*"
-to = "https://shypy-test-center.netlify.app/:splat"
-status = 200
+from = "*/:splat/"
+to = "/:splat.html"
+status = 301
 force = true
 
   [redirects.query]
