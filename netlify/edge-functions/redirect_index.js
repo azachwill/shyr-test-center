@@ -1,9 +1,9 @@
 export default async (request, context) => {
     const url = new URL(request.url);
-     // Check if the URL path starts with /docs and ends with a trailing slash
-    if (url.pathname.startsWith('/py/docs') && url.pathname.endsWith('/')) {
+     // Check if the URL path starts with /py and ends with a index.html
+    if (url.pathname.startsWith('/py/') && url.pathname.endsWith('index.html')) {
       // Remove the trailing slash and add .html extension
-      const newPathname = url.pathname.slice(0, -1) + '.html';
+      const newPathname = url.pathname.slice(0, -1) + '/';
       const newUrl = `${url.origin}${newPathname}`;
     
         // Perform a 301 redirect
@@ -18,6 +18,6 @@ export default async (request, context) => {
     return context.next();
   };
    export const config = {
-    path: '/py/docs/*',
+    path: '/py/*',
   };
  
