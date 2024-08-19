@@ -12,6 +12,10 @@ headers = []
   [functions."*"]
 
 [[edge_functions]]
+function = "redirect_index"
+path = "/py/"
+
+[[edge_functions]]
 function = "redirect_article"
 path = "/py/docs"
 
