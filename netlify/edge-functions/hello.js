@@ -16,7 +16,7 @@ export default async (request, context) => {
       newUrl = `${url.origin}${newPathname}`;
       break;     
     default:
-      newUrl = url ;
+      break;
       }
       {
       // Perform a 301 redirect
