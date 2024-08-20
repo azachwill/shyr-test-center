@@ -1,7 +1,7 @@
 export default async (request, context) => {
     const url = new URL(request.url);
      // Check if the URL path starts with /docs and ends with a trailing slash
-    if (url.pathname.startsWith('/py/docs') && url.pathname.endsWith('/')) {
+    if ( (url.pathname.startsWith('/py/docs') || url.pathname.startsWith('/py/api') ) && url.pathname.endsWith('/') ) {
       // Remove the trailing slash and add .html extension
       const newPathname = url.pathname.slice(0, -1) + '.html';
       const newUrl = `${url.origin}${newPathname}`;
