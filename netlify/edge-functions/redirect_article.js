@@ -4,7 +4,7 @@ export default async (request, context) => {
     const result = pattern.test(url);
 
      // Check if the URL path is one of the index.html pages
-    if ( !result && !url.endsWith(".html"))  {
+    if ( !result && !url.pathname.endsWith(".html"))  {
       // Remove the trailing slash and add .html extension
       const newPathname = url.pathname.slice(0) + '.html';
       const newUrl = `${url.origin}${newPathname}`;
