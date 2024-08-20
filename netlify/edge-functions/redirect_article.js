@@ -4,9 +4,9 @@ export default async (request, context) => {
     const result = pattern.test(url);
 
      // Check if the URL path is one of the index.html pages
-    if ( !result )  {
+    if ( !result && !url.endsWith(".html"))  {
       // Remove the trailing slash and add .html extension
-      const newPathname = url.pathname.slice(0, -1) + '.html';
+      const newPathname = url.pathname.slice(0) + '.html';
       const newUrl = `${url.origin}${newPathname}`;
     
         // Perform a 301 redirect
