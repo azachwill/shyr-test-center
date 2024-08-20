@@ -1,7 +1,10 @@
 export default async (request, context) => {
     const url = new URL(request.url);
-     // Check if the URL path starts with /docs and ends with a trailing slash
-    if ( (url.pathname.startsWith('/py/docs') || url.pathname.startsWith('/py/api') ) && url.pathname.endsWith('/') ) {
+    const pattern = /\/(core|express|testing)(\/?)$/;
+    const result = pattern.test(url);
+
+     // Check if the URL path is one of the index.html pages
+    if ( !result )  {
       // Remove the trailing slash and add .html extension
       const newPathname = url.pathname.slice(0, -1) + '.html';
       const newUrl = `${url.origin}${newPathname}`;
@@ -18,6 +21,6 @@ export default async (request, context) => {
     return context.next();
   };
    export const config = {
-    path: ['/*'],
+    path: ['/py/docs/*', "/py/api/*"],
   };
  
