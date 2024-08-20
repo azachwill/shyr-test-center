@@ -18,6 +18,6 @@ export default async (request, context) => {
     return context.next();
   };
    export const config = {
-    path: '/py/docs/*',
+    path: ['/py/docs/*', '/py/api'],
   };
  
