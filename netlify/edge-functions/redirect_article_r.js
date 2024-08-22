@@ -1,6 +1,6 @@
 export default async (request, context) => {
     const url = new URL(request.url);
-    const pattern = /(\/py\/|\/deploy|\/contribute|\/help|\/(\d{1,3}\.\d{1,3}\.\d{1,3})\/upgrade)(\/?)/;
+    const pattern = /(\/py\/|\/deploy|\/contribute|\/help|\/(\d{1,3}\.\d{1,3}((\.\d{1,3})?)|latest)\/upgrade)(\/?)/;
     const result = pattern.test(url);
 
      // Check if the URL path is one of the index.html pages
