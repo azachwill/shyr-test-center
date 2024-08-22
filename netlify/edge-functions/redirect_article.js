@@ -1,6 +1,6 @@
 export default async (request, context) => {
     const url = new URL(request.url);
-    const pattern = /\/(core|express|testing|getstarted|articles|gallery|reference\/shiny)(\/?)$/;
+    const pattern = /\/(core|express|testing)(\/?)$/;
     const result = pattern.test(url);
 
      // Check if the URL path is one of the index.html pages
@@ -21,6 +21,6 @@ export default async (request, context) => {
     return context.next();
   };
    export const config = {
-    path: ['/r/', '/py/docs/*', "/py/api/*"],
+    path: ['/py/docs/*', "/py/api/*"],
   };
  
