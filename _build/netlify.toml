@@ -12,11 +12,15 @@ headers = []
   [functions."*"]
 
 [[edge_functions]]
-function = "redirect_article"
+function = "redirect_article_r"
+path = "/r/*"
+
+[[edge_functions]]
+function = "redirect_article_py"
 path = "/py/docs/*"
 
 [[edge_functions]]
-function = "redirect_article"
+function = "redirect_article_py"
 path = "/py/api/*"
 
 [[redirects]]
@@ -59,6 +63,18 @@ force = true
 from = "/py/*"
 to = "https://shypy-test-center.netlify.app/:splat"
 status = 200
+force = true
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
+from = "/getstarted"
+to = "/getstarted.html"
+status = 301
 force = true
 
   [redirects.query]
