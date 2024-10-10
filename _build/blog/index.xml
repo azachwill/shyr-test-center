@@ -14,7 +14,7 @@
 <title>Shiny</title>
 <link>https://shyr-test-center.netlify.app/blog/</link>
 </image>
-<generator>quarto-1.5.55</generator>
+<generator>quarto-1.5.57</generator>
 <lastBuildDate>Mon, 22 Jul 2024 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Announcing Shiny for Python 1.0</title>
@@ -5146,7 +5146,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </section><section id="why-bslib-themable-dashboards" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="why-bslib-themable-dashboards">Why bslib? Themable dashboards</h3>
 <p>Since we <a href="https://posit.co/resources/videos/styling-shiny-apps-with-sass-and-bootstrap-4/">announced it at rstudio::conf(2020)</a><sup>1</sup>, bslib has made it easy to theme virtually any Shiny app, R Markdown document, or R project that utilizes Bootstrap. One notable and unfortunate exception has been <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>, arguably the most popular UI extension for Shiny apps.</p>
-<p>While projects like <a href="https://rinterface.github.io/bs4Dash/index.html">bs4Dash</a> and <a href="https://github.com/dreamRs/fresh">fresh</a> have helped provide way to upgrade <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>’s Bootstrap/AdminLTE dependency and theme dashboards, AdminLTE has kept shinydashboard from keeping up with modern versions of Bootstrap (now on version 5).</p>
+<p>While projects like <a href="https://github.com/RinteRface/bs4Dash">bs4Dash</a> and <a href="https://github.com/dreamRs/fresh">fresh</a> have helped provide way to upgrade <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>’s Bootstrap/AdminLTE dependency and theme dashboards, AdminLTE has kept shinydashboard from keeping up with modern versions of Bootstrap (now on version 5).</p>
 <p>Rather than rewriting <a href="http://rstudio.github.io/shinydashboard/">shinydashboard</a>, we’re choosing to expand the footprint of bslib. It now provides themable and modern Bootstrap components that are perfect for dashboard apps, meaning that you can expect <a href="https://rstudio.github.io/bslib/articles/theming.html#real-time">real time themes</a>, <a href="https://rstudio.github.io/bslib/articles/theming.html#bootswatch">Bootswatch themes</a>, and <a href="https://rstudio.github.io/bslib/articles/theming.html#main-colors">custom themes</a> to “just work” like they do for most other Shiny apps and R Markdown docs powered by <a href="https://rstudio.github.io/bslib/">bslib</a>.</p>
 <div class="column-screen bg-blue py-5 mt-4 mb-5 page-columns page-full">
 <div class="column-body-outset">

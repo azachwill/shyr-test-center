@@ -36,8 +36,8 @@ force = true
   [redirects.headers]
 
 [[redirects]]
-  from = "/*/index.html"
-  to = "/:splat/"
+  from = "/*/"
+  to = "/:splat/index.html"
   status = 301
   force = true
 
