@@ -1,21 +1,25 @@
 export default async (request, context) => {
   const url = new URL(request.url);
+  const pattern = /(https:\/\/shyr-test-center\.netlify\.app|https:\/\/shypy-test-center\.netlify\.app)(\/?)/;
+  const result = pattern.test(url);
 
   // Redirect specific URLs to their base paths
-  if (url.pathname === '/index.html') {
-    if (url.hostname === 'shypy-test-center.netlify.app') {
-      return Response.redirect('https://shypy-test-center.netlify.app/', 301);
-    } else if (url.hostname === 'shyr-test-center.netlify.app') {
-      return Response.redirect('https://shyr-test-center.netlify.app/', 301);
-    }
+  if ( !result && url.pathname.endsWith("/"))  {
+    // Add .html extension
+    const newPathname = url.pathname + 'index.html';
+    const newUrl = `${url.origin}${newPathname}`;
+  
+      // Perform a 301 redirect
+    return new Response(null, {
+      status: 301,
+      headers: {
+        'Location': newUrl,
+      },
+    });
   }
-
-  // Redirect all other URLs ending in '/' to '/index.html'
-  if (url.pathname.endsWith('/') && url.pathname !== '/') {
-    url.pathname += 'index.html';
-    return Response.redirect(url.toString(), 301);
-  }
-
-  // If no redirect is needed, return the original request
+   // If the URL does not match the criteria, proceed with the request as usual
   return context.next();
+};
+export const config = {
+ path: ['/'],
 };
