@@ -12,6 +12,10 @@ headers = []
   [functions."*"]
 
 [[edge_functions]]
+function = "redirect_index"
+path = "/"
+
+[[edge_functions]]
 function = "redirect_article_r"
 path = "/r/*"
 
@@ -34,18 +38,6 @@ force = true
   [redirects.conditions]
 
   [redirects.headers]
-
-[[redirects]]
-  from = "https://shyr-test-center.netlify.app/index.html"
-  to = "https://shyr-test-center.netlify.app"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/*/"
-  to = "/:splat/index.html"
-  status = 301
-  force = true
 
 [[redirects]]
 from = "https://shiny.rstudio.com/*"
