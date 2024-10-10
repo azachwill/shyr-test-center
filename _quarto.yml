@@ -18,6 +18,10 @@ project:
   post-render:
     - scripts/generate_api_docs_from_template.R
 
+output:
+  html:
+    pretty: true
+
 website:
   title: "Shiny"
   site-url: https://shyr-test-center.netlify.app/
