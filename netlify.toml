@@ -12,10 +12,6 @@ headers = []
   [functions."*"]
 
 [[edge_functions]]
-function = "redirect_index"
-path = "/"
-
-[[edge_functions]]
 function = "redirect_article_r"
 path = "/r/*"
 
