@@ -36,6 +36,12 @@ force = true
   [redirects.headers]
 
 [[redirects]]
+  from = "http://shiny.posit.co/index.html"
+  to = "http://shiny.posit.co"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*/"
   to = "/:splat/index.html"
   status = 301
