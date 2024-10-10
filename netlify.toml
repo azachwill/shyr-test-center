@@ -17,11 +17,7 @@ path = "/r/*"
 
 [[edge_functions]]
 function = "redirect_article_py"
-path = "/py/docs/*"
-
-[[edge_functions]]
-function = "redirect_article_py"
-path = "/py/api/*"
+path = ["/py/docs/*","/py/api/*"]
 
 [[redirects]]
 from = "http://shiny.rstudio.com/*"
@@ -36,8 +32,8 @@ force = true
   [redirects.headers]
 
 [[redirects]]
-  from = "http://shiny.posit.co/index.html"
-  to = "http://shiny.posit.co"
+  from = "https://shyr-test-center.netlify.app/index.html"
+  to = "https://shyr-test-center.netlify.app"
   status = 301
   force = true
 
