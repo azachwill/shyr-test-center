@@ -11,6 +11,18 @@ headers = []
 
   [functions."*"]
 
+[[edge_functions]]
+function = "redirect_article_r"
+path = "/r/*"
+
+[[edge_functions]]
+function = "redirect_article_py"
+path = "/py/docs/*"
+
+[[edge_functions]]
+function = "redirect_article_py"
+path = "/py/api/*"
+
 [[redirects]]
 from = "http://shiny.rstudio.com/*"
 to = "https://shyr-test-center.netlify.app/:splat"
@@ -3409,6 +3421,17 @@ force = false
 from = "/feed/blog.xml"
 to = "/blog/index.xml"
 status = 301
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+   
+[[redirects]]
+from = "/r/"
+to = "/r/getstarted/"
 force = false
 
   [redirects.query]
