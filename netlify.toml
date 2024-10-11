@@ -3430,8 +3430,8 @@ force = false
   [redirects.headers]
    
 [[redirects]]
-from = "/r/"
-to = "/r/getstarted/"
+from = "/r/*"
+to = "/r/getstarted/:splat"
 force = false
 
   [redirects.query]
