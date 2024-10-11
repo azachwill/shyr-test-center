@@ -603,7 +603,7 @@ End Google Tag Manager (noscript) -->
 <h2 data-anchor-id="your-turn">Your Turn</h2>
 <p>Create a new directory named <code>App-1</code> in your <a href="http://www.rstudio.com/ide/docs/using/workspaces">working directory</a>. Then copy and paste the <code>app.R</code> script above into your directory (the scripts from <strong>Hello Shiny</strong>). When you are finished the directory should look like this:</p>
 <div class="my-5">
-<p><a href="images/example1-folder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title=""><img src="images/example1-folder.png" class="img-fluid" alt="An image of a folder with a file called app.R inside"></a></p>
+<p><a href="images/example1-folder.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-2"><img src="images/example1-folder.png" class="img-fluid" alt="An image of a folder with a file called app.R inside"></a></p>
 </div>
 <p>Launch your app by running <code>runApp("App-1")</code>. Then click escape and make some changes to your app:</p>
 <ol type="1">
@@ -613,7 +613,7 @@ End Google Tag Manager (noscript) -->
 </ol>
 <p>When you are ready, launch your app again. Your new app should match the image below. If it doesn’t, or if you want to check your code, press the model answers button to reveal how we did these tasks.</p>
 <div class="border my-5">
-<p><a href="images/01_hello-modified.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title=""><img src="images/01_hello-modified.png" class="img-fluid" alt="Hello Shiny! Shiny app with slider moved to a new value"></a></p>
+<p><a href="images/01_hello-modified.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-3"><img src="images/01_hello-modified.png" class="img-fluid" alt="Hello Shiny! Shiny app with slider moved to a new value"></a></p>
 </div>
 <p>By default, Shiny apps display in “normal” mode, like the app pictured above. <strong>Hello Shiny</strong> and the other built in examples display in “showcase mode”, a different mode that displays the <code>app.R</code> script alongside the app.</p>
 <p>If you would like your app to display in showcase mode, you can run <code>runApp("App-1", display.mode = "showcase")</code>.</p>
@@ -690,7 +690,7 @@ View UI Answers
 <li><p>Open the <code>app.R</code> script in your RStudio editor. RStudio will recognize the Shiny script and provide a Run App button (at the top of the editor). Either click this button to launch your app or use the keyboard shortcut: Command+Shift+Enter (Control+Shift+Enter on Windows).</p></li>
 </ul>
 <div class="my-5">
-<p><a href="images/run-app.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title=""><img src="images/run-app.png" class="img-fluid" alt="RStudio IDE with the Run App button highlighted"></a></p>
+<p><a href="images/run-app.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-4"><img src="images/run-app.png" class="img-fluid" alt="RStudio IDE with the Run App button highlighted"></a></p>
 </div>
 <p>RStudio will launch the app in a new window by default, but you can also choose to have the app launch in a dedicated viewer pane, or in your external web browser. Make your selection by clicking the icon next to Run App.</p>
 <div class="my-5">
@@ -1192,7 +1192,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"fade","selector":".lightbox","openEffect":"fade","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"fade","openEffect":"fade"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
