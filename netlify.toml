@@ -36,10 +36,10 @@ force = true
   [redirects.headers]
 
 [[redirects]]
-  from = "/*/index.html"
-  to = "/:splat/"
-  status = 301
-  force = true
+from = "/*/index.html"
+to = "/:splat"
+status = 301
+force = true
 
   [redirects.query]
 
