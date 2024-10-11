@@ -346,3 +346,7 @@ https://shiny.rstudio.com/* https://shyr-test-center.netlify.app/:splat 301!
 /tutorial/* /r/getstarted/:splat 301
 /blog/* /blog/posts/:splat 301
 /feed/blog.xml /blog/index.xml 301
+
+# in leiu of a homepage for R, send that URL to the get started page.
+
+/r/ /r/getstarted/ 
