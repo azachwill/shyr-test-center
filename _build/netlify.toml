@@ -61,7 +61,7 @@ force = true
 
 [[redirects]]
 from = "/py/*"
-to = "https://shypy-test-center.netlify.app/:splat"
+to = "https://shyr-test-center.netlify.app/:splat"
 status = 200
 force = true
 
