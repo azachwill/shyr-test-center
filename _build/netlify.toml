@@ -3428,7 +3428,7 @@ force = false
   [redirects.conditions]
 
   [redirects.headers]
-  
+   
 [[redirects]]
 from = "/r/"
 to = "/r/getstarted/"
