@@ -11,14 +11,6 @@ headers = []
 
   [functions."*"]
 
-[[edge_functions]]
-function = "redirect_article_py"
-path = "/py/docs/*"
-
-[[edge_functions]]
-function = "redirect_article_py"
-path = "/py/api/*"
-
 [[redirects]]
 from = "http://shiny.rstudio.com/*"
 to = "https://shyr-test-center.netlify.app/:splat"
