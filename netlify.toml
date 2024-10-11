@@ -36,6 +36,18 @@ force = true
   [redirects.headers]
 
 [[redirects]]
+from = "/py/*"
+to =  https://shyr-test-center.netlify.app/:splat
+status = 200
+force = true
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
 from = "/*/index.html"
 to = "/:splat"
 status = 301
