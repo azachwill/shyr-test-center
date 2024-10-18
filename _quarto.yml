@@ -17,6 +17,7 @@ project:
     - "*.qmd"
   post-render:
     - scripts/generate_api_docs_from_template.R
+    - scripts/sitemap_render.py
 
 output:
   html:
