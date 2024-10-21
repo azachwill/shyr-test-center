@@ -16,12 +16,8 @@ function = "redirect_article_r"
 path = "/r/*"
 
 [[edge_functions]]
-function = "redirect_article_py"
-path = "/py/docs/*"
-
-[[edge_functions]]
-function = "redirect_article_py"
-path = "/py/api/*"
+function = "redirect_article_r"
+path = "/py/*"
 
 [[redirects]]
 from = "http://shiny.rstudio.com/*"
