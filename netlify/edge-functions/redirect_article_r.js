@@ -2,23 +2,32 @@ export default async (request, context) => {
   const url = new URL(request.url);
 
   const patternArray = [
-    //shiny.posit.co/r/ directories:
-      "/r/contribute",
-      "/r/help",
-      "/r/getstarted/build-an-app/",
+    //shiny.posit.co/r/ directories:\
+    "\/r\/deploy",
+      "\/r\/contribute",
+      "\/r\/help",
+      "\/r\/getstarted/build-an-app",
       //past releases, e.g,: /0.1.2/upgrade.html
-      "/r/((\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?)|latest)/upgrade",
+      "\/r\/((\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?)|latest)\/upgrade",
       //shiny.posit.co/py/ directories:
-      "/py/core",
-      "/py/express",
-      "/py/testing",
-      "/?"
+      "\/py\/api\/core",
+      "\/py\/api\/express",
+      "/\py\/api\/testing"
     ];
     const pattern = new RegExp(patternArray.join("|"));
     const result = pattern.test(url);
 
+    const patternArrayNot = [
+        //shiny.posit.co/py/ directories:
+        "\/py\/api\/core(\/?)$",
+        "\/py\/api\/express(\/?)$",
+        "/\py\/api\/testing(\/?)$"
+      ];
+      const patternNot = new RegExp(patternArrayNot.join("|"));
+      const resultNot = patternNot.test(url);
+
      // Check if the URL path is one of the index.html pages
-     if ( result && !url.pathname.endsWith(".html"))  {
+     if ( result && !resultNot &&  !url.pathname.endsWith(".html"))  {
       // Remove the trailing slash and add .html extension
       const newPathname = url.pathname.endsWith("/") ? url.pathname.slice(0, -1) + '.html' : url.pathname + '.html';
       const newUrl = `${url.origin}${newPathname}`;
