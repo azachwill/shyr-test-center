@@ -8,7 +8,7 @@ export default async (request, context) => {
     "\/r\/help",
     "\/r\/getstarted/build-an-app",
     // releases, e.g,: /0.1.2/upgrade.html
-    "\/r\/reference\/shiny\/((\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?)|latest)",
+    "\/r\/reference\/shiny\/(\d{1,3}\.\d{1,3}(\.\d{1,3})?|latest)",
     //shiny.posit.co/py/ directories:
     "\/py\/docs",
     "\/py\/api\/core",
@@ -18,8 +18,9 @@ export default async (request, context) => {
     const pattern = new RegExp(patternArray.join("|"));
     const result = pattern.test(url);
 
+    //exclude the following from redirect_article processing:
     const patternArrayNot = [
-      "\/r\/reference\/shiny\/latest(\/?)$",
+      "\/r\/reference\/shiny\/(\d{1,3}\.\d{1,3}(\.\d{1,3})?|latest)(\/?)$",
       //shiny.posit.co/py/ directories:
       "\/py\/api\/core(\/?)$",
       "\/py\/api\/express(\/?)$",
