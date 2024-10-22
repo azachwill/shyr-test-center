@@ -32,7 +32,7 @@ force = true
   [redirects.headers]
 
 [[redirects]]
-  from = "/*/index.html"
+  from = "*/index.html"
   to = "/:splat/"
   status = 301
   force = true
