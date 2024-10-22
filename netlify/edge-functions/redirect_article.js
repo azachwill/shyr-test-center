@@ -19,6 +19,7 @@ export default async (request, context) => {
     const result = pattern.test(url);
 
     const patternArrayNot = [
+      "\/r\/reference\/shiny\/latest(\/?)$",
         //shiny.posit.co/py/ directories:
         "\/py\/api\/core(\/?)$",
         "\/py\/api\/express(\/?)$",
@@ -45,7 +46,7 @@ export default async (request, context) => {
     return context.next();
   };
    export const config = {
-    path: ['/r/*','/py/api/*','/py/docs/*'],
+    path: ['/r/*','/py/*'],
   };
 
 
