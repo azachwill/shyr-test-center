@@ -32,16 +32,16 @@ force = true
   [redirects.headers]
 
 [[redirects]]
-  from = "*/index.html"
-  to = "/:splat/"
+  from = "/index.html"
+  to = "/"
   status = 301
   force = true
 
-  [redirects.query]
-
-  [redirects.conditions]
-
-  [redirects.headers]
+[[redirects]]
+  from = "/*/index.html"
+  to = "/:splat/"
+  status = 301
+  force = true
 
 [[redirects]]
 from = "/py/*"
