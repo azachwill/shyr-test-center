@@ -8,7 +8,7 @@ export default async (request, context) => {
       "\/r\/help",
       "\/r\/getstarted/build-an-app",
       // releases, e.g,: /0.1.2/upgrade.html
-      "\/r\/reference\/shiny\/((\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?)|latest)\/upgrade",
+      "\/r\/reference\/shiny\/((\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?)|latest))",
       //shiny.posit.co/py/ directories:
       "\/py\/docs",
       "\/py\/api\/core",
