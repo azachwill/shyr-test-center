@@ -8,7 +8,7 @@ export default async (request, context) => {
     "\/r\/help",
     "\/r\/getstarted/build-an-app",
     // releases, e.g,: /0.1.2/upgrade.html
-    "\/r\/reference\/shiny\/(\d{1,3}\.\d{1,3}(\.\d{1,3})?|latest)",
+    "/r/reference/shiny/(\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?|latest)",
     //shiny.posit.co/py/ directories:
     "\/py\/docs",
     "\/py\/api\/core",
@@ -20,11 +20,11 @@ export default async (request, context) => {
 
     //exclude the following from redirect_article processing:
     const patternArrayNot = [
-      "\/r\/reference\/shiny\/(\d{1,3}\.\d{1,3}(\.\d{1,3})?|latest)(\/?)$",
+      "/r/reference/shiny/(\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?|latest)(\\/?)$",
       //shiny.posit.co/py/ directories:
-      "\/py\/api\/core(\/?)$",
-      "\/py\/api\/express(\/?)$",
-      "/\py\/api\/testing(\/?)$"
+      "\/py\/api\/core(\\/?)$",
+      "\/py\/api\/express(\\/?)$",
+      "/\py\/api\/testing(\\/?)$"
       ];
       const patternNot = new RegExp(patternArrayNot.join("|"));
       const resultNot = patternNot.test(url);
