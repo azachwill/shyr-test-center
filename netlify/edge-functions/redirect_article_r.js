@@ -7,9 +7,10 @@ export default async (request, context) => {
       "\/r\/contribute",
       "\/r\/help",
       "\/r\/getstarted/build-an-app",
-      //past releases, e.g,: /0.1.2/upgrade.html
-      "\/r\/((\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?)|latest)\/upgrade",
+      // releases, e.g,: /0.1.2/upgrade.html
+      "\/r\/reference\/shiny\/((\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?)|latest)\/upgrade",
       //shiny.posit.co/py/ directories:
+      "\/py\/docs",
       "\/py\/api\/core",
       "\/py\/api\/express",
       "/\py\/api\/testing"
