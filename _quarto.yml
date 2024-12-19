@@ -28,6 +28,7 @@ website:
   site-url: https://shyr-test-center.netlify.app/
   page-navigation: true
   favicon: "favicon.png"
+  search: false
   cookie-consent:
     type: express
     style: headline
