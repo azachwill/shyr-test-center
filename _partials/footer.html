@@ -1,0 +1,13 @@
+<script type="text/javascript">
+window.onload = function() {
+    let script1 = document.createElement('script'); // Corrected element creation
+    script1.textContent = 'if (window.location.href.indexOf("r/articles") >= 0) { \
+        document.querySelector("#open_preferences_center").style.display = "none"; \
+        document.querySelector("#open_preferences_center").style.visibility = "hidden"; \
+        document.querySelector("#quarto-announcement").style.display = "none"; \
+        document.querySelector("#quarto-announcement").style.visibility = "hidden"; \
+    }';
+
+    document.body.appendChild(script1); // Append after correct string closure
+};
+</script>
