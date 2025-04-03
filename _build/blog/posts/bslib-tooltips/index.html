@@ -109,7 +109,7 @@ cookieconsent.run({
         background: #ffffff;
       }
 </style>
-<!-- Google Tag Manager --><script type="text/plain" cookie-consent="tracking">
+<!-- Google Tag Manager --><script type="javascript">
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
 </script><!-- End Google Tag Manager --><!-- Add rel="noopener noreferrer" to each target="_blank" --><script type="text/javascript">
   window.addEventListener("load",() =>
@@ -117,7 +117,19 @@ cookieconsent.run({
       .forEach(lnk => lnk.setAttribute("rel", "noopener noreferrer"))
   );
 </script><!-- End Add rel="noopener noreferrer" to each target="_blank" --><link href="../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
-<script src="../../../site_libs/bslib-bslibShiny-js-0.5.1/bslibShiny.min.js"></script><script src="../../../site_libs/bslib-tag-require-0.5.1/tag-require.js"></script><link rel="stylesheet" href="../../../_partials/blog/blog-article.css">
+<script type="text/javascript">
+window.onload = function() {
+    let script1 = document.createElement('script'); // Corrected element creation
+    script1.textContent = 'if (window.location.href.indexOf("r/articles") >= 0) { \
+        document.querySelector("#open_preferences_center").style.display = "none"; \
+        document.querySelector("#open_preferences_center").style.visibility = "hidden"; \
+        document.querySelector("#quarto-announcement").style.display = "none"; \
+        document.querySelector("#quarto-announcement").style.visibility = "hidden"; \
+    }';
+
+    document.body.appendChild(script1); // Append after correct string closure
+};
+</script><script src="../../../site_libs/bslib-bslibShiny-js-0.5.1/bslibShiny.min.js"></script><script src="../../../site_libs/bslib-tag-require-0.5.1/tag-require.js"></script><link rel="stylesheet" href="../../../_partials/blog/blog-article.css">
 <meta property="og:title" content="Shiny for R updates: tooltips, popovers, a new theme, and more – Shiny">
 <meta property="og:description" content="An overview of recent Shiny for R updates, including tooltips, popovers, a new theme, and more.">
 <meta property="og:image" content="https://shyr-test-center.netlify.app/blog/posts/bslib-tooltips/feature.png">
