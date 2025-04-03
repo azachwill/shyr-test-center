@@ -146,6 +146,9 @@ cookieconsent.run({
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="d2ed95361607a5c9a375465f635f8868" class="alert alert-info hidden"><div class="quarto-announcement-content">
+<p>We’ve added Cookie Consent to docs.posit.co. For more information, see the <a href="https://posit.co/about/privacy-policy/">Posit - Privacy Policy</a>. To make updates to your existing preferences, click the cookie <i class="bi bi-cookie"></i> icon located in the footer.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -517,7 +520,7 @@ End Google Tag Manager (noscript) -->
 <li>Decide whether or not to correct prices for inflation.</li>
 </ol>
 <div class="border my-5">
-<p><a href="images/stockVis.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-1"><img src="images/stockVis.png" class="img-fluid" alt="stockVis Shiny app with stock symbols and date range, and a plot of the stock over that time range on the right"></a></p>
+<p><a href="images/stockVis.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title=""><img src="images/stockVis.png" class="img-fluid" alt="stockVis Shiny app with stock symbols and date range, and a plot of the stock over that time range on the right"></a></p>
 </div>
 <p>Note that the “Adjust prices for inflation” check box doesn’t work yet. One of our tasks in this lesson is to fix this check box.</p>
 <p>By default, stockVis displays the SPY ticker (an index of the entire S&amp;P 500). To look up a different stock, type in a stock symbol that Yahoo finance will recognize. You can look up Yahoo’s stock symbols <a href="https://finance.yahoo.com/lookup/">here</a>. Some common symbols are GOOG (Google), AAPL (Apple), and GS (Goldman Sachs).</p>
@@ -1162,9 +1165,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ <a href="#" id="open_preferences_center" title="Manage your cookie preferences"><i class="bi bi-cookie"></i></a>
+  </li>  
     <li class="nav-item compact">
     <a class="nav-link" href="https://twitter.com/posit_pbc">
       <i class="bi bi-twitter" role="img" aria-label="Posit Twitter">
@@ -1187,7 +1193,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"fade","selector":".lightbox","loop":false,"closeEffect":"fade","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"fade","descPosition":"bottom","openEffect":"fade"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

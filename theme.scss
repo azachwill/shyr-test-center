@@ -115,7 +115,7 @@ $h1-font-size: 2.1rem;
 // make lists reflect regular paragraph line-height letter-spacing
 
 ol li, ul li {
-  margin-bottom: 0.3em; 
+  margin-bottom: 0.3em;
 }
 // text links have different underline
 
@@ -145,7 +145,7 @@ a:hover code {
 }
 
 table a {
- border-bottom: none !important; 
+ border-bottom: none !important;
 }
 
 // space before content of a page
@@ -169,7 +169,7 @@ body {
   font-weight: 400;
 }
 
-// lil blue for an hr 
+// lil blue for an hr
 
 hr.blue {
   color: $blue;
@@ -220,7 +220,7 @@ hr.blue {
 
 
 #quarto-header.headroom--top {
-  box-shadow: none; 
+  box-shadow: none;
 }
 
 #quarto-header .navbar-dark {
@@ -291,7 +291,7 @@ hr.blue {
   }
 }
 
-// mobile navbar 
+// mobile navbar
 
 @media only screen and (max-width:991px) {
 
@@ -344,7 +344,7 @@ hr.blue {
 
 }
 
-// tweaking font-size in template classes 
+// tweaking font-size in template classes
 
 .p-95 {
   font-size: 95% !important;
@@ -382,7 +382,7 @@ hr.blue {
   font-size: 55% !important;
 }
 
-// tweaking font-weight in template classes 
+// tweaking font-weight in template classes
 
 .fw-500 {
   font-weight: 500 !important;
@@ -532,7 +532,7 @@ a.external.no-icon:after, a.external.view-app:after {
   font-size: 1em;
 }
 
-.nav-footer-left {    
+.nav-footer-left {
   white-space: nowrap;
 }
 
@@ -566,7 +566,7 @@ a.external.no-icon:after, a.external.view-app:after {
   position: absolute;
 }
 
-// blog and gallary cards 
+// blog and gallary cards
 
 .blog-card .card, .quarto-grid-item {
   transition: 0.15s ease-in-out;
@@ -693,7 +693,7 @@ h2,
 }
 
 // top flourish for boring pages
-.quarto-title.simple {   
+.quarto-title.simple {
  border-bottom: 2px solid $blue;
     padding-bottom: 1.25rem;
 }
@@ -724,7 +724,7 @@ h2,
   outline-offset: -3px;
   background: tint-color($blue, 97%);
   text-decoration: none;
-  
+
 }
 
 .option .block:hover img {
@@ -943,7 +943,7 @@ h2.header-indigo {
   padding-bottom: 1rem;
 }
 
-// hide description from all pages 
+// hide description from all pages
 
 .quarto-title-banner .description,
 .quarto-title-block .description {
@@ -1000,14 +1000,14 @@ pre.console code {
   cursor: pointer;
 }
 
-// remove accordion header background color when open 
+// remove accordion header background color when open
 
 .accordion-button:not(.collapsed) {
   color: #202020;
   background-color: transparent;
 }
 
-// styling accordions overall 
+// styling accordions overall
 
 .accordion {
   border-top: 1px solid $blue;
@@ -1164,7 +1164,7 @@ a.gallery-meta {
 .quarto-secondary-nav nav.quarto-page-breadcrumbs {
     color: $gray-800;
 }
-// avoid scss btn padding for mobile secondary breadcrumb nav icons 
+// avoid scss btn padding for mobile secondary breadcrumb nav icons
 
 .quarto-secondary-nav .quarto-btn-toggle.btn {
   padding-left: 0.8rem;
@@ -1269,7 +1269,7 @@ ul.navbar-nav .dropdown-item {
     margin-top:20px;
   }
 }
-.bottom-image { 
+.bottom-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -1279,12 +1279,12 @@ ul.navbar-nav .dropdown-item {
   bottom:3.5rem;
 }
 
-.bottom-image img { 
+.bottom-image img {
   max-width: 1600px;
 }
 
 @media only screen and (max-height:1080px) {
-    .bottom-image { 
+    .bottom-image {
     position:relative;
   }
 }
@@ -1332,4 +1332,8 @@ ul.navbar-nav .dropdown-item {
 .badge.bg-light {
 /*  background-color: tint-color($blue, 95%) !important;*/
   color: $body-color;
+}
+
+.bi-cookie {
+  font-size: 18px !important;
 }

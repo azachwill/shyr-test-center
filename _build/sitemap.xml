@@ -2,1282 +2,1286 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.0/</loc>
-    <lastmod>2024-08-09T18:23:04.659Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.599Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-r-1.8.1/</loc>
-    <lastmod>2024-08-09T15:05:48.749Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.606Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-vscode-1.0.0/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.614Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/nonblocking/</loc>
-    <lastmod>2024-08-09T15:05:48.750Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.838Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/js-introjs/</loc>
-    <lastmod>2024-08-06T19:22:39.476Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.759Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/google-analytics/</loc>
-    <lastmod>2024-08-06T19:22:39.574Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.837Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/</loc>
-    <lastmod>2024-08-06T19:22:39.630Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.891Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shinyswatch-0.7.0/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.661Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-express/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.513Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.5.0/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.521Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/</loc>
-    <lastmod>2024-08-06T19:22:40.703Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.837Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.8.1/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.671Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.813Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.7.5/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.619Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.770Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.7.3/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.567Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.725Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.7.1/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.519Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.682Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.6.0/upgrade.html</loc>
-    <lastmod>2024-08-09T15:05:48.755Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.610Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.4.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.410Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.568Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.3.1/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.356Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.523Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.2.0/upgrade.html</loc>
-    <lastmod>2024-08-09T15:05:48.763Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.481Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.0.5/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.251Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.437Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.0.3/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.204Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.389Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.0.1/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.159Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.339Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.14/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.083Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.278Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.14.1/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.031Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.231Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.13.1/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:39.985Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.188Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.12.2/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:39.941Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.148Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.12.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:39.903Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.111Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.11.1/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:39.867Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.077Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson7/</loc>
-    <lastmod>2024-08-09T20:02:53.103Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.023Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson5/</loc>
-    <lastmod>2024-08-06T19:22:39.823Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.020Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson3/</loc>
-    <lastmod>2024-08-09T15:05:48.774Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.010Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson1/</loc>
-    <lastmod>2024-08-06T19:22:39.790Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.997Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/index-old.html</loc>
-    <lastmod>2024-08-06T19:22:39.784Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.994Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactivity-essentials/stop-trigger-delay.html</loc>
-    <lastmod>2024-08-06T19:22:39.784Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.993Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactivity-essentials/reactives-observers.html</loc>
-    <lastmod>2024-08-06T19:22:39.784Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.993Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactive-flow/ui-outputs.html</loc>
-    <lastmod>2024-08-09T15:05:48.773Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.993Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactive-flow/render-functions.html</loc>
-    <lastmod>2024-08-06T19:22:39.783Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.992Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/hello-shiny/user-interface.html</loc>
-    <lastmod>2024-08-09T20:02:53.106Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.936Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/hello-shiny/recap.html</loc>
-    <lastmod>2024-08-06T19:22:39.683Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.935Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/customizing-ui/theming.html</loc>
-    <lastmod>2024-08-06T19:22:39.682Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.935Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/customizing-ui/layout.html</loc>
-    <lastmod>2024-08-06T19:22:39.680Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.933Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/customizing-ui/congratulations.html</loc>
-    <lastmod>2024-08-09T20:02:53.104Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.933Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/widget-gallery/</loc>
-    <lastmod>2024-08-06T19:22:39.679Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.932Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/selectize-vs-select/</loc>
-    <lastmod>2024-08-06T19:22:39.678Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.931Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/option-groups-for-selectize-input/</loc>
-    <lastmod>2024-08-06T19:22:39.678Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.931Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/file-upload/</loc>
-    <lastmod>2024-08-06T19:22:39.677Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.930Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/dynamic-clustering/</loc>
-    <lastmod>2024-08-06T19:22:39.676Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.930Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/datatables-options/</loc>
-    <lastmod>2024-08-06T19:22:39.676Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.929Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/custom-input-control/</loc>
-    <lastmod>2024-08-06T19:22:39.675Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.928Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/basic-datatable/</loc>
-    <lastmod>2024-08-06T19:22:39.674Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.928Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/technology/dynamic-repot/</loc>
-    <lastmod>2024-08-06T19:22:39.673Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.927Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/technology/chirp/</loc>
-    <lastmod>2024-08-06T19:22:39.672Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.926Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/start-simple/telephones-by-region/</loc>
-    <lastmod>2024-08-06T19:22:39.671Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.926Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/start-simple/kmeans-example/</loc>
-    <lastmod>2024-08-06T19:22:39.671Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.925Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/sports/soccer-player-similarity/</loc>
-    <lastmod>2024-08-06T19:22:39.670Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.924Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/sports/impact-replay-cfl/</loc>
-    <lastmod>2024-08-06T19:22:39.669Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.923Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/reactive-programming/timer/</loc>
-    <lastmod>2024-08-06T19:22:39.668Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.922Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/reactive-programming/reactivity/</loc>
-    <lastmod>2024-08-06T19:22:39.667Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.922Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/reactive-programming/observer-demo/</loc>
-    <lastmod>2024-08-06T19:22:39.666Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.921Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/reactive-programming/actionbutton-demo/</loc>
-    <lastmod>2024-08-06T19:22:39.666Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.920Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/pokemon-questions/</loc>
-    <lastmod>2024-08-06T19:22:39.665Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.919Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/magnetic-fields/</loc>
-    <lastmod>2024-08-06T19:22:39.663Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.919Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/lego-mosaic/</loc>
-    <lastmod>2024-08-06T19:22:39.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.913Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/hex-memory/</loc>
-    <lastmod>2024-08-06T19:22:39.654Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.913Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/conference-tweet-dashboard/</loc>
-    <lastmod>2024-08-06T19:22:39.651Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.909Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/visual-abstracts/</loc>
-    <lastmod>2024-08-06T19:22:39.649Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.909Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/shinyab-sample-size/</loc>
-    <lastmod>2024-08-06T19:22:39.649Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.908Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/phylo-tree-view-subset/</loc>
-    <lastmod>2024-08-06T19:22:39.648Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.907Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/mri-images/</loc>
-    <lastmod>2024-08-06T19:22:39.640Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.902Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/isee/</loc>
-    <lastmod>2024-08-06T19:22:39.639Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.901Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/genome-browser/</loc>
-    <lastmod>2024-08-06T19:22:39.635Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.897Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/covid19-tracker/</loc>
-    <lastmod>2024-08-06T19:22:39.635Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.896Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/animal-tracking/</loc>
-    <lastmod>2024-08-06T19:22:39.634Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.896Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/internationalization/unicode-characters/</loc>
-    <lastmod>2024-08-06T19:22:39.633Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.895Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-visualizations/movie-explorer/</loc>
-    <lastmod>2024-08-06T19:22:39.632Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.894Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-visualizations/bus-dashboard/</loc>
-    <lastmod>2024-08-06T19:22:39.632Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.893Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-plots/plot-interaction-selecting-points/</loc>
-    <lastmod>2024-08-06T19:22:39.631Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.892Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-plots/plot-interaction-advanced/</loc>
-    <lastmod>2024-08-06T19:22:39.631Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.891Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/viscover/</loc>
-    <lastmod>2024-08-06T19:22:39.630Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.890Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/scotpho-profiles/</loc>
-    <lastmod>2024-08-06T19:22:39.629Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.890Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/nyc-metro/</loc>
-    <lastmod>2024-08-06T19:22:39.628Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.889Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/india-blood-banks/</loc>
-    <lastmod>2024-08-06T19:22:39.626Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.888Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/dublin-transport/</loc>
-    <lastmod>2024-08-06T19:22:39.626Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.888Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/crime-watch/</loc>
-    <lastmod>2024-08-06T19:22:39.625Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.887Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/brazil-voter-profile/</loc>
-    <lastmod>2024-08-06T19:22:39.624Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.886Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/finance-banking/career-pathfinder/</loc>
-    <lastmod>2024-08-06T19:22:39.622Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.884Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/extending-shiny/drag-drop-map-maker/</loc>
-    <lastmod>2024-08-06T19:22:39.622Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.883Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/education/rd-business-game/</loc>
-    <lastmod>2024-08-06T19:22:39.621Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.883Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/education/ncaa-swim-team-finder/</loc>
-    <lastmod>2024-08-06T19:22:39.620Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.882Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/dynamic-user-interface/update-input-demo/</loc>
-    <lastmod>2024-08-06T19:22:39.619Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.881Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/dynamic-user-interface/conditionalpanel-demo/</loc>
-    <lastmod>2024-08-06T19:22:39.618Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.881Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/tabsets/</loc>
-    <lastmod>2024-08-06T19:22:39.618Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.880Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/retirement-simulation/</loc>
-    <lastmod>2024-08-06T19:22:39.617Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.879Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/navlistpanel-example/</loc>
-    <lastmod>2024-08-06T19:22:39.617Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.878Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/inline-output/</loc>
-    <lastmod>2024-08-06T19:22:39.616Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.878Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/absolutely-positioned-panels/</loc>
-    <lastmod>2024-08-06T19:22:39.616Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.877Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/selectize-rendering-methods/</loc>
-    <lastmod>2024-08-06T19:22:39.615Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.876Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/option-groups-for-server-side-selectize/</loc>
-    <lastmod>2024-08-06T19:22:39.614Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.876Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/image-output/</loc>
-    <lastmod>2024-08-06T19:22:39.613Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.875Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/download-knitr-reports/</loc>
-    <lastmod>2024-08-06T19:22:39.613Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.874Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/client-data-and-query-string/</loc>
-    <lastmod>2024-08-06T19:22:39.612Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.874Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/bookmarking-url/</loc>
-    <lastmod>2024-08-06T19:22:39.611Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.873Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/contribute.html</loc>
-    <lastmod>2024-08-06T19:22:39.611Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.873Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/start/help/</loc>
-    <lastmod>2024-08-06T19:22:39.610Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.872Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/start/build/</loc>
-    <lastmod>2024-08-06T19:22:39.607Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.870Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/shinyapps/</loc>
-    <lastmod>2024-08-06T19:22:39.601Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.864Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/share-data/</loc>
-    <lastmod>2024-08-09T15:05:48.750Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.862Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/migration/</loc>
-    <lastmod>2024-08-06T19:22:39.598Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.860Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/function/</loc>
-    <lastmod>2024-08-06T19:22:39.593Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.856Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/deployment-local/</loc>
-    <lastmod>2024-08-06T19:22:39.593Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.855Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/bookmarking-state/</loc>
-    <lastmod>2024-08-06T19:22:39.592Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.855Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/advanced-bookmarking/</loc>
-    <lastmod>2024-08-06T19:22:39.591Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.854Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/</loc>
-    <lastmod>2024-08-06T19:22:39.591Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.853Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/upgrade-R/</loc>
-    <lastmod>2024-08-06T19:22:39.587Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.849Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/testing-overview/</loc>
-    <lastmod>2024-08-06T19:22:39.586Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.848Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/server-function-testing/</loc>
-    <lastmod>2024-08-09T15:05:48.750Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.847Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/scaling-and-tuning/</loc>
-    <lastmod>2024-08-06T19:22:39.577Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.840Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/sanitize-errors/</loc>
-    <lastmod>2024-08-06T19:22:39.577Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.840Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/reconnecting/</loc>
-    <lastmod>2024-08-06T19:22:39.576Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.839Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/plot-caching/</loc>
-    <lastmod>2024-08-06T19:22:39.575Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.839Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/modules/</loc>
-    <lastmod>2024-08-06T19:22:39.574Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.837Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/communicate-bet-modules/</loc>
-    <lastmod>2024-08-06T19:22:39.554Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.817Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/async/</loc>
-    <lastmod>2024-08-06T19:22:39.552Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.816Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/understanding-reactivity/</loc>
-    <lastmod>2024-08-06T19:22:39.546Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.813Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/themes/</loc>
-    <lastmod>2024-08-06T19:22:39.535Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.802Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/tag-glossary/</loc>
-    <lastmod>2024-08-06T19:22:39.533Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.801Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/sql-injections/</loc>
-    <lastmod>2024-08-06T19:22:39.532Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.800Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/shinyjs/</loc>
-    <lastmod>2024-08-06T19:22:39.530Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.799Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/selecting-rows-of-data/</loc>
-    <lastmod>2024-08-06T19:22:39.529Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.798Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/rmarkdown/</loc>
-    <lastmod>2024-08-06T19:22:39.501Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.775Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/render-table/</loc>
-    <lastmod>2024-08-06T19:22:39.497Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.772Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/progress/</loc>
-    <lastmod>2024-08-06T19:22:39.494Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.770Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/pool-basics/</loc>
-    <lastmod>2024-08-06T19:22:39.493Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.770Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/plot-interaction/</loc>
-    <lastmod>2024-08-06T19:22:39.493Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.770Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/persistent-data-storage/</loc>
-    <lastmod>2024-08-06T19:22:39.492Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.769Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/overview/</loc>
-    <lastmod>2024-08-06T19:22:39.491Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.769Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/notifications/</loc>
-    <lastmod>2024-08-06T19:22:39.490Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.768Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/layout-guide/</loc>
-    <lastmod>2024-08-09T20:02:53.114Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.764Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/js-events/</loc>
-    <lastmod>2024-08-06T19:22:39.470Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.756Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/js-custom-input/</loc>
-    <lastmod>2024-08-06T19:22:39.460Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.752Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/interactive-docs/</loc>
-    <lastmod>2024-08-06T19:22:39.452Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.747Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/htmlwidgets/</loc>
-    <lastmod>2024-08-06T19:22:39.452Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.746Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/html-tags/</loc>
-    <lastmod>2024-08-09T15:05:48.750Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.745Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/gadgets/</loc>
-    <lastmod>2024-08-06T19:22:39.433Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.728Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/execution-scheduling/</loc>
-    <lastmod>2024-08-06T19:22:39.427Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.725Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/download/</loc>
-    <lastmod>2024-08-06T19:22:39.424Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.721Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/datatables/</loc>
-    <lastmod>2024-08-06T19:22:39.416Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.715Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/css/</loc>
-    <lastmod>2024-08-06T19:22:39.414Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.714Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/client-data/</loc>
-    <lastmod>2024-08-06T19:22:39.413Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.712Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/building-inputs/</loc>
-    <lastmod>2024-08-06T19:22:39.412Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.711Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/action-buttons/</loc>
-    <lastmod>2024-08-06T19:22:39.411Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.710Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/weather-lookup-caching/</loc>
-    <lastmod>2024-08-09T15:05:48.749Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.692Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/weather-lookup-about/</loc>
-    <lastmod>2024-08-06T19:22:39.363Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.676Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shinyuieditor-out-of-alpha/</loc>
-    <lastmod>2024-08-06T19:22:39.329Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.661Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-chatstream/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.592Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.1/</loc>
-    <lastmod>2024-08-09T18:23:04.664Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.571Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.4.0/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.519Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/introducing-shiny-templates/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.512Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/conf-2023-recap-andrew-holz/</loc>
-    <lastmod>2024-08-06T19:22:38.919Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.511Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/announcing-new-r-shiny-ui-components/</loc>
-    <lastmod>2024-08-09T15:05:48.749Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.438Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/generating-reports/</loc>
-    <lastmod>2024-08-06T19:22:39.433Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.729Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/cards-in-shinyuieditor/</loc>
-    <lastmod>2024-08-06T19:22:38.918Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.510Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/introducing-component-layouts/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.511Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-on-hugging-face/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.516Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.6.0/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.523Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-1.0/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.582Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-general-availability/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.595Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/the-past-and-future-of-shiny-joe-cheng/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.674Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/weather-lookup-bslib/</loc>
-    <lastmod>2024-08-09T15:05:48.749Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.689Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/</loc>
-    <lastmod>2024-08-09T18:22:57.021Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.709Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/app-formats/</loc>
-    <lastmod>2024-08-06T19:22:39.411Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.711Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/building-outputs/</loc>
-    <lastmod>2024-08-06T19:22:39.412Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.711Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/communicating-with-js/</loc>
-    <lastmod>2024-08-06T19:22:39.414Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.712Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/dashboards/</loc>
-    <lastmod>2024-08-06T19:22:39.415Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.714Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/display-modes/</loc>
-    <lastmod>2024-08-06T19:22:39.418Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.717Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/dynamic-ui/</loc>
-    <lastmod>2024-08-06T19:22:39.424Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.721Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/gadget-ui/</loc>
-    <lastmod>2024-08-06T19:22:39.430Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.726Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/google-analytics/</loc>
-    <lastmod>2024-08-06T19:22:39.448Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.744Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/html-ui/</loc>
-    <lastmod>2024-08-06T19:22:39.451Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.746Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/images/</loc>
-    <lastmod>2024-08-06T19:22:39.452Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.746Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/isolation/</loc>
-    <lastmod>2024-08-06T19:22:39.453Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.748Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/js-dashboard/</loc>
-    <lastmod>2024-08-06T19:22:39.468Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.755Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/js-send-message/</loc>
-    <lastmod>2024-08-06T19:22:39.476Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.759Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/modal-dialogs/</loc>
-    <lastmod>2024-08-06T19:22:39.490Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.768Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/output-args/</loc>
-    <lastmod>2024-08-06T19:22:39.491Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.769Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/packaging-javascript/</loc>
-    <lastmod>2024-08-06T19:22:39.492Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.769Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/plot-interaction-advanced/</loc>
-    <lastmod>2024-08-06T19:22:39.492Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.769Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/pool-advanced/</loc>
-    <lastmod>2024-08-06T19:22:39.493Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.770Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/pool-dplyr/</loc>
-    <lastmod>2024-08-06T19:22:39.493Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.770Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/reactivity-overview/</loc>
-    <lastmod>2024-08-06T19:22:39.496Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.772Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/rm-cheatsheet/</loc>
-    <lastmod>2024-08-06T19:22:39.499Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.773Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/rmd-integration/</loc>
-    <lastmod>2024-08-06T19:22:39.516Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.785Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/selectize/</loc>
-    <lastmod>2024-08-06T19:22:39.530Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.798Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/sliders/</loc>
-    <lastmod>2024-08-06T19:22:39.531Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.799Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/tabsets/</loc>
-    <lastmod>2024-08-06T19:22:39.533Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.800Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/templates/</loc>
-    <lastmod>2024-08-06T19:22:39.533Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.801Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/two-file/</loc>
-    <lastmod>2024-08-06T19:22:39.545Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.811Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/upload/</loc>
-    <lastmod>2024-08-06T19:22:39.552Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.815Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/caching/</loc>
-    <lastmod>2024-08-06T19:22:39.553Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.816Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/debugging/</loc>
-    <lastmod>2024-08-09T15:05:48.751Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.818Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/performance/</loc>
-    <lastmod>2024-08-06T19:22:39.575Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.838Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/profiling/</loc>
-    <lastmod>2024-08-06T19:22:39.576Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.839Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/req/</loc>
-    <lastmod>2024-08-06T19:22:39.576Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.839Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/scaling-and-tuning-ssp-rsc/</loc>
-    <lastmod>2024-08-06T19:22:39.577Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.840Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/scoping/</loc>
-    <lastmod>2024-08-06T19:22:39.585Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.847Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/shinytest/</loc>
-    <lastmod>2024-08-06T19:22:39.585Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.847Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/unicode/</loc>
-    <lastmod>2024-08-06T19:22:39.586Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.848Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/validation/</loc>
-    <lastmod>2024-08-06T19:22:39.588Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.850Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/admin-deployment/</loc>
-    <lastmod>2024-08-06T19:22:39.591Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.854Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/bookmarking-modules/</loc>
-    <lastmod>2024-08-06T19:22:39.592Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.854Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/custom-domains/</loc>
-    <lastmod>2024-08-06T19:22:39.593Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.855Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/deployment-web/</loc>
-    <lastmod>2024-08-06T19:22:39.593Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.855Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/libraries/</loc>
-    <lastmod>2024-08-06T19:22:39.597Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.860Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/permissions/</loc>
-    <lastmod>2024-08-06T19:22:39.598Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.860Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/share/shiny-server/</loc>
-    <lastmod>2024-08-06T19:22:39.600Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.863Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/start/basics/</loc>
-    <lastmod>2024-08-06T19:22:39.607Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.870Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/start/cheatsheet/</loc>
-    <lastmod>2024-08-06T19:22:39.610Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.872Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/start/running/</loc>
-    <lastmod>2024-08-06T19:22:39.611Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.873Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/deploy.html</loc>
-    <lastmod>2024-08-09T15:05:48.749Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.873Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/bookmarking-with-updatequerystring/</loc>
-    <lastmod>2024-08-06T19:22:39.612Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.873Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/creating-a-ui-from-a-loop/</loc>
-    <lastmod>2024-08-06T19:22:39.612Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.874Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/generating-reports/</loc>
-    <lastmod>2024-08-06T19:22:39.613Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.875Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/modal-dialogs/</loc>
-    <lastmod>2024-08-06T19:22:39.614Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.875Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/progress-bar-example/</loc>
-    <lastmod>2024-08-06T19:22:39.614Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.876Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/advanced-shiny/server-to-client-custom-messages/</loc>
-    <lastmod>2024-08-06T19:22:39.615Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.877Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/including-html-text-and-markdown-files/</loc>
-    <lastmod>2024-08-06T19:22:39.616Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.877Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/navbar-example/</loc>
-    <lastmod>2024-08-06T19:22:39.617Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.878Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/plot-plus-three-columns/</loc>
-    <lastmod>2024-08-06T19:22:39.617Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.879Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/shiny-theme-selector/</loc>
-    <lastmod>2024-08-06T19:22:39.618Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.880Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/application-layout/vertical-layout/</loc>
-    <lastmod>2024-08-06T19:22:39.618Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.880Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/dynamic-user-interface/dynamic-ui/</loc>
-    <lastmod>2024-08-06T19:22:39.619Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.881Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/education/didacting-modeling/</loc>
-    <lastmod>2024-08-06T19:22:39.620Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.882Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/education/radiant/</loc>
-    <lastmod>2024-08-06T19:22:39.621Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.882Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/extending-shiny/button-styler/</loc>
-    <lastmod>2024-08-06T19:22:39.621Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.883Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/extending-shiny/shiny-wysiwyg/</loc>
-    <lastmod>2024-08-06T19:22:39.622Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.884Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/finance-banking/real-estate-investment/</loc>
-    <lastmod>2024-08-06T19:22:39.624Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.885Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/city-cycle/</loc>
-    <lastmod>2024-08-06T19:22:39.625Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.886Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/dairy-farms/</loc>
-    <lastmod>2024-08-06T19:22:39.626Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.887Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/freedom-press-index/</loc>
-    <lastmod>2024-08-06T19:22:39.626Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.888Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/lake-profile-dashboard/</loc>
-    <lastmod>2024-08-06T19:22:39.628Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.889Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/nz-trade-dash/</loc>
-    <lastmod>2024-08-06T19:22:39.628Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.889Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/government-public-sector/soil-profiles/</loc>
-    <lastmod>2024-08-06T19:22:39.629Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.890Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-plots/image-interaction-basic/</loc>
-    <lastmod>2024-08-06T19:22:39.630Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.891Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-plots/plot-interaction-basic/</loc>
-    <lastmod>2024-08-06T19:22:39.631Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.892Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-plots/plot-interaction-zoom/</loc>
-    <lastmod>2024-08-06T19:22:39.631Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.892Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-visualizations/google-charts/</loc>
-    <lastmod>2024-08-06T19:22:39.632Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.893Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/interactive-visualizations/superzip-example/</loc>
-    <lastmod>2024-08-06T19:22:39.633Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.894Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/ab-test-sample-size/</loc>
-    <lastmod>2024-08-06T19:22:39.634Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.895Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/biodiversity-national-parks/</loc>
-    <lastmod>2024-08-06T19:22:39.634Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.896Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/explore-panel-data/</loc>
-    <lastmod>2024-08-06T19:22:39.635Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.897Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/hospital-data-antimicrobial/</loc>
-    <lastmod>2024-08-06T19:22:39.636Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.898Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/mote-effect-size/</loc>
-    <lastmod>2024-08-06T19:22:39.639Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.901Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/nutrition-calculator/</loc>
-    <lastmod>2024-08-06T19:22:39.642Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.903Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/sdcapp-microdata/</loc>
-    <lastmod>2024-08-06T19:22:39.648Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.908Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/life-sciences/shroom-edibility-prediction/</loc>
-    <lastmod>2024-08-06T19:22:39.649Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.908Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/bus-company-simulation/</loc>
-    <lastmod>2024-08-06T19:22:39.650Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.909Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/dog-medical-history/</loc>
-    <lastmod>2024-08-06T19:22:39.654Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.912Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/hotshot-dashboard/</loc>
-    <lastmod>2024-08-06T19:22:39.657Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.913Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/lego-world/</loc>
-    <lastmod>2024-08-06T19:22:39.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.914Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/pokemon-explorer/</loc>
-    <lastmod>2024-08-06T19:22:39.664Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.919Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/miscellaneous/tidy-tuesday/</loc>
-    <lastmod>2024-08-06T19:22:39.665Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.920Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/reactive-programming/isolate-demo/</loc>
-    <lastmod>2024-08-06T19:22:39.666Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.921Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/reactive-programming/reactive-poll-and-file-reader/</loc>
-    <lastmod>2024-08-06T19:22:39.667Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.921Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/reactive-programming/submitbutton-demo/</loc>
-    <lastmod>2024-08-06T19:22:39.667Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.922Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/sports/fifa-births/</loc>
-    <lastmod>2024-08-06T19:22:39.668Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.923Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/sports/masters/</loc>
-    <lastmod>2024-08-06T19:22:39.669Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.923Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/start-simple/faithful/</loc>
-    <lastmod>2024-08-06T19:22:39.670Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.925Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/start-simple/single-file-shiny-app/</loc>
-    <lastmod>2024-08-06T19:22:39.671Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.925Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/start-simple/word-cloud/</loc>
-    <lastmod>2024-08-06T19:22:39.672Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.926Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/technology/cran-explorer/</loc>
-    <lastmod>2024-08-06T19:22:39.673Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.927Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/technology/uber-rider/</loc>
-    <lastmod>2024-08-06T19:22:39.674Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.927Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/custom-input-bindings/</loc>
-    <lastmod>2024-08-06T19:22:39.674Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.928Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/datatables-demo/</loc>
-    <lastmod>2024-08-06T19:22:39.675Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.929Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/date-and-date-range/</loc>
-    <lastmod>2024-08-06T19:22:39.676Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.929Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/file-download/</loc>
-    <lastmod>2024-08-06T19:22:39.677Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.930Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/mathjax/</loc>
-    <lastmod>2024-08-06T19:22:39.677Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.931Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/selectize-examples/</loc>
-    <lastmod>2024-08-06T19:22:39.678Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.931Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/sliders/</loc>
-    <lastmod>2024-08-06T19:22:39.679Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.932Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/gallery/widgets/widgets/</loc>
-    <lastmod>2024-08-06T19:22:39.679Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.932Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/customizing-ui/interface.html</loc>
-    <lastmod>2024-08-09T15:05:48.773Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.933Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/customizing-ui/tabs.html</loc>
-    <lastmod>2024-08-06T19:22:39.682Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.935Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/hello-shiny/getting-started.html</loc>
-    <lastmod>2024-08-06T19:22:39.683Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.935Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/hello-shiny/server-function.html</loc>
-    <lastmod>2024-08-06T19:22:39.683Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.936Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactive-flow/reactive-flow.html</loc>
-    <lastmod>2024-08-06T19:22:39.783Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.992Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactive-flow/ui-inputs.html</loc>
-    <lastmod>2024-08-09T15:05:48.773Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.992Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactivity-essentials/reactive-elements.html</loc>
-    <lastmod>2024-08-06T19:22:39.783Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.993Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactivity-essentials/recap.html</loc>
-    <lastmod>2024-08-06T19:22:39.784Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.993Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/build-an-app/reactivity-essentials/using-reactives.html</loc>
-    <lastmod>2024-08-06T19:22:39.784Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.994Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/next-steps/</loc>
-    <lastmod>2024-08-06T19:22:39.785Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.994Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson2/</loc>
-    <lastmod>2024-08-09T20:02:53.103Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.004Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson4/</loc>
-    <lastmod>2024-08-06T19:22:39.811Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.012Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/getstarted/shiny-basics/lesson6/</loc>
-    <lastmod>2024-08-06T19:22:39.827Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.022Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/help.html</loc>
-    <lastmod>2024-08-06T19:22:39.829Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.023Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.11/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:39.885Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.093Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.12.1/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:39.923Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.130Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.13.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:39.963Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.166Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.13.2/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.004Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.207Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/0.14.2/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.060Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.255Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.0.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.134Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.314Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.0.2/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.183Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.364Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.0.4/upgrade.html</loc>
-    <lastmod>2024-08-09T15:05:48.756Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.413Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.1.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.276Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.459Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.3.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.331Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.502Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.3.2/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.381Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.548Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.5.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.437Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.589Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.7.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.492Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.636Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.7.2/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.544Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.704Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.7.4/upgrade.html</loc>
-    <lastmod>2024-08-09T15:05:48.767Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.746Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.8.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.646Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.792Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/1.9.0/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.702Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.836Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/latest/upgrade.html</loc>
-    <lastmod>2024-08-06T19:22:40.727Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.860Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/</loc>
-    <lastmod>2024-08-06T19:22:38.788Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.436Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/</loc>
-    <lastmod>2024-08-09T18:23:04.658Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.573Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/getstarted.html</loc>
-    <lastmod>2024-08-09T18:22:57.021Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.702Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/reference/shiny/template/template.html</loc>
-    <lastmod>2024-08-06T19:22:40.728Z</lastmod>
+    <lastmod>2025-04-03T15:59:12.861Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/js-build-widget/</loc>
-    <lastmod>2024-08-06T19:22:39.459Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.751Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/build/js-widget-functionality/</loc>
-    <lastmod>2024-08-06T19:22:39.481Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.762Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/bslib-dashboards/</loc>
-    <lastmod>2024-08-09T15:05:48.749Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.460Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/r/articles/improve/usage-metrics/</loc>
-    <lastmod>2024-08-09T15:05:48.750Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.849Z</lastmod>
   </url>
   <url>
     <loc>https://shyr-test-center.netlify.app/blog/posts/bslib-tooltips/</loc>
-    <lastmod>2024-08-09T20:02:53.110Z</lastmod>
+    <lastmod>2025-04-03T15:59:11.472Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shyr-test-center.netlify.app/</loc>
+    <lastmod>2025-04-03T15:59:11.709Z</lastmod>
   </url>
 </urlset>
