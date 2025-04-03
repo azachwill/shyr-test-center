@@ -330,7 +330,7 @@ format:
     link-external-filter: ^https?:\/\/shyr-test-center\.netlify\.app
     anchor-sections: false
     enable-grid-classes: true
-    include-in-header: "_partials/head.html"
+    include-in-header: "partials/head.html"
     include-before-body: "_partials/google-analytics/gtm-body.html"
     grid:
       sidebar-width: 300px
