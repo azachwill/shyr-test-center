@@ -116,7 +116,24 @@ cookieconsent.run({
 </script>
 <!-- End Google Tag Manager -->
 
+<script type="text/javascript">
+window.onload = function() {
+    let hideCookieContent = document.createElement('script');
 
+    hideCookieContent.textContent = 'let prefCenter = document.querySelector("#open_preferences_center"); \
+    let announcement = document.querySelector("#quarto-announcement"); \
+    let sURL = window.location.href; \
+    if (prefCenter && sURL.indexOf("r/articles") >= 0) { \
+        prefCenter.style.display = "none"; \
+        prefCenter.style.visibility = "hidden"; \
+        } if (announcement && sURL.indexOf("r/articles") >= 0) { \
+        announcement.style.display = "none"; \
+        announcement.style.visibility = "hidden"; \
+    }';
+
+    document.body.appendChild(hideCookieContent);
+};
+</script>
 
 <!-- Add rel="noopener noreferrer" to each target="_blank" -->
 <script type="text/javascript">
@@ -128,19 +145,6 @@ cookieconsent.run({
 <!-- End Add rel="noopener noreferrer" to each target="_blank" -->
 
 <link href="../../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
-<script type="text/javascript">
-window.onload = function() {
-    let script1 = document.createElement('script'); // Corrected element creation
-    script1.textContent = 'if (window.location.href.indexOf("r/articles") >= 0) { \
-        document.querySelector("#open_preferences_center").style.display = "none"; \
-        document.querySelector("#open_preferences_center").style.visibility = "hidden"; \
-        document.querySelector("#quarto-announcement").style.display = "none"; \
-        document.querySelector("#quarto-announcement").style.visibility = "hidden"; \
-    }';
-
-    document.body.appendChild(script1); // Append after correct string closure
-};
-</script>
 
 
 <link rel="stylesheet" href="../../../secondary-menu.css">
@@ -520,7 +524,7 @@ End Google Tag Manager (noscript) -->
 <section id="control-widgets" class="level2">
 <h2 data-anchor-id="control-widgets">Control widgets</h2>
 <div class="border mb-5 mt-4">
-<p><a href="images/basic-widgets.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-1"><img src="images/basic-widgets.png" class="img-fluid" alt="The set of basic widgets you can use in Shiny. Includes buttons, single checkbox, checkbox, date input, date range, file input, help text, numeric input, radio buttons, select box, sliders, text input"></a></p>
+<p><a href="images/basic-widgets.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title=""><img src="images/basic-widgets.png" class="img-fluid" alt="The set of basic widgets you can use in Shiny. Includes buttons, single checkbox, checkbox, date input, date range, file input, help text, numeric input, radio buttons, select box, sliders, text input"></a></p>
 </div>
 <p>Shiny comes with a family of pre-built widgets, each created with a transparently named R function. For example, Shiny provides a function named <code>actionButton</code> that creates an Action Button and a function named <code>sliderInput</code> that creates a slider bar.</p>
 <p>The standard Shiny widgets are:</p>
@@ -703,10 +707,10 @@ End Google Tag Manager (noscript) -->
 <h2 data-anchor-id="your-turn">Your turn</h2>
 <p>Rewrite your <code>ui</code> to create the user interface displayed below. Notice that this Shiny app uses a basic Shiny layout (no columns) and contains three of the widgets pictured above. The other values of the select box are shown below the image of the app.</p>
 <div class="border my-5">
-<p><a href="images/censusviz.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-2"><img src="images/censusviz.png" class="img-fluid" alt="Left section of a Shiny app for censusVis"></a></p>
+<p><a href="images/censusviz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title=""><img src="images/censusviz.png" class="img-fluid" alt="Left section of a Shiny app for censusVis"></a></p>
 </div>
 <div class="border my-5">
-<p><a href="images/select-box.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-3"><img src="images/select-box.png" class="img-fluid" alt="Select box widget for censusVis app"></a></p>
+<p><a href="images/select-box.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title=""><img src="images/select-box.png" class="img-fluid" alt="Select box widget for censusVis app"></a></p>
 </div>
 <section id="model-answer" class="level3">
 <h3 data-anchor-id="model-answer">Model Answer</h3>
@@ -769,11 +773,11 @@ View Answer
 <p>The <a href="https://shyr-test-center.netlify.app/gallery/widget-gallery.html">Shiny Widgets Gallery</a> provides templates that you can use to quickly add widgets to your Shiny apps.</p>
 <p>To use a template, visit the <a href="https://shyr-test-center.netlify.app/gallery/widget-gallery.html">gallery</a>. The gallery displays each of Shiny’s widgets, and demonstrates how the widgets’ values change in response to your input.</p>
 <div class="border my-5">
-<p><a href="images/widgets-gallery.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-4"><img src="images/widgets-gallery.png" class="img-fluid" alt="Shiny widgets gallery"></a></p>
+<p><a href="images/widgets-gallery.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title=""><img src="images/widgets-gallery.png" class="img-fluid" alt="Shiny widgets gallery"></a></p>
 </div>
 <p>Select the widget that you want and click the “See Code” button below the widget. The gallery will take you to an example app that describes the widget. To use the widget, copy and paste the code in the example’s <code>app.R</code> file to your <code>app.R</code> file.</p>
 <div class="border my-5">
-<p><a href="images/individual-widget.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-5"><img src="images/individual-widget.png" class="img-fluid" alt="Individual widget of a checkbox group"></a></p>
+<p><a href="images/individual-widget.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title=""><img src="images/individual-widget.png" class="img-fluid" alt="Individual widget of a checkbox group"></a></p>
 </div>
 <p>In <a href="../lesson4/">Lesson 4</a>, you will learn how to connect widgets to reactive output, objects that update themselves whenever your user changes a widget.</p>
 
@@ -1247,7 +1251,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"fade","openEffect":"fade","selector":".lightbox","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"fade","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"fade"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

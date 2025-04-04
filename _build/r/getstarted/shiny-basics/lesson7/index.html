@@ -116,7 +116,24 @@ cookieconsent.run({
 </script>
 <!-- End Google Tag Manager -->
 
+<script type="text/javascript">
+window.onload = function() {
+    let hideCookieContent = document.createElement('script');
 
+    hideCookieContent.textContent = 'let prefCenter = document.querySelector("#open_preferences_center"); \
+    let announcement = document.querySelector("#quarto-announcement"); \
+    let sURL = window.location.href; \
+    if (prefCenter && sURL.indexOf("r/articles") >= 0) { \
+        prefCenter.style.display = "none"; \
+        prefCenter.style.visibility = "hidden"; \
+        } if (announcement && sURL.indexOf("r/articles") >= 0) { \
+        announcement.style.display = "none"; \
+        announcement.style.visibility = "hidden"; \
+    }';
+
+    document.body.appendChild(hideCookieContent);
+};
+</script>
 
 <!-- Add rel="noopener noreferrer" to each target="_blank" -->
 <script type="text/javascript">
@@ -128,19 +145,6 @@ cookieconsent.run({
 <!-- End Add rel="noopener noreferrer" to each target="_blank" -->
 
 <link href="../../../../_lib/font-awesome/css/all.css" rel="stylesheet" type="text/css">
-<script type="text/javascript">
-window.onload = function() {
-    let script1 = document.createElement('script'); // Corrected element creation
-    script1.textContent = 'if (window.location.href.indexOf("r/articles") >= 0) { \
-        document.querySelector("#open_preferences_center").style.display = "none"; \
-        document.querySelector("#open_preferences_center").style.visibility = "hidden"; \
-        document.querySelector("#quarto-announcement").style.display = "none"; \
-        document.querySelector("#quarto-announcement").style.visibility = "hidden"; \
-    }';
-
-    document.body.appendChild(script1); // Append after correct string closure
-};
-</script>
 
 
 <link rel="stylesheet" href="../../../secondary-menu.css">
@@ -530,7 +534,7 @@ End Google Tag Manager (noscript) -->
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">runApp</span>(<span class="st">"census-app"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="my-5">
-<p><a href="images/zip.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title=""><img src="images/zip.png" class="img-fluid" alt="File navigation viewer showing a zipped folder"></a></p>
+<p><a href="images/zip.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-1"><img src="images/zip.png" class="img-fluid" alt="File navigation viewer showing a zipped folder"></a></p>
 </div>
 <p>Shiny has three built in commands that make it easy to use files that are hosted online: <code>runUrl</code>, <code>runGitHub</code>, and <code>runGist</code>.</p>
 <section id="runurl" class="level3">
@@ -1088,7 +1092,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"fade","openEffect":"fade","selector":".lightbox","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"fade","closeEffect":"fade","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
