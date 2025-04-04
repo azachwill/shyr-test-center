@@ -113,20 +113,20 @@ cookieconsent.run({
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
 </script><!-- End Google Tag Manager --><script type="text/javascript">
 window.onload = function() {
-    let hideCookieContent = document.createElement('script');
+    let prefCenter = document.querySelector("#open_preferences_center");
+    let announcement = document.querySelector("#quarto-announcement");
+    let sURL = window.location.href;
 
-    hideCookieContent.textContent = 'let prefCenter = document.querySelector("#open_preferences_center"); \
-    let announcement = document.querySelector("#quarto-announcement"); \
-    let sURL = window.location.href; \
-    if (prefCenter && sURL.indexOf("r/articles") >= 0) { \
-        prefCenter.style.display = "none"; \
-        prefCenter.style.visibility = "hidden"; \
-        } if (announcement && sURL.indexOf("r/articles") >= 0) { \
-        announcement.style.display = "none"; \
-        announcement.style.visibility = "hidden"; \
-    }';
-
-    document.body.appendChild(hideCookieContent);
+    if (sURL.indexOf("r/articles") >= 0) {
+        if (prefCenter) {
+            prefCenter.style.display = "none";
+            prefCenter.style.visibility = "hidden";
+        }
+        if (announcement) {
+            announcement.style.display = "none";
+            announcement.style.visibility = "hidden";
+        }
+    }
 };
 </script><!-- Add rel="noopener noreferrer" to each target="_blank" --><script type="text/javascript">
   window.addEventListener("load",() =>
