@@ -82,22 +82,23 @@
 
         <script type="text/javascript">
         window.onload = function() {
-            let hideCookieContent = document.createElement('script');
+            let prefCenter = document.querySelector("#open_preferences_center");
+            let announcement = document.querySelector("#quarto-announcement");
+            let sURL = window.location.href;
 
-            hideCookieContent.textContent = 'let prefCenter = document.querySelector("#open_preferences_center"); \
-            let announcement = document.querySelector("#quarto-announcement"); \
-            let sURL = window.location.href; \
-            if (prefCenter && sURL.indexOf("r/articles") >= 0) { \
-                prefCenter.style.display = "none"; \
-                prefCenter.style.visibility = "hidden"; \
-                } if (announcement && sURL.indexOf("r/articles") >= 0) { \
-                announcement.style.display = "none"; \
-                announcement.style.visibility = "hidden"; \
-            }';
-
-            document.body.appendChild(hideCookieContent);
+            if (sURL.indexOf("r/articles") >= 0) {
+                if (prefCenter) {
+                    prefCenter.style.display = "none";
+                    prefCenter.style.visibility = "hidden";
+                }
+                if (announcement) {
+                    announcement.style.display = "none";
+                    announcement.style.visibility = "hidden";
+                }
+            }
         };
         </script>
+
 
         <!-- Add rel="noopener noreferrer" to each target="_blank" -->
         <script type="text/javascript">
