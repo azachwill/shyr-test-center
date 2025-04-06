@@ -112,29 +112,32 @@ cookieconsent.run({
 <style>html{ scroll-behavior: smooth; }</style>
 <!-- Google Tag Manager -->
 <script type="javascript">
+if (sURL.includes("docs.posit.co") || sURL.includes("netlify.app")) {
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+}
 </script>
 <!-- End Google Tag Manager -->
 
+<!-- Display cookie icon in footer in docs.posit.co/netlify.app URLs; hide icon on other URLs -->
 <script type="text/javascript">
-window.onload = function() {
+window.onload = function () {
     let prefCenter = document.querySelector("#open_preferences_center");
-    let announcement = document.querySelector("#quarto-announcement");
     let sURL = window.location.href;
 
-    if (sURL.indexOf("r/articles") >= 0) {
-        if (prefCenter) {
+    if (prefCenter) { // Test for prefCenter ID presence
+        // Show the icon only if the URL contains "docs.posit.co" or "netlify.app"
+        if (sURL.includes("docs.posit.co") || sURL.includes("netlify.app")) {
+            prefCenter.style.display = "inline";
+            prefCenter.style.visibility = "visible";
+        } else {
+            // Hide the element for all other URLs
             prefCenter.style.display = "none";
             prefCenter.style.visibility = "hidden";
-        }
-        if (announcement) {
-            announcement.style.display = "none";
-            announcement.style.visibility = "hidden";
         }
     }
 };
 </script>
-
+<!-- End display/hide cookie icon -->
 
 <!-- Add rel="noopener noreferrer" to each target="_blank" -->
 <script type="text/javascript">
@@ -1448,7 +1451,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"fade","closeEffect":"fade"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"fade","closeEffect":"fade","selector":".lightbox","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
