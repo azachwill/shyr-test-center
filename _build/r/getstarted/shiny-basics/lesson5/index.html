@@ -112,29 +112,32 @@ cookieconsent.run({
 <style>html{ scroll-behavior: smooth; }</style>
 <!-- Google Tag Manager -->
 <script type="javascript">
+if (sURL.includes("docs.posit.co") || sURL.includes("netlify.app")) {
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
+}
 </script>
 <!-- End Google Tag Manager -->
 
+<!-- Display cookie icon in footer in docs.posit.co/netlify.app URLs; hide icon on other URLs -->
 <script type="text/javascript">
-window.onload = function() {
+window.onload = function () {
     let prefCenter = document.querySelector("#open_preferences_center");
-    let announcement = document.querySelector("#quarto-announcement");
     let sURL = window.location.href;
 
-    if (sURL.indexOf("r/articles") >= 0) {
-        if (prefCenter) {
+    if (prefCenter) { // Test for prefCenter ID presence
+        // Show the icon only if the URL contains "docs.posit.co" or "netlify.app"
+        if (sURL.includes("docs.posit.co") || sURL.includes("netlify.app")) {
+            prefCenter.style.display = "inline";
+            prefCenter.style.visibility = "visible";
+        } else {
+            // Hide the element for all other URLs
             prefCenter.style.display = "none";
             prefCenter.style.visibility = "hidden";
-        }
-        if (announcement) {
-            announcement.style.display = "none";
-            announcement.style.visibility = "hidden";
         }
     }
 };
 </script>
-
+<!-- End display/hide cookie icon -->
 
 <!-- Add rel="noopener noreferrer" to each target="_blank" -->
 <script type="text/javascript">
@@ -534,7 +537,7 @@ End Google Tag Manager (noscript) -->
 </ul>
 <p>When you’re done, your <code>census-app</code> folder should look like this.</p>
 <div class="my-5">
-<p><a href="images/example2-folder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title=""><img src="images/example2-folder.png" class="img-fluid" alt="App folder with data subfolder"></a></p>
+<p><a href="images/example2-folder.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-1"><img src="images/example2-folder.png" class="img-fluid" alt="App folder with data subfolder"></a></p>
 </div>
 <p>The dataset in <code>counties.rds</code> contains</p>
 <ul>
@@ -559,7 +562,7 @@ End Google Tag Manager (noscript) -->
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"maps"</span>, <span class="st">"mapproj"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Save <code>helpers.R</code> inside your <code>census-app</code> directory, like below.</p>
 <div class="my-5">
-<p><a href="images/example2-folder2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title=""><img src="images/example2-folder2.png" class="img-fluid" alt="App folder with data subfolder and helpers script"></a></p>
+<p><a href="images/example2-folder2.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-2"><img src="images/example2-folder2.png" class="img-fluid" alt="App folder with data subfolder and helpers script"></a></p>
 </div>
 <p>The <code>percent_map</code> function in <code>helpers.R</code> takes five arguments:</p>
 <table class="caption-top table">
@@ -605,7 +608,7 @@ End Google Tag Manager (noscript) -->
 <p><em>Note: The code above assumes that <code>census-app</code> is a sub-directory in your working directory. Make certain to set your working directory as the parent directory for <code>census-app</code>. To change your working directory location, click on Session &gt; Set Working Directory &gt; Choose Directory… in the RStudio menu bar.</em></p>
 <p><code>percent_map</code> plots the counties data as a choropleth map. Here it will plot the percent of white residents in the counties in the color dark green.</p>
 <div class="border my-5">
-<p><a href="images/census4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title=""><img src="images/census4.png" class="img-fluid" alt="map of the United states where percent white was selected as the demographic"></a></p>
+<p><a href="images/census4.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-3"><img src="images/census4.png" class="img-fluid" alt="map of the United states where percent white was selected as the demographic"></a></p>
 </div>
 </section>
 <section id="loading-files-and-file-paths" class="level2">
@@ -627,15 +630,15 @@ End Google Tag Manager (noscript) -->
 <p>Shiny will execute all of these commands if you place them in your <code>app.R</code> script. However, where you place them will determine how many times they are run (or re-run), which will in turn affect the performance of your app, since Shiny will run some sections your <code>app.R</code> script more often than others.</p>
 <p>Shiny will run the whole script the first time you call <code>runApp</code>. This causes Shiny to execute the <code>server</code> function.</p>
 <div class="my-5">
-<p><a href="images/run-once.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title=""><img src="images/run-once.png" class="img-fluid" alt="Code highlighted, which runs once when app is launched"></a></p>
+<p><a href="images/run-once.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-4"><img src="images/run-once.png" class="img-fluid" alt="Code highlighted, which runs once when app is launched"></a></p>
 </div>
 <p>Shiny saves the <code>server</code> function until a new user arrives. Each time a new user visits your app, Shiny runs the <code>server</code> function again, one time. The function helps Shiny build a distinct set of reactive objects for each user.</p>
 <div class="my-5">
-<p><a href="images/run-once-per-user.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title=""><img src="images/run-once-per-user.png" class="img-fluid" alt="Section of code highlighted which runs once each time a user visits the app"></a></p>
+<p><a href="images/run-once-per-user.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-5"><img src="images/run-once-per-user.png" class="img-fluid" alt="Section of code highlighted which runs once each time a user visits the app"></a></p>
 </div>
 <p>As users interact with the widgets and change their values, Shiny will re-run the R expressions assigned to each reactive object that depend on a widget whose value was changed. If your user is very active, these expressions may be re-run many, many times a second.</p>
 <div class="my-5">
-<p><a href="images/run-many-times.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title=""><img src="images/run-many-times.png" class="img-fluid" alt="Code highlighted for the section which runs once each time a user changes a widget that output$map depends on"></a></p>
+<p><a href="images/run-many-times.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-6"><img src="images/run-many-times.png" class="img-fluid" alt="Code highlighted for the section which runs once each time a user changes a widget that output$map depends on"></a></p>
 </div>
 <p>Here’s what we’ve learned so far:</p>
 <ul>
@@ -802,7 +805,7 @@ View Answer
 <div class="border my-5">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/censusvis.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title=""><img src="images/censusvis.png" class="img-fluid figure-img" alt="censusVis app with Percent White chosen as the variable to display, and the US map associated with that selection"></a></p>
+<p><a href="images/censusvis.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-7"><img src="images/censusvis.png" class="img-fluid figure-img" alt="censusVis app with Percent White chosen as the variable to display, and the US map associated with that selection"></a></p>
 <figcaption>Census app</figcaption>
 </figure>
 </div>
@@ -1391,7 +1394,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"fade","openEffect":"fade"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"fade","descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"fade"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
