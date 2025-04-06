@@ -30,8 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../r/articles/improve/performance/index.html" rel="next">
 <link href="../../../../r/articles/improve/plot-caching/index.html" rel="prev">
 <link href="../../../../favicon.png" rel="icon" type="image/png">
-<script src="../../../../site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="../../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../../site_libs/quarto-html/popper.min.js"></script>
@@ -56,28 +54,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-
-<script type="text/javascript" charset="UTF-8">
-document.addEventListener('DOMContentLoaded', function () {
-cookieconsent.run({
-  "notice_banner_type":"headline",
-  "consent_type":"express",
-  "palette":"light",
-  "language":"en",
-  "page_load_consent_levels":["strictly-necessary"],
-  "notice_banner_reject_button_hide":false,
-  "preferences_center_close_button_hide":false,
-  "website_name":""
-  ,
-"language":"en"
-  });
-});
-</script> 
-  
 <style>html{ scroll-behavior: smooth; }</style>
 <!-- Google Tag Manager -->
 <script type="javascript">
-if (sURL.includes("docs.posit.co") || sURL.includes("netlify.app")) {
+if (sURL.includes("shyr-test-center") || sURL.includes("netlify.app")) {
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');
 }
 </script>
@@ -90,14 +70,14 @@ window.onload = function () {
     let sURL = window.location.href;
 
     if (prefCenter) { // Test for prefCenter ID presence
-        // Show the icon only if the URL contains "docs.posit.co" or "netlify.app"
-        if (sURL.includes("docs.posit.co") || sURL.includes("netlify.app")) {
-            prefCenter.style.display = "inline";
-            prefCenter.style.visibility = "visible";
-        } else {
-            // Hide the element for all other URLs
+        // Do not display on "r/articles"
+        if (sURL.includes("shyr-test-center") && sURL.includes("r/articles")) {
             prefCenter.style.display = "none";
             prefCenter.style.visibility = "hidden";
+        } else {
+            // Hide the element for all other URLs
+            prefCenter.style.display = "inline";
+            prefCenter.style.visibility = "visible";
         }
     }
 };
@@ -134,9 +114,6 @@ window.onload = function () {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <div id="quarto-announcement" data-announcement-id="d2ed95361607a5c9a375465f635f8868" class="alert alert-info hidden"><div class="quarto-announcement-content">
-<p>We’ve added Cookie Consent to docs.posit.co. For more information, see the <a href="https://posit.co/about/privacy-policy/">Posit - Privacy Policy</a>. To make updates to your existing preferences, click the cookie <i class="bi bi-cookie"></i> icon located in the footer.</p>
-</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -1621,8 +1598,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
 </div>   
     <div class="nav-footer-center">
-
-</div>
+      &nbsp;
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">

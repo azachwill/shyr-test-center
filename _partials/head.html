@@ -13,14 +13,14 @@ window.onload = function () {
     let sURL = window.location.href;
 
     if (prefCenter) { // Test for prefCenter ID presence
-        // Show the icon only if the URL contains "docs.posit.co" or "netlify.app"
+        // Do not display on "r/articles"
         if (sURL.includes("shyr-test-center") && sURL.includes("r/articles")) {
-            prefCenter.style.display = "inline";
-            prefCenter.style.visibility = "visible";
-        } else {
-            // Hide the element for all other URLs
             prefCenter.style.display = "none";
             prefCenter.style.visibility = "hidden";
+        } else {
+            // Hide the element for all other URLs
+            prefCenter.style.display = "inline";
+            prefCenter.style.visibility = "visible";
         }
     }
 };
