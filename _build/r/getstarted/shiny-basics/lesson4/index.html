@@ -62,6 +62,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../r/getstarted/shiny-basics/lesson5/index.html" rel="next">
 <link href="../../../../r/getstarted/shiny-basics/lesson3/index.html" rel="prev">
 <link href="../../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../../site_libs/quarto-html/popper.min.js"></script>
@@ -89,6 +91,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"interstitial",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":"",
+"website_privacy_policy_url":"https://posit.co/privacy"
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
 <style>html{ scroll-behavior: smooth; }</style>
 <!-- Google Tag Manager -->
 <script type="text/javascript">
@@ -504,7 +525,7 @@ End Google Tag Manager (noscript) -->
 <p>Time to give your Shiny app a “live” quality! This lesson will teach you how to build reactive output to displays in your Shiny app. Reactive output automatically responds when your user toggles a widget.</p>
 <p>By the end of this lesson, you’ll know how to make a simple Shiny app with two reactive lines of text. Each line will display the values of a widget based on your user’s input.</p>
 <div class="border my-5">
-<p><a href="images/censusviz.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-1"><img src="images/censusviz.png" class="img-fluid" alt="censusVis Shiny app that creates demographic maps with information from the 2010 US Census"></a></p>
+<p><a href="images/censusviz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title=""><img src="images/censusviz.png" class="img-fluid" alt="censusVis Shiny app that creates demographic maps with information from the 2010 US Census"></a></p>
 </div>
 <p>This new Shiny app will need its own, new directory. Create a folder in your working directory named <code>census-app</code>. This is where we’ll save the <code>app.R</code> file that you make in this lesson.</p>
 <section id="two-steps" class="level2">
@@ -671,7 +692,7 @@ End Google Tag Manager (noscript) -->
 <p>When you are ready, update your <code>server</code> and <code>ui</code> functions to match those above. Then launch your Shiny app by running <code>runApp("census-app", display.mode = "showcase")</code> at the command line. Your app should look like the app below, and your statement should update instantly as you change the select box widget.</p>
 <p>Watch the <code>server</code> portion of the script. When Shiny rebuilds an output, it highlights the code it is running. This temporary highlighting can help you see how Shiny generates reactive output.</p>
 <div class="border my-5">
-<p><a href="images/censusviz-showcase.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-2"><img src="images/censusviz-showcase.png" class="img-fluid" alt="censusVis Shiny app in showcase mode"></a></p>
+<p><a href="images/censusviz-showcase.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title=""><img src="images/censusviz-showcase.png" class="img-fluid" alt="censusVis Shiny app in showcase mode"></a></p>
 </div>
 </section>
 <section id="your-turn" class="level2">
@@ -1195,8 +1216,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>Proudly supported by <a href="https://www.posit.co/" class="no-icon"><img src="../../../../images/posit-logo-black.svg" alt="Posit" width="80" style="padding-left: 3px;vertical-align:text-top;"></a></p>
 </div>   
     <div class="nav-footer-center">
-      &nbsp;
-    </div>
+
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
@@ -1224,7 +1245,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"fade","openEffect":"fade"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"fade","descPosition":"bottom","closeEffect":"fade","selector":".lightbox","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
