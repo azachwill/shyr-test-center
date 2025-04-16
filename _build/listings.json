@@ -125,10 +125,6 @@
     ]
   },
   {
-    "listing": "/r/articles/index.html",
-    "items": []
-  },
-  {
     "listing": "/blog/index.html",
     "items": [
       "/blog/posts/shiny-python-1.0/index.html",
@@ -158,5 +154,9 @@
       "/blog/posts/weather-lookup-caching/index.html",
       "/blog/posts/weather-lookup-about/index.html"
     ]
+  },
+  {
+    "listing": "/r/articles/index.html",
+    "items": []
   }
 ]

@@ -15,10 +15,6 @@ headers = []
 function = "redirect_article"
 path = "/r/*"
 
-[[edge_functions]]
-function = "redirect_article"
-path = "/py/*"
-
 [[redirects]]
   from = "/index.html"
   to = "/"
@@ -45,7 +41,7 @@ force = true
 
 [[redirects]]
 from = "/py/*"
-to =  "https://pyshiny.netlify.app//:splat"
+to =  "https://shypy-test-center.netlify.app//:splat"
 status = 200
 force = true
 
@@ -3436,7 +3432,7 @@ force = false
   [redirects.conditions]
 
   [redirects.headers]
-   
+
 [[redirects]]
 from = "/r/"
 to = "/r/getstarted/"
