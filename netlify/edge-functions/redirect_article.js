@@ -34,7 +34,7 @@ export default async (request, context) => {
       // Remove the trailing slash and add .html extension
       const newPathname = url.pathname.endsWith("/") ? url.pathname.slice(0, -1) + '.html' : url.pathname + '.html';
       const newUrl = `${url.origin}${newPathname}`;
-    
+
         // Perform a 301 redirect
       return new Response(null, {
         status: 301,
@@ -47,5 +47,5 @@ export default async (request, context) => {
     return context.next();
   };
    export const config = {
-    path: ['/r/*','/py/*'],
+    path: ['/r/*']
   };
