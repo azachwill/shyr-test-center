@@ -22,9 +22,9 @@ export default async (request, context) => {
     const patternArrayNot = [
       "/r/reference/shiny/(\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?|latest)(\\/?)$",
       //shiny.posit.co/py/ directories:
-      "/py/api/core(\\/?)$",
-      "/py/api/express(\\/?)$",
-      "/py/api/testing(\\/?)$"
+      "/py/api/core",
+      "/py/api/express",
+      "/py/api/testing"
       ];
       const patternNot = new RegExp(patternArrayNot.join("|"));
       const resultNot = patternNot.test(url);
