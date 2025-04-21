@@ -1,7 +1,4 @@
-/py/index.html /py/index.html 200
-/index.html / 301
-
-/py/**/index.html /py/**/index.html 200
+/index.html / 301!
 /*/index.html /:splat/ 301!
 
 http://shiny.rstudio.com/* https://shyr-test-center.netlify.app/:splat 301!
